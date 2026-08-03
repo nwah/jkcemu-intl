@@ -79,6 +79,7 @@ public class KC85SettingsFld
   private static final int MOD_IDX_DESC = 2;
 
   private static final String[][] modules = {
+	{ MT_ETC, FujiNet.MODULE_NAME, FujiNet.DESCRIPTION },
 	{ MT_ETC, "M001",
 		"Digital I/O mit angeschlossenem Plotter XY4131 / XY4140" },
 	{ MT_ETC, "M003", "V.24 mit angeschlossenem Drucker" },

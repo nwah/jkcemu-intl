@@ -37,6 +37,7 @@ import jkcemu.emusys.kc85.AbstractKC85Module;
 import jkcemu.emusys.kc85.D004;
 import jkcemu.emusys.kc85.D005KeyboardFld;
 import jkcemu.emusys.kc85.D008;
+import jkcemu.emusys.kc85.FujiNet;
 import jkcemu.emusys.kc85.KC85CharRecognizer;
 import jkcemu.emusys.kc85.KC85JoystickModule;
 import jkcemu.emusys.kc85.KC85KeyboardFld;
@@ -2935,7 +2936,10 @@ public class KC85 extends EmuSys implements
 				slot );
 	  String moduleName = props.getProperty( prefix + PROP_NAME );
 	  if( moduleName != null ) {
-	    if( moduleName.equals( "M001" ) ) {
+	    if( moduleName.equals( FujiNet.MODULE_NAME ) ) {
+	      modules.add( new FujiNet( slot, this.emuThread ) );
+	    }
+	    else if( moduleName.equals( "M001" ) ) {
 	      modules.add( new M001( slot, this.emuThread, props ) );
 	    }
 	    else if( moduleName.equals( "M003" ) ) {
