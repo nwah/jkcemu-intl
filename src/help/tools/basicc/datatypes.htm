@@ -1,0 +1,302 @@
+<html>
+<head><title>BASIC-Compiler: Datentypen</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC-Compiler</a></h1>
+
+ <h2>Datentypen</h2>
+  Der JKCEMU-BASIC-Compiler kennt folgende Datentypen:
+  <ul>
+   <li>
+    <em><a href="datatypes.htm#integer">Integer</a></em>
+    f&uuml;r ganze Zahlen im Bereich -32767 bis +32767
+   </li>
+   <li>
+    <em><a href="datatypes.htm#long">Long</a></em>
+    f&uuml;r ganze Zahlen im Bereich -2147483647 bis +2147483647
+   </li>
+   <li>
+    <em><a href="datatypes.htm#decimal">Decimal</a></em>
+    f&uuml;r ganze Zahlen und Flie&szlig;kommazahlen
+    mit bis zu 11&nbsp;Dezimalstellen,
+    davon maximal 7&nbsp;Nachkommastellen
+   </li>
+   <li>
+    <em><a href="datatypes.htm#single">Single</a></em>
+    f&uuml;r Flie&szlig;kommazahlen im Bereich
+    &plusmn;10<sup>-38</sup> bis &plusmn;10<sup>+38</sup>
+    und einer Genauigkeit von 6&nbsp;Dezimalstellen
+   </li>
+   <li>
+    <em><a href="datatypes.htm#string">String</a></em>
+    f&uuml;r Zeichenketten
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="integer">Integer</a></h3>
+  Beim numerischen Datentyp <em>Integer</em> werden die Zahlen intern
+  im 16-Bit-Zweierkomplement gespeichert.
+  Damit umfasst der Wertebereich auch die Zahl -32768.
+  Allerdings kann diese Zahl nicht immer errechnet werden,
+  da deren absoluter Betrag (+32768),
+  der bei manchen Berechnungen intern gebildet werden muss,
+  nicht mehr im Wertebereich liegt.
+  Aus diesem Grund sind bei <em>Integer</em> nur Zahlen
+  von -32767 bis +32767 voll nutzbar.
+  Mathematische Berechnungen mit dem Datentyp <em>Integer</em>
+  sind besonders schnell, schneller als bei allen anderen
+  numerischen Datentypen.
+ <br/><br/>
+
+ <h3><a name="long">Long</a></h3>
+  <em>Long</em> ist ein numerischer Datentyp,
+  der ganze Zahlen im 32-Bit-Zweierkomplement speichert.
+  Ad&auml;quat zu <em>Integer</em> gibt es auch bei Long eine Zahl,
+  die zwar mit zum Wertebereich geh&ouml;rt,
+  aber nicht voll nutzbar ist: -2147483648.
+ <br/><br/>
+
+ <h3><a name="decimal">Decimal</a></h3>
+  Dieser Datentyp speichert die Zahlen als gepackte BCD-Zahlen
+  in 6&nbsp;Bytes (BCD: Binary Coded Decimal,
+  gepackt: zwei Ziffern pro Byte).
+  Das oberste Halbbyte enth&auml;lt das Vorzeichen (1&nbsp;Bit)
+  und die Anzahl der Nachkommastellen (3&nbsp;Bit).
+  Damit ergeben sich 11&nbsp;Dezimalstellen,
+  davon 0 bis 7 Nachkommastellen.
+  Es lassen sich somit folgende Zahlen speichern:
+ <br/><br/>
+  &nbsp;&nbsp;-99999999999 bis 99999999999 bzw.<br/>
+  &nbsp;&nbsp;-9999999999.9 bis 9999999999.9 bzw.<br/>
+  &nbsp;&nbsp;...<br/>
+  &nbsp;&nbsp;-9999.9999999 bis 9999.9999999
+ <br/><br/>
+  Der kleinste darstellbare Betrag ist: 0.0000001
+ <br/><br/>
+  Wie man sieht, k&ouml;nnen mit <em>Decimal</em> auch
+  Flie&szlig;kommazahlen gespeichert werden.
+  Im Gegensatz zum Datentyp <em>Single</em> (siehe weiter unten),
+  der ebenfalls Flie&szlig;kommazahlen speichern kann,
+  bildet <em>Decimal</em> die Zahlen im Dezimalsystem ab.
+  Dadurch sind mathematische Berechnungen zwar wesentlich langsamer,
+  aber es entstehen keine Rundungsfehler wegen Umrechnungen zwischen
+  Dezimal- und Bin&auml;rsystem.
+  <em>Decimal</em> eignet sich deshalb besonders f&uuml;r solche F&auml;lle,
+  bei denen auch die letzte Stelle exakt berechnet werden muss,
+  z.B. bei Geldbetr&auml;gen.
+  Rundungsfehler k&ouml;nnen aber trotzdem auftreten,
+  und zwar genau dann, wenn das Ergebnis einer Berechnung mehr
+  Nachkommastellen hat, als der Datentyp aufnehmen kann.
+  In dem Fall werden die Fehlervariablen
+  <a href="functions.htm#err">ERR</a> und
+  <a href="functions.htm#err$">ERR$</a> entsprechend gesetzt.
+  Damit kann man im Programm mit
+ <br/><br/>
+  &nbsp;&nbsp;<tt>IF ERR=E_DIGITS_TRUNCATED THEN ...</tt>
+ <br/><br/>
+  abfragen, ob bei den <em>Decimal</em>-Berechnungen in der letzten Anweisung
+  Nachkommastellen abgeschnitten wurden oder ob das mathematisch
+  exakte Ergebnis berechnet werden konnte.
+ <br/><br/>
+
+ <h3><a name="single">Single</a></h3>
+  <em>Single</em> ist ein numerischer Datentyp f&uuml;r bin&auml;re
+  Flie&szlig;kommazahlen einfacher Genauigkeit entsprechend dem Standard
+  IEEE&nbsp;754.
+  Die Zahlen werden mit einem 8&nbsp;Bit gro&szlig;en Exponenten und
+  einer 24&nbsp;Bit gro&szlig;en Mantisse (zusammen 32&nbsp;Bit) abgebildet.
+  Damit ergibt sich ein Zahlenbereich von etwa
+  &plusmn;10<sup>-38</sup> bis &plusmn;10<sup>+38</sup>
+  bei einer Genauigkeit von etwa sieben Dezimalstellen.
+  Allerdings speichert der Datentyp die Zahlen approximiert ab.
+  Damit ist gemeint, dass nicht jede dezimale Flie&szlig;kommazahl
+  exakt numerisch abgebildet werden kann.
+  Viele Zahlen m&uuml;ssen mit einem numerischen Wert gespeichert werden,
+  der nur ann&auml;hernd, d.h. approximiert, dem Dezimalwert entspricht.
+  Dadurch ergeben sich Rundungsfehler,
+  die bei jeder mathematischen Berechnung gr&ouml;&szlig;er werden.
+  Die Genauigkeit kann somit auch weniger als sieben Dezimalstellen betragen.
+  Um nun keine h&ouml;here Genauigkeit vorzut&auml;uschen
+  als tats&auml;chlich gegeben ist,
+  werden Zahlen mit dem Datentyp <em>Single</em> bei der Ausgabe,
+  d.h. bei der Umwandlung in eine Dezimalzahl,
+  auf 6&nbsp;Dezimalstellen gerundet.
+ <br/><br/>
+  Aufgrund des gro&szlig;en Zahlenbereichs von <em>Single</em> k&ouml;nnen
+  die Zahlen auch mit einem Dezimalexponenten geschrieben werden,
+  sowohl im BASIC-Quelltext als auch bei der Eingabe mit der
+  <a href="instructions.htm#input"><tt>INPUT</tt></a>-Anweisung.
+  Hier einige Beispiele:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Beispiel</th><th>Bedeutung</th></tr>
+   <tr>
+    <td valign="top"><tt>1.23E7</tt></td>
+    <td valign="top">1.23 * 10^7 = 12300000</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>2E+4</tt></td>
+    <td valign="top">2 * 10^4 = 20000</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>4.5e-3</tt></td>
+    <td valign="top">4.5 * 10^-3 = 0.0045</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>-0.00678E5</tt></td>
+    <td valign="top">-0.00678 * 10^5 = -678</td>
+   </tr>
+  </table>
+ <br/>
+  Der kleinste darstellbare Betrag gr&ouml;&szlig;er Null ist
+  1.17549E-38.
+  Ergibt eine mathematische Berechnung einen Wert mit einem kleineren
+  Betrag, ist das Ergebnis Null,
+  auch wenn es mathematisch eigentlich nicht Null ist.
+ <br/><br/>
+  Beispiel:
+ <br/><br/>
+  2E-30 * 3E-20 ergibt mathematisch 6E-50.
+  Das ist aber mit dem Datentyp <em>Single</em> nicht darstellbar.
+  Deshalb ist das Ergbebnis&nbsp;0.
+ <br/><br/>
+  Der gr&ouml;&szlig;te darstellbare Betrag ist 3.40283E+38.
+  Ist das Ergebnis einer mathematischen Berechnung gr&ouml;&szlig;er,
+  bricht das compilierte Programm mit einem numerischen
+  &Uuml;berlauffehler ab.
+ <br/><br/>
+  Der Vorteil von <em>Single</em> gegen&uuml;ber <em>Decimal</em>
+  liegt in der wesentlich h&ouml;heren Rechengeschwindigkeit. 
+  Aus diesem Grund stehen einige mathematische Funktionen,
+  die komplexe Berechnungen erfordern,
+  nur f&uuml;r <em>Single</em> zur Verf&uuml;gung.
+ <br/><br/>
+  Der Name <em>Single</em> ist nur bei der Programmiersprache BASIC
+  &uuml;blich. In anderen Programmiersprachen hei&szlig;t dieser Datentyp
+  h&auml;ufig <em>Float</em>.
+  Aus diesem Grund kann im JKCEMU-BASIC-Compiler auch das
+  Schl&uuml;sselwort <em>FLOAT</em> anstelle von <em>SINGLE</em>
+  verwendet werden.
+ <br/><br/>
+  <b>Hinweis:</b> Der Datentyp <em>Single</em> entspricht zwar
+  von seinen Eigenschaften her dem im Standard IEEE&nbsp;754
+  definierten Flie&szlig;kommadatentyp einfacher Genauigkeit,
+  ist aber nicht exakt dem Standard entsprechend implementiert.
+  Konkret sind Vorzeichen und Exponent vertauscht,
+  da sich das f&uuml;r einen 8-Bit-Prozessor wesentlich besser
+  implementieren l&auml;sst.
+  Des Weiteren werden die speziellen Werte <em>+Infinity</em>,
+  <em>-Infinity</em> und <em>NaN</em> nicht unterst&uuml;tzt,
+  da sie im Sprachkonzept des JKCEMU-BASIC-Compilers nicht vorkommen.
+ <br/><br/>
+
+ <h3><a name="string">String</a></h3>
+  Der Datentyp <em>String</em> dient zur Speicherung von Zeichenkettem
+  und wird immer mit einem nachgestellten $-Zeichen markiert,
+  d.h., alle Variablen und Funktionen, deren Namen auf ein
+  Dollarzeichen enden, sind String-Variablen bzw. String-Funktionen,
+  die eine Zeichenkette speichern bzw. liefern.
+  Weitergehende Informationen finden Sie auf der Seite:
+  <a href="strings.htm">Zeichenkettenverarbeitung</a>
+ <br/><br/>
+
+ <h3><a name="typeconv">Typumwandlungen</a></h3>
+  Es gibt implizite und explizite Typumwandlungen.
+  Implizit bedeutet, dass der Compiler automatisch
+  die notwendige Typumwandlung vornimmt.
+  Das geschieht an den Stellen, wo ein numerischer Datentyp
+  mit einem kleineren Wertebereich an einer Stelle angegeben wurde,
+  wo ein numerischer Datentyp mit einem gr&ouml;&szlig;eren Wertebereich
+  erwartet wird.
+  Das betrifft z.B.
+  <a href="expressions.htm#operators2">Operatoren mit zwei Operanden</a>
+  und bestimmte Funktionsargumente.
+  Die implizite Typumwandlung geht immer vom kleineren
+  zum gr&ouml;&szlig;eren Wertebereich, d.h. in diese Richtung:
+ <br/><br/>
+  Integer &rarr; Long &rarr; Decimal &rarr; Single
+ <br/><br/>
+  In die andere Richtung,
+  d.h. wenn ein numerischer Datentyp angegeben wurde,
+  der einen gr&ouml;&szlig;eren Wertebereich hat
+  als an der betreffenden Stelle vorgesehen,
+  muss die Typumwandlung explizit erfolgen.
+  Dabei muss der Softwareentwickler selbst daf&uuml;r Sorge tragen,
+  das der Wertebereich nicht &uuml;berschritten wird.
+  Falls doch, bricht n&auml;mlich das compilierte Programm
+  mit einem &Uuml;berlauffehler ab.
+ <br/><br/>
+  Bei der expliziten Typumwandlung wird eine vom Softwareentwickler
+  explizit im Quelltext des BASIC-Programms angegebene BASIC-Funktion
+  aufgerufen, die die Typumwandlung vornimmt.
+  Folgende Funktionen stehen daf&uuml;r zur Verf&uuml;gung:
+ <br/>
+  <ul>
+   <li>
+    <a href="functions.htm#cdec"><tt>CDEC</tt></a>
+    (Integer, Long, Single &rarr; Decimal)
+   </li>
+   <li>
+    <a href="functions.htm#cint"><tt>CINT</tt></a>
+    (Decimal, Long, Single &rarr; Integer)
+   </li>
+   <li>
+    <a href="functions.htm#clng"><tt>CLNG</tt></a>
+     (Decimal, Integer, Single &rarr; Long)
+   </li>
+   <li>
+    <a href="functions.htm#csng"><tt>CSNG</tt></a>
+     (Decimal, Integer, Long &rarr; Single)
+   </li>
+   <li>
+    <a href="functions.htm#decval"><tt>DECVAL</tt></a>
+    (String &rarr; Decimal)
+   </li>
+   <li>
+    <a href="functions.htm#intval"><tt>INTVAL</tt></a>
+    (String &rarr; Integer)
+   </li>
+   <li>
+    <a href="functions.htm#lngval"><tt>LNGVAL</tt></a>
+    (String &rarr; Long)
+   </li>
+   <li>
+    <a href="functions.htm#sngval"><tt>SNGVAL</tt></a>
+    (String &rarr; Single)
+   </li>
+   <li>
+    <a href="functions.htm#val"><tt>VAL</tt></a>
+    (String &rarr; Integer)
+   </li>
+  </ul>
+ <br/>
+  Im weiteren Sinn dienen auch diese Funktionen der Typumwandlung:
+ <br/>
+  <ul>
+   <li>
+    <a href="functions.htm#asc"><tt>ASC</tt></a>
+    (String &rarr; Integer)
+   </li>
+   <li>
+    <a href="functions.htm#bin$"><tt>BIN$</tt></a>
+    (Integer, Long &rarr; String)
+   </li>
+   <li>
+    <a href="functions.htm#chr$"><tt>CHR$</tt></a>
+    (Integer &rarr; String)
+   </li>
+   <li>
+    <a href="functions.htm#hex$"><tt>HEX$</tt></a>
+    (Integer, Long &rarr; String)
+   </li>
+   <li>
+    <a href="functions.htm#oct$"><tt>OCT$</tt></a>
+    (Integer, Long &rarr; String)
+   </li>
+   <li>
+    <a href="functions.htm#str$"><tt>STR$</tt></a>
+    (Decimal, Integer, Long, Single &rarr; String)
+   </li>
+  </ul>
+</body>
+</html>

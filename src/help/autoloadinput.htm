@@ -1,0 +1,63 @@
+<html>
+<body>
+ <h1>AutoLoad und AutoInput</h1>
+  AutoLoad und AutoInput sind Funktionen zur Herstellung eines
+  benutzerabh&auml;ngigen Initialzustandes des jeweils emulierten Systems
+  und dienen der Erh&ouml;hung des Komforts f&uuml;r den Anwender.
+ <br/><br/>
+  AutoLoad l&auml;dt nach jedem emulierten Einschalten bzw. nach jedem RESET
+  automatisch Dateien in den Arbeitsspeicher (RAM).
+  AutoInput f&uuml;hrt nach jedem emulierten Einschalten bzw. nach jedem RESET
+  automatisch Tastatureingaben aus.
+  Beide Funktionen arbeiten voneinander unabh&auml;ngig,
+  lassen sich aber gut miteinander kombinieren.
+  So kann man sich z.B. mit AutoLoad eine ausf&uuml;hbare Programmdatei laden
+  und mit AutoInput nach einer kurzen Wartezeit das Kommando zum Starten
+  des Programms ausf&uuml;hren lassen.
+ <br/><br/>
+  AutoLoad und AutoInput stehen f&uuml;r viele, nicht aber f&uuml;r alle
+  von JKCEMU emulierten Systeme zur Verf&uuml;gung.
+  Bei den unterst&uuml;tzten Systemen finden Sie in den jeweiligen
+  Einstellungen die Reiter <em>AutoLoad</em> und <em>AutoInput</em>.
+  Darin k&ouml;nnen Sie beliebig viele Eintr&auml;ge anlegen,
+  die nach dem emulierten Einschalten und nach RESET von oben nach unten
+  der Reihe nach abgearbeitet werden.
+  Bei jedem Eintrag k&ouml;nnen Sie auch eine Zeit angeben,
+  die JKCEMU wartet, bevor der jeweilige Eintrag ausgef&uuml;hrt wird.
+ <br/><br/>
+  Die automatischen Tastatureingaben bei AutoInput erfolgen &uuml;ber
+  die Funktion zum Einf&uuml;gen von Text in den Emulator.
+  Je nach emulierten System kann dies unterschiedlich lang dauern.
+ <br/><br/>
+  <b>Hinweis:</b> Das Schwierigste bei AutoLoad und AutoInput ist,
+  das Zeitregime richtig einzustellen.
+  Geben Sie im Zweifelsfall lieber eine etwas l&auml;ngere Pause an
+  bzw. teilen Sie bei AutoInput die Eingaben auf mehrere Eintr&auml;ge
+  mit entsprechenden Pausen dazwischen auf.
+  Das emulierte System ben&ouml;tigt n&auml;mlich entsprechende Zeit,
+  die Eingaben zu verarbeiten.
+ <br/><br/>
+  <b>Achtung!</b> AutoLoad und AutoInput sind allgemeine Funktionen
+  und ber&uuml;cksichtigen nicht die speziellen Eigenheiten
+  des jeweils emulierten Systems.
+  So k&ouml;nnen Sie z.B. bei AutoLoad angeben,
+  Dateien in einen Adressbereich zu laden, wo gar kein RAM vorhanden ist.
+  In dem Fall wird jedoch einfach nichts geladen werden.
+  Genauso k&ouml;nnen Sie bei AutoInput Zeichen bzw. Steuertasten angeben,
+  die bei dem emulierten System gar nicht eingebbar sind
+  (z.B. wegen einer hexadezimalen Tastatur).
+  In dem Fall wird bei der Ausf&uuml;hrung von AutoInput
+  eine entsprechende Meldung erscheinen.
+ <br/><br/>
+  <b>Achtung!</b> AutoInput sendet f&uuml;r die Steuertaste
+  <em>Cursor links / Backspace</em> den Code&nbsp;08h
+  und f&uuml;r die Taste <em>Cursor rechts / Tabulator</em>
+  den Code 09h an das emulierte System.
+  Manche Systeme behandeln die Tasten <em>Cursor links</em>
+  und <em>Backspace</em> bzw. <em>Cursor rechts</em> und <em>Tabulator</em>
+  unterschiedlich.
+  In so einem Fall h&auml;ngt es vom emulierten System ab,
+  welche konkrete Funktion ausgef&uuml;hrt wird.
+</body>
+</html>
+

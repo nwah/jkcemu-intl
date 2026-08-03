@@ -1,0 +1,661 @@
+<html>
+<head><title>BASIC-Compiler: Ausdr&uuml;cke</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC-Compiler</a></h1>
+
+ <h2>Ausdr&uuml;cke</h2>
+  Ausdr&uuml;cke sind Kombinationen aus Literalen
+  (im BASIC-Programm stehende Zahlen und Zeichenketten),
+  Variablen, Funktionsaufrufen, Operatoren und Klammern,
+  die als Ergebnis einen numerischen Wert oder eine Zeichenkette liefern.
+  Ausdr&uuml;cke, die einen numerischen Wert liefern,
+  sind <em>numerische Ausdr&uuml;cke</em>.
+  Ausdr&uuml;cke, die eine Zeichenkette liefern,
+  werden <em>String-Ausdr&uuml;cke</em> genannt.
+ <br/><br/>
+
+ <ul>
+  <li>
+   <a href="expressions.htm#num_expr">1. Numerische Ausdr&uuml;cke</a>
+   <ul>
+    <li><a href="expressions.htm#numbers">1.1. Zahlen</a></li>
+    <li><a href="expressions.htm#variables">1.2. Variablen</a></li>
+    <li><a href="expressions.htm#functions">1.3. Funktionen</a></li>
+    <li>
+     <a href="expressions.htm#operators1">1.4. Operatoren mit einem Operanden</a>
+    </li>
+    <li>
+     <a href="expressions.htm#operators2">1.5. Operatoren mit zwei Operanden</a>
+     <ul>
+      <li>
+       <a href="expressions.htm#cond_op">1.5.1. Vergleichsoperatoren</a>
+      </li>
+      <li>
+       <a href="expressions.htm#math_op">1.5.2. Mathematische Operatoren</a>
+      </li>
+      <li>
+       <a href="expressions.htm#bit_op">1.5.3. Bitweise wirkende Operatoren</a>
+      </li>
+      <li>
+       <a href="expressions.htm#shift_op">1.5.4. Schiebeoperatoren</a>
+      </li>
+     </ul>
+    </li>
+    <li><a href="expressions.htm#priority_rules">1.6. Vorrangregeln</a></li>
+   </ul>
+  </li>
+  <li><a href="expressions.htm#str_expr">2. String-Ausdr&uuml;cke</a></li>
+  <li><a href="expressions.htm#grammar">3. Grammatik</a></li>
+ </ul>
+ <br/>
+
+ <h3><a name="num_expr">1. Numerische Ausdr&uuml;cke</a></h3>
+  Numerische Ausdr&uuml;cke liefern einen numerischen Wert
+  mit dem Datentyp <a href="datatypes.htm#integer">Integer</a>,
+  <a href="datatypes.htm#long">Long</a>,
+  <a href="datatypes.htm#decimal">Decimal</a> oder
+  <a href="datatypes.htm#single">Single</a>.
+ <br/><br/>
+
+ <h3><a name="numbers">1.1. Zahlen</a></h3>
+  Der Compiler versteht Dezimalzahlen mit und ohne Dezimalpunkt,
+  Hexadezimalzahlen sowie Bin&auml;rzahlen.
+  Dezimalzahlen beginnen mit einer Ziffer&nbsp;0 bis&nbsp;9,
+  Hexadezimalzahlen mit <em>&amp;H</em>
+  und Bin&auml;rzahlen mit <em>&amp;B</em>.
+ <br/><br/>
+  Der Datentyp der Zahl wird automatisch ermittelt.
+  Bei Bedarf k&ouml;nnen Sie aber auch durch Anh&auml;ngen eines Buchstaben
+  einen Typ erzwingen:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Angeh&auml;ngter Buchstabe</th><th>Erzwungener Datentyp</th></tr>
+   <tr><td>D</td><td>Decimal (nur bei Dezimalzahlen m&ouml;glich)</td></tr>
+   <tr><td>L</td><td>Long</td></tr>
+  </table>
+ <br/>
+  F&uuml;r die Datentypen Integer und Single existieren keine solche
+  Buchstaben, da diese Datentypen automatisch vor Long und Decimal
+  eingenommen werden.
+ <br/><br/>
+  Beispiele:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Literal</th><th>Dezimalwert</th><th>Datentyp</th></tr>
+   <tr><td>123</td><td>123</td><td>Integer</td></tr>
+   <tr><td>123D</td><td>123.0</td><td>Decimal</td></tr>
+   <tr><td>123L</td><td>123</td><td>Long</td></tr>
+   <tr><td>123.0</td><td>123.0</td><td>Decimal</td></tr>
+   <tr><td>123.45</td><td>123.45</td><td>Single</td></tr>
+   <tr><td>123.45D</td><td>123.45</td><td>Decimal</td></tr>
+   <tr>
+    <td>123.45L</td>
+    <td colspan="2">Fehler: Kommazahl als Long nicht m&ouml;glich</td>
+   </tr>
+   <tr><td>123456</td><td>123456</td><td>Long</td></tr>
+   <tr><td>123456.7</td><td>123456.7</td><td>Single</td></tr>
+   <tr><td>123456.7D</td><td>123456.7</td><td>Decimal</td></tr>
+   <tr><td>123456.7E3</td><td>123456700</td><td>Single</td></tr>
+   <tr><td>123456.7E+3</td><td>123456700</td><td>Single</td></tr>
+   <tr><td>123456.7E-3</td><td>123.4567</td><td>Single</td></tr>
+   <tr>
+    <td>123456.7E3D</td>
+    <td colspan="2">Fehler: Exponent bei Decimal nicht unterst&uuml;tzt</td>
+   </tr>
+   <tr><td>&amp;HA2BD</td><td>-23875</td><td>Integer</td></tr>
+   <tr><td>&amp;HA2BDL</td><td>41661</td><td>Long</td></tr>
+   <tr><td>&amp;H89A2BD</td><td>9020093</td><td>Long</td></tr>
+   <tr><td>&amp;H89A2BDL</td><td>9020093</td><td>Long</td></tr>
+   <tr><td>&amp;B1001011</td><td>75</td><td>Integer</td></tr>
+   <tr><td>&amp;B1001011L</td><td>75</td><td>Long</td></tr>
+   <tr><td>&amp;B10010110100101101</td><td>77101</td><td>Long</td></tr>
+  </table>
+ <br/>
+  <b>Achtung!</b> Wenn Sie keinen Datentyp erzwingen,
+  kann es aber durchaus vorkommen,
+  dass der Compiler aus Optimierungsgr&uuml;nden intern
+  einen anderen Datentyp erzeugt.
+  So wird z.B. beim Zuweisen einer Long-Variable mit einem Integer-Literal
+  das Literal intern gleich als Long compiliert,
+  um den sonst notwendigen Aufruf einer entspechenden Konvertierungsroutine
+  zur Laufzeit einzusparen.
+ <br/><br/>
+
+ <h3><a name="variables">1.2. Variablen</a></h3>
+  <a href="variables.htm">Variablen</a> werden in einem Ausdruck verwendet,
+  um den in einer Variable gespeicherten Wert zu lesen.
+  Bei Feldvariablen muss immer ein konkretes Feldelement angegeben werden,
+  da ein Audruck nur einen Wert liefern kann.
+  Der Zugriff auf ein einzelnes Element erfolgt mit einem hinter dem
+  Feldnamen in runden Klammern stehenden Index bzw. einer Indexliste.
+ <br/><br/>
+
+ <h3><a name="functions">1.3. Funktionen</a></h3>
+  Eine Liste der Funktionen finden Sie <a href="functions.htm">hier</a>.
+  Funktionen, deren Namen mit einem <tt>$</tt>-Zeichen enden,
+  sind String-Funktionen.
+  Diese liefern eine Zeichenkette zur&uuml;ck.
+ <br/><br/>
+
+ <h3><a name="operators1">1.4. Operatoren mit einem Operanden</a></h3>
+  <table border=1>
+   <tr><th nowrap="nowrap">Operator</th><th nowrap="nowrap">Bedeutung</th></tr>
+   <tr>
+    <td valign="top"><tt>+</tt></td>
+    <td>positives Vorzeichen (Wert wird nicht ge&auml;ndert.)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>-</tt></td>
+    <td>negatives Vorzeichen (mathematische Negation)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>NOT</tt></td>
+    <td>
+     bitweise Negation (nur Integer und Long),<br/>
+     Beispiel: <tt>A = NOT B</tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  Das Ergebnis hat den gleichen Datentyp wie der Operand.
+ <br/><br/>
+
+ <h3><a name="operators2">1.5. Operatoren mit zwei Operanden</a></h3>
+  <table border=1>
+   <tr>
+    <th>Operator</th>
+    <th>Bedeutung</th>
+    <th> Unterst&uuml;tzte Datentypen f&uuml;r den linken Operanden</th>
+    <th> Unterst&uuml;tzte Datentypen f&uuml;r den rechten Operanden</th>
+   </tr>
+   <tr>
+    <td valign="top"><tt>=</tt></td>
+    <td valign="top">Test auf Gleichheit</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&lt;&gt;</tt></td>
+    <td valign="top">Test auf Ungleichheit</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&lt;</tt></td>
+    <td valign="top">Test auf kleiner</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&lt;=</tt></td>
+    <td valign="top">Test auf kleiner oder gleich</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&gt;</tt></td>
+    <td valign="top">Test auf gr&ouml;&szlig;er</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&gt;=</tt></td>
+    <td valign="top">Test auf gr&ouml;&szlig;er oder gleich</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>+</tt></td>
+    <td valign="top">Addition</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)&nbsp;&sup2;)</td>
+    <td nowrap="nowrap">alle&nbsp;&sup1;)&nbsp;&sup2;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>-</tt></td>
+    <td valign="top">Subtraktion</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>*</tt></td>
+    <td valign="top">Multiplikation</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>/</tt></td>
+    <td valign="top">Division</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>ADD</tt></td>
+    <td valign="top">Addition ohne &Uuml;berlaufpr&uuml;fung</td>
+    <td valign="top">Integer</td>
+    <td valign="top">Integer</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>SUB</tt></td>
+    <td valign="top">Subtraktion ohne &Uuml;berlaufpr&uuml;fung</td>
+    <td valign="top">Integer</td>
+    <td valign="top">Integer</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>MOD</tt></td>
+    <td valign="top">Modulo (Rest einer Division)</td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer, Long</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>AND</tt></td>
+    <td valign="top">bitweises UND</td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer, Long</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>OR</tt></td>
+    <td valign="top">bitweises ODER</td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer, Long</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>XOR</tt></td>
+    <td valign="top">bitweises Exklusiv-ODER</td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer, Long</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>SHL</tt></td>
+    <td valign="top">
+     links schieben ohne &Uuml;berlaufpr&uuml;fung,<br/>
+     Beispiel (B um zwei Bits nach links schieben): <tt>B = B SHL 2</tt>
+    </td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>SHR</tt></td>
+    <td valign="top">rechts schieben ohne &Uuml;berlaufpr&uuml;fung</td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer</td>
+   </tr>
+  </table>
+ <br/>
+  Anmerkungen:
+ <br/>
+  <table border="0">
+   <tr>
+    <td valign="top">&sup1;)</td>
+    <td valign="top">
+     Wenn der linke Operand einen numerischen Datentyp hat
+     (Integer, Long, Decimal, oder Single),
+     muss der rechte Operand ebenfalls einen numerischen Datentyp haben,
+     jedoch nicht zwingend den gleichen.
+     Wenn der linke Operand ein String-Ausdruck ist,
+     muss der rechte Operand ebenfalls vom Typ String sein.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">&sup2;)</td>
+    <td valign="top">
+     Beim Datentyp String lassen sich mit dem Plus-Operator
+     komplexe String-Ausdr&uuml;cke bilden.
+     Lesen Sie dazu bitte auch die Hinweise zur
+     <a href="strings.htm">Zeichenkettenverarbeitung</a>,
+     insbesondere zur den
+     <a href="strings.htm#expr">String-Ausdr&uuml;cken</a>!
+    </td>
+   </tr>
+  </table>
+ <br/>
+  <b>Hinweis:</b> F&uuml;r eine Multiplikation oder Division mit 2 oder 10
+  lesen Sie bitte auch die Erkl&auml;uterungen zu folgenden Funktionen:
+ <br/>
+  <ul>
+   <li><a href="functions.htm#mul10">MUL10</a></li>
+   <li><a href="functions.htm#mul2">MUL2</a></li>
+   <li><a href="functions.htm#div10">DIV10</a></li>
+   <li><a href="functions.htm#div2">DIV2</a></li>
+  </ul>
+ <br/>
+
+ <h3><a name="cond_op">1.5.1. Vergleichsoperatoren</a></h3>
+  Vergleichsoperatoren (=, &lt;&gt;, &lt;, &lt;=, &gt; und &gt;=)
+  liefern als Ergebnis immer einen Integer-Wert, und zwar entweder &nbsp;0
+  (Vergleich fehlgeschlagen, alle Bits zur&uuml;ckgesetzt)
+  oder&nbsp;-1 (Vergleich erfolgreich, alle Bits gesetzt).
+  Dadurch, dass immer alle Bits gesetzt oder zur&uuml;ckgesetzt werden,
+  k&ouml;nnen die
+  <a href="expressions.htm#bit_op">bitweise wirkenden Operatoren AND und OR</a>
+  sowie die <a href="expressions.htm#operators1">bitweise Negation NOT</a>
+  auch als logische Operatoren zum Verkn&uuml;pfen von
+  Vergleichen verwendet werden.
+  Anhand des folgenden Beispiels soll das verdeutlicht werden:
+ <br/>
+  <tt>
+   &#10;<br/>
+   10 A$="ABC"&#10;<br/>
+   20 B$="XYZ"&#10;<br/>
+   30 C=1&#10;<br/>
+   40 D=2&#10;<br/>
+   50 PRINT (A$&lt;B$) AND (C&lt;D)&#10;<br/>
+  </tt>
+ <br/>
+  In Zeile&nbsp;50 wird eine&nbsp;-1 ausgeben.
+  Und das kommt folgenderma&szlig;en:
+  Die Teilausdr&uuml;cke <tt>A$&lt;B$</tt> und
+  <tt>C&lt;D</tt> liefern jeweils den Wert&nbsp;-1,
+  d.h., es sind alle Bits gesetzt.
+  Die UND-Verkn&uuml;pfung (AND-Operator) zwischen
+  <em>alle Bits gesetzt</em> und <em>alle Bits gesetzt</em>
+  bleibt bei <em>alle Bits gesetzt</em>,
+  was den numerischen Wert&nbsp;-1 darstellt.
+ <br/><br/>
+
+ <h3><a name="math_op">1.5.2. Mathematische Operatoren</a></h3>
+  Die mathematischen Operatoren sind:
+  + - * / ADD SUB MOD.
+  Haben beide Operanden den gleichen Datentyp,
+  wird auch die Operation mit diesem Datentyp ausgef&uuml;hrt.
+  Haben dagegen die Operanden unterschiedliche Datenypen,
+  wird zuerst der Operand, dessen Typ den kleineren Wertebereich hat,
+  in den Datentyp des anderen Operanden umgewandelt
+  (automatische Datentypkonvertierung).
+  Das Ergebnis hat dann den Datentyp mit dem gr&ouml;&szlig;eren
+  Wertebereich.
+ <br/><br/>
+  Das Ergebnis muss in den Ergebnisdatentyp passen.
+  Ist das nicht der Fall, kommt es zu einem numerischen &Uuml;berlauf
+  und das Programm bricht mit einer entsprechenden Fehlermeldung ab.
+ <br/><br/>
+  Die Operatoren <tt>ADD</tt> und <tt>SUB</tt> f&uuml;hren dagegen eine
+  Integer-Addition bzw. -Subtraktion ohne &Uuml;berlaufpr&uuml;fung aus.
+  Das ist z.B. sinnvoll bei der Berechnung von Speicheradressen.
+  Folgendes Beispiel soll das verdeutlichen:
+ <br/>
+  <tt>
+   &#10;<br/>
+   10 A=&amp;H7F00&#10;<br/>
+   20 N=0&#10;<br/>
+   30 FOR I=0 TO 999&#10;<br/>
+   40 IF PEEK(A+I)=0 THEN N=N+1&#10;<br/>
+   50 NEXT&#10;<br/>
+   60 PRINT N&#10;<br/>
+  </tt>
+ <br/>
+  Ab der Adresse 7F00h sollen in den folgenden 1000 Bytes die Anzahl
+  der Nullbytes gez&auml;hlt werden.
+  Bei der Adresse 8000h bricht das Programm mit einem numerischen
+  &Uuml;berlauf ab, da der gr&ouml;&szlig;tm&ouml;gliche
+  vorzeichenbehaftete Wert von&nbsp;32767 (7FFFh) &uuml;berschritten wurde.
+  Mit dem ADD-Operator bricht das Programmm nicht ab:
+ <br/>
+  <tt>
+   &#10;<br/>
+   10 A=&amp;H7F00&#10;<br/>
+   20 N=0&#10;<br/>
+   30 FOR I=0 TO 999&#10;<br/>
+   40 IF PEEK(A ADD I)=0 THEN N=N+1&#10;<br/>
+   50 NEXT&#10;<br/>
+   60 PRINT N&#10;<br/>
+  </tt>
+ <br/>
+  <b>Achtung!</b> Manche BASIC-Dialekte kennen auch
+  den Operator&nbsp;<tt>^</tt> f&uuml;r die Exponentialrechnung.
+  Der JKCEMU-BASIC-Compiler unterst&uuml;tzt diesen Operator nicht,
+  bietet aber die gleiche Funktionalit&auml;t in Form
+  der Funktion&nbsp;<a href="functions.htm#pow">POW</a>.
+ <br/><br/>
+
+ <h3><a name="bit_op">1.5.3. Bitweise wirkende Operatoren</a></h3>
+  Die Operatoren AND, OR und XOR f&uuml;hren bitweise Verkn&uuml;pfungen
+  durch und sind nur mit den Datentypen Integer und Long m&ouml;glich.
+  Haben beiden Operanden den Datentyp Integer,
+  wird auch Integer zur&uuml;ckgeliefrt.
+  In allen anderen F&auml;llen,
+  d.h. wenn mindestens ein Operand den Typ Long hat,
+  wird die gesamte Operation als Long ausgef&uuml;hrt.
+ <br/><br/>
+
+ <h3><a name="shift_op">1.5.4. Schiebeoperatoren</a></h3>
+  Die Operatoren SHL und SHR schieben den 16-Bit-Integer- bzw.
+  32-Bit-Long-Wert des linken Operanden um soviele Bits nach
+  links (SHL) bzw. rechts (SHR),
+  wie durch den rechten Operanden angegeben wurde.
+  Es werden immer Nullbits hineingeschoben.
+  Die herausgeschobenen Bits gehen verloren.
+  Eine &Uuml;berlaufpr&uuml;fung findet nicht statt.
+  Das Ergebnis hat den gleichen Datentyp wie der linke Operand.
+ <br/><br/>
+
+ <h3><a name="priority_rules">1.6. Vorrangregeln</a></h3>
+  Die verschiedenen Operatoren haben eine unterschiedliche Bindungskraft.
+  Operatoren mit einer h&ouml;heren Bindungskraft werden vor den
+  Operatoren mit einer niedrigeren Bindungskraft ausgef&uuml;hrt.
+  Innerhalb der gleichen Bindungskraft erfolgt die Ausf&uuml;hrung
+  von links nach rechts.
+ <br/><br/>
+  Die Tabelle zeigt die Rangfolge der einzlnen Operatoren.
+  Je weiter oben ein Operator steht, desto h&ouml;her ist die Bindungskraft.
+ <br/><br/>
+  <table border="1">
+   <tr><th>Rang</th><th>Operator</th><th>Bemerkung</th></tr>
+   <tr>
+    <td valign="top">1</td>
+    <td valign="top">(...)</td>
+    <td valign="top">in Klammern eingeschlossener Ausdruck</td>
+   </tr>
+   <tr>
+    <td valign="top">2</td>
+    <td valign="top">
+     +<br/>
+     -
+    </td>
+    <td valign="top">
+     Operatoren mit einem Operanden (Vorzeichen)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">3</td>
+    <td valign="top">
+     *<br/>
+     /
+    </td>
+    <td valign="top">Multiplikation und Division</td>
+   </tr>
+   <tr>
+    <td valign="top">4</td>
+    <td valign="top">
+     +<br/>
+     -<br/>
+     ADD<br/>
+     SUB
+    </td>
+    <td valign="top">Addition und Subtraktion</td>
+   </tr>
+   <tr>
+    <td valign="top">5</td>
+    <td valign="top">
+     SHL<br/>
+     SHR
+    </td>
+    <td valign="top">Schiebeoperationen</td>
+   </tr>
+   <tr>
+    <td valign="top">6</td>
+    <td valign="top">
+     &lt;<br/>
+     &lt;=<br/>
+     &gt;<br/>
+     &gt;=<br/>
+     =<br/>
+     &lt;&gt;
+    </td>
+    <td valign="top">Vergleiche</td>
+   </tr>
+   <tr>
+    <td valign="top">7</td>
+    <td valign="top">NOT</td>
+    <td valign="top">bitweise Negation</td>
+   </tr>
+   <tr>
+    <td valign="top">8</td>
+    <td valign="top">
+     AND<br/>
+     OR<br/>
+     XOR
+    </td>
+    <td valign="top">bitweise bin&auml;re Operationen</td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="str_expr">2. String-Ausdr&uuml;cke</a></h3>
+  String-Ausdr&uuml;cke sind entweder ein String-Literal
+  (Zeichenkettenkonstante), eine String-Variable oder der Aufruf
+  einer String-Funktion.
+  Das Zusammenketten von String-Ausdr&uuml;cken mit dem Plus-Zeichen
+  ist nur bei der Zuweisung einer String-Variable
+  (<a href="instructions.htm#let">LET</a>-Anweisung) und
+  bei den Anweisungen <a href="instructions.htm#label">LABEL</a>
+  und <a href="instructions.htm#print">PRINT</a> erlaubt.
+ <br/><br/>
+  Lesen Sie bitte die Hinweise zur
+  <a href="strings.htm">String-Verarbeitung</a>.
+ <br/><br/>
+
+ <h3><a name="grammar">3. Grammatik</a></h3>
+  Folgende Grammatik beschreibt die Syntax der Ausdr&uuml;cke:
+ <br/><br/>
+  <i>Ausdruck:</i><br/>
+  &nbsp;&nbsp;<i>Negationsausdruck</i><br/>
+  &nbsp;&nbsp;<i>Ausdruck</i>&nbsp;<tt>AND</tt>&nbsp;<i>Negationsausdruck</i><br/>
+  &nbsp;&nbsp;<i>Ausdruck</i>&nbsp;<tt>OR</tt>&nbsp;<i>Negationsausdruck</i><br/>
+  &nbsp;&nbsp;<i>Ausdruck</i>&nbsp;<tt>XOR</tt>&nbsp;<i>Negationsausdruck</i>
+ <br/><br/>
+  <i>Negationsausdruck:</i><br/>
+  &nbsp;&nbsp;<i>Vergleichsausdruck</i><br/>
+  &nbsp;&nbsp;<tt>NOT</tt>&nbsp;<i>Vergleichsausdruck</i>
+ <br/><br/>
+  <i>Vergleichsausdruck:</i><br/>
+  &nbsp;&nbsp;<i>Verschiebeausdruck</i><br/>
+  &nbsp;&nbsp;<i>Vergleichsausdruck</i>&nbsp;<i>Vergleichsoperator</i>&nbsp;<i>Verschiebeausdruck</i><br/>
+  &nbsp;&nbsp;<i>Einfacher_String-Ausdruck</i>&nbsp;<i>Vergleichsoperator</i>&nbsp;<i>Einfacher_String-Ausdruck</i>
+ <br/><br/>
+  <i>Vergleichsoperator:</i><br/>
+  &nbsp;&nbsp;<tt>&lt;</tt><br/>
+  &nbsp;&nbsp;<tt>&lt;=</tt><br/>
+  &nbsp;&nbsp;<tt>=</tt><br/>
+  &nbsp;&nbsp;<tt>=&gt;</tt><br/>
+  &nbsp;&nbsp;<tt>&gt;</tt><br/>
+  &nbsp;&nbsp;<tt>&lt;&gt;</tt>
+ <br/><br/>
+  <i>Verschiebeausdruck:</i><br/>
+  &nbsp;&nbsp;<i>Additionsausdruck</i><br/>
+  &nbsp;&nbsp;<i>Verschiebeausdruck</i>&nbsp;<i>Verschiebeoperator</i>&nbsp;<i>Additionssausdruck</i>
+ <br/><br/>
+  <i>Verschiebeoperator:</i><br/>
+  &nbsp;&nbsp;<tt>SHL</tt><br/>
+  &nbsp;&nbsp;<tt>SHR</tt>
+ <br/><br/>
+  <i>Additionsausdruck:</i><br/>
+  &nbsp;&nbsp;<i>Multiplikationsausdruck</i><br/>
+  &nbsp;&nbsp;<i>Additionsausdruck</i>&nbsp;<i>Additionsoperator</i>&nbsp;<i>Multiplikationsausdruck</i>
+ <br/><br/>
+  <i>Additionsoperator:</i><br/>
+  &nbsp;&nbsp;<tt>ADD</tt><br/>
+  &nbsp;&nbsp;<tt>SUB</tt><br/>
+  &nbsp;&nbsp;<tt>+</tt><br/>
+  &nbsp;&nbsp;<tt>-</tt>
+ <br/><br/>
+  <i>Multiplikationsausdruck:</i><br/>
+  &nbsp;&nbsp;<i>Un&auml;rer_Ausdruck</i><br/>
+  &nbsp;&nbsp;<i>Multiplikationsausdruck</i>&nbsp;<i>Multiplikationsoperator</i>&nbsp;<i>Un&auml;rer_Ausdruck</i>
+ <br/><br/>
+  <i>Multiplikationsoperator:</i><br/>
+  &nbsp;&nbsp;<tt>*</tt><br/>
+  &nbsp;&nbsp;<tt>/</tt><br/>
+  &nbsp;&nbsp;<tt>MOD</tt>
+ <br/><br/>
+  <i>Un&auml;rer_Ausdruck:</i><br/>
+  &nbsp;&nbsp;<i>Prim&auml;rausdruck</i><br/>
+  &nbsp;&nbsp;<i>Numerische_Feldvariable</i><br/>
+  &nbsp;&nbsp;<i>Vorzeichen</i>&nbsp;<i>Prim&auml;rausdruck</i>
+ <br/><br/>
+  <i>Vorzeichen:</i><br/>
+  &nbsp;&nbsp;<tt>+</tt><br/>
+  &nbsp;&nbsp;<tt>-</tt>
+ <br/><br/>
+  <i>Prim&auml;rausdruck:</i><br/>
+  &nbsp;&nbsp;<tt>(</tt>&nbsp;<i>Ausdruck</i>&nbsp;<tt>)</tt><br/>
+  &nbsp;&nbsp;<i>Zahlenliteral</i><br/>
+  &nbsp;&nbsp;<i>Zeichenliteral</i><br/>
+  &nbsp;&nbsp;<i>Einfache_numerische_Variable</i><br/>
+  &nbsp;&nbsp;<i>Numerische_Feldvariable</i><br/>
+  &nbsp;&nbsp;<i>Numerischer_Funktionsaufruf</i>
+ <br/><br/>
+  <i>Singul&auml;re_Ganzzahlvariable:</i><br/>
+  &nbsp;&nbsp;<i>Einfache_Integer_oder_Long-Variable</i><br/>
+  &nbsp;&nbsp;<i>Integer_oder_Long_Feldvariable</i>
+ <br/><br/>
+  <i>Zahlenliteral:</i><br/>
+  &nbsp;&nbsp;<i>Folge_von_Ziffern_0...9</i><br/>
+  &nbsp;&nbsp;<i>Folge_von_Ziffern_0...9</i>&nbsp;<i>Dezimalpunkt</i>&nbsp;<i>Folge_von_Ziffern_0...9</i><br/>
+  &nbsp;&nbsp;<tt>&amp;B</tt>&nbsp;<i>Folge_von_Ziffern_0_oder_1</i><br/>
+  &nbsp;&nbsp;<tt>&amp;H</tt>&nbsp;<i>Folge_von_Hexadezimalziffern</i>
+ <br/><br/>
+  <i>Dezimalpunkt:</i><br/>
+  &nbsp;&nbsp;<tt>.</tt>
+ <br/><br/>
+  <i>Zeichenliteral:</i><br/>
+  &nbsp;&nbsp;<tt>'</tt>&nbsp;<i>8-Bit-Zeichen</i>&nbsp;<tt>'</tt>
+ <br/><br/>
+  <i>Einfache_numerische_Variable:</i><br/>
+  &nbsp;&nbsp;<i>numerischer_Bezeichner</i>
+ <br/><br/>
+  <i>Numerische_Feldvariable:</i><br/>
+  &nbsp;&nbsp;<i>numerischer_Bezeichner</i>&nbsp;<tt>(</tt>&nbsp;<i>Ausdruck</i>&nbsp;<tt>)</tt><br/>
+  &nbsp;&nbsp;<i>numerischer_Bezeichner</i>&nbsp;<tt>(</tt>&nbsp;<i>Ausdruck</i>&nbsp;<tt>,</tt>&nbsp;<i>Ausdruck</i>&nbsp;<tt>)</tt>
+ <br/><br/>
+  <i>Numerischer_Funktionsaufruf:</i><br/>
+  &nbsp;&nbsp;<i>numerischer_Bezeichner</i><br/>
+  &nbsp;&nbsp;<i>numerischer_Bezeichner</i>&nbsp;<tt>(</tt>&nbsp;<i>Argumentliste</i>&nbsp;<tt>)</tt>
+ <br/><br/>
+  <i>numerischer_Bezeichner:</i><br/>
+  &nbsp;&nbsp;<i>Buchstabe_A...Z</i><br/>
+  &nbsp;&nbsp;<i>Buchstabe_A...Z</i>&nbsp;<i>Folge_von_Buchstaben_A...Z_und_Zifferrn_0...9</i>
+ <br/><br/>
+  <i>Argumentliste:</i><br/>
+  &nbsp;&nbsp;<i>Argument</i><br/>
+  &nbsp;&nbsp;<i>Argumentliste</i>&nbsp;<tt>,</tt>&nbsp;<i>Argument</i>
+ <br/><br/>
+  <i>Argument:</i><br/>
+  &nbsp;&nbsp;<i>Ausdruck</i><br/>
+  &nbsp;&nbsp;<i>Einfacher_String-Ausdruck</i>
+ <br/><br/>
+  <i>Einfacher_String-Ausdruck:</i><br/>
+  &nbsp;&nbsp;<i>String-Literal</i><br/>
+  &nbsp;&nbsp;<i>String-Variable</i><br/>
+  &nbsp;&nbsp;<i>String-Feldvariable</i><br/>
+  &nbsp;&nbsp;<i>String-Funktion</i>
+ <br/><br/>
+  <i>String-Literal:</i><br/>
+  &nbsp;&nbsp;<tt>&quot;</tt>&nbsp;<i>Folge_von_8-Bit-Zeichen</i>&nbsp;<tt>&quot;</tt>
+ <br/><br/>
+  <i>String-Variable:</i><br/>
+  &nbsp;&nbsp;<i>String-Bezeichner</i>&nbsp;<tt>$</tt>
+ <br/><br/>
+  <i>String-Feldvariable:</i><br/>
+  &nbsp;&nbsp;<i>String-Bezeichner</i>&nbsp;<tt>$</tt>&nbsp;<tt>(</tt>&nbsp;<i>Ausdruck</i>&nbsp;<tt>)</tt><br/>
+  &nbsp;&nbsp;<i>String-Bezeichner</i>&nbsp;<tt>$</tt>&nbsp;<tt>(</tt>&nbsp;<i>Ausdruck</i>&nbsp;<tt>,</tt>&nbsp;<i>Ausdruck</i>&nbsp;<tt>)</tt>
+ <br/><br/>
+  <i>String-Funktion:</i><br/>
+  &nbsp;&nbsp;<i>String-Bezeichner</i><br/>
+  &nbsp;&nbsp;<i>String-Bezeichner</i>&nbsp;<tt>(</tt>&nbsp;<i>Argumentliste</i>&nbsp;<tt>)</tt>
+ <br/><br/>
+  <i>String-Bezeichner:</i><br/>
+  &nbsp;&nbsp;<i>Buchstabe&nbsp;A...Z</i>&nbsp;<tt>$</tt><br/>
+  &nbsp;&nbsp;<i>Buchstabe&nbsp;A...Z</i>&nbsp;<i>Folge_von_Buchstaben_A...Z_und_Zifferrn_0...9</i>&nbsp;<tt>$</tt>
+ <br/>
+</body>
+</html>

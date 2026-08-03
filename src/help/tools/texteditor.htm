@@ -1,0 +1,462 @@
+<html>
+<body>
+ <h1>Texteditor</h1>
+  <ul>
+   <li><a href="texteditor.htm#intro">1. Vorbemerkungen</a></li>
+   <li><a href="texteditor.htm#start">2. Texteditor starten</a></li>
+   <li>
+    <a href="texteditor.htm#fct">3. Funktionen</a>
+    <ul>
+     <li>
+      <a href="texteditor.htm#open">3.1. Datei &ouml;ffnen</a>
+      <ul>
+       <li>
+	<a href="texteditor.htm#emusys">3.1.1. Dateien der emulierten Systeme</a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="texteditor.htm#open_with">3.2. Datei &ouml;ffnen mit Zeichensatz</a>
+     </li>
+     <li><a href="texteditor.htm#save">3.3. Datei speichern</a></li>
+     <li>
+      <a href="texteditor.htm#save_as">3.4. Datei speichern unter...</a>
+     </li>
+     <li><a href="texteditor.htm#print">3.5. Drucken</a></li>
+     <li><a href="texteditor.htm#props">3.6. Eigenschaften</a></li>
+     <li>
+      <a href="texteditor.htm#check_bracket">3.7. Klammer pr&uuml;fen</a>
+     </li>
+     <li><a href="texteditor.htm#select_char">3.8. Zeichenauswahl</a></li>
+     <li>
+      <a href="texteditor.htm#newpage">3.9. Seitenumbruchzeichen einf&uuml;gen und entfernen</a>
+     </li>
+     <li><a href="texteditor.htm#tabsize">3.10. Tabulatorbreite</a></li>
+     <li>
+      <a href="texteditor.htm#wordstar">3.11. WordStar-Formatierungen entfernen</a>
+     </li>
+     <li>
+      <a href="texteditor.htm#conv_umlauts">3.12. Deutsche Umlaute konvertieren</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="texteditor.htm#prg">4. Programmierung mit Assembler und BASIC-Compiler</a>
+    <ul>
+     <li><a href="texteditor.htm#prj">4.1. Projektdateien</a></li>
+    </ul>
+   </li>
+   <li><a href="texteditor.htm#settings">5. Einstellungen</a></li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="intro">1. Vorbemerkungen</a></h2>
+  Ein Texteditor dient nat&uuml;rlich zum Anzeigen und Bearbeiten
+  von Textdateien.
+  Der JKCEMU-Texteditor ist aber insbesondere auf die Belange
+  des Emulators ausgelegt.
+  So bietet er einerseits Zugang zum <a href="assembler.htm">Assembler</a>
+  und zum <a href="basicc.htm">BASIC-Compiler</a>
+  und andereseits kann er mit den &uuml;blichen Zeichens&auml;tzen
+  und teilweise auch mit den Dateiformaten der emulierten Systeme umgehen.
+  Alte Dateiformate werden in der Form unterst&uuml;tzt,
+  dass beim &Ouml;ffnen von EDAS*4-Assemblerquelltextdateien
+  und diversen BASIC-Programmdateien der jeweilige Quelltext extrahiert
+  und in Form einer neuen Textdatei bereitstellen wird.
+ <br/><br/>
+
+
+ <h2><a name="start">2. Texteditor starten</a></h2>
+  Sie befinden sich im JKCEMU Hauptfenster und klicken im Men&uuml;
+  <em>Datei</em> den Punkt <em>Texteditor/Programmierung...</em> an.
+ <br/><br/>
+  Die weitere Beschreibung bezieht sich auf das Fenster des Texteditors.
+ <br/><br/>
+
+
+ <h2><a name="fct">3. Funktionen</a></h2>
+  Im Editor k&ouml;nnen gleichzeitig mehrere Textdateien
+  angezeigt und bearbeitet werden.
+  Erstellen Sie einen neuen Text (Punkt <em>Neuer Text</em>
+  im Men&uuml; <em>Datei</em>) oder &ouml;ffnen Sie eine Datei
+  (Men&uuml;punkte <em>&Ouml;ffnen...</em> und
+  <em>&Ouml;ffnen mit Zeichensatz...</em>),
+  so wird daf&uuml;r ein neues Unterfenster angelegt.
+  Der bereits angezeigte Text bleibt in seinem Unterfenster erhalten.
+  F&uuml;r jedes Unterfenster sehen Sie oberhalb des Textbereiches
+  eine Lasche mit dem Dateinamen.
+  Durch Mausklick auf die entsprechende Lasche k&ouml;nnen
+  Sie zwischen den einzelnen Unterfenstern,
+  d.h. zwischen den einzelnen Texten, hin- und herschalten.
+ <br/><br/>
+  Die Editier-Funktionen finden Sie im Men&uuml;
+  <em>Bearbeiten</em>, z.B. letzte &Auml;nderung r&uuml;ckg&auml;ngig machen,
+  Arbeiten mit der Zwischenablage, Suchen und Ersetzen,
+  mit dem Cursor zu einer bestimmten Zeile springen usw.
+ <br/><br/>
+  Nachfolgend wird auf einige Funktionen n&auml;her eingegangen.
+  Die nicht n&auml;her erl&auml;uterten Funktionen entsprechen denen
+  gew&ouml;hnlicher Texteditoren.
+ <br/><br/>
+
+ <h3><a name="open">3.1. Datei &ouml;ffnen</a></h3>
+  Mit dieser Funktion &ouml;ffnen Sie eine Datei und laden
+  den darin enthaltenen Text in den Editor.
+  Dazu erscheint ein Dateiauswahldialog, in dem Sie die zu
+  &ouml;ffnende Datei ausw&auml;hlen.
+ <br/><br/>
+  Der Texteditor erkennt die Dateieigenschaften automatisch und merkt
+  sie sich intern, so dass beim Speichern des Textes die gleichen
+  Eigenschaften wieder verwendet werden.
+  Die Erkennung des Zeichensatzes geschieht folgenderma&szlig;en:
+  Beginnt die Datei mit einer Byte-Order-Markierung,
+  so leitet sich daraus der Zeichensatz ab (UTF-8, UTF16-BE oder UTF-16LE).
+  Ohne Byte-Order-Markierung wird die Datei mit dem bevorzugten
+  Zeichensatz UTF-8 eingelesen.
+  Treten dabei Zeichen-Mapping-Fehler auf,
+  wird die Datei mit dem lokalen Systemzeichensatz bzw. mit ISO-8859-1
+  noch einmel eingelesen.
+  War das Einlesen mit UTF-8 dagegen erfolgreich,
+  pr&uuml;ft der Texteditor noch, ob es sich evtl. um eine reine
+  ASCII-Datei (Untermenge von UTF-8) handelt.
+ <br/><br/>
+  Wenn die Zeichensatzerkennung zu einem falschen Ergebnis f&uuml;hrt,
+  kann man die Datei mit dem Men&uuml;punkt
+  <a href="texteditor.htm#open_with">Datei &ouml;ffnen mit Zeichensatz</a>
+  laden und dabei den Zeichensatz ausw&auml;hlen.
+ <br/><br/>
+
+ <h3><a name="emusys">3.1.1. Dateien der emulierten Systeme</a></h3>
+  Der Texteditor ist in der Lage, einige Dateien der emulierten Systeme
+  zu lesen und den eventuell darin enthaltenen Text zu extrahieren.
+  Dieser wird dann als neue Textdatei (<em>Neuer Text</em>) angezeigt.
+  Wird nun dieser Text gespeichert, hat man somit die Datei
+  in eine heute &uuml;bliche Textdatei konvertiert.
+ <br/><br/>
+  Konkret kann der Editor Texte aus folgenden Dateitypen extrahieren:
+ <br/>
+  <ul>
+   <li>
+    BASIC-Programmdatei folgender BASIC-Interpreter:
+    <ul>
+     <li>AC1 8K BASIC</li>
+     <li>AC1 12K BASIC</li>
+     <li>AC1 BASIC6</li>
+     <li>AC1 BACOBAS&nbsp;2 (nur Normalmodus, kein BASICODE)</li>
+     <li>AC1 BACOBAS&nbsp;3 (nur Normalmodus, kein BASICODE)</li>
+     <li>H&uuml;bler/Grafik-MC BASIC</li>
+     <li>Kramer-MC BASIC</li>
+     <li>LLCBASIC (nur Normalmodus, kein BASICODE)</li>
+    </ul>
+   </li>
+   <li>
+    Headersave-Datei mit Dateityp &quot;A&quot;,
+    wenn die Datei einen EDAS*4-Quelltext enth&auml;lt
+   </li>
+   <li>
+    Headersave-Datei mit Dateityp &quot;B&quot;
+    (BASIC-Programm von einem der o.g. BASIC-Interpreter)
+   </li>
+   <li>
+    Headersave-Datei mit Dateityp &quot;b&quot; (Mini-/Tiny-BASIC):
+    <ul>
+     <li>AC1 Mini-BASIC&nbsp;V2.1</li>
+     <li>LLC1-BASIC&nbsp;V1.2</li>
+     <li>Z1013 BASIC&nbsp;3.01</li>
+    </ul>
+   </li>
+   <li>
+    Headersave-Datei mit Dateityp &quot;I&quot; oder &quot;T&quot;,
+    wenn die Datei eine Textdatei enth&auml;lt.
+    Dabei wird als Zeilenende auch der hexdezimalen Wert 1E
+    unterst&uuml;tzt.
+   </li>
+   <li>KCB-Datei</li>
+   <li>KC-BASIC-Programmdatei</li>
+   <li>
+    KC-TAP-Datei, wenn die darin enthaltenen Bytes dem Format einer
+    KC-BASIC-Programmdatei entsprechen.
+    H&auml;ufig sind jedoch KC-BASIC-Programme nicht als
+    KC-BASIC-Programmdatei gespeichert, sondern als KC-Systemdatei,
+    um einen Autostart zu erm&ouml;glichen.
+    Diese Dateien k&ouml;nnen zwar nicht direkt im Texteditor
+    ge&ouml;ffnet werden,
+    jedoch k&ouml;nnen Sie diese Dateien in den Emulator laden
+    und das BASIC-Programm aus dem Arbeitsspeicher heraus extrahieren
+    (siehe auch <a href="../tips/kcc_tap_basic.htm">KC-BASIC-Programm
+    aus KCC-/KC-TAP-Datei extrahieren</a>).
+   </li>
+  </ul>
+ <br/><br/>
+
+ <h3><a name="open_with">3.2. Datei &ouml;ffnen mit Zeichensatz</a></h3>
+  Mit dieser Funktion &ouml;ffnen Sie eine Datei,
+  die in einem anderen als den Systemzeichensatz gespeichert wurde.
+  Nach der Dateiauswahl werden Sie nach dem Zeichensatz gefragt,
+  mit der die Datei geladen werden soll.
+ <br/><br/>
+  <b>Achtung!</b> Wenn Sie eine Datei mit einem anderen Zeichensatz laden,
+  als sie einmal erzeugt oder gespeichert wurde,
+  werden m&ouml;glicherweise einige Zeichen falsch angezeigt
+  oder fehlen ganz.
+ <br/><br/>
+  Des Weiteren haben Sie die M&ouml;glichkeit, die Option
+  <em>Eventuell vorhandenes Dateiendezeichen ignorieren</em>
+  zu aktivieren.
+  Damit wird eine Datei bis zum physischen Ende eingelesen,
+  auch wenn vorher ein Dateiendezeichen kommt.
+  Ein Dateiendezeichen (Byte 1Ah) wird &uuml;blicherweise als Ende
+  einer Textdatei bei Speicherung auf einem blockorientierten Medium
+  (z.B. Kassettenaufzeichnung, CP/M-Diskettenspeicherung) verwendet.
+  Heute werden Dateien Byte-exakt gespeichert,
+  so dass ein Dateiendezeichen nicht mehr notwendig ist.
+  Doch bei blockorientierter Speicherung wird eine Datei bis zum
+  Ende des Blocks eingelesen.
+  Dadurch k&ouml;nnen hinter dem Text noch verwirrende Bytes folgen.
+  Das wird mit dem Dateiendezeichen verhindert.
+ <br/><br/>
+
+ <h3><a name="save">3.3. Datei speichern</a></h3>
+  Diese Funktion speichert den angezeigten Text in eine Datei.
+  Die Dabei hat den gleichen Namen, den gleichen Zeichensatz und
+  auch sonst die gleichen Eigenschaften wie beim &Ouml;ffnen
+  beziehungsweise beim letzten Speichern.
+ <br/><br/>
+  Wenn Sie einen neuen Text angelegt haben und diesen erstmalig
+  speichern, wird automatisch die Funktionen <em>Speichern unter...</em>
+  aufgerufen, d.h., Sie m&uuml;ssen den Dateinamen und
+  die Eigenschaften festlegen.
+ <br/><br/>
+  <b>Achtung!</b> Wurde eine Datei mit einem Zeichensatz ge&ouml;ffnet,
+  der nur einen begrenzten Zeichenvorrat umfasst (z.B.ASCII)
+  und man tippt nun ein Zeichen ein, welches nicht in dem Zeichenvorrat
+  enthalten ist (z.B. deutscher Umlaut bei einer ASCII-Datei),
+  so erscheint beim Speichern eine Meldung, dass der Text nicht
+  vollst&auml;ndig in diesem Zeichensatz gespeichert werden kann.
+  In diesem Fall m&uuml;ssen Sie die Funktion
+  <a href="texteditor.htm#save_as">Datei speichern unter...</a>
+  verwenden und einen passenden Zeichensatz (z.B. UTF-8) ausw&auml;hlen.
+ <br/><br/>
+
+ <h3><a name="save_as">3.4. Datei speichern unter...</a></h3>
+  Sie k&ouml;nnen den angezeigten Text in einer Datei mit einem
+  anderen Namen und/oder mit anderen Eigenschaften speichern.
+  Zuerst erscheint ein Dateiauswahldialog, in dem Sie den Namen
+  der zu speichernden Datei bestimmen.
+  Nach dem Best&auml;tigen sehen Sie ein neues Fenster,
+  in dem Sie die Eigenschaften angeben k&ouml;nnen.
+  Damit ist es auch m&ouml;glich,
+  eine Textdatei in einem anderen Zeichensatz zu speichern
+  oder die Zeilenendebytes (DOS/Windows- bzw. Unix/Linux-Format)
+  zu &auml;ndern.
+ <br/><br/>
+
+ <h3><a name="print">3.5. Drucken</a></h3>
+  Der angezeigte Text wird gedruckt.
+  Mit der Funktion <em>Druckoptionen...</em> bestimmen Sie die
+  zu verwendende Schriftgr&ouml;&szlig;e und legen fest,
+  ob die Seitenzahl und der Dateiname gedruckt werden sollen.
+ <br/><br/>
+
+ <h3><a name="props">3.6. Eigenschaften</a></h3>
+  Jede Textdatei besitzt Eigenschaften, die Sie sich mit
+  dieser Funktion anzeigen lassen k&ouml;nnen.
+  Zu den Eigenschaften geh&ouml;ren der vollst&auml;ndige Dateiname,
+  der Zeichensatz, die Tabulatorbreite, die Zeilenendekennung und
+  die Option, ob beim Speichern nicht sichtbare Zeichen am Zeilenende
+  (angeh&auml;ngte Leerzeichen und Tabulatoren) abgeschnitten werden sollen.
+ <br/><br/>
+  M&ouml;chten Sie die Eigenschaften &auml;ndern,
+  so speichern Sie die Datei mit der Funktion <em>Speichern unter...</em>
+  und geben dort die neuen Eigenschaften an.
+ <br/><br/>
+
+ <h3><a name="check_bracket">3.7. Klammer pr&uuml;fen</a></h3>
+  Mit dieser Funktion finden Sie die zugeh&ouml;rige Klammer,
+  wenn sich der Cursor unmittelbar vor einer Klammer befindet.
+  Steht dagegen der Cursor an einer anderen Stelle,
+  springt er zur n&auml;chsten schlie&szlig;enden Klammer.
+ <br/><br/>
+
+ <h3><a name="select_char">3.8. Zeichenauswahl</a></h3>
+  Der Men&uuml;punkt <em>Zeichenauswahl...</em> &ouml;ffnet ein Fenster,
+  in dem Sie beliebige, in der aktuell eingestellten Schriftart darstellbare
+  Unicode-Zeichen ausw&auml;hlen und in den Text einf&uuml;gen bzw.
+  in die Zwischenablage kopieren k&ouml;nnen.
+ <br/><br/>
+  Die Unicode-Zeichen sind in Seiten aufgeteilt.
+  Es wird immer eine Seite angezeigt.
+  Mit den Pfeiltasten oben k&ouml;nnen Sie zur n&auml;chsten
+  und zur vorherigen Seite navigieren.
+  In dem Feld mit der hexadezimalen Seitennummer k&ouml;nnen Sie
+  durch Eintippen einer Nummer und anschlie&szlig;enden Dr&uuml;cken
+  der Enter-Taste auch direkt zu einer beliebigen Seite springen.
+ <br/><br/>
+  Jedes Unicode-Zeichen hat einen numerischen Code.
+  Ganz links finden Sie die Codes der Zeichen in der ersten Spalte
+  und oben die letzten beiden Ziffern der Codes der anderen Spalten.
+ <br/><br/>
+
+ <h3>
+  <a name="newpage">3.9. Seitenumbruchzeichen einf&uuml;gen und entfernen</a>
+ </h3>
+  Seitenumbruchzeichen (Form&nbsp;Feed, Code&nbsp;0Ch)
+  k&ouml;nnen eingef&uuml;gt und auch (alle auf einmal) wieder
+  entfernt werden.
+  Diese Zeichen haben jedoch nur beim Drucken eine Wirkung.
+  Im Editor werden die Seitenumbruchzeichen wie normale Zeichen behandelt.
+  Da ein Seitenumbruchzeichen jedoch ein sogenanntes nicht druckbares
+  Zeichen ist, h&auml;ngt es von der verwendeten Schrift ab,
+  ob und wie dieses Zeichen angezeigt wird.
+ <br/><br/>
+
+ <h3><a name="tabsize">3.10. Tabulatorbreite</a></h3>
+  Die Tabulatorbreite wird nicht in der Textdatei gespeichert,
+  d.h., es wird immer die Tabulatorbreite verwendet,
+  die Sie gerade eingestellt haben.
+ <br/><br/>
+  Einstellen k&ouml;nnen Sie die Tabulatorbreite im Men&uuml;
+  <em>Bearbeiten</em>.
+  Dabei k&ouml;nnen Sie angeben,
+  ob der Wert als Standardwert gesetzt werden soll.
+  Wenn nein, gilt die Tabulatorbreite nur f&uuml;r das
+  aktuelle Unterfenster.
+  Wenn ja, werden alle weiteren Textdateien, die Sie &ouml;ffnen
+  oder neu anlegen, mit dieser Tabulatorbreite angezeigt.
+  Dauerhaft gespeichert wird die Standardtabulatorbreite aber erst,
+  wenn Sie in den <a href="../settings.htm">Einstellungen</a>
+  ein Profil speichern.
+ <br/><br/>
+
+ <h3><a name="wordstar">3.11. WordStar-Formatierungen entfernen</a></h3>
+  WordStar war zu Zeiten der 8-Bit-Computer eine weit verbreitete
+  Textverarbung.
+  Aus diesem Grund wurden viele Dokumentationen in WordStar erstellt.
+  Damit Sie solche Dateien lesen k&ouml;nnen,
+  bietet der JKCEMU-Texteditor eine spezielle Unterst&uuml;tzung an:
+  Wenn Sie nach dem &Ouml;ffnen einer Datei erkennen,
+  dass es sich um eine WordStar-Datei handelt,
+  k&ouml;nnen Sie mit dem Men&uuml;punkt die WordStar-Formatierungen
+  entfernen und so eine einfache Textdatei daraus machen.
+  Eine WordStar-Datei erkennt man meistens daran,
+  dass der letzte Buchstabe eines jeden Wortes durch ein
+  seltsames Zeichen dargestellt wird.
+ <br/><br/>
+  <b>Achtung!</b> Bei einer Datei mit deutschsprachigem Inhalt
+  m&uuml;ssen Sie nach dem Entfernen der WordStar-Formatierungen
+  wahrscheinlich noch die Umlaute konvertieren.
+ <br/><br/>
+
+ <h3><a name="conv_umlauts">3.12. Deutsche Umlaute konvertieren</a></h3>
+  Die emulierten Computer kennen in ihrem Originalzustand keine
+  deutschen Umlaute.
+  Um trotzdem deutschsprachige Texte anzeigen zu k&ouml;nnen,
+  verwendeten einige Anwender die deutsche Variante des
+  ISO-646-Zeichensatzes,
+  bei dem anstelle der Zeichen <tt>[\]{|}~</tt> die Umlaute zu finden sind.
+  Wird nun ein solcher Text in einem gew&ouml;hnlichen Texteditor
+  angezeigt, so sind anstelle der deutschen Umlaute eben die Zeichen
+  <tt>[\]{|}~</tt> zu sehen.
+ <br/><br/>
+  Manche Anwender haben auch einen DOS-kompatiblen Zeichensatz installiert.
+  Wenn Sie nun eine im DOS-Zeichensatz erstellte Textdatei &ouml;ffnen,
+  sehen Sie anstelle der deutschen Umlaute ebenfalls andere Zeichen.
+ <br/><br/>
+  Zwar k&ouml;nnen Sie mit der Funktion
+  <em>&Ouml;ffnen mit Zeichensatz...</em>
+  die Datei gleich mit dem richtigen Zeichensatz laden,
+  doch falls Sie diesen nicht kennen, ist es umst&auml;ndlich,
+  alle m&ouml;glichen Zeichens&auml;tze erst auszuprobieren.
+  Mit den Funktionen im Untermen&uuml; <em>Deutsche Umlaute konvertieren</em>
+  k&ouml;nnen Sie die deutschen Umlaute aus dem DOS-Zeichensatz
+  beziehungsweise aus der deutschen Variante des ISO-646-Zeichensatzes
+  nachtr&auml;glich umwandeln, so dass sie richtig angezeigt werden.
+ <br/><br/>
+  <b>Achtung!</b> Vergewissern Sie sich bitte vor jedem Konvertieren,
+  mit welchem Zeichensatz der Text erstellt wurde
+  und &uuml;berlegen Sie bitte sorgf&auml;ltig,
+  ob und wie Sie Zeichen umwandeln m&uuml;ssen.
+ <br/><br/>
+
+
+ <h2>
+  <a name="prg">4. Programmierung mit Assembler und BASIC-Compiler</a>
+ </h2>
+  Dieser Abschnitt geht auf die Programmierung mit
+  <a href="assembler.htm">Assembler</a> und
+  <a href="basicc.htm">BASIC-Compiler</a>
+  unter Nutzung des im JKCEMU integrierten Texteditors ein.
+  M&ouml;chten Sie zur Programmierung jedoch einen anderen
+  Texteditor verwenden,
+  k&ouml;nnen Sie den Assembler und den BASIC-Compiler &uuml;ber die
+  Kommandozeile aufrufen (siehe <a href="assembler.htm#cmdline">hier</a>
+  und <a href="basicc/cmdline.htm">hier</a>).
+ <br/><br/>
+  Mit dem JKCEMU-Texteditor k&ouml;nnen Sie Assembler-
+  und BASIC-Programme schreiben und diese direkt &uuml;bersetzen lassen.
+  Der Aufruf des <a href="assembler.htm">Assemblers</a> bzw.
+  <a href="basicc.htm">BASIC-Compilers</a> erfolgt &uuml;ber
+  die entsprechenden Men&uuml;eintr&auml;ge im Men&uuml;
+  <em>Programmierung</em>.
+  Beim erstmaligen Aufruf der Men&uuml;punkte <em>Assemblieren</em> und
+  <em>BASIC-Programm compilieren</em> erscheint ein Dialog zur Eingabe
+  bzw. Anpassung der Optionen.
+  Bei nachfolgenden Aufrufen dieser beiden Men&uuml;punkte sehen Sie
+  den Dialog nicht mehr,
+  und es wird mit den gleichen Optionen assembliert bzw. compiliert.
+ <br/><br/>
+  M&ouml;chten Sie die Optionen &auml;ndern,
+  so verwenden Sie die Men&uuml;punkte <em>Assemblieren mit...</em> und
+  <em>BASIC-Programm compilieren mit...</em>.
+  Bei diesen beiden erscheint immer der Dialog mit den Optionen.
+  Ist in den Optionen bei <em>Programmcode in Emulator laden</em>
+  das H&auml;kchen gesetzt, wird der Programmcode direkt
+  in den Arbeitsspeicher (RAM) des Emulators geladen,
+  d.h., Sie k&ouml;nnen das Programm ausf&uuml;hren oder
+  <a href="debugger.htm">debuggen</a>.
+ <br/><br/>
+  Nach dem Assemblieren werden links die jeweiligen Adressen eingeblendet,
+  sofern im Men&uuml; <em>Programmierung</em> &rarr;
+  <em>Adressleiste nach Assemblieren anzeigen</em> eingeschaltet ist.
+  Damit sehen Sie, auf welchen Adressen die jeweiligen Quelltextzeilen
+  assembliert wurden.
+  Das erleichert den &Uuml;berblick bei der Arbeit mit dem
+  <a href="debugger.htm">Debugger</a>.
+  Au&szlig;erdem ist es damit auch m&ouml;glich,
+  &uuml;ber das Kontextmen&uuml; im Texteditor direkt
+  einen Halte-/Log-Punkt oder eine Variable im Debugger anzulegen.
+  Steht der Cursor dabei auf einer Zeile mit einer Marke,
+  wird diese als Name f&uuml;r den Halte-/Log-Punkt bzw.
+  f&uuml;r die Variable &uuml;bernommen.
+ <br/><br/>
+
+ <h3><a name="prj">4.1. Projektdateien</a></h3>
+  Der JKCEMU-Texteditor bietet die M&ouml;glichkeit,
+  ein angefangenes Assembler- oder BASIC-Programm als Projekt zu speichern
+  (Men&uuml;punkte <em>Programmierung</em> &rarr; <em>Projekt speichern</em>
+  sowie <em>Programmierung</em> &rarr; <em>Projekt speichern unter...</em>).
+  Dabei wird eine Projektdatei erzeugt, die die eingestellten Optionen
+  sowie einen Verweis auf die Quelltextdatei enth&auml;lt.
+  Sie k&ouml;nnen ein Projekt erst speichern,
+  nachdem der Quelltext einmal gespeichert wurde,
+  damit der Name der Quelltextdatei bekannt ist.
+ <br/><br/>
+  Das &Ouml;ffnen eines Projektes geschieht im dem Men&uuml;punkt
+  <em>Programmierung</em> &rarr; <em>Projektdatei &ouml;ffnen...</em>.
+  Dabei werden die Assembler- bzw. BASIC-Compiler-Optionen geladen
+  und die zugeh&ouml;rige Quelltextdatei ge&ouml;ffnet.
+ <br/><br/>
+  <b>Achtung!</b> Wenn Sie nur die Quelltextdatei anstelle der Projektdatei
+  &ouml;ffnen, werden die Assembler- bzw. Compiler-Optionen
+  nicht wieder so eingestellt, wie sie beim Speichern des Projektes waren.
+ <br/><br/>
+
+
+ <h2><a name="settings">5. Einstellungen</a></h2>
+  Die Schrift kann man in den
+  <a href="../settings.htm">JKCEMU-Einstellungen</a>
+  im Reiter <em>Schriften/Symbole</em> unter
+  <em>Schrift f&uuml;r Code-Bereiche</em> &auml;ndern.
+</body>
+</html>

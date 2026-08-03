@@ -1,0 +1,100 @@
+<html>
+<body>
+ <h1>CP/M-kompatible Diskettenabbilddateien entpacken</h1>
+  Diskettenabbilddateien k&ouml;nnen von JKCEMU entpackt werden,
+  wenn sie dem Diskettenformat von CP/M&nbsp;2.2 entsprechen.
+  Beim Entpacken werden die einzelnen Dateien,
+  die auf der Diskette bzw. in der Abbilddatei enthalten sind,
+  extrahiert und in das Dateisystem des Emulatorrechners kopiert.
+ <br/><br/>
+  Den Men&uuml;punkt zum Aufruf dieser Funktion
+  finden Sie im Hauptfenster, Men&uuml;<em>Extra</em>,
+  Untermen&uuml; <em>Werkzeuge</em>.
+  Nach dem Aufruf &ouml;ffnet sich ein neues Fenster.
+  In diesem w&auml;hlen Sie im oberen Bereich die zu entpackende
+  Diskettenabbilddatei aus.
+  JKCEMU analysiert die Datei und zeigt im mittleren Bereich an,
+  ob die Blockgr&ouml;&szlig;e und das Blocknummernformat
+  (8&nbsp; oder 16&nbsp;Bit) erkannt wurden.
+  Wenn nicht, m&uuml;ssen Sie diese beiden Werte selbst korrekt setzen!
+ <br/><br/>
+  Im unterern Bereich wird das Directory der Diskettenabbilddatei angezeigt.
+  Die Abbilddatei kann nur entpackt werden,
+  wenn ein Directory gefunden wurde.
+  Dann k&ouml;nnen Sie auf die Schaltfl&auml;che <em>Entpacken</em> klicken.
+ <br/><br/>
+
+ <h2>Optionen</h2>
+  Im mittleren Bereich k&ouml;nnen auch diverse Optionen angegeben werden,
+  z.B., ob eventuell vorhandene gel&ouml;schte Dateien entpackt
+  werden sollen.
+  Wenn Sie in den <a href="../settings.htm">Einstellungen</a>
+  ein Profil speichern, werden darin auch die beim letzten Entpacken
+  verwendeten Optionen gespeichert.
+  Beim n&auml;chsten Start von JKCEMU mit diesem Profil sind dann
+  im Werkzeugs zum Entpacken von Diskettenabbilddateien
+  die Optionen wieder so gesetzt.
+ <br/><br/>
+
+ <h2>Zeitstempel (DateStamper)</h2>
+  Wenn die zu entpackende Diskettenabbilddatei die Datei
+  <em>!!!TIME&amp;.DAT</em> enth&auml;lt
+  (siehe <a href="datestamper.htm">DateStamper</a>),
+  werden die Zeitstempel der entpackten Dateien auf die darin
+  enthaltenen Werte gesetzt, vorausgesetzt,
+  die verwendete Java-Laufzeitumgebung sowie das Dateisystem
+  erm&ouml;glichen das Setzen der Zeitstempel.
+ <br/><br/>
+
+ <h2>Probleme beim Entpacken</h2>
+  JKCEMU sucht das Directory auf den ersten vier Spuren der ersten Seite
+  im jeweils ersten Sektor.
+  Wenn das Directory sich an einer anderen Stelle befindet,
+  d.h. innerhalb einer Spur, wird es nicht gefunden.
+  In dem Fall handelt es sich entweder um ein Diskettenformat,
+  welches von JKCEMU nicht unterst&uuml;tzt wird
+  oder die Diskettenabbilddatei ist korrupt.
+ <br/><br/>
+  Eine weitere Bedingung f&uuml;r das Entpacken ist,
+  dass die Sektoren ab dem Directory ein gleichm&auml;&szlig;iges
+  Sektorlayout haben, d.h. dass auf allen Spuren alle Sektoren
+  die gleichen Nummern und die gleichen Gr&ouml;&szlig;en haben
+  und dass keine Spuren oder Sektoren fehlen oder Sektoren zu viel sind.
+  Wenn dies nicht der Fall ist, werden nur die Dateien entpackt,
+  deren Daten vor der ersten Unregelm&auml;&szlig;igkeit liegen.
+  Die Systemspuren k&ouml;nnen ein anderes Format haben.
+ <br/><br/>
+  Bei einer einfachen Diskettenabbilddatei sucht JKCEMU
+  das Directory in den ersten Kilobytes der Datei.
+  Es wird nicht gepr&uuml;ft, ob das Directory am Spuranfang beginnt
+  oder ob das Sektorlayout gleichm&auml;&szlig;ig ist,
+  da eine einfache Abbilddatei keine Sektorinformationen enth&auml;lt,
+  die gepr&uuml;ft werden k&ouml;nnten.
+  Aufgrund dieser fehlenden Pr&uuml;fungen ist es eventuell
+  auch m&ouml;glich, CP/M-kompatible Abbilddateien zu entpacken,
+  die von anderen Quellen als von gew&ouml;hnlichen Disketten stammen.
+  Offiziell unterst&uuml;tzt wird dies jedoch nicht!
+ <br/><br/>
+  Wenn man eine Diskettenabbilddatei hat,
+  die sich aufgrund der o.g. Bedingungen nicht entpacken l&auml;sst,
+  man jedoch der Meinung ist, die Abbilddatei enth&auml;lt
+  einen korrekten CP/M-kompatiblen Datenbereich,
+  kann man versuchen, die Datei mit dem
+  <a href="../tools/fileconverter.htm">Dateikonverter</a>
+  in eine einfache Abbildddatei zu konvertieren und dann zu entpacken.
+  Hintergrund ist, dass bei einer einfachen Diskettenabbilddatei
+  wie oben bereits erl&auml;utert weniger gepr&uuml;ft wird.
+  Wenn sich die Abbilddatei nicht konvertieren l&auml;sst,
+  weil sie z.B. ein unregelm&auml;&szlig;iges Sektorlayout hat,
+  dann kann man bei entsprechend vorhandener Fachkenntnis
+  durch Exportieren der betreffenden Spuren und Sektoren im
+  <a href="diskimgviewer.htm">Diskettenabbilddatei-Inspektor</a>
+  und eventueller Nachbearbeitung im
+  <a href="../tools/hexeditor.htm">Hex-Editor</a>
+  eine einfache Abbilddatei erstellen
+  und diese dann versuchen zu entpacken.
+  Die Verantwortung, dass eine so erstellte Abbilddatei
+  und die daraus entpackten Dateien korrekt sind,
+  liegt jedoch ausschlie&szlig;lich beim Anwender!
+</body>
+</html>
