@@ -185,6 +185,21 @@ public abstract class AbstractKC85Module
 
 
   /*
+   * Die Methode wird anstelle von readMemByte(...) aufgerufen,
+   * wenn der Lesevorgang nicht von der CPU stammt,
+   * sondern z.B. von der Speicheranzeige oder vom Debugger.
+   * Sie darf deshalb keine Seiteneffekte ausloesen.
+   *
+   * Rueckgabewert:
+   *  -1: Modul bedient diesen Lesevorgang nicht.
+   */
+  public int peekMemByte( int addr )
+  {
+    return readMemByte( addr );
+  }
+
+
+  /*
    * Rueckgabewert:
    *  -1: Modul bedient diesen Lesevorgang nicht.
    */

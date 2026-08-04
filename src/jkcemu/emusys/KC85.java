@@ -2937,7 +2937,7 @@ public class KC85 extends EmuSys implements
 	  String moduleName = props.getProperty( prefix + PROP_NAME );
 	  if( moduleName != null ) {
 	    if( moduleName.equals( FujiNet.MODULE_NAME ) ) {
-	      modules.add( new FujiNet( slot, this.emuThread ) );
+	      modules.add( new FujiNet( slot, this.emuThread, props ) );
 	    }
 	    else if( moduleName.equals( "M001" ) ) {
 	      modules.add( new M001( slot, this.emuThread, props ) );
@@ -3415,7 +3415,15 @@ public class KC85 extends EmuSys implements
 	  // Wait-State bei M1-Zugriff auf Module in einem D002
 	  this.emuThread.getZ80CPU().addWaitStates( 1 );
 	}
-	int v = module.readMemByte( addr );
+	/*
+	 * Nur bei einem Lesevorgang der CPU werden Wartezyklen erzeugt.
+	 * Alle anderen Lesevorgaenge stammen von der Oberflaeche
+	 * (Speicheranzeige, Debugger, Reassembler)
+	 * und duerfen deshalb keine Seiteneffekte im Modul ausloesen.
+	 */
+	int v = enabledWaitStates ?
+			module.readMemByte( addr )
+			: module.peekMemByte( addr );
 	if( v >= 0 ) {
 	  rv = v;
 	  break;

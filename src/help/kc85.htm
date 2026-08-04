@@ -56,8 +56,9 @@
        <li><a href="kc85.htm#m006">1.2.2. M006</a></li>
        <li><a href="kc85.htm#m052">1.2.3. M052</a></li>
        <li><a href="kc85.htm#m066">1.2.4. M066</a></li>
+       <li><a href="kc85.htm#fujinet">1.2.5. FUJINET</a></li>
        <li>
-	<a href="kc85.htm#modules_in_d004">1.2.5. Module in der D004/D008</a>
+	<a href="kc85.htm#modules_in_d004">1.2.6. Module in der D004/D008</a>
        </li>
       </ul>
      </li>
@@ -255,10 +256,9 @@
   <table border="1">
    <tr><th>Modul</th><th>Bemerkung</th></tr>
    <tr>
-    <td valign="top">FUJINET</td>
+    <td valign="top"><a href="kc85.htm#fujinet">FUJINET</a></td>
     <td>
-     FujiNet (gegenw&auml;rtig nur ein ROM mit dem Men&uuml;eintrag
-     <em>FUJINET</em> ohne Funktion)
+     Verbindung zu einem emulierten FujiNet-Ger&auml;t
     </td>
    </tr>
    <tr>
@@ -461,7 +461,64 @@
   und somit das erste M066-Modul alle weiteren M066 immer verdeckt.
  <br/><br/>
 
- <h3><a name="modules_in_d004">1.2.5. Module in der D004/D008</a></h3>
+ <h3><a name="fujinet">1.2.5. FUJINET</a></h3>
+  Das Modul FUJINET verbindet den emulierten KC85
+  mit einem emulierten FujiNet-Ger&auml;t,
+  das auf dem lokalen Rechner (127.0.0.1) auf einem TCP-Port lauscht.
+  Die Verbindung wird beim Start des Emulators aufgebaut
+  und bei einem Fehler einmal pro Sekunde erneut versucht,
+  d.h. das FujiNet-Ger&auml;t kann auch nach dem Emulator gestartet werden.
+ <br/><br/>
+  Der Datenaustausch erfolgt &uuml;ber vier Register,
+  die am oberen Ende des 8&nbsp;KByte gro&szlig;en Modulfensters liegen
+  und dort die letzten vier ROM-Bytes verdecken.
+  Ist das Modul auf die Adresse C000 geschaltet
+  (Kommando <em>SWITCH&nbsp;8&nbsp;C1</em>),
+  liegen die Register somit auf DFFC bis DFFF:
+ <br/>
+  <table border="1">
+   <tr><th>Adresse</th><th>Zugriff</th><th>Bedeutung</th></tr>
+   <tr>
+    <td valign="top">+1FFC</td>
+    <td valign="top">lesen</td>
+    <td>
+     N&auml;chstes vom FujiNet-Ger&auml;t empfangenes Byte.
+     Ist kein Byte vorhanden, wird 00 gelesen.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">+1FFD</td>
+    <td valign="top">lesen</td>
+    <td>
+     Status:<br/>
+     Bit&nbsp;7: Empfangsdaten vorhanden<br/>
+     Bit&nbsp;6: Verbindung zum FujiNet-Ger&auml;t besteht
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">+1FFE</td>
+    <td valign="top">schreiben</td>
+    <td>Byte an das FujiNet-Ger&auml;t senden</td>
+   </tr>
+   <tr>
+    <td valign="top">+1FFF</td>
+    <td valign="top">schreiben</td>
+    <td>
+     Steuerung:<br/>
+     Bit&nbsp;0: Empfangspuffer l&ouml;schen
+    </td>
+   </tr>
+  </table>
+ <br/>
+  Der Port ist standardm&auml;&szlig;ig 1985
+  und kann mit der Eigenschaft <em>jkcemu.fujinet.port</em>
+  in der Profildatei ge&auml;ndert werden.
+ <br/><br/>
+  Der mitgelieferte ROM enth&auml;lt gegenw&auml;rtig nur
+  den Men&uuml;eintrag <em>FUJINET</em>, der sofort zur&uuml;ckspringt.
+ <br/><br/>
+
+ <h3><a name="modules_in_d004">1.2.6. Module in der D004/D008</a></h3>
   Haben Sie die D004- oder D008-Emulation aktiviert und m&ouml;chten Module
   in der D004 bzw. D008 (Sch&auml;chte&nbsp;F0 und F4) emulieren,
   m&uuml;ssen Sie in den Einstellung nach dem Hinzuf&uuml;gen der Module
