@@ -3415,15 +3415,7 @@ public class KC85 extends EmuSys implements
 	  // Wait-State bei M1-Zugriff auf Module in einem D002
 	  this.emuThread.getZ80CPU().addWaitStates( 1 );
 	}
-	/*
-	 * Nur bei einem Lesevorgang der CPU werden Wartezyklen erzeugt.
-	 * Alle anderen Lesevorgaenge stammen von der Oberflaeche
-	 * (Speicheranzeige, Debugger, Reassembler)
-	 * und duerfen deshalb keine Seiteneffekte im Modul ausloesen.
-	 */
-	int v = enabledWaitStates ?
-			module.readMemByte( addr )
-			: module.peekMemByte( addr );
+	int v = module.readMemByte( addr );
 	if( v >= 0 ) {
 	  rv = v;
 	  break;

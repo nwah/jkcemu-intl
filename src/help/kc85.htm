@@ -469,17 +469,20 @@
   und bei einem Fehler einmal pro Sekunde erneut versucht,
   d.h. das FujiNet-Ger&auml;t kann auch nach dem Emulator gestartet werden.
  <br/><br/>
-  Der Datenaustausch erfolgt &uuml;ber vier Register,
-  die am oberen Ende des 8&nbsp;KByte gro&szlig;en Modulfensters liegen
-  und dort die letzten vier ROM-Bytes verdecken.
-  Ist das Modul auf die Adresse C000 geschaltet
-  (Kommando <em>SWITCH&nbsp;8&nbsp;C1</em>),
-  liegen die Register somit auf DFFC bis DFFF:
+  Wie beim <a href="kc85.htm#m052">M052</a> hat das Modul
+  das Strukturbyte&nbsp;FDh, d.h. im Steuerbyte schaltet
+  Bit&nbsp;0 den ROM und Bit&nbsp;2 die E/A-Adressen frei.
+  Mit dem Kommando <em>SWITCH&nbsp;8&nbsp;C5</em> wird also ein Modul
+  im Schacht&nbsp;8 mit dem ROM auf Adresse C000
+  und freigegebenen E/A-Adressen eingeschaltet.
+ <br/><br/>
+  Der Datenaustausch erfolgt &uuml;ber zwei E/A-Adressen,
+  eine f&uuml;r die Daten und eine f&uuml;r Status und Steuerung:
  <br/>
   <table border="1">
-   <tr><th>Adresse</th><th>Zugriff</th><th>Bedeutung</th></tr>
+   <tr><th>E/A-Adresse</th><th>Zugriff</th><th>Bedeutung</th></tr>
    <tr>
-    <td valign="top">+1FFC</td>
+    <td valign="top">70h</td>
     <td valign="top">lesen</td>
     <td>
      N&auml;chstes vom FujiNet-Ger&auml;t empfangenes Byte.
@@ -487,7 +490,12 @@
     </td>
    </tr>
    <tr>
-    <td valign="top">+1FFD</td>
+    <td valign="top">70h</td>
+    <td valign="top">schreiben</td>
+    <td>Byte an das FujiNet-Ger&auml;t senden</td>
+   </tr>
+   <tr>
+    <td valign="top">71h</td>
     <td valign="top">lesen</td>
     <td>
      Status:<br/>
@@ -496,12 +504,7 @@
     </td>
    </tr>
    <tr>
-    <td valign="top">+1FFE</td>
-    <td valign="top">schreiben</td>
-    <td>Byte an das FujiNet-Ger&auml;t senden</td>
-   </tr>
-   <tr>
-    <td valign="top">+1FFF</td>
+    <td valign="top">71h</td>
     <td valign="top">schreiben</td>
     <td>
      Steuerung:<br/>

@@ -97,6 +97,15 @@ public class Main
   private static final ThreadGroup threadGroup
 			= new ThreadGroup( APPNAME + " thread group" );
 
+  /*
+   * Mit dieser Eigenschaft laesst sich der Hinweis unterdruecken,
+   * dass ein Profil mit einer anderen Version gespeichert wurde.
+   * Das ist notwendig, wenn JKCEMU automatisiert
+   * und somit ohne Benutzerinteraktion gestartet werden soll.
+   */
+  private static final String SYSPROP_NO_PROFILE_CHECK
+					= "jkcemu.profile.nocheck";
+
   private static final String SYSPROP_UI_SCALE_VALUE = "sun.java2d.uiScale";
   private static final String SYSPROP_UI_SCALE_ENABLED
 					= "sun.java2d.uiScale.enabled";
@@ -602,7 +611,7 @@ public class Main
 						Properties props )
   {
     boolean rv = true;
-    if( props != null ) {
+    if( (props != null) && !isProfileCheckDisabled() ) {
       if( !EmuUtil.getProperty( props, PROP_VERSION ).equals( VERSION ) ) {
 	String[]    options = new String[] {
 				LangUtil.tr( "Ja" ),
@@ -1220,6 +1229,20 @@ public class Main
   }
 
 
+  /*
+   * Ist die Eigenschaft SYSPROP_NO_PROFILE_CHECK gesetzt,
+   * werden die Dialoge zum Profil unterdrueckt,
+   * damit JKCEMU ohne Benutzerinteraktion starten kann.
+   */
+  private static boolean isProfileCheckDisabled()
+  {
+    return EmuUtil.getBooleanProperty(
+			System.getProperties(),
+			SYSPROP_NO_PROFILE_CHECK,
+			false );
+  }
+
+
   private static File getArgFile( String[] args, int pos )
   {
     File file = null;
@@ -1433,7 +1456,11 @@ public class Main
 	  buf.append( msg );
 	}
       }
-      EmuUtil.fireShowErrorDlg( screenFrm, buf.toString(), null );
+      if( isProfileCheckDisabled() ) {
+	printlnErr( buf.toString() );
+      } else {
+	EmuUtil.fireShowErrorDlg( screenFrm, buf.toString(), null );
+      }
     }
 
     // Profil anwenden

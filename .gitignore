@@ -1,4 +1,5 @@
 .DS_Store
 build
-jkcemu.jar
 *.class
+*.jar
+.claude

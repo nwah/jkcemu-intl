@@ -5,30 +5,34 @@
  *
  * Emulation des FujiNet-Moduls
  *
- * Das Modul stellt einen 8K-ROM mit dem Strukturbyte 0xFB bereit.
+ * Das Modul stellt einen 8K-ROM mit dem Strukturbyte 0xFD bereit.
  * Der ROM enthaelt gegenwaertig nur den Menueeintrag "FUJINET",
  * der sofort zurueckspringt (RET).
  *
- * Die Verbindung zum emulierten FujiNet-Geraet erfolgt wie beim
- * openMSX-Modul ueber eine TCP-Verbindung nach 127.0.0.1,
- * standardmaessig auf Port 1985.
+ * Die Verbindung zum emulierten FujiNet-Geraet erfolgt ueber eine
+ * TCP-Verbindung nach 127.0.0.1, standardmaessig auf Port 1985.
  * Die Verbindung wird von einem Hintergrund-Thread aufgebaut
  * und bei einem Fehler einmal pro Sekunde erneut versucht.
  *
- * Der Datenaustausch erfolgt ueber vier Register,
- * die am oberen Ende des 8K-Fensters eingeblendet werden
- * und somit die letzten vier ROM-Bytes ueberdecken
- * (bei eingeblendetem Modul auf C000 also DFFC-DFFF):
+ * Der Datenaustausch erfolgt wie beim M052 ueber E/A-Adressen,
+ * wobei wie bei einer PIO bzw. SIO eine Datenadresse
+ * und eine Steueradresse verwendet werden:
  *
- *   +1FFC  GETC     (lesen)     naechstes empfangenes Byte
- *   +1FFD  STATUS   (lesen)     Bit 7: Empfangsdaten vorhanden
- *                               Bit 6: Verbindung besteht
- *   +1FFE  PUTC     (schreiben) Byte an das FujiNet-Geraet senden
- *   +1FFF  CONTROL  (schreiben) Bit 0: Empfangspuffer loeschen
+ *   70h  lesen      naechstes empfangenes Byte
+ *   70h  schreiben  Byte an das FujiNet-Geraet senden
+ *   71h  lesen      Status: Bit 7: Empfangsdaten vorhanden
+ *                           Bit 6: Verbindung besteht
+ *   71h  schreiben  Steuerung: Bit 0: Empfangspuffer loeschen
  *
- * Anders als beim openMSX-Modul steuert das CONTROL-Register nicht
- * die Einblendung des ROMs, da das beim KC85 der Modulschacht
- * mit dem Strukturbyte bzw. dem SWITCH-Kommando erledigt.
+ * Die Register liegen bewusst nicht im ROM-Fenster des Moduls,
+ * da CAOS die Modulfenster nach Menueeintraegen durchsucht
+ * und dabei das Datenregister lesen
+ * und somit empfangene Daten verwerfen wuerde.
+ *
+ * Wie beim M052 schaltet im Steuerbyte Bit 0 den ROM
+ * und Bit 2 die E/A-Adressen frei, d.h. mit SWITCH 8 C5
+ * wird ein Modul im Schacht 8 mit ROM auf C000
+ * und freigegebenen E/A-Adressen eingeschaltet.
  */
 
 package jkcemu.emusys.kc85;
@@ -59,11 +63,9 @@ public class FujiNet extends KC85ROM8KModule implements Runnable
   private static final int DEBUG_MASK_MSG  = 0x01;
   private static final int DEBUG_MASK_DATA = 0x02;
 
-  // Offsets der Register im 8K-Fenster
-  private static final int IO_OFFS_GETC    = 0x1FFC;
-  private static final int IO_OFFS_STATUS  = 0x1FFD;
-  private static final int IO_OFFS_PUTC    = 0x1FFE;
-  private static final int IO_OFFS_CONTROL = 0x1FFF;
+  // E/A-Adressen
+  private static final int IOADDR_DATA   = 0x70;
+  private static final int IOADDR_STATUS = 0x71;
 
   // Bits im STATUS-Register
   private static final int STATUS_DATA_AVAILABLE = 0x80;
@@ -79,6 +81,7 @@ public class FujiNet extends KC85ROM8KModule implements Runnable
   private volatile int     port;
   private volatile boolean stopped;
   private volatile Socket  socket;
+  private boolean          ioEnabled;
   private Thread           thread;
   private byte[]           rxBuf;
   private int              rxPos;
@@ -92,6 +95,7 @@ public class FujiNet extends KC85ROM8KModule implements Runnable
     this.port      = getPortProp( props );
     this.stopped   = false;
     this.socket    = null;
+    this.ioEnabled = false;
     this.rxBuf     = new byte[ RX_BUF_SIZE ];
     this.rxPos     = 0;
     this.rxLen     = 0;
@@ -218,43 +222,29 @@ public class FujiNet extends KC85ROM8KModule implements Runnable
 
 
   @Override
-  public int peekMemByte( int addr )
+  public int getTypeByte()
   {
-    int rv = -1;
-    switch( getIOOffs( addr ) ) {
-      case IO_OFFS_GETC:
-	rv = peekRxByte();
-	break;
-
-      case IO_OFFS_STATUS:
-	rv = getStatus();
-	break;
-
-      default:
-	rv = super.peekMemByte( addr );
-    }
-    return rv;
+    return 0xFD;
   }
 
 
   @Override
-  public int readMemByte( int addr )
+  public int readIOByte( int port, int tStates )
   {
     int rv = -1;
-    switch( getIOOffs( addr ) ) {
-      case IO_OFFS_GETC:
-	rv = readRxByte();
-	if( (this.debugMask & DEBUG_MASK_DATA) != 0 ) {
-	  System.out.printf( "FujiNet: GETC -> %02X\n", rv );
-	}
-	break;
+    if( this.ioEnabled ) {
+      switch( port & 0xFF ) {
+	case IOADDR_DATA:
+	  rv = readRxByte();
+	  if( (this.debugMask & DEBUG_MASK_DATA) != 0 ) {
+	    System.out.printf( "FujiNet: GETC -> %02X\n", rv );
+	  }
+	  break;
 
-      case IO_OFFS_STATUS:
-	rv = getStatus();
-	break;
-
-      default:
-	rv = super.readMemByte( addr );
+	case IOADDR_STATUS:
+	  rv = getStatus();
+	  break;
+      }
     }
     return rv;
   }
@@ -268,27 +258,34 @@ public class FujiNet extends KC85ROM8KModule implements Runnable
 
 
   @Override
-  public int writeMemByte( int addr, int value )
+  public void setStatus( int value )
   {
-    int rv = 0;
-    switch( getIOOffs( addr ) ) {
-      case IO_OFFS_PUTC:
-	if( (this.debugMask & DEBUG_MASK_DATA) != 0 ) {
-	  System.out.printf( "FujiNet: PUTC %02X\n", value & 0xFF );
-	}
-	send( value );
-	rv = 2;
-	break;
+    super.setStatus( value );
+    this.ioEnabled = ((value & 0x04) != 0);
+  }
 
-      case IO_OFFS_CONTROL:
-	if( (value & CONTROL_CLEAR_RX) != 0 ) {
-	  clearRxBuf();
-	}
-	rv = 2;
-	break;
 
-      default:
-	rv = super.writeMemByte( addr, value );
+  @Override
+  public boolean writeIOByte( int port, int value, int tStates )
+  {
+    boolean rv = false;
+    if( this.ioEnabled ) {
+      switch( port & 0xFF ) {
+	case IOADDR_DATA:
+	  if( (this.debugMask & DEBUG_MASK_DATA) != 0 ) {
+	    System.out.printf( "FujiNet: PUTC %02X\n", value & 0xFF );
+	  }
+	  send( value );
+	  rv = true;
+	  break;
+
+	case IOADDR_STATUS:
+	  if( (value & CONTROL_CLEAR_RX) != 0 ) {
+	    clearRxBuf();
+	  }
+	  rv = true;
+	  break;
+      }
     }
     return rv;
   }
@@ -340,26 +337,6 @@ public class FujiNet extends KC85ROM8KModule implements Runnable
   }
 
 
-  /*
-   * Die Methode liefert den Offset der angesprochenen
-   * Registeradresse im 8K-Fenster oder -1,
-   * wenn die Adresse kein Register des Moduls ist.
-   */
-  private int getIOOffs( int addr )
-  {
-    int rv = -1;
-    if( this.enabled ) {
-      int begAddr = getBegAddr();
-      if( (addr >= (begAddr + IO_OFFS_GETC))
-	  && (addr <= (begAddr + IO_OFFS_CONTROL)) )
-      {
-	rv = addr - begAddr;
-      }
-    }
-    return rv;
-  }
-
-
   private static int getPortProp( Properties props )
   {
     int rv = EmuUtil.getIntProperty( props, PROP_PORT, DEFAULT_PORT );
@@ -380,18 +357,6 @@ public class FujiNet extends KC85ROM8KModule implements Runnable
     }
     if( this.socket != null ) {
       rv |= STATUS_CONNECTED;
-    }
-    return rv;
-  }
-
-
-  private int peekRxByte()
-  {
-    int rv = 0;
-    synchronized( this.rxBuf ) {
-      if( this.rxLen > 0 ) {
-	rv = (int) this.rxBuf[ this.rxPos ] & 0xFF;
-      }
     }
     return rv;
   }
