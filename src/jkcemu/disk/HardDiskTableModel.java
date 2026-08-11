@@ -9,11 +9,12 @@
 package jkcemu.disk;
 
 import java.awt.Window;
-import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Collections;
 import javax.swing.table.AbstractTableModel;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class HardDiskTableModel extends AbstractTableModel
@@ -93,7 +94,8 @@ public class HardDiskTableModel extends AbstractTableModel
   @Override
   public String getColumnName( int col )
   {
-    return (col >= 0) && (col < colNames.length) ? colNames[ col ] : "";
+    return (col >= 0) && (col < colNames.length) ? 
+		LangUtil.tr( colNames[ col ] ) : "";
   }
 
 

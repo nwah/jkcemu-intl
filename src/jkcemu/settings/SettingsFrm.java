@@ -44,6 +44,7 @@ import jkcemu.base.ProfileDlg;
 import jkcemu.base.ScreenFrm;
 import jkcemu.base.UserCancelException;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 import jkcemu.net.KCNet;
 import jkcemu.net.KCNetSettingsFld;
 
@@ -415,9 +416,10 @@ public class SettingsFrm extends BaseFrm
       catch( IOException ex ) {
 	BaseDlg.showErrorDlg(
 		this,
-		"Die Einstellungen k\u00F6nnen nicht in die Datei\n\'"
-			+ profileFile.getPath()
-			+ "\'\ngespeichert werden." );
+		LangUtil.tr(
+			"Die Einstellungen k\u00F6nnen nicht in die"
+				+ " Datei\n''{0}''\ngespeichert werden.",
+			profileFile.getPath() ) );
       }
       finally {
 	EmuUtil.closeSilently( out );

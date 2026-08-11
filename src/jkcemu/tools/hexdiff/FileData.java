@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import jkcemu.lang.LangUtil;
 
 
 public class FileData implements Closeable
@@ -25,14 +26,16 @@ public class FileData implements Closeable
   public FileData( File file ) throws IOException
   {
     if( !file.exists() ) {
-      throw new IOException( file.getPath() + ":\nDatei nicht gefunden" );
+      throw new IOException( LangUtil.tr(
+		"{0}:\nDatei nicht gefunden", file.getPath() ) );
     }
     if( !file.isFile() ) {
-      throw new IOException(
-			file.getPath() + ":\nKeine regul\u00E4re Datei" );
+      throw new IOException( LangUtil.tr(
+		"{0}:\nKeine regul\u00E4re Datei", file.getPath() ) );
     }
     if( !file.canRead() ) {
-      throw new IOException( file.getPath() + ":\nDatei nicht lesbar" );
+      throw new IOException( LangUtil.tr(
+		"{0}:\nDatei nicht lesbar", file.getPath() ) );
     }
     this.file = file;
     this.in   = null;

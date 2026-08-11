@@ -51,6 +51,7 @@ import jkcemu.base.PopupMenuOwner;
 import jkcemu.base.ReplyIntDlg;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class HexDiffFrm extends HTMLViewFrm implements
@@ -623,19 +624,22 @@ public class HexDiffFrm extends HTMLViewFrm implements
 	    if( (maxDiffs > 0) && (nDiffs >= maxDiffs) ) {
 	      buf.append( "<br>\n" );
 	      if( maxDiffs == 1 ) {
-		buf.append( "Es wird nur der erste Unterschied"
-						+ " angezeigt.\n" );
+		buf.append( LangUtil.tr(
+			"Es wird nur der erste Unterschied"
+				+ " angezeigt.\n" ) );
 	      } else {
-		buf.append( "Es werden nur die ersten " );
-		buf.append( maxDiffs );
-		buf.append( " Unterschiede angezeigt.\n" );
+		buf.append( LangUtil.tr(
+			"Es werden nur die ersten {0}"
+				+ " Unterschiede angezeigt.\n",
+			maxDiffs ) );
 	      }
 	    } else {
 	      if( nDiffs == 1 ) {
-		buf.append( "1 unterschiedliches Byte\n" );
+		buf.append( LangUtil.tr( "1 unterschiedliches Byte\n" ) );
 	      } else {
-		buf.append( nDiffs );
-		buf.append( " unterschiedliche Bytes\n" );
+		buf.append( LangUtil.tr(
+			"{0} unterschiedliche Bytes\n",
+			nDiffs ) );
 	      }
 	    }
 	    buf.append( "</html>\n" );

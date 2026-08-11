@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.regex.PatternSyntaxException;
 import jkcemu.Main;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.CmdLineArgIterator;
 import jkcemu.programming.PrgLogger;
 import jkcemu.programming.assembler.Z80Assembler;
@@ -488,8 +489,10 @@ public class CmdLineBasicCompiler
 	  } else if( warnText.equalsIgnoreCase( "UNUSED" ) ) {
 	    options.setWarnUnusedItems( true );
 	  } else if( !warnText.equalsIgnoreCase( "NONE" ) ) {
-	    throw new IOException( "Option \'W\': Schl\u00FCsselwort "
-				+ warnText + " nicht unterst\u00FCtzt" );
+	    throw new IOException( LangUtil.tr(
+			"Option ''W'': Schl\u00FCsselwort {0}"
+				+ " nicht unterst\u00FCtzt",
+			warnText ) );
 	  }
 	} else {
 	  options.setWarnImplicitDecls( false );

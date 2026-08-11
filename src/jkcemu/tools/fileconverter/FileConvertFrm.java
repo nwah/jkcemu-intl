@@ -72,6 +72,7 @@ import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.LoadData;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -350,14 +351,14 @@ public class FileConvertFrm extends BaseFrm implements
 	  else if( TextUtil.endsWith( fName, DiskUtil.plainDiskFileExt ) ) {
 	    disk = getPlainFloppyDisk( file );
 	    if( disk != null ) {
-	      infoBuf.append( "Einfache Diskettenabbildddtei" );
+	      infoBuf.append( LangUtil.tr( "Einfache Diskettenabbildddtei" ) );
 	    }
 	    done = true;
 	  }
 	  else if( TextUtil.endsWith( fName, DiskUtil.gzPlainDiskFileExt ) ) {
 	    disk = getPlainFloppyDisk( file );
 	    if( disk != null ) {
-	      infoBuf.append( "Komprimierte einfache Diskettenabbildddtei" );
+	      infoBuf.append( LangUtil.tr( "Komprimierte einfache Diskettenabbildddtei" ) );
 	    }
 	    done = true;
 	  }

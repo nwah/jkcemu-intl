@@ -398,20 +398,24 @@ public class TextEditFrm extends BaseFrm implements
     if( props != null ) {
       setState( Frame.NORMAL );
       toFront();
-      String[] options = { "Projekt", "Inhalt", EmuUtil.TEXT_CANCEL };
+      String[] options = { LangUtil.tr( "Projekt" ),
+			   LangUtil.tr( "Inhalt" ),
+			   EmuUtil.TEXT_CANCEL };
       int      selOpt  = JOptionPane.showOptionDialog(
 				this,
-				"Die ausgew\u00E4hlte Datei ist eine"
-					+ " JKCEMU-Projektdatei.\n"
-					+ "M\u00F6chten Sie das Projekt oder"
-					+ " den Inhalt\n"
-					+ "der Projektdatei \u00F6ffnen?",
-				"Projektdatei ausgew\u00E4hlt",
+				LangUtil.tr(
+					"Die ausgew\u00E4hlte Datei ist eine"
+						+ " JKCEMU-Projektdatei.\n"
+						+ "M\u00F6chten Sie das Projekt"
+						+ " oder den Inhalt\n"
+						+ "der Projektdatei"
+						+ " \u00F6ffnen?" ),
+				LangUtil.tr( "Projektdatei ausgew\u00E4hlt" ),
 				JOptionPane.YES_NO_CANCEL_OPTION,
 				JOptionPane.QUESTION_MESSAGE,
 				null,
 				options,
-				"Projekt" );
+				options[ 0 ] );
       if( selOpt == 0 ) {
 	openProject( file, props );
       }

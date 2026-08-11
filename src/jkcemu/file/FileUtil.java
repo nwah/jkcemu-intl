@@ -77,6 +77,7 @@ import jkcemu.base.ObjectByStringComparator;
 import jkcemu.base.ReplyDirDlg;
 import jkcemu.base.ReplyTextDlg;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -197,17 +198,27 @@ public class FileUtil
 	  if( dirFile.exists() ) {
 	    if( dirFile.isDirectory() ) {
 	      StringBuilder buf = new StringBuilder( 256 );
-	      buf.append( dirFile.getPath() );
-	      buf.append( "\nexistiert bereits" );
 	      File[] tmpEntries = dirFile.listFiles();
+	      boolean notEmpty  = false;
 	      if( tmpEntries != null ) {
-		if( tmpEntries.length > 0 ) {
-		  buf.append( " und enth\u00E4lt Dateien,\n"
-			+ "die m\u00F6glicherweise \u00FCberschrieben"
-			+ " werden" );
-		}
+		notEmpty = (tmpEntries.length > 0);
 	      }
-	      buf.append( ".\nM\u00F6chten Sie das Verzeichnis verwenden?" );
+	      if( notEmpty ) {
+		buf.append( LangUtil.tr(
+			"{0}\nexistiert bereits und enth\u00E4lt"
+				+ " Dateien,\n"
+				+ "die m\u00F6glicherweise"
+				+ " \u00FCberschrieben werden.\n"
+				+ "M\u00F6chten Sie das Verzeichnis"
+				+ " verwenden?",
+			dirFile.getPath() ) );
+	      } else {
+		buf.append( LangUtil.tr(
+			"{0}\nexistiert bereits.\n"
+				+ "M\u00F6chten Sie das Verzeichnis"
+				+ " verwenden?",
+			dirFile.getPath() ) );
+	      }
 	      if( !BaseDlg.showYesNoDlg( owner, buf.toString() ) ) {
 		dirFile = null;
 	      }
@@ -303,12 +314,13 @@ public class FileUtil
 	{
 	  state = BaseDlg.showYesNoWarningDlg(
 		owner,
-		fileToSave.getPath()
-			+ ":\nDie Datei wurde in der Zwischenzeit"
-			+ " ge\u00E4ndert.\n"
-			+ "M\u00F6chten Sie trotzdem speichern und"
-			+ " die \u00C4nderungen \u00FCberschreiben?",
-		"Konflikt beim Speichern" );
+		LangUtil.tr(
+			"{0}:\nDie Datei wurde in der Zwischenzeit"
+				+ " ge\u00E4ndert.\n"
+				+ "M\u00F6chten Sie trotzdem speichern und"
+				+ " die \u00C4nderungen \u00FCberschreiben?",
+			fileToSave.getPath() ),
+		LangUtil.tr( "Konflikt beim Speichern" ) );
 	}
       }
     }
@@ -446,9 +458,12 @@ public class FileUtil
       if( file.exists() ) {
 	rv = BaseDlg.showYesNoWarningDlg(
 		owner,
-		"Die Datei \'" + file.getName() + "\' existiert bereits.\n"
-			+ "M\u00F6chten Sie die Datei \u00FCberschreiben?",
-		"Best\u00E4tigung" );
+		LangUtil.tr(
+			"Die Datei ''{0}'' existiert bereits.\n"
+				+ "M\u00F6chten Sie die Datei"
+				+ " \u00FCberschreiben?",
+			file.getName() ),
+		LangUtil.tr( "Best\u00E4tigung" ) );
       } else {
 	rv = true;
       }
@@ -1095,14 +1110,17 @@ public class FileUtil
     }
     catch( OverlappingFileLockException ex ) {}
     catch( IOException ex ) {
-      throw new IOException( file.getPath()
-			+ ":\nDatei kann nicht gesperrt werden." );
+      throw new IOException( LangUtil.tr(
+		"{0}:\nDatei kann nicht gesperrt werden.",
+		file.getPath() ) );
     }
     if( fileLock == null ) {
-      throw new IOException( file.getPath()
-		+ ":\nDatei ist gesperrt.\n"
-		+ "Bitte schlie\u00DFen Sie die Datei in dem Programm,\n"
-		+ "in dem sie ge\u00F6ffnet ist." );
+      throw new IOException( LangUtil.tr(
+		"{0}:\nDatei ist gesperrt.\n"
+			+ "Bitte schlie\u00DFen Sie die Datei in dem"
+			+ " Programm,\n"
+			+ "in dem sie ge\u00F6ffnet ist.",
+		file.getPath() ) );
     }
     return fileLock;
   }

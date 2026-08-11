@@ -51,6 +51,7 @@ import jkcemu.file.FileFormat;
 import jkcemu.file.FileUtil;
 import jkcemu.file.SaveDlg;
 import jkcemu.joystick.JoystickThread;
+import jkcemu.lang.LangUtil;
 import jkcemu.net.KCNet;
 import jkcemu.text.CharConverter;
 import jkcemu.usb.VDIP;
@@ -554,64 +555,64 @@ public class A5105 extends EmuSys implements
 	+ "<tr><td>C000h - FFFFh</td><td>" );
     switch( this.memConfig & 0xC0 ) {
       case 0x00:
-	buf.append( "ROM im Grundger&auml;t (bis 9FFFh)" );
+	buf.append( LangUtil.tr( "ROM im Grundger&auml;t (bis 9FFFh)" ) );
 	break;
       case 0x40:
-	buf.append( "Modul in der Datenspeichereinheit (nicht emuliert)" );
+	buf.append( LangUtil.tr( "Modul in der Datenspeichereinheit (nicht emuliert)" ) );
 	break;
       case 0x80:
 	buf.append( "RAM" );
 	break;
       case 0xC0:
-	buf.append( "Modul im Grundger&auml;t (nicht emuliert)" );
+	buf.append( LangUtil.tr( "Modul im Grundger&auml;t (nicht emuliert)" ) );
 	break;
     }
     buf.append( "</td></tr>\n"
 	+ "<tr><td>8000h - BFFFh</td><td>" );
     switch( this.memConfig & 0x30 ) {
       case 0x00:
-	buf.append( "ROM im Grundger&auml;t (bis 9FFFh)" );
+	buf.append( LangUtil.tr( "ROM im Grundger&auml;t (bis 9FFFh)" ) );
 	break;
       case 0x10:
-	buf.append( "Modul in der Datenspeichereinheit (nicht emuliert)" );
+	buf.append( LangUtil.tr( "Modul in der Datenspeichereinheit (nicht emuliert)" ) );
 	break;
       case 0x20:
 	buf.append( "RAM" );
 	break;
       case 0x30:
-	buf.append( "Modul im Grundger&auml;t (nicht emuliert)" );
+	buf.append( LangUtil.tr( "Modul im Grundger&auml;t (nicht emuliert)" ) );
 	break;
     }
     buf.append( "</td></tr>\n"
 	+ "<tr><td>4000h - 7FFFh</td><td>" );
     switch( this.memConfig & 0x0C ) {
       case 0x00:
-	buf.append( "ROM im Grundger&auml;t" );
+	buf.append( LangUtil.tr( "ROM im Grundger&auml;t" ) );
 	break;
       case 0x04:
-	buf.append( "ROM in der Datenspeichereinheit" );
+	buf.append( LangUtil.tr( "ROM in der Datenspeichereinheit" ) );
 	break;
       case 0x08:
 	buf.append( "RAM" );
 	break;
       case 0x0C:
-	buf.append( "Modul im Grundger&auml;t (nicht emuliert)" );
+	buf.append( LangUtil.tr( "Modul im Grundger&auml;t (nicht emuliert)" ) );
 	break;
     }
     buf.append( "</td></tr>\n"
 	+ "<tr><td>0000h - 3FFFh</td><td>" );
     switch( this.memConfig & 0x03 ) {
       case 0x00:
-	buf.append( "ROM im Grundger&auml;t" );
+	buf.append( LangUtil.tr( "ROM im Grundger&auml;t" ) );
 	break;
       case 0x01:
-	buf.append( "Modul in der Datenspeichereinheit (nicht emuliert)" );
+	buf.append( LangUtil.tr( "Modul in der Datenspeichereinheit (nicht emuliert)" ) );
 	break;
       case 0x02:
 	buf.append( "RAM" );
 	break;
       case 0x03:
-	buf.append( "Modul im Grundger&auml;t (nicht emuliert)" );
+	buf.append( LangUtil.tr( "Modul im Grundger&auml;t (nicht emuliert)" ) );
 	break;
     }
     buf.append( "</td></tr>\n"

@@ -1110,7 +1110,7 @@ public class ImageFrm extends AbstractImageFrm implements
 			"M\u00F6glicherweise m\u00FCssen Sie das Bild aufhellen"
 				+ " und den Kontrast erh\u00F6hen,"
 				+ " um die Konturen zu sehen.\n"
-				+ "Auch die Funktion \'{0}\' \u2192 \'{1}\'\n"
+				+ "Auch die Funktion \'\'{0}\'\' \u2192 \'\'{1}\'\'\n"
 				+ "kann f\u00FCr die weitere Bearbeitung"
 				+ " n\u00FCtzlich sein.",
 			this.mnuToBW.getText(),
@@ -1289,19 +1289,20 @@ public class ImageFrm extends AbstractImageFrm implements
 	if( !isUnrotated() ) {
 	  BaseDlg.showInfoDlg(
 		this,
-		"Das Bild wird ohne die gerade angezeigte Drehung"
-			+ " exportiert,\n"
-			+ "da bei dem Dateiformat Breite und H\u00F6he"
-			+ " nicht \u00E4nderbar sind.\n"
-			+ "Wenn Sie das Bild gedreht exportieren"
-			+ " m\u00F6chten,\n"
-			+ "m\u00FCssen Sie es zuerst drehen,"
-			+ " und dann mit der entsprechenden\n"
-			+ "Funktion im Men\u00FC \""
-			+ this.mnuEdit.getText()
-			+ "\" \u2192 \""
-			+ this.mnuConvert.getText() + "\"\n"
-			+ "in das gew\u00FCnschte Format umwandeln." );
+		LangUtil.tr(
+			"Das Bild wird ohne die gerade angezeigte Drehung"
+				+ " exportiert,\n"
+				+ "da bei dem Dateiformat Breite und"
+				+ " H\u00F6he nicht \u00E4nderbar sind.\n"
+				+ "Wenn Sie das Bild gedreht exportieren"
+				+ " m\u00F6chten,\n"
+				+ "m\u00FCssen Sie es zuerst drehen,"
+				+ " und dann mit der entsprechenden\n"
+				+ "Funktion im Men\u00FC \"{0}\""
+				+ " \u2192 \"{1}\"\n"
+				+ "in das gew\u00FCnschte Format umwandeln.",
+			this.mnuEdit.getText(),
+			this.mnuConvert.getText() ) );
 	}
 	String fileName = null;
 	File   dirFile  = null;
@@ -2729,9 +2730,11 @@ public class ImageFrm extends AbstractImageFrm implements
       if( this.imgStack.peek().getFile() == null ) {
 	rv = BaseDlg.showYesNoWarningDlg(
 		this,
-		"Das angezeigte Bild wurde nicht gespeichert.\n"
-			+ "M\u00F6chten Sie es verwerfen?",
-		"Bild nicht gespeichert" );
+		LangUtil.tr(
+			"Das angezeigte Bild wurde nicht"
+				+ " gespeichert.\n"
+				+ "M\u00F6chten Sie es verwerfen?" ),
+		LangUtil.tr( "Bild nicht gespeichert" ) );
       }
     }
     return rv;

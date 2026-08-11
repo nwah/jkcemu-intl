@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class TarEntry
@@ -209,13 +210,16 @@ public class TarEntry
 	} else {
 	  errMsg = addLine(
 			errMsg,
-			"Ung\u00FCltiges Zeichen im Namen des Eintrags" );
+			LangUtil.tr(
+				"Ung\u00FCltiges Zeichen im Namen"
+					+ " des Eintrags" ) );
 	}
       }
       entryName = buf.toString();
     }
     if( entryName.isEmpty() ) {
-      errMsg = addLine( errMsg, "Name des Eintrags fehlt" );
+      errMsg = addLine( errMsg,
+			LangUtil.tr( "Name des Eintrags fehlt" ) );
     }
     String    typeText  = null;
     EntryType entryType = EntryType.OTHER;

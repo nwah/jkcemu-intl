@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import javax.swing.table.AbstractTableModel;
 import jkcemu.base.AutoLoadEntry;
+import jkcemu.lang.LangUtil;
 
 
 public class AutoLoadTableModel extends AbstractTableModel
@@ -127,7 +128,8 @@ public class AutoLoadTableModel extends AbstractTableModel
   @Override
   public String getColumnName( int col )
   {
-    return (col >= 0) && (col < colNames.length) ? colNames[ col ] : "";
+    return (col >= 0) && (col < colNames.length) ? 
+		LangUtil.tr( colNames[ col ] ) : "";
   }
 
 

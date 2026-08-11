@@ -35,6 +35,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class RotateDlg extends BaseDlg implements ChangeListener
@@ -384,16 +385,20 @@ public class RotateDlg extends BaseDlg implements ChangeListener
       {
 	showSuppressableInfoDlg(
 		this,
-		"Das urspr\u00FCngliche Bild hat ein indexiertes"
-			+ " Farbmodell.\n"
-			+ "Durch die Drehung ist eine zus\u00E4tzliche"
-			+ " Farbe f\u00FCr den Hintergrund hinzugekommen.\n"
-			+ "Dadurch hat das gedrehte Bild kein"
-			+ " indexiertes Farbmodel mehr.\n"
-			+ "Falls Sie jedoch eins ben\u00F6tigen,"
-			+ " k\u00F6nnen Sie mit dem Men\u00FCpunkt\n"
-			+ this.imageFrm.getMenuPathTextReduceColors()
-			+ " wieder eins erzeugen." );
+		LangUtil.tr(
+			"Das urspr\u00FCngliche Bild hat ein indexiertes"
+				+ " Farbmodell.\n"
+				+ "Durch die Drehung ist eine"
+				+ " zus\u00E4tzliche"
+				+ " Farbe f\u00FCr den Hintergrund"
+				+ " hinzugekommen.\n"
+				+ "Dadurch hat das gedrehte Bild kein"
+				+ " indexiertes Farbmodel mehr.\n"
+				+ "Falls Sie jedoch eins ben\u00F6tigen,"
+				+ " k\u00F6nnen Sie mit dem"
+				+ " Men\u00FCpunkt\n"
+				+ "{0} wieder eins erzeugen.",
+			this.imageFrm.getMenuPathTextReduceColors() ) );
       }
     }
   }

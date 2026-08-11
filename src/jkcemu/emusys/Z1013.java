@@ -44,6 +44,7 @@ import jkcemu.etc.RTC7242X;
 import jkcemu.file.FileFormat;
 import jkcemu.file.SaveDlg;
 import jkcemu.joystick.JoystickThread;
+import jkcemu.lang.LangUtil;
 import jkcemu.net.KCNet;
 import jkcemu.print.PrintMngr;
 import jkcemu.text.TextUtil;
@@ -662,20 +663,25 @@ public class Z1013 extends EmuSys implements
     boolean done = false;
     if( this.ramKRT != null ) {
       if( this.modeKRT ) {
-	buf.append( "KRT-Grafik" );
 	if( this.mode64x16 ) {
-	  buf.append( " (64x16 Modus aktiv)" );
+	  buf.append( LangUtil.tr( "KRT-Grafik (64x16 Modus aktiv)" ) );
+	} else {
+	  buf.append( LangUtil.tr( "KRT-Grafik" ) );
 	}
 	done = true;
       } else {
-	buf.append( "Standard-BWS, " );
+	buf.append( LangUtil.tr( "Standard-BWS, " ) );
       }
     }
     if( !done ) {
-      buf.append( this.mode64x16 ? "64x16" : "32x32" );
-      buf.append( " Zeichen" );
       if( this.altFontEnabled ) {
-	buf.append( ", alternativer Zeichensatz" );
+	buf.append( LangUtil.tr(
+		"{0} Zeichen, alternativer Zeichensatz",
+		this.mode64x16 ? "64x16" : "32x32" ) );
+      } else {
+	buf.append( LangUtil.tr(
+		"{0} Zeichen",
+		this.mode64x16 ? "64x16" : "32x32" ) );
       }
     }
     buf.append( "</td></tr>\n"

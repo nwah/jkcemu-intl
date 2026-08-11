@@ -48,6 +48,7 @@ import jkcemu.base.HelpFrm;
 import jkcemu.base.ScreenFrm;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class VideoCaptureFrm extends BaseFrm implements Runnable
@@ -1034,9 +1035,10 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 	StringBuilder buf = new StringBuilder( 64 );
 	appendRecordedTimeText( buf );
 	if( this.focusedWindowOnly && !this.capturing ) {
-	  buf.append( ", automatische Pause (Fenster inaktiv)" );
+	  buf.append( LangUtil.tr(
+		", automatische Pause (Fenster inaktiv)" ) );
 	} else {
-	  buf.append( ", Aufnahme l\u00E4uft..." );
+	  buf.append( LangUtil.tr( ", Aufnahme l\u00E4uft..." ) );
 	}
 	text = buf.toString();
       }

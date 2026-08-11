@@ -24,6 +24,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Collection;
 import javax.swing.JOptionPane;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class FileCopier extends AbstractFileWorker
@@ -115,12 +116,14 @@ public class FileCopier extends AbstractFileWorker
 	  }
 	  if( (this.copyAllDirs == null) && exists ) {
 	    switch( showJOptionPane(
-			"Das Verzeichnis \'" + dstDir.toString()
-				+ "\' existiert bereits.\n"
-				+ "M\u00F6chten Sie trotzdem in das"
-				+ " Verzeichnis hinein kopieren?",
+			LangUtil.tr(
+				"Das Verzeichnis ''{0}''"
+					+ " existiert bereits.\n"
+					+ "M\u00F6chten Sie trotzdem in das"
+					+ " Verzeichnis hinein kopieren?",
+				dstDir.toString() ),
 			JOptionPane.WARNING_MESSAGE,
-			"Zielverzeichnis bereits vorhanden",
+			LangUtil.tr( "Zielverzeichnis bereits vorhanden" ),
 			new String[] {
 				EmuUtil.TEXT_COPY,
 				OPTION_COPY_ALL,

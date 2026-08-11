@@ -44,6 +44,7 @@ import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.PopupMenuOwner;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.LogTextActionMngr;
 
 
@@ -509,27 +510,35 @@ public class LastModifiedDlg
   {
     StringBuilder buf = new StringBuilder( 256 );
     if( this.cancelled ) {
-      buf.append( "Vorgang abgebrochen\n" );
+      buf.append( LangUtil.tr( "Vorgang abgebrochen" ) );
+      buf.append( '\n' );
     }
-    buf.append( this.numTouched );
     if( this.numTouched == 1 ) {
-      buf.append( " Datei/Verzeichnis" );
+      buf.append( LangUtil.tr(
+		"{0} Datei/Verzeichnis ge\u00E4ndert",
+		this.numTouched ) );
     } else {
-      buf.append( " Dateien/Verzeichnissen" );
+      buf.append( LangUtil.tr(
+		"{0} Dateien/Verzeichnissen ge\u00E4ndert",
+		this.numTouched ) );
     }
-    buf.append( " ge\u00E4ndert" );
     if( this.numFailed > 0 ) {
-      buf.append( "\n" );
-      buf.append( this.numFailed );
+      buf.append( '\n' );
       if( this.numFailed == 1 ) {
-	buf.append( " Datei/Verzeichnis konnte" );
+	buf.append( LangUtil.tr(
+		"{0} Datei/Verzeichnis konnte nicht"
+			+ " ge\u00E4ndert werden.",
+		this.numFailed ) );
       } else {
-	buf.append( " Dateien/Verzeichnisse konnten" );
+	buf.append( LangUtil.tr(
+		"{0} Dateien/Verzeichnisse konnten nicht"
+			+ " ge\u00E4ndert werden.",
+		this.numFailed ) );
       }
-      buf.append( " nicht ge\u00E4ndert werden." );
     }
     if( !this.cancelled ) {
-      buf.append( "\nFertig" );
+      buf.append( '\n' );
+      buf.append( LangUtil.tr( "Fertig" ) );
     }
     appendToLog( buf.toString() );
     this.btnClose.setText( EmuUtil.TEXT_CLOSE );

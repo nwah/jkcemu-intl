@@ -27,6 +27,7 @@ import javax.net.ServerSocketFactory;
 import javax.net.SocketFactory;
 import jkcemu.Main;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class W5100
@@ -159,25 +160,32 @@ public class W5100
 	  }
 	}
 	StringBuilder buf = new StringBuilder( 512 );
-	buf.append( "Es wurden Daten von" );
 	if( ipAddrText != null ) {
-	  buf.append( " der IP-Adresse " );
-	  buf.append( ipAddrText );
+	  buf.append( LangUtil.tr(
+		"Es wurden Daten von der IP-Adresse {0} empfangen,\n"
+			+ "deren Format von KCNet nicht"
+			+ " unterst\u00FCtzt wird.\n",
+		ipAddrText ) );
 	} else {
-	  buf.append( " einer IP-Adresse" );
+	  buf.append( LangUtil.tr(
+		"Es wurden Daten von einer IP-Adresse empfangen,\n"
+			+ "deren Format von KCNet nicht"
+			+ " unterst\u00FCtzt wird.\n" ) );
 	}
-	buf.append( " empfangen,\n"
-		+ "deren Format von KCNet nicht unterst\u00FCtzt wird.\n" );
 	if( inetAddr != null ) {
 	  if( inetAddr instanceof Inet6Address ) {
-	    buf.append( "Die Gegenstelle benutzt IPv6,"
-		+ " KCNet beherrscht aber nur IPv4.\n" );
+	    buf.append( LangUtil.tr(
+		"Die Gegenstelle benutzt IPv6,"
+			+ " KCNet beherrscht aber nur IPv4.\n" ) );
 	  }
 	}
-	buf.append( "Aus diesem Grund kann JKCEMU die IP-Adresse nicht\n"
-		+ "in das emulierte KCNet eintragen,\n"
-		+ "wodurch das im Emulator laufende Nertwerkprogramm\n"
-		+ "eine Gegenstelle ohne g\u00FCltige IP-Adresse sieht." );
+	buf.append( LangUtil.tr(
+		"Aus diesem Grund kann JKCEMU die IP-Adresse nicht\n"
+			+ "in das emulierte KCNet eintragen,\n"
+			+ "wodurch das im Emulator laufende"
+			+ " Netzwerkprogramm\n"
+			+ "eine Gegenstelle ohne g\u00FCltige"
+			+ " IP-Adresse sieht." ) );
 	EmuUtil.fireShowInfoDlg( Main.getScreenFrm(), buf.toString() );
 	this.nonIPv4MsgShown = true;
       }

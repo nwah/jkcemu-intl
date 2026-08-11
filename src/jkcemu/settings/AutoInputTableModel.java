@@ -12,8 +12,9 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Collection;
 import javax.swing.table.AbstractTableModel;
-import jkcemu.base.AutoInputEntry;
 import jkcemu.base.AutoInputCharSet;
+import jkcemu.base.AutoInputEntry;
+import jkcemu.lang.LangUtil;
 
 
 public class AutoInputTableModel extends AbstractTableModel
@@ -124,7 +125,8 @@ public class AutoInputTableModel extends AbstractTableModel
   @Override
   public String getColumnName( int col )
   {
-    return (col >= 0) && (col < colNames.length) ? colNames[ col ] : "";
+    return (col >= 0) && (col < colNames.length) ? 
+		LangUtil.tr( colNames[ col ] ) : "";
   }
 
 

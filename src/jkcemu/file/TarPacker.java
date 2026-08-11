@@ -34,6 +34,7 @@ import java.util.zip.GZIPOutputStream;
 import jkcemu.base.AbstractThreadFrm;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileProgressInputStream;
+import jkcemu.lang.LangUtil;
 
 
 public class TarPacker extends AbstractThreadFrm
@@ -489,7 +490,9 @@ public class TarPacker extends AbstractThreadFrm
     if( linkedName != null ) {
       len = linkedName.length();
       if( len > 99 ) {
-	throw new IOException( linkedName + ": Verlinkter Name zu lang" );
+	throw new IOException( LangUtil.tr(
+		"{0}: Verlinkter Name zu lang",
+		linkedName ) );
       }
       nameBytes = null;
       try {
@@ -500,8 +503,10 @@ public class TarPacker extends AbstractThreadFrm
 	nameBytes = entryName.getBytes();
       }
       if( nameBytes.length != len ) {
-	throw new IOException( linkedName
-		+ ": Verlinkter Name enth\u00E4lt nicht erlaubte Zeichen" );
+	throw new IOException( LangUtil.tr(
+		"{0}: Verlinkter Name enth\u00E4lt nicht erlaubte"
+			+ " Zeichen",
+		linkedName ) );
       }
       System.arraycopy( nameBytes, 0, headerBuf, 157, nameBytes.length );
     }

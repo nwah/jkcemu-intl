@@ -15,6 +15,7 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -23,6 +24,7 @@ import jkcemu.base.BaseDlg;
 import jkcemu.base.DesktopHelper;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class FileRemover extends AbstractFileWorker
@@ -37,19 +39,22 @@ public class FileRemover extends AbstractFileWorker
       int n = paths.size();
       if( n > 0 ) {
 	StringBuilder buf = new StringBuilder( 128 );
-	buf.append( "M\u00F6chten Sie " );
 	if( n == 1 ) {
 	  Path p = paths.get( 0 );
 	  if( Files.isDirectory( p ) ) {
-	    buf.append( "das Verzeichnis" );
+	    buf.append( LangUtil.tr(
+		"M\u00F6chten Sie das Verzeichnis\n''{0}''\nl\u00F6schen?",
+		p ) );
 	  } else if( Files.isSymbolicLink( p ) ) {
-	    buf.append( "den symbolischen Link" );
+	    buf.append( LangUtil.tr(
+		"M\u00F6chten Sie den symbolischen Link"
+			+ "\n''{0}''\nl\u00F6schen?",
+		p ) );
 	  } else {
-	    buf.append( "die Datei" );
+	    buf.append( LangUtil.tr(
+		"M\u00F6chten Sie die Datei\n''{0}''\nl\u00F6schen?",
+		p ) );
 	  }
-	  buf.append( "\n\'" );
-	  buf.append( p );
-	  buf.append( "\'\n" );
 	} else {
 	  int nDirs  = 0;
 	  int nFiles = 0;
@@ -63,41 +68,40 @@ public class FileRemover extends AbstractFileWorker
 	      nFiles++;
 	    }
 	  }
+	  /*
+	   * Die Aufzaehlung wird aus einzeln uebersetzbaren
+	   * Teilen zusammengesetzt, damit die Uebersetzung
+	   * die jeweils passende Form waehlen kann.
+	   */
+	  java.util.List<String> parts = new ArrayList<>();
 	  if( nDirs == 1 ) {
-	    buf.append( "das Verzeichnis" );
+	    parts.add( LangUtil.tr( "das Verzeichnis" ) );
 	  } else if( nDirs > 1 ) {
-	    buf.append( nDirs );
-	    buf.append( " Verzeichnisse" );
+	    parts.add( LangUtil.tr( "{0} Verzeichnisse", nDirs ) );
 	  }
-	  if( nFiles > 0 ) {
-	    if( nDirs > 0 ) {
-	      if( nLinks > 0 ) {
-		buf.append( ", " );
-	      } else {
-		buf.append( " und " );
-	      }
-	    }
-	    if( nFiles == 1 ) {
-	      buf.append( "die Datei" );
-	    } else if( nFiles > 1 ) {
-	      buf.append( nFiles );
-	      buf.append( " Dateien" );
-	    }
+	  if( nFiles == 1 ) {
+	    parts.add( LangUtil.tr( "die Datei" ) );
+	  } else if( nFiles > 1 ) {
+	    parts.add( LangUtil.tr( "{0} Dateien", nFiles ) );
 	  }
-	  if( nLinks > 0 ) {
-	    if( (nDirs > 0) && (nFiles > 0) ) {
-	      buf.append( " und " );
-	    }
-	    if( nLinks == 1 ) {
-	      buf.append( "den symbolischen Link" );
-	    } else if( nLinks > 1 ) {
-	      buf.append( nLinks );
-	      buf.append( " symbolische Links" );
-	    }
+	  if( nLinks == 1 ) {
+	    parts.add( LangUtil.tr( "den symbolischen Link" ) );
+	  } else if( nLinks > 1 ) {
+	    parts.add( LangUtil.tr( "{0} symbolische Links", nLinks ) );
 	  }
-	  buf.append( '\u0020' );
+	  StringBuilder itemBuf = new StringBuilder( 64 );
+	  for( int i = 0; i < parts.size(); i++ ) {
+	    if( i > 0 ) {
+	      itemBuf.append( i == (parts.size() - 1) ?
+				LangUtil.tr( " und " )
+				: LangUtil.tr( ", " ) );
+	    }
+	    itemBuf.append( parts.get( i ) );
+	  }
+	  buf.append( LangUtil.tr(
+		"M\u00F6chten Sie {0} l\u00F6schen?",
+		itemBuf.toString() ) );
 	}
-	buf.append( "l\u00F6schen?" );
 
 	boolean status      = false;
 	boolean moveToTrash = false;

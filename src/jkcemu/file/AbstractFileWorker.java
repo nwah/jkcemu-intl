@@ -46,6 +46,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public abstract class AbstractFileWorker
@@ -201,21 +202,24 @@ public abstract class AbstractFileWorker
 	JOptionPane pane  = null;
         String      title = null;
 	if( allCancelled ) {
-	  title             = "Best\u00E4tigung";
+	  title             = LangUtil.tr( "Best\u00E4tigung" );
 	  StringBuilder buf = new StringBuilder( 512 );
 	  if( nWorkers == 1 ) {
-	    buf.append(
-		"Eine abgebrochene Datei-Operation l\u00E4uft noch." );
+	    buf.append( LangUtil.tr(
+		"Eine abgebrochene Datei-Operation l\u00E4uft noch." ) );
 	  } else {
-	    buf.append( nWorkers );
-	    buf.append( " abgebrochene Datei-Operationen laufen noch." );
+	    buf.append( LangUtil.tr(
+		"{0} abgebrochene Datei-Operationen laufen noch.",
+		nWorkers ) );
 	  }
-	  buf.append( "\nDas Fenster sollte erst geschlossen werden,\n"
-		+ "wenn keine Datei-Operation mehr l\u00E4uft.\n\n"
-		+ "M\u00F6chten Sie trotzdem schlie\u00DFen"
-		+ " und riskieren,\n"
-		+ "dass bei Beendigung des Programms noch laufende\n"
-		+ "Datei-Operationen hart abgebrochen werden?" );
+	  buf.append( LangUtil.tr(
+		"\nDas Fenster sollte erst geschlossen werden,\n"
+			+ "wenn keine Datei-Operation mehr l\u00E4uft.\n\n"
+			+ "M\u00F6chten Sie trotzdem schlie\u00DFen"
+			+ " und riskieren,\n"
+			+ "dass bei Beendigung des Programms noch"
+			+ " laufende\n"
+			+ "Datei-Operationen hart abgebrochen werden?" ) );
 	  pane = new JOptionPane(
 			buf.toString(),
 			JOptionPane.WARNING_MESSAGE,

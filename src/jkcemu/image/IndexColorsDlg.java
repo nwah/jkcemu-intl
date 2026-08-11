@@ -34,6 +34,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.file.FileNameFld;
+import jkcemu.lang.LangUtil;
 
 
 public class IndexColorsDlg extends BaseDlg
@@ -575,17 +576,16 @@ public class IndexColorsDlg extends BaseDlg
     if( srcImg.getTransparency() != Transparency.OPAQUE ) {
       Color colorForTransp = getSelectedColorForTransp();
       if( colorForTransp == null ) {
-	throw new UserInputException(
-		"Bei dieser Funktion ist die Option\n\'"
-			+ this.rbTranspKeep.getText()
-			+ "\' nicht m\u00F6glich,\n"
+	throw new UserInputException( LangUtil.tr(
+		"Bei dieser Funktion ist die Option\n''{0}''"
+			+ " nicht m\u00F6glich,\n"
 			+ "da die Farbpalette keine transparenten Farben"
 			+ " enth\u00E4lt.\n"
-			+ "W\u00E4hlen Sie bitte die Option\n\'"
-			+ this.rbTranspToWhite.getText()
-			+ "\' oder\n\'"
-			+ this.rbTranspToBlack.getText()
-			+ "\' aus!" );
+			+ "W\u00E4hlen Sie bitte die Option\n''{1}''"
+			+ " oder\n''{2}'' aus!",
+		this.rbTranspKeep.getText(),
+		this.rbTranspToWhite.getText(),
+		this.rbTranspToBlack.getText() ) );
       }
       int w = srcImg.getWidth();
       int h = srcImg.getHeight();

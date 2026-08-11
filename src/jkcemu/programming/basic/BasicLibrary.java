@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.SortedSet;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgLogger;
 
 
@@ -6483,11 +6484,12 @@ public class BasicLibrary
       PrgLogger logger = compiler.getLogger();
       if( logger != null ) {
 	if( handlerLog.length() > 0 ) {
-	  logger.appendToOutLog( "Eingebundene Treiber f\u00FCr OPEN: " );
+	  logger.appendToOutLog( LangUtil.tr(
+		"Eingebundene Treiber f\u00FCr OPEN: " ) );
 	  logger.appendToOutLog( handlerLog.toString() );
 	} else {
-	  logger.appendToOutLog(
-		"Warnung: Keine Treiber f\u00FCr OPEN eingebunden" );
+	  logger.appendToOutLog( LangUtil.tr(
+		"Warnung: Keine Treiber f\u00FCr OPEN eingebunden" ) );
 	}
 	logger.appendToOutLog( "\n" );
       }

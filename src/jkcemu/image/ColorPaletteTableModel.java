@@ -11,6 +11,7 @@ package jkcemu.image;
 import java.awt.Color;
 import java.awt.image.IndexColorModel;
 import java.util.Arrays;
+import jkcemu.lang.LangUtil;
 
 
 public class ColorPaletteTableModel
@@ -172,7 +173,8 @@ public class ColorPaletteTableModel
   @Override
   public String getColumnName( int col )
   {
-    return (col >= 0) && (col < colNames.length) ?  colNames[ col ] : "";
+    return (col >= 0) && (col < colNames.length) ?  
+		LangUtil.tr( colNames[ col ] ) : "";
   }
 
 

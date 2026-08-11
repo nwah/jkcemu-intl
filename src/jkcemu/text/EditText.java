@@ -68,6 +68,7 @@ import jkcemu.file.LoadData;
 import jkcemu.file.RecentDirsMngr;
 import jkcemu.file.RAFOutputStream;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgOptions;
 import jkcemu.programming.PrgSource;
 import jkcemu.programming.basic.BasicOptions;
@@ -739,12 +740,13 @@ public class EditText implements
 		  }
 		  buf.append( '\n' );
 		}
-		buf.append( "Die Datei hat eine " );
-		buf.append( bomEnc );
-		buf.append( " Byte-Order-Markierung.\n"
-			+ "Sie wird aber entsprechend der Vorgabe als " );
-		buf.append( encodingName );
-		buf.append( " ge\u00F6ffnet." );
+		buf.append( LangUtil.tr(
+			"Die Datei hat eine {0}"
+				+ " Byte-Order-Markierung.\n"
+				+ "Sie wird aber entsprechend der Vorgabe"
+				+ " als {1} ge\u00F6ffnet.",
+			bomEnc,
+			encodingName ) );
 		BaseDlg.showInfoDlg( this.textEditFrm, buf.toString() );
 		bomEnc = null;
 		bomLen.set( 0 );
@@ -848,20 +850,31 @@ public class EditText implements
       }
       if( textProps.charsLost ) {
 	StringBuilder buf = new StringBuilder( 512 );
-	buf.append( "Die Datei enth\u00E4lt Bytes bzw. Bytefolgen,"
-		+ " die sich nicht\n"
-		+ "als Zeichen im" );
 	if( (charConverter == null) && (encodingName == null) ) {
-	  buf.append( " Systemzeichensatz" );
+	  buf.append( LangUtil.tr(
+		"Die Datei enth\u00E4lt Bytes bzw. Bytefolgen,"
+			+ " die sich nicht\n"
+			+ "als Zeichen im Systemzeichensatz abbilden"
+			+ " lassen.\n"
+			+ "Diese Bytes wurden ignoriert."
+			+ " Sie sollten evtl. versuchen,\n"
+			+ "die Datei mit einem anderen Zeichensatz"
+			+ " zu \u00F6ffnen\n"
+			+ "(siehe Men\u00FCpunkt"
+			+ " ''\u00D6ffnen mit Zeichensatz...'')." ) );
 	} else {
-	  buf.append( " dem ausgew\u00E4hlten Zeichensatz" );
+	  buf.append( LangUtil.tr(
+		"Die Datei enth\u00E4lt Bytes bzw. Bytefolgen,"
+			+ " die sich nicht\n"
+			+ "als Zeichen im dem ausgew\u00E4hlten"
+			+ " Zeichensatz abbilden lassen.\n"
+			+ "Diese Bytes wurden ignoriert."
+			+ " Sie sollten evtl. versuchen,\n"
+			+ "die Datei mit einem anderen Zeichensatz"
+			+ " zu \u00F6ffnen\n"
+			+ "(siehe Men\u00FCpunkt"
+			+ " ''\u00D6ffnen mit Zeichensatz...'')." ) );
 	}
-	buf.append( " abbilden lassen.\n"
-		+ "Diese Bytes wurden ignoriert. Sie sollten evtl. versuchen,\n"
-		+ "die Datei mit einem anderen Zeichensatz"
-		+ " zu \u00F6ffnen\n"
-		+ "(siehe Men\u00FCpunkt"
-		+ " \'\u00D6ffnen mit Zeichensatz...\')." );
 	BaseDlg.fireShowWarningDlg( this.textEditFrm, buf.toString() );
       }
     }
@@ -1133,24 +1146,28 @@ public class EditText implements
 
       if( firstLostCharPos >= 0 ) {
 	StringBuilder buf = new StringBuilder( 2048 );
-	buf.append( "Der Text enth\u00E4lt Zeichen,"
-		+ " die in dem Zeichensatz,\n"
-		+ "mit dem die Datei"
-		+ " gespeichert werden soll,"
-		+ " nicht existieren.\n"
-		+ "Diese Zeichen fehlen in der gespeicherten Datei." );
+	buf.append( LangUtil.tr(
+		"Der Text enth\u00E4lt Zeichen,"
+			+ " die in dem Zeichensatz,\n"
+			+ "mit dem die Datei gespeichert werden soll,"
+			+ " nicht existieren.\n"
+			+ "Diese Zeichen fehlen in der gespeicherten"
+			+ " Datei." ) );
 	if( !utf8 ) {
-	  buf.append( "\n\nMit dem Men\u00FCeintrag \'"
-		+ EmuUtil.TEXT_SAVE_AS
-		+ "\' kann die Datei\n"
-		+ "auch in einem Zeichensatz (z.B. UTF-8)"
-		+ " gespeichert werden,\n"
-		+ "bei dem keine Zeichen verloren gehen." );
+	  buf.append( LangUtil.tr(
+		"\n\nMit dem Men\u00FCeintrag ''{0}''"
+			+ " kann die Datei\n"
+			+ "auch in einem Zeichensatz (z.B. UTF-8)"
+			+ " gespeichert werden,\n"
+			+ "bei dem keine Zeichen verloren gehen.",
+		EmuUtil.TEXT_SAVE_AS ) );
 	}
 	if( this.textArea != null ) {
-	  buf.append( "\n\nNachdem Sie diese Meldung weggeklickt haben,\n"
-		+ "steht der Cursor vor dem ersten Zeichen,\n"
-		+ "welches nicht gespeichert werden konnte." );
+	  buf.append( LangUtil.tr(
+		"\n\nNachdem Sie diese Meldung weggeklickt"
+			+ " haben,\n"
+			+ "steht der Cursor vor dem ersten Zeichen,\n"
+			+ "welches nicht gespeichert werden konnte." ) );
 	}
 	BaseDlg.showWarningDlg( owner, buf.toString() );
 	if( this.textArea != null ) {

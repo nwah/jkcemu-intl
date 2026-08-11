@@ -36,6 +36,7 @@ import jkcemu.etc.PSG8910;
 import jkcemu.etc.RTC7242X;
 import jkcemu.file.FileFormat;
 import jkcemu.joystick.JoystickThread;
+import jkcemu.lang.LangUtil;
 import jkcemu.net.KCNet;
 import jkcemu.text.TextUtil;
 import jkcemu.usb.VDIP;
@@ -797,21 +798,28 @@ public class Z9001 extends EmuSys implements
   {
     buf.append( "<h1>" );
     EmuUtil.appendHTML( buf, getTitle() );
-    buf.append( " Speicherkonfiguration</h1>\n"
+    buf.append( ' ' );
+    buf.append( LangUtil.tr( "Speicherkonfiguration" ) );
+    buf.append( "</h1>\n"
         + "<table border=\"1\">\n"
-	+ "<tr><td>F000h-FFFFh:</td><td>Betriebssystem-ROM</td></tr>\n"
+	+ "<tr><td>F000h-FFFFh:</td><td>" );
+    buf.append( LangUtil.tr( "Betriebssystem-ROM" ) );
+    buf.append( "</td></tr>\n"
 	+ "<tr><td>EC00h-EFFFh:</td><td>" );
     if( (this.ramPixel != null)
 	&& (this.graphType == GRAPHIC_KRT)
 	&& this.graphMode )
     {
-      buf.append( "KRT-Pixel-RAM, Segment " );
-      buf.append( this.graphBank );
+      buf.append( LangUtil.tr(
+		"KRT-Pixel-RAM, Segment {0}",
+		this.graphBank ) );
     } else {
-      buf.append( "Text-BWS" );
       if( this.c80Enabled ) {
-	buf.append( " Segment " );
-	buf.append( this.c80MemSwap ? "1" : "0" );
+	buf.append( LangUtil.tr(
+		"Text-BWS Segment {0}",
+		this.c80MemSwap ? "1" : "0" ) );
+      } else {
+	buf.append( LangUtil.tr( "Text-BWS" ) );
       }
     }
     buf.append( "</td></tr>\n"

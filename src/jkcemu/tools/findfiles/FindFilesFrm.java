@@ -108,6 +108,7 @@ import jkcemu.file.FileEntry;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
 import jkcemu.file.TransferableFileList;
+import jkcemu.lang.LangUtil;
 
 
 public class FindFilesFrm
@@ -1488,11 +1489,11 @@ public class FindFilesFrm
       try {
 	this.findDir = getSelectedDirPath();
 	if( this.findDir == null ) {
-	  throw new UserInputException(
-		"Sie m\u00FCssen im Feld \'"
-			+ this.labelDir.getText()
-			+ "\' ein Verzeichnis ausw\u00E4hlen\n"
-			+ "welches durchsucht werden soll!" );
+	  throw new UserInputException( LangUtil.tr(
+		"Sie m\u00FCssen im Feld ''{0}'' ein Verzeichnis"
+			+ " ausw\u00E4hlen\n"
+			+ "welches durchsucht werden soll!",
+		this.labelDir.getText() ) );
 	}
 
 	this.findFileNamePatterns = parseFileNameMask();
@@ -2309,9 +2310,9 @@ public class FindFilesFrm
     {
       StringBuilder buf = new StringBuilder( 64 );
       if( this.thread != null ) {
-	buf.append( "Suche l\u00E4uft" );
+	buf.append( LangUtil.tr( "Suche l\u00E4uft" ) );
 	if( this.millisStart > 0 ) {
-	  buf.append( " seit " );
+	  buf.append( LangUtil.tr( " seit " ) );
 	  appendDurationTo( buf );
 	}
 	if( this.nFilesFound > 0 ) {
@@ -2321,12 +2322,12 @@ public class FindFilesFrm
 	  buf.append( "..." );
 	}
       } else {
-	buf.append( "Letzte Suche: " );
+	buf.append( LangUtil.tr( "Letzte Suche: " ) );
 	if( this.millisStart > 0 ) {
 	  if( this.findCancelled ) {
-	    buf.append( "nach " );
+	    buf.append( LangUtil.tr( "nach " ) );
 	    appendDurationTo( buf );
-	    buf.append( " abgebrochen" );
+	    buf.append( LangUtil.tr( " abgebrochen" ) );
 
 	  } else {
 	    appendDurationTo( buf );

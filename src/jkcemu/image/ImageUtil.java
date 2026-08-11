@@ -41,6 +41,7 @@ import jkcemu.emusys.KCcompact;
 import jkcemu.emusys.a5105.VIS;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class ImageUtil
@@ -242,12 +243,16 @@ public class ImageUtil
 						String[]... suffixes )
   {
     StringBuilder buf = new StringBuilder( 512 );
-    buf.append( "Das durch die Dateiendung angegebene Format"
-	+ " wird nicht unterst\u00FCtzt." );
+    buf.append( LangUtil.tr(
+	"Das durch die Dateiendung angegebene Format"
+		+ " wird nicht unterst\u00FCtzt." ) );
 
     String suffixesText = createFileSuffixesText( suffixes );
     if( !suffixesText.isEmpty() ) {
-      buf.append( "\nFolgende Dateiendungen sind m\u00F6glich:\n" );
+      buf.append( '\n' );
+      buf.append( LangUtil.tr(
+		"Folgende Dateiendungen sind m\u00F6glich:" ) );
+      buf.append( '\n' );
       buf.append( suffixesText );
     }
     return buf.toString();

@@ -10,6 +10,7 @@ package jkcemu.emusys.customsys;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import jkcemu.lang.LangUtil;
 
 
 public class ROMTableModel extends AbstractTableModel
@@ -104,7 +105,8 @@ public class ROMTableModel extends AbstractTableModel
   @Override
   public String getColumnName( int col )
   {
-    return (col >= 0) && (col < colNames.length) ?  colNames[ col ] : "";
+    return (col >= 0) && (col < colNames.length) ?  
+		LangUtil.tr( colNames[ col ] ) : "";
   }
 
 

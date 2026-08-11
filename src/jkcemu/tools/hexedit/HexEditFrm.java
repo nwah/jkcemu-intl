@@ -44,6 +44,7 @@ import jkcemu.file.Downloader;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
 import jkcemu.file.RecentFilesMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.print.PrintOptionsDlg;
 import jkcemu.print.PrintUtil;
 import jkcemu.text.TextFinder;
@@ -1123,14 +1124,16 @@ public class HexEditFrm
       toFront();
       String[] options = {
 			EmuUtil.TEXT_SAVE,
-			"Verwerfen",
+			LangUtil.tr( "Verwerfen" ),
 			EmuUtil.TEXT_CANCEL };
       int selOpt = JOptionPane.showOptionDialog(
 				this,
-				"Die Datei wurde ge\u00E4ndert und nicht"
-					+" gespeichert.\n"
-					+ "M\u00F6chten Sie jetzt speichern?",
-				"Daten ge\u00E4ndert",
+				LangUtil.tr(
+					"Die Datei wurde ge\u00E4ndert und"
+						+ " nicht gespeichert.\n"
+						+ "M\u00F6chten Sie jetzt"
+						+ " speichern?" ),
+				LangUtil.tr( "Daten ge\u00E4ndert" ),
 				JOptionPane.YES_NO_CANCEL_OPTION,
 				JOptionPane.WARNING_MESSAGE,
 				null,

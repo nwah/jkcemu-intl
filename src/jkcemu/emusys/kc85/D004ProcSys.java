@@ -19,6 +19,7 @@ import jkcemu.emusys.KC85;
 import jkcemu.disk.FDC8272;
 import jkcemu.disk.FloppyDiskDrive;
 import jkcemu.disk.GIDE;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
 import z80emu.Z80IOSystem;
@@ -119,13 +120,13 @@ public class D004ProcSys implements
     buf.append( "<tr><td>Betriebszustand:</td><td>" );
     switch( this.runLevel ) {
       case DOWN:
-	buf.append( "Dauer-RESET" );
+	buf.append( LangUtil.tr( "Dauer-RESET" ) );
 	break;
       case START_UP:
-	buf.append( "Hochlaufen mit Speicher l&ouml;schen" );
+	buf.append( LangUtil.tr( "Hochlaufen mit Speicher l&ouml;schen" ) );
 	break;
       default:
-	buf.append( "normale Programmausf&uuml;hrung" );
+	buf.append( LangUtil.tr( "normale Programmausf&uuml;hrung" ) );
 	break;
     }
     buf.append( "</td></tr>\n" );

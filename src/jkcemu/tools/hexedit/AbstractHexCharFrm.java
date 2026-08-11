@@ -43,6 +43,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.HexCharFld;
 import jkcemu.base.ReplyBytesDlg;
 import jkcemu.etc.CksCalculator;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -103,17 +104,22 @@ public abstract class AbstractHexCharFrm
     // ReadOnly-Fehlermeldung erzeugen
     StringBuilder buf      = new StringBuilder();
     String        menuText = menu.getText();
-    buf.append( "Sie m\u00FCssen zuerst den Men\u00FCeintrag" );
     if( menuText != null ) {
-      buf.append( "\n\'" );
-      buf.append( menuText );
-      buf.append( "\' \u2192" );
+      buf.append( LangUtil.tr(
+		"Sie m\u00FCssen zuerst den Men\u00FCeintrag"
+			+ "\n''{0}'' \u2192 ''{1}''\n"
+			+ "aktivieren, bevor Sie die Bytes direkt"
+			+ " in der Anzeige \u00E4ndern k\u00F6nnen.",
+		menuText,
+		this.mnuDirectEdit.getText() ) );
+    } else {
+      buf.append( LangUtil.tr(
+		"Sie m\u00FCssen zuerst den Men\u00FCeintrag"
+			+ " ''{0}''\n"
+			+ "aktivieren, bevor Sie die Bytes direkt"
+			+ " in der Anzeige \u00E4ndern k\u00F6nnen.",
+		this.mnuDirectEdit.getText() ) );
     }
-    buf.append( " \'" );
-    buf.append( this.mnuDirectEdit.getText() );
-    buf.append( "\'\n"
-		+ "aktivieren, bevor Sie die Bytes direkt"
-		+ " in der Anzeige \u00E4ndern k\u00F6nnen." );
     this.readOnlyErrorMsg = buf.toString();
   }
 

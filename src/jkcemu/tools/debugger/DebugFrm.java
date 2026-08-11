@@ -2931,8 +2931,8 @@ public class DebugFrm extends BaseFrm implements
       // an alte Datei anhaengen oder neue Datei anlegen?
       if( this.lastTraceFile != null ) {
 	String[] options = {
-			"Anh\u00E4ngen",
-			"Neue Datei",
+			LangUtil.tr( "Anh\u00E4ngen" ),
+			LangUtil.tr( "Neue Datei" ),
 			EmuUtil.TEXT_CANCEL };
 	action = BaseDlg.showOptionDlg(
 		this,
@@ -2941,7 +2941,7 @@ public class DebugFrm extends BaseFrm implements
 				+ "{0}\nangeh\u00E4ngt werden oder m\u00F6chten"
 				+ " Sie\neine neue Datei anlegen?",
 			this.lastTraceFile.getPath() ),
-		"Entscheidung",
+		LangUtil.tr( "Entscheidung" ),
 		options );
 	if( action == 0 ) {
 	  file   = this.lastTraceFile;

@@ -14,6 +14,7 @@ import jkcemu.audio.BitSampleBuffer;
 import jkcemu.base.ByteIterator;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileInfo;
+import jkcemu.lang.LangUtil;
 
 
 public class ZXSpectrumAudioCreator extends BitSampleBuffer
@@ -274,9 +275,10 @@ public class ZXSpectrumAudioCreator extends BitSampleBuffer
     int pauseMillis = this.iter.nextWord();
     int sampleRate  = this.iter.nextInt3LE();
     if( sampleRate != SAMPLE_RATE ) {
-      throw new IOException( "Block-ID 18: Abtastrate "
-			+ String.valueOf( sampleRate )
-			+ " Hz nicht unterst\u00FCtzt" );
+      throw new IOException( LangUtil.tr(
+			"Block-ID 18: Abtastrate {0} Hz"
+				+ " nicht unterst\u00FCtzt",
+			sampleRate ) );
     }
     int compression = this.iter.nextByte();
     if( compression != 1 ) {

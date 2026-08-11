@@ -10,6 +10,7 @@ package jkcemu.print;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import jkcemu.lang.LangUtil;
 
 
 public class PrintMngr extends AbstractTableModel
@@ -128,7 +129,8 @@ public class PrintMngr extends AbstractTableModel
   @Override
   public String getColumnName( int col )
   {
-    return (col >= 0) && (col < colNames.length) ? colNames[ col ] : "";
+    return (col >= 0) && (col < colNames.length) ? 
+		LangUtil.tr( colNames[ col ] ) : "";
   }
 
 

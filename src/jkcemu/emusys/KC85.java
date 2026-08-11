@@ -68,6 +68,7 @@ import jkcemu.etc.Plotter;
 import jkcemu.etc.PSGSoundDevice;
 import jkcemu.file.FileFormat;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import jkcemu.usb.VDIP;
 import z80emu.Z80CPU;
@@ -793,7 +794,7 @@ public class KC85 extends EmuSys implements
       if( this.ram0Enabled ) {
 	buf.append( EmuUtil.TEXT_ON );
 	if( !this.ram0Writeable ) {
-	  buf.append( "(schreibgesch&uuml;tzt)" );
+	  buf.append( LangUtil.tr( "(schreibgesch&uuml;tzt)" ) );
 	}
       } else {
 	buf.append( EmuUtil.TEXT_OFF );
@@ -804,7 +805,7 @@ public class KC85 extends EmuSys implements
 	if( this.ram4Enabled ) {
 	  buf.append( EmuUtil.TEXT_ON );
 	  if( !this.ram4Writeable ) {
-	    buf.append( "(schreibgesch&uuml;tzt)" );
+	    buf.append( LangUtil.tr( "(schreibgesch&uuml;tzt)" ) );
 	  }
 	} else {
 	  buf.append( EmuUtil.TEXT_OFF );
@@ -819,10 +820,10 @@ public class KC85 extends EmuSys implements
 	  }
 	  buf.append( EmuUtil.TEXT_ON );
 	  if( !this.ram8Writeable ) {
-	    buf.append( "(schreibgesch&uuml;tzt)" );
+	    buf.append( LangUtil.tr( "(schreibgesch&uuml;tzt)" ) );
 	  }
 	  if( this.irmEnabled ) {
-	    buf.append( ", aber vom IRM &uuml;berdeckt" );
+	    buf.append( LangUtil.tr( ", aber vom IRM &uuml;berdeckt" ) );
 	  }
 	} else {
 	  buf.append( EmuUtil.TEXT_OFF );

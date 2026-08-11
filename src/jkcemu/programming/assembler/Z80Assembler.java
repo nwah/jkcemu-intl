@@ -3504,10 +3504,10 @@ public class Z80Assembler
       }
     }
     if( firstLabel ) {
-      buf.append( "Markentabelle ist leer." );
+      buf.append( LangUtil.tr( "Markentabelle ist leer." ) );
     } else if( missingValue ) {
-      buf.append(
-	"\n    k.W.: Numerischer Wert konnte nicht berechnet werden." );
+      buf.append( LangUtil.tr(
+	"\n    k.W.: Numerischer Wert konnte nicht berechnet werden." ) );
     }
     buf.append( '\n' );
     if( this.listOut == null ) {
@@ -3642,12 +3642,14 @@ public class Z80Assembler
 	  appendToErrLog( buf.toString() );
 	}
       } else {
-	appendToErrLog( "Programmcode kann nicht gespeichert werden,\n"
-			+ "da kein Dateiname ausgew\u00E4hlt wurde.\n" );
+	appendToErrLog( LangUtil.tr(
+		"Programmcode kann nicht gespeichert werden,\n"
+			+ "da kein Dateiname ausgew\u00E4hlt wurde.\n" ) );
       }
     } else {
-      appendToErrLog( "Programmcode kann nicht gespeichert werden,\n"
-			+ "da kein einziges Byte erzeugt wurde.\n" );
+      appendToErrLog( LangUtil.tr(
+		"Programmcode kann nicht gespeichert werden,\n"
+			+ "da kein einziges Byte erzeugt wurde.\n" ) );
     }
     return status;
   }

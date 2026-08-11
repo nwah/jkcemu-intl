@@ -54,6 +54,7 @@ import jkcemu.base.PopupMenuOwner;
 import jkcemu.etc.CksCalculator;
 import jkcemu.file.FileEntry;
 import jkcemu.file.FileTableModel;
+import jkcemu.lang.LangUtil;
 
 
 public class FileChecksumFrm extends BaseFrm
@@ -534,18 +535,21 @@ public class FileChecksumFrm extends BaseFrm
 	  if( value.equalsIgnoreCase( text ) ) {
 	    JOptionPane.showMessageDialog(
 			this,
-			"Der ausgew\u00E4hlte Wert stimmt mit dem\n"
-				+ "in der Zwischenablage stehenden Text"
-				+ " \u00FCberein.",
-			"\u00DCbereinstimmung",
+			LangUtil.tr(
+				"Der ausgew\u00E4hlte Wert stimmt mit dem\n"
+					+ "in der Zwischenablage stehenden"
+					+ " Text \u00FCberein." ),
+			LangUtil.tr( "\u00DCbereinstimmung" ),
 			JOptionPane.INFORMATION_MESSAGE );
 	  } else {
 	    JOptionPane.showMessageDialog(
 			this,
-			"Der ausgew\u00E4hlte Wert stimmt mit dem\n"
-				+ "in der Zwischenablage stehenden Text\n"
-				+ "nicht \u00FCberein.",
-			"Abweichung",
+			LangUtil.tr(
+				"Der ausgew\u00E4hlte Wert stimmt mit dem\n"
+					+ "in der Zwischenablage stehenden"
+					+ " Text\n"
+					+ "nicht \u00FCberein." ),
+			LangUtil.tr( "Abweichung" ),
 			JOptionPane.WARNING_MESSAGE );
 	  }
 	} else {

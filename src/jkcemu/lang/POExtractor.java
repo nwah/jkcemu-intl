@@ -67,9 +67,15 @@ public class POExtractor
 	{ "GUIFactory", "createTitledBorder",                 ARG_ALL },
 	{ "GUIFactory", "createImageButton",                  "2" },
 	{ "GUIFactory", "createRelImageResourceButton",       "2" },
+	{ null,         "createButton",                       ARG_ALL },
 	{ null,         "createMenuItem",                     ARG_ALL },
 	{ null,         "createMenuItemWithStandardAccelerator", ARG_ALL },
 	{ null,         "createMenuItemWithNonControlAccelerator", ARG_ALL },
+	{ null,         "createMenuItemWithDirectAccelerator", ARG_ALL },
+	{ null,         "createPopupMenuItem",                "1" },
+	{ "FileUtil",   "showFileOpenDlg",                    "1" },
+	{ "FileUtil",   "showFileSaveDlg",                    "1" },
+	{ null,         "askForOutputFile",                   "1" },
 	{ null,         "addTab",                             ARG_ALL },
 	{ null,         "setTitle",                           ARG_ALL },
 	{ null,         "setText",                            ARG_ALL },
@@ -88,20 +94,38 @@ public class POExtractor
 	{ "LangUtil",   "trCtx",                              ARG_CTX } };
 
   /*
-   * Liste der Exception-Klassen, deren Konstruktoraufruf
-   * ("new Klasse( ... )") einen uebersetzbaren Text enthaelt.
-   * Bei allen hier gelisteten Klassen ist die Fehlermeldung
-   * das 1. Konstruktorargument.
+   * Liste der Klassen, deren Konstruktoraufruf ("new Klasse( ... )")
+   * einen uebersetzbaren Text enthaelt.
+   * Bei den Exception-Klassen ist das die Fehlermeldung,
+   * bei den Komponenten der Beschriftungstext, den der Konstruktor
+   * an GUIFactory bzw. setTitle weiterreicht.
+   * Die Argumentspezifikation entspricht der in CALL_SITES;
+   * mehrere Argumentindizes werden durch Komma getrennt.
    */
   private static final String[][] NEW_CALL_SITES = {
-	{ "IOException",         "0" },
-	{ "PrgException",        "0" },
-	{ "UserInputException",  "0" } };
+	{ "IOException",            "0" },
+	{ "PrgException",           "0" },
+	{ "UserInputException",     "0" },
+	{ "FontSelectionFld",       "1" },
+	{ "ROMFileSettingsFld",     "2" },
+	{ "RAMFloppySettingsFld",   "2" },
+	{ "RAMFloppiesSettingsFld", "2,4" },
+	{ "ReplyBytesDlg",          "1" },
+	{ "SaveDlg",                "3" } };
 
   private static final String DEFAULT_OUTPUT     = "src/lang/jkcemu.pot";
   private static final String CANDIDATES_FILE    = "candidates.txt";
 
   private static final String PREFIX_TEXT_FIELD = "TEXT_";
+
+  /*
+   * Namen von String-Array-Feldern, deren Elemente uebersetzbare
+   * Texte sind (Spaltenueberschriften der Tabellenmodelle).
+   * Die Uebersetzung erfolgt erst beim Zugriff (getColumnName),
+   * da die Felder statisch initialisiert werden,
+   * also bevor die Sprache feststeht.
+   */
+  private static final String[] TEXT_ARRAY_FIELDS = { "colNames" };
 
 
   public static void main( String[] args )
@@ -280,6 +304,42 @@ public class POExtractor
 	continue;
       }
 
+      /*
+       * "String[] colNames = { ... };"-Deklarationen
+       * Die Klammern werden vom Lexer als OTHER geliefert;
+       * es genuegt deshalb, ab dem Gleichheitszeichen
+       * alle Zeichenkettenliterale bis zum Semikolon einzusammeln.
+       */
+      if( (t.type == TokType.IDENT) && t.text.equals( "String" ) ) {
+	int k = i + 1;
+	while( (k < n) && (tokens.get( k ).type == TokType.OTHER) ) {
+	  k++;
+	}
+	if( (k > i + 1)
+	    && (k < n)
+	    && (tokens.get( k ).type == TokType.IDENT)
+	    && isTextArrayField( tokens.get( k ).text )
+	    && ((k + 1) < n)
+	    && (tokens.get( k + 1 ).type == TokType.EQUALS) )
+	{
+	  int j = k + 2;
+	  while( (j < n) && (tokens.get( j ).type != TokType.SEMI) ) {
+	    if( tokens.get( j ).type == TokType.STRING ) {
+	      ParsedLiteral lit = parseStringExpr( tokens, j );
+	      if( lit != null ) {
+		markConsumed( consumed, j, lit.length );
+		addEntry( result, null, lit.value, relPath, lit.line );
+		j += lit.length;
+		continue;
+	      }
+	    }
+	    j++;
+	  }
+	  i = j;
+	  continue;
+	}
+      }
+
       // Konstruktoraufrufe: "new Klasse( ... )"
       if( (t.type == TokType.IDENT) && t.text.equals( "new" )
 	  && ((i + 2) < n)
@@ -451,18 +511,34 @@ public class POExtractor
 	}
       }
     } else {
-      int idx = -1;
-      try {
-	idx = Integer.parseInt( argSpec );
-      }
-      catch( NumberFormatException ex ) {}
-      if( (idx >= 0) && (idx < literals.size()) ) {
-	String s = literals.get( idx );
-	if( s != null ) {
-	  addEntry( result, null, s, relPath, lines.get( idx ).intValue() );
+      String[] specs = argSpec.split( "," );
+      for( int i = 0; i < specs.length; i++ ) {
+	int idx = -1;
+	try {
+	  idx = Integer.parseInt( specs[ i ].trim() );
+	}
+	catch( NumberFormatException ex ) {}
+	if( (idx >= 0) && (idx < literals.size()) ) {
+	  String s = literals.get( idx );
+	  if( s != null ) {
+	    addEntry( result, null, s, relPath, lines.get( idx ).intValue() );
+	  }
 	}
       }
     }
+  }
+
+
+  private static boolean isTextArrayField( String fieldName )
+  {
+    boolean rv = false;
+    for( int i = 0; i < TEXT_ARRAY_FIELDS.length; i++ ) {
+      if( TEXT_ARRAY_FIELDS[ i ].equals( fieldName ) ) {
+	rv = true;
+	break;
+      }
+    }
+    return rv;
   }
 
 

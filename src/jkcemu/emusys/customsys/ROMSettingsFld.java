@@ -31,6 +31,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserCancelException;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.CustomSys;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.SettingsFrm;
 
@@ -248,10 +249,11 @@ public class ROMSettingsFld
       if( overlap ) {
 	if( !BaseDlg.showConfirmDlg(
 		this.settingsFrm,
-		"ROM-Bereiche \u00FCberlappen sich.\n"
-			+ "Im Fall einer \u00DCberlappung ist der"
-			+ " ROM-Bereich relevant,\n"
-			+ "der in der Liste weiter oben steht." ) )
+		LangUtil.tr(
+			"ROM-Bereiche \u00FCberlappen sich.\n"
+				+ "Im Fall einer \u00DCberlappung ist der"
+				+ " ROM-Bereich relevant,\n"
+				+ "der in der Liste weiter oben steht." ) ) )
 	{
 	  throw new UserCancelException();
 	}
@@ -259,10 +261,11 @@ public class ROMSettingsFld
       if( !at0000 && (nBootROMs == 0) ) {
 	if( !BaseDlg.showConfirmDlg(
 		this.settingsFrm,
-		"An der Adesse 0000h befindet sich kein ROM\n"
-			+ "und es ist auch kein Boot-ROM markiert.\n"
-			+ "Nach RESET beginnt die Programmausf\u00FChrung"
-			+ " somit im RAM!" ) )
+		LangUtil.tr(
+			"An der Adresse 0000h befindet sich kein ROM\n"
+				+ "und es ist auch kein Boot-ROM markiert.\n"
+				+ "Nach RESET beginnt die"
+				+ " Programmausf\u00FChrung somit im RAM!" ) ) )
 	{
 	  throw new UserCancelException();
 	}

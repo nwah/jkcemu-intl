@@ -130,7 +130,7 @@ public class LAFSettingsFld extends AbstractSettingsFld
 	BaseDlg.showInfoDlg(
 		this,
 		LangUtil.tr(
-			"Die \u00C4nderung an der Option \'{0}\'"
+			"Die \u00C4nderung an der Option \'\'{0}\'\'"
 				+ " ist nur wirksam,\n"
 				+ "wenn Sie die Einstellungen als Profil"
 				+ " speichern und anschlie\u00DFend {1}"

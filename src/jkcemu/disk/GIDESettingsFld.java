@@ -36,6 +36,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.SettingsFrm;
 
@@ -228,8 +229,8 @@ public class GIDESettingsFld
 	      props.setProperty( prefix + GIDE.PROP_FILE, "" );
 	      if( selected ) {
 		throw new UserInputException(
-		    String.format(
-			"%d. Festplatte: Abbilddatei nicht ausgew\u00E4hlt",
+		    LangUtil.tr(
+			"{0}. Festplatte: Abbilddatei nicht ausgew\u00E4hlt",
 			i + 1 ) );
 	      }
 	    }
@@ -461,7 +462,7 @@ public class GIDESettingsFld
 					"1. Festplatte (Master):" );
     } else {
       this.titleLabels[ idx ] = GUIFactory.createLabel(
-		String.format( "%d. Festplatte (Slave):", idx + 1 ) );
+		LangUtil.tr( "{0}. Festplatte (Slave):", idx + 1 ) );
     }
     gbc.fill          = GridBagConstraints.NONE;
     gbc.weightx       = 0.0;

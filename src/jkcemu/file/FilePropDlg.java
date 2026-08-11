@@ -38,6 +38,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class FilePropDlg
@@ -109,24 +110,24 @@ public class FilePropDlg
       }
       if( text != null ) {
 	if( !text.isEmpty() ) {
-	  lines.add( new String[] { "Name:", text } );
+	  lines.add( new String[] { LangUtil.tr( "Name:" ), text } );
 	}
       }
       if( attrs.isRegularFile() ) {
-	lines.add( new String[] { "Typ:", "regul\u00E4re Datei" } );
+	lines.add( new String[] { LangUtil.tr( "Typ:" ), LangUtil.tr( "regul\u00E4re Datei" ) } );
 	long size = attrs.size();
 	if( size >= 0 ) {
 	  lines.add( new String[] {
-			"Gr\u00F6\u00DFe:",
+			LangUtil.tr( "Gr\u00F6\u00DFe:" ),
 			EmuUtil.formatSize( size, false, true ) } );
 	}
       }
       else if( attrs.isDirectory() ) {
-	lines.add( new String[] { "Typ:", "Verzeichnis" } );
+	lines.add( new String[] { LangUtil.tr( "Typ:" ), LangUtil.tr( "Verzeichnis" ) } );
 	sizeLineIdx = lines.size();
 	lines.add( new String[] {
-			"Gr\u00F6\u00DFe aller Dateien:",
-			"wird berechnet..." } );
+			LangUtil.tr( "Gr\u00F6\u00DFe aller Dateien:" ),
+			LangUtil.tr( "wird berechnet..." ) } );
       }
       else if( attrs.isSymbolicLink() ) {
 	try {
@@ -136,7 +137,7 @@ public class FilePropDlg
 	    s = p.toString();
 	  }
 	  lines.add( new String[] {
-				"Symbolischer Link auf:",
+				LangUtil.tr( "Symbolischer Link auf:" ),
 				s != null ? s : "" } );
 	}
 	catch( Exception ex ) {}
@@ -145,7 +146,7 @@ public class FilePropDlg
 	FileTime t = Files.getLastModifiedTime( path );
 	if( t != null ) {
 	  lines.add( new String[] {
-		"Zuletzt ge\u00E4ndert:",
+		LangUtil.tr( "Zuletzt ge\u00E4ndert:" ),
 		DateFormat.getDateTimeInstance(
 			DateFormat.MEDIUM,
 			DateFormat.MEDIUM ).format(
@@ -157,7 +158,7 @@ public class FilePropDlg
 	String s = owner.getName();
 	if( s != null ) {
 	  if( !s.isEmpty() ) {
-	    lines.add( new String[] { "Eigent\u00FCmer:", s } );
+	    lines.add( new String[] { LangUtil.tr( "Eigent\u00FCmer:" ), s } );
 	  }
 	}
       }
@@ -165,7 +166,7 @@ public class FilePropDlg
 	String s = group.getName();
 	if( s != null ) {
 	  if( !s.isEmpty() ) {
-	    lines.add( new String[] { "Gruppe:", s } );
+	    lines.add( new String[] { LangUtil.tr( "Gruppe:" ), s } );
 	  }
 	}
       }
@@ -235,28 +236,29 @@ public class FilePropDlg
 	    text = store.name();
 	    if( text != null ) {
 	      if( !text.isEmpty() ) {
-		lines.add( new String[] { "Name:", text } );
+		lines.add( new String[] { LangUtil.tr( "Name:" ), text } );
 	      }
 	    }
 	    text = store.type();
 	    if( text != null ) {
 	      if( !text.isEmpty() ) {
-		lines.add( new String[] { "Typ:", text } );
+		lines.add( new String[] { LangUtil.tr( "Typ:" ), text } );
 	      }
 	    }
 	    lines.add(
 		new String[] {
-			"Schreibgesch\u00FCtzt:",
-			store.isReadOnly() ? "ja" : "nein"
+			LangUtil.tr( "Schreibgesch\u00FCtzt:" ),
+			store.isReadOnly() ?
+				LangUtil.tr( "ja" ) : LangUtil.tr( "nein" )
 		} );
 	    lines.add(
 		new String[] {
-			"Gr\u00F6\u00DFe:",
+			LangUtil.tr( "Gr\u00F6\u00DFe:" ),
 			EmuUtil.formatSize( storeSize, false, true )
 		} );
 	    lines.add(
 		new String[] {
-			"Freier Speicher:",
+			LangUtil.tr( "Freier Speicher:" ),
 			EmuUtil.formatSize(
 					store.getUnallocatedSpace(),
 					false,

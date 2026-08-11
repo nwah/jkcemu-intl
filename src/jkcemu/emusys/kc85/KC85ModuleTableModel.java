@@ -10,6 +10,7 @@ package jkcemu.emusys.kc85;
 
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -173,7 +174,8 @@ public class KC85ModuleTableModel extends AbstractTableModel
   @Override
   public String getColumnName( int col )
   {
-    return (col >= 0) && (col < colNames.length) ?  colNames[ col ] : "";
+    return (col >= 0) && (col < colNames.length) ?  
+		LangUtil.tr( colNames[ col ] ) : "";
   }
 
 

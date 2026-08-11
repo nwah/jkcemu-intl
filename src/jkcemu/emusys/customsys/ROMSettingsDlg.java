@@ -37,6 +37,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class ROMSettingsDlg
@@ -237,9 +238,11 @@ public class ROMSettingsDlg
 	if( fileSize > romSize ) {
 	  if( !showConfirmDlg(
 		this,
-		"Die Datei ist gr\u00F6\u00DFer als der ROM-Bereich.\n"
-			+ "Es sind somit nicht alle Bytes der Datei"
-			+ " im Arbeitsspeicher sichtbar." ) )
+		LangUtil.tr(
+			"Die Datei ist gr\u00F6\u00DFer als der"
+				+ " ROM-Bereich.\n"
+				+ "Es sind somit nicht alle Bytes der Datei"
+				+ " im Arbeitsspeicher sichtbar." ) ) )
 	  {
 	    status = false;
 	  }
@@ -247,9 +250,10 @@ public class ROMSettingsDlg
       } else {
 	if( !showConfirmDlg(
 		this,
-		"Sie haben keine Datei ausgew\u00E4hlt.\n"
-			+ "Der ROM-Bereich enth\u00E4lt somit nur"
-			+ " FFh-Bytes." ) )
+		LangUtil.tr(
+			"Sie haben keine Datei ausgew\u00E4hlt.\n"
+				+ "Der ROM-Bereich enth\u00E4lt somit nur"
+				+ " FFh-Bytes." ) ) )
 	{
 	  status = false;
 	}

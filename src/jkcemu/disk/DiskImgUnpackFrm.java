@@ -457,7 +457,9 @@ public class DiskImgUnpackFrm
 	    if( this.fileErr && !this.sysBytesCRCErr ) {
 	      fileName = SYS_TRACKS_FILENAME + FILE_ERROR_SUFFIX;
 	      if( file.renameTo( new File( this.outDir, fileName ) ) ) {
-		appendToLog( "  Datei in " + fileName + " umbenannt\n\n" );
+		appendToLog( LangUtil.tr(
+				"  Datei in {0} umbenannt\n\n",
+				fileName ) );
 	      }
 	    }
 	  }
@@ -1255,9 +1257,9 @@ public class DiskImgUnpackFrm
 					new File( dirFile, fName2 )
 					: new File( fName2 ));
 		  if( file.renameTo( newFile ) ) {
-		    appendToLog( "  Datei in " );
-		    appendToLog( fName2 );
-		    appendToLog( " umbenannt\n" );
+		    appendToLog( LangUtil.tr(
+				"  Datei in {0} umbenannt\n",
+				fName2 ) );
 		  }
 		}
 
