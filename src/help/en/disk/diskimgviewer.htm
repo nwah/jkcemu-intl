@@ -1,0 +1,150 @@
+<html>
+<body>
+ <h1>Disk Image Inspector</h1>
+  The Disk Image Inspector is used to examine
+  disk image files.
+  It lets you see the arrangement and content of the individual sectors
+  and search within the image file.
+  Sectors with a special feature, e.g. a deviating sector size,
+  or with problematic properties are marked in red.
+  Furthermore, in the case of a CP/M-compatible image file,
+  the logical floppy disk format and the directory are shown
+  in a separate tab,
+  provided they could be automatically detected.
+ <br/>
+  <ul>
+   <li><a href="diskimgviewer.htm#general">1. General</a></li>
+   <li>
+    <a href="diskimgviewer.htm#cpm_fmt">2. Logical Floppy Disk Format</a>
+   </li>
+   <li>
+    <a href="diskimgviewer.htm#repair">3. Repairing a Disk Image File</a>
+   </li>
+   <li>
+    <a href="diskimgviewer.htm#export">4. Exporting Tracks and Sectors</a>
+   </li>
+  </ul>
+ <br/>
+
+ <h2><a name="general">1. General</a></h2>
+  The main purpose of the tool is
+  to examine images created from real floppy disks
+  that cause problems in the emulator.
+  For troubleshooting, it is very helpful
+  if the image file contains, in addition to the actual payload data,
+  as much additional information as possible.
+  This, in turn, depends on which tool was used to create
+  the image file and thus which file format was used.
+  A free sector arrangement, for example, can only be stored by
+  <a href="diskimgformats.htm#anadisk">AnaDisk</a>,
+  <a href="diskimgformats.htm#cpcdisk">CPC-Disk</a>,
+  <a href="diskimgformats.htm#imagedisk">ImageDisk</a> and
+  <a href="dis.kimgformats.htm#teledisk">TeleDisk files</a>.
+  <a href="diskimgformats.htm#copyqm">CopyQM files</a>, on the other hand,
+  only contain information about interleave and skew,
+  and even these values are often not even set correctly.
+  So if the sectors in a CopyQM file are arranged in ascending order,
+  that does not necessarily mean that this was also the case
+  on the original floppy disk.
+ <br/><br/>
+  Different sector sizes within a track
+  can only be represented in
+  <a href="diskimgformats.htm#anadisk">AnaDisk</a>,
+  <a href="diskimgformats.htm#imagedisk">ImageDisk</a> and
+  <a href="diskimgformats.htm#teledisk">TeleDisk files</a>.
+  The latter two also store whether a CRC error occurred
+  when reading a sector and whether the sector has a deletion mark.
+  <a href="diskimgformats.htm#teledisk">TeleDisk</a> can additionally
+  also store sectors whose header area could not be read.
+  Such sectors contain the data area as well as information
+  stating that the sector ID was generated (i.e. made up by TeleDisk).
+  You can see all this information in the
+  Disk Image Inspector.
+ <br/><br/>
+  <b>Caution!</b> The <em>Timestamp</em> field does not show the
+  modification time stored in the file system,
+  but the timestamp stored in the file by the creating program.
+  Only <a href="diskimgformats.htm#copyqm">CopyQM</a>,
+  <a href="diskimgformats.htm#imagedisk">ImageDisk</a> and
+  <a href="diskimgformats.htm#teledisk">TeleDisk files</a>
+  can have such a timestamp.
+ <br/><br/>
+
+ <h2><a name="cpm_fmt">2. Logical Floppy Disk Format</a></h2>
+  The Disk Image Inspector attempts
+  to automatically detect the logical CP/M floppy disk format
+  (system tracks, directory size, block size,
+  and block number format).
+  This is only possible, however, if the directory is
+  sufficiently filled.
+  Note that the block size
+  cannot be detected with 100% certainty.
+  The block number format (8 or 16&nbsp;bit) can only be detected
+  if the floppy disk image contains files
+  that are at least two blocks in size.
+ <br/><br/>
+
+ <h2><a name="repair">3. Repairing a Disk Image File</a></h2>
+  If JKCEMU automatically repairs data while loading a disk
+  image file
+  (see <a href="diskimgformats.htm#teledisk">TeleDisk files</a>),
+  you are asked whether the repaired or the original data
+  should be loaded.
+  The Disk Image Inspector is thus the only
+  way in JKCEMU to bypass the automatic repair
+  and access the original data of the image file.
+ <br/><br/>
+  Apart from the automatic repair when loading the file,
+  the Disk Image Inspector offers no functions
+  for repairing or editing image files.
+  However, there is the option of exporting the payload data of tracks
+  or individual sectors and then loading it into a hex editor,
+  e.g. the one <a href="../tools/hexeditor.htm">integrated</a> into JKCEMU,
+  and editing it there.
+  This way, you can use the exported data in the hex editor to create a
+  new or repaired (<a href="diskimgformats.htm#plain">plain</a>)
+  disk image file, provided
+  the necessary data could be exported and you have
+  the corresponding knowledge of the structure of the image file.
+ <br/><br/>
+
+ <h2><a name="export">4. Exporting Tracks and Sectors</a></h2>
+  With the menu item <em>File</em> &rarr;
+  <em>Export Tracks...</em>, you have the option
+  of exporting the payload data of one or more tracks to a binary file.
+  For each track, the sectors are written to the file
+  sorted in ascending order by floppy disk side and sector number.
+  If a sector is present more than once (same sector number),
+  the &quot;best&quot; of them is selected
+  and exported.
+  The &quot;best&quot; sector is the sector
+  that has the fewest &quot;negative criteria&quot;
+  (CRC error, sector marked as deleted,
+  head or track number in the sector ID does not match
+  the physical side or track number).
+ <br/><br/>
+  When exporting tracks, a detailed result text is
+  generated, in which each exported sector is listed with its number,
+  followed in parentheses by its size.
+  There you can see whether the sector arrangement in the exported
+  file is regular (all tracks have the same sector numbers
+  and all sectors are the same size)
+  or irregular.
+  Furthermore, the sectors with the &quot;negative criteria&quot;
+  mentioned above are marked accordingly.
+ <br/><br/>
+  In addition to exporting entire tracks, there is also the option
+  of exporting the payload data of each sector individually,
+  or copying it as hexadecimal numbers to the clipboard.
+  This also lets you export the data of sectors
+  whose sector number occurs more than once on a track
+  and which were omitted when exporting tracks because they were
+  &quot;not the best sector&quot;.
+ <br/><br/>
+  To export individual sectors, click in the left-hand view
+  on the desired sector so that its data
+  is shown in the right-hand view.
+  There you then click the button
+  <em>Export Sector Data...</em> or <em>Copy Sector Data</em>.
+</body>
+</html>

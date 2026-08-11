@@ -1,0 +1,99 @@
+<html>
+<body>
+ <h1>Unpacking CP/M-Compatible Disk Image Files</h1>
+  Disk image files can be unpacked by JKCEMU
+  if they conform to the floppy disk format of CP/M&nbsp;2.2.
+  When unpacking, the individual files
+  contained on the floppy disk or in the image file
+  are extracted and copied into the file system of the emulator computer.
+ <br/><br/>
+  You will find the menu item to call this function
+  in the main window, menu <em>Extra</em>,
+  submenu <em>Tools</em>.
+  After calling it, a new window opens.
+  In it, select the disk image file to be unpacked
+  in the upper area.
+  JKCEMU analyzes the file and shows in the middle area
+  whether the block size and the block number format
+  (8&nbsp;or 16&nbsp;bit) were detected.
+  If not, you must set these two values correctly yourself!
+ <br/><br/>
+  The directory of the disk image file is shown in the lower area.
+  The image file can only be unpacked
+  if a directory was found.
+  Then you can click on the <em>Unpack</em> button.
+ <br/><br/>
+
+ <h2>Options</h2>
+  Various options can also be specified in the middle area,
+  e.g. whether any deleted files present should be unpacked
+  as well.
+  If you save a profile in the <a href="../settings.htm">Settings</a>,
+  the options used during the last unpacking operation
+  are also saved in it.
+  The next time JKCEMU is started with this profile,
+  these options are set again the same way
+  in the tool for unpacking disk image files.
+ <br/><br/>
+
+ <h2>Timestamps (DateStamper)</h2>
+  If the disk image file to be unpacked contains the file
+  <em>!!!TIME&amp;.DAT</em>
+  (see <a href="datestamper.htm">DateStamper</a>),
+  the timestamps of the unpacked files are set to the values
+  contained in it, provided
+  the Java runtime environment used and the file system
+  allow the timestamps to be set.
+ <br/><br/>
+
+ <h2>Problems When Unpacking</h2>
+  JKCEMU looks for the directory on the first four tracks of the first side,
+  in each case in the first sector.
+  If the directory is located elsewhere,
+  i.e. within a track, it will not be found.
+  In that case, it is either a floppy disk format
+  that is not supported by JKCEMU,
+  or the disk image file is corrupt.
+ <br/><br/>
+  Another condition for unpacking is
+  that the sectors starting at the directory have a uniform
+  sector layout, i.e. that on all tracks all sectors
+  have the same numbers and the same sizes,
+  and that no tracks or sectors are missing or there are too many sectors.
+  If this is not the case, only the files
+  whose data is located before the first irregularity are unpacked.
+  The system tracks may have a different format.
+ <br/><br/>
+  For a plain disk image file, JKCEMU looks
+  for the directory in the first kilobytes of the file.
+  It is not checked whether the directory begins at the start of a track
+  or whether the sector layout is uniform,
+  since a plain image file does not contain any sector information
+  that could be checked.
+  Because of these missing checks, it may also be possible
+  to unpack CP/M-compatible image files
+  that originate from sources other than ordinary floppy disks.
+  However, this is not officially supported!
+ <br/><br/>
+  If you have a disk image file
+  that cannot be unpacked because of the conditions mentioned above,
+  but you believe the image file contains
+  a correct CP/M-compatible data area,
+  you can try converting the file with the
+  <a href="../tools/fileconverter.htm">File Converter</a>
+  into a plain image file and then unpacking it.
+  The reason is that, as explained above, fewer checks are performed
+  on a plain disk image file.
+  If the image file cannot be converted
+  because it has, for example, an irregular sector layout,
+  then, given the necessary expertise, you can
+  create a plain image file by exporting the relevant tracks and sectors in the
+  <a href="diskimgviewer.htm">Disk Image Inspector</a>
+  and possibly editing them further in the
+  <a href="../tools/hexeditor.htm">Hex Editor</a>,
+  and then try to unpack that.
+  However, the responsibility for ensuring that an image file created
+  in this way, and the files unpacked from it, are correct
+  lies solely with the user!
+</body>
+</html>

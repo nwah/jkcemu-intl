@@ -1,0 +1,39 @@
+<html>
+<body>
+ <h1>Writing an Image File to a Volume</h1>
+  JKCEMU can write plain image files as well as ISO files
+  to a volume,
+  provided a suitable drive is present in or attached to the emulator computer
+  and is supported by the operating system.
+  For floppy disk drives it is especially important
+  that the physical floppy disk format
+  (number of tracks, number of sectors per track, sector size)
+  is supported.
+  You will find the function for writing an image file to a volume
+  in the main window in the <em>Extra</em> menu.
+ <br/><br/>
+  If the size of the image file is not approximately
+  divisible by 512, it is assumed
+  that it is a plain hard disk image file with a
+  256&nbsp;byte header block (see
+  <a href="../gide.htm#fileformats">File Formats for Hard Disk Image Files</a>).
+  In that case the header block is skipped and only the data
+  behind the header block is written to the volume.
+  Image files in other formats must first be converted into a
+  plain image file
+  (e.g. with the <a href="../tools/fileconverter.htm">File Converter</a>)
+  before they can be written to a volume.
+ <br/><br/>
+  <b>Caution!</b> Access to physical drives depends
+  on various factors and therefore cannot be guaranteed
+  on all platforms and operating system environments.
+  Depending on the operating system and the type of volume,
+  e.g. whether it is partitioned,
+  JKCEMU may have to run under a user account with special
+  privileges (e.g. Administrator).
+  However, access to the volume may still be denied
+  even with Administrator privileges, or
+  the function may not be available at all
+  on your system.
+</body>
+</html>

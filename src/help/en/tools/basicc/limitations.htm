@@ -1,0 +1,68 @@
+<html>
+<head>
+ <title>BASIC Compiler: Limitations of the Compiler Compared to an Interpreter</title>
+</head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Limitations of the Compiler Compared to an Interpreter</h2>
+  The goal of the BASIC compiler is to generate
+  fast and, where possible, small machine code programs
+  that contain no unnecessary functionality.
+  The BASIC source code and any BASIC functionality that is not needed
+  are not present in the machine code program.
+  This results in a few limitations compared to
+  running a BASIC program in an interpreter:
+ <br/><br/>
+
+ <h3>1. CALL and USR</h3>
+  In principle, the CALL statement and the USR function
+  have no limitations compared to the interpreter.
+  However, some BASIC programs use CALL or USR
+  to call machine subroutines of the BASIC interpreter.
+  Other programs contain machine code hidden in REM lines,
+  which is then called.
+  Subroutines of the BASIC interpreter, or machine code hidden
+  in REM lines, are no longer present in the generated
+  machine code program and thus cannot be called either.
+  If such a CALL or USR command is executed anyway,
+  it will probably cause the program to crash.
+ <br/><br/>
+  One solution to this problem is to generate
+  the needed machine code routines with POKE commands
+  before calling them, or to integrate them directly
+  into the BASIC program with the
+  <a href="instructions.htm#asm">ASM</a> statement.
+ <br/><br/>
+
+ <h3>2. GOTO and GOSUB</h3>
+  If a line number is specified after GOTO or GOSUB,
+  it must be a constant number (a literal).
+  A variable expression, as is possible with some interpreters,
+  is not allowed.
+  Since the generated machine code program contains no BASIC
+  source code and thus no line numbers either,
+  the compiler must already resolve the jump targets.
+  However, it can only do this if the targets are unambiguous,
+  i.e. if they are not variable.
+ <br/><br/>
+  The compiler could indeed also build a mapping
+  from line numbers to machine code addresses into the
+  generated machine code program, thereby also allowing
+  variable jump targets, but this would then bloat
+  the program considerably.
+  Since that is not the goal of the BASIC compiler,
+  variable jump targets are simply not supported.
+  With certain limitations, however, such requirements
+  can be met with the statements
+  <a href="instructions.htm#on_goto">ON...GOTO</a>
+  and <a href="instructions.htm#on_gosub">ON...GOSUB</a>.
+ <br/><br/>
+  Furthermore, the line numbers or labels following GOTO
+  and GOSUB must actually exist.
+  Some BASIC interpreters jump to the next higher existing line
+  when a nonexistent line number is given.
+  The JKCEMU BASIC compiler, however, does not support this.
+ <br/>
+</body>
+</html>

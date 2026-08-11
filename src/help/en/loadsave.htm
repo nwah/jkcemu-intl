@@ -1,0 +1,185 @@
+<html>
+<body>
+ <h1>Loading, Starting and Saving Programs and Files</h1>
+  <ul>
+   <li><a href="loadsave.htm#intro">1. Preliminary Remarks</a></li>
+   <li>
+    <a href="loadsave.htm#loadfile">2. Loading a File</a>
+    <ul>
+     <li>
+      <a href="loadsave.htm#filedlg">2.1. Loading a File via the File Selection Dialog</a>
+      <ul>
+       <li><a href="loadsave.htm#options">2.1.1. Load Options</a></li>
+      </ul>
+     </li>
+     <li><a href="loadsave.htm#dnd">2.2. Loading via Drag&amp;Drop</a></li>
+    </ul>
+   </li>
+   <li><a href="loadsave.htm#run">3. Starting a Program</a></li>
+   <li>
+    <a href="loadsave.htm#savefile">4. Saving a File</a>
+    <ul>
+     <li>
+      <a href="loadsave.htm#autoext">4.1. Automatic File Name Extension</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="intro">1. Preliminary Remarks</a></h2>
+  On some of the computers emulated by JKCEMU, data
+  is stored on magnetic tape, i.e. on a cassette.
+  In principle, this is also possible in the emulator
+  with the help of the <a href="audio.htm">audio functions</a>,
+  but files can be stored much more conveniently
+  in the file system of the computer running the emulator,
+  which is why this is usually how it is done instead.
+  JKCEMU supports several
+  <a href="fileformats.htm">file formats</a> for this.
+ <br/><br/>
+  <b>Caution!</b> On the emulated computers,
+  <a href="loadsavebasic.htm">saving and loading BASIC programs</a>
+  is handled by the BASIC interpreter
+  rather than by the operating system or monitor program.
+  BASIC files also frequently have a different format.
+  For this reason, a different procedure is required
+  for BASIC programs.
+  Please read about this <a href="loadsavebasic.htm">here</a>.
+ <br/><br/>
+
+ <h2><a name="loadfile">2. Loading a File</a></h2>
+  There are three ways to load a file from the file system
+  into the emulator:
+  <ol>
+   <li>via a file selection dialog</li>
+   <li>using the <a href="tools/filebrowser.htm">File Browser</a></li>
+   <li>via drag&amp;drop</li>
+  </ol>
+ <br/>
+
+ <h3><a name="filedlg">2.1. Loading a File via the File Selection Dialog</a></h3>
+  This classic way of loading a file is done via the
+  <em>File</em> menu, menu item <em>Load...</em>.
+  A file selection box appears, in which you can select
+  the file.
+ <br/><br/>
+  Depending on your choice (see
+  <a href="settings.htm#filedialog">Settings</a>), JKCEMU offers you
+  its own file selection dialog or the operating system's
+  file selection box.
+  The JKCEMU file selection dialog is optimized
+  for the specifics of the emulator.
+  If you have selected a file that contains header data
+  with a load address,
+  you can load it into working memory by clicking
+  <em>Load</em>.
+  If the file contains an executable machine code program
+  and a start address is stored in its header data,
+  clicking the <em>Start</em> button
+  loads the file into working memory and starts it immediately.
+  The third option, <em>Load With...</em>, lets you enter
+  <a href="loadsave.htm#options">load options</a>,
+  such as different load addresses.
+ <br/><br/>
+  If you use the operating system's file selection box,
+  after selecting a file you are always taken
+  to the mode for entering the load options.
+ <br/><br/>
+
+ <h3><a name="options">2.1.1. Load Options</a></h3>
+  The load options include the choice of file format,
+  the load addresses, and, in the case of a
+  <a href="fileformats.htm#headersave">Headersave</a> file
+  while a Z1013 is being emulated at the same time,
+  whether the Headersave header data should additionally
+  be copied to the address range of working memory reserved for it.
+  The load options are entered in a separate window.
+ <br/><br/>
+  For some <a href="fileformats.htm">file formats</a>,
+  the load addresses are stored in the file (header data),
+  so that you do not need to specify a start and end address explicitly.
+  However, if you want to load the file to a different location
+  in working memory, you must enter the corresponding start address.
+  The field for the end address can be left empty.
+ <br/><br/>
+  The load options also let you load a file
+  in a format other than the one that was automatically detected.
+  For example, there are Z1013 files
+  that have a file header compatible with Headersave,
+  but that does not contain the Headersave identifier.
+  As a result, the file is not recognized as a Headersave file.
+  In that case, however, it can still be loaded as one.
+  But you must be absolutely certain of what you are doing
+  with such things!
+  Misuse can cause the program running in the emulator to crash
+  and thus lead to data loss.
+ <br/><br/>
+  If a Z1013 is currently being emulated and you want to also load
+  the header data of a Headersave file, when loading it,
+  into the address range of working memory reserved for it,
+  enable the corresponding option.
+ <br/><br/>
+
+ <h3><a name="dnd">2.2. Loading via Drag&amp;Drop</a></h3>
+  In the <a href="tools/filebrowser.htm">File Browser</a>,
+  select a file,
+  drag it with the mouse button held down over the
+  emulator window, and drop it there.
+  So that you do not accidentally load a file this way
+  and thereby destroy data in the emulator's working memory,
+  the window for entering the load options always appears
+  as a safety measure.
+ <br/><br/>
+  <b>Note:</b> On some platforms or operating systems,
+  drag&amp;drop also works across program boundaries, i.e.
+  you can also select a file in another program, e.g. a file manager,
+  drag it into JKCEMU, and drop it there.
+ <br/><br/>
+
+ <h2><a name="run">3. Starting a Program</a></h2>
+  Starting a program requires that the corresponding
+  program file has been loaded first.
+  If the program file contains a start address,
+  you can have the program started immediately as you load it.
+  Otherwise, you must start the program manually
+  through the operating system or the monitor program.
+ <br/><br/>
+
+ <h2><a name="savefile">4. Saving a File</a></h2>
+  In the <em>File</em> menu, click on the item <em>Save</em>.
+  A window appears in which you enter the addresses of the range
+  to be saved, select the file format, and, depending on
+  the selected file format, specify the header data.
+ <br/><br/>
+  You must fill in the <em>Start Address</em> and
+  <em>End Address</em> fields in hexadecimal.
+  These values are automatically used as header data,
+  provided the selected file format supports header data.
+  However, you can also specify different addresses as header data,
+  which are then only used when loading the file.
+ <br/><br/>
+  If a Z1013 is currently being emulated and you want to also load
+  the header data of a Headersave file, when saving it,
+  into the address range of working memory reserved for it,
+  enable the corresponding option.
+ <br/><br/>
+  Clicking the <em>Save</em> button brings up
+  a file selection dialog.
+  Here you specify the name of the file to be saved.
+ <br/><br/>
+
+ <h3><a name="autoext">4.1. Automatic File Name Extension</a></h3>
+  If you specified a file name without an extension when saving,
+  the file extension is appended automatically, provided it is clear
+  which extension the file being saved must have.
+  For this, you must use the JKCEMU or Java/Swing file selection dialog
+  (see <a href="settings.htm#filedialog">Settings</a>)
+  and have selected a file filter (<em>File Type</em> choice)
+  that allows exactly one file extension.
+ <br/><br/>
+  Automatic file name extension applies not only when saving
+  programs, but everywhere in JKCEMU when saving a file.
+</body>
+</html>

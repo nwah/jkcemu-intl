@@ -1,0 +1,113 @@
+<html>
+<body>
+ <h1>Interleave</h1>
+  Interleave specifies the physical
+  arrangement of the sectors on a track
+  and serves to reduce access time.
+  If the sectors are arranged in ascending order, the following happens
+  when reading several sectors sequentially:
+  once the first sector has been read,
+  the floppy disk controller may have to be reprogrammed
+  to read the second sector.
+  Something may also still need to be done with the data just read.
+  During this time, the beginning of the second sector
+  may already have passed the read head,
+  so that now almost an entire disk revolution has to be waited for
+  before the second sector can be read again.
+  However, if other sectors were placed
+  between two sectors to be read one after another, this would provide time
+  during which the floppy disk controller can be reprogrammed.
+  As a result, the next sector could still be read within the same
+  disk revolution.
+  And that is exactly what is achieved with interleave.
+ <br/><br/>
+  Interleave specifies after how many physical sectors the sector
+  with the next higher logical sector number follows.
+  With an interleave of 1:1, the sectors are arranged in ascending order,
+  i.e. they are not interleaved with one another.
+  So there is no interleave.
+  With 2:1, there is one sector in between; with 3:1, there are two, etc.
+  The table shows the physical sector arrangement for 5 and 9 sectors
+  per track:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th>Interleave</th>
+    <th>Sector Arrangement with 5 Sectors per Track</th>
+    <th>Sector Arrangement with 9 Sectors per Track</th>
+   </tr>
+   <tr>
+    <td align="left" valign="top" nowrap="nowrap">1:1</td>
+    <td align="left" valign="top" nowrap="nowrap">1 2 3 4 5</td>
+    <td align="left" valign="top" nowrap="nowrap">1 2 3 4 5 6 7 8 9</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top" nowrap="nowrap">2:1</td>
+    <td align="left" valign="top" nowrap="nowrap">1 4 2 5 3</td>
+    <td align="left" valign="top" nowrap="nowrap">1 6 2 7 3 8 4 9 5</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top" nowrap="nowrap">3:1</td>
+    <td align="left" valign="top" nowrap="nowrap">1 3 5 2 4</td>
+    <td align="left" valign="top" nowrap="nowrap">
+     1 4 7 2 5 8 3 6 9 &sup1;
+   </td>
+   </tr>
+   <tr>
+    <td align="left" valign="top" nowrap="nowrap">4:1</td>
+    <td align="left" valign="top" nowrap="nowrap">1 5 4 3 2</td>
+    <td align="left" valign="top" nowrap="nowrap">1 8 6 4 2 9 7 5 3</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top" nowrap="nowrap">5:1</td>
+    <td align="left" valign="top" nowrap="nowrap">not relevant</td>
+    <td align="left" valign="top" nowrap="nowrap">1 3 5 7 9 2 4 6 8</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top" nowrap="nowrap">6:1</td>
+    <td align="left" valign="top" nowrap="nowrap">not relevant</td>
+    <td align="left" valign="top" nowrap="nowrap">
+     1 4 7 3 6 9 2 5 8 &sup1;
+    </td>
+   </tr>
+   <tr>
+    <td align="left" valign="top" nowrap="nowrap">7:1</td>
+    <td align="left" valign="top" nowrap="nowrap">not relevant</td>
+    <td align="left" valign="top" nowrap="nowrap">1 5 9 4 8 3 7 2 6</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top" nowrap="nowrap">8:1</td>
+    <td align="left" valign="top" nowrap="nowrap">not relevant</td>
+    <td align="left" valign="top" nowrap="nowrap">1 9 8 7 6 5 4 3 2</td>
+   </tr>
+  </table>
+ <br/>
+  &sup1;) In these cases, an exactly equal physical distance
+  between two logically consecutive sectors is not
+  fully possible.
+ <br/><br/>
+  The interleave ratio also implicitly indicates
+  how many disk revolutions are necessary to sequentially read all sectors
+  of a track.
+  With an interleave of 1:1, theoretically one disk revolution is sufficient;
+  with 2:1, two are necessary, and with 3:1, three disk revolutions.
+  The smaller the interleave, the shorter the access time.
+  However, if the interleave is chosen too small,
+  it has no effect at all, because then a full disk revolution
+  has to be waited for each sector.
+  The larger the interleave, the smaller the effect,
+  but the more certain it is that it has any effect at all.
+  The optimal interleave ratio depends
+  on various factors, such as the speed of the computer
+  and the specific implementation of the read and write routines.
+  For this reason, the respective formatting programs produce
+  different interleave ratios even for otherwise
+  identical floppy disk formats.
+ <br/><br/>
+  In JKCEMU you can specify an interleave when manually
+  <a href="creatediskimg.htm">creating a disk image file</a>.
+  You can see the physical sector arrangement in the
+  <a href="diskimgviewer.htm">Disk Image Inspector</a>.
+  However, it has no effect on access times in the emulator.
+</body>
+</html>

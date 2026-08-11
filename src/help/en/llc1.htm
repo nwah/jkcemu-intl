@@ -1,0 +1,274 @@
+<html>
+<body>
+ <h1>LLC1</h1>
+  The LLC1 is a home-built learning computer presented by
+  Dr. Gerd Maudrich in 1985, whose construction plans were sold.
+ <br/><br/>
+  The concept of this computer is somewhat idiosyncratic.
+  On the one hand, it has a 7-segment display and a hexadecimal
+  keyboard.
+  On the other hand, the original construction plans already
+  include a module for screen output on a monitor or television.
+  The corresponding alphanumeric keyboard could also be purchased
+  as construction plans.
+  You operate the monitor program with the hexadecimal keyboard,
+  while the BASIC interpreter, also contained in ROM, is operated
+  with the alphanumeric keyboard.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="llc1.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="llc1.htm#hex_keyboard">1.1. Hexadecimal Keyboard</a></li>
+     <li>
+      <a href="llc1.htm#alpha_screen">1.2. Alphanumeric Screen</a>
+     </li>
+     <li>
+      <a href="llc1.htm#alpha_keyboard">1.3. Alphanumeric Keyboard</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="llc1.htm#software">2. Software Contained in the ROM</a>
+    <ul>
+     <li>
+      <a href="llc1.htm#usage">2.1. Notes on Operating the Monitor Program</a>
+      <ul>
+       <li>
+	<a href="llc1.htm#ein">2.1.1. EIN: Input (Display/Change Memory Cells)</a>
+       </li>
+       <li>
+	<a href="llc1.htm#reg">2.1.2. REG: Display/Change Registers</a>
+       </li>
+       <li><a href="llc1.htm#es">2.1.3. ES: Single Step</a></li>
+       <li><a href="llc1.htm#hp">2.1.4. HP: Set Breakpoint</a></li>
+       <li>
+	<a href="llc1.htm#dl">2.1.5. DL: Run Through (Start Program)</a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="llc1.htm#basic">3. BASIC</a>
+    <ul>
+     <li>
+      <a href="llc1.htm#basic_save">3.1. Saving a BASIC Program</a>
+     </li>
+     <li>
+      <a href="llc1.htm#basic_load">3.2. Loading a BASIC Program</a>
+     </li>
+     <li>
+      <a href="llc1.htm#basic_view">3.3. Displaying a BASIC Program Located in Working Memory</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="llc1.htm#etc">4. Miscellaneous</a>
+    <ul>
+     <li>
+      <a href="llc1.htm#autoinput">4.1. AutoInput</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  <ul>
+   <li>5&nbsp;KByte ROM in the address range 0000-13FF</li>
+   <li>25&nbsp;KByte RAM in the address range 1400-1BFF</li>
+   <li>15&nbsp;KByte video RAM in the address range 1C00-1FFF</li>
+   <li>8-digit 7-segment display</li>
+   <li>Hexadecimal keyboard with additional function keys</li>
+   <li>Alphanumeric keyboard</li>
+   <li>Alphanumeric screen</li>
+  </ul>
+ <br/>
+
+ <h3><a name="hex_keyboard">1.1. Hexadecimal Keyboard</a></h3>
+  The table shows how the keys of the LLC1 hexadecimal keyboard
+  are mapped onto the keyboard of the computer running the
+  emulator:
+ <br/>
+  <table border="1">
+   <tr>
+    <th>LLC1 key</th><th>Key in the emulator</th><th>Meaning</th>
+   </tr>
+   <tr>
+    <td valign="top">EIN</td>
+    <td valign="top">M</td>
+    <td>&quot;Input&quot;: display/change memory cells</td>
+   </tr>
+   <tr>
+    <td valign="top">REG</td>
+    <td valign="top">R</td>
+    <td>display/change &quot;registers&quot;</td>
+   </tr>
+   <tr>
+    <td>ES</td>
+    <td>S</td>
+    <td>&quot;single-step mode&quot;</td>
+   </tr>
+   <tr>
+    <td valign="top">DL</td>
+    <td valign="top">G or J</td>
+    <td>&quot;run through&quot;: start program</td>
+   </tr>
+   <tr>
+    <td valign="top">HP</td>
+    <td valign="top">H</td>
+    <td>enter &quot;breakpoint&quot;</td>
+   </tr>
+   <tr>
+    <td valign="top">ST</td>
+    <td valign="top">X or Enter</td>
+    <td>&quot;start&quot;: complete input</td>
+   </tr>
+   <tr><td>0...9</td><td>0...9</td><td>address/data input</td></tr>
+   <tr>
+    <td valign="top">A...F</td>
+    <td valign="top">A...F or a...f</td>
+    <td>address/data input</td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="alpha_screen">1.2. Alphanumeric Screen</a></h3>
+  The alphanumeric screen is shown in a separate window.
+  This window opens automatically as soon as the relevant video
+  RAM is written to.
+  If you have closed the window and want to open it again, call
+  up the menu item <em>Extras</em> &rarr; <em>Secondary Display
+  Unit...</em> in the main window.
+ <br/><br/>
+
+ <h3><a name="alpha_keyboard">1.3. Alphanumeric Keyboard</a></h3>
+  The alphanumeric keyboard is linked to the alphanumeric screen,
+  i.e., if you want to enter input with the alphanumeric keyboard,
+  you must activate the window with the alphanumeric screen.
+  If, on the other hand, the main window with the hexadecimal
+  display is active, keyboard input results in actions on the
+  emulated hexadecimal keyboard.
+ <br/><br/>
+
+
+ <h2><a name="software">2. Software Contained in the ROM</a></h2>
+  <ul>
+   <li>Original monitor program</li>
+   <li>LLC1-BASIC&nbsp;V1.2</li>
+  </ul>
+ <br/>
+
+ <h3><a name="usage">2.1. Notes on Operating the Monitor Program</a></h3>
+  Pressing one of the keys <em>EIN&nbsp;(M)</em>,
+  <em>REG&nbsp;(R)</em>, <em>ES&nbsp;(S)</em>, <em>HP&nbsp;(H)</em>
+  and <em>DL&nbsp;(G)</em> takes you into one of the five modes.
+  This also applies if you are already in a different mode.
+  You can therefore switch between the modes at any time, as you
+  like.
+ <br/><br/>
+
+ <h3>
+  <a name="ein">2.1.1. EIN: Input (Display/Change Memory Cells)</a>
+ </h3>
+  <em>EIN&nbsp;(M)</em> &rarr; &lt;address&gt; [ &rarr; &lt;value&gt; ]
+  &rarr; <em>ST&nbsp;(Enter)</em>
+ <br/><br/>
+  <b>Caution!</b> Each time you press the <em>ST</em>&nbsp;(Enter)
+  key, the address is incremented by one.
+  To change the value at the first address, you must type the
+  two-digit value directly after the four-digit address and only
+  then press <em>ST</em>&nbsp;(Enter).
+ <br/><br/>
+
+ <h3><a name="reg">2.1.2. REG: Display/Change Registers</a></h3>
+  <em>REG&nbsp;(R)</em> &rarr; <em>ST&nbsp;(Enter)</em>
+  &rarr; <em>ST&nbsp;(Enter)</em> &rarr; ...
+ <br/><br/>
+  Each time you press <em>ST&nbsp;(Enter)</em>, the next register
+  pair is shown, in the following order:
+  <em>SP</em>, <em>PC</em>, <em>IY</em>, <em>IX</em>, <em>HL</em>,
+  <em>DE</em>, <em>BC</em>, <em>AF</em>, <em>HL'</em>, <em>DE'</em>,
+  <em>BC'</em> and <em>AF'</em>.
+ <br/><br/>
+  To change the register content, enter the new value and then
+  press <em>ST&nbsp;(Enter)</em>.
+ <br/><br/>
+
+ <h3><a name="es">2.1.3. ES: Single Step</a></h3>
+  <em>ES&nbsp;(S)</em> &rarr; &lt;address&gt;
+  &rarr; <em>ST&nbsp;(Enter)</em> &rarr; ...
+ <br/><br/>
+  The monitor program loads the registers and then executes the
+  instruction at the specified address.
+  It then halts again, and the register contents are saved.
+ <br/><br/>
+
+ <h3><a name="hp">2.1.4. HP: Set Breakpoint</a></h3>
+  <em>HP&nbsp;(H)</em> &rarr; &lt;address&gt;
+  &rarr; <em>ST&nbsp;(Enter)</em> &rarr; ...
+ <br/><br/>
+  A breakpoint is set at the specified address, so that a program
+  started with the <em>DL</em> mode halts there.
+  The register contents are saved and can be viewed and changed
+  with the <em>REG</em> mode.
+ <br/><br/>
+  The breakpoint is implemented using a restart instruction, which
+  is written to the specified address.
+  For this reason, the breakpoint can only be set in RAM and only
+  on the first byte of a CPU instruction.
+ <br/><br/>
+
+ <h3><a name="dl">2.1.5. DL: Run Through (Start Program)</a></h3>
+  <em>DL&nbsp;(G)</em> &rarr; &lt;address&gt;
+  &rarr; <em>ST&nbsp;(Enter)</em> &rarr; ...
+ <br/><br/>
+  The <em>run through</em> mode starts a program.
+  The name refers to letting a program <em>run through</em>.
+ <br/><br/>
+
+
+ <h2><a name="basic">3. BASIC</a></h2>
+  The ROM contains a simple BASIC interpreter, which you can
+  start at addresses 0800 (cold start) and 0803 (warm start).
+  So, to start it for the first time, enter:
+ <br/>
+  <em>G&nbsp;0&nbsp;8&nbsp;0&nbsp;0&nbsp;Enter</em>
+ <br/><br/>
+
+ <h3><a name="basic_save">3.1. Saving a BASIC Program</a></h3>
+  JKCEMU offers special support for
+  <a href="loadsavebasic.htm">saving and loading BASIC programs</a>.
+  To save, please use the function
+  <em>Save BASIC Program...</em> in the <em>File</em> menu and
+  save the program as a
+  <a href="fileformats.htm#headersave">Headersave</a> file with
+  the file type <tt>b</tt>.
+ <br/><br/>
+
+ <h3><a name="basic_load">3.2. Loading a BASIC Program</a></h3>
+  First load the BASIC program and then start the BASIC
+  interpreter with a warm start.
+ <br/><br/>
+
+ <h3>
+  <a name="basic_view">3.3. Displaying a BASIC Program Located in Working Memory</a>
+ </h3>
+  Please use the menu item
+  <em>Open&nbsp;BASIC&nbsp;Program&nbsp;in&nbsp;Text&nbsp;Editor...</em>
+  in the <em>File</em> menu for this.
+ <br/><br/>
+
+
+ <h2><a name="etc">4. Miscellaneous</a></h2>
+
+ <h3><a name="autoinput">4.1. AutoInput</a></h3>
+  AutoInput performs automatic keystrokes only on the hexadecimal
+  keyboard.
+  The emulated alphanumeric keyboard cannot be operated with it.
+</body>
+</html>

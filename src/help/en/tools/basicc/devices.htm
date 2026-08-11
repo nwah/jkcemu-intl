@@ -1,0 +1,219 @@
+<html>
+<head><title>BASIC Compiler: I/O Devices</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>I/O Devices</h2>
+  <ul>
+   <li><a href="devices.htm#crt">1. Screen&nbsp;(CRT:)</a></li>
+   <li><a href="devices.htm#lpt">2. Printer&nbsp;(LPT:)</a></li>
+   <li>
+    <a href="devices.htm#file">3. File system&nbsp;(A:&nbsp;to&nbsp;P:)</a>
+   </li>
+   <li>
+    <a href="devices.htm#vdip">4. USB storage on VDIP module&nbsp;(V:)</a>
+   </li>
+ </ul>
+ <br/>
+  Input and output of text and data takes place via devices.
+  The keyboard and the screen are used most often.
+  These two devices can be controlled with various statements
+  and functions,
+  e.g. <a href="instructions.htm#input">INPUT</a>,
+  <a href="functions.htm#inkey$">INKEY$</a> and
+  <a href="instructions.htm#print">PRINT</a>.
+  Some target systems also support a printer,
+  on which you can produce output with the
+  <a href="instructions.htm#lprint">LPRINT</a> statement.
+  Besides these special statements, it is also possible to address
+  the screen and the printer via an output channel.
+  All other devices can only be communicated with via
+  input/output channels, which are opened with the
+  <a href="instructions.htm#open">OPEN</a> statement.
+ <br/><br/>
+  When an input/output channel is to be opened with the
+  OPEN statement,
+  the name of the device and/or the name of a file must be specified.
+  The device name can be written in upper case as well as lower case.
+  Some devices do not support file names,
+  i.e. for these only the device name is specified and
+  the device as such is opened.
+  Other devices offer access to files.
+  Here, a file name must follow the device name,
+  i.e. after the colon.
+  Depending on the specific device,
+  the file name may also contain a path.
+ <br/><br/>
+  If no device is specified, i.e.
+  if the specified text does not contain a colon,
+  the supported devices,
+  or more precisely their corresponding drivers,
+  are tried one after another
+  in order to open the file with them.
+  By default, the compiled program contains all the drivers
+  that make sense.
+  However, if you know that, for example, a particular driver
+  is not needed, you can disable it
+  in the <a href="options.htm">compiler options</a>.
+ <br/><br/>
+  In principle, it is also possible to
+  address devices directly, bypassing the input/output channels and
+  depending on the hardware, with <a href="functions.htm#peek">PEEK</a>-
+  and <a href="instructions.htm#poke">POKE</a>- or with
+  <a href="functions.htm#in">IN</a>- and
+  <a href="instructions.htm#out">OUT</a>-commands.
+  However, this only makes sense for special applications
+  and also requires special knowledge.
+  For this reason, it is not covered further here.
+ <br/><br/>
+  The following is a description of the devices supported
+  by the JKCEMU BASIC compiler:
+ <br/><br/>
+
+ <h3><a name="crt">1. Screen&nbsp;(CRT:)</a></h3>
+  An output channel to the device <em>CRT:</em> is used to output
+  text on the screen.
+  Graphical output is not possible with it.
+  The purpose of opening an output channel to the screen
+  is to be able to write programs
+  that allow the same output either in parallel or switchably
+  on multiple devices.
+  You then only need to implement the logic for generating
+  the output once, and specify only in the OPEN statement
+  on which device the output is to take place.
+ <br/><br/>
+
+ <h3><a name="lpt">2. Printer&nbsp;(LPT:)</a></h3>
+  Similar to the screen, it is possible with the device
+  <em>LPT:</em> to open an output channel to the printer.
+  This, however, is only possible
+  if the target system supports a printer.
+ <br/><br/>
+
+ <h3>
+  <a name="file">3. File system&nbsp;(A:&nbsp;to&nbsp;P:)</a>
+ </h3>
+  The target systems <a href="targets.htm#cpm">CP/M-compatible</a> and
+  <a href="targets.htm#kc85_caos48">KC85/5 with CAOS&nbsp;>=&nbsp;4.8</a>
+  are the only ones that offer access to a file system.
+  To do this, specify the drive (<em>A:</em> to <em>P:</em>)
+  followed by the name of the file to be opened
+  in the <a href="instructions.htm#open">OPEN</a> statement.
+  The drive represents the device and can be omitted.
+  In that case the file is opened on the current drive.
+ <br/><br/>
+  A user area can be specified between the drive letter
+  and the colon.
+  This is a numeric value between&nbsp;0 and 15.
+  The file is then searched for or created in the specified
+  user area, otherwise in the current user area
+  (see CP/M command&nbsp;<em>USER</em>).
+ <br/><br/>
+  Example without specifying a user area:
+ <br/><br/>
+  &nbsp;&nbsp;<tt>OPEN "A:DATEI.TXT" FOR INPUT AS #1</tt>
+ <br/><br/>
+  Example with a user area specified:
+ <br/><br/>
+  &nbsp;&nbsp;<tt>OPEN "A12:DATEI.TXT" FOR INPUT AS #1</tt>
+ <br/><br/>
+  Files in a CP/M-compatible system are always stored
+  in blocks of 128&nbsp;bytes,
+  i.e. the file length is also only possible in 128-byte steps.
+  However, in order to still allow file operations
+  with a byte-exact file length,
+  the byte&nbsp;1Ah is used as an end-of-file marker.
+  This byte is therefore automatically appended when closing
+  a file that was opened for writing.
+  Conversely, a file can only be read up to the byte&nbsp;1Ah.
+  A null byte is likewise treated as an end of file.
+ <br/><br/>
+  The end-of-file marker also affects the APPEND
+  (append) mode.
+  The file is opened and read up to the first occurrence
+  of a 00h or 1Ah byte.
+  Writing then begins at exactly this position.
+ <br/><br/>
+  Using the bytes&nbsp;00h and 1Ah as end-of-file markers has,
+  however, the disadvantage that these bytes cannot be read
+  and thus there are restrictions when accessing binary files.
+  If you need full access to binary files,
+  you must open them in binary mode
+  (see keyword&nbsp;BINARY in the
+  <a href="instructions.htm#open">OPEN</a> statement).
+  Binary mode does not use end-of-file markers,
+  i.e. neither is such a character automatically appended
+  nor is an end of file recognized when such a character is read.
+ <br/><br/>
+
+ <h3>
+  <a name="vdip">4. USB storage on VDIP module&nbsp;(V:)</a>
+ </h3>
+  This device represents a FAT-formatted USB storage device
+  connected to port&nbsp;2 of a VDIP module.
+  The device name <em>V:</em> deliberately has the same form
+  as the drive letters known from the CP/M and DOS world,
+  since, like the drives there, it is used for storing files
+  and can thus also be regarded as a drive.
+ <br/><br/>
+  The file name may, but does not have to, begin with a path.
+  This path can be either absolute (separator at the beginning)
+  or relative (no separator at the beginning).
+  Both the backslash (\) and
+  the slash (/) can be used as separators.
+  The table shows some examples:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <td nowrap="nowrap"><tt>V:abc.txt</tt></td>
+    <td>
+     File name without a path,<br/>
+     The file is searched for in the current directory.
+    </td>
+   </tr>
+   <tr>
+    <td nowrap="nowrap"><tt>V:\abc.txt</tt></td>
+    <td>
+     File name with an absolute path to the root directory
+    </td>
+   </tr>
+   <tr>
+    <td nowrap="nowrap"><tt>V:/xxx/abc.txt</tt></td>
+    <td>File name with an absolute path</td>
+   </tr>
+   <tr>
+    <td nowrap="nowrap"><tt>V:xxx/abc.txt</tt></td>
+    <td>
+     File name with a relative path,<br/>
+     Starting from the current directory, the file is searched
+     for in the subdirectory <em>xxx</em>.
+    </td>
+   </tr>
+  </table>
+ <br/>
+  <b>Caution!</b> For system reasons, when opening a file
+  with a path specification, the directory is changed first and
+  the file is opened afterward.
+  After closing the file,
+  but also if the file could not be opened,
+  this directory remains set as the current directory
+  in the VDIP module, i.e. if afterward another file
+  is to be opened without a path or with a relative path,
+  it will probably not be found,
+  since the search is now made in, or from,
+  a different directory.
+ <br/><br/>
+  <b>Note!</b>
+  Since files on the USB storage have a byte-exact length,
+  there is no need to use special end-of-file markers as described
+  above for the CP/M-compatible file system.
+  For this reason, there is also no distinction between a
+  text mode and a binary mode, i.e.
+  the keyword&nbsp;<em>BINARY</em> in the
+  <a href="instructions.htm#open">OPEN</a> statement has no effect.
+  The file is always opened in a kind of binary mode.
+  Nevertheless, for reasons of portability, you should still
+  specify the keyword <em>BINARY</em>
+  when dealing with binary files.
+</body>
+</html>

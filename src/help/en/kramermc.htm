@@ -1,0 +1,123 @@
+<html>
+<body>
+ <h1>Kramer-MC</h1>
+  In his book <em>Praktische Mikrocomputertechnik</em>, published
+  in 1987, Manfred Kramer published the construction plans for a
+  home-built computer.
+  Since he did not give this computer any particular name, it is
+  called the <em>Kramer-MC</em> here.
+ <br/><br/>
+  What is special about this computer is that, besides the
+  hardware, a lot of attention was also paid to the software.
+  For example, the Kramer-MC's ROM contains all the essential
+  tools for software development in assembler and BASIC.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="kramermc.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="kramermc.htm#printer">1.1. Printer</a></li>
+    </ul>
+   </li>
+   <li><a href="kramermc.htm#software">2. Software Contained in the ROM</a></li>
+   <li><a href="kramermc.htm#mem">3. Memory Layout</a></li>
+   <li>
+    <a href="kramermc.htm#basic_io">4. Saving and Loading BASIC Programs</a>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  <ul>
+   <li>23&nbsp;KByte ROM</li>
+   <li>41&nbsp;KByte RAM including 1 KByte video RAM</li>
+   <li>64x16&nbsp;character screen size</li>
+  </ul>
+ <br/><br/>
+
+ <h3><a name="printer">1.1. Printer</a></h3>
+  A printer is emulated by having JKCEMU intercept the operating
+  system calls for print output and append the data to the
+  current print job.
+  However, this function is disabled by default and must be
+  enabled in the <a href="settings.htm">Settings</a> if needed.
+ <br/><br/>
+  The reason for this is that after a RESET, the logical printer
+  channel points to the screen, and the monitor program also
+  outputs its startup message via it.
+  If interception of print output is enabled, a print job
+  containing the short startup message is therefore created on
+  every RESET.
+  To avoid this inconvenience, the printer emulation is disabled
+  by default.
+ <br/><br/>
+
+
+ <h2><a name="software">2. Software Contained in the ROM</a></h2>
+  <ul>
+   <li><a href="kramermc/monitor.htm">Monitor program</a></li>
+   <li><a href="kramermc/assembler.htm">Assembler</a></li>
+   <li>Disassembler</li>
+   <li>Debugger</li>
+   <li>BASIC interpreter</li>
+   <li><a href="kramermc/editor.htm">Editor</a></li>
+  </ul>
+ <br/><br/>
+
+
+ <h2><a name="mem">3. Memory Layout</a></h2>
+  <table border="1">
+   <tr>
+    <td>0000h-03FFh</td>
+    <td><a href="kramermc/monitor.htm">Monitor program</a></td>
+   </tr>
+   <tr><td>0400h-07FFh</td><td>Debugger</td></tr>
+   <tr><td>0800h-0BFFh</td><td>Disassembler</td></tr>
+   <tr><td>0C00h-0FFFh</td><td>System RAM</td></tr>
+   <tr>
+    <td>1000h-3FFFh</td>
+    <td>RAM, program storage for BASIC</td>
+   </tr>
+   <tr>
+    <td>4000h-7FFFh</td>
+    <td>
+     RAM, text storage for <a href="kramermc/editor.htm">editor</a>
+    </td>
+   </tr>
+   <tr><td>8000h-AFFFh</td><td>BASIC interpreter</td></tr>
+   <tr><td>B000h-BFFFh</td><td>RAM</td></tr>
+   <tr>
+    <td>C000h-C3FFh</td>
+    <td><a href="kramermc/editor.htm">Editor</a></td>
+   </tr>
+   <tr>
+    <td>C400h-DFFFh</td>
+    <td><a href="kramermc/assembler.htm">Assembler</a></td>
+   </tr>
+   <tr><td>E000h-FBFFh</td><td>RAM</td></tr>
+   <tr><td>FC00h-FFFFh</td><td>Video RAM</td></tr>
+  </table>
+ <br/><br/>
+
+
+ <h2><a name="basic_io">4. Saving and Loading BASIC Programs</a></h2>
+  JKCEMU offers special support for
+  <a href="loadsavebasic.htm">saving and loading BASIC programs</a>.
+  To save, please use the function
+  <em>Save BASIC Program...</em> in the <em>File</em> menu and
+  save the respective program as a
+  <a href="fileformats.htm#basic">BASIC/RBASIC program file (*.bas)</a>.
+  Alternatively, saving as a
+  <a href="fileformats.htm#headersave">Headersave file (*.z80)</a>
+  with the file type&nbsp;<em>B</em> is also possible.
+ <br/><br/>
+  If you save a BASIC program in a different file format, JKCEMU
+  will later no longer recognize, when loading the file, that it
+  is a BASIC program, and will not adjust the system cells of the
+  BASIC interpreter accordingly.
+  The loaded program cannot then be used.
+</body>
+</html>

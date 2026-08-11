@@ -1,0 +1,264 @@
+<html>
+<head><title>BASIC Compiler: Compiler Options</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Compiler Options</h2>
+  The first time you compile a source text, or
+  when you invoke the menu item <em>Compile BASIC program with...</em>,
+  a window appears
+  in which you can set options.
+  These options influence how the compiler works.
+ <br/><br/>
+  If you have several BASIC source texts open in the
+  <a href="../texteditor.htm">Text Editor</a>,
+  the compiler options are managed separately for each source text.
+ <br/><br/>
+  The BASIC compiler options are divided into several groups,
+  which are described below.
+ <br/><br/>
+
+ <h3>1. Options in the <em>General</em> group</h3>
+  <ul>
+   <li>
+    <b>Target system</b><br/>
+    This setting specifies for which
+    <a href="targets.htm">target system</a> the program code is to be generated.
+    By default, a target system is preselected
+    that corresponds to the system currently being emulated,
+    provided it is also supported by the compiler.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Type of program</b><br/>
+    Selecting <em>Standalone program</em> generates a program
+    that is usually invoked by entering an appropriate
+    command in the operating system.
+    Selecting <em>Subprogram</em> generates a program
+    that is called from another program with the help of a
+    <tt>CALL</tt> command.
+    Note that the compiled program
+    uses all registers except <tt>IX</tt>.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Name of the program</b><br/>
+    This setting is only available for certain target systems.
+    It specifies the name with which the program is started.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Start address</b><br/>
+    The start address determines where the program is located
+    in the address range of main memory.
+    A value suitable for the target system is preselected.
+    The value can be changed as desired.
+    However, you must make sure yourself
+    that the compiled program fits entirely within
+    a suitable address range.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Variables/memory cells</b><br/>
+    This determines where the variables, the memory cells and,
+    if desired, the program's own stack area are to be located
+    in the address range of main memory.
+    This area must be RAM.
+    If you do not specify an address for the variables
+    and memory cells,
+    they are placed directly after the program code.
+    However, this also means that the compiled program
+    can only run in RAM.
+    If you want to generate program code that can run from ROM,
+    you must specify an address located in RAM for
+    the variables and memory cells.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Size of string buffer</b><br/>
+    The string buffer is where the strings
+    stored in string variables are kept.
+    The amount of memory needed depends largely on the number
+    of string variables and on the length of the strings
+    stored in them, but also on the number of assignments
+    performed.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Stack</b><br/>
+    This specifies the size of the stack area.
+    It must be larger
+    the more deeply subroutines are nested when called.
+    In particular, with
+    <a href="usersubs.htm">user-defined functions and procedures</a>
+    a large stack area is required,
+    since arguments and local variables are placed on the stack.
+    Using the system stack is also possible,
+    but only advisable if the BASIC program calls hardly any
+    subroutines and you are otherwise also sure
+    that the system stack is sufficiently large.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Language of the runtime messages</b><br/>
+    Here you specify in which language error messages and other
+    messages are to appear in the compiled program.
+   </li>
+  </ul>
+ <br/><br/>
+
+ <h3>2. Options in the <em>Runtime Properties</em> group</h3>
+  <ul>
+   <li>
+    <b>Compile for testing and debugging</b><br/>
+    This option should be enabled
+    while the BASIC program is still under development.
+    Various runtime checks are then compiled into the program,
+    which, in the event of a program error, ensure
+    that the program does not crash uncontrolled
+    but instead terminates in a controlled way with an
+    error message.
+    These additional runtime checks
+    make the compiled program correspondingly larger
+    and also somewhat slower.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Compile for production use</b><br/>
+    With this option, no additional runtime checks
+    are compiled in.
+    Program errors can lead to an uncontrolled crash.
+    This option should be enabled
+    once the BASIC program has been fully developed and
+    sufficiently tested, and you want to generate
+    the shortest and fastest program code.
+    <br/><br/>
+   </li>
+   <li>
+    <b>User-defined</b><br/>
+    With this option, you decide for yourself
+    which runtime checks are compiled into the program.
+   </li>
+  </ul>
+ <br/><br/>
+
+ <h3>3. Options in the <em>Drivers</em> group</h3>
+  <ul>
+   <li>
+    <b>Include the following drivers when the OPEN statement is used: ...</b>
+    <br/>
+    The <a href="instructions.htm#open">OPEN</a> statement is used to
+    open input/output channels.
+    For this, certain drivers must be included
+    in the compiled program.
+    By default, the compiler includes all drivers
+    that it considers necessary
+    based on the BASIC program and the target system.
+    However, it is possible
+    that a particular driver is not needed at all,
+    for example because the program is written in such a way
+    that it will never open an input/output channel
+    to the device in question.
+    If you know this, you can disable the drivers
+    that are not needed and thereby reduce
+    the size of the compiled program.
+    <br/><br/>
+   </li>
+  </ul>
+ <br/><br/>
+
+ <h3>4. Options in the <em>Generated Program Code</em> group</h3>
+  <ul>
+   <li>
+    <b>Load program code into emulator</b><br/>
+    If this option is enabled, after each successful
+    compiler run the generated program code is loaded
+    into the emulator's main memory.
+    The program can then be started in the emulator.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Save program code to file</b><br/>
+    With this option, the generated program code is written
+    to a file whose name you must specify.
+    The format of the file depends on the specified
+    file extension.
+    <br/><br/>
+    <b>Caution!</b> With KCC, KCM and TAP files, there are
+    differences in the file format depending on the target system.
+    If a target system for KC85/1, KC87 or Z9001 is selected,
+    the file type <em>COM</em> is entered in the file header,
+    and TAP files begin with block number&nbsp;0.
+    For all other target systems, no file type is entered.
+    Furthermore, TAP files then begin with block number&nbsp;1,
+    in accordance with the HC900
+    and KC85/2..5 conventions.
+   </li>
+  </ul>
+ <br/><br/>
+
+ <h3>5. Options in the <em>Miscellaneous</em> group</h3>
+  <ul>
+   <li>
+    <b>Warn about non-ASCII characters</b><br/>
+    The character set of the text editor can differ
+    (and in most cases probably will differ)
+    from the character set of the target system.
+    If you write a non-ASCII character in a string
+    in the BASIC program (e.g. a German umlaut),
+    this character will probably look different
+    on the target system.
+    If this option is enabled, you will be alerted
+    to such characters.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Warn about unused functions, procedures and variables</b>
+    <br/>
+    If you have declared or implemented functions,
+    procedures or variables that are never called or used anywhere,
+    the compiler reports a warning.
+    This is often an indication of a typing error
+    in the name of the function, procedure or variable
+    in question.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Prefer relative jumps</b><br/>
+    Jumps to certain statements are compiled as absolute jumps
+    with three bytes,
+    since the jump distance is not known at compile time.
+    If this option is enabled,
+    the compiler compiles jumps that probably have
+    only a short jump distance
+    using relative jump instructions, which are only two bytes long
+    and are also executed faster than absolute jumps.
+   <br/><br/>
+    Jumps with a probably short jump distance
+    are, for example, jumps to the ELSE branch within
+    a single-line IF statement.
+   <br/><br/>
+    In rare cases it can happen
+    that the jump distance for a relative jump is too large,
+    for example if a program line with an IF statement
+    contains a great many statements.
+    In that case, the assembler,
+    which is automatically started after the actual compiler,
+    reports
+    &quot;Relative jump distance too large&quot;.
+    For you, this simply means
+    that you must disable the option
+    if that error message appears.
+    <br/><br/>
+   </li>
+   <li>
+    <b>Show generated assembler code</b><br/>
+    Enable this option if you are interested in the
+    program code generated by the BASIC compiler.
+    It is then displayed in a new subwindow
+    in the <a href="../texteditor.htm">Text Editor</a>.
+   </li>
+  </ul>
+ <br/>
+</body>
+</html>

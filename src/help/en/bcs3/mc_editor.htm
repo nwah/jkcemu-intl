@@ -1,0 +1,83 @@
+<html>
+<head><title>BCS3: Machine Code Editor</title></head>
+<body>
+ <h1>Machine Code Editor</h1>
+  Torsten Musiol developed a machine code editor for the BCS3,
+  which is also integrated into the emulator.
+  Since this machine code editor only runs correctly with BASIC-SE&nbsp;3.1
+  for 29 characters per line,
+  it is only available as a ROM in main memory
+  for that BASIC version.
+ <br/><br/>
+  The machine code editor requires at least 20 visible lines.
+  Please set an appropriate number of lines
+  when performing a cold start of BASIC-SE&nbsp;3.1.
+ <br/><br/>
+
+ <h2>Invocation</h2>
+  Enter the following line in BASIC-SE&nbsp;3.1:<br/><br/>
+  <tt>Y=USR(0F000H)</tt><br/><br/>
+  The machine code editor responds with: <tt>EDIT&gt;</tt><br/>
+  You are now in the command loop.
+ <br/><br/>
+
+ <h2>Commands</h2>
+  <table border="1">
+   <tr><th>Command</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">G&lt;address&gt;</td>
+    <td valign="top">
+     Go<br/>
+     Start a machine code subroutine
+     at the specified address.<br/>
+     A RETURN instruction jumps back
+     to the command loop.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">M&lt;addr1&gt;-&lt;addr2&gt;-&lt;addr3&gt;</td>
+    <td valign="top">
+     Move<br/>
+     Copy the memory area from &lt;addr1&gt; to &lt;addr2&gt;
+     to &lt;addr3&gt;,<br/>
+     The memory areas may overlap.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">S&lt;address&gt;</td>
+    <td valign="top">
+     Substitute<br/>
+     Write memory cells starting at the specified address,<br/>
+     Use the keys <em>O</em>, <em>L</em>, <em>I</em> and <em>P</em>
+     to move the cursor to the
+     desired memory cell.
+     Then enter the byte to be written in hexadecimal
+     and press the ENTER key.
+     The <em>Q</em> key returns to the command loop.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">T&lt;address&gt;</td>
+    <td valign="top">
+     Test<br/>
+     Like command G, except that
+     when returning from the machine code subroutine,
+     the registers AF, BC, DE and HL are output.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">Q</td>
+    <td valign="top">
+     Quit<br/>
+     Return to BASIC-SE 3.1
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>Literature</h2>
+  Musiol, Torsten: Maschinencode-Editor,<br/>
+  in radio fernsehen elektronik, Heft 1/1989, S. 50-52,<br/>
+  Berlin 1989
+</body>
+</html>

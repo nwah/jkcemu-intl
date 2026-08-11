@@ -1,0 +1,179 @@
+<html>
+<head>
+ <title>BASIC Compiler: Including Your Own Assembler Source Code</title>
+</head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Including Your Own Assembler Source Code</h2>
+  <ul>
+   <li>
+    <a href="userasm.htm#asm">1. The ASM Statement and ASM Function</a>
+   </li>
+   <li>
+    <a href="userasm.htm#var">2. Accessing BASIC Variables</a>
+   </li>
+   <li>
+    <a href="userasm.htm#optimizer">3. Optimizer</a>
+   </li>
+  </ul>
+ <br/>
+  Although the BASIC compiler offers a wide range of functionality,
+  not every requirement or programming task
+  can be solved using BASIC alone.
+  In such cases, you must write the desired functions
+  in assembler and call them from the BASIC program.
+  One option is to store
+  the machine code of your own assembler routine in
+  <a href="instructions.htm#data">DATA</a> lines,
+  read it with <a href="instructions.htm#read">READ</a> during
+  program execution, write it into working memory (RAM) with
+  <a href="instructions.htm#poke">POKE</a> or
+  <a href="instructions.htm#doke">DOKE</a>
+  (e.g. after <a href="constants.htm#top">TOP</a>), and then
+  call the routine with <a href="instructions.htm#call">CALL</a>
+  or <a href="functions.htm#usr">USR</a>.
+  The example reads the current value of the R register
+  in the microprocessor and displays it as a decimal number:
+ <br/>
+  <tt>
+   &#10;<br/>
+   DEFUSR0=TOP&#10;<br/>
+   DATA &amp;HED,&amp;H5F,&amp;H6F,&amp;H26,&amp;H00,&amp;HC9&#10;<br/>
+   A=TOP&#10;<br/>
+   FOR I=1 TO 6&#10;<br/>
+   &nbsp;&nbsp;READ B&#10;<br/>
+   &nbsp;&nbsp;POKE A,B&#10;<br/>
+   &nbsp;&nbsp;A=A+1&#10;<br/>
+   NEXT I&#10;<br/>
+   PRINT "R-Register: ";USR0(0)&#10;<br/>
+  </tt>
+ <br/>
+  This is a classic approach that is fairly straightforward.
+  However, it is inefficient in terms of the memory
+  it requires, and is therefore only suitable
+  for smaller machine code routines.
+  It can also become difficult
+  if your own machine code is not relocatable
+  and is therefore bound to fixed addresses.
+ <br/><br/>
+
+ <h2><a name="asm">1. The ASM Statement and ASM Function</a></h2>
+  The JKCEMU BASIC compiler offers the option, using
+  the <a href="instructions.htm#asm">ASM</a> statement
+  and the <a href="functions.htm#asm">ASM</a> function,
+  of including your own assembler source code directly in the BASIC program.
+  This allows many things to be solved much more elegantly.
+  The example from above then looks like this:
+ <br/>
+  <tt>
+   &#10;<br/>
+   PRINT "R-Register: ";ASM("  CALL lese_Reg_R")&#10;<br/>
+   END&#10;<br/>
+   ASM "lese_Reg_R:"&#10;<br/>
+   ASM "  LD A,R"&#10;<br/>
+   ASM "  LD L,A"&#10;<br/>
+   ASM "  LD H,0"&#10;<br/>
+   ASM "  RET"&#10;<br/>
+  </tt>
+ <br/>
+  You can also do without the separate routine
+  and read the R register like this:
+ <br/>
+  <tt>
+   &#10;<br/>
+   ASM "  LD A,R"&#10;<br/>
+   ASM "  LD L,A"&#10;<br/>
+   ASM "  LD H,0"&#10;<br/>
+   ASM "  PUSH HL"&#10;<br/>
+   PRINT "R-Register: ";ASM("  POP HL")&#10;<br/>
+  </tt>
+ <br/>
+  The last example in particular makes it clear
+  that including your own assembler source code directly
+  interferes with the code generation of the BASIC compiler.
+  For this reason:
+  the ASM statement and the ASM function are intended only for experts
+  <b>who know exactly what they are doing</b>!
+ <br/><br/>
+  There are no dependencies between the individual BASIC statements
+  and functions with respect to the registers, i.e.,
+  you do not need to save any registers for the BASIC compiler
+  when using the ASM statement and the ASM function.
+ <br/><br/>
+
+ <h2><a name="var">2. Accessing BASIC Variables</a></h2>
+  Your own assembler routines can also access BASIC variables.
+  You can find the address of a variable with the BASIC function
+  <a href="functions.htm#varptr">VARPTR</a>.
+  <a href="datatypes.htm#integer">Integer</a> and
+  <a href="datatypes.htm#long">Long</a> variables are&nbsp;2
+  or 4&nbsp;bytes in size and store the numeric value
+  as two's complement with the least significant byte first
+  (little endian).
+ <br/><br/>
+  <a href="datatypes.htm#decimal">Decimal</a> variables
+  are 6&nbsp;bytes in size and store the value as a packed BCD number
+  in big-endian format (most significant byte first).
+  The upper nibble of the first byte contains,
+  in bits&nbsp;4 to 6, the number of decimal places
+  and, in bit&nbsp;7, the sign.
+  The lower nibble of the first byte, together with the 10&nbsp;nibbles
+  of the following five bytes, contain the 11&nbsp;decimal digits.
+ <br/><br/>
+  <a href="datatypes.htm#single">Single</a> variables
+  are 4&nbsp;bytes in size and store, in the first three bytes,
+  the mantissa with the least significant byte first (little endian).
+  Bit&nbsp;7 of the most significant, and thus third, byte
+  contains the sign.
+  The exponent is stored in the fourth byte.
+  In accordance with the IEEE&nbsp;754 standard, it has an offset
+  (bias) of 7Fh.
+  If the exponent is zero, the entire Single value is zero,
+  regardless of the mantissa.
+  The value 0FFh is not allowed for the exponent.
+  The special values defined in the IEEE&nbsp;754 standard,
+  <em>+Infinity</em> (positive infinity),
+  <em>-Infinity</em> (negative infinity)
+  and <em>NaN</em> (not a number), are not supported.
+ <br/><br/>
+  <a href="datatypes.htm#string">String</a> variables are 2&nbsp;bytes
+  in size and contain a pointer to the actual string,
+  which is terminated with a null byte.
+ <br/><br/>
+  <b>Caution!</b> Strings are stored in a dynamic memory
+  area that is managed by the compiled program.
+  So that this memory management does not get confused,
+  you must never
+  assign a value to a BASIC string variable in your own assembler routines!
+ <br/><br/>
+  If you want to generate strings in your own assembler routines
+  and use them in BASIC, please return the start address
+  of the string in the HL register to the calling BASIC program
+  and convert the type there to String using the function
+  <a href="functions.htm#memstr$">MEMSTR$</a>.
+  You can now, for example, assign this string
+  to a string variable in BASIC.
+ <br/><br/>
+  <b>Caution!</b> If, in your own assembler routines, you
+  assign a value to a <a href="datatypes.htm#decimal">Decimal</a> variable,
+  that value must absolutely be in a valid BCD format!
+  Otherwise, a division
+  by such an invalid number can end up
+  stuck in an infinite loop.
+ <br/><br/>
+
+ <h2><a name="optimizer">3. Optimizer</a></h2>
+  The BASIC compiler contains a global optimizer
+  that goes through the generated assembler code and removes unnecessary
+  instructions.
+  In doing so, it can also modify assembler code
+  generated using ASM statements and ASM functions.
+  However, the optimizer only touches those assembler lines
+  in which the instruction mnemonic is separated from the start of the line
+  or the label by a tab character.
+  So if you want to make sure the optimizer does not
+  modify your assembler code,
+  do not use tab characters in the ASM statements!
+</body>
+</html>

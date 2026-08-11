@@ -1,0 +1,184 @@
+<html>
+<body>
+ <h1>Network (KCNet)</h1>
+  <ul>
+   <li><a href="kcnet.htm#intro">1. General Information</a></li>
+   <li>
+    <a href="kcnet.htm#cfg">2. Configuration</a>
+    <ul>
+     <li><a href="kcnet.htm#dhcp">2.1. DHCP</a></li>
+    </ul>
+   </li>
+   <li><a href="kcnet.htm#ipv6">3. Notes on IPv6</a></li>
+  </ul>
+ <br/>
+
+ <h2><a name="intro">1. General Information</a></h2>
+  Ralf K&auml;stner developed a TCP/IP-capable solution for
+  connecting the KC85 computers from M&uuml;hlhausen to an
+  Ethernet network.
+  This solution is called <em>KCNet</em> and is found in
+  module M052.
+  For other 8-bit computers, KCNet is available in the form of a
+  separate network card.
+ <br/><br/>
+  KCNet is based on the <em>WIZnet W5100</em> chip, which
+  contains a complete TCP/IPv4 protocol stack.
+  JKCEMU emulates this network solution, using the protocol stack
+  of the operating system on which the emulator runs.
+  This principle, in particular the operating system's permission
+  model, does however entail some limitations:
+  <ul>
+   <li>
+    The protocol stack is only emulated at the TCP and UDP level,
+    i.e., the level that application programs usually build on.
+   </li>
+   <li>
+    If the protocol stack is addressed at a lower level (raw IP,
+    raw MAC), no successful communication will take place.
+    The only exception is ICMP echo (ping), which is simulated.
+   </li>
+   <li>
+    Sending data packets is only possible if an IP address is
+    specified as the destination.
+    If the application program instead only specifies a MAC
+    address, nothing is sent.
+    As a result, some special use cases that work without an IP
+    address (e.g. <em>Wake On LAN</em>) are not possible.
+   </li>
+   <li>
+    With TCP and UDP, privileged ports (port numbers up to 1024)
+    usually cannot be bound, which particularly restricts use as
+    a server.
+    This restriction can be bypassed with system or administrator
+    rights, but that is not recommended for security reasons.
+   </li>
+   <li>
+    The IP address, subnet mask and gateway of the operating
+    system on which JKCEMU happens to be running are always used.
+    This also applies if KCNet is configured differently in the
+    emulation.
+   </li>
+  </ul>
+ <br/>
+
+ <h2><a name="cfg">2. Configuration</a></h2>
+  After starting the computer, KCNet must first be configured
+  before it can be used.
+  There are special programs for this, with which you can enter
+  the values for the IP address, subnet mask, gateway and DNS
+  server in the network module.
+  In the emulation, however, the values for IP address, subnet
+  mask and gateway set in KCNet are not used at all, since that
+  is the responsibility of the operating system on which JKCEMU
+  runs.
+  Nevertheless, you must still configure at least the IP address
+  and the subnet mask in KCNet, since otherwise the corresponding
+  application programs will detect an unconfigured network and
+  therefore refuse their service.
+  The gateway, on the other hand, can be left blank.
+  It has no meaning in the emulation anyway.
+ <br/><br/>
+  The situation is different for the DNS server.
+  Here, the operating system of the computer running the emulator
+  is not involved.
+  The network programs running in the emulator perform name
+  resolution themselves and use the DNS server set in KCNet for
+  this.
+ <br/><br/>
+  JKCEMU offers the option of preconfiguring KCNet, i.e., the
+  network is already configured when the emulation starts, and
+  you no longer need to start a special configuration program.
+  You can set the four individual values for the network
+  configuration in the <a href="settings.htm">Settings</a>, in the
+  <em>Network</em> section.
+  However, this is usually not necessary, since an option is
+  enabled by default that automatically determines the IP address,
+  the subnet mask and the DNS server and enters them into the
+  emulated KCNet module.
+ <br/><br/>
+  On some systems, JKCEMU cannot determine the DNS server.
+  If this is the case for you, you must find out the IP address
+  of the DNS server yourself.
+  On a Windows operating system, this works as follows:
+  <ol>
+   <li>
+    Start the command prompt by typing <tt>cmd.exe</tt> into
+    the Windows search.
+   </li>
+   <li>
+    Type <tt>ipconfig /all</tt> into the command prompt and
+    press <em>Enter</em>.
+   </li>
+   <li>
+    In the command prompt's program output, find the line with
+    the DNS server and enter the IP address given there into the
+    <em>DNS Server</em> field in the emulator.
+   </li>
+  </ol>
+ <br/>
+
+ <h3><a name="dhcp">2.1. DHCP</a></h3>
+  If you forgo the preconfiguration option, KCNet is initially
+  unconfigured after JKCEMU starts.
+  Now, just as would usually be done on a real system, you could
+  start a program that configures KCNet using DHCP.
+  However, since in the case of the emulation the network is
+  managed by the underlying operating system, and the emulator
+  normally also runs in an environment without system privileges,
+  this DHCP configuration program (DHCP client) would run into
+  an error.
+  Nevertheless, so that a DHCP process can still complete without
+  errors in the emulation, JKCEMU simulates a DHCP server.
+  For this, the emulator intercepts all DHCP requests and answers
+  them the way a real DHCP server would.
+ <br/><br/>
+  <b>Caution!</b> The values supplied by the simulated DHCP
+  server for the server IP address as well as for the lease,
+  renew and rebind time of the client IP address have no basis
+  in reality!
+  These values only serve to satisfy the DHCP client running in
+  the emulation.
+  Furthermore, note that no DHCP server is simulated if JKCEMU
+  cannot determine an IP address and none was specified in the
+  settings either.
+ <br/><br/>
+
+ <h2><a name="ipv6">3. Notes on IPv6</a></h2>
+  The emulated network solution KCNet exclusively uses the old
+  TCP/IP version IPv4 with its 4-byte IP addresses, which are
+  written as four decimal numbers separated by a dot.
+  In the meantime, however, the new IPv6 with 16-byte IP addresses
+  is being encountered more and more often, mostly in the form of
+  a mixed IPv4/IPv6 environment.
+  The IP address is then used to distinguish whether IPv4 or IPv6
+  is being used.
+ <br/><br/>
+  If JKCEMU receives data packets in IPv6 format in such an
+  environment, it cannot pass the IPv6 address contained in them
+  on to the emulated KCNet in the form of an IPv4 address, i.e.,
+  the program running in the emulator sees the remote party with
+  the IP address 0.0.0.0, which stands for a missing IP address.
+  The program cannot do anything with that, however.
+  You must therefore make sure that network communication always
+  takes place using IPv4.
+ <br/><br/>
+  If the program running in the emulator is a client application,
+  and thus the initiator of a network communication, there is no
+  problem, since JKCEMU begins the communication with IPv4, upon
+  which a server will also respond with IPv4.
+ <br/><br/>
+  However, it becomes problematic if the program running in the
+  emulator is a server application, and the network communication
+  is thus initiated from outside JKCEMU.
+  In this case, you must make sure that the IPv4 address is
+  specified when establishing the connection to the computer
+  running the emulator.
+  When using logical host names that are resolved via DNS, it
+  depends on the DNS configuration whether an IPv4 or IPv6
+  address is used.
+  If the DNS returns an IPv6 address, you have no choice but to
+  forgo the logical host name and specify the IPv4 address of the
+  computer running the emulator directly.
+</body>
+</html>

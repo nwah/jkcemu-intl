@@ -1,0 +1,117 @@
+<html>
+<head><title>BCS3: S/P-BASIC&nbsp;V3.3</title></head>
+<body>
+ <h1>S/P-BASIC&nbsp;V3.3</h1>
+  S/P-BASIC&nbsp;V3.3 is a further development of BASIC-SE&nbsp;3.1
+  created by Frank Pr&uuml;fer,
+  which, besides extensions to the language scope, also offers
+  improved system stability.
+  Only the essential differences are described below.
+ <br/><br/>
+
+ <h2>1. Operator Execution Order</h2>
+  The execution order was changed,
+  but, as with BASIC-SE&nbsp;3.1, still does not correspond
+  to the mathematical rules.
+  It is therefore advisable to fix the execution order
+  yourself by using round brackets.
+ <br/><br/>
+
+ <h2>2. New and Changed Statements</h2>
+  <table border="1">
+   <tr><th>Statement</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">CALL &lt;address&gt; [ , ... ]</td>
+    <td valign="top">
+     Call a machine code subroutine without returning
+     a value
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">IF &lt;condition&gt; THEN ...</td>
+    <td valign="top">
+     Conditional program execution,<br/>
+     The syntax of the IF statement has not changed.
+     However, there are differences in the logic
+     when more than one statement follows the keyword THEN:
+     If the condition is not met,
+     execution continues with the next program line rather than,
+     as with BASIC-SE&nbsp;3.1, with the statement
+     after next following THEN.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">PRINT [... [, ...]] [;]</td>
+    <td valign="top">
+     PRINT has gained a construct for outputting spaces:<br/>
+     &amp; &lt;expression&gt;<br/>
+     As many spaces are output
+     as the value of the expression.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">RANDOMIZE</td>
+    <td valign="top">
+     Sets a random starting value
+     for the random number generator (RND function)
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>3. New and Changed Functions</h2>
+  <table border="1">
+   <tr><th>Function</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">ASC( &lt;string expression&gt; )</td>
+    <td valign="top">
+     Determines the ASCII code of the first character
+     of the passed string
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     USR( &lt;address&gt; )<br/>
+     USR( &lt;address&gt; , &lt;value&gt; )
+    </td>
+    <td valign="top">
+     Calls a machine code subroutine that returns
+     a value in the registers BC and HL,<br/>
+     It is also possible to pass a value
+     in these registers.
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>4. New and Changed Error Messages</h2>
+  <table border="1">
+   <tr>
+    <td valign="top">U</td>
+    <td valign="top">
+     Undefined character, neither a number nor a keyword
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">S</td>
+    <td valign="top">Syntax error</td>
+   </tr>
+   <tr>
+    <td valign="top">O</td>
+    <td valign="top">Overflow during PLOT/UNPLOT or with arrays</td>
+   </tr>
+   <tr>
+    <td valign="top">L</td>
+    <td valign="top">Line not found</td>
+   </tr>
+   <tr>
+    <td valign="top">T</td>
+    <td valign="top">
+     Reading from magnetic tape failed,<br/>
+     You should reinitialize everything with NEW.
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+</body>
+</html>

@@ -1,0 +1,1396 @@
+<html>
+<body>
+ <h1>Assembler</h1>
+  The emulator has a built-in assembler,
+  which you can call up via the <a href="texteditor.htm">Text Editor</a>,
+  i.e. you open, edit and assemble the assembler source code
+  in the text editor.
+  Alternatively, the assembler can also be called
+  as a standalone command line program
+  (see <a href="assembler.htm#cmdline">Command Line</a>).
+ <br/><br/>
+  The description of the assembler is divided
+  into the following sections:
+  <ul>
+   <li><a href="assembler.htm#options">1. Assembler Options</a></li>
+   <li>
+    <a href="assembler.htm#msg">2. Assembler Output and Error Messages</a>
+   </li>
+   <li>
+    <a href="assembler.htm#general_syntax">3. General Syntax</a>
+    <ul>
+     <li>
+      <a href="assembler.htm#case">3.1. Upper and Lower Case</a>
+     </li>
+     <li>
+      <a href="assembler.htm#line_syntax">3.2. Structure of an Assembler Source Line</a>
+     </li>
+     <li>
+      <a href="assembler.htm#instructions">3.4. Assembler Instructions</a>
+     </li>
+     <li>
+      <a href="assembler.htm#comments">3.5. Comments</a>
+     </li>
+    </ul>
+   </li>
+   <li><a href="assembler.htm#pseudo_inst">4. Pseudo-Instructions</a></li>
+   <li>
+    <a href="assembler.htm#special_syntax">5. Mnemonics and Syntax: Zilog or Robotron?</a>
+   </li>
+   <li>
+    <a href="assembler.htm#undoc">6. Undocumented Processor Instructions</a>
+    <ul>
+     <li>
+      <a href="assembler.htm#ixy8">6.1. Access to the Individual Bytes of the Index Registers</a>
+     </li>
+     <li>
+      <a href="assembler.htm#inf">6.2. Input Instruction: Setting Only the Flag Register</a>
+     </li>
+     <li>
+      <a href="assembler.htm#sll">6.3. Logical Shift-Left Instruction</a>
+     </li>
+     <li>
+      <a href="assembler.htm#undoc_single_bit">
+       6.4. Rotate, Shift and Single-Bit Instructions with Index Registers
+            that Also Act on Another Register
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="assembler.htm#expr">7. Numeric Expressions</a>
+    <ul>
+     <li><a href="assembler.htm#num_literal">7.1. Numeric Literal</a></li>
+     <li><a href="assembler.htm#char_literal">7.2. Character Literal</a></li>
+     <li><a href="assembler.htm#functions">7.3. Functions</a></li>
+     <li><a href="assembler.htm#unary_op">7.4. Unary Operators</a></li>
+     <li>
+      <a href="assembler.htm#binary_op">7.5. Binary Operators</a>
+     </li>
+     <li><a href="assembler.htm#cur_addr">7.6. Current Address</a></li>
+    </ul>
+   </li>
+   <li><a href="assembler.htm#string_literal">8. Character Strings</a></li>
+   <li>
+    <a href="assembler.htm#conditional_asm">9. Conditional Assembly</a>
+   </li>
+   <li><a href="assembler.htm#cmdline">10. Command Line</a></li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="options">1. Assembler Options</a></h2>
+  The assembler options let you control how the assembler
+  works, in particular with regard to the supported
+  mnemonics and syntax and what should be done
+  with the generated program code.
+  You set the assembler options in a window
+  that appears the first time the assembler is started.
+  You can also call up and change the options at any time
+  using the menu item <em>Assemble With...</em>.
+ <br/><br/>
+  The options are self-explanatory.
+  However, an explanation can be found in the section
+  <a href="assembler.htm#cmdline">Command Line</a>.
+  Contrary to the description given there, when the assembler
+  is called from the text editor, the optional assembler listing
+  is not written to a file but is instead displayed
+  in the text editor, where it can be saved manually.
+ <br/><br/>
+  Among other things, the assembler options also let you specify
+  a file to which the generated program code is written.
+  The format of the file is determined by the file extension
+  (*.tap produces a <a href="../fileformats.htm#kctap">KC-TAP</a> file).
+ <br/><br/>
+  <b>Caution!</b>
+  With <a href="../fileformats.htm#kcc">KCC</a>,
+  <a href="../fileformats.htm#kcm">KCM</a> and
+  <a href="../fileformats.htm#kctap">KC-TAP</a> files, there are
+  differences between KC85/1, KC87 and Z9001 on the one hand
+  and HC900 and KC85/2..5 on the other.
+  To ensure that the assembler generates the correct file format,
+  it takes its cue from the system currently being emulated.
+  If JKCEMU is currently emulating a KC85/1, KC87 or Z9001,
+  the file type <em>COM</em> is entered in the file header,
+  and KC-TAP files start with block number&nbsp;0.
+  In all other cases, no file type is entered.
+  In addition, KC-TAP files then start with block number&nbsp;1,
+  in accordance with the HC900 and KC85/2..5 conventions.
+ <br/><br/>
+  If you have several assembler source files open in the text editor,
+  the assembler options are managed separately for each source file.
+ <br/><br/>
+
+
+ <h2><a name="msg">2. Assembler Output and Error Messages</a></h2>
+  All assembler output, i.e. messages about the
+  progress of processing, error messages, warnings
+  and, if specified in the assembler options,
+  the output of the label table, appear in a separate window
+  that is opened each time the assembler is started, or
+  brought to the front of the desktop.
+  You can double-click on error messages and warnings
+  to jump directly to the corresponding location in the source code.
+ <br/><br/>
+
+
+ <h2><a name="general_syntax">3. General Syntax</a></h2>
+
+ <h3><a name="case">3.1. Upper and Lower Case</a></h3>
+  Except for character and string literals, the assembler
+  does not distinguish between upper and lower case,
+  i.e. the mnemonics of the instructions and the registers
+  can be written in either upper or lower case.
+  For labels, you specify in the assembler options
+  whether upper and lower case should be distinguished.
+ <br/><br/>
+
+ <h3><a name="line_syntax">3.2. Structure of an Assembler Source Line</a></h3>
+  The general syntax of a source line is:
+  <p>
+   <tt>[label[:]] [mnemonic [argument_1[,argument_2[,...]]]] [;comment]</tt>
+  </p>
+  <br/>
+  Expressions in square brackets are optional.
+  A label must begin at the start of a line.
+  An assembler instruction (given by a mnemonic) must not
+  begin at the start of a line, i.e.
+  if the line does not contain a label,
+  the mnemonic must be preceded by at least one space or a tab.
+  An exception is formed by the instructions for conditional assembly.
+  These can be placed at the start of a line, but can also be indented.
+ <br/><br/>
+
+ <h3><a name="labels">3.3. Labels</a></h3>
+  Labels have a numeric value and are defined
+  by being placed at the start of an assembler line.
+  If this line contains the pseudo-instruction <em>EQU</em>,
+  the label receives the value of the expression following <em>EQU</em>,
+  otherwise the value of the current address.
+ <br/><br/>
+  Labels can be used as jump targets or in numeric expressions.
+ <br/><br/>
+  Labels can contain letters, digits, the underscore,
+  the @ character and the question mark.
+  However, digits and the question mark are not allowed
+  at the start of a label.
+ <br/><br/>
+  <b>Caution!</b> To support
+  <a href="assembler.htm#conditional_asm">conditional assembly</a>,
+  the assembler automatically always defines the label
+  <em>__JKCEMU__</em> with the value&nbsp;-1
+  (all bits set).
+ <br/><br/>
+
+ <h3><a name="instructions">3.4. Assembler Instructions</a></h3>
+  Assembler instructions are written in the form of a mnemonic.
+  The assembler understands the following instructions:
+  <ul>
+   <li>pseudo-instructions</li>
+   <li>
+    processor instructions according to Zilog syntax (if allowed
+    in the <a href="assembler.htm#options">assembler options</a>)
+   </li>
+   <li>
+    processor instructions according to Robotron syntax (if allowed
+    in the <a href="assembler.htm#options">assembler options</a>)
+   </li>
+   <li>
+    undocumented processor instructions (if allowed
+    in the <a href="assembler.htm#options">assembler options</a>)
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="comments">3.5. Comments</a></h3>
+  Comments begin with a semicolon.
+  Everything from the semicolon to the end of the source line is
+  treated as a comment and is not evaluated by the assembler.
+  This does not apply, however, if the semicolon appears within a
+  <a href="assembler.htm#char_literal">character literal</a> or a
+  <a href="assembler.htm#string_literal">string literal</a>.
+  In that case, the semicolon does not mark a comment.
+ <br/><br/>
+
+
+ <h2><a name="pseudo_inst">4. Pseudo-Instructions</a></h2>
+  The assembler understands the following pseudo-instructions:
+  <table border="1">
+   <tr>
+    <th nowrap="nowrap">Mnemonic</th>
+    <th nowrap="nowrap">Number of Arguments</th>
+    <th nowrap="nowrap">Argument Type</th>
+    <th nowrap="nowrap">Description</th>
+   </tr>
+   <tr>
+    <td valign=top><tt>ALIGN</tt></td>
+    <td valign=top>1 or 2</td>
+    <td valign=top>numeric expressions</td>
+    <td valign=top>
+     Align the current address to a power of two,
+     e.g. to 2, 4, 8, 16, etc.
+     <br/>
+     Example:
+     <br/>
+     <tt>
+      &nbsp;&nbsp;ORG&nbsp;8000H&#10;<br/>
+      &nbsp;&nbsp;DB&nbsp;1&#10;<br/>
+      &nbsp;&nbsp;ALIGN&nbsp;100H&nbsp;&nbsp;;Current address now 8100H
+     </tt>
+     <br/><br/>
+     Optionally, the byte to pad with can also be specified
+     as the second argument:
+     <br/>
+     <tt>
+      &nbsp;&nbsp;ORG&nbsp;8000H&#10;<br/>
+      &nbsp;&nbsp;DB&nbsp;1&#10;<br/>
+      &nbsp;&nbsp;ALIGN&nbsp;4,0FFH&nbsp;&nbsp;;Inserts 3 bytes of FFh.
+     </tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>BINCLUDE</tt></td>
+    <td valign=top>1</td>
+    <td valign=top>string</td>
+    <td valign=top>
+     Include a binary file,<br/>
+     The specified file is inserted unchanged at the current position
+     in the generated program code.
+     The file name can be given with or without a path,
+     and both an absolute and a relative path are allowed.
+     The path specification must follow the rules of the operating
+     system on which JKCEMU is running.
+     Independently of that, however, a relative path can also
+     be given in an operating-system-independent form (i.e. also under
+     Windows) using a slash&nbsp;(/) as the path separator.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>CPU</tt></td>
+    <td valign=top>1</td>
+    <td valign=top>
+     keyword <tt>U880</tt>, <tt>U880UNDOC</tt>,
+     <tt>Z80</tt> or <tt>Z80UNDOC</tt>
+    </td>
+    <td valign=top>
+     Specify the processor type,<br/>
+     The four possible keywords can also be written
+     as standalone pseudo-instructions.
+     Their meaning is explained there as well.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>DB</tt><br/>
+     <tt>DEFB</tt><br/>
+     <tt>DEFM</tt><br/>
+     <tt>DFB</tt>
+    </td>
+    <td valign=top>at least 1</td>
+    <td valign=top>numeric expressions or strings</td>
+    <td valign=top>generate data bytes</td>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>DEFH</tt><br/>
+     <tt>DFH</tt><br/>
+     <tt>HEX</tt>
+    </td>
+    <td valign=top>at least 1</td>
+    <td valign=top>
+     hexadecimal numbers,<br/>
+     Hexadecimal numbers can also be specified
+     without a leading zero and without a trailing
+     <tt>H</tt>.<br/>
+     Example: <tt>DEFH AB</tt>
+    </td>
+    <td valign=top>generate data bytes</td>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>DEFS</tt><br/>
+     <tt>DFS</tt><br/>
+     <tt>DS</tt>
+    </td>
+    <td valign=top>at least 1</td>
+    <td valign=top>numeric expressions</td>
+    <td valign=top>
+     Reserve a memory area,<br/>
+     If the instruction is at the beginning or end of the source code,
+     the memory area is reserved,
+     i.e. the addresses are counted,
+     but no program code is generated.
+     If, on the other hand, the instruction is in the middle
+     of the source code, the area is filled with zero bytes.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>DA</tt><br/>
+     <tt>DEFW</tt><br/>
+     <tt>DFW</tt><br/>
+     <tt>DW</tt>
+    </td>
+    <td valign=top>at least 1</td>
+    <td valign=top>numeric expressions</td>
+    <td valign=top>generate data words (2 bytes each)</td>
+   </tr>
+   <tr>
+    <td valign=top><tt>END</tt></td>
+    <td valign=top>0</td>
+    <td></td>
+    <td valign=top>
+     End of the source code or the source file,<br/>
+     All further lines of the source code, or of the current
+     source file, are ignored.
+     If the instruction is in a file included with INCLUDE,
+     that included file is ended and the assembler continues
+     with the line following the corresponding
+     INCLUDE instruction.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>ENT</tt><br/>
+     <tt>ENTRY</tt>
+    </td>
+    <td valign=top>0</td>
+    <td></td>
+    <td valign=top>
+     Entry point into the program,<br/>
+     The current address is used as the start address.
+     If the instruction is missing from the source code,
+     the start address is used as the entry point.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>EQU</tt></td>
+    <td valign=top>1</td>
+    <td valign=top>numeric expression</td>
+    <td valign=top>
+     Define a label,<br/>
+     The source line must contain a label,
+     which is defined with the specified value.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>ERROR</tt></td>
+    <td valign=top>1</td>
+    <td valign=top>string</td>
+    <td valign=top>
+     The specified string is output as an error.
+     The pseudo-instruction ERROR is generally only useful in
+     combination with
+     <a href="assembler.htm#conditional_asm">conditional assembly</a>,
+     e.g. to report an error when a condition is not met:
+     <br/>
+     <tt>
+      &nbsp;&nbsp;<tt>IF $ > 800h&#10;<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;ERROR 'Program code too large for 2K EPROM'&#10;<br/>
+      &nbsp;&nbsp;<tt>ENDIF&#10;<br/>
+     </tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>EVEN</tt></td>
+    <td valign=top>0</td>
+    <td valign=top></td>
+    <td valign=top>
+     Align the current address to an even value,<br/>
+     The instruction has the same effect as:<br/>
+      &nbsp;&nbsp;<tt>ALIGN 2</tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>INCLUDE</tt></td>
+    <td valign=top>1</td>
+    <td valign=top>string</td>
+    <td valign=top>
+     Include a source file,<br/>
+     The specified file is inserted into the source code at the
+     current position and assembled along with it.
+     Regarding the file name, the same rules apply as for the
+     pseudo-instruction BINCLUDE described above.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>NAME</tt></td>
+    <td valign=top>1</td>
+    <td valign=top>string</td>
+    <td valign=top>
+     Specify the program name,<br/>
+     The only effect of the instruction is that, when the generated
+     program code is saved to a file, the specified name is written
+     into the file as the file name,
+     provided the <a href="../fileformats.htm#memimg">file format</a>
+     supports a name.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>NEWPAGE</tt></td>
+    <td valign=top>0</td>
+    <td></td>
+    <td valign=top>
+     A page break character&nbsp;0Ch
+     (form feed) is inserted in the assembler listing, and a new
+     table header is generated.
+     The line containing the NEWPAGE appears on the new page.
+     <br/><br/>
+     <b>Caution!</b> The JKCEMU text editor has no page management
+     and therefore displays the inserted page break character
+     as a single character.
+     Depending on the font used, this character may not be visible.
+     When printing, however, the page break characters are
+     evaluated and each results in a new page.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>ORG</tt></td>
+    <td valign=top>1</td>
+    <td valign=top>numeric expression</td>
+    <td valign=top>
+     Set the program counter (address) to the specified value,<br/>
+     If the instruction is in the middle of the source code,
+     the area between the last address and the new address
+     is filled with zero bytes.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>PAGE</tt></td>
+    <td valign=top>0</td>
+    <td></td>
+    <td valign=top>
+     PAGE is a synonym for NEWPAGE
+     and therefore has the same effect as NEWPAGE.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>TITLE</tt></td>
+    <td valign=top>1</td>
+    <td valign=top>string</td>
+    <td valign=top>
+     Specify the title or the program name,<br/>
+     The instruction <em>TITLE</em> is a synonym for the
+     pseudo-instruction <em>NAME</em> and therefore has the same
+     meaning as that instruction.
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>U880</tt></td>
+    <td valign=top>0</td>
+    <td valign=top></td>
+    <td valign=top>
+     The pseudo-instruction <tt>U880</tt> allows exclusively
+     the Robotron mnemonics/syntax and thereby overrides
+     the assembler options set in the
+     <em>Mnemonics/Syntax</em> group.
+     The instruction has the same meaning as:<br/>
+     &nbsp;&nbsp;<tt>CPU U880</tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>U880UNDOC</tt></td>
+    <td valign=top>0</td>
+    <td valign=top></td>
+    <td valign=top>
+     The pseudo-instruction <tt>U880UNDOC</tt> allows
+     the Robotron mnemonics/syntax as well as undocumented instructions.
+     This overrides the assembler options set in the
+     <em>Mnemonics/Syntax</em> group.
+     The instruction has the same meaning as:<br/>
+     &nbsp;&nbsp;<tt>CPU U880UNDOC</tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>Z80</tt></td>
+    <td valign=top>0</td>
+    <td valign=top></td>
+    <td valign=top>
+     The pseudo-instruction <tt>Z80</tt> allows exclusively
+     the Zilog mnemonics/syntax and thereby overrides
+     the assembler options set in the
+     <em>Mnemonics/Syntax</em> group.
+     The instruction has the same meaning as:<br/>
+     &nbsp;&nbsp;<tt>CPU Z80</tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign=top><tt>Z80UNDOC</tt></td>
+    <td valign=top>0</td>
+    <td valign=top></td>
+    <td valign=top>
+     The pseudo-instruction <tt>Z80UNDOC</tt> allows
+     the Zilog mnemonics/syntax as well as undocumented instructions.
+     This overrides the assembler options set in the
+     <em>Mnemonics/Syntax</em> group.
+     The instruction has the same meaning as:<br/>
+     &nbsp;&nbsp;<tt>CPU Z80UNDOC</tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  All pseudo-instructions can also be written with a leading period,
+  e.g. <tt>.ORG</tt>, <tt>.DB</tt> and so on.
+  In that case, the pseudo-instruction is also allowed to appear
+  at the start of a line.
+ <br/><br/>
+
+
+ <h2>
+  <a name="special_syntax">5. Mnemonics and Syntax: Zilog or Robotron?</a>
+ </h2>
+  For some assembler instructions, Robotron introduced mnemonics
+  that differ from Zilog's,
+  and in some cases also a different syntax.
+  The JKCEMU assembler supports both variants.
+  However, in the <a href="assembler.htm#options">assembler options</a>
+  you can also set whether only the Zilog
+  or only the Robotron mnemonics/syntax is allowed.
+ <br/><br/>
+  The mnemonics differ for the following instructions:
+  <table border="1">
+   <tr>
+    <th nowrap="nowrap">Assembler Instruction</th>
+    <th nowrap="nowrap">Zilog Mnemonic</th>
+    <th nowrap="nowrap">Robotron Mnemonic</th>
+   </tr>
+   <tr>
+    <td valign=top>conditional CALL instructions</td>
+    <td valign=top>
+     <tt>CALL Z</tt><br/>
+     <tt>CALL NZ</tt><br/>
+     <tt>CALL C</tt><br/>
+     <tt>CALL NC</tt><br/>
+     <tt>CALL PE</tt><br/>
+     <tt>CALL PO</tt><br/>
+     <tt>CALL M</tt><br/>
+     <tt>CALL P</tt>
+    </td>
+    <td valign=top>
+     <tt>CAZ</tt><br/>
+     <tt>CANZ</tt><br/>
+     <tt>CAC</tt><br/>
+     <tt>CANC</tt><br/>
+     <tt>CAPE</tt><br/>
+     <tt>CAPO</tt><br/>
+     <tt>CAM</tt><br/>
+     <tt>CAP</tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign=top>compare instructions</td>
+    <td valign=top><tt>CP</tt></td>
+    <td valign=top><tt>CMP</tt></td>
+   </tr>
+   <tr>
+    <td valign=top>exchange instruction with AF</td>
+    <td valign=top><tt>EX AF,AF'</tt></td>
+    <td valign=top><tt>EXAF</tt></td>
+   </tr>
+   <tr>
+    <td valign=top>input instruction: flag register only</td>
+    <td valign=top>not documented by Zilog</td>
+    <td valign=top><tt>INF</tt></td>
+   </tr>
+   <tr>
+    <td valign=top>unconditional absolute jump</td>
+    <td valign=top><tt>JP</tt></td>
+    <td valign=top><tt>JMP</tt></td>
+   </tr>
+   <tr>
+    <td valign=top>conditional absolute jumps</td>
+    <td valign=top>
+     <tt>JP Z</tt><br/>
+     <tt>JP NZ</tt><br/>
+     <tt>JP C</tt><br/>
+     <tt>JP NC</tt><br/>
+     <tt>JP PE</tt><br/>
+     <tt>JP PO</tt><br/>
+     <tt>JP M</tt><br/>
+     <tt>JP P</tt>
+    </td>
+    <td valign=top>
+     <tt>JPZ</tt><br/>
+     <tt>JPNZ</tt><br/>
+     <tt>JPC</tt><br/>
+     <tt>JPNC</tt><br/>
+     <tt>JPPE</tt><br/>
+     <tt>JPPO</tt><br/>
+     <tt>JPM</tt><br/>
+     <tt>JPP</tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign=top>conditional relative jumps</td>
+    <td valign=top>
+     <tt>JR Z</tt><br/>
+     <tt>JR NZ</tt><br/>
+     <tt>JR C</tt><br/>
+     <tt>JR NC</tt>
+    </td>
+    <td valign=top>
+     <tt>JRZ</tt><br/>
+     <tt>JRNZ</tt><br/>
+     <tt>JRC</tt><br/>
+     <tt>JRNC</tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign=top>conditional return instructions</td>
+    <td valign=top>
+     <tt>RET Z</tt><br/>
+     <tt>RET NZ</tt><br/>
+     <tt>RET C</tt><br/>
+     <tt>RET NC</tt><br/>
+     <tt>RET PE</tt><br/>
+     <tt>RET PO</tt><br/>
+     <tt>RET M</tt><br/>
+     <tt>RET P</tt>
+    </td>
+    <td valign=top>
+     <tt>RZ</tt><br/>
+     <tt>RNZ</tt><br/>
+     <tt>RC</tt><br/>
+     <tt>RNC</tt><br/>
+     <tt>RPE</tt><br/>
+     <tt>RPO</tt><br/>
+     <tt>RM</tt><br/>
+     <tt>RP</tt>
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+  The syntax differs for the following instructions:
+  <table border="1">
+   <tr>
+    <th nowrap="nowrap">Assembler Instruction</th>
+    <th nowrap="nowrap">Zilog Syntax</th>
+    <th nowrap="nowrap">Robotron Syntax</th>
+    <th nowrap="nowrap">Explanation</th>
+   </tr>
+   <tr>
+    <td valign=top>input instructions</td>
+    <td valign=top><tt>IN r,(C)</tt></td>
+    <td valign=top><tt>IN r</tt></td>
+    <td valign=top><tt>r</tt>: register A, B, C, D, E, H or L</td>
+   </tr>
+   <tr>
+    <td valign=top>output instructions</td>
+    <td valign=top>
+     <tt>OUT (C),r</tt><br/>
+     <tt>OUT (n),A</tt>
+    </td>
+    <td valign=top>
+     <tt>OUT r</tt><br/>
+     <tt>OUT n</tt>
+    </td>
+    <td valign=top>
+     <tt>r</tt>: register A, B, C, D, E, H or L<br/>
+     <tt>n</tt>: numeric expression
+    </td>
+   </tr>
+   <tr>
+    <td valign=top>
+     8-bit instructions:
+     <ul>
+      <li>ADD
+      <li>ADC
+      <li>SBC
+     </ul>
+    </td>
+    <td valign=top>
+     <tt>ADD A,x<br/></tt>
+     <tt>ADC A,x<br/></tt>
+     <tt>SBC A,x</tt>
+    </td>
+    <td valign=top>
+     <tt>ADD x</tt><br/>
+     <tt>ADC x</tt><br/>
+     <tt>SBC x</tt>
+    </td>
+    <td valign=top>
+     <tt>x</tt>: either:
+     <ul>
+      <li>numeric expression or
+      <li>register A, B, C, D, E, H, L or
+      <li><tt>(HL)</tt> or
+      <li><tt>(IX+d)</tt> or
+      <li><tt>(IY+d)</tt>
+     </ul>
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+
+ <h2><a name="undoc">6. Undocumented Processor Instructions</a></h2>
+  Some opcodes cause the microprocessor to execute instructions
+  that are not documented by the manufacturer.
+  Here, the U880 processor behaves exactly like the Z80 CPU.
+ <br/><br/>
+  The assembler supports these undocumented instructions
+  if you enable this in the
+  <a href="assembler.htm#options">assembler options</a>.
+  Since these instructions are documented by neither Zilog
+  nor Robotron, no official mnemonic or syntax exists for them.
+  For this reason, the mnemonics and syntax of these undocumented
+  processor instructions are specific to the JKCEMU assembler
+  and are described below.
+ <br/><br/>
+
+ <h3>
+  <a name="ixy8">6.1. Access to the Individual Bytes of the Index Registers</a>
+ </h3>
+  Many 8-bit register instructions can also be applied
+  to the low or high byte of either of the two index registers.
+  For this, the assembler understands the following names for
+  the index sub-registers:
+  <table border="1">
+   <tr><th nowrap="nowrap">Sub-Register</th><th>Name</th></tr>
+    <tr>
+     <td valign=top>low byte of IX:</td>
+     <td valign=top><tt>IXL</tt> or <tt>LX</tt></td>
+    </tr>
+    <tr>
+     <td valign=top>high byte of IX:</td>
+     <td valign=top><tt>IXH</tt> or <tt>HX</tt></td>
+    </tr>
+    <tr>
+     <td valign=top>low byte of IY:</td>
+     <td valign=top><tt>IYL</tt> or <tt>LY</tt></td>
+    </tr>
+    <tr>
+     <td valign=top>high byte of IY:</td>
+     <td valign=top><tt>IYH</tt> or <tt>HY</tt></td>
+   </tr>
+  </table>
+ <br/><br/>
+  The following instructions are possible:
+  <table border="1">
+   <tr>
+    <th nowrap="nowrap">Mnemonic and Syntax with IXH</th>
+    <th nowrap="nowrap">Explanation</th>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>LD IXH,n</tt><br/>
+     <tt>LD IXH,r</tt><br/>
+     <tt>LD IXH,IXH</tt><br/>
+     <tt>LD IXH,IXL</tt>
+    </td>
+    <td valign=top>
+     <tt>n</tt>: numeric expression<br/>
+     <tt>r</tt>: register A, B, C, D or E
+    </td>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>LD r,IXH</tt>
+    </td>
+    <td valign=top>
+     <tt>r</tt>: register A, B, C, D or E
+    </td>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>ADD A,IXH</tt><br/>
+     <tt>ADC A,IXH</tt><br/>
+     <tt>SUB IXH</tt><br/>
+     <tt>SBC A,IXH</tt><br/>
+     <tt>AND IXH</tt><br/>
+     <tt>XOR IXH</tt><br/>
+     <tt>OR IXH</tt><br/>
+     <tt>CP IXH</tt>
+    </td>
+    <td valign=top></td>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>INC IXH</tt><br/>
+     <tt>DEC IXH</tt>
+    </td>
+    <td valign=top></td>
+   </tr>
+  </table>
+ <br/>
+  Instead of <tt>IXH</tt>, <tt>IXL</tt>, <tt>IYH</tt>,
+  <tt>IYL</tt> and the alternative spellings
+  <tt>HX</tt>, <tt>LX</tt>, <tt>HY</tt> and <tt>LY</tt> are also possible.
+ <br/><br/>
+
+ <h3><a name="inf">6.2. Input Instruction: Setting Only the Flag Register</a></h3>
+  This instruction reads a byte from the input port whose address
+  is in register C, and sets the flag register accordingly.
+  The value read itself is not kept.
+  <table border="1">
+   <tr><th nowrap="nowrap">Mnemonic and Syntax</th></tr>
+   <tr><td valign=top>IN F,(C)<br/> IN (C)</td></tr>
+  </table>
+  <br/>
+  <b>Caution:</b> Robotron documented this instruction with the
+  mnemonic <tt>INF</tt>. This mnemonic is therefore also understood
+  by the assembler as an official instruction.
+ <br/><br/>
+
+ <h3><a name="sll">6.3. Logical Shift-Left Instruction</a></h3>
+  This instruction shifts the argument one bit to the left,
+  with bit 0 then set to 1.
+  <table border="1">
+   <tr>
+    <th nowrap="nowrap">Mnemonic and Syntax</th>
+     <th nowrap="nowrap">Explanation</th>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>SLL r</tt><br/>
+     <tt>SLL (HL)</tt><br/>
+     <tt>SLL (IX+d)</tt><br/>
+     <tt>SLL (IY+d)</tt>
+    </td>
+    <td valign=top>
+     <tt>r</tt>: register A, B, C, D, E, H or L
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3>
+  <a name="undoc_single_bit">
+   6.4. Rotate, Shift and Single-Bit Instructions with Index Registers
+        that Also Act on Another Register
+  </a>
+ </h3>
+  The officially documented rotate, shift and single-bit instructions
+  that are applied to a byte in memory
+  addressed indirectly with an index register
+  and a displacement,
+  can also act on a register
+  specified as an additional argument.
+  This also applies to the undocumented SLL instruction.
+
+  <table border="1">
+   <tr>
+    <th nowrap="nowrap">Mnemonic and Syntax</th>
+    <th nowrap="nowrap">Explanation</th>
+   </tr>
+   <tr>
+    <td valign=top>
+     <tt>RLC (IX+d),r</tt><br/>
+     <tt>RRC (IX+d),r</tt><br/>
+     <tt>RL (IX+d),r</tt><br/>
+     <tt>RR (IX+d),r</tt><br/>
+     <tt>SLA (IX+d),r</tt><br/>
+     <tt>SRA (IX+d),r</tt><br/>
+     <tt>SLL (IX+d),r</tt><br/>
+     <tt>SRL (IX+d),r</tt><br/>
+     <tt>RES b,(IX+d),r</tt><br/>
+     <tt>SET b,(IX+d),r</tt>
+    </td>
+    <td valign=top>
+     <tt>r</tt>: register A, B, C, D, E, H or L<br/>
+     <tt>b</tt>: 0 to 7
+    </td>
+   </tr>
+  </table>
+ <br/>
+  <tt>IY</tt> can also be specified instead of <tt>IX</tt>.
+  These instructions have the same effect as the officially
+  documented instructions without the additional register argument,
+  except that they also act on the additionally specified 8-bit register.
+ <br/><br/>
+
+ <h2><a name="expr">7. Numeric Expressions</a></h2>
+  Numeric expressions are used everywhere a numeric value
+  is required.
+  In the assembler instruction
+ <br/><br/>
+  &nbsp;&nbsp;<tt>LD A,3</tt>
+ <br/><br/>
+  the 3, for example, is a numeric expression,
+  specifically a numeric literal.
+  However, numeric expressions can also be more complex
+  and contain operations, functions, character literals and labels.
+  In addition, numeric expressions can be nested arbitrarily
+  deep using parentheses.
+ <br/><br/>
+
+ <h3><a name="num_literal">7.1. Numeric Literal</a></h3>
+  Numeric literals begin with a digit and can end
+  with a letter that specifies the base of the number.
+  The following letters are possible:
+  <table border="1">
+   <tr>
+    <th>Trailing Letter</th>
+    <th>Base of the Number</th>
+    <th>Remark</th>
+   </tr>
+   <tr><td>none</td><td>10</td><td>decimal number</td></tr>
+   <tr><td>B or b</td><td>2</td><td>binary number</td></tr>
+   <tr><td>O, o, Q or q</td><td>8</td><td>octal number</td></tr>
+   <tr>
+    <td>H or h</td>
+    <td>16</td>
+    <td>hexadecimal number, must begin with a digit (e.g. 0)!</td>
+   </tr>
+  </table>
+ <br/>
+  Hexadecimal numbers can also be written in two other syntax
+  variants:
+  <ul>
+   <li>% followed by the hexadecimal number</li>
+   <li>
+    X followed by the hexadecimal number enclosed
+    in single quotes
+   </li>
+  </ul>
+ <br/>
+  Examples:
+  <table border="1">
+   <tr><th>Example</th><th>Decimal Value</th></tr>
+   <tr><td>123</td><td>123</td></tr>
+   <tr><td>101b</td><td>5</td></tr>
+   <tr><td>123q</td><td>83</td></tr>
+   <tr><td>0AFh</td><td>175</td></tr>
+   <tr><td>%AF</td><td>175</td></tr>
+   <tr><td>X'AF'</td><td>175</td></tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="char_literal">7.2. Character Literal</a></h3>
+  A character literal is a character enclosed in single quotes,
+  e.g. <tt>'A'</tt>.
+  A character literal can be used within a numeric expression.
+ <br/><br/>
+
+ <h3><a name="functions">7.3. Functions</a></h3>
+  The assembler offers functions for accessing the
+  low and high byte of a numeric value.
+ <br/>
+  <table border="1">
+   <tr><th>Access to</th><th>Syntax</th></tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <tt>HIGH(...)</tt>
+    </td>
+    <td valign="top">access to the high byte</td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <tt>LOW(...)</tt>
+    </td>
+    <td valign="top">access to the low byte</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="unary_op">7.4. Unary Operators</a></h3>
+  Unary operators act on the following expression.
+ <br/>
+  <table border="1">
+   <tr><th>Operator</th><th>Description</th></tr>
+   <tr>
+    <td valign="top">+</td>
+    <td valign="top">
+     sign<br/>
+     The following value is not changed.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-</td>
+    <td valign="top">
+     sign<br/>
+     The following value is mathematically negated.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">NOT</td>
+    <td valign="top">the following value is bitwise inverted</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="binary_op">7.5. Binary Operators</a></h3>
+  Binary operators stand between two expressions.
+ <br/>
+  <table border="1">
+   <tr><th>Operator</th><th>Description</th></tr>
+   <tr><td valign="top">+</td><td valign="top">addition</td></tr>
+   <tr><td valign="top">-</td><td valign="top">subtraction</td></tr>
+   <tr><td valign="top">*</td><td valign="top">multiplication</td></tr>
+   <tr><td valign="top">/</td><td valign="top">division</td></tr>
+   <tr>
+    <td valign="top">MOD</td>
+    <td valign="top">modulo - remainder of the division</td>
+   </tr>
+   <tr>
+    <td valign="top">AND</td>
+    <td valign="top">bitwise AND operation</td>
+   </tr>
+   <tr>
+    <td valign="top">OR</td>
+    <td valign="top">bitwise inclusive-OR operation</td>
+   </tr>
+   <tr>
+    <td valign="top">XOR</td>
+    <td valign="top">bitwise exclusive-OR operation</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     &lt;&lt;<br/>
+     SHL
+    </td>
+    <td valign="top">
+     shift left<br/>
+     The value before the operator is shifted left by as many
+     bits as the value after the operator specifies.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     &gt;&gt;<br/>
+     SHR
+    </td>
+    <td valign="top">
+     shift right<br/>
+     The value before the operator is shifted right by as many
+     bits as the value after the operator specifies.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     &lt;<br/>
+     LT
+    </td>
+    <td valign="top">
+     comparison for less than<br/>
+     If the first value is less than the second,
+     the result is&nbsp;-1 (all bits set), otherwise&nbsp;0.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     &lt;=<br/>
+     LE
+    </td>
+    <td valign="top">
+     comparison for less than or equal<br/>
+     If the first value is less than or equal to the second,
+     the result is&nbsp;-1 (all bits set), otherwise&nbsp;0.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     &gt;<br/>
+     GT
+    </td>
+    <td valign="top">
+     comparison for greater than<br/>
+     If the first value is greater than the second,
+     the result is&nbsp;-1 (all bits set), otherwise&nbsp;0.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     &gt;=<br/>
+     GE
+    </td>
+    <td valign="top">
+     comparison for greater than or equal<br/>
+     If the first value is greater than or equal to the second,
+     the result is&nbsp;-1 (all bits set), otherwise&nbsp;0.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     =<br/>
+     EQ
+    </td>
+    <td valign="top">
+     comparison for equality<br/>
+     If the first value equals the second,
+     the result is&nbsp;-1 (all bits set), otherwise&nbsp;0.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     &lt;&gt;<br/>
+     NE
+    </td>
+    <td valign="top">
+     comparison for inequality<br/>
+     If the first value does not equal the second,
+     the result is&nbsp;-1 (all bits set), otherwise&nbsp;0.
+    </td>
+   </tr>
+  </table>
+ <br/>
+  Binary operators have a lower precedence than unary operators.
+  Among the binary operators, the following table gives the
+  precedence.
+  The higher an operator is in the table, the higher its precedence.
+ <br/>
+  <table border="1">
+   <tr><td valign="top">* / MOD</td></tr>
+   <tr><td valign="top">+ -</td></tr>
+   <tr><td valign="top">&lt;&lt; &gt;&gt; SHL SHR</td></tr>
+   <tr><td valign="top">&lt; &lt;= &gt; &gt;= LT LE GT GE</td></tr>
+   <tr><td valign="top">= &lt;&gt; EQ NE</td></tr>
+   <tr><td valign="top">AND</td></tr>
+   <tr><td valign="top">XOR</td></tr>
+   <tr><td valign="top">OR</td></tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="cur_addr">7.6. Current Address</a></h3>
+  The current address is represented by the $ character.
+  So if, in an expression, you need the value of the program counter
+  (register&nbsp;PC) at the start of the current assembler line,
+  write the character:&nbsp;$
+ <br/><br/>
+
+ <h2><a name="string_literal">8. Character Strings</a></h2>
+  A character string (string literal) consists of one or more
+  characters enclosed in single or double quotes.
+  String literals can only be used with the pseudo-instructions
+  <tt>BINCLUDE</tt>, <tt>DB</tt>, <tt>DEFB</tt>, <tt>DEFM</tt>,
+  <tt>DFB</tt> and <tt>INCLUDE</tt>.
+ <br/><br/>
+
+
+ <h2>
+  <a name="conditional_asm">9. Conditional Assembly</a>
+ </h2>
+  Conditional assembly means that parts of the source code
+  are only assembled if a particular condition is met.
+ <br/><br/>
+  A source code section subject to conditional assembly
+  begins with an <em>IF</em> statement,
+  which comes in several variants.
+  The <em>ENDIF</em> statement marks the end of the
+  corresponding source code section, and thus closes the
+  <em>IF</em> statement.
+ <br/><br/>
+  Between <em>IF</em> and <em>ENDIF</em>, the <em>ELSE</em>
+  statement can optionally also appear.
+  The source code between <em>ELSE</em> and <em>ENDIF</em> is only
+  assembled if the section between <em>IF</em> and <em>ELSE</em>
+  is not assembled, and vice versa.
+ <br/><br/>
+  The table describes the various IF statements
+  for conditional assembly:
+  <table border="1">
+   <tr><th>Statements/Syntax</th><th>Description</th></tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     IF&nbsp;&lt;numeric_expression&gt;<br/>
+     IFT&nbsp;&lt;numeric_expression&gt;<br/>
+    </td>
+    <td valign="top">
+     The following source code is assembled
+     if the value of the numeric expression is not equal to&nbsp;0.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     IFE&nbsp;&lt;numeric_expression&gt;<br/>
+     IFF&nbsp;&lt;numeric_expression&gt;<br/>
+    </td>
+    <td valign="top">
+     The following source code is assembled
+     if the value of the numeric expression equals&nbsp;0.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     IFDEF&nbsp;&lt;label&gt;
+    </td>
+    <td valign="top">
+     The following source code is assembled
+     if the specified label exists.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     IFNDEF&nbsp;&lt;label&gt;
+    </td>
+    <td valign="top">
+     The following source code is assembled
+     if the specified label does not exist.
+    </td>
+   </tr>
+  </table>
+ <br/>
+  The statements for conditional assembly can be placed
+  either at the start of a line or indented.
+  Furthermore, conditional assemblies can also be nested.
+ <br/><br/>
+  The JKCEMU assembler automatically defines the label
+  <em>__JKCEMU__</em> with the value&nbsp;-1 (all bits set).
+  This lets you detect whether the program is being assembled
+  with the JKCEMU assembler.
+ <br/><br/>
+  Example:
+ <br/><br/>
+  <tt>&nbsp;&nbsp;DB&nbsp;'This program was assembled with'</tt>&#10;<br/>
+  <tt>IFDEF&nbsp;__JKCEMU__</tt>&#10;<br/>
+  <tt>&nbsp;&nbsp;DB&nbsp;' the JKCEMU '</tt>&#10;<br/>
+  <tt>ELSE</tt>&#10;<br/>
+  <tt>&nbsp;&nbsp;DB&nbsp;' another '</tt>&#10;<br/>
+  <tt>ENDIF</tt>&#10;<br/>
+  <tt>&nbsp;&nbsp;DB&nbsp;'assembler'</tt>&#10;<br/>
+ <br/><br/>
+
+
+ <h2><a name="cmdline">10. Command Line</a></h2>
+  The assembler can also be called from the command line
+  as a standalone program, without the emulator.
+  Under Windows, you need to start the command prompt for this.
+  The command line for calling the assembler looks as follows
+  (adjust the name and path of the JKCEMU JAR file accordingly):
+ <br/><br/>
+  <tt>java -jar jkcemu.jar --as [options] &lt;source file&gt;</tt>
+ <br/><br/>
+   or
+ <br/><br/>
+  <tt>java -jar jkcemu.jar --assembler [options] &lt;source file&gt;</tt>
+ <br/><br/>
+  The following options can be specified
+  (case-sensitive!):
+ <br/>
+  <table border="1">
+   <tr><th>Option</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">-h</td>
+    <td>show help on the assembler options</td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">-f&nbsp;&lt;file&gt;</td>
+    <td>
+     read further command line from a file
+     <br/><br/>
+     The command line can be quite long,
+     possibly longer than supported by the command prompt
+     or the operating system.
+     For this reason, the command line can be read from a file.
+     <br/><br/>
+     When it reaches the <em>-f</em> option, the assembler opens
+     the specified file and reads the further command line from it.
+     Once the end of the file has been reached,
+     the rest of the original command line is processed.
+     The assembler thus behaves as if the contents of the file
+     stood in the command line in place of the <em>-f</em> option.
+     <br/><br/>
+     Within the file, the individual command line arguments
+     do not have to be on a single line, but can be split
+     across multiple lines.
+     If a command line argument contains spaces,
+     it must be enclosed in double quotes
+     so that the assembler processes it as a single argument.
+    <td/>
+   </tr>
+   <tr>
+    <td valign="top">-l</td>
+    <td>
+     generate an assembler listing,<br/>
+     The file for the assembler listing has the same path
+     and the same base name as the output file
+     (see option <em>-o</em>).
+     However, the extension is: <em>.lst</em>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">-n&nbsp;&lt;number&gt;</td>
+    <td>
+     number of lines per page for the assembler listing,<br/>
+     This option is only useful together with the option&nbsp;<tt>-l</tt>
+     and causes a page break character and a table header
+     to be inserted automatically into the assembler listing
+     after the specified number of lines.
+     If the option is omitted or the value&nbsp;0 is specified,
+     no automatic page breaks are generated.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">-o&nbsp;&lt;output file&gt;</td>
+    <td>
+     The generated program code is written to the specified file.
+     The format of the output file depends on the extension
+     (*.bin; *.hex; *.kcc; *.kcm; *.tap; *.z80) and on whether
+     the option <em>-9</em> is specified.
+     <br/>
+     If the option <em>-o</em> is omitted, the output file has
+     the same name as the source file, except for the extension.
+     The extension is: <em>*.bin</em>
+   </tr>
+   <tr>
+    <td valign="top">-t</td>
+    <td>
+     output the label table,<br/>
+     The label table is written to standard output,
+     unless you have also specified the option <em>-l</em>.
+     In that case, the label table is appended
+     to the assembler listing.
+    </td>
+   <tr>
+    <td valign="top" nowrap="nowrap">-9</td>
+    <td>
+     If, with the option <em>-o</em>, a
+     <a href="../fileformats.htm#kcc">KCC</a>,
+     <a href="../fileformats.htm#kcm">KCM</a> or
+     <a href="../fileformats.htm#kctap">TAP</a> file
+     was specified, it is generated
+     in the format for a Z9001,
+     KC85/1 and KC87 (file type <em>COM</em> entered, and
+     for TAP files the first block has number&nbsp;0).
+     If the option <em>-9</em> is omitted, KCC, KCM and TAP files
+     are generated in the format for HC900 and KC85/2..5.
+   </tr>
+   <tr>
+    <td valign="top">-C</td>
+    <td>distinguish upper and lower case for labels</td>
+   </tr>
+   <tr>
+    <td valign="top">-D&nbsp;&lt;label&gt;</td>
+    <td>define a label with the value&nbsp;-1 (all bits set)</td>
+   </tr>
+   <tr>
+    <td valign="top">-D&nbsp;&lt;label=value&gt;</td>
+    <td>
+     define a label with the specified value,<br/>
+     The value is given as a decimal, hexadecimal, octal
+     or binary number
+     (see <a href="assembler.htm#num_literal">Numeric Literal</a>).
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-J</td>
+    <td>
+     translate relative jumps that are too large into absolute ones,<br/>
+     This option causes relative jump instructions with too large
+     a jump distance to not result in an error,
+     but instead to be translated into absolute jump instructions.
+     In that case, a warning is issued.<br/>
+     However, the option has no effect on the DJNZ instruction,
+     since there is no functionally equivalent instruction with an
+     absolute jump for it.
+     Simulating the DJNZ instruction using other CPU instructions
+     also cannot be implemented in a way that is functionally
+     one hundred percent exact,
+     since DJNZ does not affect any CPU flags.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-U</td>
+    <td>allow undocumented instructions</td>
+   </tr>
+   <tr>
+    <td valign="top">-R</td>
+    <td>allow only Robotron mnemonics/syntax</td>
+   </tr>
+   <tr>
+    <td valign="top">-Z</td>
+    <td>allow only Zilog mnemonics/syntax</td>
+   </tr>
+  </table>
+</body>
+</html>

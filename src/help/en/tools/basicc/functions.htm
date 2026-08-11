@@ -1,0 +1,1747 @@
+<html>
+<head><title>BASIC Compiler: Functions and System Variables</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Functions and System Variables</h2>
+  <ul>
+   <li>
+    <a href="functions.htm#ret_type">1. Data Type of the Return Value</a>
+   </li>
+   <li><a href="functions.htm#func_args">2. Arguments</a></li>
+   <li><a href="functions.htm#sys_vars">3. System Variables</a></li>
+   <li>
+    <a href="functions.htm#accuracy">4. Accuracy of the Mathematical Functions</a>
+   </li>
+   <li>
+    <a href="functions.htm#func_list">5. List of Functions and System Variables</a>
+   </li>
+   <li>
+    <a href="functions.htm#func_descr">6. Description of the Functions and System Variables</a>
+   </li>
+  </ul>
+ <br/>
+  The compiler knows the following BASIC functions:
+ <br/>
+  &nbsp;<a href="functions.htm#abs"><tt>ABS</tt></a>
+  &nbsp;<a href="functions.htm#asc"><tt>ASC</tt></a>
+  &nbsp;<a href="functions.htm#asm"><tt>ASM</tt></a>
+  &nbsp;<a href="functions.htm#atn"><tt>ATN</tt></a>
+  &nbsp;<a href="functions.htm#bin$"><tt>BIN$</tt></a>
+  &nbsp;<a href="functions.htm#cdec"><tt>CDEC</tt></a>
+  &nbsp;<a href="functions.htm#chr$"><tt>CHR$</tt></a>
+  &nbsp;<a href="functions.htm#cint"><tt>CINT</tt></a>
+  &nbsp;<a href="functions.htm#clng"><tt>CLNG</tt></a>
+  &nbsp;<a href="functions.htm#cos"><tt>COS</tt></a>
+  &nbsp;<a href="functions.htm#crslin"><tt>CRSLIN</tt></a>
+  &nbsp;<a href="functions.htm#crspos"><tt>CRSPOS</tt></a>
+  &nbsp;<a href="functions.htm#csng"><tt>CSNG</tt></a>
+  &nbsp;<a href="functions.htm#datetime$"><tt>DATETIME$</tt></a>
+  &nbsp;<a href="functions.htm#decval"><tt>DECVAL</tt></a>
+  &nbsp;<a href="functions.htm#deek"><tt>DEEK</tt></a>
+  &nbsp;<a href="functions.htm#div10"><tt>DIV10</tt></a>
+  &nbsp;<a href="functions.htm#div2"><tt>DIV2</tt></a>
+  &nbsp;<a href="functions.htm#eof"><tt>EOF</tt></a>
+  &nbsp;<a href="functions.htm#err"><tt>ERR</tt></a>
+  &nbsp;<a href="functions.htm#err$"><tt>ERR$</tt></a>
+  &nbsp;<a href="functions.htm#exp"><tt>EXP</tt></a>
+  &nbsp;<a href="functions.htm#fix"><tt>FIX</tt></a>
+  &nbsp;<a href="functions.htm#frac"><tt>FRAC</tt></a>
+  &nbsp;<a href="functions.htm#hex$"><tt>HEX$</tt></a>
+  &nbsp;<a href="functions.htm#hibyte"><tt>HIBYTE</tt></a>
+  &nbsp;<a href="functions.htm#hiword"><tt>HIWORD</tt></a>
+  &nbsp;<a href="functions.htm#h_char"><tt>H_CHAR</tt></a>
+  &nbsp;<a href="functions.htm#h_pixel"><tt>H_PIXEL</tt></a>
+  &nbsp;<a href="functions.htm#in"><tt>IN</tt></a>
+  &nbsp;<a href="functions.htm#inkey$"><tt>INKEY$</tt></a>
+  &nbsp;<a href="functions.htm#in"><tt>INP</tt></a>
+  &nbsp;<a href="functions.htm#input$"><tt>INPUT$</tt></a>
+  &nbsp;<a href="functions.htm#instr"><tt>INSTR</tt></a>
+  &nbsp;<a href="functions.htm#int"><tt>INT</tt></a>
+  &nbsp;<a href="functions.htm#intval"><tt>INTVAL</tt></a>
+  &nbsp;<a href="functions.htm#is_target"><tt>IS_TARGET</tt></a>
+  &nbsp;<a href="functions.htm#joyst"><tt>JOYST</tt></a>
+  &nbsp;<a href="functions.htm#lcase$"><tt>LCASE$</tt></a>
+  &nbsp;<a href="functions.htm#left$"><tt>LEFT$</tt></a>
+  &nbsp;<a href="functions.htm#len"><tt>LEN</tt></a>
+  &nbsp;<a href="functions.htm#ln"><tt>LN</tt></a>
+  &nbsp;<a href="functions.htm#lngval"><tt>LNGVAL</tt></a>
+  &nbsp;<a href="functions.htm#lobyte"><tt>LOBYTE</tt></a>
+  &nbsp;<a href="functions.htm#lower$"><tt>LOWER$</tt></a>
+  &nbsp;<a href="functions.htm#loword"><tt>LOWORD</tt></a>
+  &nbsp;<a href="functions.htm#ltrim$"><tt>LTRIM$</tt></a>
+  &nbsp;<a href="functions.htm#max"><tt>MAX</tt></a>
+  &nbsp;<a href="functions.htm#memstr$"><tt>MEMSTR$</tt></a>
+  &nbsp;<a href="functions.htm#mid$"><tt>MID$</tt></a>
+  &nbsp;<a href="functions.htm#min"><tt>MIN</tt></a>
+  &nbsp;<a href="functions.htm#mirror$"><tt>MIRROR$</tt></a>
+  &nbsp;<a href="functions.htm#mul10"><tt>MUL10</tt></a>
+  &nbsp;<a href="functions.htm#mul2"><tt>MUL2</tt></a>
+  &nbsp;<a href="functions.htm#oct$"><tt>OCT$</tt></a>
+  &nbsp;<a href="functions.htm#peek"><tt>PEEK</tt></a>
+  &nbsp;<a href="functions.htm#point"><tt>POINT</tt></a>
+  &nbsp;<a href="functions.htm#pos"><tt>POS</tt></a>
+  &nbsp;<a href="functions.htm#pow"><tt>POW</tt></a>
+  &nbsp;<a href="functions.htm#ptest"><tt>PTEST</tt></a>
+  &nbsp;<a href="functions.htm#right$"><tt>RIGHT$</tt></a>
+  &nbsp;<a href="functions.htm#rnd"><tt>RND</tt></a>
+  &nbsp;<a href="functions.htm#round"><tt>ROUND</tt></a>
+  &nbsp;<a href="functions.htm#rtrim$"><tt>RTRIM$</tt></a>
+  &nbsp;<a href="functions.htm#scale"><tt>SCALE</tt></a>
+  &nbsp;<a href="functions.htm#sgn"><tt>SGN</tt></a>
+  &nbsp;<a href="functions.htm#sin"><tt>SIN</tt></a>
+  &nbsp;<a href="functions.htm#sngval"><tt>SNGVAL</tt></a>
+  &nbsp;<a href="functions.htm#space$"><tt>SPACE$</tt></a>
+  &nbsp;<a href="functions.htm#sqr"><tt>SQR</tt></a>
+  &nbsp;<a href="functions.htm#str$"><tt>STR$</tt></a>
+  &nbsp;<a href="functions.htm#string$"><tt>STRING$</tt></a>
+  &nbsp;<a href="functions.htm#strptr"><tt>STRPTR</tt></a>
+  &nbsp;<a href="functions.htm#tan"><tt>TAN</tt></a>
+  &nbsp;<a href="functions.htm#trim$"><tt>TRIM$</tt></a>
+  &nbsp;<a href="functions.htm#trunc"><tt>TRUNC</tt></a>
+  &nbsp;<a href="functions.htm#ucase$"><tt>UCASE$</tt></a>
+  &nbsp;<a href="functions.htm#ucase$"><tt>UPPER$</tt></a>
+  &nbsp;<a href="functions.htm#usr"><tt>USR</tt></a>
+  &nbsp;<a href="functions.htm#val"><tt>VAL</tt></a>
+  &nbsp;<a href="functions.htm#varptr"><tt>VARPTR</tt></a>
+  &nbsp;<a href="functions.htm#w_char"><tt>W_CHAR</tt></a>
+  &nbsp;<a href="functions.htm#w_pixel"><tt>W_PIXEL</tt></a>
+  &nbsp;<a href="functions.htm#xpos"><tt>XPOS</tt></a>
+  &nbsp;<a href="functions.htm#ypos"><tt>YPOS</tt></a>
+ <br/><br/>
+
+ <h3><a name="ret_type">1. Data Type of the Return Value</a></h3>
+  Functions whose name ends with a $ character
+  return a string.
+  All others have a numeric return value,
+  whose data type is given in the
+  <em>Return</em> row of the respective table.
+  System variables whose name ends with a $ character
+  contain a string, all others an Integer value.
+ <br/><br/>
+
+ <h3><a name="func_args">2. Arguments</a></h3>
+  The arguments, or parameters, are written in parentheses after
+  the function name.
+  For functions without arguments
+  (e.g.&nbsp;<a href="functions.htm#inkey$">INKEY$</a>)
+  these parentheses are omitted.
+ <br/><br/>
+
+ <h3><a name="sys_vars">3. System Variables</a></h3>
+  System variables behave like functions without arguments.
+  They can be read, but not written to directly.
+  System variables are set by the system.
+  Some can also be set with the help of special statements
+  (e.g. <a href="functions.htm#xpos">XPOS</a> and
+  <a href="functions.htm#ypos">YPOS</a> by the
+  <a href="instructions.htm#move">MOVE</a> statement).
+ <br/><br/>
+  Since system variables behave like functions from the
+  software developer's point of view, they are listed and described
+  here in the function overview.
+ <br/><br/>
+
+ <h3>
+  <a name="accuracy">4. Accuracy of the Mathematical Functions</a>
+ </h3>
+  For the mathematical functions
+  &nbsp;<a href="functions.htm#atn"><tt>ATN</tt></a>,
+  &nbsp;<a href="functions.htm#cos"><tt>COS</tt></a>,
+  &nbsp;<a href="functions.htm#exp"><tt>EXP</tt></a>,
+  &nbsp;<a href="functions.htm#ln"><tt>LN</tt></a>,
+  &nbsp;<a href="functions.htm#pow"><tt>POW</tt></a>,
+  &nbsp;<a href="functions.htm#sin"><tt>SIN</tt></a>,
+  &nbsp;<a href="functions.htm#sqr"><tt>SQR</tt></a> and
+  &nbsp;<a href="functions.htm#tan"><tt>TAN</tt></a>
+  the respective result is calculated using an iterative
+  approximation method.
+  For this reason, and because of the limited accuracy
+  of the <a href="datatypes.htm#single">Single</a> data type,
+  these functions usually do not return the mathematically exact result,
+  but a value that comes very close to it.
+  As a rule, the accuracy is 6&nbsp;decimal places,
+  which also corresponds to the accuracy with which values of the
+  Single data type are displayed.
+  However, this accuracy cannot be guaranteed in every case.
+  Especially at the edges of the range, e.g. with very small
+  or very large numbers or near zero crossings,
+  the accuracy can be lower.
+ <br/><br/>
+  For the trigonometric functions,
+  which expect an angle in radians as their argument,
+  the accuracy also decreases if the angle lies outside the
+  normal range of 0 to 2&pi;
+  (especially if it lies far outside that range),
+  since the angle first has to be converted into that range.
+ <br/><br/>
+
+ <h3>
+  <a name="func_list">5. List of Functions and System Variables</a>
+ </h3>
+  <table border="1">
+   <tr><th>Function</th><th>Meaning</th></tr>
+   <tr valign="top">
+    <td><a href="functions.htm#abs"><tt>ABS</tt></a></td>
+    <td>determine the absolute value</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#asc"><tt>ASC</tt></a></td>
+    <td>determine the character code of the first character of a string</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#asm"><tt>ASM</tt></a></td>
+    <td>insert assembler source code</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#atn"><tt>ATN</tt></a></td>
+    <td>calculate the arc tangent</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#bin$"><tt>BIN$</tt></a></td>
+    <td>convert a numeric value into a binary number</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#cdec"><tt>CDEC</tt></a></td>
+    <td>convert a numeric value into Decimal</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#chr$"><tt>CHR$</tt></a></td>
+    <td>convert a character code into a string</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#cint"><tt>CINT</tt></a></td>
+    <td>convert a numeric value into Integer</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#clng"><tt>CLNG</tt></a></td>
+    <td>convert a numeric value into Long</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#cos"><tt>COS</tt></a></td>
+    <td>calculate the cosine</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#crslin"><tt>CRSLIN</tt></a></td>
+    <td>determine the current line the cursor is in</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#crspos"><tt>CRSPOS</tt></a></td>
+    <td>determine the current column the cursor is in</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#csng"><tt>CSNG</tt></a></td>
+    <td>convert a numeric value into Single</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#datetime$"><tt>DATETIME$</tt></a></td>
+    <td>generate a string with the current date and/or time</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#decval"><tt>DECVAL</tt></a></td>
+    <td>convert a string into a Decimal value</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#deek"><tt>DEEK</tt></a></td>
+    <td>read a 16-bit value (2&nbsp;bytes) from memory</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#div10"><tt>DIV10</tt></a></td>
+    <td>fast division by&nbsp;10</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#div2"><tt>DIV2</tt></a></td>
+    <td>fast division by&nbsp;2</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#eof"><tt>EOF</tt></a></td>
+    <td>detect the end of an input channel or a file</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#err"><tt>ERR</tt></a></td>
+    <td>determine the last error code</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#err$"><tt>ERR$</tt></a></td>
+    <td>determine the last error text</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#exp"><tt>EXP</tt></a></td>
+    <td>
+     exponential function with base&nbsp;e (Euler's number 2.718282):
+     e<sup>x</sup>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#fix"><tt>FIX</tt></a></td>
+    <td>determine the integer part of a numeric value</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#frac"><tt>FRAC</tt></a></td>
+    <td>determine the fractional part of a numeric value</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#hex$"><tt>HEX$</tt></a></td>
+    <td>convert a numeric value into a hexadecimal number</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#hibyte"><tt>HIBYTE</tt></a></td>
+    <td>determine the high-order byte</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#hiword"><tt>HIWORD</tt></a></td>
+    <td>determine the high-order word</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#h_char"><tt>H_CHAR</tt></a></td>
+    <td>
+     determine the screen height in character positions
+     (number of text lines)
+    </td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#h_pixel"><tt>H_PIXEL</tt></a></td>
+    <td>determine the screen height in pixels</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#in"><tt>IN</tt></a></td>
+    <td>read a value from an input port</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#inkey$"><tt>INKEY$</tt></a></td>
+    <td>query the keyboard status</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#in"><tt>INP</tt></a></td>
+    <td>read a value from an input port</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#input$"><tt>INPUT$</tt></a></td>
+    <td>
+     read keyboard input without echo, or bytes from an input channel
+     or a file
+    </td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#instr"><tt>INSTR</tt></a></td>
+    <td>search for a string within another string</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#int"><tt>INT</tt></a></td>
+    <td>
+     round a numeric value down to the next smaller
+     whole number
+    </td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#intval"><tt>INTVAL</tt></a></td>
+    <td>convert a string into an Integer value</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#is_target"><tt>IS_TARGET</tt></a></td>
+    <td>test for a target system</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#joyst"><tt>JOYST</tt></a></td>
+    <td>query the joystick</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#lcase$"><tt>LCASE$</tt></a></td>
+    <td>convert a string into lowercase letters</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#left$"><tt>LEFT$</tt></a></td>
+    <td>extract the beginning of a string</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#len"><tt>LEN</tt></a></td>
+    <td>determine the length of a string</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#ln"><tt>LN</tt></a></td>
+    <td>calculate the natural logarithm</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#lngval"><tt>LNGVAL</tt></a></td>
+    <td>convert a string into a Long value</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#lobyte"><tt>LOBYTE</tt></a></td>
+    <td>determine the low-order 16-bit value</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#lower$"><tt>LOWER$</tt></a></td>
+    <td>convert a string into lowercase letters</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#lobyte"><tt>LOWORD</tt></a></td>
+    <td>determine the low-order word</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#ltrim$"><tt>LTRIM$</tt></a></td>
+    <td>trim leading whitespace</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#max"><tt>MAX</tt></a></td>
+    <td>determine the largest value from a list of values</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#memstr$"><tt>MEMSTR$</tt></a></td>
+    <td>access a string located in memory</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#mid$"><tt>MID$</tt></a></td>
+    <td>extract a substring from a string</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#min"><tt>MIN</tt></a></td>
+    <td>determine the smallest value from a list of values</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#mirror$"><tt>MIRROR$</tt></a></td>
+    <td>mirror a string</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#mul10"><tt>MUL10</tt></a></td>
+    <td>fast multiplication by&nbsp;10</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#mul2"><tt>MUL2</tt></a></td>
+    <td>fast multiplication by&nbsp;2</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#oct$"><tt>OCT$</tt></a></td>
+    <td>convert a numeric value into an octal number</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#peek"><tt>PEEK</tt></a></td>
+    <td>read an 8-bit value (1&nbsp;byte) from memory</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#point"><tt>POINT</tt></a></td>
+    <td>determine the color of a pixel</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#pos"><tt>POS</tt></a></td>
+    <td>determine the current column the cursor is in</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#pow"><tt>POW</tt></a></td>
+    <td>exponential function for any base: x<sup>y</sup></td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#ptest"><tt>PTEST</tt></a></td>
+    <td>test a pixel</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#right$"><tt>RIGHT$</tt></a></td>
+    <td>extract the end of a string</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#rnd"><tt>RND</tt></a></td>
+    <td>determine a random number</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#round"><tt>ROUND</tt></a></td>
+    <td>round a number</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#rtrim$"><tt>RTRIM$</tt></a></td>
+    <td>trim trailing whitespace</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#scale"><tt>SCALE</tt></a></td>
+    <td>determine the number of decimal places of a Decimal value</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#sgn"><tt>SGN</tt></a></td>
+    <td>determine the sign</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#sin"><tt>SIN</tt></a></td>
+    <td>calculate the sine</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#sngval"><tt>SNGVAL</tt></a></td>
+    <td>convert a string into a Single value</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#space$"><tt>SPACE$</tt></a></td>
+    <td>generate a string filled with spaces</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#sqr"><tt>SQR</tt></a></td>
+    <td>determine the square root</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#str$"><tt>STR$</tt></a></td>
+    <td>convert a numeric value into a decimal number</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#string$"><tt>STRING$</tt></a></td>
+    <td>duplicate a character or string</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#strptr"><tt>STRPTR</tt></a></td>
+    <td>determine the start address of a string</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#tan"><tt>TAN</tt></a></td>
+    <td>calculate the tangent</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#trim$"><tt>TRIM$</tt></a></td>
+    <td>trim whitespace</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#trunc"><tt>TRUNC</tt></a></td>
+    <td>truncate decimal places</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#ucase$"><tt>UCASE$</tt></a></td>
+    <td>convert a string into uppercase letters</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#ucase$"><tt>UPPER$</tt></a></td>
+    <td>convert a string into uppercase letters</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#usr"><tt>USR</tt></a></td>
+    <td>call a function implemented in machine code</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#val"><tt>VAL</tt></a></td>
+    <td>convert a string into an Integer value</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#varptr"><tt>VARPTR</tt></a></td>
+    <td>determine the address of a variable</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#w_char"><tt>W_CHAR</tt></a></td>
+    <td>
+     determine the screen width in character positions
+     (number of text columns)
+    </td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#w_pixel"><tt>W_PIXEL</tt></a></td>
+    <td>determine the screen width in pixels</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#xpos"><tt>XPOS</tt></a></td>
+    <td>determine the current X coordinate of the graphics cursor</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="functions.htm#ypos"><tt>YPOS</tt></a></td>
+    <td>determine the current Y coordinate of the graphics cursor</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3>
+  <a name="func_descr">6. Description of the Functions and System Variables</a>
+ </h3>
+  Elements enclosed in angle brackets serve as placeholders
+  and must be replaced accordingly.
+ <br/><br/>
+
+ <h3><a name="abs">ABS</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>ABS</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr>
+    <td>Value:</td>
+    <td>numeric expression</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>same type as the value passed</td>
+   </tr>
+  </table>
+ <br/>
+   The function returns the absolute value
+   of the value passed.
+ <br/><br/>
+
+ <h3><a name="asc">ASC</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>ASC (</tt> &lt;string&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+   The function returns the code of the first character
+   in the string passed.
+   If the string is empty, 0 is returned.
+ <br/><br/>
+
+ <h3><a name="asm">ASM</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>ASM (</tt> &lt;string&gt;
+     [, &lt;string&gt; [, ...]] <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>string literal</td></tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The ASM function inserts one or more assembler lines
+  into the assembler text generated by the compiler.
+  Unlike the <a href="instructions.htm#asm">ASM</a> statement,
+  the ASM function returns the value in the HL register
+  to the BASIC program.
+  In combination with the <a href="functions.htm#memstr$">MEMSTR$</a>
+  function, strings generated in your own assembler routines
+  can also be returned to the BASIC program.
+ <br/><br/>
+  The example shows a possible use of the ASM function
+  in combination with <a href="functions.htm#usr">USR</a>,
+  as a way of passing a parameter to the assembler routine
+  and having it return a numeric value:
+ <br/>
+  <tt>
+   &#10;<br/>
+   DEF USR0 = ASM(" LD HL,meine_negation")&#10;<br/>
+   PRINT USR0(123)&#10;<br/>
+   END&#10;<br/>
+   &#10;<br/>
+   ASM "meine_negation:"&#10;<br/>
+   ASM " LD HL,0000H"&#10;<br/>
+   ASM " OR A"&#10;<br/>
+   ASM " SBC HL,DE"&#10;<br/>
+   ASM " RET"&#10;<br/>
+  </tt>
+ <br/>
+  In the second example, the assembler routine returns the string
+  <em>ABC</em>:
+ <br/>
+  <tt>
+   &#10;<br/>
+   PRINT MEMSTR$( ASM(" CALL meine_routine") )&#10;<br/>
+   END&#10;<br/>
+   &#10;<br/>
+   ASM CODE "meine_routine:"&#10;<br/>
+   ASM CODE " LD HL,mein_string"&#10;<br/>
+   ASM CODE " RET"&#10;<br/>
+   ASM DATA "mein_string: DB 'ABC',0"&#10;<br/>
+  </tt>
+ <br/>
+  <b>Caution!</b> Please read the notes on
+  <a href="userasm.htm">including your own assembler source code</a>!
+ <br/><br/>
+
+ <h3><a name="atn">ATN</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>ATN</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr>
+    <td>Value:</td>
+    <td>numeric expression</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Single</td>
+   </tr>
+  </table>
+ <br/>
+  The function calculates the arc tangent of the value passed.
+  Please also read the notes on
+  <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
+ <br/><br/>
+
+ <h3><a name="bin$">BIN$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>BIN$</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt><br/>
+     <tt>BIN$</tt> <tt>(</tt> &lt;value&gt;
+	<tt>,</tt> &lt;number of digits&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>Value:</td><td>Integer or Long expression</td></tr>
+   <tr><td>Number of digits:</td><td>Integer</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function BIN$ generates a string
+  that represents the value passed as a binary number.
+  Negative values are represented in two's complement.
+  If the second argument is omitted,
+  the generated string is 16&nbsp;characters long for an Integer value
+  and 32&nbsp;characters long for a Long value.
+ <br/><br/>
+  The optional second argument can be used to specify the length
+  of the binary number to be generated.
+  Possible values are 0 to 16 for an Integer expression
+  and 0 to 32 for a Long expression.
+  With a value of 0, the binary number is generated without
+  leading zeros, with as many digits as are needed
+  to represent the value completely.
+  With a digit count greater than&nbsp;0, the binary number has
+  as many digits as specified,
+  starting from the right, i.e. with the least significant digits.
+ <br/><br/>
+
+ <h3><a name="cdec">CDEC</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>CDEC</tt> <tt>(</tt> &lt;numeric expression&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Return:</td>
+    <td>Decimal</td>
+  </table>
+ <br/>
+  The function converts the value passed into a Decimal value.
+  If the conversion is not possible,
+  e.g. because the magnitude of the value passed is too large,
+  the program aborts with an overflow error.
+ <br/><br/>
+
+ <h3><a name="chr$">CHR$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>CHR$</tt> <tt>(</tt> &lt;character code&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>Character code:</td><td>Integer expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function CHR$ generates a string
+  consisting of only the one character
+  that corresponds to the character code passed
+  (usually the&nbsp;ASCII code).
+  If the value&nbsp;0 is passed, the returned
+  string is empty.
+ <br/><br/>
+  <b>Caution!</b> With the statements
+  <a href="instructions.htm#print">PRINT</a> and
+  <a href="instructions.htm#lprint">LPRINT</a>, <tt>CHR$(0)</tt>
+  outputs a null byte.
+ <br/><br/>
+
+ <h3><a name="cint">CINT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>CINT</tt> <tt>(</tt> &lt;numeric expression&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Return:</td>
+    <td>Integer</td>
+  </table>
+ <br/>
+  The function converts the integer part of the value passed
+  into an Integer value.
+  The fractional part is lost in the process.
+  If the conversion is not possible because the magnitude is too large,
+  the program aborts with an overflow error.
+ <br/><br/>
+
+ <h3><a name="clng">CLNG</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>CLNG</tt> <tt>(</tt> &lt;numeric expression&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Return:</td>
+    <td>Long</td>
+  </table>
+ <br/>
+  The function converts the integer part of the value passed
+  into a Long value.
+  The fractional part is lost in the process.
+  If the conversion is not possible because the magnitude is too large,
+  the program aborts with an overflow error.
+ <br/><br/>
+
+ <h3><a name="cos">COS</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>COS</tt> <tt>(</tt> &lt;angle&gt; <tt>)</tt></td>
+   </tr>
+   <tr>
+    <td>Angle:</td>
+    <td>numeric expression with the angle in radians</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Single</td>
+   </tr>
+  </table>
+ <br/>
+  The function calculates the cosine of the angle,
+  which must be given in radians.
+  Please also read the notes on
+  <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
+ <br/><br/>
+
+ <h3><a name="crslin">CRSLIN</a></h3>
+  This system variable contains the current line number
+  the cursor is in, starting at 0.
+  If the cursor is outside the visible area, or
+  the target system does not support reading the cursor position,
+  the variable contains the value&nbsp;-1.
+ <br/><br/>
+
+ <h3><a name="crspos">CRSPOS</a></h3>
+  This system variable contains the current column number
+  the cursor is in, starting at 0.
+  If the cursor is outside the visible area, or
+  the target system does not support reading the cursor position,
+  the variable contains the value&nbsp;-1.
+ <br/><br/>
+  The system variable provides the same information as the function
+  <a href="functions.htm#pos">POS</a> and is included for reasons
+  of name analogy with <a href="functions.htm#crslin">CRSLIN</a>.
+ <br/><br/>
+
+ <h3><a name="csng">CSNG</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>CSNG</tt> <tt>(</tt> &lt;numeric expression&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Return:</td>
+    <td>Single</td>
+  </table>
+ <br/>
+  The function converts the value passed into a Single value.
+ <br/><br/>
+
+ <h3><a name="datetime$">DATETIME$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>DATETIME$</tt> <tt>(</tt> &lt;format string&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>Format string:</td><td>simple string expression</td></tr>
+   <tr>
+    <td>Return:</td>
+    <td>String</td>
+   </tr>
+  </table>
+ <br/>
+  The function DATETIME$ returns a string
+  with the current date and/or the current time.
+  You specify the appearance of the string with a format string.
+  In the format string, certain letters or groups of letters
+  serve as placeholders for the individual elements of the date
+  or the time.
+  The returned string corresponds to the format string,
+  with the placeholders replaced accordingly.
+ <br/><br/>
+  The placeholders can be written in either upper or lower case.
+  All characters that are not placeholders are copied unchanged
+  into the returned string.
+ <br/><br/>
+  The following placeholders are possible:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Placeholder</th><th>Meaning</th></tr>
+   <tr><td>D</td><td>day, one or two digits</td></tr>
+   <tr><td>DD</td><td>day, always two digits</td></tr>
+   <tr><td>M</td><td>month, one or two digits</td></tr>
+   <tr><td>MM</td><td>month, always two digits</td></tr>
+   <tr><td>Y</td><td>year, one digit (units only)</td></tr>
+   <tr><td>YY</td><td>year, two digits (tens and units)</td></tr>
+   <tr><td>YYYY</td><td>year, four digits</td></tr>
+   <tr><td>H</td><td>hour (0 to 23), one or two digits</td></tr>
+   <tr><td>HH</td><td>hour (0 to 23), always two digits</td></tr>
+   <tr><td>MI</td><td>minute, always two digits</td></tr>
+   <tr><td>S</td><td>second, one or two digits</td></tr>
+   <tr><td>SS</td><td>second, always two digits</td></tr>
+  </table>
+ <br/><br/>
+  Example:
+ <br/><br/>
+  <tt>
+   PRINT "Heute ist der ";DATETIME$("D.MM.YYYY.")&#10;<br/>
+   PRINT "Datum heute:  ";DATETIME$("DD.MM.YYYY")&#10;<br/>
+   PRINT "Akt. Zeit:    ";DATETIME$("H:MI:SS")&#10;<br/>
+   PRINT "Datum / Zeit: ";DATETIME$("YYYY-MM-DD HH:MI:SS")&#10;<br/>
+  </tt>
+ <br/>
+  <b>Caution:</b> The function can only return a meaningful string
+  if the computer on which the compiled BASIC program is running
+  also has a clock.
+  By default, an attempt is made to read the date and time
+  from the real-time clock of a connected GIDE.
+  If no GIDE is connected, or the
+  <a href="targets.htm">target system</a> supports neither a GIDE
+  nor any other way of reading the system time,
+  an empty string is returned.
+ <br/><br/>
+
+ <h3><a name="decval">DECVAL</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>DECVAL</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr>
+    <td>Return:</td>
+    <td>Decimal</td>
+   </tr>
+  </table>
+ <br/>
+  The function DECVAL attempts to read the contents of a string
+  as a number and returns its numeric value as a Decimal
+  value.
+  The function sets the error variables
+  <a href="functions.htm#err">ERR</a> and
+  <a href="functions.htm#err$">ERR$</a>.
+  These, especially the ERR variable, can be used to check
+  whether the function was successful:
+ <br/><br/>
+  <table border="1">
+   <tr><th>ERR value</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top"><a href="constants.htm#error">E_OK</a></td>
+    <td>the number could be read</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     <a href="constants.htm#error">E_DIGITS_TRUNCATED</a>
+    </td>
+    <td>
+     The number could be read, but contains too many
+     decimal places that do not fit into the Decimal data type.
+     These decimal places were truncated, i.e.
+     the returned value does not exactly correspond
+     to the number in the string passed.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="constants.htm#error">E_INVALID</a></td>
+    <td>
+     invalid characters read,
+     return value is&nbsp;0
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="constants.htm#error">E_OVERFLOW</a></td>
+    <td>
+     numeric overflow, i.e. the number has too many digits
+     before the decimal point,
+     return value is&nbsp;0
+    </td>
+   </tr>
+  </table>
+ <br/>
+  For converting a string into another numeric data type,
+  there are the functions
+  <a href="functions.htm#intval">INTVAL</a>
+  (identical to <a href="functions.htm#val">VAL</a>),
+  <a href="functions.htm#lngval">LNGVAL</a> and
+  <a href="functions.htm#sngval">SNGVAL</a>.
+ <br/><br/>
+
+ <h3><a name="deek">DEEK</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td> <tt>DEEK</tt> <tt>(</tt> &lt;address&gt; <tt>)</tt></td>
+   </tr>
+   <tr valign="top">
+    <td>Address:</td><td>Integer expression</td>
+   </tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function reads two consecutive bytes from memory
+  starting at the specified address and returns them as a 16-bit value.
+  The first byte is the least significant.
+ <br/><br/>
+
+ <h3><a name="div10">DIV10</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td> <tt>DIV10</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr valign="top">
+    <td>Value:</td><td>Decimal expression</td>
+   </tr>
+   <tr><td>Return:</td><td>Decimal</td></tr>
+  </table>
+ <br/>
+  Decimal numbers can be divided by&nbsp;10 very quickly
+  by shifting the decimal point one place to the left.
+  That is exactly what the function <tt>DIV10</tt> does.
+  This makes it considerably faster than dividing by&nbsp;10
+  using the division operator.
+  Since this fast division is only possible with decimal numbers,
+  the function can only be used with the
+  <a href="datatypes.htm#decimal">Decimal</a> data type.
+ <br/><br/>
+
+ <h3><a name="div2">DIV2</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td> <tt>DIV2</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr valign="top">
+    <td>Value:</td><td>Integer, Long or Single expression</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>same data type that was passed</td>
+   </tr>
+  </table>
+ <br/>
+  Just as decimal numbers can be divided by&nbsp;10 very quickly
+  by shifting the decimal point,
+  binary numbers can be divided by&nbsp;2 very quickly.
+  That is what the function <tt>DIV2</tt> is for.
+  Since this fast division is only possible with binary numbers,
+  the function can only be used with the data types
+  <a href="datatypes.htm#integer">Integer</a>,
+  <a href="datatypes.htm#long">Long</a> and
+  <a href="datatypes.htm#single">Single</a>.
+ <br/><br/>
+
+ <h3><a name="eof">EOF</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>EOF</tt> <tt>(</tt> &lt;channel&gt; <tt>)</tt><br/>
+     <tt>EOF</tt> <tt>( #</tt> &lt;channel&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Channel:</td>
+    <td>Integer expression</td>
+   </tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function tests
+  whether the end of the input channel or file has been reached.
+  This sets the error variables&nbsp;<a href="functions.htm#err">ERR</a>
+  and <a href="functions.htm#err$">ERR$</a>.
+ <br/><br/>
+  For files, the function only reliably returns
+  <a href="constants.htm#boolean">TRUE</a>
+  once an attempt has been made to read past the end of the file.
+ <br/><br/>
+
+ <h3><a name="err">ERR</a></h3>
+  The system variable ERR contains the last error code.
+  The value&nbsp;0 (constant&nbsp;E_OK) means
+  that no error occurred in the last statement or function
+  that affects the error variable.
+  A value other than&nbsp;0 stands for an error.
+  <a href="constants.htm#error">Error code constants</a> are available
+  for evaluating the ERR&nbsp;system variable.
+ <br/><br/>
+  The ERR system variable is reset at the beginning of each BASIC
+  statement in which the system variable is itself set or affected
+  by the statement or by function calls.
+  This ensures that no error condition is lost even when
+  several function calls within one statement affect the error variable.
+  The following example illustrates this:
+ <br/><br/>
+  <tt>
+   OPEN #1,"datei.dat"&#10;<br/>
+   ...:REM Pruefen, ob Oeffnen der Datei erfolgreich war&#10;<br/>
+   PRINT "Hex=";HEX$(VAL(INPUT$(5,#1));" Text=";INPUT$(10,#1)&#10;<br/>
+   IF ERR THEN&#10;<br/>
+   &nbsp;&nbsp;PRINT ERR$&#10;<br/>
+   ENDIF&#10;<br/>
+  </tt>
+ <br/><br/>
+  The file <em>datei.dat</em> begins with two data fields,
+  each with a fixed, predefined field length.
+  The first field is 5&nbsp;bytes in size
+  and contains a number in text form.
+  The second field, 10&nbsp;bytes in size, contains a string.
+  In the first PRINT statement, the following happens in order:
+  <ol>
+   <li>The first data field is read from the file as a string.</li>
+   <li>
+    The string that was read is converted into a numeric value.
+   </li>
+   <li>
+    This value is converted into a hexadecimal number
+    and output on the screen.
+   </li>
+   <li>
+    The second data field is read from the file and output.
+   </li>
+  </ol>
+ <br/>
+  Both read operations, as well as the conversion into a
+  numeric value, can fail and affect the ERR variable.
+  If, for example, the first data field contained something
+  that cannot be interpreted as a number,
+  the VAL function sets the ERR system variable.
+  If the subsequent reading of the second data field
+  is then successful, the error information from the VAL function
+  should nevertheless not be lost.
+  And that is exactly what is ensured by resetting the ERR
+  system variable only at the beginning of the relevant statement.
+  In the example above, the ERR variable (apart from at program start)
+  is reset to&nbsp;zero only at the beginning of the first PRINT statement.
+  Since the subsequent IF statement only reads the ERR variable
+  and does not set it, no reset takes place there,
+  and, as intended, you read
+  the error information from the preceding statement.
+ <br/><br/>
+  Another case where this behavior is important
+  is calculations with the
+  <a href="datatypes.htm#decimal">DECIMAL</a> data type.
+  You can safely perform several individual
+  DECIMAL calculations within one statement and then test
+  whether decimal places were truncated in the process
+  (<tt>IF ERR=E_DIGITS_TRUNCATED THEN ...</tt>).
+  If the result had to be shortened in one of the calculations,
+  the ERR system variable is guaranteed to be set accordingly,
+  even if subsequent DECIMAL calculations within the same statement
+  completed correctly.
+ <br/><br/>
+  <b>Caution!</b> The fact that the ERR system variable is reset
+  at the beginning of the relevant statement must be taken into account
+  when reading it.
+  If the ERR variable is both read and set within one statement,
+  the error information from the preceding
+  statement is lost.
+  The statements in a THEN or ELSE branch of an IF
+  or ELSEIF statement count as separate statements in this respect,
+  i.e. you can safely evaluate the error status
+  of the preceding statement in the condition
+  of an IF or ELSEIF statement
+  and then use statements in the THEN or ELSE branch
+  that affect the ERR system variable again.
+ <br/><br/>
+
+ <h3><a name="err$">ERR$</a></h3>
+  The system variable ERR$ contains the last error text.
+  In combination with the system variable&nbsp;ERR,
+  error handling can be implemented quite simply
+  and still conveniently for the user, e.g.:
+ <br/>
+  <tt>
+   &#10;<br/>
+   ...:'Funktion oder Anweisung, die die Fehlervariablen setzt&#10;<br/>
+   IF ERR THEN&#10;<br/>
+   &nbsp;&nbsp;PRINT ERR$&#10;<br/>
+   ELSE&#10;<br/>
+   &nbsp;&nbsp;...:'kein Fehler aufgetreten&#10;<br/>
+   ENDIF&#10;<br/>
+  </tt>
+ <br/>
+  <b>Caution!</b> If you use the system variable&nbsp;ERR$,
+  the compiled program becomes correspondingly larger,
+  since all error messages that can occur
+  also have to be compiled into the program.
+  If you are aiming for as small a program as possible
+  and can do without the detailed error texts,
+  you should evaluate only the error code variable&nbsp;ERR
+  and not use ERR$.
+ <br/><br/>
+  <b>Caution!</b> Regarding the resetting of the system variable&nbsp;ERR$,
+  the same applies as for the system variable
+  <a href="functions.htm#err">ERR</a>.
+ <br/><br/>
+
+ <h3><a name="exp">EXP</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>EXP</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>Value:</td><td>numeric expression</td></tr>
+   <tr>
+    <td>Return:</td>
+    <td>Single</td>
+   </tr>
+  </table>
+ <br/>
+  The function EXP is the exponential function with base&nbsp;e
+  (see constant <a href="constants.htm#math">EULER</a>)
+  and is thus the inverse function of the natural logarithm
+  (see function <a href="functions.htm#ln">LN</a>).
+  For exponentiation with any base,
+  there is the function <a href="functions.htm#pow">POW</a>.
+  Please also read the notes on
+  <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
+ <br/><br/>
+
+ <h3><a name="fix">FIX</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>FIX</tt> <tt>(</tt> &lt;numeric expression&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>same data type that was passed</td>
+   </tr>
+  </table>
+ <br/>
+  The function returns the integer part of the value passed,
+  i.e. the part before the decimal point.
+ <br/><br/>
+
+ <h3><a name="frac">FRAC</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>FRAC</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>Value:</td><td>numeric expression</td></tr>
+   <tr>
+    <td>Return:</td>
+    <td>same data type that was passed</td>
+   </tr>
+  </table>
+ <br/>
+  The function returns the fractional part
+  of the value passed.
+  The result is always greater than or equal to zero,
+  even if the value passed is less than zero.
+ <br/><br/>
+  <b>Caution!</b> If you pass the function a Single value
+  and output both the value passed and the result on the
+  screen, the decimal digits shown for the two numbers
+  may differ.
+  This is because the binary stored values do not necessarily
+  correspond exactly to the displayed or entered decimal numbers
+  (see approximate values under the
+  <a href="datatypes.htm#single">Single</a> data type), and these
+  values are rounded to 6&nbsp;decimal places when output.
+ <br/><br/>
+  Example:
+ <br/><br/>
+  <tt>PRINT FRAC(654.321)</tt>
+ <br/><br/>
+  Mathematically, the example should return 0.321,
+  but 0.320984 is displayed.
+  This is because the number 654.321 cannot be stored exactly
+  as such using the Single data type,
+  and the resulting error component is magnified enough
+  by separating out the fractional part and converting it
+  into a new floating-point number
+  that it becomes visible in the output.
+  The FRAC function in combination with the Single data type
+  is therefore intended primarily for internal calculations.
+  So
+ <br/><br/>
+  <tt>PRINT FIX(654.321)+FRAC(654.321)</tt>
+ <br/><br/>
+  again yields the value 654.321
+  (<a href="functions.htm#fix">FIX</a> returns the integer part).
+  The following program shows
+  that the split into an integer and a fractional part is numerically exact.
+  To remove all doubt, the integer part is converted with
+  <a href="functions.htm#cint">CINT</a> into an Integer value
+  and then with <a href="functions.htm#csng">CSNG</a>
+  back into a Single value.
+ <br/><br/>
+  <tt>
+   DIM A AS SINGLE&#10;<br/>
+   DIM V AS INTEGER&#10;<br/>
+   DIM N AS SINGLE&#10;<br/>
+   A=654.321&#10;<br/>
+   V=CINT(FIX(A))&#10;<br/>
+   N=FRAC(A)&#10;<br/>
+   IF CSNG(V)+N=A THEN PRINT "OK":ELSE:PRINT "nicht OK"
+  </tt>
+ <br/><br/>
+  With the <a href="datatypes.htm#decimal">Decimal</a> data type,
+  this effect does not occur,
+  since the values are stored numerically exactly.
+  So
+ <br/><br/>
+  <tt>PRINT FRAC(654.321D)</tt>
+ <br/><br/>
+  yields exactly the value 0.321.
+  The appended <em>D</em>
+  gives the number the Decimal data type.
+ <br/><br/>
+
+ <h3><a name="hex$">HEX$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>HEX$</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt><br/>
+     <tt>HEX$</tt> <tt>(</tt> &lt;value&gt;
+	<tt>,</tt> &lt;number of digits&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>Value:</td><td>Integer or Long expression</td></tr>
+   <tr><td>Number of digits:</td><td>Integer</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function HEX$ generates a string
+  that represents the value passed as a hexadecimal number.
+  Negative values are represented in two's complement.
+  If the second argument is omitted,
+  the generated string is four characters long for an Integer value
+  and eight characters long for a Long value.
+ <br/><br/>
+  The optional second argument can be used to specify the length
+  of the hexadecimal number to be generated.
+  Possible values are 0 to 4 for an Integer expression
+  and 0 to 8 for a Long expression.
+  With a value of 0, the hexadecimal number is generated without
+  leading zeros, with as many digits as are needed
+  to represent the value completely.
+  With a digit count greater than&nbsp;0, the hexadecimal number has
+  as many digits as specified,
+  starting from the right, i.e. with the least significant digits.
+ <br/><br/>
+
+ <h3><a name="hibyte">HIBYTE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>HIBYTE</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>Value:</td><td>Integer expression</td></tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function returns only the value of the high-order byte
+  of the value passed,
+  i.e. the return value is always in the range 0 to 255.
+ <br/><br/>
+  The function HIBYTE has the same effect as
+  <tt>(&lt;value&gt;&nbsp;SHR&nbsp;8)&nbsp;AND&nbsp;&amp;H00FF</tt>,
+  but generates shorter and faster program code.
+ <br/><br/>
+
+ <h3><a name="hiword">HIWORD</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>HIWORD</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>Value:</td><td>Long expression</td></tr>
+   <tr><td>Return:</td><td>Long</td></tr>
+  </table>
+ <br/>
+  The function returns only the value of the high-order 16&nbsp;bits
+  of the Long value passed,
+  i.e. the return value is always in the range 0 to 32767.
+ <br/><br/>
+  The function HIWORD has the same effect as
+  <tt>(&lt;value&gt;&nbsp;SHR&nbsp;16)&nbsp;AND&nbsp;&amp;H0000FFFF</tt>,
+  but generates shorter and faster program code.
+ <br/><br/>
+
+ <h3><a name="h_char">H_CHAR</a></h3>
+  The system variable contains the height of the screen
+  in character positions, i.e.
+  the number of visible text lines is returned.
+  If this value is not clearly defined, or if the target system
+  allows different values (e.g. with CP/M),
+  the variable contains the value&nbsp;-1.
+ <br/><br/>
+  A&nbsp;0 is returned if the
+  <a href="instructions.htm#screen">SCREEN</a> statement
+  has set a graphics screen
+  that does not permit text output.
+ <br/><br/>
+
+ <h3><a name="h_pixel">H_PIXEL</a></h3>
+  This system variable contains the height
+  of the fully graphics-capable screen in pixels.
+  If no full graphics mode is available,
+  the value&nbsp;0 is returned.
+  In that case, the graphics commands cannot be used.
+ <br/><br/>
+
+ <h3><a name="inkey$">INKEY$</a></h3>
+  The function checks whether a key is currently pressed.
+  If so, the function returns a string containing the
+  character entered.
+  Otherwise, an empty string is returned.
+  INKEY$ has no arguments.
+ <br/><br/>
+
+ <h3><a name="in">IN<br/>INP</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>IN</tt> <tt>(</tt> &lt;address&gt; <tt>)</tt><br/>
+     <tt>INP</tt> <tt>(</tt> &lt;address&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top"><td>Address:</td><td>Integer expression</td></tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The functions IN and INP read a byte from the input port
+  specified by the address and return the value of the byte.
+ <br/><br/>
+  Both functions are identical. For reasons of compatibility
+  with various BASIC dialects, both function names are supported.
+ <br/><br/>
+  <b>Caution!</b> Although the microprocessor officially only
+  supports 8-bit input/output addresses,
+  using 16-bit addresses is possible.
+  The compiler translates the statement into program code
+  that, due to the undocumented behavior of the microprocessor,
+  also makes a 16-bit input/output address
+  take effect.
+ <br/><br/>
+
+ <h3><a name="input$">INPUT$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>INPUT$</tt> <tt>(</tt> &lt;count&gt; <tt>)</tt><br/>
+     <tt>INPUT$</tt> <tt>(</tt> &lt;count&gt; <tt>,</tt>
+		&lt;channel&gt; <tt>)</tt><br/>
+     <tt>INPUT$</tt> <tt>(</tt> &lt;count&gt; <tt>, #</tt>
+		&lt;channel&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Count:</td>
+    <td>Integer expression in the range 0 to 255</td>
+   </tr>
+   <tr valign="top">
+    <td>Channel:</td>
+    <td>Integer expression</td>
+   </tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  There are two variants of this function, with and without a channel number.
+  In the variant without a channel number, the specified number of characters
+  is read from the keyboard and returned as a string.
+  Control keys (e.g. cursor keys, Enter) are not evaluated.
+  Instead, the corresponding control codes appear
+  in the string.
+  Nothing is output on the screen.
+ <br/><br/>
+  In the variant with a channel number, the function reads
+  the specified number of characters from the input channel
+  or the file and returns them as a string.
+  This sets the error variables <a href="functions.htm#err">ERR</a>
+  and <a href="functions.htm#err$">ERR$</a>.
+ <br/><br/>
+  <b>Caution!</b> Null bytes serve as terminators for strings,
+  i.e. if a null byte is read, the
+  returned string contains only the bytes up to the first
+  null byte read.
+  Nevertheless, as many bytes are read from the input channel
+  as were specified in the first argument.
+  So if the returned string is shorter
+  than the number of bytes read, and the error variable
+  <a href="functions.htm#err">ERR</a> contains the value&nbsp;0
+  (constant E_OK, no error occurred),
+  then a null byte was read after the string.
+  This also makes it possible, in general, to read binary files.
+  The example shows how a file is read byte by byte
+  and output as a hex dump on the screen:
+ <br/>
+  <tt>
+   &#10;<br/>
+   INPUT "Datei:";F$&#10;<br/>
+   OPEN F$ FOR BINARY INPUT AS #1&#10;<br/>
+   IF ERR THEN&#10;<br/>
+   &nbsp;&nbsp;PRINT ERR$&#10;<br/>
+   ELSE&#10;<br/>
+   &nbsp;&nbsp;N=0&#10;<br/>
+   &nbsp;&nbsp;WHILE NOT EOF(#1)&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;B=ASC(INPUT$(1,#1))&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;IF ERR THEN&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRINT ERR$:EXIT&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;ELSE&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PRINT CHR$(32);HEX$(B,2);&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;N=N+1&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;IF N=8 THEN N=0:PRINT&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;ENDIF&#10;<br/>
+   &nbsp;&nbsp;WEND&#10;<br/>
+   &nbsp;&nbsp;PRINT&#10;<br/>
+   &nbsp;&nbsp;IF ERR THEN PRINT ERR$&#10;<br/>
+   &nbsp;&nbsp;CLOSE #1&#10;<br/>
+   ENDIF&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="instr">INSTR</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>INSTR</tt> <tt>(</tt> &lt;string to search in&gt;
+	<tt>,</tt> &lt;string to search for&gt; <tt>)</tt><br/>
+     <tt>INSTR</tt> <tt>(</tt> &lt;position&gt;
+	<tt>,</tt> &lt;string to search in&gt;
+	<tt>,</tt> &lt;string to search for&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>Position:</td><td>Integer expression</td></tr>
+   <tr>
+    <td>String to search in:</td>
+    <td>simple string expression</td>
+   </tr>
+   <tr>
+    <td>String to search for:</td>
+    <td>simple string expression</td>
+   </tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function searches the first string passed
+  for the second string passed and returns the position
+  where it was found.
+  If the second string is not contained in the first,
+  0 is returned.
+  If a position was specified, the search starts from that position.
+ <br/><br/>
+  Examples:
+ <br/><br/>
+  <tt>PRINT INSTR("ABCD","C")</tt>
+ <br/><br/>
+  returns&nbsp;3.
+ <br/><br/>
+  <tt>PRINT INSTR(3,"KASKADE","K")</tt>
+ <br/><br/>
+  returns&nbsp;4.
+ <br/><br/>
+  <b>Caution!</b> With this function, there are differences
+  in argument order between the various BASIC dialects.
+  In most of the internationally common BASIC dialects,
+  the first string is the one to be searched
+  and the second is the one to search for.
+  For this reason, JKCEMU implements it the same way.
+  In KC-BASIC, however, it is exactly the other way around.
+  So if you want to compile or port KC-BASIC programs,
+  you must swap the two strings.
+ <br/><br/>
+
+ <h3><a name="int">INT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>INT</tt> <tt>(</tt> &lt;numeric expression&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Single</td>
+   </tr>
+  </table>
+ <br/>
+  The function rounds the value passed down to the
+  next smaller whole number.
+  If the value passed is already a whole number,
+  the same value is returned.
+ <br/><br/>
+  Examples:
+ <br/><br/>
+  <tt>INT( 2.3 )</tt> returns <tt>2</tt><br/>
+  <tt>INT( -2.0 )</tt> returns <tt>-2</tt><br/>
+  <tt>INT( -2.3 )</tt> returns <tt>-3</tt><br/>
+  <tt>INT( -3.1D )</tt> returns <tt>-4</tt><br/>
+ <br/>
+  For values greater than or equal to&nbsp;0, the function returns
+  the same results as
+  <a href="functions.htm#fix">FIX</a>.
+ <br/><br/>
+
+ <h3><a name="intval">INTVAL</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>INTVAL</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt><br/>
+     <tt>INTVAL</tt> <tt>(</tt> &lt;string&gt;
+	<tt>,</tt> &lt;number base&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr>
+    <td>Number base:</td>
+    <td>Integer expression with the value 2, 10 or 16</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Integer</td>
+   </tr>
+  </table>
+ <br/>
+  The function INTVAL is identical to the function
+  <a href="functions.htm#val">VAL</a> and is described there.
+  The function name INTVAL makes it clear
+  that an Integer value is returned
+  and exists for reasons of name analogy with
+  <a href="functions.htm#decval">DECVAL</a>
+  (returns Decimal),
+  <a href="functions.htm#lngval">LNGVAL</a>
+  (returns Long) and
+  <a href="functions.htm#sngval">SNGVAL</a>
+  (returns Single).
+ <br/><br/>
+
+ <h3><a name="is_target">IS_TARGET</a></h3>
+  The function IS_TARGET determines
+  whether the program was compiled for a specific target system.
+  This lets you write portable BASIC programs while still
+  adapting them to very specific characteristics of the target system.
+  The function is usually called with a
+  <a href="constants.htm#target">constant for the target system</a>.
+  The following example demonstrates its use:
+ <br/>
+  <tt>
+   &#10;<br/>
+   IF IS_TARGET(TARGET_KC85) THEN PRINT "Ich bin ein KC85/2..5 oder HC900"&#10;<br/>
+   IF IS_TARGET(TARGET_Z9001) THEN PRINT "Ich bin ein KC85/1, KC87 oder Z9001"&#10;<br/>
+   IF IS_TARGET(TARGET_Z1013) THEN PRINT "Ich bin ein Z1013"&#10;<br/>
+  </tt>
+ <br/>
+  <b>Caution!</b> The function IS_TARGET also returns
+  <a href="constants.htm#boolean">TRUE</a>
+  if compiling for a derived target system
+  and testing against the more general target system,
+  i.e. if, for example, the target system
+  <em>TARGET_KC85_4</em> (KC85/4..5 with support for both video memories)
+  is set in the compiler options,
+  the function returns TRUE for both
+  <em>TARGET_KC85</em> and <em>TARGET_KC85_4</em>.
+ <br/><br/>
+  <b>Caution!</b> The function IS_TARGET does not determine
+  which type of computer the program is actually running on,
+  but for which type of computer the BASIC program was compiled.
+  For example, a program can be compiled for the AC1
+  but still run on an LLC2,
+  if it does not use anything AC1-specific.
+  The function IS_TARGET(TARGET_AC1) would then still return TRUE,
+  and IS_TARGET(TARGET_LLC2) would return FALSE.
+ <br/><br/>
+
+ <h3><a name="joyst">JOYST</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>JOYST</tt> <tt>(</tt> &lt;joystick number&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Joystick number:</td>
+    <td>Integer expression with a value &gt;= 0</td>
+   </tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function reads the current status of the specified joystick.
+  The first joystick has the number&nbsp;0.
+  The bit assignment of the return value differs between
+  the individual <a href="targets.htm">target systems</a> and should
+  therefore be evaluated using the following constants:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Constant</th><th>Meaning</th></tr>
+   <tr>
+    <td><tt>JOYST_LEFT</tt></td>
+    <td>joystick pushed left</td>
+   </tr>
+   <tr>
+    <td><tt>JOYST_RIGHT</tt></td>
+    <td>joystick pushed right</td>
+   </tr>
+   <tr>
+    <td><tt>JOYST_UP</tt></td>
+    <td>joystick pushed up</td>
+   </tr>
+   <tr>
+    <td><tt>JOYST_DOWN</tt></td>
+    <td>joystick pushed down</td>
+   </tr>
+   <tr>
+    <td><tt>JOYST_BUTTON1</tt></td>
+    <td>action button&nbsp;1 pressed</td>
+   </tr>
+   <tr>
+    <td><tt>JOYST_BUTTON2</tt></td>
+    <td>action button&nbsp;2 pressed</td>
+   </tr>
+   <tr>
+    <td><tt>JOYST_BUTTONS</tt></td>
+    <td>action button&nbsp;1 or 2 pressed</td>
+   </tr>
+  </table>
+ <br/>
+  The JOYST function returns an Integer value
+  in which each set bit stands for a specific action.
+  Several bits can be set at the same time,
+  e.g. the bits for left and up,
+  when the joystick is pushed to the upper left.
+  The joystick constants are defined such
+  that the respective bit for the action in question is set.
+  With the help of the
+  <a href="expressions.htm#operators2">AND</a> operator,
+  the individual actions can be tested:
+ <br/>
+  <tt>
+   &#10;<br/>
+   A=JOYST(0)&#10;<br/>
+   IF A AND JOYST_LEFT THEN PRINT "links"&#10;<br/>
+   IF A AND JOYST_RIGHT THEN PRINT "rechts"&#10;<br/>
+   IF A AND JOYST_DOWN THEN PRINT "runter"&#10;<br/>
+   IF A AND JOYST_UP THEN PRINT "hoch"&#10;<br/>
+   IF A AND JOYST_BUTTON1 THEN PRINT "Feuer 1"&#10;<br/>
+   IF A AND JOYST_BUTTON2 THEN PRINT "Feuer 2"&#10;<br/>
+   IF A AND JOYST_BUTTONS THEN PRINT "Feuer 1 oder 2"&#10;<br/>
+  </tt>
+ <br/>
+  On a target system that supports only one fire button per joystick,
+  the constant <tt>JOYST_BUTTONS</tt> has
+  the same value as <tt>JOYST_BUTTON1</tt>,
+  and <tt>JOYST_BUTTON2</tt> is&nbsp;0.
+  On systems that offer no joystick support,
+  the JOYST function always returns&nbsp;0,
+  and the joystick constants also all have the value&nbsp;0.
+ <br/><br/>

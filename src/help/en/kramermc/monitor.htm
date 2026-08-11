@@ -1,0 +1,122 @@
+<html>
+<body>
+ <h1>Kramer-MC: Monitor Program</h1>
+
+ <h2>Commands</h2>
+  <table border="1">
+   <tr><th>Command</th><th>Meaning</th><th>Syntax</th></tr>
+   <tr>
+    <td>A</td>
+    <td><a href="assembler.htm">Assembler</a> call</td>
+    <td><tt>A</tt></td>
+   </tr>
+   <tr><td>B</td><td>Call BASIC interpreter</td><td><tt>B</tt></td></tr>
+   <tr><td>C</td><td>COPY WO: = RI</td><td><tt>C</tt></td></tr>
+   <tr><td>D</td><td>DUMP</td><td><tt>DAADR, EADR</tt></td></tr>
+   <tr><td>E</td><td>End-File</td><td><tt>EAADR</tt></td></tr>
+   <tr><td>F</td><td>Fill</td><td><tt>FAADR,EADR, Byte</tt></td></tr>
+   <tr>
+    <td>G</td>
+    <td>GO</td>
+    <td>
+     <tt>GAADR, EADR1, EADR2</tt> or<br/>
+     <tt>GAADR</tt> or<br/>
+     <tt>G</tt>
+    </td>
+   </tr>
+   <tr><td>H</td><td>HEX arithmetic</td><td><tt>HADR,ADR</tt></td></tr>
+   <tr>
+    <td>I</td>
+    <td>Assign INPUT channel</td>
+    <td><tt>IT or IL or IU</tt></td>
+   </tr>
+   <tr><td>J</td><td>JUMP RAM table</td><td><tt>J</tt></td></tr>
+   <tr><td>K</td><td>KNOW RAM test</td><td><tt>KAADR,EADR</tt></td></tr>
+   <tr>
+    <td>L</td>
+    <td>Assign LIST</td>
+    <td><tt>LT or LL or LU</tt></td>
+   </tr>
+   <tr><td>M</td><td>MOVE</td><td><tt>MAADR,EADR, ZADR</tt></td></tr>
+   <tr>
+    <td>O</td>
+    <td>Assign OUTPUT channel</td>
+    <td><tt>OT or OL or OU</tt></td>
+   </tr>
+   <tr>
+    <td>P</td>
+    <td>PRINT disassembler</td>
+    <td><tt>PAADR,EADR</tt></td></tr>
+   <tr><td>R</td><td>READ ext. memory</td><td><tt>RADR</tt></td></tr>
+   <tr>
+    <td>S</td>
+    <td>SUBSTITUTE<br/>(change a byte in working memory)</td>
+    <td><tt>SADR,Byte</tt></td>
+   </tr>
+   <tr>
+    <td>T</td>
+    <td><a href="editor.htm">Text editor</a></td>
+    <td><tt>T</tt></td>
+   </tr>
+   <tr><td>V</td><td>VERIFY</td><td><tt>VAADR, EADR, ZADR</tt></td></tr>
+   <tr><td>W</td><td>WRITE</td><td><tt>WAADR,EADR</tt></td></tr>
+   <tr><td>X</td><td>Show registers</td><td><tt>X or Xr</tt></td></tr>
+   <tr><td>Z</td><td>Second register set</td><td><tt>Z or Zr</tt></td></tr>
+  </table>
+ <br/>
+  Explanations:<br/>
+  <table border="1">
+   <tr><td>ADR</td><td>address</td></tr>
+   <tr><td>AADR</td><td>start address</td></tr>
+   <tr><td>EADR</td><td>end address</td></tr>
+   <tr><td>ZADR</td><td>destination address</td></tr>
+   <tr><td>r</td><td>register A, B, ...</td></tr>
+  </table>
+ <br/><br/>
+
+ <h2>Entry Point Table</h2>
+  <table border="1">
+   <tr><th>Address</th><th>Instruction</th><th>Meaning</th></tr>
+   <tr>
+    <td>00E0H</td>
+    <td>MCI: JMP CI</td>
+    <td>Single-character input from keyboard, character in register A</td>
+   </tr>
+   <tr>
+    <td>00E3H</td>
+    <td>MRI: JMP RI</td>
+    <td>Single-character input from INPUT channel, character in register A</td>
+   </tr>
+   <tr>
+    <td>00E6H</td>
+    <td>MCO: JMPCO</td>
+    <td>Single-character output to screen, character in register C</td>
+   </tr>
+   <tr>
+    <td>00E9H</td>
+    <td>MWO: JMPWO</td>
+    <td>Single-character output to OUTPUT channel, character in register C</td>
+   </tr>
+   <tr>
+    <td>00ECH</td>
+    <td>MLO: JMP LO</td>
+    <td>Single-character output to LIST channel, character in register C</td>
+   </tr>
+   <tr>
+    <td>00EFH</td>
+    <td>MCSTS: JMP CSTS</td>
+    <td>Keyboard status 0: no character, -1: character</td>
+   </tr>
+   <tr>
+    <td>0F2H</td>
+    <td>MIOC: JMP IOCHK</td>
+    <td>Query IN/OUT assignment, byte in register A</td>
+   </tr>
+   <tr>
+    <td>0F5H</td>
+    <td>MIOS: JMP IOSET</td>
+    <td>Assign IN/OUT device, byte in register A</td>
+   </tr>
+  </table>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<html>
+<body>
+ <h1>SC2&nbsp;Chess Computer</h1>
+  The SC2 chess computer was manufactured
+  at VEB Mikroelektronik Erfurt.
+  Communication between the player and the computer takes place
+  exclusively via a keyboard and a 7-segment display,
+  along with two LEDs for "check" and "checkmate".
+  There is also an acoustic signal.
+  This is quite practical, since the computer's thinking time
+  can be rather long depending on the program level.
+  In JKCEMU, the signal tone can only be heard
+  if you enable sound output in the
+  <a href="audio.htm">Audio/Tape</a> window
+  on the <em>Speaker</em> tab.
+ <br/><br/>
+  You can shorten the computer's thinking time
+  by running the emulator at maximum speed.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li><a href="sc2.htm#keyboard">1. Keyboard</a></li>
+   <li>
+    <a href="sc2.htm#display">2. Display</a>
+    <ul>
+     <li><a href="sc2.htm#7seg">2.1. 7-Segment Display</a></li>
+     <li>
+      <a href="sc2.htm#signaling">2.2. Signaling of Certain Game Situations</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="sc2.htm#usage">3. Notes on Operation</a>
+    <ul>
+     <li><a href="sc2.htm#level">3.1. Program Levels</a></li>
+     <li>
+      <a href="sc2.htm#specialmoves">3.2. Special Moves</a>
+      <ul>
+       <li><a href="sc2.htm#castling">3.2.1. Castling</a></li>
+       <li><a href="sc2.htm#enpassant">3.2.2. En&nbsp;Passant</a></li>
+       <li><a href="sc2.htm#promotion">3.2.3. Pawn Promotion</a></li>
+      </ul>
+     </li>
+     <li><a href="sc2.htm#corrections">3.3. Corrections</a></li>
+     <li><a href="sc2.htm#boardcheck">3.4. Checking the Board Position</a></li>
+     <li>
+      <a href="sc2.htm#gameinput">3.5. Problem Entry (Changing the Board Position)</a>
+     </li>
+    </ul>
+   </li>
+   <li><a href="sc2.htm#etc">4. Miscellaneous</a></li>
+   <li><a href="sc2.htm#source">5. Source</a></li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="keyboard">1. Keyboard</a></h2>
+  <table border="1">
+   <tr><th>SC2 Key</th><th>Key in JKCEMU</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">R</td>
+    <td valign="top">Escape</td>
+    <td>
+     reset (RESET),<br/>
+     all pieces are in the starting position,<br/>
+     the computer plays black.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">K</td>
+    <td valign="top">K or +</td>
+    <td>set program level</td>
+   </tr>
+   <tr>
+    <td valign="top">L</td>
+    <td valign="top">L or Backspace</td>
+    <td>
+     clear the display,<br/>
+     delete unconfirmed move entries
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">P</td>
+    <td valign="top">P</td>
+    <td>problem entry</td>
+   </tr>
+   <tr>
+    <td valign="top">Q</td>
+    <td valign="top">Q or Enter</td>
+    <td>
+     confirm move entries,<br/>
+     display the next piece and its position
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">T</td>
+    <td valign="top">T</td>
+    <td>turn off the signal tone</td>
+   </tr>
+   <tr>
+    <td valign="top">W</td>
+    <td valign="top">W</td>
+    <td>piece selection: the computer plays white.</td>
+   </tr>
+   <tr>
+    <td valign="top">A&nbsp;1</td>
+    <td valign="top">A or 1</td>
+    <td>enter the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">B&nbsp;2</td>
+    <td valign="top">B or 2</td>
+    <td>enter the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">C&nbsp;3</td>
+    <td valign="top">C or 3</td>
+    <td>enter the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">D&nbsp;4</td>
+    <td valign="top">D or 4</td>
+    <td>enter the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">E&nbsp;5</td>
+    <td valign="top">E or 5</td>
+    <td>enter the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">F&nbsp;6</td>
+    <td valign="top">F or 6</td>
+    <td>enter the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">G&nbsp;7</td>
+    <td valign="top">G or 7</td>
+    <td>enter the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">H&nbsp;8</td>
+    <td valign="top">H or 8</td>
+    <td>enter the row or column</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+
+ <h2><a name="display">2. Display</a></h2>
+
+ <h3><a name="7seg">2.1. 7-Segment Display</a></h3>
+  <table border="1">
+   <tr><th>Display</th><th>Meaning</th></tr>
+   <tr><td><em>E2&nbsp;E4</em></td><td>move E2 to E4</td></tr>
+   <tr>
+    <td><em>--&nbsp;--</em></td>
+    <td>invalid entry or illegal move</td>
+   </tr>
+   <tr>
+    <td><em>EE&nbsp;EE</em></td>
+    <td>the computer plays white</td>
+   </tr>
+   <tr>
+    <td><em>oo&nbsp;oo</em></td>
+    <td>the computer is currently thinking</td>
+   </tr>
+   <tr>
+    <td><em>d3&nbsp;E1</em></td>
+    <td>
+     <em>d3</em>: coordinates of the queen entered<br/>
+     <em>E1</em>: code for the white queen during entry<br/>
+    </td>
+   </tr>
+   <tr>
+    <td><em>Pr&nbsp;ob</em></td>
+    <td>problem entry mode</td>
+   </tr>
+  </table>
+ <br/>
+  The columns of the chessboard are shown with <em>A</em>, <em>b</em>,
+  <em>C</em>, <em>d</em>, <em>E</em>, <em>F</em>, <em>g</em>,
+  and <em>H</em>.
+  The lowercase <em>g</em> looks exactly like the digit <em>9</em>.
+ <br/><br/>
+
+ <h3><a name="signaling">2.2. Signaling of Certain Game Situations</a></h3>
+  <table border="1">
+   <tr>
+    <th>Game Situation</th>
+    <th>7-Segment Display</th>
+    <th>"Checkmate" Indicator</th>
+    <th>"Check" Indicator</th>
+    <th>Remark</th>
+   </tr>
+   <tr>
+    <td valign="top">stalemate for the computer</td>
+    <td valign="top">flashes</td>
+    <td></td>
+    <td></td>
+    <td valign="top">end of game</td>
+   </tr>
+   <tr>
+    <td valign="top">forced mate for the player</td>
+    <td valign="top">flashes</td>
+    <td></td>
+    <td></td>
+    <td valign="top">the game can be continued.</td>
+   </tr>
+   <tr>
+    <td valign="top">checkmate for the computer</td>
+    <td valign="top">flashes</td>
+    <td valign="top">flashes</td>
+    <td></td>
+    <td valign="top">end of game</td>
+   </tr>
+   <tr>
+    <td valign="top">forced mate for the computer</td>
+    <td valign="top">flashes</td>
+    <td valign="top">flashes</td>
+    <td></td>
+    <td valign="top">the game can be continued.</td>
+   </tr>
+   <tr>
+    <td valign="top">check by the computer</td>
+    <td></td>
+    <td></td>
+    <td valign="top">lit</td>
+    <td valign="top">the game can be continued.</td>
+   </tr>
+   <tr>
+    <td valign="top">checkmate for the player</td>
+    <td valign="top">flashes</td>
+    <td></td>
+    <td valign="top">flashes</td>
+    <td valign="top">end of game</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     forced mate for the player and<br/>
+     check by the computer</td>
+    <td valign="top">flashes</td>
+    <td></td>
+    <td valign="top">flashes</td>
+    <td valign="top">the game can be continued.</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     forced mate for the computer and<br/>
+     check by the computer</td>
+    <td valign="top">flashes</td>
+    <td valign="top">flashes</td>
+    <td valign="top">flashes</td>
+    <td valign="top">the game can be continued.</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+
+ <h2><a name="usage">3. Notes on Operation</a></h2>
+  After resetting (RESET or Escape), select
+  the program level (1 to 10) with the <em>K</em> key.
+  The higher the program level, the stronger the computer plays.
+  However, it then also takes longer to think.
+ <br/><br/>
+  By default, you play white and the computer
+  plays black, i.e. you move first.
+  Now enter your first move (e.g. <em>E2E4</em>)
+  and confirm with <em>Q (Enter)</em>.
+  The computer thinks and then displays its move.
+  Now it is your turn again, and so on.
+ <br/><br/>
+  If you want to play black,
+  press the <em>W</em> key after selecting the program level
+  (display <em>EE EE</em>) and confirm with
+  <em>Q (Enter)</em>.
+  The computer now displays its first move.
+  Now it is your turn: enter your first move and confirm,
+  and so on.
+ <br/><br/>
+
+ <h3><a name="level">3.1. Program Levels</a></h3>
+  <table border="1">
+   <tr>
+    <th>Program Level</th>
+    <th>Suitable For</th>
+    <th>Average Move Time</th>
+   </tr>
+   <tr><td>10</td><td>endgame analysis</td><td>12:30 minutes</td></tr>
+   <tr><td>9</td><td>full analysis</td><td>1 hour</td></tr>
+   <tr><td>8</td><td>special analysis</td><td>16 minutes</td></tr>
+   <tr><td>7</td><td>tournament analysis</td><td>10 minutes</td></tr>
+   <tr><td>6</td><td>training analysis</td><td>4:50 minutes</td></tr>
+   <tr><td>5</td><td>tournament</td><td>2:30 minutes</td></tr>
+   <tr><td>4</td><td>training</td><td>1 minute</td></tr>
+   <tr><td>3</td><td>practice</td><td>40 seconds</td></tr>
+   <tr><td>2</td><td>rapid chess</td><td>8 seconds</td></tr>
+   <tr><td>1</td><td>blitz chess</td><td>3 seconds</td></tr>
+  </table>
+ <br/>
+  The program level can be changed at any time during the game
+  by pressing the <em>K</em> key.
+ <br/><br/>
+
+ <h3><a name="specialmoves">3.2. Special Moves</a></h3>
+
+ <h3><a name="castling">3.2.1. Castling</a></h3>
+  Castling is entered, and displayed, as the king's move,
+  i.e. the possible moves are:
+  <table border="1">
+   <tr>
+    <td><em>E1&nbsp;G1</em></td>
+    <td>castle kingside as white</td>
+   </tr>
+   <tr>
+    <td><em>E1&nbsp;C1</em></td>
+    <td>castle queenside as white</td>
+   </tr>
+   <tr>
+    <td><em>E8&nbsp;g8</em></td>
+    <td>castle kingside as black</td>
+   </tr>
+   <tr>
+    <td><em>E8&nbsp;C8</em></td>
+    <td>castle queenside as black</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="enpassant">3.2.2. En&nbsp;Passant</a></h3>
+  Capturing <em>en&nbsp;passant</em> (in passing)
+  is only possible between pawns, and only
+  when a pawn advances two squares, thereby skipping over
+  a square on which it could have been captured by another pawn.
+  In that case, the opposing pawn can capture it
+  by moving to the skipped-over square.
+ <br/><br/>
+
+ <h3><a name="promotion">3.2.3. Pawn Promotion</a></h3>
+  When a pawn reaches the opponent's back rank,
+  it can be promoted to any other piece.
+  By default, it is always promoted to a queen.
+  However, if you want to promote your pawn to a different piece,
+  you must do so via problem entry.
+ <br/><br/>
+
+ <h3><a name="corrections">3.3. Corrections</a></h3>
+  If you made a typing mistake while entering a move
+  and have not yet confirmed the move with <em>Q (Enter)</em>,
+  press <em>L</em> and enter the move again.
+ <br/><br/>
+  If the computer does not accept the move you entered
+  (display <em>-- --</em>), simply enter a valid move.
+ <br/><br/>
+
+ <h3><a name="boardcheck">3.4. Checking the Board Position</a></h3>
+  JKCEMU offers its own <a href="chessboard.htm">chessboard display</a>,
+  which has practically made the chess program's own
+  board-position check unnecessary.
+  For the sake of completeness, however,
+  it is explained here anyway.
+ <br/><br/>
+  Whenever it is your turn, you can invoke the board-position check
+  to have the board position stored in the computer displayed to you.
+  Simply press the <em>Q (Enter)</em> key
+  without entering a move.
+  With each key press, an occupied square and the piece
+  standing on it are displayed.
+  The left two digits of the display indicate the square,
+  and the right two digits stand for the piece.
+  The pieces are coded as follows:
+ <br/>
+  <table border="1">
+   <tr><th>Piece</th><th>White</th><th>Black</th></tr>
+   <tr><td>pawn</td><td>E2</td><td>2</td></tr>
+   <tr><td>knight</td><td>E4</td><td>4</td></tr>
+   <tr><td>bishop</td><td>E6</td><td>6</td></tr>
+   <tr><td>rook</td><td>E8</td><td>8</td></tr>
+   <tr><td>queen</td><td>EA</td><td>A</td></tr>
+   <tr><td>king</td><td>EC</td><td>C</td></tr>
+  </table>
+ <br/><br/>
+  Except after a problem entry, the board-position check
+  is only possible after the first move has been made.
+  To continue playing after the board-position check, you must press
+  the <em>L</em> key.
+  The display then shows <em>00 00</em>,
+  and you can now enter your move.
+ <br/><br/>
+
+ <h3>
+  <a name="gameinput">3.5. Problem Entry (Changing the Board Position)</a>
+ </h3>
+  The <em>P</em> key takes you into problem entry mode.
+  The same key takes you out of this mode again.
+  The display then shows four zeros,
+  and you can continue playing.
+ <br/><br/>
+  If you want to remove a piece,
+  enter the position of the square and press
+  <em>Q (Enter)</em>.
+  The square is then set to empty.
+ <br/><br/>
+  If, on the other hand, you want to add or change a piece,
+  enter the position of the square, followed by
+  the code for the piece, and press
+  <em>Q (Enter)</em>.
+ <br/><br/>
+  The codes for the pieces differ, for the king
+  and the queen, from those used in the board-position check
+  (queen: <em>1</em> instead of <em>A</em>,
+  king: <em>3</em> instead of <em>C</em>).
+  However, you can still enter the codes <em>A</em> and <em>C</em>;
+  <em>1</em> and <em>3</em> are then displayed instead.
+ <br/><br/>
+  The following codes therefore apply to problem entry:
+ <br/>
+  <table border="1">
+   <tr><th>Piece</th><th>White</th><th>Black</th></tr>
+   <tr><td>pawn</td><td>E2</td><td>2</td></tr>
+   <tr><td>knight</td><td>E4</td><td>4</td></tr>
+   <tr><td>bishop</td><td>E6</td><td>6</td></tr>
+   <tr><td>rook</td><td>E8</td><td>8</td></tr>
+   <tr><td>queen</td><td>E1</td><td>1</td></tr>
+   <tr><td>king</td><td>E3</td><td>3</td></tr>
+  </table>
+ <br/><br/>
+
+
+ <h2><a name="etc">4. Miscellaneous</a></h2>
+  The SC2 chess computer was initially shipped
+  with software that was not entirely free of bugs.
+  In certain cases, the check indicator would light up
+  even though there was no check situation at all.
+  There were also cases where the indicator failed to light up
+  even though check had been given.
+  These occasional false indications are also described
+  in the addendum to the operating manual.
+  Later, the chess computer was shipped with
+  corrected software.
+  JKCEMU includes the corrected version.
+ <br/><br/>
+
+
+ <h2><a name="source">5. Source</a></h2>
+  The tables and information from section 2 onward were taken
+  largely from the original operating manual.
+</body>
+</html>

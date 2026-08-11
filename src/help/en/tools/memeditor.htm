@@ -1,0 +1,108 @@
+<html>
+<body>
+ <h1>Memory Editor</h1>
+  The Memory Editor is used for viewing and changing
+  the bytes in the emulator's working memory.
+ <br/><br/>
+  <ul>
+   <li><a href="memeditor.htm#show">1. Displaying a Memory Range</a></li>
+   <li>
+    <a href="memeditor.htm#change">2. Writing to a Memory Range</a>
+    <ul>
+     <li>
+      <a href="memeditor.htm#overwrite">2.1. Overwriting Bytes Directly</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="memeditor.htm#copy">3. Copying Selected Bytes</a>
+   </li>
+   <li><a href="memeditor.htm#font">4. Font</a></li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="show">1. Displaying a Memory Range</a></h2>
+  In the upper area, the window contains two fields
+  for entering the start and end address.
+  Fill these in as hexadecimal values and choose
+  the menu item <em>File</em> &rarr; <em>Refresh</em>.
+  The corresponding range of the working memory
+  is now displayed in the window.
+ <br/><br/>
+  You can also refresh
+  by pressing the <em>Enter</em> key
+  while the cursor is in the input field for the end address.
+ <br/><br/>
+  <b>Caution!</b> You always see the memory range
+  as the microprocessor sees it at the time of the refresh.
+  If the emulated system has several memory banks
+  overlapping in that address range,
+  you must make sure yourself
+  that the correct bank is switched in.
+ <br/><br/>
+
+
+ <h2><a name="change">2. Writing to a Memory Range</a></h2>
+  First, click with the mouse to set the cursor
+  on the memory location you want to write to.
+  Then choose the function
+  <em>Edit</em> &rarr; <em>Overwrite Bytes...</em> in the menu.
+  In the dialog that opens, enter the bytes to be written
+  and press <em>OK</em>.
+ <br/><br/>
+  To position the cursor, you can also enter the desired address
+  into one of the two fields in the <em>Address</em> area
+  and press <em>Enter</em>.
+ <br/><br/>
+  <b>Caution!</b> If the emulated system has several
+  memory banks overlapping in that address range,
+  the bytes are written to whichever memory bank
+  the microprocessor sees at the time of writing.
+  You must make sure yourself
+  that the correct bank is switched in.
+ <br/><br/>
+
+ <h3><a name="overwrite">2.1. Overwriting Bytes Directly</a></h3>
+  Besides the procedure described above for writing to the memory range,
+  there is also the option
+  of changing the data bytes directly in the display
+  by simply typing two hexadecimal digits,
+  thereby setting the new value of the selected data byte.
+  However, this direct input option can easily lead
+  to the memory range being overwritten by mistake.
+  For this reason, it is disabled by default.
+  You can enable this input option
+  via the menu item <em>Settings</em> &rarr;
+  <em>Overwrite Bytes by Direct Input</em>.
+  When a <a href="../settings.htm#profiles">profile is saved</a>,
+  this setting is saved along with it.
+ <br/><br/>
+
+
+ <h2><a name="copy">3. Copying Selected Bytes</a></h2>
+  With this function, which you find in the <em>Edit</em> menu,
+  you can copy the selected bytes as a hex string
+  to the clipboard
+  and then paste them from there,
+  e.g. into the dialog for searching for or overwriting bytes.
+  To do this, select the desired bytes
+  by dragging with the mouse button held down,
+  or by pressing the cursor keys while holding down the Shift key.
+ <br/><br/>
+  <b>Caution!</b> The bytes to be copied are read directly
+  from the working memory.
+  If these bytes have since been changed in the meantime
+  (e.g. by loading files or by the emulated system itself),
+  bytes other than the ones shown in the Memory Editor
+  are copied.
+ <br/><br/>
+
+
+ <h2><a name="font">4. Font</a></h2>
+  The font for the data display can be changed
+  in the <a href="../settings.htm">JKCEMU Settings</a> window,
+  on the <em>Fonts/Icons</em> tab, under
+  <em>Font for code areas</em>.
+</body>
+</html>

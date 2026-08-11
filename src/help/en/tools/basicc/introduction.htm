@@ -1,0 +1,52 @@
+<html>
+<head><title>BASIC Compiler: General Information</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>General Information</h2>
+  The compiler is used to translate BASIC programs into machine code.
+  The machine code programs generated this way can be started directly
+  in the emulator or saved to a program file.
+ <br/><br/>
+  The BASIC compiler is characterized by the following capabilities:
+  <ul>
+   <li>16-bit and 32-bit integer arithmetic</li>
+   <li>Floating-point arithmetic</li>
+   <li>
+    <a href="strings.htm">String handling</a>
+   </li>
+   <li><a href="graphics.htm">Graphics support</a>.</li>
+   <li>
+    Support for structured programming
+    using various kinds of
+    <a href="structure.htm#loops">loops</a> and
+    <a href="usersubs.htm">user-defined functions and procedures</a>
+   </li>
+   <li>
+    Generation of fast and compact Z80 program code
+    for the following computers
+    (see <a href="targets.htm">target systems</a>):<br/>
+    <ul>
+     <li>AC1</li>
+     <li>CP/M-compatible systems</li>
+     <li>HC900</li>
+     <li>H&uuml;bler-Grafik-MC</li>
+     <li>KC85/1...5</li>
+     <li>KC87</li>
+     <li>Kramer-MC</li>
+     <li>LLC2</li>
+     <li>Z1013</li>
+     <li>Z9001</li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+  Normally, the compiler generates standalone programs
+  that are started with the appropriate command in the operating system.
+  However, it is also possible to compile the BASIC program into a
+  machine code subroutine
+  (see <a href="options.htm">compiler options</a>).
+  This allows the compiled program to be called from other programs
+  with a <tt>CALL</tt> command.
+</body>
+</html>

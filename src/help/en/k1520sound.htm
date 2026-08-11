@@ -1,0 +1,61 @@
+<html>
+<body>
+ <h1>K1520 Sound Card</h1>
+  For computers with a K1520 bus connector,
+  and thus also for some of the computers emulated by JKCEMU,
+  a sound card was developed
+  that uses the AY-3-8910 or AY-3-8912 chip.
+  A CTC is also included.
+ <br/><br/>
+  The sound card can be flexibly configured via jumpers.
+  In JKCEMU, this card is emulated with the following settings:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <td align="left" valign="top">Clock frequency of the sound chip:</td>
+    <td align="left" valign="top">1.79&nbsp;MHz</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top">Clock frequency of the CTC:</td>
+    <td align="left" valign="top">= clock frequency of the emulated system</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top">CTC input channel&nbsp;0:</td>
+    <td align="left" valign="top">
+     = one quarter of the clock frequency of the sound chip,
+     i.e. 447.5&nbsp;kHz
+    </td>
+   </tr>
+   <tr>
+    <td align="left" valign="top">CTC input channel&nbsp;1:</td>
+    <td align="left" valign="top">CTC output channel&nbsp;0</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top">CTC input channel&nbsp;2:</td>
+    <td align="left" valign="top">CTC output channel&nbsp;1</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top">CTC input channel&nbsp;3:</td>
+    <td align="left" valign="top">CTC output channel&nbsp;2</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top">Assignment of sound channels:</td>
+    <td align="left" valign="top">A: Left, B: Center, C: Right</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top">I/O addresses:</td>
+    <td align="left" valign="top">
+     38h: select or read sound register<br/>
+     39h: write sound register<br/>
+     3Ch: CTC channel&nbsp;0<br/>
+     3Dh: CTC channel&nbsp;1<br/>
+     3Eh: CTC channel&nbsp;2<br/>
+     3Fh: CTC channel&nbsp;3
+    </td>
+   </tr>
+  </table>
+ <br/>
+  <b>Caution!</b> In <a href="nanos.htm">NANOS</a>, the sound card
+  is operated in the different I/O address range E0h to E7h.
+</body>
+</html>

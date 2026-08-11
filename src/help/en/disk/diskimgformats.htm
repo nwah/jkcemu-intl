@@ -1,0 +1,353 @@
+<html>
+<body>
+ <h1>File Formats for Disk Image Files</h1>
+  One form of floppy disk emulation is the use
+  of image files (disk image files).
+  JKCEMU supports:
+  <ul>
+   <li><a href="diskimgformats.htm#plain">Plain image files</a></li>
+   <li>
+    <a href="diskimgformats.htm#anadisk">AnaDisk files (*.dump)</a>
+   </li>
+   <li>
+    <a href="diskimgformats.htm#copyqm">CopyQM files (*.cqm)</a>
+   </li>
+   <li>
+    <a href="diskimgformats.htm#cpcdisk">CPC-Disk files `*.dsk)</a>
+   </li>
+   <li>
+    <a href="diskimgformats.htm#imagedisk">ImageDisk files (*.imd)</a>
+   </li>
+   <li>
+    <a href="diskimgformats.htm#teledisk">TeleDisk files (*.td0)</a>
+   </li>
+  </ul>
+  These files can also be
+  <a href="diskimgformats.htm#gzip">GZIP-compressed</a>.
+ <br/><br/>
+  All these formats are supported by JKCEMU for both reading and writing.
+  However, there is a restriction
+  on write support:
+  <a href="floppydiskintro.htm#file">Emulating a floppy disk by means of an image file</a>
+  is only possible, for writing, with the file formats
+  that get by without any compression and allow random access
+  to the data of each individual sector.
+  This is only the case for plain image files, AnaDisk files, and CPC-Disk
+  files.
+  Full write support, i.e. creating such a file,
+  on the other hand exists for the
+  <a href="creatediskimg.htm#manually">manual creation of a disk image file</a>
+  as well as in the <a href="../tools/fileconverter.htm">File Converter</a>
+  (see also
+  <a href="diskimgformats.htm#summary">summary</a>).
+ <br/><br/>
+  There are floppy disks that have a different floppy disk format
+  on the system tracks than in the data area.
+  Such floppy disks can only be represented in disk image file formats
+  that support a free sector arrangement.
+  This is only the case for AnaDisk, CPC-Disk, ImageDisk and TeleDisk
+  files.
+ <br/><br/>
+
+ <h2><a name="plain">1. Plain Image Files</a></h2>
+  A plain image file is a concatenation of all the sectors
+  of a floppy disk, but without management or geometry data,
+  i.e. a plain image file contains only payload data.
+  The image file of a 720K floppy disk is thus exactly 720&nbsp;KByte in size.
+  A free sector arrangement, <a href="interleave.htm">interleave</a>,
+  or gaps in the sector numbering are not possible with this file format.
+ <br/><br/>
+  Although plain image files are widely used,
+  the format has no uniform name.
+  It is often simply called the RAW format.
+  The file extension is also not fixed.
+  Common ones are <em>*.img</em>, <em>*.image</em>, <em>*.raw</em>
+  and <em>*.dd</em>.
+  The latter is derived from the Linux/Unix command of the same name,
+  with which you can create image files, e.g.:
+ <br/><br/>
+  <tt>&nbsp;dd&nbsp;if=/dev/fd0&nbsp;of=&lt;file name&gt;</tt>
+ <br/><br/>
+  Under DOS, the programs <em>rawread.exe</em>
+  and, for writing back, <em>rawwrite.exe</em> are well known.
+ <br/><br/>
+
+ <h2><a name="anadisk">2. AnaDisk Files (*.dump)</a></h2>
+  AnaDisk is a program for creating special
+  disk image files (AnaDisk files).
+  In an AnaDisk file, the sectors are strung together uncompressed,
+  with an 8-byte header preceding each sector.
+  This header has the following structure:
+ <br/>
+  <table border="1">
+   <tr><th>Number of Bytes</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">1&nbsp;byte</td>
+    <td>Physical cylinder number (starts with 0)</td>
+   </tr>
+   <tr>
+    <td valign="top">1&nbsp;byte</td>
+    <td>Physical head number (starts with 0)</td>
+   </tr>
+   <tr>
+    <td valign="top">1&nbsp;byte</td>
+    <td>Cylinder number in the sector ID (starts with 0)</td>
+   </tr>
+   <tr>
+    <td valign="top">1&nbsp;byte</td>
+    <td>Head number in the sector ID (starts with 0)</td>
+   </tr>
+   <tr>
+    <td valign="top">1&nbsp;byte</td>
+    <td>Sector number (starts with 1)</td>
+   </tr>
+   <tr>
+    <td valign="top">1&nbsp;byte</td>
+    <td>
+     Sector size:<br/>
+     &nbsp;&nbsp;0: 128&nbsp;bytes<br/>
+     &nbsp;&nbsp;1: 256&nbsp;bytes<br/>
+     &nbsp;&nbsp;2: 512&nbsp;bytes<br/>
+     &nbsp;&nbsp;3: 1024&nbsp;bytes<br/>
+       </td>
+   </tr>
+   <tr>
+    <td valign="top">2 bytes</td>
+    <td>
+     Number of following bytes
+     (actual sector size in the file,
+     little-endian encoded))
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+  From the header data preceding each sector, the geometry data
+  and thus the floppy disk format can be determined.
+  Since each sector has its own header data,
+  not only can a free sector arrangement be represented,
+  but also different sector lengths within a track.
+  Deleted sectors are, however, not possible in an AnaDisk file,
+  or cannot be marked as such.
+ <br/><br/>
+  When formatting an AnaDisk file in the emulation,
+  the tracks must be formatted seamlessly in ascending order,
+  and within a track, side&nbsp;1 must be formatted before side&nbsp;2.
+ <br/><br/>
+
+ <h2><a name="copyqm">3. CopyQM Files (*.cqm)</a></h2>
+  JKCEMU supports the file format of the floppy disk copying program
+  CopyQM for both reading and writing.
+  Write support, however, is limited
+  to the manual creation of an image file and to the File Converter.
+  In the <em>JKCEMU Floppy Disk Station</em> window, a
+  CopyQM file can only be opened for reading,
+  because the data area in the file is compressed as a whole
+  and therefore writing an individual sector is not possible.
+ <br/><br/>
+  The CopyQM format is proprietary and not publicly documented.
+  The CopyQM support contained in JKCEMU is based
+  on the few pieces of information freely available on the internet
+  and could therefore be incomplete.
+  For this reason, it cannot be guaranteed
+  that every CopyQM file works in JKCEMU, or
+  that every file created with JKCEMU is accepted by CopyQM.
+ <br/><br/>
+
+ <h2><a name="cpcdisk">4. CPC-Disk Files (*.dsk)</a></h2>
+  The format commonly used by CPC emulators is supported by JKCEMU
+  for both reading and writing.
+  There are two subformats (standard and extended format),
+  both of which are supported.
+  When creating a CPC-Disk file, e.g. in the
+  <a href="../tools/fileconverter.htm">File Converter</a>,
+  JKCEMU automatically selects
+  the subformat suitable for the specific case.
+ <br/><br/>
+  When formatting a new CPC-Disk file in the emulation,
+  only the standard format is supported,
+  i.e. all tracks must be formatted with the same size.
+  In addition, the tracks must be formatted seamlessly
+  in ascending order, and within a track, side&nbsp;1 must be
+  formatted before side&nbsp;2.
+ <br/><br/>
+
+ <h2><a name="imagedisk">5. ImageDisk Files (*.imd)</a></h2>
+  The file format of the floppy disk archiving tool ImageDisk,
+  developed by Dave Dunfield, is supported by JKCEMU.
+  This file format can also be created during the manual creation
+  of a disk image file and in the File Converter.
+  In the <em>JKCEMU Floppy Disk Station</em> window, on the other hand,
+  only read support is available,
+  because the sector data can be compressed, and thus
+  seamlessly writing an individual sector in the middle
+  of the image file is not readily possible.
+ <br/><br/>
+  The ImageDisk file format is very flexible and can contain deleted
+  sectors as well as store the information
+  as to whether a sector was read with a CRC error.
+ <br/><br/>
+
+ <h2><a name="teledisk">6. TeleDisk Files (*.td0)</a></h2>
+  JKCEMU supports TeleDisk files for both writing and reading,
+  but without <em>Advanced Compression</em>.
+  Write support is limited
+  to the manual creation of an image file and to the File Converter.
+  In the <em>JKCEMU Floppy Disk Station</em> window, a
+  TeleDisk file can only be opened for reading,
+  because, as with the ImageDisk format, the sectors in the file
+  may be stored compressed,
+  and thus seamlessly writing an individual sector in the middle
+  of the image file is not readily possible.
+ <br/><br/>
+  TeleDisk is a program for creating and writing back
+  special disk image files (TeleDisk files)
+  and was very popular around 1990.
+  A TeleDisk file contains, in addition to the payload data,
+  very detailed management and geometry data.
+  This allows TeleDisk to produce an almost identical copy of a floppy
+  disk, even if the floppy disk format deviates from the standard.
+ <br/><br/>
+  The TeleDisk file format is very flexible and can, besides
+  deleted sectors, also contain information about sectors
+  read with a CRC error.
+  Furthermore, TeleDisk can also store sectors
+  for which only the data area, but not the header area, was readable.
+  In that case, it generates a sector ID
+  (i.e. it makes one up) and marks the sector accordingly.
+ <br/><br/>
+  Another special feature is
+  that TeleDisk sometimes reads and stores sectors multiple times,
+  i.e. the same sector can be present in the file more than once.
+  Since this, as well as sectors with a generated sector ID, cause
+  problems in the emulator, JKCEMU attempts to repair the data
+  read in from a TeleDisk file if necessary,
+  i.e. to replace a generated sector ID with the probably correct one
+  and to eliminate duplicate sectors.
+  If such a repair takes place, the user is informed
+  about it.
+  The repair applies only to the data read in,
+  not to the file itself, i.e. the file is not modified.
+ <br/><br/>
+
+
+ <h2><a name="gzip">7. Compressed Image Files</a></h2>
+  Image files can be compressed with GZIP
+  to save disk space.
+  For JKCEMU to correctly recognize such files,
+  a <em>.gz</em> must be appended to the file name
+  (see table).
+  You can compress and decompress them using the
+  <a href="../tools/filebrowser.htm">File Browser</a>.
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th>File Type</th>
+    <th>File Extension Uncompressed</th>
+    <th>File Extension Compressed</th>
+   </tr>
+   <tr>
+    <td valign="top">Plain image file</td>
+    <td valign="top">
+     .dd<br/>
+     .img<br/>
+     .image<br/>
+     .raw
+    </td>
+    <td valign="top">
+     .dd.gz<br/>
+     .img.gz<br/>
+     .image.gz<br/>
+     .raw.gz
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">AnaDisk file</td>
+    <td valign="top">.dump</td>
+    <td valign="top">.dump.gz</td>
+   </tr>
+   <tr>
+    <td valign="top">CPC-Disk file</td>
+    <td valign="top">.dsk</td>
+    <td valign="top">.dsk.gz</td>
+   </tr>
+   <tr>
+    <td valign="top">CopyQM file</td>
+    <td valign="top">
+     .cqm<br/>
+     .qm
+    </td>
+    <td valign="top">
+     .cqm.gz<br/>
+     .qm.gz
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">ImageDisk file</td>
+    <td valign="top">.imd</td>
+    <td valign="top">.imd.gz</td>
+   </tr>
+   <tr>
+    <td valign="top">TeleDisk file</td>
+    <td valign="top">.td0</td>
+    <td valign="top">.td0.gz</td>
+   </tr>
+  </table>
+ <br/>
+  <b>Caution!</b> Disk image files compressed with GZIP
+  are only supported for reading
+  in the <a href="floppydiskintro.htm#file">emulation of a floppy disk</a>.
+ <br/><br/>
+
+ <h2><a name="summary">8. Summary</a></h2>
+  The table summarizes the support for the individual
+  disk image file formats in JKCEMU:
+  <table border="1">
+   <tr>
+    <th>File Format</th>
+    <th>Emulation of a Floppy Disk</th>
+    <th>Manual Creation of an Image File</th>
+    <th>File Converter</th>
+   </tr>
+   <tr>
+    <td>Plain image file (*.dd; *.img; *.image; *.raw;)</td>
+    <td>RW</td>
+    <td>W</td>
+    <td>RW</td>
+   </tr>
+   <tr>
+    <td>AnaDisk file (*.dump)</td>
+    <td>RW</td>
+    <td>W</td>
+    <td>RW</td>
+   </tr>
+   <tr>
+    <td>CPC-Disk file (*.dsk)</td>
+    <td>RW</td>
+    <td>W</td>
+    <td>RW</td>
+   </tr>
+   <tr>
+    <td>CopyQM file (*.cqm; *.qm)</td>
+    <td>R</td>
+    <td>W</td>
+    <td>RW</td>
+   </tr>
+   <tr>
+    <td>ImageDisk file (*.imd)</td>
+    <td>R</td>
+    <td>W</td>
+    <td>RW</td>
+   </tr>
+   <tr>
+    <td>TeleDisk file (*.td0)</td>
+    <td>R</td>
+    <td>W</td>
+    <td>RW</td>
+   </tr>
+  </table>
+  R:&nbsp;read&nbsp;only,
+  RW:&nbsp;read&nbsp;and&nbsp;write,
+  W:&nbsp;write&nbsp;only
+</body>
+</html>
+

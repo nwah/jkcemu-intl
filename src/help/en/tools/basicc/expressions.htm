@@ -1,0 +1,664 @@
+<html>
+<head><title>BASIC Compiler: Expressions</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Expressions</h2>
+  Expressions are combinations of literals
+  (numbers and strings written in the BASIC program),
+  variables, function calls, operators and parentheses
+  that yield a numeric value or a string as their result.
+  Expressions that yield a numeric value
+  are <em>numeric expressions</em>.
+  Expressions that yield a string
+  are called <em>string expressions</em>.
+ <br/><br/>
+
+ <ul>
+  <li>
+   <a href="expressions.htm#num_expr">1. Numeric expressions</a>
+   <ul>
+    <li><a href="expressions.htm#numbers">1.1. Numbers</a></li>
+    <li><a href="expressions.htm#variables">1.2. Variables</a></li>
+    <li><a href="expressions.htm#functions">1.3. Functions</a></li>
+    <li>
+     <a href="expressions.htm#operators1">1.4. Operators with one operand</a>
+    </li>
+    <li>
+     <a href="expressions.htm#operators2">1.5. Operators with two operands</a>
+     <ul>
+      <li>
+       <a href="expressions.htm#cond_op">1.5.1. Comparison operators</a>
+      </li>
+      <li>
+       <a href="expressions.htm#math_op">1.5.2. Mathematical operators</a>
+      </li>
+      <li>
+       <a href="expressions.htm#bit_op">1.5.3. Bitwise operators</a>
+      </li>
+      <li>
+       <a href="expressions.htm#shift_op">1.5.4. Shift operators</a>
+      </li>
+     </ul>
+    </li>
+    <li><a href="expressions.htm#priority_rules">1.6. Precedence rules</a></li>
+   </ul>
+  </li>
+  <li><a href="expressions.htm#str_expr">2. String expressions</a></li>
+  <li><a href="expressions.htm#grammar">3. Grammar</a></li>
+ </ul>
+ <br/>
+
+ <h3><a name="num_expr">1. Numeric expressions</a></h3>
+  Numeric expressions yield a numeric value
+  with the data type <a href="datatypes.htm#integer">Integer</a>,
+  <a href="datatypes.htm#long">Long</a>,
+  <a href="datatypes.htm#decimal">Decimal</a> or
+  <a href="datatypes.htm#single">Single</a>.
+ <br/><br/>
+
+ <h3><a name="numbers">1.1. Numbers</a></h3>
+  The compiler understands decimal numbers with and without
+  a decimal point, hexadecimal numbers and binary numbers.
+  Decimal numbers begin with a digit&nbsp;0 to&nbsp;9,
+  hexadecimal numbers with <em>&amp;H</em>
+  and binary numbers with <em>&amp;B</em>.
+ <br/><br/>
+  The data type of the number is determined automatically.
+  If needed, however, you can also force a type
+  by appending a letter:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Appended letter</th><th>Forced data type</th></tr>
+   <tr><td>D</td><td>Decimal (only possible with decimal numbers)</td></tr>
+   <tr><td>L</td><td>Long</td></tr>
+  </table>
+ <br/>
+  For the data types Integer and Single there is no such letter,
+  since these data types are automatically used
+  in preference to Long and Decimal.
+ <br/><br/>
+  Examples:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Literal</th><th>Decimal value</th><th>Data type</th></tr>
+   <tr><td>123</td><td>123</td><td>Integer</td></tr>
+   <tr><td>123D</td><td>123.0</td><td>Decimal</td></tr>
+   <tr><td>123L</td><td>123</td><td>Long</td></tr>
+   <tr><td>123.0</td><td>123.0</td><td>Decimal</td></tr>
+   <tr><td>123.45</td><td>123.45</td><td>Single</td></tr>
+   <tr><td>123.45D</td><td>123.45</td><td>Decimal</td></tr>
+   <tr>
+    <td>123.45L</td>
+    <td colspan="2">Error: a number with a decimal point cannot be Long</td>
+   </tr>
+   <tr><td>123456</td><td>123456</td><td>Long</td></tr>
+   <tr><td>123456.7</td><td>123456.7</td><td>Single</td></tr>
+   <tr><td>123456.7D</td><td>123456.7</td><td>Decimal</td></tr>
+   <tr><td>123456.7E3</td><td>123456700</td><td>Single</td></tr>
+   <tr><td>123456.7E+3</td><td>123456700</td><td>Single</td></tr>
+   <tr><td>123456.7E-3</td><td>123.4567</td><td>Single</td></tr>
+   <tr>
+    <td>123456.7E3D</td>
+    <td colspan="2">Error: exponent not supported with Decimal</td>
+   </tr>
+   <tr><td>&amp;HA2BD</td><td>-23875</td><td>Integer</td></tr>
+   <tr><td>&amp;HA2BDL</td><td>41661</td><td>Long</td></tr>
+   <tr><td>&amp;H89A2BD</td><td>9020093</td><td>Long</td></tr>
+   <tr><td>&amp;H89A2BDL</td><td>9020093</td><td>Long</td></tr>
+   <tr><td>&amp;B1001011</td><td>75</td><td>Integer</td></tr>
+   <tr><td>&amp;B1001011L</td><td>75</td><td>Long</td></tr>
+   <tr><td>&amp;B10010110100101101</td><td>77101</td><td>Long</td></tr>
+  </table>
+ <br/>
+  <b>Caution!</b> If you do not force a data type,
+  it can still happen that, for optimization reasons,
+  the compiler internally generates a different data type.
+  For example, when assigning a Long variable an Integer literal,
+  the literal is internally compiled directly as Long,
+  in order to avoid the call to a corresponding conversion routine
+  that would otherwise be necessary at run time.
+ <br/><br/>
+
+ <h3><a name="variables">1.2. Variables</a></h3>
+  <a href="variables.htm">Variables</a> are used in an expression
+  to read the value stored in a variable.
+  For array variables, a specific array element must always
+  be specified,
+  since an expression can only yield a single value.
+  Access to a single element is done with an index,
+  or a list of indexes,
+  in parentheses following the array name.
+ <br/><br/>
+
+ <h3><a name="functions">1.3. Functions</a></h3>
+  A list of the functions can be found <a href="functions.htm">here</a>.
+  Functions whose names end with a <tt>$</tt> character
+  are string functions.
+  These return a string.
+ <br/><br/>
+
+ <h3><a name="operators1">1.4. Operators with one operand</a></h3>
+  <table border=1>
+   <tr><th nowrap="nowrap">Operator</th><th nowrap="nowrap">Meaning</th></tr>
+   <tr>
+    <td valign="top"><tt>+</tt></td>
+    <td>positive sign (the value is not changed.)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>-</tt></td>
+    <td>negative sign (mathematical negation)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>NOT</tt></td>
+    <td>
+     bitwise negation (Integer and Long only),<br/>
+     example: <tt>A = NOT B</tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  The result has the same data type as the operand.
+ <br/><br/>
+
+ <h3><a name="operators2">1.5. Operators with two operands</a></h3>
+  <table border=1>
+   <tr>
+    <th>Operator</th>
+    <th>Meaning</th>
+    <th> Supported data types for the left operand</th>
+    <th> Supported data types for the right operand</th>
+   </tr>
+   <tr>
+    <td valign="top"><tt>=</tt></td>
+    <td valign="top">test for equality</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&lt;&gt;</tt></td>
+    <td valign="top">test for inequality</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&lt;</tt></td>
+    <td valign="top">test for less than</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&lt;=</tt></td>
+    <td valign="top">test for less than or equal</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&gt;</tt></td>
+    <td valign="top">test for greater than</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&gt;=</tt></td>
+    <td valign="top">test for greater than or equal</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>+</tt></td>
+    <td valign="top">addition</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)&nbsp;&sup2;)</td>
+    <td nowrap="nowrap">all&nbsp;&sup1;)&nbsp;&sup2;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>-</tt></td>
+    <td valign="top">subtraction</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>*</tt></td>
+    <td valign="top">multiplication</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>/</tt></td>
+    <td valign="top">division</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+    <td valign="top">Integer, Long, Decimal, Single</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>ADD</tt></td>
+    <td valign="top">addition without overflow check</td>
+    <td valign="top">Integer</td>
+    <td valign="top">Integer</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>SUB</tt></td>
+    <td valign="top">subtraction without overflow check</td>
+    <td valign="top">Integer</td>
+    <td valign="top">Integer</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>MOD</tt></td>
+    <td valign="top">modulo (remainder of a division)</td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer, Long</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>AND</tt></td>
+    <td valign="top">bitwise AND</td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer, Long</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>OR</tt></td>
+    <td valign="top">bitwise OR</td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer, Long</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>XOR</tt></td>
+    <td valign="top">bitwise exclusive OR</td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer, Long</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>SHL</tt></td>
+    <td valign="top">
+     shift left without overflow check,<br/>
+     example (shift B left by two bits): <tt>B = B SHL 2</tt>
+    </td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>SHR</tt></td>
+    <td valign="top">shift right without overflow check</td>
+    <td valign="top">Integer, Long</td>
+    <td valign="top">Integer</td>
+   </tr>
+  </table>
+ <br/>
+  Notes:
+ <br/>
+  <table border="0">
+   <tr>
+    <td valign="top">&sup1;)</td>
+    <td valign="top">
+     If the left operand has a numeric data type
+     (Integer, Long, Decimal, or Single),
+     the right operand must likewise have a numeric data type,
+     though not necessarily the same one.
+     If the left operand is a string expression,
+     the right operand must likewise be of type String.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">&sup2;)</td>
+    <td valign="top">
+     For the data type String, the plus operator can be used
+     to build complex string expressions.
+     For this, please also read the notes on
+     <a href="strings.htm">string handling</a>,
+     especially on
+     <a href="strings.htm#expr">string expressions</a>!
+    </td>
+   </tr>
+  </table>
+ <br/>
+  <b>Note:</b> For a multiplication or division by 2 or 10,
+  please also read the explanations for the following functions:
+ <br/>
+  <ul>
+   <li><a href="functions.htm#mul10">MUL10</a></li>
+   <li><a href="functions.htm#mul2">MUL2</a></li>
+   <li><a href="functions.htm#div10">DIV10</a></li>
+   <li><a href="functions.htm#div2">DIV2</a></li>
+  </ul>
+ <br/>
+
+ <h3><a name="cond_op">1.5.1. Comparison operators</a></h3>
+  Comparison operators (=, &lt;&gt;, &lt;, &lt;=, &gt; and &gt;=)
+  always yield an Integer value as their result,
+  namely either&nbsp;0
+  (comparison failed, all bits cleared)
+  or&nbsp;-1 (comparison succeeded, all bits set).
+  Because either all bits are set or all bits are cleared,
+  the
+  <a href="expressions.htm#bit_op">bitwise operators AND and OR</a>
+  as well as the <a href="expressions.htm#operators1">bitwise negation NOT</a>
+  can also be used as logical operators for combining
+  comparisons.
+  The following example illustrates this:
+ <br/>
+  <tt>
+   &#10;<br/>
+   10 A$="ABC"&#10;<br/>
+   20 B$="XYZ"&#10;<br/>
+   30 C=1&#10;<br/>
+   40 D=2&#10;<br/>
+   50 PRINT (A$&lt;B$) AND (C&lt;D)&#10;<br/>
+  </tt>
+ <br/>
+  Line&nbsp;50 outputs&nbsp;-1.
+  This comes about as follows:
+  The subexpressions <tt>A$&lt;B$</tt> and
+  <tt>C&lt;D</tt> each yield the value&nbsp;-1,
+  i.e. all bits are set.
+  The AND operation between
+  <em>all bits set</em> and <em>all bits set</em>
+  remains <em>all bits set</em>,
+  which represents the numeric value&nbsp;-1.
+ <br/><br/>
+
+ <h3><a name="math_op">1.5.2. Mathematical operators</a></h3>
+  The mathematical operators are:
+  + - * / ADD SUB MOD.
+  If both operands have the same data type,
+  the operation is also carried out with this data type.
+  If, on the other hand, the operands have different data types,
+  the operand whose type has the smaller value range is first
+  converted to the data type of the other operand
+  (automatic data type conversion).
+  The result then has the data type with the larger
+  value range.
+ <br/><br/>
+  The result must fit into the result data type.
+  If this is not the case, a numeric overflow occurs
+  and the program terminates with an appropriate error message.
+ <br/><br/>
+  The operators <tt>ADD</tt> and <tt>SUB</tt>, on the other hand,
+  perform an Integer addition or subtraction
+  without an overflow check.
+  This is useful, for example, when calculating memory addresses.
+  The following example illustrates this:
+ <br/>
+  <tt>
+   &#10;<br/>
+   10 A=&amp;H7F00&#10;<br/>
+   20 N=0&#10;<br/>
+   30 FOR I=0 TO 999&#10;<br/>
+   40 IF PEEK(A+I)=0 THEN N=N+1&#10;<br/>
+   50 NEXT&#10;<br/>
+   60 PRINT N&#10;<br/>
+  </tt>
+ <br/>
+  Starting at address 7F00h, the number of null bytes is to be
+  counted in the following 1000 bytes.
+  At address 8000h the program terminates with a numeric
+  overflow, since the largest possible signed value
+  of&nbsp;32767 (7FFFh) has been exceeded.
+  With the ADD operator, the program does not terminate:
+ <br/>
+  <tt>
+   &#10;<br/>
+   10 A=&amp;H7F00&#10;<br/>
+   20 N=0&#10;<br/>
+   30 FOR I=0 TO 999&#10;<br/>
+   40 IF PEEK(A ADD I)=0 THEN N=N+1&#10;<br/>
+   50 NEXT&#10;<br/>
+   60 PRINT N&#10;<br/>
+  </tt>
+ <br/>
+  <b>Caution!</b> Some BASIC dialects also have
+  the operator&nbsp;<tt>^</tt> for exponentiation.
+  The JKCEMU BASIC compiler does not support this operator,
+  but offers the same functionality in the form
+  of the function&nbsp;<a href="functions.htm#pow">POW</a>.
+ <br/><br/>
+
+ <h3><a name="bit_op">1.5.3. Bitwise operators</a></h3>
+  The operators AND, OR and XOR perform bitwise operations
+  and are only possible with the data types Integer and Long.
+  If both operands have the data type Integer,
+  Integer is also returned.
+  In all other cases,
+  i.e. if at least one operand has the type Long,
+  the entire operation is carried out as Long.
+ <br/><br/>
+
+ <h3><a name="shift_op">1.5.4. Shift operators</a></h3>
+  The operators SHL and SHR shift the 16-bit Integer or
+  32-bit Long value of the left operand as many bits to the
+  left (SHL) or right (SHR)
+  as specified by the right operand.
+  Zero bits are always shifted in.
+  Bits shifted out are lost.
+  No overflow check is performed.
+  The result has the same data type as the left operand.
+ <br/><br/>
+
+ <h3><a name="priority_rules">1.6. Precedence rules</a></h3>
+  The various operators have different binding strength.
+  Operators with a higher binding strength are executed before
+  operators with a lower binding strength.
+  Within the same binding strength, execution proceeds
+  from left to right.
+ <br/><br/>
+  The table shows the precedence of the individual operators.
+  The further up an operator is, the higher its binding strength.
+ <br/><br/>
+  <table border="1">
+   <tr><th>Rank</th><th>Operator</th><th>Remark</th></tr>
+   <tr>
+    <td valign="top">1</td>
+    <td valign="top">(...)</td>
+    <td valign="top">expression enclosed in parentheses</td>
+   </tr>
+   <tr>
+    <td valign="top">2</td>
+    <td valign="top">
+     +<br/>
+     -
+    </td>
+    <td valign="top">
+     operators with one operand (sign)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">3</td>
+    <td valign="top">
+     *<br/>
+     /
+    </td>
+    <td valign="top">multiplication and division</td>
+   </tr>
+   <tr>
+    <td valign="top">4</td>
+    <td valign="top">
+     +<br/>
+     -<br/>
+     ADD<br/>
+     SUB
+    </td>
+    <td valign="top">addition and subtraction</td>
+   </tr>
+   <tr>
+    <td valign="top">5</td>
+    <td valign="top">
+     SHL<br/>
+     SHR
+    </td>
+    <td valign="top">shift operations</td>
+   </tr>
+   <tr>
+    <td valign="top">6</td>
+    <td valign="top">
+     &lt;<br/>
+     &lt;=<br/>
+     &gt;<br/>
+     &gt;=<br/>
+     =<br/>
+     &lt;&gt;
+    </td>
+    <td valign="top">comparisons</td>
+   </tr>
+   <tr>
+    <td valign="top">7</td>
+    <td valign="top">NOT</td>
+    <td valign="top">bitwise negation</td>
+   </tr>
+   <tr>
+    <td valign="top">8</td>
+    <td valign="top">
+     AND<br/>
+     OR<br/>
+     XOR
+    </td>
+    <td valign="top">bitwise binary operations</td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="str_expr">2. String expressions</a></h3>
+  String expressions are either a string literal
+  (a string constant), a string variable, or the call
+  of a string function.
+  Concatenating string expressions with the plus sign
+  is only allowed when assigning a string variable
+  (the <a href="instructions.htm#let">LET</a> statement) and
+  with the statements <a href="instructions.htm#label">LABEL</a>
+  and <a href="instructions.htm#print">PRINT</a>.
+ <br/><br/>
+  Please read the notes on
+  <a href="strings.htm">string handling</a>.
+ <br/><br/>
+
+ <h3><a name="grammar">3. Grammar</a></h3>
+  The following grammar describes the syntax of expressions:
+ <br/><br/>
+  <i>Expression:</i><br/>
+  &nbsp;&nbsp;<i>Negation_expression</i><br/>
+  &nbsp;&nbsp;<i>Expression</i>&nbsp;<tt>AND</tt>&nbsp;<i>Negation_expression</i><br/>
+  &nbsp;&nbsp;<i>Expression</i>&nbsp;<tt>OR</tt>&nbsp;<i>Negation_expression</i><br/>
+  &nbsp;&nbsp;<i>Expression</i>&nbsp;<tt>XOR</tt>&nbsp;<i>Negation_expression</i>
+ <br/><br/>
+  <i>Negation_expression:</i><br/>
+  &nbsp;&nbsp;<i>Comparison_expression</i><br/>
+  &nbsp;&nbsp;<tt>NOT</tt>&nbsp;<i>Comparison_expression</i>
+ <br/><br/>
+  <i>Comparison_expression:</i><br/>
+  &nbsp;&nbsp;<i>Shift_expression</i><br/>
+  &nbsp;&nbsp;<i>Comparison_expression</i>&nbsp;<i>Comparison_operator</i>&nbsp;<i>Shift_expression</i><br/>
+  &nbsp;&nbsp;<i>Simple_string_expression</i>&nbsp;<i>Comparison_operator</i>&nbsp;<i>Simple_string_expression</i>
+ <br/><br/>
+  <i>Comparison_operator:</i><br/>
+  &nbsp;&nbsp;<tt>&lt;</tt><br/>
+  &nbsp;&nbsp;<tt>&lt;=</tt><br/>
+  &nbsp;&nbsp;<tt>=</tt><br/>
+  &nbsp;&nbsp;<tt>=&gt;</tt><br/>
+  &nbsp;&nbsp;<tt>&gt;</tt><br/>
+  &nbsp;&nbsp;<tt>&lt;&gt;</tt>
+ <br/><br/>
+  <i>Shift_expression:</i><br/>
+  &nbsp;&nbsp;<i>Addition_expression</i><br/>
+  &nbsp;&nbsp;<i>Shift_expression</i>&nbsp;<i>Shift_operator</i>&nbsp;<i>Addition_expression</i>
+ <br/><br/>
+  <i>Shift_operator:</i><br/>
+  &nbsp;&nbsp;<tt>SHL</tt><br/>
+  &nbsp;&nbsp;<tt>SHR</tt>
+ <br/><br/>
+  <i>Addition_expression:</i><br/>
+  &nbsp;&nbsp;<i>Multiplication_expression</i><br/>
+  &nbsp;&nbsp;<i>Addition_expression</i>&nbsp;<i>Addition_operator</i>&nbsp;<i>Multiplication_expression</i>
+ <br/><br/>
+  <i>Addition_operator:</i><br/>
+  &nbsp;&nbsp;<tt>ADD</tt><br/>
+  &nbsp;&nbsp;<tt>SUB</tt><br/>
+  &nbsp;&nbsp;<tt>+</tt><br/>
+  &nbsp;&nbsp;<tt>-</tt>
+ <br/><br/>
+  <i>Multiplication_expression:</i><br/>
+  &nbsp;&nbsp;<i>Unary_expression</i><br/>
+  &nbsp;&nbsp;<i>Multiplication_expression</i>&nbsp;<i>Multiplication_operator</i>&nbsp;<i>Unary_expression</i>
+ <br/><br/>
+  <i>Multiplication_operator:</i><br/>
+  &nbsp;&nbsp;<tt>*</tt><br/>
+  &nbsp;&nbsp;<tt>/</tt><br/>
+  &nbsp;&nbsp;<tt>MOD</tt>
+ <br/><br/>
+  <i>Unary_expression:</i><br/>
+  &nbsp;&nbsp;<i>Primary_expression</i><br/>
+  &nbsp;&nbsp;<i>Numeric_array_variable</i><br/>
+  &nbsp;&nbsp;<i>Sign</i>&nbsp;<i>Primary_expression</i>
+ <br/><br/>
+  <i>Sign:</i><br/>
+  &nbsp;&nbsp;<tt>+</tt><br/>
+  &nbsp;&nbsp;<tt>-</tt>
+ <br/><br/>
+  <i>Primary_expression:</i><br/>
+  &nbsp;&nbsp;<tt>(</tt>&nbsp;<i>Expression</i>&nbsp;<tt>)</tt><br/>
+  &nbsp;&nbsp;<i>Number_literal</i><br/>
+  &nbsp;&nbsp;<i>Character_literal</i><br/>
+  &nbsp;&nbsp;<i>Simple_numeric_variable</i><br/>
+  &nbsp;&nbsp;<i>Numeric_array_variable</i><br/>
+  &nbsp;&nbsp;<i>Numeric_function_call</i>
+ <br/><br/>
+  <i>Singular_integer_variable:</i><br/>
+  &nbsp;&nbsp;<i>Simple_Integer_or_Long_variable</i><br/>
+  &nbsp;&nbsp;<i>Integer_or_Long_array_variable</i>
+ <br/><br/>
+  <i>Number_literal:</i><br/>
+  &nbsp;&nbsp;<i>Sequence_of_digits_0...9</i><br/>
+  &nbsp;&nbsp;<i>Sequence_of_digits_0...9</i>&nbsp;<i>Decimal_point</i>&nbsp;<i>Sequence_of_digits_0...9</i><br/>
+  &nbsp;&nbsp;<tt>&amp;B</tt>&nbsp;<i>Sequence_of_digits_0_or_1</i><br/>
+  &nbsp;&nbsp;<tt>&amp;H</tt>&nbsp;<i>Sequence_of_hexadecimal_digits</i>
+ <br/><br/>
+  <i>Decimal_point:</i><br/>
+  &nbsp;&nbsp;<tt>.</tt>
+ <br/><br/>
+  <i>Character_literal:</i><br/>
+  &nbsp;&nbsp;<tt>'</tt>&nbsp;<i>8-bit_character</i>&nbsp;<tt>'</tt>
+ <br/><br/>
+  <i>Simple_numeric_variable:</i><br/>
+  &nbsp;&nbsp;<i>numeric_identifier</i>
+ <br/><br/>
+  <i>Numeric_array_variable:</i><br/>
+  &nbsp;&nbsp;<i>numeric_identifier</i>&nbsp;<tt>(</tt>&nbsp;<i>Expression</i>&nbsp;<tt>)</tt><br/>
+  &nbsp;&nbsp;<i>numeric_identifier</i>&nbsp;<tt>(</tt>&nbsp;<i>Expression</i>&nbsp;<tt>,</tt>&nbsp;<i>Expression</i>&nbsp;<tt>)</tt>
+ <br/><br/>
+  <i>Numeric_function_call:</i><br/>
+  &nbsp;&nbsp;<i>numeric_identifier</i><br/>
+  &nbsp;&nbsp;<i>numeric_identifier</i>&nbsp;<tt>(</tt>&nbsp;<i>Argument_list</i>&nbsp;<tt>)</tt>
+ <br/><br/>
+  <i>numeric_identifier:</i><br/>
+  &nbsp;&nbsp;<i>Letter_A...Z</i><br/>
+  &nbsp;&nbsp;<i>Letter_A...Z</i>&nbsp;<i>Sequence_of_letters_A...Z_and_digits_0...9</i>
+ <br/><br/>
+  <i>Argument_list:</i><br/>
+  &nbsp;&nbsp;<i>Argument</i><br/>
+  &nbsp;&nbsp;<i>Argument_list</i>&nbsp;<tt>,</tt>&nbsp;<i>Argument</i>
+ <br/><br/>
+  <i>Argument:</i><br/>
+  &nbsp;&nbsp;<i>Expression</i><br/>
+  &nbsp;&nbsp;<i>Simple_string_expression</i>
+ <br/><br/>
+  <i>Simple_string_expression:</i><br/>
+  &nbsp;&nbsp;<i>String_literal</i><br/>
+  &nbsp;&nbsp;<i>String_variable</i><br/>
+  &nbsp;&nbsp;<i>String_array_variable</i><br/>
+  &nbsp;&nbsp;<i>String_function</i>
+ <br/><br/>
+  <i>String_literal:</i><br/>
+  &nbsp;&nbsp;<tt>&quot;</tt>&nbsp;<i>Sequence_of_8-bit_characters</i>&nbsp;<tt>&quot;</tt>
+ <br/><br/>
+  <i>String_variable:</i><br/>
+  &nbsp;&nbsp;<i>String_identifier</i>&nbsp;<tt>$</tt>
+ <br/><br/>
+  <i>String_array_variable:</i><br/>
+  &nbsp;&nbsp;<i>String_identifier</i>&nbsp;<tt>$</tt>&nbsp;<tt>(</tt>&nbsp;<i>Expression</i>&nbsp;<tt>)</tt><br/>
+  &nbsp;&nbsp;<i>String_identifier</i>&nbsp;<tt>$</tt>&nbsp;<tt>(</tt>&nbsp;<i>Expression</i>&nbsp;<tt>,</tt>&nbsp;<i>Expression</i>&nbsp;<tt>)</tt>
+ <br/><br/>
+  <i>String_function:</i><br/>
+  &nbsp;&nbsp;<i>String_identifier</i><br/>
+  &nbsp;&nbsp;<i>String_identifier</i>&nbsp;<tt>(</tt>&nbsp;<i>Argument_list</i>&nbsp;<tt>)</tt>
+ <br/><br/>
+  <i>String_identifier:</i><br/>
+  &nbsp;&nbsp;<i>Letter&nbsp;A...Z</i>&nbsp;<tt>$</tt><br/>
+  &nbsp;&nbsp;<i>Letter&nbsp;A...Z</i>&nbsp;<i>Sequence_of_letters_A...Z_and_digits_0...9</i>&nbsp;<tt>$</tt>
+ <br/>
+</body>
+</html>

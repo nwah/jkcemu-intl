@@ -1,0 +1,65 @@
+<html>
+<body>
+ <h1>DateStamper</h1>
+  DateStamper is a method for storing timestamps
+  for files in CP/M-compatible file systems.
+  The individual timestamps are kept in the file <em>!!!TIME&amp;.DAT</em>,
+  which physically must be the first file on the floppy disk.
+  For each file, the time of creation,
+  the time of last access, and
+  the time of last modification can be stored to the minute.
+ <br/><br/>
+
+ <h2>1. DateStamper Support in JKCEMU</h2>
+  JKCEMU optionally supports DateStamper in:
+  <ul>
+   <li>
+    <a href="creatediskimg.htm#manually">Creating an Image File Manually</a>
+   </li>
+   <li>
+    <a href="unpackdiskimg.htm">Unpacking a CP/M Disk Image File</a>
+   </li>
+   <li>
+    <a href="floppydiskintro.htm#dir">
+     Mapping an Emulated Floppy Disk to a Directory
+    </a>
+   </li>
+  </ul>
+ <br/><br/>
+
+ <h2>2. Structure of the Timestamp File</h2>
+  The timestamp file <em>!!!TIME&amp;.DAT</em> contains
+  16-byte records,
+  with each record assigned to a directory entry.
+  The assignment is made in order, i.e.
+  the first record in the timestamp file refers
+  to the first directory entry, and so on.
+  The file <em>!!!TIME&amp;.DAT</em> is thus exactly half the size
+  of the directory (which has 32&nbsp;bytes per entry).
+ <br/><br/>
+  Each record in the timestamp file contains the
+  five-byte timestamps for the time
+  of creation, the time of last access, and the
+  time of last modification, as well as a check byte.
+ <br/><br/>
+  A timestamp consists of five BCD-encoded bytes:
+  <ol>
+   <li>Year (for 0...77 +2000, for 78...99 +1900)</li>
+   <li>Month (1...12)</li>
+   <li>Day (1...31)</li>
+   <li>Hour (0...23)</li>
+   <li>Minute (0...59)</li>
+  </ol>
+ <br/>
+  If a timestamp contains invalid values,
+  e.g. month or day equal to zero,
+  this means the timestamp is not set.
+ <br/><br/>
+  With regard to the check byte, every eight records
+  form a group.
+  The check bytes of the first seven records of a group
+  spell out the string <em>!!!TIME</em>.
+  The check byte of the eighth record is the sum
+  of all the preceding 127&nbsp;bytes of the group.
+</body>
+</html>

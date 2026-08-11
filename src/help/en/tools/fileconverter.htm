@@ -1,0 +1,202 @@
+<html>
+<body>
+ <h1>File Converter</h1>
+  The JKCEMU File Converter lets you convert memory image and
+  disk image files, as well as sound files, into various formats.
+  To do so, start the converter via the menu item
+  <em>Extra</em> &rarr; <em>Tools</em> &rarr; <em>File Converter</em>.
+  It is also possible to start the File Converter as a standalone
+  program without the emulator.
+  To do so, specify the option <em>--fc</em> or <em>--fileconverter</em>
+  on the command line when starting JKCEMU.
+  Optionally, a file can also be specified after it,
+  which is then opened in the converter.
+ <br/><br/>
+  In the File Converter window that then appears,
+  select the file to be converted under <em>Source File</em>.
+  You can also drag the file from a File Browser
+  into the window using drag&amp;drop and
+  release it over the file name field.
+ <br/><br/>
+  Once the file has been selected, the converter analyzes
+  the file and shows, under <em>Output File</em>,
+  the possible file formats
+  into which the source file can be converted.
+  Now select the desired output format and press
+  <em>Convert</em>.
+  A file selection dialog then asks you for the name
+  of the output file, and the conversion is already complete.
+  No completion message appears.
+  The source file is retained.
+ <br/><br/>
+  For a sound file or a disk image file as the output file,
+  you determine the specific format via the file extension.
+  Which sound file formats are possible
+  depends on the Java platform on which JKCEMU is running.
+  Sound files can also be compressed with GZIP right away
+  during conversion.
+  To do so, the extension <em>.gz</em> must be appended
+  to the name of the output file, after the extension
+  of the sound file format
+  (e.g. <em>outputfile.wav.gz</em>).
+  Furthermore, you can play back the generated sound file
+  directly, without it having to be saved.
+  This makes it possible, for example, to transfer it via an
+  audio cable to a real computer.
+ <br/><br/>
+  If, after selecting the source file, the list of possible
+  output formats remains empty,
+  there is no way to convert it, i.e.
+  the format of the source file is not supported by the converter.
+ <br/><br/>
+  The table shows the possible conversions:
+  <table border="1">
+   <tr>
+    <th>Kind of Source File</th>
+    <th>Output Formats</th>
+   </tr>
+   <tr>
+    <td valign="top">
+     Disk image file<br/>
+     (*.cqm; *.dd; *.dump; *.imd; *.img; *.image; *.qm; *.raw; *.td0)
+    </td>
+    <td valign="top">
+     <ul>
+      <li>
+       Plain disk image file (*.dd; *.img; *.image; *.raw)
+      </li>
+      <li>AnaDisk file (*.dump)</li>
+      <li>CopyQM file (*.cqm)</li>
+      <li>CPC disk file (*.dsk)</li>
+      <li>ImageDisk file (*.imd)</li>
+      <li>TeleDisk file (*.td0)</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     Memory image file for system programs and data<br/>
+     (*.bin; *.hex; *.kcb; *,kcc; *.rmc; *.rom; *.tap; *.z80)
+    </td>
+    <td valign="top">
+     <ul>
+      <li>Plain memory image file (*.bin)</li>
+      <li>Headersave file (*.z80)</li>
+      <li>Intel HEX file (*.hex)</li>
+      <li>KC system file (*.kcc)</li>
+      <li>KC TAP system file for KC85/1, KC87, and Z9001 (*.tap)</li>
+      <li>KC TAP system file for HC900 and KC85/2..5 (*.tap)</li>
+      <li>RBASIC machine code file (*.rmc)</li>
+      <li>Sound file in AC1 format</li>
+      <li>Sound file in KC system format for KC85/1, KC87, and Z9001</li>
+      <li>Sound file in KC system format for HC900 and KC85/2..5</li>
+      <li>Sound file in AC1/LLC2 TurboSave format</li>
+      <li>Sound file in Z1013 format</li>
+      <li>Sound file in Z1013 Headersave format</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     Memory image file for BASIC programs<br/>
+     (*.z80)
+    </td>
+    <td valign="top">
+     <ul>
+      <li>Sound file in AC1 BASIC format</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     Memory image file for KC BASIC programs<br/>
+     (*.kcb; *.sss; *.tap)
+    </td>
+    <td valign="top">
+     <ul>
+      <li>KC BASIC file (*.sss)</li>
+      <li>
+       KC system file with a KC BASIC program (*.kcb)
+      </li>
+      <li>KC TAP BASIC file (*.tap)</li>
+      <li>Sound file in KC BASIC format</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     Sound file<br/>
+     (*.aif; *.aiff; *.au; *.wav)
+    </td>
+    <td valign="top">
+     <ul>
+      <li>Sound file (*.aif; *.aiff; *.au; *.wav)</li>
+      <li>
+       Compressed sound file
+       (*.aif.gz; *.aiff.gz; *.au.gz; *.wav.gz)
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     Compressed sound file<br/>
+     (*.aif.gz; *.aiff.gz; *.au.gz; *.wav.gz)
+    </td>
+    <td valign="top">
+     <ul>
+      <li>Sound file (*.aif; *.aiff; *.au; *.wav)</li>
+      <li>
+       Compressed sound file
+       (*.aif.gz; *.aiff.gz; *.au.gz; *.wav.gz)
+     </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     Tape file<br/>
+     (*.cdt; *.csw; *.tap; *.tzx)
+    </td>
+    <td valign="top">
+     <ul>
+      <li>Sound file (*.aif; *.au; *.wav)</li>
+      <li>Compressed sound file (*.aif.gz; *.au.gz; *.wav.gz)</li>
+     </ul>
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+  <b>Caution!</b> If, when converting a disk image file,
+  you get an error message
+  that a certain sector was not found,
+  the source file contains an irregular sector arrangement,
+  but the output file's format does not support that.
+  In that case, you must change the output format.
+  The following formats support a free sector arrangement:
+  AnaDisk, CPC Disk, ImageDisk, and TeleDisk.
+ <br/><br/>
+  <b>Caution!</b> KCB files and certain Headersave files contain
+  KC BASIC programs with possibly additional machine code
+  and data areas.
+  These files can be converted both into a format for system programs
+  and into a format for KC BASIC programs.
+  In the latter case, the output file contains only the actual
+  BASIC program, i.e. any machine code or data areas
+  are lost in the process.
+ <br/><br/>
+  <b>Caution!</b> For
+  <a href="../fileformats.htm#multi_kctap">multi-KC-TAP files</a>,
+  i.e. TAP files
+  that consist of several individual KC-TAP files and thus
+  represent several consecutive tape recordings,
+  only the first part is converted.
+  The only exception is the output format <em>Sound file in KC format,
+  converted 1:1 from a KC-TAP or KC-Multi-TAP file</em>.
+  With this format, the contents of the TAP file are converted
+  1:1 into audio data.
+  This also makes it possible to convert multi-KC-TAP files as well as
+  KC-TAP files with an irregular structure.
+  However, no header data can be changed for this format.
+</body>
+</html>

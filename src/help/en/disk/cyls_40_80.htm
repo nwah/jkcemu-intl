@@ -1,0 +1,33 @@
+<html>
+<body>
+ <h1>The 40/80-Track Problem</h1>
+  JKCEMU must know whether a floppy disk drive with 40&nbsp;tracks
+  (Single Density, SD) or with 80&nbsp;tracks (Double Density, DD)
+  is to be emulated.
+  If the floppy disk inserted in the drive has 50 or more tracks,
+  JKCEMU assumes a double-density floppy disk.
+  In that case, a double-density drive is also emulated.
+ <br/><br/>
+  A single-density floppy disk, on the other hand, can be operated
+  in either a single-density or a double-density drive.
+  It depends on the software running in the emulator
+  which drive type must be emulated.
+  If the software assumes a double-density drive,
+  it will send two positioning steps to the drive
+  to accomplish a track change on the floppy disk.
+  In that case, JKCEMU must combine these two steps
+  back into one (track number conversion).
+  For this reason, when you insert a single-density floppy disk,
+  you are asked whether a 40- or 80-track drive should be emulated.
+  With 40&nbsp;tracks, track number conversion is switched off,
+  and with 80&nbsp;tracks it is switched on.
+ <br/><br/>
+  When <a href="formatdisk.htm">formatting</a>, on the other hand,
+  the emulator detects on its own
+  whether the track numbers need to be converted.
+  If, after formatting track&nbsp;0, two positioning steps
+  are sent to the drive,
+  JKCEMU assumes a 40-track floppy disk in an 80-track drive
+  and switches on track number conversion.
+</body>
+</html>

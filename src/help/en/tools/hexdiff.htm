@@ -1,0 +1,43 @@
+<html>
+<body>
+ <h1>Hex File Comparator</h1>
+  The <em>Hex File Comparator</em> tool provides a hexadecimal
+  display of the binary differences between files.
+  It is built into JKCEMU
+  to help you find out, for example, whether and how
+  several versions of a program differ,
+  when you have more than one version of it.
+  This is intended to provide a way
+  to recognize and distinguish, for example, original
+  and patched versions of a program.
+ <br/><br/>
+  You can compare several files
+  by adding them (see the <em>File</em> menu).
+  As soon as at least two files have been added,
+  they are compared and the result is shown.
+ <br/><br/>
+  To remove a file from the comparison again,
+  select it and call up the function <em>Remove File</em>
+  in the <em>File</em> menu.
+ <br/><br/>
+  By default, only a certain number of differences
+  are shown.
+  You can set the number of differences to be shown
+  in the <em>Settings</em> menu.
+  However, do not choose too large a value,
+  since the comparison can then take a very long time,
+  and the required main memory may also not be
+  sufficient, which could cause JKCEMU to crash.
+ <br/><br/>
+  The maximum number of file differences to be shown
+  is permanently saved
+  when you save a profile in the <a href="../settings.htm">Settings</a>.
+ <br/><br/>
+  The Hex File Comparator can also be started as a standalone program
+  without the emulator.
+  To do so, specify the option <em>--hd</em> or <em>--hexdiff</em>
+  on the command line when starting JKCEMU.
+  In addition, files can also be specified after it,
+  which are then opened in the Hex File Comparator.
+</body>
+</html>

@@ -1,0 +1,245 @@
+<html>
+<body>
+ <h1>Floppy Disk Emulation in JKCEMU</h1>
+  JKCEMU emulates the U8272 floppy disk controller,
+  which is compatible with the Intel&nbsp;8272A and the NEC&nbsp;765A.
+  This controller can handle up to four floppy disk drives.
+ <br/><br/>
+  The emulated drives are visible to the user in the
+  <em>JKCEMU Floppy Disk Station</em> window,
+  which you can open from the main window, menu <em>File</em>
+  &rarr; <em>Floppy Disk Station</em>.
+  This window is only available
+  if the emulated system originally offers or supports
+  floppy disk drives as well.
+  Furthermore, only as many drives are emulated
+  as are actually possible in the original.
+ <br/><br/>
+  Each drive has its own tab.
+  In addition, you will find a button in the lower right of the window
+  for opening/loading, which lets you conceptually insert
+  and remove a floppy disk.
+  Since the emulator computer may not have any
+  physical floppy disk drive at all,
+  JKCEMU offers several options for emulating
+  a floppy disk.
+  An emulated floppy disk can be represented by:
+  <ol>
+   <li>
+    a <a href="floppydiskintro.htm#disk">real floppy disk</a>
+    inserted in a physical floppy disk drive
+    connected to the emulator computer
+   </li>
+   <li>a <a href="floppydiskintro.htm#file">disk image file</a></li>
+   <li>
+    a <a href="floppydiskintro.htm#dir">directory</a>
+    in the file system of the emulator computer
+   </li>
+  </ol>
+ <br/>
+  Pressing the <em>Open/Load</em> button
+  opens a menu in which you can select the various
+  options.
+ <br/><br/>
+
+ <h2><a name="disk">1. Emulation with a Real Floppy Disk</a></h2>
+  If you want to access, from the emulated system, a floppy disk
+  inserted in a floppy disk drive connected to the emulator computer,
+  then select <em>Open floppy disk...</em>
+  in the <em>Open/Load</em> menu.
+  You will then be asked for the drive.
+  On a Windows system, select the drive letter
+  under which the floppy disk drive is visible in Windows.
+  On a Linux/Unix system, specify the corresponding
+  device file.
+ <br/><br/>
+  <b>Caution!</b> On a Linux/Unix system, JKCEMU may
+  have to run with administrator privileges
+  (user name <em>root</em>)
+  in order to access the floppy disk drive.
+ <br/><br/>
+  When emulating a floppy disk drive with a real floppy disk,
+  the following restrictions apply:
+  <ul>
+   <li>
+    The physical floppy disk format, i.e. the number of tracks,
+    the number of sectors per track, and the sector size,
+    must be supported by the hardware and the operating system
+    of the emulator computer.
+    Newer operating systems and USB floppy disk drives
+    probably only support 512&nbsp;byte
+    sectors anymore.
+    <br/><br/>
+   </li>
+   <li>
+    The logical format, i.e. the CP/M file system,
+    on the other hand, does not need to be supported by the emulator computer
+    (and usually is not supported), i.e.,
+    you will not be able to see the files on the floppy disk
+    in the file system of the emulator computer.
+    <br/><br/>
+   </li>
+   <li>
+    The emulator cannot detect a floppy disk change.
+    It is therefore important, before ejecting the floppy disk,
+    to select <em>Close floppy disk/image file</em> in the menu
+    <em>Open/Load</em>
+    in the <em>JKCEMU Floppy Disk Station</em> window.
+    If you should forget to do so, just do it afterwards.
+    Under no circumstances should you insert a different floppy disk
+    with a different floppy disk format without closing the floppy disk first
+    and try to write to it!
+    If you do this, you must expect data loss!
+    <br/><br/>
+   </li>
+   <li>
+    If you format the floppy disk in the emulated system,
+    it is not physically formatted, but only overwritten.
+    Therefore, formatting in the emulation is only possible
+    if the new format is identical to the old one.
+    If the formats differ, a write error is emulated,
+    and the formatting program should also report this error.
+   </li>
+  </ul>
+ <br/>
+  <b>Caution!</b> If the floppy disk contains a CP/M file system
+  or another &quot;old&quot; file system,
+  the operating system of the emulator computer will probably
+  not be able to do anything with it.
+  In that case, Windows will offer to format the volume.
+  Under no circumstances should you do that, or all the data will be gone!
+  Furthermore, it can happen that when a USB floppy disk drive
+  is connected with a floppy disk inserted
+  that has an &quot;old&quot; file system,
+  the floppy disk drive is not recognized correctly.
+  Therefore, always connect a USB floppy disk drive
+  without a floppy disk inserted, and only insert the floppy disk
+  once the operating system has recognized the drive and
+  the drive's access indicator has gone out.
+ <br/><br/>
+
+ <h2><a name="file">2. Emulation with a Disk Image File</a></h2>
+  A <a href="diskimgformats.htm">disk image file</a>
+  (Disk Image File) is a 1:1 image of a floppy disk and
+  thus also contains the tracks and sectors
+  as found on a real floppy disk.
+  There are various <a href="diskimgformats.htm">file formats</a>
+  for image files, which differ in content mainly in the amount
+  of geometry and management data stored.
+ <br/><br/>
+
+ <h2>
+  <a name="dir">3. Mapping an Emulated Floppy Disk to a Directory</a>
+ </h2>
+  With this form, you <a href="../dirchooser.htm">select</a>
+  a directory in the file system
+  of the emulator computer.
+  The files located in that directory that
+  conform to the CP/M file naming convention
+  are packed into a virtual floppy disk and
+  are thus visible from the emulated system.
+  This provides a very simple way to exchange files between
+  the emulator computer and the system running in the emulator.
+ <br/><br/>
+  When the virtual floppy disk is full,
+  the remaining files in the directory are ignored.
+  The same applies to files that are too large.
+ <br/><br/>
+  User areas 1 through 15 are represented by subdirectories
+  named <em>1</em> through <em>15</em>,
+  i.e. files in these subdirectories
+  will then appear in the corresponding user area.
+ <br/><br/>
+  After selecting the directory, you will be asked for the
+  floppy disk format.
+  For a format with system tracks, the contents of the file
+  <em>@boot.sys</em> are copied into these system tracks.
+  This makes it possible to boot from a directory as well.
+  If the file <em>@boot.sys</em> is not found in the directory,
+  the system tracks contain zero bytes.
+ <br/><br/>
+  <b>Caution!</b> JKCEMU also offers write support for a floppy disk
+  that is emulated on the basis of a directory.
+  To do this, open the directory without write protection.
+  In that case, write accesses to the virtual floppy disk
+  directly affect the underlying files,
+  i.e. the files located in the directory.
+  If the configured directory size does not match
+  the one used by the program or operating system
+  running in the emulator, or if you refresh the emulated floppy disk
+  at an unfavorable time (see further below),
+  this can lead to deletion or unintended
+  overwriting of the underlying files
+  and thus to data loss!
+  It is even worse if the program running in the emulator
+  incorrectly writes to the directory sectors of the virtual floppy disk.
+  For these reasons, <b>it is strongly recommended
+  to open a directory for floppy disk emulation
+  without write protection
+  only if the files contained in it
+  are also backed up in another location!</b>
+ <br/><br/>
+
+ <h3><a name="refresh">3.1. Refreshing the Emulated Floppy Disk</a></h3>
+  When a floppy disk is emulated on the basis of a directory,
+  it is possible that the files located in the directory are also
+  used and modified by other programs besides the emulator.
+  If the changes made in the directory
+  are to be reflected in the emulated floppy disk as well,
+  it must be refreshed.
+  To do this, select in the menu on the <em>Open/Load</em> button
+  the item <em>Refresh emulated floppy disk</em>.
+  As soon as the directory is next read from the emulated floppy disk,
+  JKCEMU generates new content for the floppy disk.
+  With a CP/M-compatible operating system in the emulator, you should
+  press <em>Control-C</em> or <em>Ctrl-C</em>
+  to trigger reading of the directory.
+ <br/><br/>
+  JKCEMU also offers automatic refreshing.
+  To use it, you must enable the option
+  <em>Refresh automatically</em>
+  in the dialog for selecting the floppy disk format.
+ <br/><br/>
+  <b>Caution!</b> Some programs or operating systems may
+  not cope well with automatic refreshing
+  of the floppy disk contents and may therefore read incorrect data.
+  In that case, you must turn off the option.
+ <br/><br/>
+  <b>Caution!</b> If you have opened the directory without write protection,
+  you should be sure
+  to only refresh the emulated floppy disk at times
+  when the program or operating system running in the emulator
+  is in its input loop and is not currently accessing the floppy disk!
+  In addition, you should always force
+  the directory to be re-read (<em>Control-C</em> or <em>Ctrl-C</em>).
+ <br/><br/>
+  <b>Caution!</b> If you want to open the directory without write protection
+  and with automatic refreshing,
+  you should <b>definitely back up the files in the directory beforehand
+  at another location</b>,
+  since this is a potentially especially critical combination.
+  Please test extensively whether the operating system
+  and the application programs running in the emulator
+  cope well with the automatic refreshing and whether it does not lead
+  to data loss or otherwise corrupted files.
+  Every time the files in the directory are changed by programs
+  outside of the emulation,
+  you should force the directory to be re-read in the emulator
+  with <em>Control-C</em> or <em>Ctrl-C</em>.
+ <br/><br/>
+
+ <h3>3.2. DateStamper</h3>
+  If you have selected a floppy disk format with
+  <a href="datestamper.htm">DateStamper</a> support,
+  the emulated floppy disk automatically contains
+  the file <em>!!!TIME&amp;.DAT</em>,
+  in which the timestamps of the individual files are stored.
+  Any timestamp file that may already exist in the directory
+  is ignored in this case.
+ <br/><br/>
+  Write accesses to the file <em>!!!TIME&amp;.DAT</em>
+  cause the timestamps of the files in the directory to be set,
+  provided the Java runtime environment used
+  and the file system allow the timestamps to be set.
+</body>
+</html>

@@ -1,0 +1,570 @@
+<html>
+<body>
+ <h1>LLC2</h1>
+  The LLC2 is a home-built computer developed
+  by Dr. Gerd Maudrich in 1985.
+  In the original concept, the computer had
+  a 2&nbsp;KByte EPROM containing a bootstrap loader.
+  The Studio Computer Club Halle (SCCH) took on further development
+  of the LLC2 and developed a 4&nbsp;KByte monitor program
+  as well as several expansion modules.
+  The monitor program and the expansion modules are also available,
+  in adapted form, for the <a href="ac1.htm">AC1</a>.
+  As a result, there is a certain degree of software compatibility
+  between the AC1 and the LLC2.
+  JKCEMU emulates the LLC2 with the SCCH enhancements.
+  For this reason, the SCCH monitor program is included
+  instead of the original bootstrap loader.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="llc2.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="llc2.htm#keyboard">1.1. Keyboard</a></li>
+     <li><a href="llc2.htm#memory">1.2. Memory</a></li>
+     <li><a href="llc2.htm#scch_mod1">1.3. SCCH Module&nbsp;1</a></li>
+     <li><a href="llc2.htm#scch_mod3">1.4. SCCH Module&nbsp;3</a></li>
+     <li><a href="llc2.htm#scch_inverse">1.5. SCCH Inverse-Video Circuit</a></li>
+     <li>
+      <a href="llc2.htm#pio_inverse">1.6. Inverse-Video Circuit via System PIO&nbsp;B5</a>
+     </li>
+     <li><a href="llc2.htm#inverse_key">1.7. Inverse-Video Key (F1)</a></li>
+     <li><a href="llc2.htm#graphic_key">1.8. Graphics Key (F2)</a></li>
+     <li><a href="llc2.htm#font_switch">1.9. Character Set Switching</a></li>
+     <li><a href="llc2.htm#splitscreen">1.10. Split Screen</a></li>
+     <li><a href="llc2.htm#fdc">1.11. Floppy Disk Module</a></li>
+     <li><a href="llc2.htm#printer">1.12. V24 Interface with Printer</a></li>
+     <li><a href="llc2.htm#joystick">1.13. Joystick</a></li>
+     <li>
+      <a href="llc2.htm#audio">1.14. Cassette and Sound Output</a>
+      <ul>
+       <li>
+	<a href="llc2.htm#loudspeaker">1.14.1. Speaker Connector</a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li><a href="llc2.htm#software">2. Software Contained in ROM</a></li>
+   <li>
+    <a href="llc2.htm#basic">3. BASIC</a>
+    <ul>
+     <li><a href="llc2.htm#gsbasic">3.1. Graphics/Sound BASIC</a></li>
+     <li>
+      <a href="llc2.htm#basic_io">3.2. Saving and Loading BASIC Programs</a>
+     </li>
+     <li><a href="llc2.htm#images">3.2. HIRES Image Files</a></li>
+    </ul>
+   </li>
+   <li>
+    <a href="llc2.htm#etc">4. Miscellaneous</a>
+    <ul>
+     <li>
+      <a href="llc2.htm#paste">4.1. Pasting Text from the Clipboard</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  <ul>
+   <li>4 KByte ROM for the monitor program</li>
+   <li>64 KByte RAM including video RAM</li>
+   <li>CTC with the output of channel 1 connected to the input of channel 3</li>
+   <li>cassette recorder connector</li>
+   <li>
+    <a href="llc2.htm#scch_mod1">SCCH module&nbsp;1</a>
+    (additional ROM)
+   </li>
+   <li>
+    <a href="llc2.htm#scch_mod3">SCCH module&nbsp;3</a>
+    (additional RAM)
+   </li>
+   <li><a href="llc2.htm#scch_inverse">SCCH inverse-video circuit</a></li>
+   <li>
+    <a href="llc2.htm#pio_inverse">inverse-video circuit via system PIO&nbsp;B5</a>
+   </li>
+   <li><a href="llc2.htm#inverse_key">inverse-video key (F1)</a></li>
+   <li><a href="llc2.htm#graphic_key">graphics key (F2)</a></li>
+   <li>
+    <a href="llc2.htm#printer">V24 interface with printer</a>
+   </li>
+   <li>
+    HIRES full-graphics expansion with
+    <a href="llc2.htm#splitscreen">split&nbsp;screen</a>
+   </li>
+   <li>
+    Optional:
+    <ul>
+     <li>
+      Two <a href="ramfloppy.htm">RAM floppies</a>
+      as described in <em>Mikroprozessortechnik</em>
+      issue&nbsp;3/1988, at I/O base addresses&nbsp;D0h and&nbsp;B0h
+     </li>
+     <li><a href="llc2.htm#fdc">floppy disk module</a></li>
+     <li>
+      <a href="gide.htm">GIDE</a> with up to two hard disks
+      at I/O base address&nbsp;80h
+     </li>
+      <li><a href="llc2.htm#joystick">joystick</a></li>
+      <li>
+       <a href="k1520sound.htm">K1520 sound card</a>
+       (see also <a href="llc2.htm#audio">Cassette and Sound Output</a>)
+      </li>
+     <li>
+       <a href="kcnet.htm">KCNet</a>-compatible network card
+       at I/O base address&nbsp;C0h
+      </li>
+      <li>
+       <a href="usb.htm">USB connector</a> (Vinculum VDIP module)
+       at I/O base addresses&nbsp;DCh and FCh
+      </li>
+     </ul>
+    </li>
+  </ul>
+ <br/>
+
+ <h3><a name="keyboard">1.1. Keyboard</a></h3>
+  Besides the usual keys for letters, digits, and
+  special characters, the following control keys are supported:
+ <br/>
+  <table border="1">
+   <tr><th>Key</th><th>Key Code Generated / Meaning</th></tr>
+   <tr><td>Home / Pos1</td><td>1</td></tr>
+   <tr><td>Cursor&nbsp;left</td><td>8</td></tr>
+   <tr><td>Cursor&nbsp;right</td><td>9</td></tr>
+   <tr><td>Cursor&nbsp;down</td><td>0Ah</td></tr>
+   <tr><td>Cursor&nbsp;up</td><td>0Bh</td></tr>
+   <tr><td>Enter / Return</td><td>0Dh</td></tr>
+   <tr><td>Backspace</td><td>7Fh</td></tr>
+   <tr><td>Tab</td><td>0Fh</td></tr>
+   <tr><td>Delete / Del</td><td>4</td></tr>
+   <tr><td>Insert / Ins</td><td>5</td></tr>
+   <tr><td>Page Up</td><td>11h</td></tr>
+   <tr><td>Page Down</td><td>15h</td></tr>
+   <tr><td>End</td><td>1Ah</td></tr>
+   <tr>
+    <td>F1</td><td><a href="llc2.htm#inverse_key">inverse-video key</a></td>
+   </tr>
+   <tr>
+    <td>F2</td><td><a href="llc2.htm#graphic_key">graphics key</a></td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="memory">1.2. Memory</a></h3>
+  The lower 48 KByte of RAM are not visible after power-on
+  or after a RESET.
+  Only with an I/O instruction to address E0h
+  is the ROM switched out and the RAM switched in.
+  With this mechanism, the monitor program relocates itself
+  from ROM into RAM.
+ <br/><br/>
+
+ <h3><a name="scch_mod1">1.3. SCCH Module&nbsp;1</a></h3>
+  SCCH module&nbsp;1 provides additional ROM,
+  namely:
+  <ul>
+   <li>8&nbsp;KByte for the Graphics/Sound BASIC interpreter</li>
+   <li>8&nbsp;KByte for Program Package X</li>
+   <li>256&nbsp;KByte for the ROM disk</li>
+  </ul>
+ <br/>
+  The module is controlled via output port&nbsp;ECh:<br/>
+  <table border="1">
+   <tr>
+    <td valign="top">Bit&nbsp;0:</td>
+    <td>switch in Program Package X in the range E000-FFFF</td>
+   </tr>
+   <tr>
+    <td valign="top">Bit&nbsp;1:</td>
+    <td>switch in Graphics/Sound BASIC in the range 4000-5FFF</td>
+   </tr>
+   <tr>
+    <td valign="top">Bit&nbsp;3:</td>
+    <td>
+     switch in one segment of the ROM disk in the range C000-FFFF,<br/>
+     bits&nbsp;0, 4, 5, and 6 determine the corresponding
+     16K segment.
+    </td>
+   </tr>
+  </table>
+ <br/>
+  JKCEMU does not supply any content for Program Package&nbsp;X
+  or the ROM disk.
+  You must provide this yourself in the
+  <a href="settings.htm">Settings</a> by loading ROM files.
+ <br/><br/>
+
+ <h3><a name="scch_mod3">1.4. SCCH Module&nbsp;3</a></h3>
+  Depending on how it is fitted, SCCH module&nbsp;3 provides
+  64, 128, 256, 320, or 512 KByte of additional RAM,
+  which can be switched into working memory via I/O instructions.
+  Specifically, bits&nbsp;0 through 3 of I/O port&nbsp;EDh
+  select one of 16 possible 64-KByte-sized blocks,
+  which is then switched in, according to bits 4 through 7 of the
+  same I/O port, as read-only, write-only, or read/write
+  (in which case only&nbsp;32 KByte are switched in).
+ <br/><br/>
+  The address space for the additional RAM is
+  1&nbsp;MByte (16 x 64&nbsp;KByte).
+  Although the original module can only be fitted with a maximum
+  of 512 KByte, JKCEMU emulates the maximum possible 1 MByte.
+  This has the advantage that software
+  using this additional RAM
+  does not need to be specially configured for use with JKCEMU,
+  because wherever the software in question expects RAM to be present,
+  it will also find RAM there in JKCEMU.
+ <br/><br/>
+
+ <h3><a name="scch_inverse">1.5. SCCH Inverse-Video Circuit</a></h3>
+  The SCCH inverse-video circuit recognizes the values 10h and 11h
+  stored in video RAM.
+  A value of 11h turns inverse video on, and 10h turns it off again.
+  Regardless of this, inverse video is always turned off
+  at the end of a line.
+ <br/><br/>
+
+ <h3>
+  <a name="pio_inverse">1.6. Inverse-Video Circuit via System PIO&nbsp;B5</a>
+ </h3>
+  With this circuit, inverse video mode is activated
+  by bit&nbsp;5 on port&nbsp;B of the system PIO
+  (I/O address&nbsp;E9h).
+  In inverse video mode, all characters with bit&nbsp;7 set
+  are then output inverted.
+ <br/><br/>
+  <b>Caution!</b> The LLC2 monitor program included in JKCEMU
+  turns off inverse video mode on keyboard input.
+  So if you want to use this inverse video mode in your own programs,
+  you must account for, or work around,
+  this interfering behavior of the monitor program.
+ <br/><br/>
+
+ <h3><a name="inverse_key">1.7. Inverse-Video Key (F1)</a></h3>
+  On the original, the SCCH inverse-video circuit also included
+  a switch with which the entire screen could be inverted.
+  JKCEMU emulates this switch with the&nbsp;F1 key.
+ <br/><br/>
+
+ <h3><a name="graphic_key">1.8. Graphics Key (F2)</a></h3>
+  The graphics key&nbsp;(F2) allows graphics characters
+  to be entered from the keyboard.
+  However, this must also be supported by the
+  respective application program.
+  The <em>Graphics/Sound BASIC</em> included in JKCEMU
+  supports the graphics key.
+ <br/><br/>
+
+ <h3><a name="font_switch">1.9. Character Set Switching</a></h3>
+  Character set switching via PIO&nbsp;B3 is emulated
+  in conjunction with an externally loaded character set file.
+  For this, the character set file must contain two character sets,
+  i.e. it must be larger than 2&nbsp;KByte.
+  Switching to the second character set is done by outputting
+  a 1 to PIO port&nbsp;B3.
+ <br/><br/>
+  Based on the size of the externally loaded character set file,
+  the emulator recognizes what kind of file it is:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th>Character Set File Size</th>
+    <th>Meaning</th>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">2&nbsp;KByte<br/>(1 to 2048 bytes)</td>
+    <td valign="top">
+     The file contains only one character set,
+     i.e. no switching is possible.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     4&nbsp;KByte<br/>(2049 to 4096 bytes)
+    </td>
+    <td valign="top">
+     The file contains two character sets in succession.
+     The second one starts at offset 0800h.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     8&nbsp;KByte<br/>(more than 4096 bytes)
+    </td>
+    <td valign="top">
+     The file is a dual HIRES character set file,
+     i.e. besides the two character sets, it also
+     contains the HIRES bitmap.
+     The character sets are located in the file
+     in the ranges 0000h-07FFh and 1000h-17FFh.
+     The other two ranges each contain the HIRES bitmap,
+     which, however, is not evaluated by JKCEMU.
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="splitscreen">1.10. Split Screen</a></h3>
+  Split screen means that during each screen refresh
+  (i.e. 50&nbsp;times per second), the display switches
+  between text and HIRES mode, so that the screen output
+  is split into a text part and a HIRES part.
+  For this, the input of CTC channel&nbsp;2 must be connected
+  to the vertical sync pulse, and the CTC must be programmed
+  to trigger an interrupt on the corresponding pixel row.
+  JKCEMU emulates this connection from the vertical sync pulse to the CTC,
+  so that programs using split screen mode also run correctly.
+ <br/><br/>
+
+ <h3><a name="fdc">1.11. Floppy Disk Module</a></h3>
+  The floppy disk module is <a href="floppydisk.htm">emulated</a>
+  at the following I/O addresses:
+ <br/>
+  <table border="1">
+   <tr>
+    <th>I/O Address (hexadecimal)</th>
+    <th>Access</th><th>Meaning</th>
+   </tr>
+   <tr>
+    <td valign="top">A0</td>
+    <td valign="top">R</td>
+    <td>FDC status register</td>
+   </tr>
+   <tr>
+    <td valign="top">A1</td>
+    <td valign="top">RW</td>
+    <td>FDC data register</td>
+   </tr>
+   <tr>
+    <td valign="top">A2,&nbsp;A3</td>
+    <td valign="top">RW</td>
+    <td>simulated DMA access to the FDC data register</td>
+   </tr>
+   <tr>
+    <td valign="top">A4,&nbsp;A5</td>
+    <td valign="top">R</td>
+    <td>
+     input gate for drive and FDC signals:
+     <ul>
+      <li>bit&nbsp;4:&nbsp;index pulse&nbsp;(inverted)</li>
+      <li>bit&nbsp;5:&nbsp;ready signal</li>
+      <li>bit&nbsp;6:&nbsp;interrupt signal&nbsp;(inverted)</li>
+      <li>bit&nbsp;4:&nbsp;DMA request&nbsp;(inverted)</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">A6,&nbsp;A7</td>
+    <td valign="top">W</td>
+    <td>bit&nbsp;0...3:&nbsp;drive selection</td>
+   </tr>
+   <tr>
+    <td valign="top">A8,&nbsp;A9</td>
+    <td valign="top">RW</td>
+    <td>
+     terminal&nbsp;count,<br/>
+     the value written or read has no meaning.
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="printer">1.12. V24 Interface with Printer</a> </h3>
+  The additional PIO (I/O addresses E4h-E7h)
+  is emulated, along with the V24 interface implemented via it
+  and a printer connected to it.
+  The printer interface is set to the parameters
+  that the built-in monitor program assumes after a RESET.
+  This way, characters can be output to the emulated printer
+  through the monitor program's functions
+  without having to change the V24 parameters.
+ <br/><br/>
+  To easily try out the printer emulation, you can use
+  <em>Ctrl-X</em> in the monitor program to additionally route
+  screen output to the printer.
+  <em>Ctrl-Y</em> switches this off again.
+ <br/><br/>
+
+ <h3><a name="joystick">1.13. Joystick</a></h3>
+  If the <a href="joystick.htm">Joystick</a> checkbox
+  is set in the LLC2 settings,
+  a joystick is emulated according to the SCCH circuit.
+  With this circuit, bit 4 of port B of the system PIO
+  is used to switch between keyboard and joystick.
+  If an LLC2 program reprograms the system PIO without
+  taking the joystick circuit into account,
+  keyboard input may no longer be possible.
+  In that case, you must turn off joystick emulation.
+ <br/><br/>
+
+ <h3><a name="audio">1.14. Cassette and Sound Output</a></h3>
+  You can listen to the sound signals output at the emulated
+  cassette recorder connector
+  (PIO&nbsp;1, port&nbsp;B, bit&nbsp;0) in the
+  <a href="audio.htm">Audio/Tape</a> window
+  on the <em>Tape Output</em> tab,
+  or record them and save them to a file.
+  The <em>Speaker</em> tab is responsible for the sound signals
+  output via CTC channel&nbsp;0 or via
+  PIO&nbsp;1, port&nbsp;B, bit&nbsp;6
+  (speaker connector, see below).
+  An additional tab appears if you have enabled emulation of the
+  <a href="k1520sound.htm">K1520 sound card</a>.
+ <br/><br/>
+
+ <h3><a name="loudspeaker">1.14.1. Speaker Connector</a></h3>
+  On the LLC2 as originally developed by Dr. Gerd Maudrich,
+  the speaker is connected via a flip-flop to CTC channel&nbsp;0.
+  Via PIO&nbsp;1, port&nbsp;B, bit&nbsp;6, this flip-flop,
+  and thus the sound output, can be switched on and off.
+  In the further development of the LLC2 by the
+  Studio Computer Club Halle, the speaker connector was changed
+  so that it now goes directly to the PIO port
+  and no longer has a connection to the CTC.
+  JKCEMU models both variants in parallel.
+  For output on PIO&nbsp;1, the phase of the speaker signal
+  is switched directly to the value
+  of port&nbsp;B, bit&nbsp;6.
+  At the same time, the emulated flip-flop is disabled
+  at low level and enabled at high level.
+  If this flip-flop is enabled, every pulse output
+  on CTC channel&nbsp;0 causes the phase to change,
+  and thus produces half a sound cycle at the speaker connector.
+ <br/><br/>
+
+
+ <h2><a name="software">2. Software Contained in ROM</a></h2>
+  <ul>
+   <li>SCCH monitor version&nbsp;9.1</li>
+   <li>Graphics/Sound BASIC version&nbsp;3.2</li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="basic">3. BASIC</a></h2>
+
+ <h3><a name="gsbasic">3.1. Graphics/Sound BASIC</a></h3>
+  The Graphics/Sound BASIC interpreter version&nbsp;3.2 resides
+  in a background ROM in the address range 4000h-5FFFh.
+  By default, this address range contains RAM.
+  Via bit 1 of I/O port&nbsp;ECh, the ROM can be brought
+  to the foreground, making the BASIC interpreter visible
+  in that address range.
+ <br/><br/>
+  With the SCCH monitor programs integrated into the emulator,
+  you can call up BASIC directly with the command
+  <em>b</em> (cold start).
+  This also brings the BASIC ROM to the foreground.
+  You perform a warm start of the interpreter with the command
+  <em>r</em>.
+ <br/><br/>
+
+ <h3><a name="basic_io">3.2. Saving and Loading BASIC Programs</a></h3>
+  JKCEMU offers special support for
+  <a href="loadsavebasic.htm">saving and loading BASIC programs</a>.
+  To save a program, please use the function
+  <em>Save BASIC Program...</em> in the <em>File</em> menu
+  and save the program as a
+  <a href="fileformats.htm#basic">BASIC/RBASIC program file (*.bas)</a>.
+  Alternatively, you can also save it as a
+  <a href="fileformats.htm#headersave">Headersave file (*.z80)</a>
+  with file type&nbsp;<em>B</em>.
+ <br/><br/>
+  If you save a BASIC program in a different file format,
+  JKCEMU will no longer recognize, when the file is loaded later,
+  that it is a BASIC program, and will not adjust
+  the system cells of the BASIC interpreter.
+  The loaded program cannot then be used.
+ <br/><br/>
+
+ <h3><a name="images">3.3. HIRES Image Files</a></h3>
+  The <a href="tools/imageviewer.htm">JKCEMU Image Viewer</a>
+  supports reading and writing LLC2 HIRES image files.
+  These files contain the contents of the HIRES pixel memory
+  unchanged and without any additional information.
+  To be displayed in the JKCEMU Image Viewer, the files must have
+  the extension <em>*.pix</em> and be exactly 16384&nbsp;bytes in size.
+  Conversely, the Image Viewer can be used to create
+  HIRES image files for the LLC2
+  simply by saving them with the extension <em>*.pix</em>.
+  To load and display these files on the LLC2, a corresponding
+  program is needed.
+  Such a program is not included in JKCEMU.
+  However, you can easily create one yourself
+  with the built-in <a href="tools/basicc.htm">BASIC Compiler</a>.
+  As an example, here is a program
+  that loads HIRES images from a USB storage device.
+  For this, a USB module (VDIP) must of course be connected,
+  or USB emulation must be enabled in JKCEMU.
+  The program asks for the name of the file to be loaded.
+  The file name can also be entered without the extension
+  <em>.PIX</em>.
+ <br/>
+  <tt>
+   &#10;<br/>
+   cls&#10;<br/>
+   print "LLC2-HIRES-Bilder von USB-Speicher laden"&#10;<br/>
+   print&#10;<br/>
+   do&#10;<br/>
+   &nbsp; input "Dateiname (nur Enter -&gt; Ende): ";f$&#10;<br/>
+   &nbsp; f$=trim$(f$)&#10;<br/>
+   &nbsp; if len(f$)=0 then end&#10;<br/>
+   &nbsp; if instr(f$,".")=0 then f$=f$+".PIX"&#10;<br/>
+   &nbsp; open f$ for input as #1&#10;<br/>
+   &nbsp; if err then&#10;<br/>
+   &nbsp; &nbsp; print f$;": ";err$&#10;<br/>
+   &nbsp; else&#10;<br/>
+   &nbsp; &nbsp; screen 1&#10;<br/>
+   &nbsp; &nbsp; a=&amp;h8000&#10;<br/>
+   &nbsp; &nbsp; for i=1 to 16384&#10;<br/>
+   &nbsp; &nbsp; &nbsp; b=asc(input$(1,1))&#10;<br/>
+   &nbsp; &nbsp; &nbsp; if err then exit&#10;<br/>
+   &nbsp; &nbsp; &nbsp; poke a,b&#10;<br/>
+   &nbsp; &nbsp; &nbsp; a=a+1&#10;<br/>
+   &nbsp; &nbsp; next&#10;<br/>
+   &nbsp; &nbsp; if not err then e=asc(input$(1))&#10;<br/>
+   &nbsp; &nbsp; screen 0&#10;<br/>
+   &nbsp; &nbsp; if err then print err$&#10;<br/>
+   &nbsp; &nbsp; close #1&#10;<br/>
+   &nbsp; endif&#10;<br/>
+   loop
+  </tt>
+ <br/><br/>
+  <b>Important!</b> When compiling, you must select the target system
+  <em>LLC2 with HIRES graphics</em>!
+ <br/>
+  In addition, the runtime properties in the compiler options
+  should be set to <em>Compile for Production Use</em>.
+ <br/><br/>
+
+ <h2><a name="etc">4. Miscellaneous</a></h2>
+
+ <h3>
+  <a name="paste">4.1. Pasting Text from the Clipboard</a>
+ </h3>
+  Pasting text from the clipboard is usually done
+  by simulating, for each character to be pasted,
+  the pressing of the corresponding key or key combination.
+  This approach is rather slow.
+  For the LLC2, there is an option in the
+  <a href="settings.htm">Settings</a> called
+  <em>Paste text by intercepting the system call</em>.
+  With this option, the emulator listens at address 1802h,
+  the entry point of the system function for reading a character
+  from the keyboard.
+  When this system function is called, JKCEMU checks
+  whether a character should be pasted.
+  If so, it writes the next character to be pasted
+  into the corresponding processor register and simulates a RETURN instruction.
+  If the operating system or the application program does not query
+  the keyboard through this entry point,
+  pasting text will not work,
+  and you must turn off the option.
+  You must also turn off the option when using
+  a different operating system (e.g. CP/M-compatible).
+</body>
+</html>

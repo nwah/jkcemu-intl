@@ -1,0 +1,311 @@
+<html>
+<body>
+ <h1>ZX&nbsp;Spectrum</h1>
+  There were several clone projects of the Sinclair ZX&nbsp;Spectrum
+  in the GDR, e.g. KUB64, Spectral, ZX-HFO, and ZX-Jena.
+  The Spectral, in particular, distributed by the Erfurt-based
+  company H&uuml;bner Elektronik, achieved wider distribution,
+  partly because it is fully compatible with a ZX&nbsp;Spectrum&nbsp;48K
+  and could also be expanded into a ZX&nbsp;Spectrum&nbsp;128K.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="zxspectrum.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li>
+      <a href="zxspectrum.htm#keyboard">1.1. Keyboard</a>
+      <ul>
+       <li>
+	<a href="zxspectrum.htm#keyb48k">1.1.1. Keyboard of the ZX&nbsp;Spectrum&nbsp;48K</a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="zxspectrum.htm#timing">1.2. Timing Behavior of the Video RAM</a>
+     </li>
+    </ul>
+    <a href="zxspectrum.htm#etc">2. Miscellaneous</a>
+    <ul>
+     <li>
+      <a href="zxspectrum.htm#audio">2.1. Sound/Cassette Output</a>
+     </li>
+     <li>
+      <a href="zxspectrum.htm#fileformats">2.2. Supported File Formats</a>
+     </li>
+     <li>
+      <a href="zxspectrum.htm#save_basic">2.3. Saving a BASIC Program to a Sound or Tape File</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  Depending on the setting, the following are emulated:
+  <ul>
+   <li>
+    ZX&nbsp;Spectrum&nbsp;48K:
+    <ul>
+     <li>48&nbsp;KByte RAM</li>
+     <li>Speaker and cassette recorder connector</li>
+     <li>Kempston joystick interface</li>
+    </ul>
+   </li>
+   <li>
+    ZX&nbsp;Spectrum+&nbsp;128K:
+    <ul>
+     <li>128&nbsp;KByte RAM</li>
+     <li>Speaker and cassette recorder connector</li>
+     <li>AY-3-8912 sound generator</li>
+     <li>Kempston joystick interface</li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="keyboard">1.1. Keyboard</a></h3>
+  The ZX&nbsp;Spectrum has several input modes,
+  which is why the keys are used for multiple purposes.
+  Although the key mapping in the emulator is designed
+  to be as simple as possible for the user,
+  not all characters can be entered directly,
+  because of the different input modes.
+  For this reason, it is important
+  that you know the different input modes:
+ <br/><br/>
+  The most important characters can be typed directly using the
+  keys of the same name.
+  For some characters, one of the two Shift keys
+  (<em>CAPS SHIFT</em> or <em>SYMBOL SHIFT</em>) must be pressed
+  together with the actual character key.
+  For somewhat less commonly used characters, you first need
+  to switch on the so-called <em>Extended Mode</em>
+  (pressing <em>CAPS SHIFT</em> and <em>SYMBOL SHIFT</em>
+  at the same time) and only then
+  press the actual character key (possibly together with a Shift key).
+  For the ZX&nbsp;Spectrum&nbsp;48K, a table is given
+  <a href="zxspectrum.htm#keyb48k">further below</a>
+  that explains the different input modes in detail.
+  On the ZX&nbsp;Spectrum+&nbsp;128K, a few control keys
+  were added that on the 48K can only be reached with key combinations.
+  Because of this, as well as the new <em>128&nbsp;BASIC</em>,
+  entry on the ZX&nbsp;Spectrum+&nbsp;128K has become somewhat simpler.
+ <br/><br/>
+  The emulator supports the different input modes
+  as follows:
+ <br/><br/>
+  Pressing <em>Ctrl</em> and <em>Shift</em> at the same time
+  emulates pressing <em>CAPS&nbsp;SHIFT</em> and <em>SYMBOL&nbsp;SHIFT</em>
+  at the same time (Extended Mode), after which, in <em>48&nbsp;BASIC</em>,
+  the E-cursor usually appears.
+ <br/><br/>
+  The two keys <em>CAPS&nbsp;SHIFT</em> and <em>SYMBOL&nbsp;SHIFT</em>
+  can also be pressed individually with the function keys <em>F5</em>
+  and <em>F6</em>.
+ <br/><br/>
+  In addition to the input modes described above, some
+  symbols/functions can also be entered more simply:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th>Text/Symbol on the Original Keyboard</th>
+    <th>Key(s) to Press on the Keyboard of the Computer Running the Emulator</th>
+   </tr>
+   <tr>
+    <td valign="top">&larr;</td>
+    <td valign="top">Cursor&nbsp;left</td>
+   </tr>
+   <tr>
+    <td valign="top">&darr;</td>
+    <td valign="top">Cursor&nbsp;down</td>
+   </tr>
+   <tr>
+    <td valign="top">&uarr;</td>
+    <td valign="top">Cursor&nbsp;up</td>
+   </tr>
+   <tr>
+    <td valign="top">&rarr;</td>
+    <td valign="top">Cursor&nbsp;right</td>
+   </tr>
+   <tr><td valign="top">EDIT</td><td valign="top"><em>F1</em></td></tr>
+   <tr>
+    <td valign="top">CAPS&nbsp;LOCK</td>
+    <td valign="top"><em>F2</em></td>
+   </tr>
+   <tr>
+    <td valign="top">TRUE&nbsp;VIDEO</td>
+    <td valign="top"><em>F3</em></td>
+   </tr>
+   <tr>
+    <td valign="top">INV.&nbsp;VIDEO</td>
+    <td valign="top"><em>F4</em></td>
+   </tr>
+   <tr>
+    <td valign="top">CAPS&nbsp;SHIFT</td>
+    <td valign="top">
+     <em>F5</em> (if CAPS&nbsp;SHIFT is to be pressed
+     as an individual key),<br/>
+     otherwise <em>Shift</em> + ...
+     </td>
+   </tr>
+   <tr>
+    <td valign="top">SYMBOL&nbsp;SHIFT</td>
+    <td valign="top">
+     <em>F6</em> (if SYMBOL&nbsp;SHIFT is to be pressed
+     as an individual key),<br/>
+     otherwise <em>Ctrl</em> + ...
+    </td>
+   </tr>
+   <tr><td valign="top">GRAPHICS</td><td valign="top"><em>F9</em></td></tr>
+   <tr>
+    <td valign="top">DELETE</td>
+    <td valign="top"><em>Delete / Del</em></td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3>
+  <a name="keyb48k">1.1.1. Keyboard of the ZX&nbsp;Spectrum&nbsp;48K</a>
+ </h3>
+  <table border="1">
+   <tr>
+    <th>Character/Text on the Original Keyboard</th>
+    <th>Key(s) to Press on the Original Keyboard</th>
+    <th>Key(s) to Press on the Keyboard of the Computer Running the Emulator</th>
+   </tr>
+   <tr>
+    <td valign="top">Large white character on the key</td>
+    <td valign="top">just this key</td>
+    <td valign="top">The identically labeled letter key</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     Small white text on the key<br/>
+     (BASIC command, only relevant with the K cursor)
+    </td>
+    <td valign="top">just this key</td>
+    <td valign="top">The identically labeled letter key</td>
+   </tr>
+   <tr>
+    <td valign="top">Red text on the key</td>
+    <td valign="top"><em>SYMBOL&nbsp;SHIFT</em> + key</td>
+    <td valign="top">
+     If the character is present on the emulator keyboard,
+     enter it directly,<br/>
+     otherwise <em>Ctrl</em> + the identically labeled letter key</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     White text above the key (first key row only)
+    </td>
+    <td valign="top"><em>CAPS&nbsp;SHIFT</em> + key</td>
+    <td valign="top">
+     <em>F1</em> through <em>F4</em>, <em>F9</em>, <em>Delete (Del)</em>,
+     or the cursor keys
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     From the second key row onward, green text above the key<br/>
+     (BASIC function, only relevant with the L cursor)
+    </td>
+    <td valign="top">
+     <em>CAPS&nbsp;SHIFT</em> + <em>SYMBOL&nbsp;SHIFT</em>
+    </td>
+    <td valign="top">
+     First <em>Ctrl</em> + <em>Shift</em>,
+     then just the identically labeled letter key
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">Red text below the key</td>
+    <td valign="top">
+     First <em>CAPS&nbsp;SHIFT</em> + <em>SYMBOL&nbsp;SHIFT</em>,<br/>
+     then <em>SYMBOL&nbsp;SHIFT</em> + key
+    </td>
+    <td valign="top">
+     First <em>Ctrl</em> + <em>Shift</em>,
+     then <em>Ctrl</em> + the identically labeled letter key
+    </td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="timing">1.2. Timing Behavior of the Video RAM</a></h3>
+  The CPU and the video hardware cannot access the video RAM
+  at the same time.
+  On the ZX&nbsp;Spectrum, access by the CPU is delayed
+  until the video hardware does not currently need to read a byte.
+  In the original, this delay is achieved by intervening
+  in the CPU clock.
+  In JKCEMU, wait states are used for this instead.
+  For the user, this difference from the original is only visible
+  in the <a href="tools/debugger.htm">debugger</a>,
+  if you look closely at the clock cycles needed
+  when accessing the video RAM.
+  The resulting timing behavior nearly matches the original.
+ <br/><br/>
+
+
+ <h2><a name="etc">2. Miscellaneous</a></h2>
+
+ <h3><a name="audio">2.1. Sound/Cassette Output</a></h3>
+  To listen to, output, or record the sound or cassette output,
+  you must open the
+  <a href="audio.htm">Audio/Tape</a> window
+  and enable the corresponding function there.
+  On the <em>Tape Output</em> tab, you can make the sounds
+  audible, or record them and then save them
+  to a file, which are output via the <em>MIC</em> connector.
+  The <em>EAR</em> tab represents the EAR connector.
+  On the ZX&nbsp;Spectrum+&nbsp;128, there is additionally the
+  <em>Sound Generator</em> tab, which represents the AY-3-8912 sound chip.
+ <br/><br/>
+
+ <h3><a name="fileformats">2.2. Supported File Formats</a></h3>
+  The file formats
+  <a href="fileformats.htm#csw">CSW</a> (*.csw),
+  <a href="fileformats.htm#tzx">TZX</a> (*.tzx), and
+  <a href="fileformats.htm#tap">ZX-TAP</a> (*.tap),
+  which are mainly used by ZX Spectrum emulators,
+  are referred to here as tape files and can be loaded into JKCEMU
+  with the function
+  <a href="audio.htm#file_in">Read audio data from a sound or tape file</a>.
+  Write support is available for CSW and TZX files
+  on the <a href="audio.htm#tape_out">Tape Output</a> tab.
+ <br/><br/>
+
+ <h3>
+  <a name="save_basic">2.3. Saving a BASIC Program to a Sound or Tape File</a>
+ </h3>
+  To save a BASIC program to a sound or tape file,
+  the following procedure is recommended:
+  <ol>
+   <li>
+    Enter the command to save to cassette (<tt>SAVE "name"</tt>)
+    and press <em>Enter</em>.<br/>
+    A message appears telling you to start the cassette recorder
+    and then press a key.
+   </li>
+   <li>
+    Enable the audio function
+    <a href="audio.htm#file_out">Record audio data and save to a file</a>
+   </li>
+   <li>
+    Reactivate the window with the emulated ZX&nbsp;Spectrum
+    and press a key.
+   </li>
+   <li>
+    Once the emulated ZX&nbsp;Spectrum has finished saving,
+    disable the audio function and save the recording
+   </li>
+  </ol>
+ <br/>
+  With a different procedure, if you are too slow,
+  it can happen that the emulator detects the end of the data output
+  before you have entered the save command,
+  which then automatically ends the audio function.
+</body>
+</html>

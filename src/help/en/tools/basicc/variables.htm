@@ -1,0 +1,98 @@
+<html>
+<head><title>BASIC Compiler: Variables</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Variables</h2>
+  Variables are used to store numeric values or
+  strings (character strings).
+  Every variable has a name and a
+  <a href="datatypes.htm">data type</a>.
+  You can choose the variable name freely.
+  It must start with a letter and, provided it is longer
+  than one character,
+  may contain letters and digits from the second position onward.
+  Upper and lower case are not distinguished.
+  The variable name must not be a reserved keyword.
+ <br/><br/>
+  The data type determines what can be stored in the variable.
+  String variables are limited to 255&nbsp;characters.
+ <br/><br/>
+  <ol>
+   <li><a href="variables.htm#kinds">Simple Variables and Arrays</a></li>
+   <li><a href="variables.htm#scope">Global and Local Variables</a></li>
+   <li><a href="variables.htm#declare">Declaring Variables</a></li>
+   <li><a href="variables.htm#access">Assigning and Reading Values</a></li>
+  </ol>
+ <br/>
+
+ <h3><a name="kinds">1. Simple Variables and Arrays</a></h3>
+  There are simple variables and array variables (arrays, for short).
+  Arrays consist of several array elements.
+  The JKCEMU BASIC compiler supports arrays
+  with up to two dimensions, i.e.,
+  the array elements can be arranged in one or two dimensions.
+  The dimensions, or the indexes used to access an array element,
+  are written in parentheses after the variable name
+  (in this case also called the array name).
+ <br/><br/>
+
+ <h3><a name="scope">2. Global and Local Variables</a></h3>
+  Variables have a scope
+  within which they are visible and therefore usable.
+  The scope, and thus the visibility, can be global
+  or local.
+  Global variables are visible throughout the entire BASIC program,
+  local ones only in the
+  <a href="usersubs.htm">user-defined function or procedure</a>
+  in which they were declared using
+  <a href="instructions.htm#local">LOCAL</a>.
+  If a local variable has the same name as a global one,
+  it hides the global variable, i.e., within the scope
+  of the local variable, the global variable of the same name
+  cannot be accessed.
+ <br/><br/>
+
+ <h3><a name="declare">3. Declaring Variables</a></h3>
+  Variables must be declared
+  before they can be used.
+  Declaring a variable means specifying its name and its type.
+ <br/><br/>
+  The JKCEMU BASIC compiler knows two kinds of variable declaration:
+  implicit and explicit.
+  Implicit variable declaration is familiar from classic BASIC
+  and means that you simply use a variable.
+  When the compiler (or, in classic BASIC, the interpreter)
+  encounters a variable it does not yet know,
+  it simply creates it.
+  In the JKCEMU BASIC compiler, only simple
+  integer and string variables can be declared implicitly.
+  The data type is then derived from the name:
+  if it ends with a $ character, it is a string variable,
+  otherwise an integer variable.
+ <br/><br/>
+  With explicit variable declaration, the variables are
+  introduced with the <a href="instructions.htm#dim">DIM</a> or
+  <a href="instructions.htm#local">LOCAL</a> statement.
+  Long, Decimal and Single variables, as well as arrays, must be
+  declared explicitly; integer and string variables may be.
+  In the interest of a "clean programming style"
+  and with an eye toward other modern programming languages,
+  it is recommended to declare all variables explicitly,
+  including integer and string variables.
+ <br/><br/>
+
+ <h3><a name="access">4. Assigning and Reading Values</a></h3>
+  Simple variables, as well as the individual array elements of array
+  variables, can be assigned a value and read again as often as desired.
+  Assignment is possible with the statements
+  <a href="instructions.htm#let">LET</a>,
+  <a href="instructions.htm#input">INPUT</a>,
+  <a href="instructions.htm#line_input">LINE&nbsp;INPUT</a>,
+  <a href="instructions.htm#password_input">PASSWORD&nbsp;INPUT</a> and
+  <a href="instructions.htm#read">READ</a>.
+  To read the value stored in a variable, specify
+  the variable name within an
+  <a href="expressions.htm">expression</a>.
+</body>
+</html>

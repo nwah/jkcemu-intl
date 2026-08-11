@@ -1,0 +1,432 @@
+<html>
+<body>
+ <h1>KC&nbsp;compact</h1>
+  The KC&nbsp;compact is the last home computer manufactured in the GDR.
+  It was developed with the goal of achieving extensive compatibility
+  with the CPC computers from Amstrad.
+  Since the KC&nbsp;compact has to do without the ULA
+  (a custom chip from Amstrad),
+  some central things are solved differently in terms of hardware
+  than in the CPC.
+  Nevertheless, the compatibility is very high, at least
+  if you do without the undocumented graphics mode&nbsp;3.
+ <br/><br/>
+  In terms of software and hardware, the KC&nbsp;compact corresponds
+  most closely to a CPC664 (64&nbsp;KByte RAM, Locomotive Basic&nbsp;1.1),
+  but without a built-in floppy disk drive.
+  The floppy disk extension for the KC&nbsp;compact is designed as a
+  separate device and also had to be purchased separately.
+  In addition, instead of the CPC-specific 3'' floppy disks
+  with 40&nbsp;tracks, the 5.25'' floppy disks with 80&nbsp;tracks
+  that were common in the GDR were used.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="kccompact.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="kccompact.htm#keyboard">1.1. Keyboard</a></li>
+     <li><a href="kccompact.htm#sound">1.2. Sound Generator</a></li>
+     <li>
+      <a href="kccompact.htm#fdc">1.3. Floppy Disk Station</a>
+      <ul>
+       <li>
+	<a href="kccompact.htm#fdcrom">1.3.1. ROM in the Floppy Disk Station</a>
+       </li>
+       <li><a href="kccompact.htm#diskfmt">1.3.2 Floppy Disk Formats</a></li>
+      </ul>
+     </li>
+     <li>
+      <a href="kccompact.htm#rom_ext">1.4. ROM Extensions</a>
+     </li>
+     <li>
+      <a href="kccompact.htm#ram_ext">1.5. RAM Extension&nbsp;512K</a>
+     </li>
+    </ul>
+   </li>
+   <li><a href="kccompact.htm#disks">2. Included Disk Images</a></li>
+   <li>
+    <a href="kccompact.htm#etc">3. Miscellaneous</a>
+    <ul>
+     <li>
+      <a href="kccompact.htm#load">3.1. Loading Programs</a>
+      <ul>
+       <li>
+	<a href="kccompact.htm#load_kcc">3.1.1. Loading KC-compact and CPC Programs</a>
+       </li>
+       <li>
+	<a href="kccompact.htm#load_cpm">3.1.2. Loading CP/M Programs</a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="kccompact.htm#screen">3.2. Screen Output</a>
+      <ul>
+       <li>
+	<a href="kccompact.htm#screensize">3.1.1. Size and Aspect Ratio</a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  The following are emulated:
+  <ul>
+   <li>Base unit</li>
+   <li>Printer</li>
+   <li>Two <a href="joystick.html">joysticks</a></li>
+   <li>
+    optional:
+    <ul>
+     <li>
+      <a href="kccompact.htm#rom_ext">15&nbsp;ROM extension modules of 16K each</a>
+     </li>
+     <li>
+      <a href="kccompact.htm#ram_ext">RAM extension&nbsp;512K</a>
+     </li>
+     <li><a href="kccompact.htm#fdc">Floppy disk station</a></li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="keyboard">1.1. Keyboard</a></h3>
+  For some keys on the KC-compact keyboard, there is usually
+  no directly corresponding key of the same name on the keyboard
+  of the computer running the emulator.
+  These keys are nevertheless emulated.
+  The table shows the key mapping for some selected keys:
+ <br/><br/>
+  <table border="1">
+   <tr><th>KC-compact key</th><th>Emulated by means of</th></tr>
+   <tr><td>RETURN</td><td>ENTER/RETURN</td></tr>
+   <tr><td>DEL</td><td>BACKSPACE</td></tr>
+   <tr><td>CLR</td><td>Del</td></tr>
+   <tr><td>F0</td><td>F5</td></tr>
+   <tr><td>F1</td><td>F1</td></tr>
+   <tr><td>F2</td><td>F2</td></tr>
+   <tr><td>F3</td><td>F3</td></tr>
+   <tr><td>F4</td><td>F4</td></tr>
+   <tr><td>ENTER</td><td>F6</td></tr>
+   <tr><td>Period</td><td>F7</td></tr>
+   <tr><td>COPY</td><td>F8</td></tr>
+  </table>
+ <br/>
+  If a function or control key is pressed together with the Control
+  or Shift key, this key combination is also reproduced directly
+  on the emulated KC-compact keyboard.
+  For all other keys (letters, digits, special characters),
+  pressing the Control and Shift keys is reproduced so that
+  the same character appears on the emulated KC&nbsp;compact
+  as on the keyboard of the emulator computer.
+  This is necessary because the characters on the emulated
+  KC-compact keyboard can be on a different shift level
+  than on the keyboard of the computer running the emulator.
+ <br/><br/>
+
+ <h3><a name="sound">1.2. Sound Generator</a></h3>
+  To hear the tones output by the sound generator,
+  you must enable the sound output in the
+  <a href="audio.htm">Audio/Tape</a> window,
+  on the <em>Sound Generator</em> tab.
+ <br/><br/>
+  <b>Note:</b> The sound generator is always emulated with the
+  original clock frequency, i.e., if you specify a different
+  clock frequency in the <a href="settings.htm">Settings</a>,
+  this only affects the emulation of the microprocessor.
+ <br/><br/>
+
+ <h3><a name="fdc">1.3. Floppy Disk Station</a></h3>
+  The floppy disk station, which was optionally available
+  as an add-on device for the KC&nbsp;compact, is
+  <a href="floppydisk.htm">emulated</a>
+  if you specify this in the <a href="settings.htm">Settings</a>.
+  The floppy disk station provides two floppy disk drives and
+  an additional 64&nbsp;KByte of RAM as well as 16&nbsp;KByte of ROM
+  (of which, however, only 8&nbsp;KByte is used).
+ <br/><br/>
+  Since the KC&nbsp;compact aimed for extensive compatibility
+  with the CPC computers from Amstrad,
+  some peculiarities of these computers were also adopted
+  for the floppy disk system:
+  <ul>
+   <li>
+    A terminal count cannot be triggered by software.
+    Therefore, an end-of-cylinder error is always reported
+    at the end when reading and writing sectors.
+    <br/><br/>
+   </li>
+   <li>
+    Internally, drive selection is done only via the DS0 line.
+    DS1 is not evaluated.
+    Therefore, the internal drive numbers 2 and 3 have the same
+    effect as 0 and 1.
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="fdcrom">1.3.1 ROM in the Floppy Disk Station</a></h3>
+  The floppy disk station contains a ROM
+  that holds the BASDOS (the CPC computers' AMSDOS extended
+  with an additional floppy disk format).
+  This ROM is integrated into the system as a ROM extension
+  with ROM number&nbsp;7,
+  without this appearing in the KC-compact settings
+  in the <em>ROM Extensions</em> subwindow.
+  If you want to replace this ROM content with a different one,
+  add a ROM extension with number&nbsp;7 in the settings
+  (see <a href="kccompact.htm#rom_ext">ROM Extensions</a>).
+  This extension then replaces the ROM in the floppy disk station.
+ <br/><br/>
+
+ <h3><a name="diskfmt">1.3.2 Floppy Disk Formats</a></h3>
+  With the KC&nbsp;compact, there are two operating modes
+  with different floppy disk formats regarding disk usage.
+  The first operating mode is called BASDOS.
+  This is the floppy disk support for the BASIC
+  contained in the KC&nbsp;compact, i.e.,
+  it can be used, for example, to save BASIC programs to floppy disk
+  and load them from there again.
+  In this operating mode, the following floppy disk formats
+  are supported:
+ <br/>
+  <ul>
+   <li>
+    <u>BASDOS standard format:</u><br/>
+    720/711&nbsp;KByte:
+    80&nbsp;tracks, double-sided, one system track, 9&nbsp;sectors,
+    512&nbsp;byte sector size, sector offset&nbsp;0,
+    4&nbsp;KByte block size
+    <br/><br/>
+   </li>
+   <li>
+    <u>AMSDOS format without system track:</u><br/>
+    180&nbsp;KByte:
+    40&nbsp;tracks; single-sided, no system track, 9&nbsp;sectors,
+    512&nbsp;byte sector size, sector offset&nbsp;C0h,
+    1&nbsp;KByte block size
+    <br/><br/>
+   </li>
+   <li>
+    <u>AMSDOS format with system tracks:</u><br/>
+    180/171&nbsp;KByte:
+    40&nbsp;tracks; single-sided, 2&nbsp;system tracks, 9&nbsp;sectors,
+    512&nbsp;byte sector size, sector offset&nbsp;40h,
+    1&nbsp;KByte block size
+   </li>
+  </ul>
+ <br/>
+  The BASDOS operating mode is entered automatically
+  when the KC&nbsp;compact is switched on or reset (RESET)
+  with the floppy disk station connected.
+ <br/><br/>
+  The second operating mode is the CP/M-compatible MicroDOS.
+  You enter this operating mode with the command <tt>|cpm</tt>.
+  To do this, the MicroDOS system disk must have been inserted
+  in the first floppy disk drive beforehand.
+ <br/><br/>
+  MicroDOS supports two floppy disk formats:
+ <br/>
+  <ul>
+   <li>
+    <u>MicroDOS standard format:</u><br/>
+    800/780&nbsp;KByte:
+    80&nbsp;tracks, double-sided, 2&nbsp;system tracks, 5&nbsp;sectors,
+    1024&nbsp;byte sector size, sector offset&nbsp;0,
+    2&nbsp;KByte block size
+    <br/><br/>
+   </li>
+   <li>
+    <u>BASDOS standard format:</u><br/>
+    720/711&nbsp;KByte:
+    80&nbsp;tracks, double-sided, one system track, 9&nbsp;sectors,
+    512&nbsp;byte sector size, sector offset&nbsp;0,
+    4&nbsp;KByte block size<br/>
+   </li>
+  </ul>
+ <br/>
+  The MicroDOS system disk included in JKCEMU is configured so that
+  the first floppy disk drive can be addressed both as drive&nbsp;<em>B:</em>
+  and as drive <em>C:</em>,
+  depending on the format of the inserted disk.
+  Drive&nbsp;<em>B:</em> is configured for the MicroDOS standard format
+  and drive&nbsp;<em>C:</em> for the BASDOS standard format.
+ <br/><br/>
+  With the program <em>FORMATCC.COM</em> included on the MicroDOS
+  system disk, you can format floppy disks for MicroDOS and BASDOS.
+  If you want to create a disk image file for BASDOS in the emulator,
+  for example to store KC&nbsp;compact BASIC programs on it,
+  proceed as follows:
+ <br/>
+  <ol>
+   <li>Set up KC&nbsp;compact emulation with a floppy disk station</li>
+   <li>Open the <em>Floppy Disk Station</em> window</li>
+   <li>Insert the <em>KC&nbsp;compact MicroDOS system disk</em> in it</li>
+   <li>Start MicroDOS with <tt>|cpm</tt></li>
+   <li>Start <em>formatcc</em></li>
+   <li>
+    In the <em>Floppy Disk Station</em> window, create a new disk image
+    file (e.g. menu item <em>Create New CPC Disk File...</em>)
+   </li>
+   <li>
+    In the emulator window, in the formatting program, select
+    drive&nbsp;B and format number&nbsp;2 (9*512*80*2)
+    and start formatting
+   </li>
+   <li>
+    After formatting has finished, trigger RESET in the emulator
+   </li>
+  </ol>
+ <br/>
+
+ <h3><a name="rom_ext">1.4. ROM Extensions</a></h3>
+  The operating system of the KC&nbsp;compact can manage 15
+  ROM extension modules, each 16&nbsp;KByte in size.
+  For this, each ROM module is assigned a number from 1 to 15.
+ <br/><br/>
+  When booting, the operating system performs a so-called ROM walk.
+  Starting with number&nbsp;15, it maps the ROM modules into
+  working memory in turn and tests whether they contain
+  operating system extensions.
+  If so, the extensions found are integrated into the operating system.
+ <br/><br/>
+  In terms of hardware, the KC&nbsp;compact can even distinguish
+  255&nbsp;ROM extension modules,
+  but the operating system only manages 15.
+  For this reason, JKCEMU also only emulates a maximum of 15&nbsp;modules.
+  To add a ROM extension, in the KC-compact settings, in the
+  <em>ROM Extensions</em> subwindow, click the
+  <em>Add</em> button.
+  A dialog opens in which you specify the ROM number
+  and the file with the ROM content.
+  Adding is also possible by dragging a ROM file into the
+  <em>ROM Extensions</em> subwindow via drag&amp;drop and dropping it
+  over the ROM list.
+ <br/><br/>
+
+ <h3><a name="ram_ext">1.5. RAM Extension&nbsp;512K</a></h3>
+  The optionally emulated RAM extension functionally corresponds to
+  two 256K RAM extension modules from DK'tronics.
+  This means that all 8&nbsp;banks in the bank switch register
+  7F&nbsp;XX&nbsp;CX are populated with RAM.
+ <br/><br/>
+  <b>Caution!</b> If the floppy disk station and the 512K RAM extension
+  are emulated at the same time, the RAM extension covers
+  the RAM in the floppy disk station, i.e.,
+  a total of 576&nbsp;KByte of RAM is available
+  (64&nbsp;KByte in the base unit and
+  512&nbsp;KByte in the RAM extension).
+ <br/><br/>
+
+
+ <h2><a name="disks">2. Included Disk Images</a></h2>
+  For KC-compact emulation, JKCEMU includes
+  the following disk image:
+  <ul>
+   <li>MicroDOS system disk</li>
+  </ul>
+  You start MicroDOS by entering the command: <tt>|cpm</tt>
+ <br/>
+  To do this, the emulation of the
+  <a href="kccompact.htm#fdc">floppy disk station</a> must be enabled
+  and the MicroDOS system disk must be inserted into the first
+  emulated floppy disk drive.
+ <br/><br/>
+  The MicroDOS on the system disk is configured with three drives:
+  <ul>
+   <li>A: RAM floppy</li>
+   <li>
+    B: first floppy disk drive in MicroDOS standard format
+    (see <a href="kccompact.htm#diskfmt">Floppy Disk Formats</a> above)
+   </li>
+   <li>
+    C: first floppy disk drive in BASDOS standard format
+    (see <a href="kccompact.htm#diskfmt">Floppy Disk Formats</a> above)
+   </li>
+  </ul>
+ <br/>
+  In MicroDOS, the directory listing is displayed with the command
+  <em>D</em>, and not with <em>DIR</em> as is otherwise
+  usual with CP/M-compatible operating systems.
+ <br/><br/>
+  <b>Caution!</b> The disk also contains the empty files
+  <a href="go_com.htm">G.COM</a> and <a href="go_com.htm">GO.COM</a>.
+  These are used to start a CP/M-compatible program that is
+  already located in working memory.
+  If <em>G</em> or <em>GO</em> is called
+  without a program being present in working memory,
+  this leads to a crash.
+ <br/><br/>
+
+
+ <h2><a name="etc">3. Miscellaneous</a></h2>
+
+ <h3><a name="load">3.1. Loading Programs</a></h3>
+
+ <h3>
+  <a name="load_kcc">3.1.1. Loading KC-compact and CPC Programs</a>
+ </h3>
+  Although JKCEMU offers the option of loading files directly
+  into the emulator's working memory, the KC&nbsp;compact operating
+  system does not recognize programs loaded this way.
+  For this reason, programs must always be loaded with the help
+  of the KC-compact operating system,
+  either via the
+  <a href="audio.htm#tape_in">emulated cassette interface</a> or
+  from an <a href="floppydisk.htm">emulated floppy disk</a>.
+ <br/><br/>
+
+ <h3>
+  <a name="load_cpm">3.1.2. Loading CP/M Programs</a>
+ </h3>
+  With CP/M-compatible operating systems, programs are loaded from
+  a floppy disk, i.e., in an emulator, from an
+  <a href="floppydisk.htm">emulated floppy disk</a>.
+  However, JKCEMU additionally offers the option of loading
+  CP/M program files (*.com) directly into working memory
+  with the help of the emulator functions and starting them
+  with the help of the empty file
+  <a href="go_com.htm">G.COM</a> or <a href="go_com.htm">GO.COM</a>,
+  without the CP/M program file in question having to be present
+  on the emulated floppy disk.
+  The prerequisite is that a CP/M-compatible operating system
+  (e.g. MicroDOS) has been started in the KC-compact emulation.
+ <br/><br/>
+  <b>Caution!</b> With MicroDOS, the RAM contained in the floppy disk
+  station is used as working memory.
+  For this reason, JKCEMU loads COM files into this RAM.
+  All other file types
+  (and, if floppy disk emulation is disabled, COM files as well)
+  are loaded into the RAM of the base unit.
+ <br/><br/>
+
+ <h3><a name="screen">3.2. Screen Output</a></h3>
+  The screen output is always updated synchronously with the
+  emulation of the video controller.
+  This is necessary for the correct display of fast
+  motion sequences (e.g. in game programs).
+  The update cycle specified in the settings therefore
+  does not apply here.
+ <br/><br/>
+
+ <h3>
+  <a name="screensize">3.2.1. Size and Aspect Ratio</a>
+ </h3>
+  The KC&nbsp;compact offers three screen resolutions.
+  When switching between these
+  (e.g. with the BASIC command <tt>mode&nbsp;2</tt> for the 80-column
+  mode), the size of the emulator window and the aspect ratio
+  also change.
+  On the original, however, the size of the screen output area
+  always stays the same. With the option
+  <em>Same window size in all screen modes</em>,
+  you can adjust the behavior to match that of the original.
+  However, the emulator window is then always as large as needed
+  to display the highest screen resolution.
+</body>
+</html>

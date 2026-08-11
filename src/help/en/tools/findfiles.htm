@@ -1,0 +1,152 @@
+<html>
+<body>
+ <h1>Find Files</h1>
+  JKCEMU offers the option
+  of searching a <a href="../dirchooser.htm">directory</a>,
+  including its subdirectories,
+  for files matching certain criteria.
+  The files found can be opened, copied, renamed,
+  deleted, or otherwise used.
+ <br/><br/>
+  <ul>
+   <li>
+    <a href="findfiles.htm#conditions">1. Search Criteria</a>
+    <ul>
+     <li><a href="findfiles.htm#filename">1.1. File Name</a></li>
+     <li><a href="findfiles.htm#filesize">1.2. File Size</a></li>
+     <li>
+      <a href="findfiles.htm#last_modified">1.3. Modification Time</a>
+     </li>
+     <li>
+      <a href="findfiles.htm#content_pattern">1.4. Contained Text</a>
+     </li>
+    </ul>
+   </li>
+   <li><a href="findfiles.htm#result">2. Search Result</a></li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="conditions">1. Search Criteria</a></h2>
+  The search criteria specify which files are to be found.
+  If no entries are made for file size and contained text,
+  matching directory names are also searched for.
+ <br/><br/>
+  The search criteria are combined with AND,
+  i.e. only the files are found
+  that match all the specified search criteria.
+ <br/><br/>
+
+ <h3><a name="filename">1.1. File Name</a></h3>
+  You can specify the file name in the form of a file name mask.
+  In this mask, the characters * and ? are interpreted as wildcards.
+  The asterisk stands for any number of characters,
+  and the question mark for exactly one arbitrary character.
+  All other characters must match
+  for the file in question to be found.
+ <br/><br/>
+  You can also specify several file name masks in the input field,
+  by simply writing them one after another,
+  separated by spaces, commas, or semicolons.
+  The search criterion <em>File Name</em> is satisfied
+  if one of these file name masks matches.
+ <br/><br/>
+  If a file name mask needs to contain a space, comma, or semicolon,
+  you must enclose it in double quotes,
+  so that these characters are not treated as separators.
+  For example, use <tt>"* *"</tt> to search for all files
+  that contain a space in their name.
+  By contrast, <tt>* *</tt> without double quotes
+  means the mask for all file names, written twice in a row.
+ <br/><br/>
+  The file name mask is a mandatory field,
+  i.e. you must enter something in the field.
+  If you do not want to restrict the file name,
+  i.e. all file names should be found,
+  then simply enter just an asterisk.
+ <br/><br/>
+
+ <h3><a name="filesize">1.2. File Size</a></h3>
+  Here you can restrict the files to be searched by their size,
+  by specifying a minimum and/or a maximum
+  size.
+  It is also possible to fill in only one of the two fields.
+ <br/><br/>
+  The size must be specified in bytes.
+ <br/><br/>
+
+ <h3><a name="last_modified">1.3. Modification Time</a></h3>
+  With the two fields after <em>Last modified on:</em>,
+  you can restrict the search by the timestamp of the last
+  modification.
+  The following are possible as time specifications:
+ <br/>
+  <ul>
+   <li>Date without time (DD.MM.YYYY)</li>
+   <li>Date with time without seconds (DD.MM.YYYY hh:mm)</li>
+   <li>Date with time with seconds (DD.MM.YYYY hh:mm:ss)</li>
+  </ul>
+ <br/>
+  Strictly speaking, the point in time you enter is a time span,
+  namely, depending on the kind of entry, a day, a minute, or a second.
+  This time span is always to be understood as &quot;inclusive&quot;,
+  both for the start and the end point.
+  So if you enter a date only in the first field,
+  the files are found that were changed at some point during
+  the specified day.
+ <br/><br/>
+  As an alternative to a specific date, you can also enter
+  the keywords <em>Today</em>, <em>Yesterday</em>,
+  and <em>The day before yesterday</em>.
+  Upper/lower case does not matter here.
+ <br/><br/>
+
+ <h3><a name="content_pattern">1.4. Contained Text</a></h3>
+  If you want to search for files that contain a certain text,
+  enter the text you are looking for in the field after
+  <em>Contained text:</em>.
+  Only the files that contain the text are then found.
+  If, in a file, the contained text is split up or separated
+  by formatting or other bytes,
+  the file will not be found.
+ <br/><br/>
+  If the search text contains non-ASCII characters (e.g. umlauts),
+  the character set of the files to be searched must be known.
+  For this purpose, JKCEMU checks the files for a possible
+  byte order mark for UTF-8 and UTF-16.
+  If one is present, the corresponding character set
+  is used; otherwise, the local system character set.
+  This also means that files without a byte order mark
+  that were created with a character set other than the local
+  system character set will probably not be found
+  if the search text contains non-ASCII characters.
+ <br/><br/>
+
+
+ <h2><a name="result">2. Search Result</a></h2>
+  The files and directories found are listed in the
+  <em>Search result:</em> field.
+  This also contains error messages marked in red,
+  for example if a directory cannot be searched
+  due to missing permissions.
+  The text locations found are also shown,
+  provided you have clicked the corresponding option.
+ <br/><br/>
+  If the search result is too large for you, you can select
+  entries you no longer need and then
+  remove them (menu item <em>Edit</em> &rarr;
+  <em>Remove Selected Entries from Search Result</em>).
+  A different menu item can be used to remove the red error
+  entries.
+  Removing entries from the search result, or clearing the entire
+  search result, can also be done while the search is still running,
+  and has no effect on the files or directories found themselves,
+  i.e. they are not deleted as a result.
+ <br/><br/>
+  To use the files or directories found,
+  select them and then call up the desired
+  function in the <em>File</em> or <em>Edit</em> menu.
+  You can also drag the files found out of the search result
+  and into another window using drag&amp;drop.
+</body>
+</html>

@@ -1,0 +1,158 @@
+<html>
+<head><title>BASIC Compiler: Source Code</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Source Code</h2>
+  <ul>
+   <li><a href="source.htm#fileformat">1. File format</a></li>
+   <li><a href="source.htm#case">2. Upper/lower case</a></li>
+   <li><a href="source.htm#linenumbers">3. Line numbers</a></li>
+   <li><a href="source.htm#labels">4. Labels</a></li>
+   <li><a href="source.htm#line_syntax">5. Syntax of a program line</a></li>
+   <li><a href="source.htm#comments">6. Comments</a></li>
+  </ul>
+ <br/>
+
+ <h3><a name="fileformat">1. File format</a></h3>
+  The BASIC program is the source code for the compiler.
+  It must be in the form of a plain text file.
+  When programming within JKCEMU, the built-in
+  <a href="../texteditor.htm">Text Editor</a> is well suited for this.
+  With it, it is possible to have the compiled program
+  automatically loaded directly into the emulator's main memory.
+  If you want to use a different text editor,
+  you can translate the BASIC program with the
+  <a href="cmdline.htm">command-line version</a> of the compiler.
+ <br/><br/>
+
+ <h3><a name="case">2. Upper/lower case</a></h3>
+  Upper/lower case does not matter except in strings
+  and character constants.
+  All statements, functions, procedures, variables and labels
+  can be written in any mix of upper case, lower case,
+  or a combination of both.
+  For better readability, blank lines can be inserted,
+  and statements and syntax elements can be indented
+  or separated with spaces.
+ <br/><br/>
+
+ <h3><a name="linenumbers">3. Line numbers</a></h3>
+  The compiler understands BASIC programs both in the classic form
+  with line numbers at the start of each line and without
+  line numbers.
+  Specifically for the second case, labels were introduced
+  as a replacement for line numbers.
+ <br/><br/>
+  The example shows a program with and without line numbers.
+  In the version without line numbers, a label is used.
+  Labels are described in the next section.
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th nowrap="nowrap">Program with line numbers</th>
+    <th nowrap="nowrap">Program without line numbers</th>
+   </tr>
+   <tr>
+    <td valign="top">
+     <tt>
+      10 I=0&#10;<br/>
+      20 I=I+1&#10;<br/>
+      30 PRINT I&#10;<br/>
+      40 IF I&lt;100 THEN GOTO 20&#10;<br/>
+      50 END
+     </tt>
+    </td>
+    <td valign="top">
+     <tt>
+      I=0&#10;<br/>
+      schleife:&#10;<br/>
+      I=I+1&#10;<br/>
+      PRINT I&#10;<br/>
+      IF I&lt;100 THEN GOTO schleife&#10;<br/>
+      END
+     </tt>
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+  Line numbers appearing in the BASIC program are referred to
+  in JKCEMU and in the help as <em>BASIC line numbers</em>.
+ <br/><br/>
+
+ <h3><a name="labels">4. Labels</a></h3>
+  There are BASIC statements that refer to a line number,
+  e.g. GOTO, GOSUB, RESTORE.
+  If you now work without BASIC line numbers, you need
+  a different way to reference a place in the source code.
+  For this, the BASIC compiler has labels.
+  A label is a marker for a source code line
+  with a freely chosen name,
+  which, however, must not be a reserved keyword
+  and must also not otherwise match the name
+  of any variable, function or procedure.
+ <br/><br/>
+  A label must stand alone on a line,
+  begin at the start of the line (no leading spaces)
+  and be terminated with a colon.
+  It is referenced without the colon.
+  The example demonstrates the use of a label
+  named <em>datenanfang</em>.
+ <br/>
+  <tt>
+   &#10;<br/>
+   RESTORE datenanfang&#10;<br/>
+   ...&#10;<br/>
+   datenanfang:&#10;<br/>
+   &nbsp;&nbsp;DATA 1,2,3&#10;<br/>
+  </tt>
+ <br/>
+  <b>Caution!</b> Nothing else may follow the closing colon
+  of a label on that line, so that the compiler
+  can syntactically distinguish a label from a statement.
+ <br/><br/>
+
+ <h3><a name="line_syntax">5. Syntax of a program line</a></h3>
+  There are three kinds of program lines:
+  <ol>
+   <li>Blank line</li>
+   <li>Line with a label</li>
+   <li>Line with statements</li>
+  </ol>
+ <br/>
+  Blank lines are used for better readability.
+  A line with a label is used to mark a place
+  in the source code and is a replacement for BASIC line numbers.
+  Lines with statements can contain one or more statements.
+  In the case of several statements, they are separated
+  from each other by a colon.
+  A list of the statements can be found <a href="instructions.htm">here</a>.
+ <br/><br/>
+  Blank lines and lines with statements can contain
+  a BASIC line number.
+  This is not possible for lines with a label.
+ <br/><br/>
+
+ <h3><a name="comments">6. Comments</a></h3>
+  For comments, there is the statement
+  <a href="instructions.htm#rem">REM</a>.
+  Instead of the keyword&nbsp;REM, an exclamation mark
+  or an apostrophe (quote character) can also be written.
+  A comment always runs to the end of the line,
+  even if the comment contains a colon.
+ <br/><br/>
+  Examples of comments:
+ <br/>
+  <tt>
+   &#10;<br/>
+   REM Kommentar&#10;<br/>
+   !Kommentar&#10;<br/>
+   'Kommentar&#10;<br/>
+   A=100:REM Kommentar&#10;<br/>
+   B=200:!Kommentar&#10;<br/>
+   C=300:'Kommentar: auch noch Kommentar&#10;<br/>
+  </tt>
+ <br/>
+</body>
+</html>
+

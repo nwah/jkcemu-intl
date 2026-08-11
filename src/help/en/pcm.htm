@@ -1,0 +1,445 @@
+<html>
+<body>
+ <h1>PC/M</h1>
+  The PC/M, also called the Mugler/Mathes-PC or simply Mugler-PC,
+  is a self-build computer with CP/M compatibility
+  that was published in 1988 as a set of construction instructions
+  in a series of articles in the magazine
+  <em>Funkamateur</em>.
+  The original concept used RAM floppies as drives,
+  the contents of which were stored on cassette tape.
+  Support for floppy disk drives was added later.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="pcm.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="pcm.htm#rom">1.1. ROM</a></li>
+     <li><a href="pcm.htm#ram">1.2. RAM Banks</a></li>
+     <li><a href="pcm.htm#fdc">1.3. Floppy Disk Module</a></li>
+     <li><a href="pcm.htm#nmi">1.4. NMI Generator</a></li>
+     <li><a href="pcm.htm#ext">1.5. Extensions</a></li>
+    </ul>
+   </li>
+   <li>
+    <a href="pcm.htm#software">2. Software Contained in the ROM</a>
+    <ul>
+     <li><a href="pcm.htm#soft_base">2.1. Base Operating System</a></li>
+     <li><a href="pcm.htm#soft_rf"> 2.2. RAM Floppy System</a></li>
+     <li><a href="pcm.htm#soft_fdc"> 2.3. Floppy Disk System</a></li>
+    </ul>
+   </li>
+   <li><a href="pcm.htm#disks">3. Included Disk Images</a></li>
+   <li>
+    <a href="pcm.htm#etc">4. Miscellaneous</a>
+    <ul>
+     <li><a href="pcm.htm#font">4.1. Character Set Files</a></li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  <ul>
+   <li>
+    <a href="pcm.htm#rom">8&nbsp;KByte ROM</a>,
+    optionally expandable up to 32&nbsp;KByte
+   </li>
+   <li>3&nbsp;RAM banks of 62&nbsp;KByte each</li>
+   <li>
+    Screen control with the resolutions:
+    <ul>
+     <li>64x16 characters (64x32 characters with interlaced lines)</li>
+     <li>80x24 characters (only possible with the floppy disk system)</li>
+    </ul>
+   </li>
+   <li>Cassette recorder connector</li>
+   <li>
+    <a href="print.htm">Printer connector</a>
+    on system SIO port&nbsp;A
+   </li>
+   <li><a href="pcm.htm#nmi">NMI generator</a></li>
+   <li>
+    optional:
+    <ul>
+     <li><a href="pcm.htm#fdc">Floppy disk module</a></li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="rom">1.1. ROM</a></h3>
+  The original PC/M has an 8&nbsp;KByte ROM
+  that contains the base operating system.
+  In the emulator, this ROM can be enlarged in steps of 8&nbsp;KByte
+  up to 32&nbsp;KByte
+  by specifying an appropriately sized ROM file
+  in the PC/M settings.
+ <br/><br/>
+
+ <h3><a name="ram">1.2. RAM Banks</a></h3>
+  RAM banks&nbsp;1 and 2 of the emulated PC/M
+  are located consecutively in RAM floppy&nbsp;1 within JKCEMU.
+  This makes sense, since the BIOS contained in the ROM
+  also treats these two banks as a single RAM floppy.
+  This means the RAM floppy can be loaded and saved
+  using the emulator's functions.
+ <br/><br/>
+
+ <h3><a name="fdc">1.3. Floppy Disk Module</a></h3>
+  The floppy disk module is <a href="floppydisk.htm">emulated</a>
+  if you have enabled one of the two PC/M expansion levels
+  with a floppy disk system in the settings.
+  However, the first drive does not have the usual internal
+  number&nbsp;0, but number&nbsp;1.
+  The reason lies in the PC/M system software,
+  which tries to boot starting from internal drive number&nbsp;1.
+  So that booting can take place from the first drive shown
+  in the <em>JKCEMU Floppy Disk Station</em> window,
+  the drive numbers are mapped as follows:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Internal Drive Number</th><th>Visible Drive</th></tr>
+   <tr><td>0</td><td>4</td></tr>
+   <tr><td>1</td><td>1</td></tr>
+   <tr><td>2</td><td>2</td></tr>
+   <tr><td>3</td><td>3</td></tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="nmi">1.4. NMI Generator</a></h3>
+  The NMI generator enables single-step operation and is used
+  by the debugger contained in the base operating system
+  of the RAM floppy system
+  (CTRL-I in the debugger executes a single step).
+ <br/><br/>
+  The NMI generator is activated by an input/output instruction
+  to one of the addresses 98h to 9Bh.
+  A non-maskable interrupt is then triggered
+  after the third instruction following the input/output instruction.
+ <br/><br/>
+
+ <h3><a name="ext">1.5 Extensions</a></h3>
+  The following extensions are optionally emulated:
+   <ul>
+   <li><a href="k1520sound.htm">K1520 sound card</a></li>
+   <li>
+    <a href="usb.htm">USB port</a> (Vinculum VDIP module)
+    at I/O base addresses&nbsp;DCh and FCh
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="software">2. Software Contained in the ROM</a></h2>
+  <table border="1">
+   <tr><th>System</th><th>Software</th></tr>
+   <tr><td>RAM floppy system</td><td>Version&nbsp;2.10</td></tr>
+   <tr><td>Floppy disk system</td><td>Version&nbsp;3.30</td></tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="soft_base">2.1. Base Operating System</a></h3>
+  On a RESET, the system software is loaded from ROM into RAM,
+  after which the ROM is switched out.
+  The base operating system then reports with the PC/M prompt:
+ <br/><br/>
+  <tt>V&gt;</tt>
+ <br/><br/>
+  You can now enter commands, each of which must be terminated
+  with <em>Enter</em>.
+  The following commands are possible:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Command</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top"><tt>0</tt></td>
+    <td valign="top">
+     Set memory bank&nbsp;0 as the current working memory
+     (default)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>1</tt></td>
+    <td valign="top">
+     Set memory bank&nbsp;1 as the current working memory
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>2</tt></td>
+    <td valign="top">
+     Set memory bank&nbsp;2 as the current working memory
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>B</tt></td>
+    <td valign="top">Switch in the operating system ROM</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>C</tt></td>
+    <td valign="top">
+     Start CP/M-compatible system:<br/>
+     <ul>
+      <li>
+       With the RAM floppy system, CP/V is started.
+       For this, the BDOS must have been loaded beforehand.
+       In the original, it is loaded from cassette tape.
+       For convenience, JKCEMU can also load the BDOS automatically
+       on every RESET,
+       if you set this option in the <a href="settings.htm">settings</a>.<br/>
+      </li>
+      <li>
+       With the floppy disk system, JKCEMU first tries
+       to start the system from the RAM floppy.
+       If none is found there, it boots from floppy disk.
+       In doing so, the system loaded from the floppy disk is copied
+       into the RAM floppy,
+       so that it can be started directly from there the next time.
+       If you want to force booting from floppy disk after a RESET,
+       the RAM floppy must be empty or previously erased.
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>D</tt></td>
+    <td valign="top">Call debugger (RAM floppy system only)</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>F X</tt></td>
+    <td valign="top">Format drive <em>X</em></td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>G aaaa</tt></td>
+    <td valign="top">
+     Jump to address <i>aaaa</i>,<br/>
+     This can be used to start a program located in working memory.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>L Filename.Type [aaaa [bbbb [cccc]]]</tt></td>
+    <td valign="top">
+     The file named <em>Filename.Type</em> is loaded
+     from cassette tape into working memory.
+     Optionally, the load address (<em>aaaa</em>),
+     the number of the first block to be loaded (<em>bbbb</em>)
+     and the number of the last block to be loaded (<em>cccc</em>)
+     can be specified.
+     In case of read errors, you can simply rewind
+     and try reading the faulty section again.
+     Loading can be aborted with <em>CTRL-C</em>.
+     Please note that a corresponding
+     <a href="audio.htm#tape_in">audio function</a>
+     must be activated in JKCEMU to load from cassette tape.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>R Filename.Type X</tt></td>
+    <td valign="top">
+     The file named <em>Filename.Type</em> is loaded
+     from cassette tape into RAM floppy <em>X</em>.
+     Loading can be aborted with <em>CTRL-C</em>.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     <tt>S Filename.Type aaaa bbbb [cccc] [/F] [dddd]</tt>
+    </td>
+    <td valign="top">
+     The address range from <em>aaaa</em> to <em>bbbb</em>
+     is saved to cassette tape under the name <em>Filename.Type</em>.
+     Optionally, for executable programs
+     (COM files), a start address (<em>cccc</em>) can be specified.
+     The option <em>/F</em> prevents writing the end-of-file marker,
+     and the file can be continued with the next free frame number
+     (<em>dddd</em>).
+     However, this then leads to larger
+     block gaps.
+     Saving can be aborted with <em>CTRL-C</em>.
+     Please note that a corresponding
+     <a href="audio.htm#tape_out">audio function</a>
+     must be activated in JKCEMU to save to cassette tape.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>V Filename.Type aaaa [bbbb [cccc]]</tt></td>
+    <td valign="top">
+     The file named
+     <em>Filename.Type</em> on cassette tape is compared with
+     working memory starting at address <em>aaaa</em>.
+     The optional arguments <em>bbbb</em> and <em>cccc</em>
+     have the same meaning as with the L command.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>X Filename.Type aaaa [bbbb [cccc]]</tt></td>
+    <td valign="top">
+     The file named <em>Filename.Type</em> is loaded from cassette tape
+     into working memory and started at the address
+     specified when it was saved.
+     The arguments have the same meaning as with the L command.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>Z aaaa</tt></td>
+    <td valign="top">
+     Set the bit rate for the cassette interface,<br/>
+     Possible values are 1200, 2400, 3600 and 4800.
+     The default setting is 3600.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>Filename</tt></td>
+    <td valign="top">
+      If you specify only a file name without a type,
+      the file is loaded from cassette tape with the type <em>COM</em>
+      and started at the address specified when it was saved.
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="soft_rf">2.2. RAM Floppy System</a></h3>
+  If you have enabled the RAM floppy system in the settings,
+  you can start the RAM floppy system from the base operating system
+  with the command <em>C</em>.
+  However, the BDOS must have been loaded beforehand.
+  JKCEMU offers you the option
+  of having the BDOS loaded automatically on every RESET.
+ <br/><br/>
+  The RAM floppy system is compatible with CP/M 2.2.
+  The following resident commands are available:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Command</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top"><tt>X:</tt></td>
+    <td valign="top">
+     Switch to drive <em>X</em>, i.e.,
+     <em>X</em> is now the current drive.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>DIR</tt></td>
+    <td valign="top">
+     Show the directory of the current drive
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>ERA Filename.Type</tt></td>
+    <td valign="top">
+     The file named <em>Filename.Type</em> is deleted.
+     The wildcard characters <em>?</em> and <em>*</em> are allowed.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>REN Newfilename.Type=Filename.Type</tt></td>
+    <td valign="top">
+     The file named <em>Filename.Type</em> is renamed
+     to <em>Newfilename.Type</em>.
+     Wildcard characters cannot be used.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>TYPE Filename.Type</tt></td>
+    <td valign="top">Display the file <em>Filename.Type</em></td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>SAVE n Filename.Type</tt></td>
+    <td valign="top">
+     Starting at address&nbsp;0100, <em>n</em>&nbsp;blocks
+     of working memory are saved to the current drive in the file
+     <em>Filename.Type</em>.
+     One block is 256&nbsp;bytes in size.<br/>
+     If you have CP/M programs available as individual files
+     and want to start them in the emulator,
+     first load such a program into working memory
+     at address 0100 and then save it with the command
+     <em>SAVE</em> to the current drive.
+     You can now start the program by calling the corresponding
+     <em>COM</em> file.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>USER n</tt></td>
+    <td valign="top">
+     Set a user area (n = 0..15),<br/>
+     This is only of limited use with a RAM floppy, though.</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="soft_fdc">2.3. Floppy Disk System</a></h3>
+  If you have enabled a floppy disk system in the settings,
+  you can boot from floppy disk from the base operating system
+  with the command <em>C</em>.
+  For this, a suitable floppy disk,
+  e.g. the PC/M boot disk supplied with JKCEMU
+  for the corresponding screen resolution,
+  must have been inserted into drive&nbsp;1
+  in the <em>JKCEMU Floppy Disk Station</em> window.
+ <br/><br/>
+
+
+ <h2><a name="disks">3. Included Disk Images</a></h2>
+  For the PC/M emulation, JKCEMU includes
+  the following disk images:
+  <ul>
+   <li>PC/M boot disk for 64x16 characters</li>
+   <li>PC/M boot disk for 80x24 characters</li>
+  </ul>
+  The PC/M boot disks mainly serve for booting
+  and, besides a README file, contain only a few
+  PC/M-specific system programs.
+  The drive assignment on both disk images is:
+ <br/><br/>
+  <table border="1">
+   <tr><td>A:</td><td>RAM floppy</td></tr>
+   <tr><td>B:</td><td>first floppy disk drive, 624&nbsp;KByte format</td></tr>
+   <tr><td>C:</td><td>second floppy disk drive, 624&nbsp;KByte format</td></tr>
+   <tr><td>D:</td><td>third floppy disk drive, 624&nbsp;KByte format</td></tr>
+  </table>
+ <br/><br/>
+  <b>Caution!</b> Both disks also contain the empty file
+  <a href="go_com.htm">GO.COM</a>.
+  This is used to start a CP/M-compatible program
+  located in working memory.
+  If <em>GO</em> is called without a program present in working memory,
+  this leads to a crash.
+ <br/><br/>
+
+
+ <h2><a name="etc">4. Miscellaneous</a></h2>
+
+ <h3><a name="font">4.1. Character Set Files</a></h3>
+  In the settings, you can specify an external character set file
+  which is then used instead of the one built into JKCEMU.
+  Note, however, that the format of this file differs
+  between the 64x16-character and 80x24-character
+  screen resolutions.
+ <br/><br/>
+  With the 64x16-character screen resolution
+  (64x32 characters with interlaced lines), the character set file
+  contains 256&nbsp;characters of 8x7&nbsp;pixels each.
+  Eight consecutive bytes represent
+  the 8&nbsp;pixel rows of a character,
+  with only bits&nbsp;1 through 7 being evaluated.
+  Bit&nbsp;7 contains the leftmost pixel.
+ <br/><br/>
+  With the 80x24-character screen resolution,
+  the character set file contains 128&nbsp;characters of 10x6&nbsp;pixels
+  each, i.e. only a 7-bit character set is used.
+  The 8th bit is used for cursor control.
+  If it is set, the cursor is drawn as a line in pixel row&nbsp;8.
+  In the character set file, 16&nbsp;consecutive bytes
+  make up one character, of which only the first 10&nbsp;bytes,
+  and of those only bits&nbsp;2 through 7, are used.
+  Bit&nbsp;7 contains the leftmost pixel.
+  Unlike the 64x16-character resolution, an unset bit
+  results in a lit pixel.
+</body>
+</html>
+

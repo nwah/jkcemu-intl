@@ -1,0 +1,1145 @@
+<html>
+<head><title>BASIC Compiler: Target Systems</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Target Systems</h2>
+  The BASIC compiler can generate program code for various systems.
+  Several systems that are related to each other
+  and on which the same program code can run
+  are grouped together.
+  This group forms a target system.
+  Programs compiled for a particular target system are therefore
+  able to run on all computers
+  that correspond to the specified target system.
+ <br/><br/>
+  The target system must be selected or specified
+  in the <a href="options.htm">compiler options</a>.
+  This tells the compiler what kind of program code
+  is to be generated.
+  The following target systems are supported:
+  <ul>
+   <li>
+    <a href="targets.htm#ac1">AC1-2010, AC1-SCCH with optional color graphics card</a>
+   </li>
+   <li><a href="targets.htm#cpm">CP/M-compatible</a></li>
+   <li><a href="targets.htm#huebler">H&uuml;bler-Grafik-MC</a></li>
+   <li><a href="targets.htm#kramer">Kramer-MC</a></li>
+   <li><a href="targets.htm#llc2">LLC2 with HIRES graphics</a></li>
+   <li><a href="targets.htm#z9001">KC85/1, KC87, Z9001</a></li>
+   <li>
+    <a href="targets.htm#z9001krt">KC85/1, KC87, Z9001 with KRT graphics</a>
+   </li>
+   <li><a href="targets.htm#kc85">KC85/2..5, HC900</a></li>
+   <li>
+    <a href="targets.htm#kc85_4">KC85/4..5 with support for both video memory banks</a>
+   </li>
+   <li>
+    <a href="targets.htm#kc85_caos48">KC85/5 with CAOS&nbsp;&gt;=&nbsp;4.8</a>
+   </li>
+   <li><a href="targets.htm#scch">SCCH (AC1-2010, AC1-SCCH, LLC2)</a></li>
+   <li><a href="targets.htm#z1013">Z1013</a></li>
+   <li>
+    <a href="targets.htm#z1013_64x16">Z1013 with support for the 64x16 screen format</a>
+   </li>
+   <li>
+    <a href="targets.htm#z1013krt">Z1013 with KRT graphics</a>
+   </li>
+   <li>
+    <a href="targets.htm#z1013zx">Z1013 with ZX graphics</a>
+   </li>
+  </ul>
+ <br/>
+  At the end of the page you will find a
+  <a href="targets.htm#summary">table summarizing</a>
+  the target systems.
+ <br/><br/>
+  Not all BASIC functionality can be implemented on every target system.
+  There are limitations, in particular, for the graphics and
+  <a href="instructions.htm#cursor">CURSOR</a> functionality.
+  For this reason, you will find notes here on the concrete
+  implementations and the associated limitations.
+ <br/><br/>
+
+ <h3><a name="ac1">AC1-2010, AC1-SCCH with optional color graphics card</a></h3>
+  For this target system, program code with color support
+  is generated for an AC1-2010 and AC1-SCCH.
+  Color support means that, for all output
+  to the screen, the color memory is written to
+  in addition to the video refresh memory.
+  However, the compiled program will also run on an AC1
+  without a color graphics card.
+  Only the <a href="functions.htm#point">POINT</a> function,
+  used to determine the color of a pixel, would
+  return incorrect values in that case.
+ <br/><br/>
+  The AC1 monitor programs do not support colors
+  by default.
+  For this reason, the compiled program must do so itself.
+  To do this, the compiler checks whether the BASIC program contains
+  statements for setting the color.
+  If so, text output to the screen is not performed
+  via the corresponding system function,
+  but instead via its own screen driver
+  included in the compiled program, which also writes
+  to the color memory.
+  This custom screen driver does not support
+  all control codes of the system routine, only the most important ones:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Control code</th><th>Meaning</th></tr>
+   <tr><td>08h</td><td nowrap="nowrap">Cursor left</td></tr>
+   <tr><td>09h</td><td nowrap="nowrap">Cursor right</td></tr>
+   <tr><td>0Ah</td><td nowrap="nowrap">Cursor down</td></tr>
+   <tr><td>0Bh</td><td nowrap="nowrap">Cursor up</td></tr>
+   <tr><td>0Ch</td><td nowrap="nowrap">Clear screen</td></tr>
+   <tr>
+    <td>0Dh</td>
+    <td nowrap="nowrap">Cursor to the start of the next line</td>
+   </tr>
+  </table>
+ <br/>
+  Other control codes, in particular the escape sequences
+  known from the system routine, are not supported.
+ <br/><br/>
+  For cursor positioning, the custom screen driver uses
+  the same system cells as the SCCH monitor programs,
+  namely 1800h/1801h for the cursor address
+  and 1846h for the character under the cursor.
+  This ensures that the cursor does not jump
+  when the program starts and ends.
+ <br/><br/>
+  If the BASIC program contains no statements for setting the color,
+  the compiled program also contains no functions
+  for writing to the color memory.
+  In that case, the graphics functions
+  (simulated full graphics, see further below) only write to the video
+  refresh memory, and the monitor program's system function is used
+  for text output.
+ <br/><br/>
+  In <a href="instructions.htm#screen">SCREEN</a>&nbsp;0,
+  full graphics with 128x64 pixels are simulated
+  and can be addressed with the graphics functions.
+  A prerequisite for this is that the character generator
+  contains the corresponding graphics characters in the range 00h to 0Fh.
+  This is the case with the ACC, SCCH and AC1-2010 character sets.
+ <br/><br/>
+  With simulated full graphics, each character position on the screen
+  is divided into four graphics pixels.
+  Since a character is 8x6&nbsp;screen pixels,
+  a simulated graphics pixel is 4x3&nbsp;screen pixels
+  in size, i.e., a graphics pixel is not square.
+  As a result, circles drawn on the screen look like ellipses
+  and squares look like rectangles.
+ <br/><br/>
+  The generated program code also runs on an AC1
+  with monitor program&nbsp;3.1,
+  provided a 2&nbsp;KByte video refresh memory is present
+  (64x32&nbsp;characters) and printer output as well as the
+  <a href="functions.htm#joyst">JOYST</a> function are not used.
+ <br/><br/>
+  Properties of the target system in detail:
+ <br/>
+  <ul>
+   <li>
+    A single-character application name is supported,
+    i.e., if the name field contains only one character,
+    a corresponding command frame is generated,
+    and the compiled program can be invoked
+    using that character.
+   </li>
+   <li>
+    In <a href="instructions.htm#screen">SCREEN</a>&nbsp;0,
+    full graphics with 128x64&nbsp;pixels are simulated
+    and can be addressed with the graphics statements.
+   </li>
+   <li>
+    The <a href="instructions.htm#cursor">CURSOR</a> statement
+    has no effect.
+   </li>
+   <li>
+    The <a href="instructions.htm#pause">PAUSE</a> statement
+    is calibrated to the standard clock frequency of the AC1
+    (2&nbsp;MHz).
+   </li>
+   <li>
+    The <a href="functions.htm#datetime$">DATETIME$</a> function
+    requires a GIDE connected at I/O base address&nbsp;80h.
+   </li>
+   <li>
+    The <a href="functions.htm#joyst">JOYST</a> function
+    supports a joystick and, for this purpose, calls
+    the system function at address&nbsp;0EB4h.
+   </li>
+   <li>
+    A VDIP module is supported at I/O base addresses&nbsp;DCh, FCh
+    and 08h (PIO2), i.e., an attempt is first made
+    to initialize the VDIP module at base address&nbsp;DCh.
+    If that fails, base address&nbsp;FCh is tried next, then 08h.
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_AC1</a>
+   </li>
+   <li>
+    This target system is derived from the target system
+    <a href="targets.htm#scch">SCCH (AC1-2010, AC1-SCCH, LLC2)</a>,
+    i.e.,
+    the function <a href="functions.htm#is_target">IS_TARGET</a>
+    also returns TRUE for <a href="constants.htm#target">TARGET_SCCH</a>.
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="cpm">CP/M-compatible</a></h3>
+  <ul>
+   <li>The graphics statements are not available.</li>
+   <li>
+    The <a href="instructions.htm#cursor">CURSOR</a> statement
+    has no effect.
+   </li>
+   <li>
+    The <a href="functions.htm#datetime$">DATETIME$</a> function
+    is not supported, i.e.,
+    it always returns an empty string.
+   </li>
+   <li>
+    The <a href="functions.htm#joyst">JOYST</a> function
+    always returns&nbsp;0.
+   </li>
+   <li>
+    Reading the cursor position is not possible,
+    i.e., the <a href="functions.htm#pos">POS</a> function
+    always returns&nbsp;-1, and the system variables
+    <a href="functions.htm#crslin">CRSLIN</a> and
+    <a href="functions.htm#crspos">CRSPOS</a>
+    always contain the value&nbsp;-1.
+   </li>
+   <li>
+    A VDIP module is supported at I/O base address&nbsp;FCh.
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_CPM</a>
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="huebler">H&uuml;bler-Grafik-MC</a></h3>
+  <ul>
+   <li>
+    The graphics statements access the video refresh memory directly.
+    For this, it must be set to the standard address C000h.
+   </li>
+   <li>
+    <a href="instructions.htm#cursor">CURSOR</a> statement:
+    turning the cursor on only takes effect
+    with the next character output.
+    Turning the cursor off, however, takes effect immediately.
+   </li>
+   <li>
+    The <a href="functions.htm#datetime$">DATETIME$</a> function
+    is not supported, i.e.,
+    it always returns an empty string.
+   </li>
+   <li>
+    The <a href="functions.htm#joyst">JOYST</a> function
+    always returns&nbsp;0.
+   </li>
+   <li>
+    Reading the cursor position is not possible,
+    i.e., the <a href="functions.htm#pos">POS</a> function
+    always returns&nbsp;-1, and the system variables
+    <a href="functions.htm#crslin">CRSLIN</a> and
+    <a href="functions.htm#crspos">CRSPOS</a>
+    always contain the value&nbsp;-1.
+   </li>
+   <li>
+    A VDIP module is supported at I/O base address&nbsp;FCh.
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_HUEBLER</a>
+   </li>
+  </ul>
+ <br/>
+  <b>Caution!</b> Programs compiled for the H&uuml;bler-Grafik-MC
+  will also run on the H&uuml;bler/Evert-MC,
+  provided the graphics functionality and the
+  <a href="functions.htm#inkey$">INKEY$</a> function
+  are not used, and the program is not compiled with the option
+  <em>CTRL-C always aborts the program</em>.
+ <br/><br/>
+
+
+ <h3><a name="kramer">Kramer-MC</a></h3>
+  <ul>
+   <li>The graphics statements are not available.</li>
+   <li>
+    The <a href="instructions.htm#cursor">CURSOR</a> statement
+    has no effect.
+   </li>
+   <li>
+    The <a href="instructions.htm#locate">LOCATE</a> statement
+    is not available.
+   </li>
+   <li>
+    The <a href="functions.htm#datetime$">DATETIME$</a> function
+    is not supported, i.e.,
+    it always returns an empty string.
+   </li>
+   <li>
+    The Kramer-MC monitor program built into JKCEMU
+    only recognizes the key combination <em>CTRL-C</em>
+    for the <a href="functions.htm#inkey$">INKEY$</a> function.
+   </li>
+   <li>
+    Printer output is performed via the LIST channel
+    (entry address&nbsp;00ECh).
+    However, the Kramer-MC monitor program included in JKCEMU
+    is configured by default so that
+    the LIST channel, and thus the printer output,
+    appears on the screen.
+   </li>
+   <li>
+    The <a href="functions.htm#joyst">JOYST</a> function
+    always returns&nbsp;0.
+   </li>
+   <li>No VDIP module is supported.</li>
+   <li>
+    You must not enable the compiler option <em>Use system stack</em>,
+    since, when a machine code program is started
+    with the command <tt>G&lt;address&gt;</tt>, the stack pointer
+    has the value&nbsp;0000 and would therefore
+    run into the video refresh memory.
+    Always compile with the option <em>Separate stack area</em>.
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_KRAMER</a>
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="llc2">LLC2 with HIRES graphics</a></h3>
+  <ul>
+   <li>
+    A single-character application name is supported,
+    i.e., if the name field contains only one character,
+    a corresponding command frame is generated,
+    and the compiled program can be invoked
+    using that character.
+   </li>
+   <li>
+    <a href="instructions.htm#screen">SCREEN</a>&nbsp;0
+    is a pure text screen,
+    in which the graphics statements cannot be used.
+   </li>
+   <li>
+    The HIRES full graphics extension with 512x256&nbsp;pixels is available
+    in <a href="instructions.htm#screen">SCREEN</a>&nbsp;1,
+    i.e., the graphics statements can be used here.
+    Text output performed with statements other than
+    <a href="instructions.htm#label">LABEL</a>
+    goes to <a href="instructions.htm#screen">SCREEN</a>&nbsp;0,
+    which, however, is not visible at that moment.
+    In <a href="instructions.htm#screen">SCREEN</a>&nbsp;1,
+    the video refresh memory
+    is located at address&nbsp;8000h and thus occupies a different area
+    than in <a href="instructions.htm#screen">SCREEN</a>&nbsp;0.
+   </li>
+   <li>
+    The <a href="instructions.htm#cursor">CURSOR</a> statement
+    has no effect.
+   </li>
+   <li>
+    The <a href="functions.htm#datetime$">DATETIME$</a> function
+    requires a GIDE connected at I/O base address&nbsp;80h.
+   </li>
+   <li>
+    The <a href="functions.htm#joyst">JOYST</a> function
+    supports a joystick and, for this purpose, calls
+    the system function at address&nbsp;0EB4h.
+   </li>
+   <li>
+    A VDIP module is supported at I/O base addresses&nbsp;DCh, FCh
+    and E4h (PIO2), i.e., an attempt is first made
+    to initialize the VDIP module at base address&nbsp;DCh.
+    If that fails, base address&nbsp;FCh is tried next, then E4h.
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_LLC2</a>
+   </li>
+   <li>
+    This target system is derived from the target system
+    <a href="targets.htm#scch">SCCH (AC1-2010, AC1-SCCH, LLC2)</a>,
+    i.e.,
+    the function <a href="functions.htm#is_target">IS_TARGET</a>
+    also returns TRUE for <a href="constants.htm#target">TARGET_SCCH</a>.
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="z9001">KC85/1, KC87, Z9001</a></h3>
+  <ul>
+   <li>
+    In <a href="instructions.htm#screen">SCREEN</a>&nbsp;0,
+    full graphics with 80x48&nbsp;pixels are simulated
+    using block graphics
+    and can be addressed with the graphics statements.
+   </li>
+   <li>
+    If the BASIC program uses the statements
+    <a href="instructions.htm#border">BORDER</a>,
+    <a href="instructions.htm#color">COLOR</a>,
+    <a href="instructions.htm#ink">INK</a> or
+    <a href="instructions.htm#paper">PAPER</a>,
+    program code with color support is generated,
+    i.e., in that case, every pixel-setting graphics statement
+    also writes to the color memory.
+    If, on the other hand, no statements for setting the color are used,
+    program code is generated that does not access the color memory.
+   </li>
+   <li>
+    The <a href="functions.htm#datetime$">DATETIME$</a> function
+    requires a GIDE connected at I/O base address&nbsp;50h.
+   </li>
+   <li>
+    A VDIP module is supported at I/O base address&nbsp;DCh.
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_Z9001</a>
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="z9001krt">KC85/1, KC87, Z9001 with KRT graphics</a></h3>
+  <ul>
+   <li>
+    <a href="instructions.htm#screen">SCREEN</a>&nbsp;0
+    is a pure text screen.
+    Full graphics are not simulated, i.e.,
+    the graphics statements cannot be used here.
+   </li>
+   <li>
+    The KRT full graphics with 320x192&nbsp;pixels are available
+    in <a href="instructions.htm#screen">SCREEN</a>&nbsp;1,
+    i.e., the graphics statements can be used here.
+    Text output, however, is not possible (except
+    with the <a href="instructions.htm#label">LABEL</a> statement).
+   </li>
+   <li>
+    Regarding color support, the same applies as for the target system
+    <em>KC85/1, KC87, Z9001</em>, with one exception:<br/>
+    <a href="instructions.htm#cls">CLS</a> in
+    <a href="instructions.htm#screen">SCREEN</a>&nbsp;1 (graphics mode)
+    always clears the color memory,
+    even if the BASIC program contains no statements
+    for setting the color.
+   </li>
+   <li>
+    Regarding the <a href="functions.htm#datetime$">DATETIME$</a>
+    function, the same applies as for the target system
+    <em>KC85/1, KC87, Z9001</em>.
+   </li>
+   <li>
+    Regarding VDIP, the same applies
+    as for the target system <em>KC85/1, KC87, Z9001</em>.
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_Z9001_KRT</a>
+   </li>
+   <li>
+    This target system is derived from the target system
+    <a href="targets.htm#z9001">KC85/1, KC87, Z9001</a>, i.e.,
+    the function <a href="functions.htm#is_target">IS_TARGET</a>
+    also returns TRUE for <a href="constants.htm#target">TARGET_Z9001</a>.
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="kc85">KC85/2..5, HC900</a></h3>
+  This target system generates program code that runs on all
+  M&uuml;hlhausen KCs,
+  from the HC900 up to the KC85/5.
+ <br/><br/>
+  Properties of the target system in detail:
+  <ul>
+   <li>
+    Keyboard input and screen output are performed via the
+    respective standard channel,
+    i.e., input and output can be redirected in CAOS.
+    This does not, however, apply to the
+    <a href="functions.htm#inkey$">INKEY$</a> function.
+    This always accesses the keyboard directly,
+    even if keyboard input has been redirected.
+   </li>
+   <li>
+    Printer output is performed on user channel&nbsp;2.
+   </li>
+   <li>
+    The <a href="instructions.htm#locate">LOCATE</a> statement
+    refers to the window currently set in CAOS.
+   </li>
+   <li>
+    On the HC900 and the KC85/2, the current window is set
+    smaller than the maximum possible size by default.
+    In that case, the <a href="instructions.htm#cls">CLS</a> statement
+    does not clear the entire screen.
+    Since this looks unattractive, the compiler checks
+    whether the program contains <a href="instructions.htm#cls">CLS</a>
+    statements.
+    If so, at program start the size of the window
+    currently set in CAOS is checked
+    and, if necessary, maximized.
+   </li>
+   <li>
+    The <a href="instructions.htm#cursor">CURSOR</a> statement
+    has no effect.
+    CAOS switches the cursor on and off automatically,
+    depending on whether input is currently being waited for or not.
+   </li>
+   <li>
+    The first time the system time is read after the program starts
+    (e.g. by the <a href="functions.htm#datetime$">DATETIME$</a> function),
+    a source for the system time is searched for and the result is remembered.
+    On subsequent reads of the system time, this same source
+    is then always used, even if it should no longer
+    be delivering valid values.
+    The reverse also applies:
+    if no source for a system time was found at the start,
+    all subsequent queries will also fail to return a system time.
+    <br/>
+    The search for a source for the system time proceeds
+    as follows:
+    <br/>
+    <ol>
+     <li>
+      It is checked whether a D004 or D008 floppy disk expansion
+      is connected.
+     </li>
+     <li>
+      If so, it is checked
+      whether a floppy disk expansion program (DEP)
+      version&nbsp;3.0 or higher is running on it.
+      If so, it writes the system time cyclically
+      into the coupling RAM, and the associated I/O addresses
+      on the base unit's side
+      are used as the source for the system time.
+     </li>
+     <li>
+      If no D004/DEP or D008/DEP pairing was found,
+      the compiled BASIC program checks the memory cells
+      at addresses 000Ch to 000Fh for valid values
+      corresponding to a DOS timestamp.
+     </li>
+     <li>
+      If a valid DOS timestamp was found,
+      that does not yet mean that a system clock exists and is running
+      that updates this timestamp.
+      For this reason, an additional check is made
+      to see whether the time (memory cells 000Eh/000Fh) has the value zero.
+      This is namely the case
+      when the M052 software writes its release date there.
+      If the time is nonzero, however, it is assumed
+      that a system clock is updating these memory cells.
+      In that case, the four memory cells 000Ch to 000Fh
+      are used as the source for the system time.
+      In all other cases, there is no system time available
+      for the compiled BASIC program.
+      <br/>
+      <b>Caution!</b> An even number of seconds is always
+      read from the memory cells 000Ch to 000Fh,
+      since the format of the DOS timestamp does not allow
+      odd numbers of seconds.
+     </li>
+    </ol>
+   </li>
+   <li>
+    The <a href="functions.htm#joyst">JOYST</a> function
+    queries the joystick module (M008 or M021) directly,
+    i.e., no special joystick driver needs to be loaded.
+    For this, the compiled program initializes the corresponding PIO
+    in the joystick module at startup, but only
+    if the BASIC program also contains a
+    <a href="functions.htm#joyst">JOYST</a> call.
+    The joystick PIO is programmed to the same operating mode
+    used by the joystick driver in CAOS&nbsp;4.5.
+    As a result, that driver is not affected.
+   </li>
+   <li>
+    VDIP is supported via module&nbsp;M052.
+    On the <a href="instructions.htm#open">OPEN</a> statement,
+    the compiled program first checks the CAOS version.
+    If it is lower than&nbsp;4.8, an M052 module is searched for,
+    activated, initialized and used.
+    Any USB keyboard connected to the module
+    will therefore stop working.
+    If the CAOS version is 4.8 or higher,
+    the program checks
+    whether the driver active in CAOS is a USB driver.
+    If so, it is used.
+    If not, the program searches the CAOS driver table
+    for a USB driver and activates the first one found.
+    The driver is then switched to USER mode, so that the
+    compiled program can access the M052 module directly.
+    On the <a href="instructions.htm#close">CLOSE</a> statement,
+    it is then switched back to CAOS mode.
+    Any USB keyboard that is connected should therefore
+    continue to work.
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_KC85</a>
+   </li>
+  </ul>
+ <br/>
+
+ <h3>
+  <a name="kc85_4">KC85/4..5 with support for both video memory banks</a>
+ </h3>
+  This target system is specially tailored to the hardware of the KC85/4
+  and KC85/5, and thus makes it possible to use both video memory banks.
+  In addition, the graphics routines have been optimized
+  for the specific hardware, so that they are somewhat faster
+  than with the general KC85/2..5 target system described further above.
+ <br/><br/>
+  The <em>KC85/4..5</em> target system provides the two
+  <a href="instructions.htm#screen">SCREEN</a>s&nbsp;0 and 1,
+  which represent the two video memory banks (IRM banks)&nbsp;0 and 1.
+  For each video memory bank, i.e. for each
+  <a href="instructions.htm#screen">SCREEN</a>,
+  the cursor is managed separately.
+  You can therefore switch between the two
+  <a href="instructions.htm#screen">SCREEN</a>s and output text
+  on both video memory banks, without this having
+  any effect on the other video memory bank.
+ <br/><br/>
+  Properties of the target system in detail:
+  <ul>
+   <li>
+    <a href="instructions.htm#screen">SCREEN</a>&nbsp;0
+    allows output of text and graphics
+    using IRM bank&nbsp;0.
+   </li>
+   <li>
+    <a href="instructions.htm#screen">SCREEN</a>&nbsp;1
+    allows output of text and graphics
+    using IRM bank&nbsp;1.
+   </li>
+   <li>
+    A separate CAOS window is used for each
+    <a href="instructions.htm#screen">SCREEN</a>,
+    so that each <a href="instructions.htm#screen">SCREEN</a>
+    also has its own cursor management.
+   </li>
+   <li>
+    Everything else is as for the target system
+    <a href="targets.htm#kc85">KC85/2..5, HC900</a>
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_KC85_4</a>
+   </li>
+   <li>
+    This target system is derived from the target system
+    <a href="targets.htm#kc85">KC85/2..5, HC900</a>, i.e.,
+    the function <a href="functions.htm#is_target">IS_TARGET</a>
+    also returns TRUE for <a href="constants.htm#target">TARGET_KC85</a>.
+   </li>
+  </ul>
+ <br/>
+
+ <h3>
+  <a name="kc85_caos48">KC85/5 with CAOS&nbsp;&gt;=&nbsp;4.8</a>
+ </h3>
+  With operating system version CAOS&nbsp;4.8, system functions
+  were introduced that let application programs access a USB storage
+  device and, in doing so, also take advantage of that storage medium's
+  features, such as subdirectories and byte-accurate file sizes.
+  Furthermore, the DEVICE interface introduced with CAOS&nbsp;4.6
+  was further developed,
+  so that application programs can now benefit from it more effectively.
+  To support these new capabilities, there is
+  the target system <em>KC85/5 with CAOS&nbsp;&gt;=&nbsp;4.8</em>.
+  It is derived from the target system
+  <em>KC85/4..5 with support for both video memory banks</em>
+  and therefore has the same properties as that one,
+  except for the following two points:
+ <br/><br/>
+  <ul>
+   <li>
+    <u>VDIP driver (access to USB storage)</u>
+    <br/><br/>
+    The generated program code no longer contains its own
+    VDIP driver; instead, it calls
+    the new driver-specific functions of the CAOS USB driver.
+    For the BASIC programmer, these behave exactly the same
+    as the otherwise used custom VDIP driver.
+    However, the compiled program is smaller, and
+    the M052 module remains entirely under the management
+    of the operating system.
+    Other USB devices connected to the M052, such as a keyboard,
+    are therefore not affected.
+    <br/><br/>
+   </li>
+   <li>
+    <u>DISK driver (access to drives in D004/D008)</u>
+    <br/><br/>
+    If you have the D004 or D008 floppy disk expansion connected
+    and the floppy disk expansion program&nbsp;DEP is running on it,
+    you can access the floppy or
+    hard disk drives from CAOS.
+    In that case, CAOS&nbsp;4.8 automatically sets up a DISK driver
+    that provides access for application programs.
+    The target system makes use of this.
+    If you open a file in the BASIC program on the devices
+    <tt>A:</tt> through <tt>P:</tt>, this goes
+    via the CAOS DISK driver.
+    There are a few things to note here:
+    <br/>
+    <ul>
+     <li>
+      The floppy or hard disks use a CP/M-compatible
+      file system.
+      As a result, files always have a byte length
+      that is a multiple of 128 (the block size).
+      In text mode, byte&nbsp;1Ah is used as the end-of-file marker,
+      i.e., when closing a file that was opened for writing,
+      byte&nbsp;1Ah is automatically appended,
+      and when reading, this byte marks the end of the file.
+      In binary mode, on the other hand, reading continues
+      up to the last physically present byte.
+     </li>
+     <li>
+      Two files cannot be open at the same time
+      via the DISK driver.
+     </li>
+     <li>
+      The CAOS DISK driver does not support appending
+      to an existing file, i.e., for the BASIC statement
+      <a href="instructions.htm#open">OPEN</a>, the mode
+      <tt>APPEND</tt> is not possible.
+     </li>
+     <li>
+      An empty file cannot be opened;
+      only one that is at least one block (128&nbsp;bytes)
+      in size.
+     </li>
+     <li>
+      When writing a file, at least two blocks are created
+      (one when opening and one when closing the file),
+      i.e., the file is always at least 256&nbsp;bytes in size.
+     </li>
+     <li>
+      When writing, the file is only physically opened
+      once the first block is written.
+      As a result, any errors that would normally occur
+      on the <a href="instructions.htm#open">OPEN</a> statement
+      only occur on the statements used for output, or even
+      only on <a href="instructions.htm#close">CLOSE</a>.
+     </li>
+     <li>
+      In the event of an error, the CAOS system functions themselves
+      output an error message to the screen.
+      The calling program is only told, in general terms,
+      that an error has occurred.
+      For this reason, the BASIC error variables usually
+      only contain a general error as well.
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+  If, for this target system, you have activated both the DISK
+  and the VDIP driver in the compiler options, and you open a file
+  without specifying a drive letter
+  (in BASIC terminology, a <em>device name</em>),
+  the DISK driver is used, i.e., the file is opened on the floppy
+  or hard disk drive that is currently selected.
+ <br/><br/>
+  A program compiled for this target system will also run
+  on a KC85/4 or KC85/5 with a CAOS version
+  lower than&nbsp;4.8.
+  However, attempting to open a file
+  results in the error message <em>Device not found</em>.
+ <br/><br/>
+  The constant for the target system is:
+  <a href="constants.htm#target">TARGET_KC85_CAOS48</a>.
+  The function <a href="functions.htm#is_target">IS_TARGET</a>
+  also returns TRUE for <a href="constants.htm#target">TARGET_KC85</a>
+  and <a href="constants.htm#target">TARGET_KC85_4</a>,
+  since this target system is derived from them.
+ <br/><br/>
+
+ <h3><a name="scch">SCCH (AC1-2010, AC1-SCCH, LLC2)</a></h3>
+  If this target system is selected, program code is generated for
+  an AC1 or LLC2 with an SCCH monitor program.
+  The program code will also run on an AC1 with monitor program&nbsp;3.1,
+  provided printer output,
+  the <a href="instructions.htm#locate">LOCATE</a> statement and
+  the <a href="functions.htm#joyst">JOYST</a> function are not used.
+ <br/>
+  <ul>
+   <li>
+    A single-character application name is supported,
+    i.e., if the name field contains only one character,
+    a corresponding command frame is generated,
+    and the compiled program can be invoked
+    using that character.
+   </li>
+   <li>The graphics statements are not available.</li>
+   <li>
+    The <a href="instructions.htm#cursor">CURSOR</a> statement
+    has no effect.
+   </li>
+   <li>
+    The <a href="instructions.htm#pause">PAUSE</a> statement
+    is calibrated to the standard clock frequency of the AC1 (2&nbsp;MHz).
+    On an LLC2, due to the higher clock frequency,
+    the wait time is correspondingly shorter.
+   </li>
+   <li>
+    The <a href="functions.htm#datetime$">DATETIME$</a> function
+    requires a GIDE connected at I/O base address&nbsp;80h.
+   </li>
+   <li>
+    The <a href="functions.htm#joyst">JOYST</a> function
+    supports a joystick and, for this purpose, calls
+    the system function at address&nbsp;0EB4h.
+   </li>
+   <li>
+    A VDIP module is supported at I/O base addresses&nbsp;DCh and FCh,
+    i.e., an attempt is first made
+    to initialize the VDIP module at base address&nbsp;DCh.
+    If that fails, base address&nbsp;FCh is tried next.
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_SCCH</a>
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="z1013">Z1013</a></h3>
+  <ul>
+   <li>
+    In <a href="instructions.htm#screen">SCREEN</a>&nbsp;0,
+    full graphics with 64x64&nbsp;pixels are simulated
+    and can be addressed with the graphics statements.
+   </li>
+   <li>
+    The <a href="functions.htm#datetime$">DATETIME$</a> function
+    requires either a real-time clock module at
+    I/O base address&nbsp;70H
+    or a GIDE at I/O base address&nbsp;80h.
+   </li>
+   <li>
+    The <a href="functions.htm#joyst">JOYST</a> function
+    calls the jump table, but only
+    if there is a jump instruction (byte&nbsp;C3h)
+    at address&nbsp;FFBBh (entry point for the joystick query).
+    This is a safeguard so that the compiled program does not crash
+    if the jump table has not been initialized.
+   </li>
+   <li>
+    Printer output is performed via the jump table,
+    but only if there is an absolute jump instruction (byte&nbsp;C3h)
+    at address&nbsp;FFE8h
+    (routine for outputting the character in register&nbsp;A).
+   </li>
+   <li>
+    The option <em>CTRL-C always aborts the program</em> slows down
+    the program considerably. The reason is the slow INKEY routine
+    of the Z1013 monitor program, which is called regularly
+    to check for abort.
+   </li>
+   <li>
+    A VDIP module is supported at I/O base addresses&nbsp;DCh and FCh,
+    i.e., an attempt is first made
+    to initialize the VDIP module at base address&nbsp;DCh.
+    If that fails, base address&nbsp;FCh is tried next.
+   </li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_Z1013</a>
+   </li>
+  </ul>
+ <br/>
+
+ <h3>
+  <a name="z1013_64x16">Z1013 with support for the 64x16 screen format</a>
+ </h3>
+  This target system is an extension of the <em>Z1013</em> target system.
+  The only difference is that there is an additional
+  <a href="instructions.htm#screen">SCREEN</a>&nbsp;1,
+  which provides the Peters board's 64x16-character mode.
+  Since the Z1013 monitor programs do not support this screen format,
+  screen output in <a href="instructions.htm#screen">SCREEN</a>&nbsp;1
+  is performed via a custom screen driver
+  included in the compiled program.
+  This supports the same control codes and also uses
+  the same system cells as the original routine in the monitor program.
+ <br/><br/>
+  Properties of the target system in detail:
+ <br/>
+  <ul>
+   <li>
+    <a href="instructions.htm#screen">SCREEN</a>&nbsp;1
+    is a pure text screen with 64x16 characters.
+   </li>
+   <li>Everything else is the same as for the target system <em>Z1013</em>.</li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_Z1013_64X16</a>
+   </li>
+   <li>
+    This target system is derived from the target system
+    <a href="targets.htm#z1013">Z1013</a>, i.e.,
+    the function <a href="functions.htm#is_target">IS_TARGET</a>
+    also returns TRUE for <a href="constants.htm#target">TARGET_Z1013</a>.
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="z1013krt">Z1013 with KRT graphics</a></h3>
+  This target system is likewise an extension of the
+  <em>Z1013</em> target system, in which there is an additional
+  <a href="instructions.htm#screen">SCREEN</a>&nbsp;1
+  that supports the full graphics extension described in
+  <em>Kleinstrechnertips&nbsp;11</em>
+  and <em>Funkamateur&nbsp;7/1991</em>.
+  In return, the simulated full graphics with 64x64 pixels are not
+  available in <a href="instructions.htm#screen">SCREEN</a>&nbsp;0.
+  <ul>
+   <li>
+    <a href="instructions.htm#screen">SCREEN</a>&nbsp;0
+    is a pure text screen.
+    Full graphics are not simulated, i.e.,
+    the graphics statements cannot be used here.
+   </li>
+   <li>
+    The full graphics with 256x256&nbsp;pixels are available
+    in <a href="instructions.htm#screen">SCREEN</a>&nbsp;1,
+    i.e., the graphics statements can be used here.
+    Text output, however, is not possible (except
+    with the <a href="instructions.htm#label">LABEL</a> statement).
+   </li>
+   <li>Everything else is the same as for the target system <em>Z1013</em>.</li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_Z1013_KRT</a>
+   </li>
+   <li>
+    This target system is derived from the target system
+    <a href="targets.htm#z1013">Z1013</a>, i.e.,
+    the function <a href="functions.htm#is_target">IS_TARGET</a>
+    also returns TRUE for <a href="constants.htm#target">TARGET_Z1013</a>.
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="z1013zx">Z1013 with ZX graphics</a></h3>
+  This target system is also an extension of the
+  <em>Z1013</em> target system, in which there is an additional
+  <a href="instructions.htm#screen">SCREEN</a>&nbsp;1
+  that supports the ZX Spectrum-compatible black-and-white full graphics
+  described in <em>practic 2/1988</em>.
+  In return, the simulated full graphics with 64x64 pixels are not
+  available in <a href="instructions.htm#screen">SCREEN</a>&nbsp;0.
+  <ul>
+   <li>
+    <a href="instructions.htm#screen">SCREEN</a>&nbsp;0
+    is a pure text screen.
+    Full graphics are not simulated, i.e.,
+    the graphics statements cannot be used here.
+   </li>
+   <li>
+    The ZX full graphics with 256x192&nbsp;pixels are available
+    in <a href="instructions.htm#screen">SCREEN</a>&nbsp;1,
+    i.e., the graphics statements can be used here.
+    Text output, however, is not possible (except
+    with the <a href="instructions.htm#label">LABEL</a> statement).
+   </li>
+   <li>
+    Since this graphics extension uses white as the background color,
+    a set pixel is black.
+    Consequently, the <a href="functions.htm#point">POINT</a> function
+    also returns, for a set pixel,
+    the numeric value for the constant
+    <a href="constants.htm#color">BLACK</a>.
+   </li>
+   <li>Everything else is the same as for the target system <em>Z1013</em>.</li>
+   <li>
+    The constant for the target system is:
+    <a href="constants.htm#target">TARGET_Z1013_ZX</a>
+   </li>
+   <li>
+    This target system is derived from the target system
+    <a href="targets.htm#z1013">Z1013</a>, i.e.,
+    the function <a href="functions.htm#is_target">IS_TARGET</a>
+    also returns TRUE for <a href="constants.htm#target">TARGET_Z1013</a>.
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="summary">Summary</a></h3>
+  The table shows, by way of the associated
+  <a href="constants.htm#target">constant</a>,
+  all the target systems and summarizes the most important properties:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th>Target system (constant)</th>
+    <th>Program runs on</th>
+    <th>Text</th>
+    <th>Graphics</th>
+    <th>Color</th>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#ac1">TARGET_AC1</a></td>
+    <td valign="top">
+     AC1-2010, AC1-SCCH,<br/>
+     with limitations also AC1-ACC
+    </td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 64x32 characters</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 128x64 pixels</td>
+    <td valign="top">yes&nbsp;&sup1;)</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#cpm">TARGET_CPM</a></td>
+    <td valign="top">
+     CP/M-compatible systems with the screen control characters
+     used by Robotron
+     (CP/A, CP/L, HR-DOS, HR-CP/M, MicroDOS, ML-DOS)
+    </td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0</td>
+    <td valign="top">-</td>
+    <td valign="top">no</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#huebler">TARGET_HUEBLER</a></td>
+    <td valign="top">
+     H&uuml;bler-Grafik-MC,<br/>
+     with limitations also H&uuml;bler/Evert-MC
+    </td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 32x32 characters</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 256x256 pixels</td>
+    <td valign="top">no</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#kramer">TARGET_KRAMER</a></td>
+    <td valign="top">Kramer-MC</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 64x16 characters</td>
+    <td valign="top">-</td>
+    <td valign="top">no</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#llc2">TARGET_LLC2</a></td>
+    <td valign="top">LLC2 with HiRes graphics</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 64x32 characters</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;1: 512x256 pixels</td>
+    <td valign="top">no</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#kc85">TARGET_KC85</a></td>
+    <td valign="top">KC85/2..5, HC900</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 40x32 characters</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 320x256 pixels</td>
+    <td valign="top">yes</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#kc85_4">TARGET_KC85_4</a></td>
+    <td valign="top">KC85/4, KC85/5</td>
+    <td valign="top" nowrap="nowrap">
+     SCREEN&nbsp;0: 40x32 characters<br/>
+     SCREEN&nbsp;1: 40x32 characters
+    </td>
+    <td valign="top" nowrap="nowrap">
+     SCREEN&nbsp;0: 320x256 pixels<br/>
+     SCREEN&nbsp;1: 320x256 pixels
+    </td>
+    <td valign="top">yes</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     <a href="targets.htm#kc85_caos48">TARGET_KC85_CAOS48</a>
+    </td>
+    <td valign="top">KC85/5 with CAOS&nbsp;&gt;=&nbsp;4.8</td>
+    <td valign="top" nowrap="nowrap">
+     SCREEN&nbsp;0: 40x32 characters<br/>
+     SCREEN&nbsp;1: 40x32 characters
+    </td>
+    <td valign="top" nowrap="nowrap">
+     SCREEN&nbsp;0: 320x256 pixels<br/>
+     SCREEN&nbsp;1: 320x256 pixels
+    </td>
+    <td valign="top">yes</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#scch">TARGET_SCCH</a></td>
+    <td valign="top">
+     AC1-2010, AC1-SCCH, LLC2<br/>
+     with limitations also original AC1 and AC1-ACC
+    </td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 64x32 characters</td>
+    <td valign="top">-</td>
+    <td valign="top">no</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#z1013">TARGET_Z1013</a></td>
+    <td valign="top">Z1013</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 32x32 characters</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 64x64 pixels</td>
+    <td valign="top">no</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     <a href="targets.htm#z1013_64x16">TARGET_Z1013_64X16</a>
+    </td>
+    <td valign="top">Z1013 with Peters board</td>
+    <td valign="top" nowrap="nowrap">
+     SCREEN&nbsp;0: 32x32 characters<br/>
+     SCREEN&nbsp;1: 64x16 characters
+    </td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 64x64 pixels</td>
+    <td valign="top">no</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#z1013krt">TARGET_Z1013_KRT</a></td>
+    <td valign="top">Z1013 with KRT graphics</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 32x32 characters</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;1: 256x256 pixels</td>
+    <td valign="top">no</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#z1013zx">TARGET_Z1013_ZX</a></td>
+    <td valign="top">Z1013 with ZX graphics</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 32x32 characters</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;1: 256x192 pixels</td>
+    <td valign="top">no</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#z9001">TARGET_Z9001</a></td>
+    <td valign="top">KC85/1, KC87, Z9001</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 40x24 characters</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 80x48 pixels</td>
+    <td valign="top">yes&nbsp;&sup1)</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="targets.htm#z9001krt">TARGET_Z9001_KRT</a></td>
+    <td valign="top">KC85/1, KC87, Z9001 with KRT graphics</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;0: 40x24 characters</td>
+    <td valign="top" nowrap="nowrap">SCREEN&nbsp;1: 320x192 pixels</td>
+    <td valign="top">yes&nbsp;&sup1)</td>
+   </tr>
+  </table>
+ <br/>
+  &sup1;) A program compiled for this target system
+  will also run on a computer without a color graphics card.
+ <br/>
+</body>
+</html>

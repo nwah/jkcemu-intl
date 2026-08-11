@@ -1,0 +1,202 @@
+<html>
+<body>
+ <h1>USB Port</h1>
+  For some of the computers emulated by JKCEMU,
+  solutions for connecting USB devices have been developed.
+  Most of these solutions are based on a design by Mario Leubner,
+  who uses a Vinculum VDIP module with VDAP firmware.
+  JKCEMU emulates this VDIP module with this firmware
+  as well as a USB mass storage device connected to it.
+  Other USB devices are not supported.
+ <br/><br/>
+  A VDIP module (there is the VDIP1 with one and the VDIP2 with two
+  physical USB ports) is equipped with a VNC1 chip.
+  Newer modules use a VNC2 chip and are called V2DIP.
+  These modules are compatible with VDIP1 and VDIP2.
+ <br/><br/>
+  <ul>
+   <li><a href="usb.htm#general">1. General</a></li>
+   <li><a href="usb.htm#options">2. Options</a></li>
+   <li>
+    <a href="usb.htm#long_names">3. Support for Long File Names</a>
+   </li>
+   <li>
+    <a href="usb.htm#notes">4. Special Aspects of USB Emulation</a>
+    <ul>
+     <li>
+      <a href="usb.htm#vdap_commands">4.1. Supported Commands</a>
+     </li>
+     <li>
+      <a href="usb.htm#vdap_err">4.2. Error Messages for Blocked Write Accesses</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="general">1. General</a></h2>
+  The emulated USB mass storage device is mapped to any directory
+  in the file system of the computer running the emulator.
+  This way, a USB memory stick can be emulated even
+  if no physical USB mass storage device is
+  connected to the computer running the emulator.
+ <br/><br/>
+  To plug a USB memory stick, figuratively speaking, into the
+  computer emulated by JKCEMU, in the window <em>JKCEMU USB Port</em>
+  <a href="dirchooser.htm">select a directory</a>
+  or drag one there via drag&amp;drop.
+  Conversely, removing the directory means unplugging
+  the memory stick.
+  You open the window <em>JKCEMU USB Port</em> in the main window
+  with the menu item <em>Extra</em> &rarr; <em>USB Port...</em>.
+ <br/><br/>
+
+
+ <h2><a name="options">2. Options</a></h2>
+  In the window <em>JKCEMU USB Port</em>, besides
+  the directory of the emulated USB memory stick, you can also specify
+  four options:
+  <ul>
+   <li>
+    <em>Shorten long file names to 8.3 format</em>
+    <br/>
+    This option supports files whose names do not conform
+    to the 8.3 format.
+    For more information, see the section
+    <a href="usb.htm#long_names">Support for Long File Names</a>.
+    <br/><br/>
+   </li>
+   <li>
+    <em>Write protection (read-only mode)</em><br/>
+    If this option is switched on, all
+    write operations are blocked.
+    <br/><br/>
+   </li>
+   <li>
+    <em>Write file names in lowercase</em><br/>
+    This option applies exclusively to the creation of
+    new files and directories.
+    By default, these are created with uppercase
+    names, since that is also how the Vinculum VDIP modules do it.
+    With this option, you can switch to lowercase.
+    <br/><br/>
+   </li>
+   <li>
+    <em>Always use the current time stamp on write accesses</em><br/>
+    If this option is switched off, the time stamp of the last
+    modification is set in accordance with the Vinculum VDIP modules:
+    the time stamp must be supplied by the application or
+    driver software when a file is opened for writing
+    or a directory is created, or, if not,
+    the VDIP standard time stamp of December 20, 2004, 00:00:00 is used.
+    But now, if the emulated system has no running system clock at all,
+    or if it runs with the wrong time
+    (e.g. because the time had to be set by hand and
+    the user did not feel like entering it correctly),
+    the time stamps of the last modification will also be set incorrectly.
+    This option exists precisely for that case.
+    If it is switched on, the time stamps supplied by the application
+    or driver software are ignored and
+    the time of the last modification is always set to the current
+    time (the system time of the computer running the emulator).
+    However, this also has the disadvantage that, when a file is copied
+    by software running in the emulator, the new file
+    receives the current time stamp instead of that of the source file.
+    <br/><br/>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2>
+  <a name="long_names">3. Support for Long File Names</a>
+ </h2>
+  The VDAP firmware on the Vinculum VDIP modules does not support
+  long file names, only ones in the 8.3 format.
+  This restriction therefore also applies in the emulation.
+  However, on a FAT-formatted USB mass storage device
+  (and only these are supported by the original VDIP modules),
+  every so-called &quot;long&quot; file name,
+  i.e. one that does not conform to the 8.3 format,
+  also has a short equivalent name in the 8.3 format.
+  It is through these short names that all files on the volume
+  are visible to the VDAP firmware.
+ <br/><br/>
+  By default, MS&nbsp;Windows always generates a short equivalent
+  name when creating a file
+  whose name does not conform to the 8.3 format,
+  regardless of whether it is on a hard disk, floppy disk, or USB storage.
+  For NTFS-formatted volumes, however,
+  this behavior can be switched off system-wide.
+  For this reason, but also due to the fact
+  that other operating systems do not offer anything like this and that
+  in the emulation, independent of file system and operating system,
+  any directory can be used as an emulated memory stick,
+  files with long names are initially not visible in the VDIP emulation.
+ <br/><br/>
+  With the option
+  <em>Shorten long file names to 8.3 format</em>,
+  files with long names can also be used in the emulation.
+  On MS&nbsp;Windows, JKCEMU tries to read the short equivalent name
+  and display it in a VDIP-DIR.
+  If such a short name exists,
+  all file operations are possible with it,
+  both inside and outside the VDIP emulation.
+  However, if no short equivalent name can be read,
+  JKCEMU itself generates unique short names in 8.3 format,
+  if necessary, the first time a VDIP-DIR command is issued in a directory,
+  displays them, and also remembers them.
+  These file names do not physically exist on the volume,
+  but only virtually within the VDIP emulation.
+  The software running in the emulator can work with these short names,
+  and JKCEMU establishes the connection to the respective
+  file with the long name.
+ <br/><br/>
+  On other operating systems, e.g. Linux or macOS,
+  no short equivalent names can be read.
+  Here, JKCEMU always generates the short 8.3 names itself,
+  provided the option is switched on.
+ <br/><br/>
+
+
+ <h2><a name="notes">4. Special Aspects of USB Emulation</a></h2>
+
+ <h3><a name="vdap_commands">4.1. Supported Commands</a></h3>
+  JKCEMU simulates all commands of VDAP firmware version&nbsp;2.69.
+  However, access to the emulated USB mass storage device is only
+  possible via the disk commands (file system level).
+  Communication at the sector level (e.g. with debug commands)
+  or directly at the USB protocol level (device commands or data mode)
+  is not possible.
+  Write-related debug and device commands return
+  either an error code or have no effect,
+  depending on whether the command can return an error
+  according to its description.
+  Read-related debug and device commands return, depending on the command,
+  either dummy values or no data at all,
+  possibly also in conjunction with an error code.
+  The <em>DATAREQ</em> signal for requesting data mode
+  has no effect.
+  Consequently, the <em>DATAACK</em> signal
+  (data mode acknowledgment) never becomes active.
+ <br/><br/>
+
+ <h3>
+  <a name="vdap_err">4.2. Error Messages for Blocked Write Accesses</a>
+ </h3>
+  When write accesses are blocked due to a write protection setting
+  (e.g. because you do not have write permission on the
+  directory, or because you opened the directory in JKCEMU with
+  write protection only),
+  the error message <em>Read Only</em> only appears
+  if it is documented for the VDAP command
+  currently being executed.
+  If that is not the case, for reasons of compatibility
+  <em>Command Failed</em> is issued or, if that error message
+  is also not documented for the command currently being executed,
+  <em>Disk Full</em> is issued.
+  In these cases, the displayed error message therefore does not
+  quite correspond to the actual reason for the prevented write access.
+</body>
+</html>

@@ -1,0 +1,63 @@
+<html>
+<body>
+ <h1>AutoLoad and AutoInput</h1>
+  AutoLoad and AutoInput are functions for bringing the respective
+  emulated system into a user-defined initial state,
+  and they are meant to increase convenience for the user.
+ <br/><br/>
+  After every emulated power-on or every RESET,
+  AutoLoad automatically loads files into working memory (RAM).
+  After every emulated power-on or every RESET,
+  AutoInput automatically performs keyboard input.
+  Both functions work independently of each other,
+  but combine well.
+  For example, you can use AutoLoad to load an executable program file
+  and then use AutoInput to issue, after a short wait,
+  the command to start the program.
+ <br/><br/>
+  AutoLoad and AutoInput are available for many, but not all,
+  of the systems emulated by JKCEMU.
+  For the supported systems, you will find the <em>AutoLoad</em>
+  and <em>AutoInput</em> tabs in the respective settings.
+  There you can create as many entries as you like,
+  which are processed in order from top to bottom
+  after the emulated power-on and after RESET.
+  For each entry, you can also specify a time
+  that JKCEMU waits before executing that entry.
+ <br/><br/>
+  The automatic keyboard input in AutoInput is performed using
+  the function for pasting text into the emulator.
+  Depending on the emulated system, this can take varying amounts of time.
+ <br/><br/>
+  <b>Note:</b> The hardest part of AutoLoad and AutoInput is
+  getting the timing right.
+  If in doubt, specify a somewhat longer pause,
+  or, for AutoInput, split the input across several entries
+  with corresponding pauses in between.
+  The emulated system needs a certain amount of time
+  to process the input.
+ <br/><br/>
+  <b>Caution!</b> AutoLoad and AutoInput are general-purpose functions
+  and do not take into account the particular quirks
+  of the respective emulated system.
+  For example, with AutoLoad you can specify
+  that files be loaded into an address range where there is no RAM at all.
+  In that case, however, nothing will simply be loaded.
+  Likewise, with AutoInput you can specify characters or control keys
+  that cannot actually be entered on the emulated system
+  (e.g. because of a hexadecimal keyboard).
+  In that case, a corresponding message will appear
+  while AutoInput is running.
+ <br/><br/>
+  <b>Caution!</b> For the control key
+  <em>Cursor Left / Backspace</em>, AutoInput sends the code&nbsp;08h
+  to the emulated system, and for the key <em>Cursor Right / Tab</em>
+  it sends the code 09h.
+  Some systems treat the <em>Cursor Left</em>
+  and <em>Backspace</em> keys, or the <em>Cursor Right</em>
+  and <em>Tab</em> keys, differently.
+  In such a case, which specific function is executed
+  depends on the emulated system.
+</body>
+</html>
+

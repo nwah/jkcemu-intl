@@ -1,0 +1,110 @@
+<html>
+<body>
+ <h1>Kramer-MC: Editor</h1>
+  The editor has a command mode and an input mode.
+  After starting it (monitor command <tt>T</tt>), you are in
+  command mode.
+ <br/><br/>
+  The address range 4000H to 7FFFH is used as text storage.
+  A different text storage area can also be set with the A
+  command.
+ <br/><br/>
+
+ <h2>Commands</h2>
+  <table border="1">
+   <tr><th>Command</th><th>Function</th><th>Syntax</th></tr>
+   <tr>
+    <td>A(sign)</td>
+    <td>Text storage assignment</td><td>A nnnn (CR)</td>
+   </tr>
+   <tr>
+    <td>D(isplay)</td>
+    <td>
+     Display a number of n lines, advancing the line counter
+    </td>
+    <td>Dn (CR)</td>
+   </tr>
+   <tr><td>E(dit)</td><td>Text input mode</td><td>En (CR)</td></tr>
+   <tr>
+    <td>G(o)</td>
+    <td>Advance the line counter forward by n lines</td>
+    <td>Gn (CR)</td>
+   </tr>
+   <tr>
+    <td>I(nput)</td>
+    <td>Assign input channel</td>
+    <td>IT, IL or IU</td>
+   </tr>
+   <tr>
+    <td>L(ist)</td>
+    <td>Assign printer channel</td>
+    <td>LT, LL or LU</td>
+   </tr>
+   <tr>
+    <td>0(utput)</td>
+    <td>Assign output channel</td>
+    <td>OT, OL or OU</td>
+   </tr>
+   <tr>
+    <td>P(rint)</td>
+    <td>Output all lines on the list channel</td>
+    <td>P</td>
+   </tr>
+   <tr><td>Q(uit)</td><td>Return to the monitor</td><td>Q</td></tr>
+  </table>
+ <br/><br/>
+
+ <h2>Editor Control Characters</h2>
+  <table border="1">
+   <tr><th>Key</th><th>Function</th></tr>
+   <tr>
+    <td>BS</td>
+    <td>
+     Cursor left, correction possible by overwriting
+    </td>
+   </tr>
+   <tr><td>DEL</td><td>Clear the content of the display line</td></tr>
+   <tr>
+    <td>LP</td>
+    <td>
+     Adopt the line into the text buffer, display the next line
+     from the buffer
+    </td>
+   </tr>
+   <tr>
+    <td>CR</td>
+    <td>Adopt the line into the buffer, leave the E command</td>
+   </tr>
+   <tr>
+    <td>Control D</td>
+    <td>Duplicate the second-to-last line into the working line</td>
+   </tr>
+   <tr>
+    <td>Control Z</td>
+    <td>Adopt the line into the buffer, start a new line</td>
+   </tr>
+   <tr>
+    <td>Control X</td>
+    <td>
+     Delete the character above the cursor, shift the rest to
+     the left
+    </td>
+   </tr>
+   <tr>
+    <td>Control S</td>
+    <td>
+     Insert a character above the cursor, shift the rest to
+     the right
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>Editor Error Messages</h2>
+  <table border="1">
+   <tr><td>E1</td><td>Command error</td></tr>
+   <tr><td>E2</td><td>Text buffer full</td></tr>
+   <tr><td>E3</td><td>Parameter error</td></tr>
+  </table>
+</body>
+</html>

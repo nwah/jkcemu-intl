@@ -1,0 +1,813 @@
+<html>
+<body>
+ <h1>Z1013</h1>
+  The Z1013 microcomputer kit is a single-board computer
+  that was manufactured from 1985 onward at VEB Robotron-Elektronik Riesa.
+  This kit was aimed at hobbyists and tinkerers,
+  who only had to solder the supplied membrane keyboard
+  and a self-supplied (i.e. not included) 12V transformer
+  onto the already fully assembled circuit board.
+ <br/><br/>
+  The original idea behind the Z1013 was to make use of electronic components
+  that did not meet industrial requirements
+  (so-called reject components, which were functionally fine
+  but, for example, did not reach the required clock frequencies)
+  in the form of a relatively low-clocked computer kit
+  for the general population.
+  As a result, the Z1013 initially had a clock frequency of only 1&nbsp;MHz
+  (model Z1013.01) and, at 690&nbsp;Marks, was the cheapest computer
+  available in the GDR that had video output
+  and could thus be considered a fully-fledged home computer.
+  It was also available to private buyers through an official channel
+  right from the start, although only from the Robotron shop
+  in Erfurt and with a waiting time of about a year.
+ <br/><br/>
+  However, the idea of using reject components for the Z1013
+  turned out to be unfavorable for the manufacturer,
+  since for warranty reasons the components ultimately had to be
+  individually tested and measured anyway.
+  For this reason, from 1987 onward the Z1013 was shipped with
+  &quot;fully specified&quot; components and a 2&nbsp;MHz clock frequency
+  (model Z1013.16).
+  This, however, also raised the price to 965&nbsp;Marks.
+  In 1989 the Z1013.64 model was released, which had 64&nbsp;KByte of RAM
+  and had dropped in price to 590&nbsp;Marks.
+  In the spring of 1990, before the introduction of the Deutschmark
+  in the GDR, the Z1013 was offered in Erfurt for only 99&nbsp;Marks.
+ <br/><br/>
+  In 2016, dedicated hobbyists presented the Z1013-128
+  (occasionally also called Z1013.128),
+  in which a number of blemishes in the original hardware design
+  were fixed.
+  It also offers a few optional expansions,
+  among them 128&nbsp;KByte of RAM, which is where its name comes from.
+  The hardware configuration can be adjusted very flexibly
+  by means of a whole series of jumpers.
+  In the default settings of these jumpers, the Z1013-128
+  essentially corresponds to a Z1013.64 with an additional
+  switchable 32&nbsp;KByte EPROM in the address range 8000h-FFFFh.
+  This ROM, and thus implicitly also the Z1013-128 in its
+  default settings, is optionally emulated.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="z1013.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="z1013.htm#kb8x4">1.1. Membrane Flat Keyboard</a></li>
+     <li><a href="z1013.htm#kb8x8">1.2. Alpha Keyboard</a></li>
+     <li><a href="z1013.htm#peters">1.3. Peters Board</a></li>
+     <li><a href="z1013.htm#mega">1.4. Mega-ROM Module</a></li>
+     <li>
+      <a href="z1013.htm#rom8000">1.5. 32K ROM Corresponding to the Z1013-128</a>
+     </li>
+     <li><a href="z1013.htm#printer">1.6. Printer</a></li>
+     <li><a href="z1013.htm#joystick">1.7. Joysticks</a></li>
+     <li><a href="z1013.htm#fdc">1.8. Floppy Disk Module</a></li>
+     <li>
+      <a href="z1013.htm#usb">1.9. USB Connector (Vinculum VDIP Module)</a>
+     </li>
+     <li><a href="z1013.htm#rtc">1.10. Real-Time Clock Module</a></li>
+     <li>
+      <a href="z1013.htm#graphzx">1.11. Full Graphics per practic&nbsp;2/1988</a>
+     </li>
+     <li>
+      <a href="z1013.htm#krt">1.12. Full Graphics per KRT&nbsp;11 and FA&nbsp;7/1991</a>
+     </li>
+     <li><a href="z1013.htm#gccj">1.13. CC&nbsp;Jena Graphics Card</a></li>
+     <li>
+      <a href="z1013.htm#poppe">1.14. Color Graphics Card with 32x32 and 64x32&nbsp;Characters</a>
+     </li>
+    </ul>
+   </li>
+   <li><a href="z1013.htm#software">2. Software Contained in ROM</a></li>
+   <li><a href="z1013.htm#disks">3. Included Disk Images</a></li>
+   <li>
+    <a href="z1013.htm#etc">4. Miscellaneous</a>
+    <ul>
+     <li>
+      <a href="z1013.htm#basic_io">4.1. Saving, Loading and Opening BASIC Programs</a>
+     </li>
+     <li><a href="z1013.htm#paste">4.2. Pasting Text</a></li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  Since the Z1013 was sold as a kit,
+  a particularly large number of modifications
+  and expansions have been developed for it.
+  This applies especially to the keyboard, the monitor program,
+  and the RAM size.
+  JKCEMU emulates the common keyboards
+  together with one or more matching monitor programs each.
+  In the <a href="settings.htm">Settings</a> you select
+  the desired combination of monitor program and keyboard.
+ <br/><br/>
+  The following are emulated:
+  <ul>
+   <li>2 or 4&nbsp;KByte ROM, depending on the monitor program</li>
+   <li>1, 16, or 64&nbsp;KByte RAM, depending on the Z1013 model</li>
+   <li>
+    Keyboards:
+    <ul>
+     <li><a href="z1013.htm#kb8x4">Membrane flat keyboard</a> (8x4 matrix)</li>
+     <li><a href="z1013.htm#kb8x8">Alpha keyboard</a> (8x8 matrix)</li>
+     <li>K7659 (12x8 matrix)</li>
+     <li>K7669 (12x8 matrix)</li>
+     <li>S6009 (12x8 matrix)</li>
+    </ul>
+   </li>
+   <li>Cassette recorder connector</li>
+   <li>
+    Optional expansions:
+    <ul>
+     <li>Peters board</li>
+     <li>KC-BASIC module</li>
+     <li><a href="z1013.htm#mega">Mega-ROM module</a></li>
+     <li>
+      <a href="z1013.htm#rom8000">32K ROM corresponding to the Z1013-128</a>
+     </li>
+     <li><a href="z1013.htm#printer">Printer</a></li>
+     <li><a href="z1013.htm#joystick">Joysticks</a></li>
+     <li>
+      Two&nbsp;<a href="ramfloppy.htm">RAM floppies</a>
+      per <em>Mikroprozessortechnik</em>
+      issue&nbsp;3/1988 at the I/O base addresses&nbsp;98h and 58h
+     </li>
+     <li><a href="z1013.htm#fdc">Floppy disk module</a></li>
+     <li>
+      <a href="gide.htm">GIDE</a> with up to two hard disks
+      at the I/O base addresses&nbsp;40h and 80h
+     </li>
+     <li>
+      <a href="z1013.htm#usb">USB connector</a> (Vinculum VDIP module)
+     </li>
+     <li><a href="z1013.htm#rtc">Real-time clock module</a></li>
+     <li>
+      <a href="kcnet.htm">KCNet</a>-compatible network card
+      at the I/O base address&nbsp;C0h
+     </li>
+     <li><a href="k1520sound.htm">K1520 sound card</a></li>
+     <li>
+      <a href="z1013.htm#graphzx">Full graphics per practic&nbsp;2/1988</a>
+     </li>
+     <li>
+      <a href="z1013.htm#krt">Full graphics per KRT&nbsp;11 and FA&nbsp;7/1991</a>
+     </li>
+     <li><a href="z1013.htm#gccj">CC&nbsp;Jena graphics card</a></li>
+     <li>
+      <a href="z1013.htm#poppe">Color graphics card with 32x32 and 64x32 characters</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+  <b>Caution!</b> Not all optional expansions
+  can be combined with each other.
+  If you enable an option in the settings
+  that cannot be combined with another one,
+  the other option is automatically deselected.
+ <br/><br/>
+
+ <h3><a name="kb8x4">1.1. Membrane Flat Keyboard</a></h3>
+  On the membrane flat keyboard, the digits are by default
+  reachable only via the Shift-1 key.
+  However, in the monitor program and via system calls,
+  the shift levels can be switched
+  so that digits can be entered without the Shift key.
+  In that case, for some letters the Shift-1 key
+  must be pressed instead.
+  This recoding of characters, however, interferes with the emulator.
+  For this reason, JKCEMU automatically detects
+  the switching of the shift levels and then emulates
+  the pressing of the Shift-1 key accordingly differently.
+  As a result, the monitor commands <em>A</em> and <em>H</em>
+  appear to have no effect.
+ <br/><br/>
+  Altogether, the membrane flat keyboard has four Shift keys,
+  which are also polled directly by some game programs
+  and used to control the game character.
+  So that you can also operate such programs without restrictions
+  in the emulator,
+  these four Shift keys are also emulated as individual keys,
+  namely with the function keys <em>F1</em> through <em>F4</em>.
+ <br/><br/>
+  A <a href="keyboard.htm">keyboard view</a> is available
+  for the membrane flat keyboard.
+ <br/><br/>
+
+ <h3><a name="kb8x8">1.2. Alpha Keyboard</a></h3>
+  The alpha keyboard is the keyboard
+  required by the A.2 monitor program.
+  However, this is not a ready-made keyboard,
+  but only a circuit for connecting a keyboard
+  with an 8x8 matrix.
+  The circuit diagram for it and the prescribed arrangement of the keys
+  in the matrix are given in the supplementary manual for the Z1013.16.
+  A schematic key arrangement is also given there.
+  This is available in the emulator as a
+  <a href="keyboard.htm">keyboard view</a>.
+ <br/><br/>
+  With the exception of the <em>Graph&nbsp;I/O</em> key, all keys
+  or characters of the alpha keyboard can usually also be found
+  on the keyboard of the computer running the emulator.
+  The <em>Graph&nbsp;I/O</em> key can be operated with the
+  function key&nbsp;F1.
+ <br/><br/>
+
+ <h3><a name="peters">1.3. Peters Board</a></h3>
+  The Peters board makes it possible, via I/O port&nbsp;4,
+  to disable the ROM and to switch the character set,
+  the clock frequency, and the screen organization.
+ <br/><br/>
+  Meaning of the bits of I/O port&nbsp;4:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th valign="top">Bit</th>
+    <th valign="top">Meaning at value&nbsp;0 (default)</th>
+    <th valign="top">Meaning at value&nbsp;1</th>
+   </tr>
+   <tr>
+    <td valign="top">4</td>
+    <td valign="top">ROM mapped in</td>
+    <td valign="top">
+     ROM switched out, RAM mapped in instead
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">5</td>
+    <td valign="top">Standard character set</td>
+    <td valign="top">
+     alternative character set,<br/>
+     The emulator switches to a character set with German umlauts
+     per ISO&nbsp;646 and inverse characters.<br/><br/>
+     <b>Caution!</b> If, in the Z1013 settings,
+     tab <em>Miscellaneous</em>,
+     an alternative character set file has been loaded, the following applies:
+     <ul>
+      <li>
+       If the externally loaded character set file is smaller than 4&nbsp;KByte,
+       it is used for both the standard and the alternative character set,
+       i.e. switching via port&nbsp;4 has no effect.
+      </li>
+      <li>
+       If the externally loaded character set file is 4&nbsp;KByte in size,
+       the lower 2&nbsp;KByte are used as the standard character set
+       and the upper 2&nbsp;KByte as the alternative character set.
+       In that case, switching the character set does have an effect.
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">6</td>
+    <td valign="top">Clock frequency 2&nbsp;MHz</td>
+    <td valign="top">
+     Clock frequency 4&nbsp;MHz,<br/><br/>
+     <b>Caution!</b> The emulator only switches to 4&nbsp;MHz
+     if the <a href="settings.htm#speed">settings</a>
+     specify the default value of 2&nbsp;MHz.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">7</td>
+    <td valign="top">Screen 32x32&nbsp;characters</td>
+    <td valign="top">Screen 64x16&nbsp;characters</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="mega">1.4. Mega-ROM Module</a></h3>
+  The Mega-ROM module, already known from the Z9001, KC85/1, and KC87
+  and adapted to the Z1013, offers 2.5&nbsp;MByte of memory,
+  divided into 256 individual 10&nbsp;KByte segments.
+  The currently active segment is mapped into the address range C000h-E7FFh.
+  Switching the active segment is done via an output instruction
+  to I/O address FFh.
+  Unlike with the Z9001, KC85/1, and KC87, the Z1013 variant of the module
+  cannot be switched off by software.
+ <br/><br/>
+  JKCEMU does not include any content for the Mega-ROM module.
+  You must therefore provide a suitable ROM file yourself
+  and select it in the settings.
+ <br/><br/>
+
+ <h3><a name="rom8000">1.5. 32K ROM Corresponding to the Z1013-128</a></h3>
+  The Z1013-128 contains an additional EPROM,
+  which can be mapped into the address range 8000h-FFFFh
+  by outputting a set bit&nbsp;5 to I/O address&nbsp;4.
+  However, the range EC00h-FFFFh is only visible
+  if bit&nbsp;4 is also set at the same time, which switches off
+  the video RAM and the system ROM.
+ <br/><br/>
+  This 32K EPROM is optionally emulated in accordance with
+  the Z1013-128 default settings.
+  JKCEMU does not include any content for this ROM.
+  You must therefore provide a suitable ROM file yourself
+  and select it in the settings.
+ <br/><br/>
+  <b>Caution!</b> The switchable 32K ROM corresponding to the Z1013-128
+  also comes with emulation of the clock frequency switch
+  via I/O address&nbsp;4, bit&nbsp;6.
+ <br/><br/>
+
+ <h3><a name="printer">1.6. Printer</a></h3>
+  There are two ways to
+  <a href="print.htm">emulate a printer</a>:
+  <ol>
+   <li>Intercepting the corresponding jump table calls</li>
+   <li>Emulating a Centronics interface at the user port</li>
+  </ol>
+ <br/>
+  With the first variant, the calls for printer output
+  are intercepted at the jump table and appended to the current
+  print job.
+  No printer driver is needed.
+  However, this variant only works with programs
+  that also use the jump table for printer output.
+ <br/><br/>
+  With the second variant, either a printer driver is required,
+  or the application program addresses the
+  Centronics interface itself.
+  Data output on the emulated Centronics interface is
+  appended to the current print job.
+ <br/><br/>
+
+ <h3><a name="joystick">1.7. Joysticks</a></h3>
+  Several hardware variants for connecting
+  <a href="joystick.htm">joysticks</a> to the Z1013 have been published,
+  along with a corresponding software interface.
+  JKCEMU can emulate both the three common hardware variants
+  and the software interface.
+  However, which type of emulation you need to enable depends
+  on the specific game or application program.
+ <br/><br/>
+  Some programs directly poll the user port
+  to which the joysticks are connected.
+  In that case, you must select the correct joystick hardware in the
+  <a href="settings.htm">settings</a>, area <em>Z1013</em>,
+  tab <em>User Port</em>.
+ <br/><br/>
+  If, on the other hand, the game or application program uses
+  the software interface,
+  then enable the option
+  <em>Intercept jump table calls for joystick queries</em>
+  on the <em>Miscellaneous</em> tab.
+  In that case, JKCEMU emulates the joystick driver
+  that is normally invoked via the jump table
+  for joystick queries.
+  Alternatively, you can also disable this option
+  and load a suitable joystick driver yourself,
+  which provides the connection between the software interface
+  and the (emulated) hardware.
+ <br/><br/>
+
+ <h3><a name="fdc">1.8. Floppy Disk Module</a></h3>
+  The floppy disk module is <a href="floppydisk.htm">emulated</a>
+  at the following input/output addresses:
+ <br/><br/>
+  <table border="1">
+   <tr><th>I/O Address</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">F0h</td>
+    <td valign="top">Status register</td>
+   </tr>
+   <tr>
+    <td valign="top">F1h</td>
+    <td valign="top">Data register</td>
+   </tr>
+   <tr>
+    <td valign="top">F8h</td>
+    <td valign="top">Terminal Count</td>
+   </tr>
+   <tr>
+    <td valign="top">FAh</td>
+    <td valign="top">RESET</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="usb">1.9. USB Connector (Vinculum VDIP Module)</a></h3>
+  The <a href="usb.htm">USB module</a> is emulated at the I/O base
+  addresses DCh and FCh.
+  If the <a href="z1013.htm#mega">Mega-ROM module</a> is enabled,
+  the USB module is emulated only at the base address DCh,
+  since otherwise there would be a conflict with I/O address FFh.
+ <br/><br/>
+
+ <h3><a name="rtc">1.10. Real-Time Clock Module</a></h3>
+  A real-time clock RTC-62421 or RTC-72421 is emulated at
+  I/O addresses&nbsp;70h to 7Fh.
+  The clock can only be read, not set.
+ <br/><br/>
+
+ <h3><a name="graphzx">1.11. Full Graphics per practic&nbsp;2/1988</a></h3>
+  The ZX&nbsp;Spectrum-compatible full graphics expansion
+  presented in the magazine practic&nbsp;2/1988 is emulated as
+  a second display unit
+  (menu <em>Extra</em>&nbsp;&rarr; <em>Second Display Unit...</em>).
+  This graphics expansion has a 6&nbsp;KByte pixel memory
+  for the 256x192&nbsp;pixels (address range 4000h-57FFh),
+  but not the color attribute memory found on the ZX&nbsp;Spectrum.
+  The screen output is therefore black and white, with white
+  as the background color.
+  A set bit in the pixel memory results in a black pixel.
+ <br/><br/>
+  The graphics expansion also generates the interrupt,
+  known from the ZX&nbsp;Spectrum, during the vertical sync pulse.
+  Since the hardware does not support an interrupt vector or a daisy chain,
+  this interrupt can practically only be used
+  in interrupt mode&nbsp;1.
+  In addition, the interrupt registration of all other
+  interrupt sources is disrupted
+  (e.g. the PIO, which triggers interrupts for the single-step mode
+  of the monitor program (command&nbsp;B)).
+ <br/><br/>
+  In the original, the graphics card does not generate a MEMDI signal,
+  i.e. the memory on the Z1013 main board or a memory expansion
+  is not switched out.
+  If other memory is present in the address range of the pixel memory,
+  the graphics expansion is configured so that the pixel memory
+  can only be written to.
+ <br/><br/>
+
+ <h3>
+  <a name="krt">1.12. Full Graphics per KRT&nbsp;11 and FA&nbsp;7/1991</a>
+ </h3>
+  The book <em>Kleinstrechnertips&nbsp;11</em> (KRT&nbsp;11)
+  presented a fairly simple circuit
+  that gives the Z1013 full graphics capabilities.
+  A slightly modified version of this circuit was published again
+  in the magazine <em>Funkamateur 7/1991</em> (FA&nbsp;7/1991).
+  Both circuit variants are optionally emulated.
+ <br/><br/>
+  The principle of the circuit is fairly simple:
+  instead of the original video RAM, there are 8&nbsp;RAM banks
+  in parallel, with each RAM bank representing one pixel row
+  within a character row.
+  If RAM bank&nbsp;0 is active, the address range EC00h to EFFFh
+  gives access to all topmost pixel rows within the character rows.
+  With RAM bank&nbsp;7, it is all bottommost pixel rows
+  within the character rows.
+  The RAM bank is selected via the lower 3&nbsp;bits
+  of output address&nbsp;8
+  (the same I/O address as for the keyboard columns).
+  The pixel data is inverted, i.e. a cleared bit
+  results in a white pixel.
+ <br/><br/>
+  You can switch between full graphics and the original text mode
+  in software.
+  This switching differs between the two circuit variants:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Function</th><th>KRT&nbsp;11</th><th>FA&nbsp;7/1991</th></tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     Full graphics&nbsp;on
+    </td>
+    <td valign="top">
+     Output of an 8 to the lower 4&nbsp;bits of I/O address&nbsp;8
+    </td>
+    <td valign="top">
+     Input or output instruction with any data byte
+     at address&nbsp;0Ch to 0Fh
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     Full graphics&nbsp;off<br/>
+     (original text mode back on)
+    </td>
+    <td valign="top">
+     Output of a 9 to the lower 4&nbsp;bits of I/O address&nbsp;8
+    </td>
+    <td valign="top">
+     Input or output instruction with any data byte
+     at address&nbsp;10h to 13h
+    </td>
+   </tr>
+  </table>
+ <br/>
+  Both circuit variants are emulated in parallel,
+  i.e. in the emulator you can switch on full graphics per
+  <em>KRT&nbsp;11</em> and switch it off again per
+  <em>FA&nbsp;7/1991</em>.
+ <br/><br/>
+
+ <h3><a name="gccj">1.13. CC&nbsp;Jena Graphics Card</a></h3>
+  The Computerclub Jena developed a graphics card
+  that uses the graphics display controller U82720.
+  Although a graphics processor is used,
+  the card can only output text at the hardware level.
+  The resolution is usually 80x25 characters.
+ <br/><br/>
+  The graphics card contains an 8&nbsp;KByte EPROM
+  as the character generator.
+  Several character sets can be stored in it,
+  the desired one of which can be selected through corresponding
+  programming of the graphics processor.
+  The character generator built into JKCEMU for this graphics card
+  contains only one complete character set.
+  However, in the settings, by loading a ROM file
+  of up to 8&nbsp;KByte, you can fill the character generator
+  with different content.
+ <br/><br/>
+  The graphics card is emulated as a second display unit
+  (menu item <em>Extra</em> &rarr; <em>Second Display Unit...</em>).
+ <br/><br/>
+
+ <h3>
+  <a name="poppe">1.14. Color Graphics Card with 32x32 and 64x32&nbsp;Characters</a>
+ </h3>
+  Heiko Poppe developed a color graphics card for text output,
+  which also exists in a special variant for the Z1013.
+  This variant is optionally emulated.
+ <br/><br/>
+  The graphics card offers the two output formats 32x32
+  and 64x32&nbsp;characters.
+  The video RAM is located in the address range E800h-EFFFh
+  and consists of a text memory and a color memory.
+  In the 32x32-character output format, the address mapping is identical
+  to the Z1013 standard, i.e. only the range from EC00h-EFFFh is displayed.
+  In this output format, the Z1013 character set is used.
+ <br/><br/>
+  In the 64x32-character output format, two character sets
+  with a character size of 8x6&nbsp;pixels are supported,
+  between which you can switch.
+  However, JKCEMU only includes one ASCII character set for this,
+  so switching the character set has no effect.
+  If you want to use the character set switching,
+  you must specify a 4&nbsp;KByte character set file
+  on the <em>Graphics Expansions</em> tab
+  in the Z1013 settings.
+  The first 2&nbsp;KByte of it are used as the first character set
+  and the second 2&nbsp;KByte as the second character set.
+ <br/><br/>
+  The color graphics card has a control register
+  that can be accessed via two input/output addresses.
+  The table shows the meaning of the individual bits of this register
+  and the access options:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th>Bit</th>
+    <th>Meaning at value&nbsp;0<br/>(default)</th>
+    <th>Meaning at value&nbsp;1</th>
+    <th>I/O address for reading</th>
+    <th>I/O address for writing</th>
+   </tr>
+   <tr>
+    <td valign="top">0</td>
+    <td valign="top">Access to text memory</td>
+    <td valign="top">Access to color memory</td>
+    <td valign="top">12h</td>
+    <td valign="top">12h</td>
+   </tr>
+   <tr>
+    <td valign="top">1</td>
+    <td valign="top">Output format 64x32&nbsp;characters</td>
+    <td valign="top">Output format 32x32&nbsp;characters</td>
+    <td valign="top">12h</td>
+    <td valign="top">11h</td>
+   </tr>
+   <tr>
+    <td valign="top">3</td>
+    <td valign="top">
+     First character set active in 64x32-character mode
+    </td>
+    <td valign="top">
+     Second character set active in 64x32-character mode
+    </td>
+    <td valign="top">12h</td>
+    <td valign="top">11h</td>
+   </tr>
+  </table>
+ <br/>
+  <b>Caution!</b> If GIDE is not enabled,
+  the color graphics card is also emulated at I/O addresses&nbsp;41h
+  and 42h.
+ <br/><br/>
+  Meaning of a memory cell in the color memory:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Bit</th><th>Meaning</th></tr>
+   <tr><td>0</td><td>Foreground color red</td></tr>
+   <tr><td>1</td><td>Foreground color green</td></tr>
+   <tr><td>2</td><td>Foreground color blue</td></tr>
+   <tr><td>3</td><td>Foreground color intense</td></tr>
+   <tr><td>4</td><td>Background color red</td></tr>
+   <tr><td>5</td><td>Background color green</td></tr>
+   <tr><td>6</td><td>Background color blue</td></tr>
+   <tr><td>7</td><td>Background color intense</td></tr>
+  </table>
+ <br/>
+
+  <b>Caution!</b> Since the Z1013 monitor programs included in JKCEMU
+  do not initialize the color memory,
+  after a RESET you see a colorful random image
+  in which the text output is difficult to make out.
+  For this reason, the color graphics card is emulated
+  as a second display unit.
+  The original Z1013 screen output thus remains visible.
+  For this to work technically, the video RAM of the graphics card
+  is only accessible for writing.
+  Write accesses in the address range E800h-EFFFh therefore go into
+  the Z1013 RAM, i.e. the original video RAM, and
+  in parallel also into the video RAM of the color graphics card.
+  Reads in the address range E800h-EFFFh, on the other hand,
+  are only from the Z1013 memory, not from the graphics card.
+  In the original, this corresponds to the connection variant
+  in which the graphics card does not generate a /MEMDI signal
+  and thus does not switch out the memory on the Z1013 main board.
+ <br/><br/>
+
+
+ <h2><a name="software">2. Software Contained in ROM</a></h2>
+  <ul>
+   <li>
+    Monitor program, depending on the setting:
+    <ul>
+     <li>Original monitor program version&nbsp;2.02</li>
+     <li>Original monitor program version&nbsp;A.2</li>
+     <li>
+      Monitor program by Rainer Brosig, version&nbsp;2.028,
+      for keyboard K7659
+     </li>
+     <li>
+      Monitor program by Rainer Brosig, version&nbsp;2.028,
+      for keyboard S6009
+     </li>
+     <li>
+      Monitor program by Jens M&uuml;ller, version&nbsp;1992
+      (see <a href="z1013/mon_jm_1992.htm">description</a>)
+     </li>
+     <li>
+      Boot loader&nbsp;BL4 by Rainer Brosig
+      (insert a boot disk in the first emulated floppy disk drive!)
+     </li>
+    </ul>
+   </li>
+   <li>KC-ROM-BASIC version&nbsp;1.0 (in the KC-BASIC module)</li>
+  </ul>
+ <br/>
+  You can replace the ROM contents in the
+  <a href="settings.htm">settings</a>
+  by specifying external ROM files.
+ <br/><br/>
+  <b>Caution!</b> If you load a different monitor program
+  this way, you must make sure
+  that the correct keyboard hardware is selected
+  in the <a href="settings.htm">settings</a>.
+ <br/><br/>
+
+
+ <h2><a name="disks">3. Included Disk Images</a></h2>
+  JKCEMU includes the following disk images
+  for the Z1013 emulation:
+  <ul>
+   <li>
+    <u>CP/M boot disk for 64x16&nbsp;characters:</u><br/>
+    To boot from the disk, you must configure the following:
+    <ul>
+     <li>Z1013.64</li>
+     <li>Boot loader 4 / keyboard K7659</li>
+     <li>Peters board</li>
+     <li>Floppy disk module</li>
+     <li>
+      RAM floppy per MP&nbsp;3/1988 at I/O addresses&nbsp;98h-9Fh
+     </li>
+     <li>
+      Printer on 7-bit Centronics connector per practic&nbsp;2/1989
+      at the user port
+     </li>
+    </ul>
+    <br/>
+   </li>
+   <li>
+    <u>CP/M boot disk for 80x25&nbsp;characters:</u><br/>
+    To boot from the disk, you must configure the following:
+    <ul>
+     <li>Z1013.64</li>
+     <li>Boot loader 4 / keyboard K7659</li>
+     <li>Peters board</li>
+     <li>Floppy disk module</li>
+     <li>Real-time clock (RTC)</li>
+     <li>CC&nbsp;Jena graphics card (80x25 characters)</li>
+     <li>
+      RAM floppy per MP&nbsp;3/1988 at I/O addresses&nbsp;98h-9Fh
+     </li>
+     <li>
+      Printer on 7-bit Centronics connector per practic&nbsp;2/1989
+      at the user port
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+  The drive assignment for both disk images is:
+ <br/><br/>
+  <table border="1">
+   <tr><td valign="top">A:</td><td>RAM floppy</td></tr>
+   <tr>
+    <td valign="top">B:</td>
+    <td>first floppy disk drive, 820&nbsp;KByte format</td>
+   </tr>
+   <tr>
+    <td valign="top">C:</td>
+    <td>first floppy disk drive, 624&nbsp;KByte format</td>
+   </tr>
+   <tr>
+    <td valign="top">D:</td>
+    <td>
+     first floppy disk drive, 780&nbsp;KByte format
+     <br/>
+     <b>Caution!</b> The disk images themselves have this format,
+     i.e. they can be accessed under drive <em>D:</em>.
+   </td>
+   </tr>
+   <tr>
+    <td valign="top">E:</td>
+    <td>first floppy disk drive, 800&nbsp;KByte format</td>
+   </tr>
+  </table>
+ <br/>
+  On the CP/M boot disk for 80x25&nbsp;characters,
+  the source code for the BIOS is also included, on user level&nbsp;15.
+  Instructions for this can be found as text files on user level&nbsp;0.
+  These files can be read with the CP/M command <em>TYPE</em>.
+ <br/><br/>
+  <b>Caution!</b> Both disks also contain the empty file
+  <a href="go_com.htm">GO.COM</a>.
+  This is used to start a CP/M-compatible program
+  that is already located in RAM.
+  If <em>GO</em> is called without a program present in RAM,
+  this leads to a crash.
+ <br/><br/>
+
+ <h2><a name="etc">4. Miscellaneous</a></h2>
+
+ <h3>
+  <a name="basic_io">4.1. Saving, Loading and Opening BASIC Programs</a>
+ </h3>
+  JKCEMU offers special support for
+  <a href="loadsavebasic.htm">saving and loading BASIC programs</a>
+  as well as for opening BASIC programs residing in RAM
+  in the text editor.
+  You can find the corresponding functions in the <em>File</em> menu.
+ <br/><br/>
+  The following BASIC interpreters are supported:
+ <br/>
+  <ul>
+   <li>Z1013-BASIC version&nbsp;3.1 (Tiny-BASIC)</li>
+   <li>HC-BASIC in RAM (KC-BASIC)</li>
+   <li>HC-BASIC in ROM (KC-BASIC)</li>
+  </ul>
+ <br/>
+  When saving BASIC programs, a window appears for selecting
+  the file format.
+  Please save Tiny-BASIC programs as a
+  <a href="fileformats.htm#headersave">Headersave file (*.z80)</a>
+  with file type&nbsp;<em>b</em>, and KC-BASIC programs either as a
+  <a href="fileformats.htm#kcbasic">KC-BASIC program file (*.sss)</a>
+  or as a
+  <a href="fileformats.htm#headersave">Headersave file (*.z80)</a>
+  with file type&nbsp;<em>B</em>.
+ <br/><br/>
+  If you save a BASIC program in a different file format,
+  JKCEMU will later, when loading the file, no longer recognize
+  that it is a BASIC program and will not adapt the
+  system cells of the BASIC interpreter.
+  The loaded program cannot then be used.
+ <br/><br/>
+
+ <h3><a name="paste">4.2. Pasting Text</a></h3>
+  Pasting text from the clipboard is usually done
+  by simulating, for each character to be pasted,
+  the pressing of the corresponding key or key combination.
+  This approach is fairly slow.
+  For the Z1013, the <a href="settings.htm">settings</a> offer
+  the option
+  <em>Paste text by intercepting the system call</em>.
+  With this option, the emulator listens at the entry address
+  for the INKEY system function.
+  When this system function is called, JKCEMU checks
+  whether a character should be pasted.
+  If so, it writes the next character to be pasted
+  into the corresponding processor register and simulates a RETURN instruction.
+  If the operating system or the application program does not poll
+  the keyboard via the INKEY system function,
+  pasting text will not work,
+  and you must turn the option off.
+ <br/><br/>
+  With this option, JKCEMU must know the start address of the INKEY function.
+  This is the case for the monitor programs built into the emulator.
+  However, if you start a different operating system or, by loading
+  an external ROM image, use a different monitor program
+  in which the INKEY function begins at a different address,
+  you must likewise turn the option off.
+</body>
+</html>

@@ -203,7 +203,7 @@ public class AboutDlg extends BaseDlg
 
 
     // Tab Urheberschaften
-    url = getClass().getResource( "/help/copyright.htm" );
+    url = HelpFrm.getPageURL( "/help/copyright.htm" );
     if( url != null ) {
       try {
 	JPanel panel = GUIFactory.createPanel( new BorderLayout() );
@@ -217,7 +217,7 @@ public class AboutDlg extends BaseDlg
 
 
     // Tab Dank
-    url = getClass().getResource( "/help/thanks.htm" );
+    url = HelpFrm.getPageURL( "/help/thanks.htm" );
     if( url != null ) {
       try {
 	JPanel panel = GUIFactory.createPanel( new BorderLayout() );

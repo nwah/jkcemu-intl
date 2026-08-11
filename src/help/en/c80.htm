@@ -1,0 +1,295 @@
+<html>
+<body>
+ <h1>C-80</h1>
+  The C-80 is a single-board computer for home construction,
+  presented by Joachim Czepa in 1986.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="c80.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="c80.htm#keyboard">1.1. Keyboard</a></li>
+    </ul>
+   </li>
+   <li>
+    <a href="c80.htm#software">2. Software Contained in ROM</a>
+    <ul>
+     <li>
+      <a href="c80.htm#usage">2.1. Notes on Using the Monitor Program</a>
+      <ul>
+       <li>
+	<a href="c80.htm#mem">2.1.1. Displaying/Changing Memory Cells</a>
+       </li>
+       <li>
+	<a href="c80.htm#run">2.1.2. Starting a Program</a>
+       </li>
+       <li>
+	<a href="c80.htm#reg">2.1.3. Displaying/Changing Registers</a>
+       </li>
+       <li>
+	<a href="c80.htm#fill">2.1.4. Filling a Data Area</a>
+       </li>
+       <li>
+	<a href="c80.htm#save">2.1.5. Saving a Data Area to Tape</a>
+       </li>
+       <li>
+	<a href="c80.htm#load">2.1.6. Loading a Data Area from Tape</a>
+       </li>
+       <li>
+	<a href="c80.htm#trans">2.1.7. Transferring a Data Area</a>
+       </li>
+       <li>
+	<a href="c80.htm#port_in">2.1.8. Port Input</a>
+       </li>
+       <li>
+	<a href="c80.htm#port_out">2.1.9. Port Output</a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  <ul>
+   <li>1&nbsp;KByte ROM in the address range 0000h-03FFh</li>
+   <li>1&nbsp;KByte RAM in the address range 0C00h-0FFFh</li>
+   <li>8-digit 7-segment display</li>
+   <li>hexadecimal keyboard with additional function keys</li>
+   <li>cassette recorder connection</li>
+  </ul>
+  Due to incomplete address decoding,
+  the RAM is also visible in the range 0800h-0BFFh.
+ <br/><br/>
+
+ <h3><a name="keyboard">1.1. Keyboard</a></h3>
+  The table shows how the keys of the C-80 are mapped
+  to the keyboard of the emulator's computer:
+  <br/>
+  <table border="1">
+   <tr>
+    <th valign="top">C-80 Key</th>
+    <th valign="top">Key in the Emulator</th>
+    <th valign="top">Meaning</th>
+   </tr>
+   <tr>
+    <td valign="top">RES</td>
+    <td valign="top">Escape</td>
+    <td valign="top">Reset</td>
+   </tr>
+   <tr>
+    <td valign="top">BRK</td>
+    <td valign="top">N</td>
+    <td valign="top">Abort (NMI)</td>
+   </tr>
+   <tr>
+    <td valign="top">FCN</td>
+    <td valign="top">F1</td>
+    <td valign="top">
+     Function key,<br/>
+     pressing it, releasing it again, and then
+     pressing one of the keys <em>1</em> to <em>6</em>
+     invokes a function
+     for which there is no separate key.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">MEM</td>
+    <td valign="top">M</td>
+    <td valign="top">Memory display</td>
+   </tr>
+   <tr>
+    <td valign="top">GO</td>
+    <td valign="top">G</td>
+    <td valign="top">Start program</td>
+   </tr>
+   <tr>
+    <td valign="top">REG</td>
+    <td valign="top">R</td>
+    <td valign="top">Display registers</td>
+   </tr>
+   <tr>
+    <td valign="top">-</td>
+    <td valign="top">-</td>
+    <td valign="top">Decrement value/address</td>
+   </tr>
+   <tr>
+    <td valign="top">+</td>
+    <td valign="top">+ or Enter</td>
+    <td valign="top">Increment value/address, or accept it</td>
+   </tr>
+   <tr>
+    <td valign="top">0...9</td>
+    <td valign="top">0...9</td>
+    <td valign="top">Address/data entry</td>
+   </tr>
+   <tr>
+    <td valign="top">A...F</td>
+    <td valign="top">A...F or a...f</td>
+    <td valign="top">Address/data entry</td>
+   </tr>
+  </table>
+ <br/>
+  <b>Caution!</b> For the sake of simplicity, Escape and N trigger
+  RESET or NMI without a confirmation prompt,
+  even if the confirmation prompt is enabled
+  for this in the settings.
+ <br/><br/>
+
+
+ <h2><a name="software">2. Software Contained in ROM</a></h2>
+  <ul>
+   <li>Original monitor program</li>
+  </ul>
+ <br/>
+
+ <h3><a name="usage">2.1. Notes on Using the Monitor Program</a></h3>
+  After a RESET, only a decimal point is visible.
+ <br/><br/>
+
+ <h3><a name="mem">2.1.1. Displaying/Changing Memory Cells</a></h3>
+  <ol>
+   <li>Reset (key <em>RESET&nbsp;(Escape)</em>)</li>
+   <li>Call up the memory display (key <em>MEM&nbsp;(M)</em>)</li>
+   <li>
+    Enter the address (keys <em>0</em>...<em>9</em>
+    and <em>A</em>...<em>F</em>)
+   </li>
+   <li>Accept the address (key <em>+</em>)</li>
+   <li>
+    Change the address if necessary (keys <em>+</em> and <em>-</em>)
+   </li>
+   <li>
+    Enter a value if necessary and accept it with the key <em>+</em>
+   </li>
+   <li>Continue with point 5</li>
+  </ol>
+ <br/><br/>
+
+ <h3><a name="run">2.1.2. Starting a Program</a></h3>
+  <em>RESET&nbsp;(Escape)</em> &rarr; <em>GO&nbsp;(G)</em>
+  &rarr; &lt;start address&gt;
+  [ &rarr; <em>-</em> &rarr; &lt;breakpoint address&gt; ]
+  &rarr; <em>+</em>
+ <br/><br/>
+  Pressing the minus key with entry of the breakpoint address
+  can also be omitted.
+ <br/><br/>
+  <b>Caution! </b> A breakpoint can only be set in RAM and only
+  on the first byte of an instruction.
+ <br/><br/>
+  The <em>BRK&nbsp;(N)</em> key (NMI) has the same effect
+  as reaching the breakpoint.
+ <br/><br/>
+
+ <h3><a name="reg">2.1.3. Displaying/Changing Registers</a></h3>
+  <em>RESET&nbsp;(Escape)</em> &rarr; <em>REG&nbsp;(R)</em>
+ <br/><br/>
+  A double register is displayed.
+  Use the keys <em>+</em> and <em>-</em> to switch
+  to the next or previous double register.
+ <br/><br/>
+  The registers are changed
+  by entering a byte and then assigning it, with <em>+</em>,
+  to the higher-order register, or with <em>-</em>
+  to the lower-order register, of the displayed double register.
+ <br/><br/>
+
+ <h3><a name="fill">2.1.4. Filling a Data Area</a></h3>
+  <em>RESET&nbsp;(Escape)</em> &rarr; <em>FCN&nbsp;(F1)</em>
+  &rarr; <em>0</em> &rarr; &lt;start address&gt; &rarr; <em>-</em>
+  &rarr; &lt;end address&gt; &rarr; <em>+</em> &lt;value&gt; &rarr; <em>+</em>
+ <br/><br/>
+  If the start address is smaller than the end address,
+  an <em>E</em> is output as an error message.
+ <br/><br/>
+
+ <h3><a name="save">2.1.5. Saving a Data Area to Tape</a></h3>
+  <em>RESET&nbsp;(Escape)</em> &rarr; <em>FCN&nbsp;(F1)</em>
+  &rarr; <em>1</em> &rarr; &lt;start address&gt; &rarr; <em>-</em>
+  &rarr; &lt;end address&gt; &rarr; <em>+</em>
+ <br/><br/>
+  If the start address is smaller than the end address,
+  an <em>E</em> is output as an error message.
+ <br/><br/>
+  The recording format is compatible with the
+  <a href="poly880.htm">Poly-Computer 880</a>.
+  As a deviation from that, the last block is padded to 32 bytes.
+  In addition, the C-80 also writes an end block
+  with the block identifier FFFFh.
+  Both the padding bytes and the end block
+  are not evaluated when reading into the Poly-Computer.
+ <br/><br/>
+  <b>Caution!</b> Do not forget
+  to enable the appropriate <a href="audio.htm">audio function</a>
+  in the emulator.
+ <br/><br/>
+
+ <h3><a name="load">2.1.6. Loading a Data Area from Tape</a></h3>
+  There are two functions for loading from tape:
+  <ol>
+   <li>
+    <em>RESET&nbsp;(Escape)</em> &rarr; <em>FCN&nbsp;(F1)</em>
+    &rarr; <em>2</em> &rarr; &lt;start address&gt; &rarr; <em>-</em>
+    &rarr; &lt;end address&gt; &rarr; <em>+</em>
+   </li>
+   <li>
+    <em>RESET&nbsp;(Escape)</em> &rarr; <em>FCN&nbsp;(F1)</em>
+    &rarr; <em>3</em> &rarr; &lt;start address&gt; &rarr; <em>-</em>
+    &rarr; &lt;end address&gt; &rarr; <em>+</em>
+   </li>
+  </ol>
+ <br/>
+  In the first case, reading is aborted
+  when the entered end address is reached
+  or a block with the end identifier is read.
+ <br/><br/>
+  In the second case, on the other hand, reading is only aborted
+  when the entered end address is reached.
+  If the file on the tape is smaller than the
+  specified data area,
+  the C-80 gets stuck while reading.
+ <br/><br/>
+  If the entered start address is smaller than the end address,
+  an <em>E</em> is output as an error message.
+ <br/><br/>
+  <b>Caution!</b> Do not forget
+  to enable the appropriate <a href="audio.htm">audio function</a>
+  in the emulator.
+ <br/><br/>
+
+ <h3><a name="trans">2.1.7. Transferring a Data Area</a></h3>
+  <em>RESET&nbsp;(Escape)</em> &rarr; <em>FCN&nbsp;(F1)</em>
+  &rarr; <em>4</em> &rarr; &lt;start address&gt; &rarr; <em>-</em>
+  &rarr; &lt;end address&gt; &rarr; <em>+</em>
+  &rarr; &lt;destination address&gt; &rarr; <em>+</em>
+ <br/><br/>
+  If the start address is smaller than the end address,
+  an <em>E</em> is output as an error message.
+ <br/><br/>
+
+ <h3><a name="port_in">2.1.8. Port Input</a></h3>
+  <em>RESET&nbsp;(Escape)</em> &rarr; <em>FCN&nbsp;(F1)</em>
+  &rarr; <em>5</em> &rarr; &lt;port address&gt; &rarr; <em>+</em>
+ <br/><br/>
+  The port address must be entered as a 16-bit value.
+  Each time the <em>+</em> key is pressed, the input port
+  is read and the value is displayed.
+  Any other key aborts the function.
+ <br/><br/>
+
+ <h3><a name="port_out">2.1.9. Port Output</a></h3>
+  <em>RESET&nbsp;(Escape)</em> &rarr; <em>FCN&nbsp;(F1)</em>
+  &rarr; <em>6</em> &rarr; &lt;port address&gt; &rarr; <em>+</em>
+  &rarr; &lt;value&gt; &rarr; <em>+</em>
+ <br/><br/>
+  The port address must be entered as a 16-bit value.
+  Each time the <em>+</em> key is pressed, the entered value
+  is written to the output port.
+</body>
+</html>
+

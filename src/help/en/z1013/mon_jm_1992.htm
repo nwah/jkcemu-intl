@@ -1,0 +1,114 @@
+<html>
+<body>
+ <h1>
+  Description of the Monitor Program
+  &quot;Z1013-OS J.Mueller 1990-1992&quot;
+ </h1>
+
+ <h2>1. General</h2>
+  The monitor program was developed with the goal
+  of replacing the original monitor 2.02 with a more convenient version.
+  The hardware requirements were meant to stay the same
+  (2 KByte ROM, membrane flat keyboard).
+ <br/><br/>
+
+ <h2>2. Features</h2>
+  The monitor program was primarily meant to include
+  the ability to save and load files
+  in the new <em>Headersave</em> cassette recording format.
+  These new functions can be called via the commands <tt>L</tt>
+  and <tt>S</tt>, as well as from programs via the jump table.
+  Functions for loading and saving in the old
+  cassette recording format are also still available
+  (commands <tt>G</tt> and <tt>P</tt> as well as system functions 8 and 9).
+ <br/><br/>
+  As a further improvement, keyboard polling was made more convenient
+  by implementing autorepeat in system function 4 (INKEY).
+ <br/><br/>
+  Because of the new functions, however, some other
+  functionality that is needed less often
+  (comparing memory areas, setting a breakpoint,
+  single-step mode, register display) had to be dropped.
+ <br/><br/>
+  One disadvantage of the new monitor program is
+  that the system functions reside at different addresses and
+  can therefore only be called via <em>RST 20</em>.
+  This disadvantage is, however, no longer as serious,
+  since the A.2 monitor also has different entry addresses,
+  which is why most Z1013 programs have been adapted accordingly
+  to use only RST 20 for system calls.
+ <br/><br/>
+
+ <h2>3. Initialization</h2>
+  At the start, as with the original, the Z1013 system cells are initialized.
+  In addition, some functions of the jump table
+  are initialized (Headersave, keyboard polling).
+  This requires the range F800h to FFFFh to be RAM.
+  After that, it is checked whether a synchronization tone
+  is currently present at the cassette input.
+  If so, the load routine (command <em>L</em>) is called.
+  After that, the input prompt appears
+  and you are in the command loop.
+ <br/><br/>
+
+ <h2>4. Commands</h2>
+  Compared to the original, the following commands
+  are no longer available: B, C, E, F, N, R
+ <br/><br/>
+  The following commands are new or have a changed
+  or completely new meaning: D, G, L, M, P, S
+ <br/><br/>
+  Only the commands that differ from the original monitor 2.02
+  are described below:
+ <br/><br/>
+
+ <h3>D&nbsp;&lt;aadr&gt;</h3>
+  Starting at the specified address, the memory contents
+  are output block by block as a HEX-ASCII dump.
+  Pressing <em>ENTER</em> shows the next block.
+  Any other key ends the command.
+ <br/><br/>
+
+ <h3>G&nbsp;&lt;aadr&gt;&nbsp;&lt;eadr&gt;</h3>
+  This command corresponds to the old <tt>L</tt> command and reads
+  a file in the old non-Headersave format from cassette.
+ <br/><br/>
+
+ <h3>L&nbsp;[&lt;aadr&gt;]</h3>
+  This command loads a file in the Headersave format
+  from the cassette.
+  A load address can be specified,
+  which is then used instead of the one contained in the file.
+ <br/><br/>
+  The command initially only lists the Headersave files
+  that the cassette plays back.
+  Each time a header block has been read, it is displayed.
+  To load the file currently displayed,
+  you must press <em>ENTER</em>.
+ <br/><br/>
+  If the desired file cannot be found,
+  you can abort the command with <em>S4-K/CTRL-C</em>.
+ <br/><br/>
+
+ <h3>M&nbsp;&lt;aadr&gt;</h3>
+  The <tt>M</tt> command is used to change memory areas
+  and corresponds to the original.
+  However, it was made more convenient,
+  in that ASCII characters can be entered
+  in addition to hexadecimal numbers.
+  If an entry begins with a quote character,
+  the next character is taken as an ASCII character.
+ <br/><br/>
+
+ <h3>P&nbsp;&lt;aadr&gt;&nbsp;&lt;eadr&gt;</h3>
+  This command corresponds to the old <tt>S</tt> command and
+  saves the specified address range in the old
+  non-Headersave format to cassette.
+ <br/><br/>
+
+ <h3>S&nbsp;&lt;aadr&gt;&nbsp;&lt;eadr&gt;&nbsp;&lt;sadr&gt;</h3>
+  This command saves the specified address range
+  in the Headersave format to cassette.
+  For this, you are asked for the type and the name of the file.
+</body>
+</html>

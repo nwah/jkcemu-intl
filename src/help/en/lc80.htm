@@ -1,0 +1,775 @@
+<html>
+<body>
+ <h1>LC-80</h1>
+  The LC-80, also written LC 80 or LC80,
+  is a single-board computer designed as a learning computer
+  with a hexadecimal keyboard and a 7-segment display.
+  It was produced from 1984 onward at VEB Mikroelektronik Erfurt
+  with two different ROM fittings (2x U505 or 1x U2716).
+ <br/><br/>
+  A planned export order later led to the development
+  of the LC80e, an enhanced version with double the clock frequency,
+  more memory, and a chess program included in ROM.
+  Since the export order never materialized,
+  only development samples of the LC-80e ever existed.
+ <br/><br/>
+  There were also private further developments of the LC-80.
+  One comes from Eckart Buschendorf and is called LC-80.2.
+  Another was created between 2014 and 2016
+  in the retrocomputing scene and is called LC-80ex.
+  All of these variants are emulated by JKCEMU.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="lc80.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="lc80.htm#lc80_2u505">1.1. LC-80 with ROM 2 x U505</a></li>
+     <li><a href="lc80.htm#lc80_2716">1.2. LC-80 with ROM 2716</a></li>
+     <li><a href="lc80.htm#lc80.2">1.3. LC-80.2</a></li>
+     <li><a href="lc80.htm#lc80e">1.4. LC-80e (Export Variant)</a></li>
+     <li><a href="lc80.htm#lc80ex">1.5. LC-80ex</a></li>
+     <li><a href="lc80.htm#keyboard">1.6. Hexadecimal Keyboard</a></li>
+     <li><a href="lc80.htm#sound">1.7. Sound Output</a></li>
+    </ul>
+   </li>
+   <li>
+    <a href="lc80.htm#software">2. Software Contained in ROM</a>
+    <ul>
+     <li>
+      <a href="lc80.htm#usage">2.1. Notes on Operating the Original Monitor Program</a>
+      <ul>
+       <li><a href="lc80.htm#display">2.1.1. Display</a></li>
+       <li><a href="lc80.htm#load">2.1.2. Loading a Program from Tape</a></li>
+       <li>
+	<a href="lc80.htm#save">2.1.3. Saving a Program to Tape</a>
+       </li>
+       <li><a href="lc80.htm#run">2.1.4. Starting a Program</a></li>
+      </ul>
+     </li>
+     <li>
+      <a href="lc80.htm#sc80">2.2. Chess Program SC-80</a>
+      <ul>
+       <li><a href="lc80.htm#sc80keyboard">2.2.1. Keyboard</a></li>
+       <li>
+	<a href="lc80.htm#sc80play">2.2.2. Playing Against the Computer</a>
+       </li>
+       <li><a href="lc80.htm#sc80corrections">2.2.3. Corrections</a></li>
+       <li><a href="lc80.htm#sc80random">2.2.4. Random Number Generator</a></li>
+       <li>
+	<a href="lc80.htm#sc80signaling">2.2.5. Signaling of Game Situations</a>
+       </li>
+       <li>
+	<a href="lc80.htm#sc80selfplay">2.2.6. Letting the Computer Play Against Itself</a>
+       </li>
+      </ul>
+     </li>
+     <li><a href="lc80.htm#lctools">2.3. LCTools</a></li>
+     <li><a href="lc80.htm#basic">2.4. BASIC</a></li>
+    </ul>
+   </li>
+   <li>
+    <a href="lc80.htm#etc">3. Miscellaneous</a>
+    <ul>
+     <li>
+      <a href="lc80.htm#autoloadinput">3.1. AutoLoad and AutoInput</a>
+     </li>
+     <li>
+      <a href="lc80.htm#sio_speed">3.2. LC-80ex SIO Speed</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  All model variants emulate:
+  <ul>
+   <li>6-digit 7-segment display</li>
+   <li>HALT LED</li>
+   <li>OUT LED (sound output)</li>
+   <li>keyboard with hexadecimal and function keys</li>
+   <li>cassette recorder connector</li>
+  </ul>
+ <br/>
+
+ <h3><a name="lc80_2u505">1.1. LC-80 with ROM 2 x U505</a></h3>
+  <ul>
+   <li>900&nbsp;kHz clock frequency</li>
+   <li>2&nbsp;KByte ROM in the address range 0000h-03FFh and 0800h-0BFFh</li>
+   <li>1&nbsp;KByte RAM in the address range 2000h-23FFh</li>
+  </ul>
+ <br/>
+  <b>Caution!</b> Due to incomplete address decoding,
+  the address range 0000h-3FFFh is also visible in the ranges
+  starting at 4000h, 8000h, and C000h.
+ <br/><br/>
+
+ <h3><a name="lc80_2716">1.2. LC-80 with ROM 2716</a></h3>
+  <ul>
+   <li>900&nbsp;kHz clock frequency</li>
+   <li>2&nbsp;KByte ROM in the address range 0000h-07FFh</li>
+   <li>4&nbsp;KByte RAM in the address range 2000h-3FFFh</li>
+  </ul>
+ <br/>
+  The manufacturer shipped this LC-80 version with only 1&nbsp;KByte of RAM.
+  However, so that JKCEMU also offers a configuration
+  that combines the original monitor program with the maximum RAM expansion,
+  4&nbsp;KByte of RAM is emulated.
+ <br/><br/>
+  <b>Caution!</b> Due to incomplete address decoding,
+  the address range 0000h-3FFFh is also visible in the ranges
+  starting at 4000h, 8000h, and C000h.
+ <br/><br/>
+
+ <h3><a name="lc80.2">1.3. LC-80.2</a></h3>
+  <ul>
+   <li>900&nbsp;kHz clock frequency</li>
+   <li>4&nbsp;KByte ROM in the address range 0000h-0FFFh</li>
+   <li>4&nbsp;KByte RAM in the address range 2000h-3FFFh</li>
+  </ul>
+ <br/>
+  <b>Caution!</b> Due to incomplete address decoding,
+  the address range 0000h-3FFFh is also visible in the ranges
+  starting at 4000h, 8000h, and C000h.
+ <br/><br/>
+
+ <h3><a name="lc80e">1.4. LC-80e (Export Variant)</a></h3>
+  <ul>
+   <li>1.8&nbsp;MHz clock frequency</li>
+   <li>
+    12&nbsp;KByte ROM in the address ranges 0000h-1FFFh and C000h-CFFFh
+   </li>
+   <li>4&nbsp;KByte RAM in the address range 2000-3FFF</li>
+  </ul>
+ <br/>
+  <b>Caution!</b> Because of the doubled clock frequency,
+  the original LC-80 programs also run twice as fast.
+  This is particularly important for time-critical programs
+  (e.g. the clock program).
+ <br/><br/>
+  <b>Note:</b> By connecting a suitably large
+  external ROM file, the ROM starting at address C000h can be
+  enlarged to up to 16&nbsp;KByte,
+  so that up to 24&nbsp;KByte of ROM in total are emulated.
+ <br/><br/>
+
+ <h3><a name="lc80ex">1.5. LC-80ex</a></h3>
+  <ul>
+   <li>1.843&nbsp;MHz clock frequency</li>
+   <li>
+    20&nbsp;KByte ROM in the address ranges 0000h-1FFFh, A000h-BFFFh,
+    and C000h-CFFFh,
+   </li>
+   <li>
+    32&nbsp;KByte RAM in the address range 2000-9FFF including Timekeeper RAM
+   </li>
+   <li>
+    2&nbsp;serial interfaces
+    (Z80 SIO at I/O ports DCh-DFh, see also
+    <a href="lc80.htm#sio_speed">LC-80ex SIO Speed</a>)
+    <ul>
+     <li>Channel&nbsp;A: printer</li>
+     <li>Channel&nbsp;B: TV Terminal&nbsp;1.2 (alphanumeric)</li>
+    </ul>
+   </li>
+   <li>
+    <a href="usb.htm">USB connector</a>
+    (Vinculum VDIP module at I/O ports BCh-BFh)
+   </li>
+   <li>
+    real-time clock (read-only) Timekeeper MT48T08 with working cells
+    in the address range 7FF9h-7FFFh
+   </li>
+  </ul>
+ <br/>
+  <b>Caution!</b> Because the clock frequency is more than double
+  that of an original LC-80, programs run correspondingly faster.
+ <br/><br/>
+  <b>Note:</b> By connecting a suitably large
+  external ROM file, the ROM starting at address C000h can be
+  enlarged to up to 16&nbsp;KByte,
+  so that up to 32&nbsp;KByte of ROM in total can be emulated.
+ <br/><br/>
+
+ <h3><a name="keyboard">1.6. Hexadecimal Keyboard</a></h3>
+  The table shows how the keys of the hexadecimal LC-80 keyboard
+  are mapped to the keys of the emulator computer's keyboard:
+ <br/>
+  <table border="1">
+   <tr><th>LC-80 Key</th><th>Key in JKCEMU</th><th>Meaning</th></tr>
+    <tr>
+     <td valign="top">RES</td>
+     <td valign="top">Escape</td>
+     <td valign="top">Reset (RESET)</td>
+    </tr>
+    <tr>
+     <td valign="top">ADR</td>
+     <td valign="top">F1 or M</td>
+     <td valign="top">start address entry</td>
+    </tr>
+    <tr>
+     <td valign="top">DAT</td>
+     <td valign="top">F2 or H</td>
+     <td valign="top">start data entry</td>
+    </tr>
+    <tr>
+     <td valign="top">LD</td>
+     <td valign="top">F3 or L</td>
+     <td valign="top">load file from tape</td>
+    </tr>
+    <tr>
+     <td valign="top">ST</td>
+     <td valign="top">F4 or S</td>
+     <td valign="top">save file to tape</td>
+    </tr>
+    <tr>
+     <td valign="top">EX</td>
+     <td valign="top">Enter or X</td>
+     <td valign="top">execute program/action</td>
+    </tr>
+    <tr>
+     <td valign="top">NMI</td>
+     <td valign="top">N</td>
+     <td valign="top">trigger non-maskable interrupt</td>
+    </tr>
+    <tr>
+     <td valign="top">+</td>
+     <td valign="top">+</td>
+     <td valign="top">
+      next address / next work step
+     </td>
+    </tr>
+    <tr>
+    <td valign="top">-</td>
+    <td valign="top">-</td>
+    <td valign="top">previous address / previous work step</td>
+   </tr>
+   <tr>
+    <td valign="top">0...9</td>
+    <td valign="top">0...9</td>
+    <td valign="top">address/data entry</td>
+   </tr>
+   <tr>
+    <td valign="top">A...F</td>
+    <td valign="top">A...F</td>
+    <td valign="top">address/data entry</td>
+   </tr>
+  </table>
+ <br/>
+  <b>Caution!</b> For simplicity, the Escape and N keys trigger
+  RESET or NMI respectively without a confirmation prompt,
+  even if the confirmation prompt is enabled
+  for this in the settings.
+ <br/><br/>
+
+ <h3><a name="sound">1.7. Sound Output</a></h3>
+  The LC-80 has only one sound output,
+  which is used both for acoustic purposes and for
+  saving programs to tape.
+  You enable this sound output in the
+  <a href="audio.htm">Audio/Tape</a> window
+  on the <a href="audio.htm#tape_out">Tape Output</a> tab.
+ <br/><br/>
+
+
+ <h2><a name="software">2. Software Contained in ROM</a></h2>
+  <ul>
+   <li>
+    LC-80 with 2&nbsp;KByte ROM:<br/>
+    <ul>
+     <li>original monitor program</li>
+    </ul>
+   </li>
+   <li>
+    LC-80.2:<br/>
+    <ul>
+     <li>
+      extended and improved monitor program
+      by Eckhard Buschendorf
+     </li>
+    </ul>
+   </li>
+   <li>
+    LC-80e:<br/>
+    <ul>
+     <li>
+      original monitor program for the LC-80e<br/>
+      (adapted to the clock frequency)
+     </li>
+     <li>chess program SC-80</li>
+    </ul>
+   </li>
+   <li>
+    LC-80ex:<br/>
+    <ul>
+     <li>original monitor program for the LC-80e</li>
+     <li>LCTools&nbsp;4 by Rolf Weidlich</li>
+     <li>
+      LC80ex-BASIC&nbsp;2.0*USB by Rolf Weidlich<br/>
+      (an adaptation of the AC1/LLC2 Graphics/Sound BASIC to the LC-80ex)
+     </li>
+    </ul>
+   </li>
+  </ul>
+  The original monitor programs of the individual LC-80 versions
+  are functionally identical, but differ in their
+  binary image, especially in the case of the LC-80e/LC-80ex.
+ <br/><br/>
+  <b>Caution!</b> On the LC-80 with the U505 fitting,
+  part of the monitor program, and thus also of the system functions,
+  is located at other addresses.
+  Programs that use these system functions therefore
+  either do not run at all, or only run on this LC-80 version.
+ <br/><br/>
+
+ <h3>
+  <a name="usage">2.1. Notes on Operating the Original Monitor Program</a>
+ </h3>
+  After being switched on, the LC-80 plays a tune.
+  For you to hear this in the emulator,
+  you must enable sound output in the <a href="audio.htm">Audio/Tape</a>
+  window on the <a href="tape_out">Tape Output</a> tab
+  and then invoke the menu item
+  <em>Power On</em> in the <em>Extras</em> menu.
+ <br/><br/>
+
+ <h3><a name="display">2.1.1. Display</a></h3>
+  For address input and output, the display is usually
+  split in two:
+  The first four digits show the address, and
+  the last two digits show the data byte
+  that was read from that address.
+ <br/><br/>
+  To the left of the display, the two LEDs are emulated:
+  <br/>
+  <table border="1">
+   <tr><td>Green LED:</td><td>output</td></tr>
+   <tr><td>Red LED:</td><td>HALT state</td></tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="load">2.1.2. Loading a Program from Tape</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>LD&nbsp;(L)</em>
+  &rarr; <em>&lt;file name&gt;</em> &rarr; <em>EX&nbsp;(Enter)</em>
+ <br/><br/>
+  The file name is a four-digit hexadecimal number.
+ <br/><br/>
+  If you do not know the file name,
+  simply enter any number.
+  In that case, i.e. if the file name is wrong,
+  the file is not loaded,
+  but the LC-80 briefly displays the file name stored on tape
+  as soon as the corresponding tape position is read.
+ <br/><br/>
+  After reading, the display shows the end address&nbsp;+&nbsp;1,
+  or, in case of an error, the message <em>Error</em>.
+ <br/><br/>
+  <b>Caution!</b> In JKCEMU you must enable the
+  <a href="audio.htm#tape_in">input-side emulation of the cassette recorder connector</a>.
+ <br/><br/>
+
+ <h3><a name="save">2.1.3. Saving a Program to Tape</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>ST&nbsp;(S)</em>
+  &rarr; <em>&lt;file name&gt;</em>
+  &rarr; <em>+</em> &rarr; <em>&lt;start address&gt;</em>
+  &rarr; <em>+</em> &rarr; <em>&lt;end address&nbsp;+&nbsp;1&gt;</em>
+  &rarr; <em>EX&nbsp;(Enter)</em>
+ <br/><br/>
+  The file name and the addresses are each a four-digit
+  hexadecimal number.
+ <br/><br/>
+  <b>Caution!</b> In JKCEMU you must enable the
+  <a href="audio.htm#tape_out">output-side emulation of the cassette recorder connector</a>.
+ <br/><br/>
+
+ <h3><a name="run">2.1.4. Starting a Program</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>ADR (F1)</em>
+  &rarr; <em>&lt;start address&gt;</em> &rarr; <em>EX&nbsp;(Enter)</em>
+ <br/><br/>
+  The address is a four-digit hexadecimal number.
+ <br/><br/>
+  Most game and application programs are started at address 2000
+  (start of RAM).
+ <br/><br/>
+
+ <h3><a name="sc80">2.2. Chess Program SC-80</a></h3>
+  The chess program SC-80 is only included in the LC-80e
+  and is started at address C800.
+  To do so, enter:
+ <br/><br/>
+  <em>RES&nbsp;(Escape) &rarr; ADR&nbsp;(F1)
+  &rarr; C &rarr; 8 &rarr; 0 &rarr; 0 &rarr; EX&nbsp;(Enter)</em>
+ <br/><br/>
+  When the message <em>SC-80</em> appears,
+  the chess program has started.
+ <br/><br/>
+  The chess program uses the non-maskable interrupt
+  to restart, i.e. pressing the <em>N</em> key
+  restarts the chess program, but only
+  after the chess program has been started once in the manner described above.
+ <br/><br/>
+
+ <h3><a name="sc80keyboard">2.2.1. Keyboard</a></h3>
+  The keys have a different meaning
+  or assignment in the chess program than in normal LC-80 mode.
+  With the original, there was a template
+  that was placed over the keyboard
+  and that contained the changed labeling of the keys
+  for the chess program.
+  The digit keys are the same in LC-80 and SC-80 mode.
+  However, the letter and special keys differ.
+  So that both modes can be operated conveniently in the emulator,
+  JKCEMU automatically detects
+  whether the chess program is running and switches
+  the key mapping between LC-80 and SC-80 mode accordingly.
+  If you have opened the window with the keyboard view of the LC-80,
+  its key labels change accordingly as well,
+  i.e. JKCEMU applies the SC-80 template on its own.
+ <br/><br/>
+  The automatic chess mode detection works according to the following principle:
+  When program execution reaches address C800
+  (the start address of the chess program),
+  the key mapping is switched to SC-80 mode.
+  From then on, JKCEMU assumes that returning
+  to the monitor program is only possible via RESET,
+  i.e. when address 0000 is reached, it switches back to LC-80 mode.
+ <br/><br/>
+  The table shows the key mapping in SC-80 mode:
+ <br/>
+  <table border="1">
+   <tr><th>SC-80 Key</th><th>Key in JKCEMU</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">RES</td>
+    <td valign="top">Escape</td>
+    <td valign="top">
+     reset (RESET),<br/>
+     you are now back in the LC-80 monitor program.
+     With NMI you can restart the chess program directly.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     NEW&nbsp;GAME<br/>
+     LEV
+    </td>
+    <td valign="top">F1 or V</td>
+    <td valign="top">
+     After starting the chess program, this key must be
+     pressed to begin a game.
+     Pressing it again lets you enter the playing strength.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     SELF&nbsp;PLAY<br/>
+     SW
+    </td>
+    <td valign="top">F2 or P</td>
+    <td valign="top">
+     If, after starting the chess program,
+     <em>NEW&nbsp;GAME&nbsp;(F1)</em> and then
+     <em>SELF&nbsp;PLAY&nbsp;(F2)</em> are pressed,
+     the computer plays against itself.
+     This key is also used to select a piece.
+    </td>
+   </tr>
+    <tr>
+    <td valign="top">BOARD</td>
+    <td valign="top">O or +</td>
+    <td valign="top">chessboard occupancy</td>
+   </tr>
+   <tr>
+    <td valign="top">COLOR</td>
+    <td valign="top">W or -</td>
+    <td valign="top">start piece selection</td>
+   </tr>
+   <tr>
+    <td valign="top">NMI</td>
+    <td valign="top">N</td>
+    <td valign="top">
+     restart the chess program,<br/>
+     this key is not labeled on the original SC-80 template.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">Pawn</td>
+    <td valign="top">U</td>
+    <td valign="top">pawn</td>
+   </tr>
+   <tr>
+    <td valign="top">Knight</td>
+    <td valign="top">S</td>
+    <td valign="top">knight</td>
+   </tr>
+   <tr>
+    <td valign="top">Bish.</td>
+    <td valign="top">L</td>
+    <td valign="top">bishop</td>
+   </tr>
+   <tr>
+    <td valign="top">Rook</td>
+    <td valign="top">T</td>
+    <td valign="top">rook</td>
+   </tr>
+   <tr>
+    <td valign="top">Queen</td>
+    <td valign="top">M</td>
+    <td valign="top">queen</td>
+   </tr>
+   <tr>
+    <td valign="top">King</td>
+    <td valign="top">K</td>
+    <td valign="top">king</td>
+   </tr>
+   <tr>
+    <td valign="top">Contr.</td>
+    <td valign="top">F4</td>
+    <td></td>
+   </tr>
+   <tr>
+    <td valign="top">RAN</td>
+    <td valign="top">R or F3</td>
+    <td>influence the random number generator</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     SP<br/>
+     0
+    </td>
+    <td valign="top">0</td>
+    <td valign="top">digit entry</td>
+   </tr>
+   <tr>
+    <td valign="top">A&nbsp;1</td>
+    <td valign="top">A or 1</td>
+    <td valign="top">column/row or digit entry</td>
+   </tr>
+   <tr>
+    <td valign="top">B&nbsp;2</td>
+    <td valign="top">B or 2</td>
+    <td valign="top">column/row or digit entry</td>
+   </tr>
+   <tr>
+    <td valign="top">C&nbsp;3</td>
+    <td valign="top">C or 3</td>
+    <td valign="top">column/row or digit entry</td>
+   </tr>
+   <tr>
+    <td valign="top">D&nbsp;4</td>
+    <td valign="top">D or 4</td>
+    <td valign="top">column/row or digit entry</td>
+   </tr>
+   <tr>
+    <td valign="top">E&nbsp;5</td>
+    <td valign="top">E or 5</td>
+    <td valign="top">column/row or digit entry</td>
+   </tr>
+   <tr>
+    <td valign="top">F&nbsp;6</td>
+    <td valign="top">F or 6</td>
+    <td valign="top">column/row or digit entry</td>
+   </tr>
+   <tr>
+    <td valign="top">G&nbsp;7</td>
+    <td valign="top">G or 7</td>
+    <td valign="top">column/row or digit entry</td>
+   </tr>
+   <tr>
+    <td valign="top">H&nbsp;8</td>
+    <td valign="top">H or 8</td>
+    <td valign="top">column/row or digit entry</td>
+   </tr>
+   <tr>
+    <td valign="top">9</td>
+    <td valign="top">9</td>
+    <td valign="top">digit entry</td>
+   </tr>
+   <tr>
+    <td valign="top">EX</td>
+    <td valign="top">Enter or X</td>
+    <td valign="top">execute action</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="sc80play">2.2.2. Playing Against the Computer</a></h3>
+  After starting the chess program, press
+  <em>NEW&nbsp;GAME&nbsp;/&nbsp;LEV&nbsp;(F1)</em>
+  to enter play mode.
+  By pressing this key again and then
+  entering a number from 0 to 6, you can select the playing
+  strength.
+  The playing strength is set to 1 by default.
+  You can also change the playing strength later
+  during the game, whenever it is your turn.
+ <br/><br/>
+  If you want to play White,
+  now enter your first move, e.g. <em>E2E4</em>,
+  and confirm with <em>EX&nbsp;(Enter)</em>.
+  The computer now thinks and displays its move.
+  Now it is your turn again, and so on.
+ <br/><br/>
+  <b>Caution!</b> When the computer displays its move,
+  you must wait about 15 seconds
+  before you can enter a move yourself again.
+  In the <a href="chessboard.htm">chessboard window</a>, the move
+  is also only shown after this waiting period.
+ <br/><br/>
+  If you want the computer to play White,
+  then after pressing
+  <em>NEW&nbsp;GAME&nbsp;/&nbsp;LEV&nbsp;(F1)</em>,
+  or after selecting the playing strength, press the key
+  <em>COLOR&nbsp;(W)</em>.
+  <em>WHITE</em> appears in the display.
+  Now press the key
+  <em>SELF&nbsp;PLAY&nbsp;/&nbsp;SW&nbsp;(F2)</em>.
+  The computer then displays its first move.
+  Now it is your turn.
+ <br/><br/>
+
+ <h3><a name="sc80corrections">2.2.3. Corrections</a></h3>
+  If you made a typing mistake while entering a move
+  and have not yet confirmed with <em>EX&nbsp;(Enter)</em>,
+  simply keep typing additional characters
+  until the message <em>SC-80</em> appears.
+  Now enter the correct move and confirm.
+ <br/><br/>
+  If your entry is invalid,
+  the message <em>Error</em> appears.
+  Simply enter a valid move and confirm.
+ <br/><br/>
+  Your move is also not accepted
+  if it is valid,
+  but would leave your king in check.
+  <br/><br/>
+
+ <h3><a name="sc80random">2.2.4. Random Number Generator</a></h3>
+  The chess program also contains a random number generator,
+  so that it does not always play the same moves.
+  You can influence this random number generator by pressing
+  <em>RANDOM&nbsp;(R)</em> and then entering
+  a digit from 0 to 9.
+ <br/><br/>
+
+ <h3>
+  <a name="sc80signaling">2.2.5. Signaling of Game Situations</a>
+ </h3>
+  If the computer puts you in check,
+  an <em>S</em> appears in the first digit of the display.
+  On checkmate, you see an <em>M</em>.
+ <br/><br/>
+
+ <h3>
+  <a name="sc80selfplay">2.2.6. Letting the Computer Play Against Itself</a>
+ </h3>
+  You can also let the computer play against itself
+  by entering the following after starting the chess program:
+ <br/><br/>
+  <em>NEW&nbsp;GAME&nbsp;(F1) &rarr; SELF&nbsp;PLAY&nbsp;(F2)</em>
+ <br/><br/>
+
+ <h3><a name="lctools">2.3. LCTools</a></h3>
+  LCTools is only included in the LC-80ex
+  and resides in the address range A000h-BFFFh.
+  It provides the following functions:
+  <ul>
+   <li>
+    loading and saving programs via the serial interface
+    (not usable in the emulator)
+   </li>
+   <li>
+    loading and saving programs via USB
+    in <a href="fileformats.htm#headersave">Headersave</a> format
+   </li>
+  </ul>
+ <br/>
+  These functions can be used both interactively
+  via the hexadecimal keyboard and
+  via a jump table from within programs.
+  In addition, three programs are included:
+  <ul>
+   <li>Timekeeper clock (start at address&nbsp;A030h)</li>
+   <li>
+    A/D converter (start at address&nbsp;A033h)<br/>
+    <b>Caution!</b> Since no corresponding hardware is emulated,
+    this program cannot be used in JKCEMU.
+   </li>
+   <li>machine code editor (start at address&nbsp;B000h)</li>
+  </ul>
+ <br/>
+
+ <h3><a name="basic">2.4. BASIC</a></h3>
+  The BASIC interpreter is only available in the LC-80ex
+  and resides in the address range C000h-DFFFh.
+  It requires LCTools in the address range A000h-BFFFh,
+  as well as a terminal connected to SIO channel&nbsp;B.
+  JKCEMU emulates the TV Terminal&nbsp;1.2 as a second display unit,
+  i.e. you operate the BASIC interpreter through the terminal window,
+  which is opened via the menu item
+  <em>Extras</em> &rarr; <em>Second Display Unit...</em>.
+ <br/><br/>
+  BASIC is started at address C000h.
+  To do so, enter the following in the JKCEMU main window:
+ <br/><br/>
+  <em>RES&nbsp;(Escape) &rarr; ADR&nbsp;(F1)
+  &rarr; C &rarr; 0 &rarr; 0 &rarr; 0 &rarr; EX&nbsp;(Enter)</em>
+ <br/><br/>
+  Only then do you switch to the terminal window.
+  If you exit the BASIC interpreter with <em>BYE</em>
+  and want to restart it without losing data,
+  use address C003h (the warm start address).
+ <br/><br/>
+  This BASIC is an adaptation of the AC1/LLC2 Graphics/Sound BASIC
+  and thus offers a similar range of functions to it.
+  However, direct access to the keyboard and pseudo-pixel graphics
+  (<em>SET</em>, <em>RESET</em>, <em>POINT</em>)
+  are not possible.
+  In return, BASIC programs are saved to a USB storage device
+  (commands <em>SAVE</em>, <em>LOAD</em>, and <em>FILES</em>).
+  Printing is possible with <em>LFILES</em>, <em>LLIST</em>, and <em>LPRINT</em>,
+  and editing a BASIC program with the command
+  <em>EDIT</em>.
+  Finally, the functions <em>DATE$(0)</em>
+  and <em>TIME$(0)</em> should be mentioned, which let you read the real-time clock.
+ <br/><br/>
+
+
+ <h2><a name="etc">3. Miscellaneous</a></h2>
+
+ <h3><a name="autoloadinput">3.1. AutoLoad and AutoInput</a></h3>
+  On the LC-80, RESET causes a warm start,
+  during which no data is lost.
+  For this reason, it is quite common
+  to trigger a RESET before executing a command.
+  Since AutoLoad and AutoInput would interfere in such cases,
+  AutoLoad and AutoInput are only executed on a cold start
+  (emulated power-on).
+ <br/><br/>
+  <b>Caution!</b> Since, in the LC-80 emulation, the Escape key
+  triggers a RESET (warm start),
+  an Escape in AutoInput likewise causes a RESET.
+ <br/><br/>
+  <b>Caution!</b> AutoInput only performs automatic keystrokes
+  on the hexadecimal keyboard.
+  The alphanumeric keyboard emulated on the TV Terminal
+  cannot be operated this way.
+ <br/><br/>
+
+ <h3><a name="sio_speed">3.2. LC-80ex SIO Speed</a></h3>
+  On the LC-80ex, the SIO channels are by default
+  clocked by CTC channel&nbsp;0.
+  This allows standardized speeds
+  of up to 2400&nbsp;baud to be achieved.
+  Since this is rather slow, however,
+  Rolf Weidlich created a circuit extension
+  in which the SIO channels are fed directly from the CPU clock
+  via a 1:12 divider.
+  This yields a speed of 9600&nbsp;baud
+  without any change to the software.
+  JKCEMU emulates this circuit extension and thus
+  the 9600&nbsp;baud rate.
+</body>
+</html>

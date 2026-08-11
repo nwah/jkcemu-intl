@@ -1,0 +1,432 @@
+<html>
+<body>
+ <h1>SLC1 Chess and Learning Computer</h1>
+  The SLC1 chess and learning computer was presented by
+  Dr. Dieter Scheuschner in Schaltungssammlung f&uuml;r den Amateur,
+  5th installment 1989.
+  It is a home-built computer.
+ <br/><br/>
+  The SLC1 was primarily designed as a chess computer.
+  However, it also has a small monitor program
+  for learning and demonstration purposes.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="slc1.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li>
+      <a href="slc1.htm#keyboard">1.1. Keyboard</a>
+      <ul>
+       <li>
+	<a href="slc1.htm#chess_keys">1.1.1. Key Mapping in the Chess Program</a>
+       </li>
+       <li>
+	<a href="slc1.htm#mon_keys">1.1.2. Key Mapping in the Monitor Program</a>
+       </li>
+       <li><a href="slc1.htm#kbwin">1.1.3. Keyboard Display in a Window</a></li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="slc1.htm#software">2. Software Contained in the ROM</a>
+    <ul>
+     <li>
+      <a href="slc1.htm#chess_usage">2.1. Notes on Operating the Chess Program</a>
+      <ul>
+       <li><a href="slc1.htm#sound">2.1.1. Switching Sound On and Off</a></li>
+       <li>
+	<a href="slc1.htm#moveinput">2.1.2. Entering and Correcting Moves</a>
+       </li>
+       <li><a href="slc1.htm#casteling">2.1.3. Castling</a></li>
+       <li>
+	<a href="slc1.htm#boardcheck">2.1.4. Displaying the Board Position</a>
+       </li>
+       <li><a href="slc1.htm#gameinput">2.1.5. Entering a Chess Problem</a></li>
+      </ul>
+     </li>
+     <li>
+      <a href="slc1.htm#mon_usage">2.2. Notes on Operating the Monitor Program</a>
+      <ul>
+       <li>
+	<a href="slc1.htm#datainput">2.2.1. Entering an Address and Data</a>
+       </li>
+       <li><a href="slc1.htm#run">2.2.2. Starting an Application Program</a></li>
+       <li><a href="slc1.htm#others">2.2.3. Further Functions</a></li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li><a href="slc1.htm#source">3. Sources / Literature</a></li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  <ul>
+   <li>4&nbsp;KByte ROM in the address range 0000-0FFF</li>
+   <li>1&nbsp;KByte RAM in the address range 5000-53FF</li>
+   <li>6-digit 7-segment display</li>
+   <li>Busy LED</li>
+   <li>Keyboard with 12&nbsp;keys</li>
+  </ul>
+  The choice between ROM and RAM is made using address line A14.
+  Because of this incomplete address decoding,
+  the memory is visible throughout the entire address space.
+ <br/><br/>
+
+ <h3><a name="keyboard">1.1. Keyboard</a></h3>
+  The SLC1 has a chess program and a monitor program.
+  The key assignment is completely different between the two programs.
+  For this reason, the emulator detects
+  when the chess or the monitor program is started
+  and switches the key mapping accordingly.
+  This allows both the chess program and the monitor program
+  to be operated with the intuitively correct keys
+  on the emulator computer's keyboard.
+ <br/><br/>
+
+ <h3><a name="chess_keys">1.1.1. Key Mapping in the Chess Program</a></h3>
+  <table border="1">
+   <tr>
+    <th valign="top">SLC1 key</th>
+    <th valign="top">Key in the emulator</th>
+    <th valign="top">Meaning</th>
+   </tr>
+   <tr>
+    <td valign="top">C</td>
+    <td valign="top">Escape</td>
+    <td valign="top">Reset</td>
+   </tr>
+   <tr>
+    <td valign="top">A</td>
+    <td valign="top">F1</td>
+    <td valign="top">
+     Enter playing strength,<br/>
+     switch sound on/off,<br/>
+     display board position
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">St</td>
+    <td valign="top">F2</td>
+    <td valign="top">
+     Switch to game mode,<br/>
+     clear input
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">Z</td>
+    <td valign="top">Z or Enter</td>
+    <td valign="top">Move input</td>
+   </tr>
+   <tr>
+    <td valign="top">A 1</td>
+    <td valign="top">A or 1</td>
+    <td valign="top">Entering the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">B 2</td>
+    <td valign="top">B or 2</td>
+    <td valign="top">Entering the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">C 3</td>
+    <td valign="top">C or 3</td>
+    <td valign="top">Entering the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">D 4</td>
+    <td valign="top">D or 4</td>
+    <td valign="top">Entering the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">E 5</td>
+    <td valign="top">E or 5</td>
+    <td valign="top">Entering the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">F 6</td>
+    <td valign="top">F or 6</td>
+    <td valign="top">Entering the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">G 7</td>
+    <td valign="top">G or 7</td>
+    <td valign="top">Entering the row or column</td>
+   </tr>
+   <tr>
+    <td valign="top">H 8</td>
+    <td valign="top">H or 8</td>
+    <td valign="top">Entering the row or column</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="mon_keys">1.1.2. Key Mapping in the Monitor Program</a></h3>
+  <table border="1">
+   <tr>
+    <th valign="top">SLC1 key</th>
+    <th valign="top">Key in the emulator</th>
+    <th valign="top">Meaning</th>
+   </tr>
+   <tr>
+    <td valign="top">ADR</td>
+    <td valign="top">F1</td>
+    <td valign="top">Address entry</td>
+   </tr>
+   <tr>
+    <td valign="top">Fu</td>
+    <td valign="top">F2</td>
+    <td valign="top">Select function</td>
+   </tr>
+   <tr>
+    <td valign="top">Seq</td>
+    <td valign="top">S</td>
+    <td valign="top">
+     Switch to shift mode:<br/>
+     release the key again and then press 8 through F
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">+/- 1</td>
+    <td valign="top">+ or -</td>
+    <td valign="top">Increase or decrease the value by one</td>
+   </tr>
+   <tr>
+    <td valign="top">0 8</td>
+    <td valign="top">0 or 8</td>
+    <td valign="top">Data/address entry</td>
+   </tr>
+   <tr>
+    <td valign="top">1 9</td>
+    <td valign="top">1 or 9</td>
+    <td valign="top">Data/address entry</td>
+   </tr>
+   <tr>
+    <td valign="top">2 A</td>
+    <td valign="top">2 or A</td>
+    <td valign="top">Data/address entry</td>
+   </tr>
+   <tr>
+    <td valign="top">3&nbsp;B</td>
+    <td valign="top">3 or B</td>
+    <td valign="top">Data/address entry</td>
+   </tr>
+   <tr>
+    <td valign="top">4 C</td>
+    <td valign="top">4 or C</td>
+    <td valign="top">Data/address entry</td>
+   </tr>
+   <tr>
+    <td valign="top">5 D</td>
+    <td valign="top">5 or D</td>
+    <td valign="top">Data/address entry</td>
+   </tr>
+   <tr>
+    <td valign="top">6 E</td>
+    <td valign="top">6 or E</td>
+    <td valign="top">Data/address entry</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     7&nbsp;F<br/>
+     GO
+    </td>
+    <td valign="top">7 or F</td>
+    <td valign="top">
+     Data/address entry,<br/>
+     function GO (program start without breakpoint)
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="kbwin">1.1.3. Keyboard Display in a Window</a></h3>
+  The menu item <em>Extra</em> &rarr; <em>Keyboard...</em>
+  opens a window that shows the keyboard schematically.
+  Since, in the original, the labeling of the keys differs
+  between the chess and the monitor program,
+  for simplicity the window only shows the labeling
+  of the program you are currently in.
+  Switching between the two views happens automatically.
+  After RESET you therefore see the key labeling of the chess program.
+  If you now press the key <em>A&nbsp;1</em> five times
+  to switch from the chess program to the monitor program,
+  the keyboard view switches accordingly as well.
+ <br/><br/>
+
+
+ <h2><a name="software">2. Software Contained in the ROM</a></h2>
+  <ul>
+   <li>Chess program</li>
+   <li>Monitor program</li>
+  </ul>
+ <br/>
+  After starting, or after a RESET, you are in the chess program.
+ <br/><br/>
+
+ <h3>
+  <a name="chess_usage">2.1. Notes on Operating the Chess Program</a>
+ </h3>
+  When the chess program starts, the computer sets up the starting position,
+  i.e. you play with the white pieces.
+  If you want to play black,
+  first press the key <em>Z (Enter)</em>.
+ <br/><br/>
+  Now you can set the playing strength (1&nbsp;to&nbsp;8):
+ <br/><br/>
+  <em>A (F1)</em> &rarr; <em>&lt;playing strength&gt;</em> &rarr;
+  <em>St (F2)</em>
+ <br/><br/>
+  You can return to the starting position at any time with the key
+  <em>C (Escape)</em>.
+ <br/><br/>
+
+ <h3><a name="sound">2.1.1. Switching Sound On and Off</a></h3>
+  <em>A (F)</em> &rarr; <em>Z (Enter)</em> &rarr; <em>St (F2)</em>
+ <br/><br/>
+  <b>Caution!</b> In the emulator, you only hear the sound
+  if you enable the sound output in the <a href="audio.htm">Audio/Tape</a>
+  window, on the <em>Loudspeaker</em> tab.
+ <br/><br/>
+
+ <h3><a name="moveinput">2.1.2. Entering and Correcting Moves</a></h3>
+  To enter a move, simply type the starting and destination square
+  one after the other and finish with <em>Z (Enter)</em>.
+  As long as you have not yet completed the entry,
+  you can use <em>St (F2)</em> to clear the incorrect entry
+  and enter your move again.
+ <br/><br/>
+  If the entered move is invalid, the display blinks
+  to prompt you to enter a new move.
+ <br/><br/>
+
+ <h3><a name="casteling">2.1.3. Castling</a></h3>
+  For castling, you enter the corresponding king move.
+ <br/><br/>
+
+ <h3><a name="boardcheck">2.1.4. Displaying the Board Position</a></h3>
+  JKCEMU shows you the board position in a separate
+  <a href="chessboard.htm">window</a>,
+  but for the sake of completeness the corresponding
+  function of the chess program is also explained here.
+  In addition, this function is needed when entering
+  a chess problem.
+ <br/><br/>
+  You reach the board display by pressing the key
+  <em>A (F1)</em> three times.
+  The display shows <em>A1</em>, followed by a code.
+  The code indicates the occupancy of square <em>A1</em>
+  and has the following meaning:
+  <table border="1">
+   <tr><th>Code</th><th>Meaning</th></tr>
+   <tr><td>01</td><td>white pawn</td></tr>
+   <tr><td>02</td><td>white knight</td></tr>
+   <tr><td>03</td><td>white bishop</td></tr>
+   <tr><td>04</td><td>white rook</td></tr>
+   <tr><td>05</td><td>white queen</td></tr>
+   <tr><td>06</td><td>white king</td></tr>
+   <tr><td>FA</td><td>black king</td></tr>
+   <tr><td>FB</td><td>black queen</td></tr>
+   <tr><td>FC</td><td>black rook</td></tr>
+   <tr><td>FD</td><td>black bishop</td></tr>
+   <tr><td>FE</td><td>black knight</td></tr>
+   <tr><td>FF</td><td>black pawn</td></tr>
+   <tr><td>--</td><td>square not occupied</td></tr>
+  </table>
+ <br/>
+  Each further press of the key <em>A (F2)</em>
+  shows the next square.
+  You return to game mode with <em>St (F1)</em>.
+ <br/><br/>
+
+ <h3><a name="gameinput">2.1.5. Entering a Chess Problem</a></h3>
+  To enter a chess problem, you must change the
+  board position accordingly.
+  Press <em>A (F1)</em> repeatedly
+  until you reach the board display.
+  Keep pressing <em>A (F1)</em>
+  until the first, or the next, square to be changed is shown.
+  Now enter the code (1 to 6) for the desired
+  piece.
+  For a black piece you must enter the code
+  of the corresponding white piece twice.
+  If you want to remove the piece from the displayed square,
+  enter <em>7</em> or <em>8</em> as the code.
+ <br/><br/>
+
+ <h3><a name="signaling">2.1.6. Signaling Check and Checkmate</a></h3>
+  <table border="1">
+   <tr><th>Game situation</th><th>Display</th></tr>
+   <tr><td>Check</td><td>The displayed move blinks</td></tr>
+   <tr>
+    <td>Checkmate</td>
+    <td>Two horizontal lines blink</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3>
+  <a name="mon_usage">2.2. Notes on Operating the Monitor Program</a>
+ </h3>
+  You start the monitor program from within the chess program
+  by pressing <em>A1 (A or 1)</em> five times.
+ <br/><br/>
+
+ <h3><a name="datainput">2.2.1. Entering an Address and Data</a></h3>
+  You begin entering an address with the key <em>ADR (F1)</em>.
+  Then you enter the four-digit address.
+  For the hexadecimal digits 8 through F you must
+  first press the key <em>Seq (S)</em>
+  to enter shift mode.
+ <br/><br/>
+  After you have entered four hexadecimal digits,
+  the two leftmost positions show the data byte at that address.
+  If you now enter further hexadecimal digits,
+  you switch to data entry, i.e. you change
+  the data byte shown at the far left.
+  However, it is not written to memory
+  until you press <em>+/- (+)</em>.
+  At the same time, the next address is displayed.
+  If you want to switch to the previous address instead of the next one,
+  press the key <em>Seq (A)</em>
+  before pressing <em>+ / -</em>.
+ <br/><br/>
+
+ <h3><a name="run">2.2.2. Starting an Application Program</a></h3>
+  First enter the start address, then call up
+  the <em>GO</em> function, i.e. the complete entry sequence looks like this:
+ <br/><br/>
+  <em>ADR (F1)</em> &rarr; <em>&lt;address&gt;</em>
+  &rarr; <em>Fu (F2)</em> &rarr; <em>GO (H)</em>
+ <br/><br/>
+  The application program can jump back into the monitor program
+  by jumping to address 05F4.
+  The memory cell whose address is in register DE
+  is then displayed.
+ <br/><br/>
+
+ <h3><a name="others">2.2.3. Further Functions</a></h3>
+  The monitor program offers further functions,
+  which, however, are also available directly in JKCEMU
+  in a more convenient form (see <a href="tools/debugger.htm">Debugger</a>
+  and <a href="tools/memeditor.htm">Memory Editor</a>).
+  If you nevertheless want to explore these further functions
+  of the monitor program,
+  please refer to the corresponding literature.
+ <br/><br/>
+
+
+ <h1><a name="source">3. Sources / Literature</a></h1>
+  The information on this page is largely taken
+  from the following publication:
+ <br/><br/>
+  Scheuschner, Dieter: Schach- und Lerncomputer SLC 1,<br/>
+  Schaltungssammlung f&uuml;r den Amateur, 5.&nbsp;Lieferung,<br/>
+  Milit&auml;rverlag der DDR, Berlin 1989
+</body>
+</html>
+

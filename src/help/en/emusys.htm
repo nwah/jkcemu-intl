@@ -1,0 +1,73 @@
+<html>
+<head><title>List of Emulated Systems</title></head>
+<body>
+ <h1>Emulated Systems</h1>
+  <ul>
+   <li><a href="a5105.htm">A5105 (BIC, ALBA-PC&nbsp;1505)</a></li>
+   <li><a href="ac1.htm">AC1</a></li>
+   <li><a href="bcs3.htm">BCS3</a></li>
+   <li><a href="c80.htm">C-80</a></li>
+   <li><a href="hemc.htm">H&uuml;bler/Evert-MC</a></li>
+   <li><a href="hgmc.htm">H&uuml;bler-Grafik-MC</a></li>
+   <li><a href="kc85.htm">HC900</a></li>
+   <li><a href="z9001.htm">KC85/1</a></li>
+   <li><a href="kc85.htm">KC85/2...5</a></li>
+   <li><a href="z9001.htm">KC87</a></li>
+   <li><a href="kramermc.htm">Kramer-MC</a></li>
+   <li><a href="lc80.htm">LC-80</a></li>
+   <li><a href="llc1.htm">LLC1</a></li>
+   <li><a href="llc2.htm">LLC2</a></li>
+   <li><a href="pcm.htm">PC/M (Mugler/Mathes-PC)</a></li>
+   <li><a href="poly880.htm">Poly-Computer&nbsp;880</a></li>
+   <li><a href="sc2.htm">SC2&nbsp;Chess Computer</a></li>
+   <li><a href="slc1.htm">SLC1 Chess and Learning Computer</a></li>
+   <li><a href="vcs80.htm">VCS80</a></li>
+   <li><a href="z1013.htm">Z1013</a></li>
+   <li><a href="z9001.htm">Z9001</a></li>
+  </ul>
+ <br/><br/>
+
+ <h2>German Umlauts</h2>
+  Some emulated systems support German umlauts, others do not.
+  When a character set contains German umlauts,
+  they are frequently mapped onto some ASCII characters
+  (that was common practice back then, see also the German variant of ISO646).
+  The German umlauts thus have the same codes as some
+  ASCII characters.
+  For this reason, on these systems JKCEMU also maps the umlauts
+  onto the codes of the corresponding ASCII characters.
+  If you enter an <em>&auml;</em>, for example,
+  the emulator generates code 5Bh,
+  which also stands for the ASCII character <em>[</em>.
+  If the character set contains German umlauts,
+  you will then see the <em>&auml;</em>,
+  otherwise the opening square bracket.
+ <br/><br/>
+  Conversely, i.e. when you save the screen output
+  of the emulated system to a text file
+  or copy it as text to the clipboard,
+  JKCEMU converts the umlauts back into the codes
+  of the system character set, but only
+  if the character set also contains umlauts.
+ <br/><br/>
+  The table shows the codes
+  that can stand for both German umlauts and ASCII characters:
+ <br/>
+  <table border="1">
+   <tr>
+    <th>Decimal Code</th>
+    <th>Hex Code</th>
+    <th>ASCII Character</th>
+    <th>Umlaut</th>
+   </tr>
+   <tr><td>64</td><td>40</td><td>&#64;</td><td>&sect;</td></tr>
+   <tr><td>91</td><td>5B</td><td>&#91;</td><td>&Auml;</td></tr>
+   <tr><td>92</td><td>5C</td><td>&#92;</td><td>&Ouml;</td></tr>
+   <tr><td>93</td><td>5D</td><td>&#93;</td><td>&Uuml;</td></tr>
+   <tr><td>123</td><td>7B</td><td>&#123;</td><td>&auml;</td></tr>
+   <tr><td>124</td><td>7C</td><td>&#124;</td><td>&ouml;</td></tr>
+   <tr><td>125</td><td>7D</td><td>&#125;</td><td>&uuml;</td></tr>
+   <tr><td>126</td><td>7E</td><td>&#126;</td><td>&szlig;</td></tr>
+ </table>
+</body>
+</html>

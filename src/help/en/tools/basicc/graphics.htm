@@ -1,0 +1,175 @@
+<html>
+<head><title>BASIC Compiler: Graphics</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Graphics</h2>
+  The language scope of the BASIC compiler also includes statements
+  and functions for full graphics.
+  All statements that draw on the screen and thus
+  set or clear pixels
+  are simply called graphics commands from here on.
+  These graphics commands can only be used within a
+  graphics environment.
+  For this, the specific target system must support
+  full graphics, and a graphics mode must be set.
+ <br/><br/>
+  If the target system does not support full graphics,
+  the graphics commands cannot be compiled.
+ <br/><br/>
+  If full graphics is supported, it in turn depends
+  on the target system whether graphics is available
+  in the standard mode (<tt>SCREEN&nbsp;0</tt>)
+  or whether a graphics mode must first be set
+  with the SCREEN statement.
+  Please read the notes on the
+  <a href="targets.htm">target systems</a>.
+ <br/><br/>
+  The functions <em>H_PIXEL</em> and <em>W_PIXEL</em> return
+  the height and width of the currently set screen mode.
+  If these functions return the value&nbsp;0,
+  no graphics is available in the current screen mode.
+ <br/><br/>
+  With these two functions, as well as with the constants
+  GRAPHICSCREEN and LASTSCREEN, the source code can be made
+  portable to a certain extent.
+  This refers to the ability
+  to write the BASIC program so that it can be compiled
+  without changes for different target systems
+  while still having at least a similar appearance
+  on every target system.
+  To do this, you must not set the pixel coordinates as fixed values,
+  but relative to the values returned by H_PIXEL and W_PIXEL.
+  A graphics mode can be set in a portable way like this:
+ <br/><br/>
+  <tt>&nbsp;SCREEN&nbsp;GRAPHICSCREEN</tt>
+ <br/><br/>
+  The prerequisite, of course,
+  is that the target system supports graphics at all.
+ <br/><br/>
+
+ <h3>Graphics commands</h3>
+  The following statements perform graphical operations
+  or play a role with respect to graphics:
+ <br/>
+  <ul>
+   <li><a href="instructions.htm#circle">CIRCLE</a></li>
+   <li><a href="instructions.htm#draw">DRAW</a></li>
+   <li><a href="instructions.htm#drawr">DRAWR</a></li>
+   <li><a href="instructions.htm#label">LABEL</a></li>
+   <li><a href="instructions.htm#line">LINE</a></li>
+   <li><a href="instructions.htm#move">MOVE</a></li>
+   <li><a href="instructions.htm#mover">MOVER</a></li>
+   <li><a href="instructions.htm#paint">PAINT</a></li>
+   <li><a href="instructions.htm#pen">PEN</a></li>
+   <li><a href="instructions.htm#plot">PLOT</a></li>
+   <li><a href="instructions.htm#plotr">PLOTR</a></li>
+   <li><a href="instructions.htm#preset">PRESET</a></li>
+   <li><a href="instructions.htm#pset">PSET</a></li>
+   <li><a href="instructions.htm#screen">SCREEN</a></li>
+  </ul>
+ <br/>
+
+ <h3>Colors</h3>
+  The BASIC compiler has statements for setting the color
+  (<a href="instructions.htm#border">BORDER</a>,
+  <a href="instructions.htm#color">COLOR</a>,
+  <a href="instructions.htm#ink">INK</a> ,
+  <a href="instructions.htm#paper">PAPER</a>).
+  However, not every target system supports colors.
+  On target systems that do not offer color graphics,
+  the statements for setting a color have no effect
+  and also generate no program code,
+  i.e. you can safely write portable BASIC programs
+  with color support and compile them for a
+  black-and-white target system
+  without unnecessary program code being generated as a result.
+ <br/><br/>
+  The color numbers differ between the individual target systems.
+  In order to still be able to write portable program code,
+  there are <a href="constants.htm#color">constants</a>
+  for some commonly used colors, which you should also use.
+ <br/><br/>
+
+ <h3>Example program</h3>
+  The example outputs a framed text in graphics mode,
+  draws a circle around it, fills it in,
+  and uses XOR mode to invert an area of the screen.
+  The program is written to be portable, i.e.
+  it will run without changes on every target system
+  that supports graphics.
+ <br/>
+  <table border="0">
+   <tr>
+    <td valign="top" nowrap=nowrap="nowrap">
+     <tt>
+      &#10;<br/>
+      DECLARE SUB boxed_text(x,y,t$)&#10;<br/>
+      &#10;<br/>
+      CURSOR 0&#10;<br/>
+      SCREEN GRAPHICSCREEN&#10;<br/>
+      CLS&#10;<br/>
+      &#10;<br/>
+      tx=W_PIXEL/5&#10;<br/>
+      ty=H_PIXEL/3&#10;<br/>
+      boxed_text(tx,ty,"Hallo")&#10;<br/>
+      &#10;<br/>
+      cx=tx+((XPOS-tx)/2)&#10;<br/>
+      cy=ty+6&#10;<br/>
+      cr=((XPOS-tx)/2)+3&#10;<br/>
+      CIRCLE cx,cy,cr&#10;<br/>
+      &#10;<br/>
+      PAINT cx,cy-cr+2&#10;<br/>
+      &#10;<br/>
+      PEN PEN_XOR&#10;<br/>
+      LINE (cx-cr-2,cy-cr-2)-(cx+cr+2,cy+cr+2),BF&#10;<br/>
+      &#10;<br/>
+      IF GRAPHICSCREEN&lt;&gt;0 THEN PAUSE 50&#10;<br/>
+      SCREEN 0&#10;<br/>
+      END&#10;<br/>
+      &#10;<br/>
+      SUB boxed_text(x,y,t$)&#10;<br/>
+      &nbsp;&nbsp;MOVE x+3,y+2&#10;<br/>
+      &nbsp;&nbsp;LABEL t$&#10;<br/>
+      &nbsp;&nbsp;LINE (x,y)-(XPOS,y+12),B&#10;<br/>
+      END SUB&#10;<br/>
+     </tt>
+    </td>
+    <td valign="top" nowrap=nowrap="nowrap">
+     <tt>
+      &#10;<br/>
+      :'declare procedure&#10;<br/>
+      &#10;<br/>
+      :'turn off cursor&#10;<br/>
+      :'turn on graphics mode (graphics screen)&#10;<br/>
+      :'clear graphics screen&#10;<br/>
+      &#10;<br/>
+      :'output framed text&#10;<br/>
+      &#10;<br/>
+      &#10;<br/>
+      &#10;<br/>
+      :'draw circle&#10;<br/>
+      &#10;<br/>
+      &#10;<br/>
+      &#10;<br/>
+      &#10;<br/>
+      :'fill circle&#10;<br/>
+      &#10;<br/>
+      :'invert area with XOR pen&#10;<br/>
+      &#10;<br/>
+      &#10;<br/>
+      :'if separate graphics screen, wait, then clear screen&#10;<br/>
+      :'turn on text screen&#10;<br/>
+      :'end of program&#10;<br/>
+      &#10;<br/>
+      :'implement procedure&#10;<br/>
+      :'lower left corner of the text&#10;<br/>
+      :'output text&#10;<br/>
+      :'draw frame&#10;<br/>
+     </tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+</body>
+</html>

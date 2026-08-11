@@ -1,0 +1,412 @@
+<html>
+<head><title>BCS3: BASIC-SE&nbsp;3.1</title></head>
+<body>
+ <h1>BASIC-SE&nbsp;3.1</h1>
+  BASIC-SE&nbsp;3.1 is a BASIC dialect with 16-bit integer
+  and 32-bit floating-point arithmetic as well as string processing.
+ <br/><br/>
+
+ <h2>1. Starting the System</h2>
+  After a cold start, you must first enter the number
+  of visible lines.
+  Only then do you reach the command mode.
+ <br/><br/>
+
+ <h2>2. Commands</h2>
+  <table border="1">
+   <tr>
+    <td valign="top">LIST</td>
+    <td valign="top">Display the program</td>
+   </tr>
+   <tr>
+    <td valign="top">LOAD</td>
+    <td valign="top">Load from tape</td>
+   </tr>
+   <tr>
+    <td valign="top">NEW</td>
+    <td valign="top">Delete the program</td>
+   </tr>
+   <tr>
+    <td valign="top">RUN</td>
+    <td valign="top">Start the program</td>
+   </tr>
+   <tr>
+    <td valign="top">SAVE</td>
+    <td valign="top">Save the program to tape</td>
+   </tr>
+   <tr>
+    <td valign="top">SAVED</td>
+    <td valign="top">
+     Save the program and the following RAM area to tape
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>3. Line Format, Entering a Program Line</h2>
+  A program line begins with the line number (1 to 9998),
+  followed by one or more statements,
+  which must be separated by a colon.
+  The line <em>9999&nbsp;END</em> is appended automatically.
+ <br/><br/>
+
+ <h2>4. Data Types</h2>
+  There are integers (whole numbers with a magnitude less than 32628)
+  and floating-point numbers as well as strings.
+ <br/><br/>
+
+ <h2>5. Constants</h2>
+  <table border="1">
+   <tr><td valign="top">Integers:</td><td>-32627 to 32627</td></tr>
+   <tr>
+    <td valign="top">Floating-point numbers:</td>
+    <td valign="top">0.0000001 to 9999999</td>
+   </tr>
+   <tr>
+     <td valign="top">Hexadecimal numbers:</td>
+     <td valign="top">
+      Start with a digit and end with an H,<br/>
+      e.g.: 0F000H
+     </td>
+   </tr>
+   <tr>
+     <td valign="top">String literal:</td>
+     <td valign="top">
+      A string enclosed in single quote characters,<br/>
+      e.g. 'ABC'
+     </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>6. Variables</h2>
+  Numeric variables can be named with a letter, two letters,
+  or a letter and a digit.
+  One- and two-dimensional arrays are also possible.
+ <br/><br/>
+  The names of string variables consist of a letter
+  followed by the currency symbol.
+ <br/><br/>
+  Numeric arrays as well as string variables must
+  be declared with the DIM statement.
+ <br/><br/>
+
+ <h2>7. Operators</h2>
+  <table border="1">
+   <tr>
+    <td valign="top"><tt>*</tt></td>
+    <td valign="top">Multiplication</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>/</tt></td>
+    <td valign="top">Division</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>-</tt></td>
+    <td valign="top">Subtraction</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>+</tt></td>
+    <td valign="top">Addition</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>OR</tt></td>
+    <td valign="top">Bitwise inclusive OR</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>AND</tt></td>
+    <td valign="top">Bitwise AND</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&gt;</tt></td>
+    <td valign="top">
+     Greater than<br/>
+     The result is 0 or 1.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&lt;</tt></td>
+    <td valign="top">
+     Less than,<br/>
+     The result is 0 or 1.
+    </td>
+   </tr>
+   <tr>
+     <td valign="top"><tt>#</tt></td>
+     <td valign="top">
+      Not equal,<br/>
+      The result is 0 or 1.
+     </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>=</tt></td>
+    <td valign="top">
+     Equal,<br/>
+     The result is 0 or 1.
+    </td>
+   </tr>
+  </table>
+ <br/>
+  Operators listed further up take precedence,
+  i.e. if all 10 operators occur in a numeric expression,
+  multiplication is performed first and the equality test
+  last.
+  However, this order of precedence does not correspond in every
+  respect to the rules of mathematics!
+  Furthermore, BASIC-SE 3.1 is not entirely free of errors at this point,
+  either.
+  For this reason, you should determine the order of execution
+  yourself by using parentheses.
+ <br/><br/>
+
+ <h2>8. Statements</h2>
+  <table border="1">
+   <tr><th>Statement</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">CLS</td>
+    <td valign="top">Clear screen</td>
+   </tr>
+   <tr>
+    <td valign="top">DATA &lt;expression&gt; [ , ... ]</td>
+    <td valign="top">
+     Data area (list of numbers and/or strings)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">DIM</td>
+    <td valign="top">
+     Declare and dimension array and string variables,<br/>
+     Example: <tt>DIM A(5), B2(6,7), C$(10)</tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">END</td>
+    <td valign="top">
+     End the program,<br/>
+     The line <em>9999 END</em> is appended automatically.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     FOR &lt;start value&gt; TO &lt;end value&gt;
+     [ STEP &lt;step size&gt; ]
+    </td>
+    <td valign="top">Beginning of a loop</td>
+   </tr>
+   <tr>
+    <td valign="top">GOSUB &lt;line number&gt;</td>
+    <td valign="top">
+     Call a subroutine,<br/>
+     The line number can also be given as a variable numeric expression.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">GOTO &lt;line number&gt;</td>
+    <td valign="top">
+     Jump to a program line,<br/>
+     The line number can also be given as a variable numeric expression.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     IF &lt;numeric expression&gt; THEN &lt;statements&gt;
+    </td>
+    <td valign="top">
+     Conditional program execution,<br/>
+     If the expression has a value other than zero,
+     the statements after THEN are executed.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     INPUT [ &lt;string literal&gt; , ] variable&gt; [ , ... ]
+    </td>
+    <td valign="top">
+     Input of numbers and writing of the entered value
+     to a variable
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     LET &lt;variable&gt; = &lt;expression&gt; [ , ... ]
+    </td>
+    <td valign="top">
+     Value assignment,<br/>
+     The keyword <em>LET</em> can be omitted.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">NEXT</td>
+    <td valign="top">End of a FOR loop</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     OUT &lt;port address&gt; , &lt;value&gt; [ , &lt;value&gt; [ , ... ] ]
+    </td>
+    <td valign="top">
+     Output the value or values to the specified I/O port
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">PLOT  &lt;x&gt; , &lt;y&gt;</td>
+    <td valign="top">
+     Set a pixel using pseudo-graphics,<br/>
+     A character cell is divided into four pixels for this purpose.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     POKE &lt;address&gt; , &lt;value&gt; [ , &lt;value_2&gt; [ , ... ] ]
+    </td>
+    <td valign="top">
+     The value is written to the specified memory cell,
+     value 2 to memory cell + 1, and so on.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     PRINT [ &lt;expression&gt; ] [ , ... ] [;]
+    </td>
+    <td valign="top">
+     Output to the screen,<br/>
+     Expression: numeric or string expression,<br/>
+     If a percent sign precedes an integer expression,
+     the value is output in hexadecimal.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     READ &lt;variable&gt; [ , &lt;variable&gt; [ , ... ] ]
+    </td>
+    <td valign="top">
+     Read the next element or elements
+     of the data area created with DATA into the specified
+     variables,<br/>
+     The read pointer is advanced accordingly.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">REM &lt;comment&gt;</td>
+    <td valign="top">
+     The text after REM is treated as a comment.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">RESTORE</td>
+    <td valign="top">Reset the read pointer for READ</td>
+   </tr>
+   <tr>
+    <td valign="top">RETURN</td>
+    <td valign="top">End a subroutine</td>
+   </tr>
+   <tr>
+    <td valign="top">UNPLOT  &lt;x&gt; , &lt;y&gt;</td>
+    <td valign="top">
+     Clear a pixel using pseudo-graphics,<br/>
+     A character cell is divided into four pixels for this purpose.
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>9. Functions</h2>
+  <table border="1">
+   <tr><th>Function</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">CHR$( &lt;numeric expression&gt; )</td>
+    <td valign="top">
+     Determine the ASCII character whose value equals the expression
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">IN( &lt;port address&gt; )</td>
+    <td valign="top">Read the specified I/O port</td>
+   </tr>
+   <tr>
+    <td valign="top">INKEY$</td>
+    <td valign="top">
+     Query the keyboard,<br/>
+     If a key is pressed, the character is returned.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">INT( &lt;numeric expression&gt; )</td>
+    <td valign="top">
+     Determine the next smaller whole number,<br/>
+     If the magnitude of the value is less than 32628,
+     the floating-point number is internally converted to an integer.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">LEN( &lt;string expression&gt; )</td>
+    <td valign="top">Determine the length of a string</td>
+   </tr>
+   <tr>
+    <td valign="top">PEEK( &lt;port address&gt; )</td>
+    <td valign="top">Read the specified memory cell</td>
+   </tr>
+   <tr>
+    <td valign="top">RND</td>
+    <td valign="top">Determine a random number between 0 and 0.9999</td>
+   </tr>
+   <tr>
+    <td valign="top">USR( &lt;address&gt; )</td>
+    <td valign="top">
+     Call a machine code subroutine<br/>
+     The return value is the content of registers CBLH.
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>10. Error Messages</h2>
+  <table border="1">
+   <tr>
+    <td valign="top">@</td>
+    <td valign="top">Neither a number nor a keyword</td>
+   </tr>
+   <tr>
+    <td valign="top">A</td>
+    <td valign="top">Arithmetic error</td>
+   </tr>
+   <tr>
+    <td valign="top">B</td>
+    <td valign="top">Syntax error</td>
+   </tr>
+   <tr>
+    <td valign="top">D</td>
+    <td valign="top">DATA missing</td>
+   </tr>
+   <tr>
+    <td valign="top">F</td>
+    <td valign="top">Function and statement confused</td>
+   </tr>
+   <tr>
+    <td valign="top">I</td>
+    <td valign="top">Not an integer</td>
+   </tr>
+   <tr>
+    <td valign="top">M</td>
+    <td valign="top">Memory full</td>
+   </tr>
+   <tr>
+    <td valign="top">U</td>
+    <td valign="top">Overflow in PLOT/UNPLOT or arrays</td>
+   </tr>
+   <tr>
+    <td valign="top">$ (currency symbol)</td>
+    <td valign="top">Not a string</td>
+   </tr>
+   <tr>
+    <td valign="top">= ()</td>
+    <td valign="top">This character is missing</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>11. Literature</h2>
+  Schiller, Eckhard: Erweiterungen f&uuml;r Basic-Heimcomputer,<br/>
+  in radio fernsehen elektronik, Heft 9/1986, S. 559-563,<br/>
+  Berlin 1986
+</body>
+</html>

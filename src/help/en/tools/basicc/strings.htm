@@ -1,0 +1,271 @@
+<html>
+<head><title>BASIC Compiler: String Handling</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>String Handling</h2>
+  The JKCEMU BASIC compiler offers extensive support
+  for the handling of strings.
+  This support includes string variables for storage,
+  functions for processing, and statements for input and output
+  of strings.
+  The notes on string handling are divided
+  into the following sections:
+ <br/>
+  <ul>
+   <li>
+    <a href="strings.htm#limit">1. Length limit of a string</a>
+   </li>
+   <li><a href="strings.htm#literal">2. String literals</a></li>
+   <li><a href="strings.htm#var">3. String variables</a></li>
+   <li><a href="strings.htm#func">4. String functions</a></li>
+   <li><a href="strings.htm#expr">5. String expressions</a></li>
+   <li>
+    <a href="strings.htm#optimize">6. Optimizations</a>
+    <ul>
+     <li>
+      <a href="strings.htm#assign">6.1. Avoiding unnecessary assignments</a>
+     </li>
+     <li>
+      <a href="strings.htm#substr">6.2. Accessing parts of a string</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="limit">1. Length limit of a string</a></h3>
+  The internal string handling can process strings up to a
+  length of 255&nbsp;characters.
+  Longer strings are truncated.
+ <br/><br/>
+  The length limit does not apply to string literals,
+  the functions <a href="functions.htm#instr">INSTR</a>,
+  <a href="functions.htm#len">LEN</a>,
+  <a href="functions.htm#ltrim$">LTRIM$</a> and
+  <a href="functions.htm#memstr$">MEMSTR$</a>, or to the output
+  of strings.
+ <br/><br/>
+
+ <h3><a name="literal">2. String literals</a></h3>
+  A string literal is a string constant,
+  i.e. the string is already written in the BASIC source code.
+  A string literal is a sequence of characters
+  enclosed in double quotation marks.
+ <br/><br/>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>&quot;</tt>&nbsp;&lt;character_sequence&gt;&nbsp;<tt>&quot;</tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="var">3. String variables</a></h3>
+  String variables are used to store strings,
+  where the limit of a maximum of 255&nbsp;characters likewise applies.
+  Both simple variables and array variables can be used
+  to store strings.
+ <br/><br/>
+  The name of a string variable must end with a $ character.
+ <br/><br/>
+
+ <h3><a name="func">4. String functions</a></h3>
+  The term string function has a double meaning.
+  In the semantic sense, it refers to a function
+  in which strings play a role, i.e.
+  in which a string is passed in or returned.
+  In the syntactic sense, only functions
+  that return a string are string functions.
+  These functions have a $ as the last character in their name.
+ <br/><br/>
+  Some of the string functions create a new string.
+  Memory is needed for this, but only briefly,
+  because once the current statement has been executed,
+  the resulting string has either been processed or, in the case of a
+  <a href="instructions.htm#let">LET</a> statement,
+  stored in a variable.
+  Either way, temporary memory is needed
+  for internal string handling.
+  The JKCEMU BASIC compiler uses a static
+  string buffer for this.
+  In contrast to dynamically allocating and freeing
+  memory areas, this static approach makes it possible
+  to generate fast and compact program code.
+  However, this also entails a few minor limitations:
+  the static string buffer can be used by only one function
+  at a time.
+  For this reason, such functions cannot be nested
+  inside themselves, or put another way:
+  when functions are nested inside each other, at most
+  one of them may use the static string buffer.
+  The following functions use the internal string buffer:
+ <br/>
+  <ul>
+   <li><a href="functions.htm#bin$"><tt>BIN$</tt></a></li>
+   <li><a href="functions.htm#chr$"><tt>CHR$</tt></a></li>
+   <li><a href="functions.htm#hex$"><tt>HEX$</tt></a></li>
+   <li><a href="functions.htm#input$"><tt>INPUT$</tt></a></li>
+   <li><a href="functions.htm#left$"><tt>LEFT$</tt></a></li>
+   <li><a href="functions.htm#lower$"><tt>LOWER$</tt></a></li>
+   <li><a href="functions.htm#mid$"><tt>MID$</tt></a></li>
+   <li><a href="functions.htm#mirror$"><tt>MIRROR$</tt></a></li>
+   <li><a href="functions.htm#rtrim$"><tt>RTRIM$</tt></a></li>
+   <li><a href="functions.htm#space$"><tt>SPACE$</tt></a></li>
+   <li><a href="functions.htm#string$"><tt>STRING$</tt></a></li>
+   <li><a href="functions.htm#trim$"><tt>TRIM$</tt></a></li>
+   <li><a href="functions.htm#upper$"><tt>UPPER$</tt></a></li>
+  </ul>
+ <br/>
+  If the limitation regarding the nesting
+  of string functions is not observed,
+  the compiler issues an appropriate error message.
+  However, the need to nest these string functions
+  inside each other may still arise.
+  In that case you must use a variable as a helper:
+  you store the result of the inner string function in a variable
+  and then use that variable as the argument in the outer one, e.g.:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Problem (compiler error)</th><th>Solution</th></tr>
+   <tr>
+    <td valign="top">
+     <tt>
+      A$="Das ist ein Beispiel."&#10;<br/>
+      B$=TRIM$(MID$(A$,4,5))
+     </tt>
+    </td>
+    <td valign="top">
+     <tt>
+      A$="Das ist ein Beispiel."&#10;<br/>
+      M$=MID$(A$,4,5)&#10;<br/>
+      B$=TRIM$(M$)
+     </tt>
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="expr">5. String expressions</a></h3>
+  The BASIC compiler distinguishes between simple and
+  complex string expressions.
+  A complex string expression consists of simple string
+  expressions concatenated with the plus operator.
+  A simple string expression is either a string literal,
+  a string variable, or the call of a string function.
+ <br/><br/>
+  Complex string expressions are only allowed in output
+  and when assigning a variable, e.g.:
+ <br/>
+  <tt>
+   &#10;<br/>
+   A$="Hallo"&#10;<br/>
+   B$="Welt"&#10;<br/>
+   C$=A$+SPACE$(1)+B$&#10;<br/>
+   LABEL "--"+C$+"--"&#10;<br/>
+  </tt>
+ <br/>
+  As arguments in function calls, only simple
+  string expressions are allowed.
+  Here too, a variable must be used for intermediate storage
+  if needed.
+ <br/><br/>
+
+ <h3><a name="optimize">6. Optimizations</a></h3>
+
+ <h3>
+  <a name="assign">6.1. Avoiding unnecessary assignments</a>
+ </h3>
+  String handling requires considerably more computing time
+  than handling Integer values.
+  In particular, storing strings in string variables
+  is very costly in terms of performance, since memory must be
+  dynamically allocated and freed again as needed.
+  For this reason, the number of variable assignments should be
+  kept as low as possible, and unnecessary assignments should be
+  avoided.
+  Furthermore, when working with individual characters,
+  they should where possible be converted to Integer values
+  and then processed further as such.
+  The following table shows both of these optimization
+  possibilities, using keyboard polling with INKEY$ as an example:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th nowrap="nowrap">Slower code</th>
+    <th nowrap="nowrap">Faster code</th>
+    <th nowrap="nowrap">Even faster code</th>
+   </tr>
+   <tr>
+    <td align="left" valign="top" nowrap="nowrap">
+     <tt>
+      E$=INKEY$&#10;<br/>
+      IF E$="A" THEN ...
+     </tt>
+    </td>
+    <td align="left" valign="top" nowrap="nowrap">
+     <tt>
+      IF INKEY$="A" THEN ...
+     </tt>
+     <br/><br/>
+     &rarr; variable assignment saved
+    </td>
+    <td align="left" valign="top" nowrap="nowrap">
+     <tt>
+      IF ASC(INKEY$)='A' THEN ...
+     </tt>
+     <br/><br/>
+     &rarr; Integer comparison instead of String comparison
+    </td>
+   </tr>
+  </table>
+ <br/>
+  <b>Caution!</b> As soon as you use even a single
+  string variable, and thus a single assignment
+  to a string variable, anywhere in the BASIC program,
+  the compiled BASIC program will also contain the entire
+  program code for internal dynamic memory management.
+  So if you do not need any string handling in the program
+  and would only use a string variable because of functions
+  such as <a href="functions.htm#inkey$">INKEY$</a>,
+  you should apply the above optimization, not only
+  for the sake of better performance, but also because of
+  a significantly smaller binary program.
+ <br/><br/>
+
+ <h3>
+  <a name="substr">6.2. Accessing parts of a string</a>
+ </h3>
+  For extracting part of a string, there is
+  the function <a href="functions.htm#mid$">MID$</a>.
+  Internally, the extracted substring is then provided
+  as a new string in a different memory area.
+  If you only want to access individual characters of a string,
+  you can also do this while bypassing the string handling,
+  and thus more efficiently, with the functions
+  <a href="functions.htm#strptr">STRPTR</a> and
+  <a href="functions.htm#peek">PEEK</a>.
+  However, you must take care yourself
+  not to go past the end of the string.
+  This is marked with a null byte.
+  The example shows how you can count the number
+  of upper-case letters in a string:
+ <br/>
+  <tt>
+   &#10;<br/>
+   T$=...&#10;<br/>
+   A=STRPTR(T$)&#10;<br/>
+   N=0&#10;<br/>
+   DO&#10;<br/>
+   &nbsp;&nbsp;B=PEEK(A)&#10;<br/>
+   &nbsp;&nbsp;A=A ADD 1&#10;<br/>
+   &nbsp;&nbsp;IF B=0 THEN EXIT&#10;<br/>
+   &nbsp;&nbsp;IF B&gt;=65 AND B&lt;=90 THEN N=N+1&#10;<br/>
+   LOOP&#10;<br/>
+   PRINT N;"Groessbuchstaben enthalten"
+  </tt>
+ <br/>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<html>
+<head><title>Improving Performance</title></head>
+<body>
+ <h1>Tips &amp; Tricks</h1>
+
+ <h2>Improving Performance</h2>
+
+ <h3>Problem</h3>
+  JKCEMU reacts sluggishly,
+  the screen output is very jerky,
+  the emulated clock frequency is below the one specified
+  in the settings, and the CPU is fully loaded at 100%.
+ <br/><br/>
+
+ <h3>Solution</h3>
+  First you should check whether other
+  programs are running on your computer that use too much
+  processing power or too much
+  memory.
+  Please close these programs first.
+ <br/><br/>
+  If that does not help, you can try
+  to minimize the processing power required by JKCEMU:
+  <ul>
+   <li>
+    If an HC900 or KC85/2..5 is currently being emulated,
+    go to the KC85 <a href="../settings.htm">Settings</a>,
+    tab <em>Miscellaneous</em>, and disable the option
+    <em>Emulate Screen Control Timing</em>.
+   </li>
+   <li>
+    The processing power required is higher
+    when JKCEMU has to scale the screen output.
+    Set the view to 100% so that no scaling is needed.
+   </li>
+   <li>
+    In the <a href="../settings.htm">Settings</a>,
+    section <em>Screen Output</em>,
+    increase the value for the refresh cycle.
+    In that case the screen output is updated less often.
+    This does make the screen output somewhat less smooth,
+    but it also saves processing time.
+   </li>
+   <li>
+    Disable the <a href="../audio.htm">audio functions</a>.
+   </li>
+   <li>
+    In the <a href="../settings.htm">Settings</a>,
+    reduce the speed of the emulated system.
+   </li>
+  </ul>
+</body>
+</html>

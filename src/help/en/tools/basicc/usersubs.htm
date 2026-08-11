@@ -1,0 +1,184 @@
+<html>
+<head>
+ <title>BASIC Compiler: User-Defined Functions and Procedures</title>
+</head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>User-Defined Functions and Procedures</h2>
+  User-defined functions and procedures allow programs to be
+  structured far better than with the classic
+  BASIC statements <em>GOSUB</em> and <em>RETURN</em>.
+  User-defined functions return a value
+  and are called in the same way as the BASIC functions.
+  Procedures, on the other hand, do not return a value
+  and are therefore treated like BASIC statements.
+ <br/><br/>
+
+ <h3>Structure of the BASIC Program</h3>
+  User-defined functions and procedures are implemented after
+  the main program, i.e.,
+  the first <a href="instructions.htm#function">FUNCTION</a>
+  or <a href="instructions.htm#sub">SUB</a> statement
+  ends the main program.
+  From that point on, only comments and implementations
+  of user-defined functions and procedures may follow.
+ <br/><br/>
+  The term <em>main program</em> refers to the first part
+  of the BASIC program, where program execution begins.
+ <br/><br/>
+
+ <h3>Calling</h3>
+  User-defined functions and procedures are called by their
+  name.
+  This name must not be a reserved keyword.
+  So that the compiler does not interpret a function
+  or procedure name as a variable when it is used,
+  a user-defined function or procedure must already be known
+  to the BASIC compiler at the point it is called.
+  This is the case if it was
+  implemented further up in the BASIC program.
+  If that is not possible (e.g. when called from the main program
+  or in the case of recursion), the function or procedure must first be
+  made known to the compiler with the
+  <a href="instructions.htm#declare">DECLARE</a> statement.
+ <br/><br/>
+
+ <h3>Local Variables</h3>
+  A special feature of user-defined functions and procedures is
+  that they can declare and use local variables
+  (see the <a href="instructions.htm#local">LOCAL</a> statement).
+  These variables are newly created on each call of the function or
+  procedure and are visible only within that function or procedure.
+  This also applies to recursion, i.e., when a function
+  or procedure calls itself, it has separate
+  local variables at each call level.
+  In that case, however, the stack area must be chosen
+  large enough, since the local variables are created on the stack.
+ <br/><br/>
+  Within a user-defined function or procedure,
+  the local variables must be created first,
+  i.e., all <a href="instructions.htm#local">LOCAL</a> statements
+  must immediately follow the
+  <a href="instructions.htm#function">FUNCTION</a> or
+  <a href="instructions.htm#sub">SUB</a> statement.
+  Only comments are still allowed in between.
+ <br/><br/>
+  The JKCEMU BASIC compiler does not support local array variables,
+  i.e., only simple variables may be specified with
+  <a href="instructions.htm#local">LOCAL</a>.
+ <br/><br/>
+  Within a user-defined function or procedure,
+  both the local and the global,
+  i.e., those used in the main program, variables are visible.
+  However, if a local variable has the same name as a global one,
+  the global variable is hidden and thus no longer visible.
+ <br/><br/>
+
+ <h3>Arguments</h3>
+  User-defined functions and procedures can have
+  arguments.
+  These are specified during declaration and implementation after the
+  function or procedure name, as a comma-separated list of argument
+  names enclosed in parentheses.
+  Each argument can be followed by a type declaration
+  using the keyword <tt>AS</tt>.
+  If the type declaration is omitted, the data type is also derived
+  from the argument name (integer or string,
+  depending on whether the argument name ends with a $ character).
+ <br/><br/>
+  Within a function or procedure, the arguments are
+  implemented as local variables,
+  i.e., they can also be assigned a value.
+  The only difference between these "argument variables"
+  and variables declared with
+  <a href="instructions.htm#local">LOCAL</a>
+  is that argument variables are initialized "from the outside"
+  when the function or procedure is called.
+ <br/><br/>
+
+ <h3>Return Value</h3>
+  User-defined functions return a value.
+  The type of the return value can be specified with the keyword
+  <tt>AS</tt>.
+  If the type specification is omitted, the data type is derived from the
+  function name:
+  if it ends with a $ character,
+  a string is returned, otherwise an integer value.
+  The desired return value is assigned, syntactically,
+  to a variable that has the same name as the function.
+  Multiple assignments are possible.
+  In that case, the last assignment is the one that counts.
+  However, reading back the assigned return value is not
+  possible within the function.
+ <br/><br/>
+
+ <h3>Example Programs</h3>
+  The first example shows the programming of a user-defined
+  function with local variables.
+  As a further special feature, a label is used
+  in the DATA and RESTORE statements.
+ <br/>
+  <tt>
+   &#10;<br/>
+   'Eingabe einer Zahl und Ausgabe als roemische Zahl&#10;<br/>
+   'Hauptprogramm&#10;<br/>
+   &#10;<br/>
+   DECLARE FUNCTION roemische_zahl$(z)&#10;<br/>
+   &#10;<br/>
+   DO&#10;<br/>
+   &nbsp;&nbsp;INPUT "Zahl: ";Z&#10;<br/>
+   &nbsp;&nbsp;IF Z&gt;0 THEN&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT "Roemische Zahl: ";roemische_zahl$(Z)&#10;<br/>
+   &nbsp;&nbsp;ELSEIF Z=0 THEN&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT "Ende"&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;EXIT&#10;<br/>
+   &nbsp;&nbsp;ELSE&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT "Keine negative Zahl!"&#10;<br/>
+   &nbsp;&nbsp;ENDIF&#10;<br/>
+   LOOP&#10;<br/>
+   END&#10;<br/>
+   &#10;<br/>
+   'Zuordnung Dezimalzahl zu roemischer Zahl&#10;<br/>
+   roem_map:&#10;<br/>
+   &nbsp;&nbsp;DATA 1000,"M",900,"CM",500,"D",400,"CD"&#10;<br/>
+   &nbsp;&nbsp;DATA 100,"C",90,"XC",50,"L",40,"XL"&#10;<br/>
+   &nbsp;&nbsp;DATA 10,"X",9,"IX",5,"V",4,"IV",1,"I"&#10;<br/>
+   &#10;<br/>
+   'Implementierung der benutzerdefinierten Funktion&#10;<br/>
+   FUNCTION roemische_zahl$(z)&#10;<br/>
+   &nbsp;&nbsp;LOCAL n,t$,rv$&#10;<br/>
+   &nbsp;&nbsp;rv$=""&#10;<br/>
+   &nbsp;&nbsp;RESTORE roem_map&#10;<br/>
+   &nbsp;&nbsp;WHILE z&gt;0&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;READ n,t$&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;WHILE z&gt;=n&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;z=z-n&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rv$=rv$+t$&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;WEND&#10;<br/>
+   &nbsp;&nbsp;WEND&#10;<br/>
+   &nbsp;&nbsp;roemische_zahl$=rv$:'Rueckgabewert zuweisen&#10;<br/>
+   END FUNCTION&#10;<br/>
+  </tt>
+ <br/><br/>
+  The second example shows a user-defined function
+  in which both the argument and the return value
+  contain a type declaration.
+ <br/>
+  <tt>
+   &#10;<br/>
+   DECLARE FUNCTION kreisflaeche( radius AS SINGLE ) AS SINGLE&#10;<br/>
+   &#10;<br/>
+   DIM r AS SINGLE&#10;<br/>
+   &#10;<br/>
+   INPUT "Radius: ";r&#10;<br/>
+   PRINT "Kreisflaeche: ";kreisflaeche(r)&#10;<br/>
+   END&#10;<br/>
+   &#10;<br/>
+   FUNCTION kreisflaeche( radius AS SINGLE ) AS SINGLE&#10;<br/>
+   &nbsp;&nbsp;  kreisflaeche = PI * radius * radius&#10;<br/>
+   END FUNCTION&#10;<br/>
+  </tt>
+ <br/>
+</body>
+</html>

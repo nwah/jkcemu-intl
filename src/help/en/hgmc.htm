@@ -1,0 +1,156 @@
+<html>
+<body>
+ <h1>H&uuml;bler-Grafik-MC</h1>
+  In 1988, Bernd H&uuml;bler published the construction plans
+  of a home-built computer in the book
+  <em>Mikroelektronik in der Amateurpraxis&nbsp;3</em>
+  under the title <em>BASIC-Kleincomputer mit Grafik</em>.
+  Since this computer has no name of its own and the title
+  of the publication is not suitable as one either,
+  the computer is called the <em>H&uuml;bler-Grafik-MC</em> in JKCEMU.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="hgmc.htm#1">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="hgmc.htm#memory">1.1. Memory Configuration</a></li>
+     <li><a href="hgmc.htm#printer">1.2. Printer</a></li>
+    </ul>
+   </li>
+   <li><a href="hgmc.htm#2">2. Software Contained in ROM</a></li>
+   <li>
+    <a href="hgmc.htm#3">3. BASIC</a>
+    <ul>
+     <li><a href="hgmc.htm#3.1">3.1. BASIC Interpreter</a></li>
+     <li>
+      <a href="hgmc.htm#3.2">3.2. Saving and Loading BASIC Programs</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="1">1. Emulated Hardware</a></h2>
+  <ul>
+   <li>4 or 18&nbsp;KByte ROM, depending on the setting</li>
+   <li>64&nbsp;KByte RAM including video RAM</li>
+   <li>CTC</li>
+   <li>PIO</li>
+   <li>
+    optional:
+    <ul>
+     <li>
+      <a href="kcnet.htm">KCNet-compatible network card</a>
+      at I/O base address&nbsp;C0h
+     </li>
+     <li>
+      <a href="usb.htm">USB port</a> (Vinculum VDIP module)
+      at I/O base address&nbsp;FCh
+     </li>
+    </ul>
+   </li>
+  </ul>
+  Of the I/O system, only the CTC and the PIO are emulated.
+  The SIO and the cassette recorder interface, as well as
+  any hardware connected to the PIO, are not emulated.
+ <br/><br/>
+
+ <h3><a name="memory">1.1. Memory Configuration</a></h3>
+  The memory configuration can be changed using output instructions:
+ <br/>
+  <table border="1">
+   <tr><th>Output Address</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">00h-03h</td>
+    <td>Switch off ROM and switch on the full 64&nbsp;KByte of RAM</td>
+   </tr>
+   <tr>
+    <td valign="top">04h-07h</td>
+    <td>Switch on ROM and switch off the lower 32&nbsp;KByte of RAM</td>
+   </tr>
+   <tr>
+    <td valign="top">10h-13h</td>
+    <td>
+     Set the start address of the video RAM,<br/>
+     bits&nbsp;5 to 7 of the output value
+     set bits&nbsp;13 to 15 of the start address.</td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="printer">1.2. Printer</a></h3>
+  A printer is emulated
+  by JKCEMU intercepting the operating system calls for print output
+  and appending the data to the current print job.
+  This function can be switched off in the <a href="settings.htm">Settings</a>.
+ <br/><br/>
+
+
+ <h2><a name="2">2. Software Contained in ROM</a></h2>
+  <ul>
+   <li>Monitor program version&nbsp;3.0</li>
+   <li>
+    Slightly modified HBASIC&nbsp;3.3
+    (optional, see section&nbsp;3.1.)
+   </li>
+  </ul>
+  In the monitor program, you can display a list of all commands
+  with <em>HELP</em>.
+  The list contains both the commands of the monitor program itself
+  and those that may be found
+  elsewhere in memory.
+ <br/><br/>
+
+
+ <h2><a name="3">3. BASIC</a></h2>
+
+ <h3><a name="3.1">3.1. BASIC Interpreter</a></h3>
+  The H&uuml;bler-Grafik-MC was designed as a BASIC computer.
+  However, the corresponding BASIC interpreter is not
+  contained in ROM in the original.
+  It has to be loaded from cassette.
+ <br/><br/>
+  So that you do not always have to load this interpreter first
+  in the emulator, JKCEMU offers the option
+  <em>BASIC interpreter contained in ROM</em>
+  in the <a href="settings.htm">Settings</a>.
+  If this option is switched on,
+  the now enlarged ROM contains the monitor program,
+  the BASIC interpreter, and a loader routine to be started
+  with the command <em>BASIC</em>,
+  which copies the interpreter from ROM to RAM and starts it there
+  (cold start).
+ <br/><br/>
+  However, the original BASIC interpreter also provides a command
+  named <em>BASIC</em>.
+  So that no confusion arises,
+  this command was renamed to <em>WBASIC</em>
+  in the BASIC version contained in JKCEMU.
+  This means that <em>BASIC</em> performs a cold start and <em>WBASIC</em>
+  a warm start of the interpreter.
+ <br/><br/>
+  The return from the BASIC interpreter to the monitor program
+  is done using RESET.
+ <br/><br/>
+
+ <h3><a name="3.2">3.2. Saving and Loading BASIC Programs</a></h3>
+  JKCEMU offers special support for
+  <a href="loadsavebasic.htm">saving and loading BASIC programs</a>.
+  To save, please use the function
+  <em>Save BASIC program...</em> in the <em>File</em> menu
+  and save the respective program as a
+  <a href="fileformats.htm#basic">BASIC/RBASIC program file (*.bas)</a>.
+  Alternatively, you can also save it as a
+  <a href="fileformats.htm#headersave">Headersave file (*.z80)</a>
+  with file type&nbsp;<em>B</em>.
+ <br/><br/>
+  If you save a BASIC program in a different file format,
+  JKCEMU will no longer recognize, when later loading the file,
+  that it is a BASIC program, and will not adjust the
+  system cells of the BASIC interpreter accordingly.
+  The loaded program cannot then be used.
+</body>
+</html>

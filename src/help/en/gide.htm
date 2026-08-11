@@ -1,0 +1,71 @@
+<html>
+<body>
+ <h1>GIDE and Hard Disks</h1>
+  Tilmann Reh developed a solution for connecting IDE hard disks
+  to 8-bit computers.
+  The solution is called GIDE (Generic&nbsp;IDE)
+  and has also been rebuilt for computer types
+  emulated by JKCEMU.
+  For this reason, JKCEMU also includes a GIDE emulation,
+  with which up to two hard disks can be emulated.
+ <br/><br/>
+  To emulate a hard disk, you must enable the GIDE emulation
+  in the <a href="settings.htm">Settings</a> for the respective system,
+  on the <em>GIDE</em> tab,
+  and select the hard disk model and an image file.
+  To help you select the hard disk model, JKCEMU provides
+  a hard disk directory
+  that already contains a number of suitable models.
+  You can change and extend this directory as you like.
+  When entering a new hard disk model, you must enter the
+  geometry data.
+ <br/><br/>
+  The data stored on the emulated hard disk
+  physically resides in the image file.
+  This file does not necessarily have to exist.
+  If it does not exist, it is created on the first write access
+  that the emulated system makes to the hard disk
+  (e.g. when formatting).
+ <br/><br/>
+  The GIDE also contains a real-time clock.
+  In the emulator, the time can only be read, not set.
+ <br/><br/>
+  <b>Caution!</b> If you enable the GIDE module
+  but have not configured a hard disk to be emulated,
+  the module is still emulated.
+  In that case, however, only the real-time clock
+  contained on the GIDE module is practically usable.
+ <br/><br/>
+
+ <h2>
+  <a name="fileformats">File Formats for Hard Disk Image Files</a>
+ </h2>
+  For the emulation of hard disks, JKCEMU supports
+  two kinds of image files:
+  <ol>
+   <li>Plain image files</li>
+   <li>
+    Plain image files with a 256&nbsp;byte header block
+   </li>
+  </ol>
+ <br/>
+  The first format, also called the RAW format, is identical to the
+  <a href="disk/diskimgformats.htm#plain">plain image files used for floppy disk emulation</a>.
+  JKCEMU can create image files in this format from a volume
+  (see <a href="disk/creatediskimg.htm">here</a>).
+ <br/><br/>
+  The second format is supported for reasons of compatibility
+  with other emulators.
+  The 256&nbsp;byte header block is neither evaluated
+  nor written by JKCEMU.
+ <br/><br/>
+  When a file is opened, its type is detected from the file length
+  (RAW files must end on a 512-byte boundary).
+  When creating a new file, you are asked
+  which type you want.
+ <br/><br/>
+  Image files in both formats can also be written back to a volume
+  with JKCEMU
+  (see <a href="disk/writediskimg.htm">here</a>).
+</body>
+</html>

@@ -1,0 +1,82 @@
+<html>
+<head><title>Saving Files to Magnetic Tape</title></head>
+<body>
+ <h1>Tips &amp; Tricks</h1>
+
+ <h2>Saving Files to Magnetic Tape</h2>
+
+ <h3>Requirements</h3>
+  <ol>
+   <li>
+    You must connect the magnetic tape device (e.g. a cassette recorder)
+    to the line-out or headphone jack
+    of the computer running the emulator.
+   </li>
+   <li>
+    You need software in the emulator
+    that can save a file in the desired format
+    to magnetic tape.
+    <br/>
+    The operating systems and monitor programs included in JKCEMU
+    usually offer the ability
+    to save machine code and/or BASIC programs
+    in the respective standard format.
+   </li>
+  </ol>
+ <br/><br/>
+
+ <h3>Procedure</h3>
+  With the function
+  <a href="../audio.htm#data_out">Output Audio Data via Sound System</a>
+  you can save data directly to magnetic tape.
+  However, you have no way of knowing whether the data was
+  really saved without errors.
+  There is a risk that a short, inaudible interruption
+  occurs in the audio data,
+  which then leads to errors when reading it back in.
+  The probability of such an interruption occurring
+  is of course greater
+  if the audio data has to be generated in real time.
+  For this reason, the detour via a sound file is recommended.
+ <br/><br/>
+  <ol>
+   <li>
+    Connect the magnetic tape device to the line-out jack, or,
+    if that is not available or the signal level is too low,
+    to the headphone jack of the computer running the emulator.
+    Suitable cables and adapters are available from specialty retailers.
+   </li>
+   <li>
+    In the emulated system
+    (e.g. operating system, monitor program),
+    enter the command to save the file,
+    but do not press <em>ENTER</em> yet.
+   </li>
+   <li>
+    Activate the function
+    <a href="../audio.htm#file_out">Record Audio Data and Save to File</a>.
+   </li>
+   <li>
+    Press the <em>ENTER</em> key
+    to start saving.
+   </li>
+   <li>
+    About one second after the program running in the emulator
+    has signaled the end of saving,
+    deactivate the audio function and save the file.
+    This one-second wait is necessary
+    because the audio data is buffered and therefore
+    output with a slight delay.
+   </li>
+   <li>
+    Open the sound file in a suitable
+    playback program, check the volume
+    and the recording level.
+   </li>
+   <li>
+    Play the sound file and record it
+    using the magnetic tape device.
+   </li>
+  </ol>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<html>
+<head>
+ <title>Extracting a KC-BASIC Program from a KCC/KC-TAP File</title>
+</head>
+<body>
+ <h1>Tips &amp; Tricks</h1>
+
+ <h2>Extracting a KC-BASIC Program from a KCC/KC-TAP File</h2>
+  KC-BASIC programs are often not stored in a KC-BASIC file format,
+  but in a KC system format.
+  This is usually done to make the program self-starting
+  with the help of a small machine code routine.
+  A special case here is the
+  <a href="../fileformats.htm#kcb">KCB format</a>,
+  since this is supported directly by JKCEMU.
+  In all other cases, proceed as follows:
+ <br/>
+  <ol>
+   <li>
+    In the <a href="../settings.htm#system">Settings</a>,
+    set a KC or a Z1013 as the emulated system.
+   </li>
+   <li>
+    Load the KC system file into the emulator.
+    The BASIC program is now in memory
+    starting at address 0401, where the ROM BASIC expects the BASIC program.
+    You can now use the BASIC program in the ROM BASIC interpreter
+    or display it in the <a href="../tools/texteditor.htm">Text Editor</a>.
+    <br/>
+    However, if you want to make the program available for RAM BASIC,
+    you still need to carry out the last two steps:
+   </li>
+   <li>
+    Save the BASIC program via the menu
+    <em>File</em> &rarr; <em>BASIC Program</em> &rarr;
+    <em>Save...</em> as a
+    <a href="../fileformats.htm#kcbasic">KC-BASIC program file</a>.
+   </li>
+   <li>
+    Now load the file into memory, specifying the
+    load address <em>2C01 for RAM BASIC</em>
+    in the <a href="../loadsave.htm#options">Load Options</a>.
+   </li>
+  </ol>
+</body>
+</html>

@@ -47,6 +47,7 @@ import jkcemu.lang.LangUtil;
 
 public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 {
+  public static final String PAGE_PREFIX  = "/help/";
   public static final String PAGE_HOME    = "/help/home.htm";
   public static final String PAGE_INDEX   = "/help/index.htm";
   public static final String PAGE_LICENSE = "/help/license.htm";
@@ -120,6 +121,37 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
   public static void openPage( final String page )
   {
     fireOpenInternal( null, page, null );
+  }
+
+
+  /*
+   * Ermittlung der URL einer Hilfeseite in der eingestellten Sprache.
+   * Die uebersetzten Hilfeseiten liegen in einem Unterverzeichnis
+   * mit dem Sprachcode, z.B. /help/en/kc85.htm.
+   * Da die Hilfeseiten untereinander relativ verlinkt sind,
+   * bleibt man beim Navigieren automatisch in der jeweiligen Sprache.
+   * Existiert eine Seite in der eingestellten Sprache nicht,
+   * wird die deutsche Originalseite verwendet.
+   */
+  public static URL getPageURL( String page )
+  {
+    URL rv = null;
+    if( page != null ) {
+      String langCode = LangUtil.getLangCode();
+      if( !langCode.equals( LangUtil.LANG_CODE_DE )
+	  && page.startsWith( PAGE_PREFIX ) )
+      {
+	rv = HelpFrm.class.getResource(
+			PAGE_PREFIX
+				+ langCode
+				+ "/"
+				+ page.substring( PAGE_PREFIX.length() ) );
+      }
+      if( rv == null ) {
+	rv = HelpFrm.class.getResource( page );
+      }
+    }
+    return rv;
   }
 
 
@@ -209,7 +241,7 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
     setPage(
 	true,
 	null,
-	HelpFrm.class.getResource( PAGE_HOME ),
+	getPageURL( PAGE_HOME ),
 	null,
 	null,
 	null );
@@ -432,7 +464,7 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
     this.textToFind     = null;
     this.jumpToTimer    = new javax.swing.Timer( 500, this );
     this.pageStack      = new Stack<>();
-    this.urlHome        = getClass().getResource( "/help/home.htm" );
+    this.urlHome        = getPageURL( PAGE_HOME );
 
 
     // Menu
@@ -684,7 +716,7 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
       processedPages.add( page );
       InputStream in = null;
       try {
-	URL url = getClass().getResource( page );
+	URL url = getPageURL( page );
 	if( url != null ) {
 	  in = url.openStream();
 
@@ -821,7 +853,7 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
     instance.setPage(
 		true,
 		htmlText,
-		page != null ? HelpFrm.class.getResource( page ) : null,
+		getPageURL( page ),
 		null,
 		findText,
 		null );

@@ -1,0 +1,68 @@
+<html>
+<body>
+ <h1>Checksum/Hash Value Calculation</h1>
+  In this window, which you reach via the
+  <a href="filebrowser.htm">File Browser</a>,
+  you can have checksums and hash values of files
+  calculated.
+  To do so, in the <a href="filebrowser.htm">File Browser</a>,
+  select the desired files and call up the function
+  <em>Compute Checksum/Hash Value...</em>
+  in the <em>File</em> menu.
+  In the window that then appears, select the desired
+  algorithm and press the <em>Calculate</em> button.
+ <br/><br/>
+
+ <h2>Supported Algorithms</h2>
+  The following checksum calculations are supported:
+ <br/>
+  <ul>
+   <li>Sum of bytes</li>
+   <li>Sum of 16-bit words (little endian)</li>
+   <li>Sum of 16-bit words (big endian)</li>
+   <li>CRC-CCITT (CRC-16 HDLC)</li>
+   <li>CRC-32</li>
+   <li>Adler-32</li>
+  </ul>
+ <br/>
+  The algorithms supported for hash value calculation
+  depend on the Java runtime environment being used
+  and can therefore change.
+  Usually, the following algorithms are supported:
+ <br/>
+  <ul>
+   <li>MD2</li>
+   <li>MD5</li>
+   <li>SHA (SHA-1)</li>
+   <li>SHA-256</li>
+   <li>SHA-384</li>
+   <li>SHA-512</li>
+  </ul>
+ <br/>
+
+ <h2>Comparing an Actual Value with a Target Value</h2>
+  The point of the calculation is usually to compare the calculated value
+  (actual value) with a given value (target value).
+  This is especially convenient
+  if you copy the target value to the clipboard,
+  then select the file in question in the table field,
+  and then call up the menu item
+  <em>Compare Value with Clipboard</em> in the
+  <em>Edit</em> menu.
+  This compares the actual and target values, without
+  regard for upper/lower case.
+  In addition, spaces and other non-hexadecimal characters
+  are also ignored.
+  This means the comparison works reliably even when,
+  for example, the target value is grouped with spaces
+  for better readability.
+  So you do not need to specially prepare the target value
+  before copying it to the clipboard.
+ <br/><br/>
+  Furthermore, you also have the option
+  of copying the calculated value to the clipboard,
+  with the hexadecimal characters <em>A</em> through <em>F</em>
+  copied as upper- or lower-case letters,
+  as you prefer.
+</body>
+</html>

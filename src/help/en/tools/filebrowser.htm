@@ -1,0 +1,309 @@
+<html>
+<body>
+ <h1>File Browser</h1>
+  <ul>
+   <li><a href="filebrowser.htm#layout">1. View</a></li>
+   <li><a href="filebrowser.htm#dragdrop">2. Drag&amp;Drop</a></li>
+   <li>
+    <a href="filebrowser.htm#load_start">3. Loading and Starting Files</a>
+    <ul>
+     <li>
+      <a href="filebrowser.htm#load_with">3.1. Load into Emulator With...</a>
+     </li>
+     <li>
+      <a href="filebrowser.htm#load">3.2. Load into Emulator</a>
+     </li>
+     <li>
+      <a href="filebrowser.htm#start">3.3. Start in Emulator</a>
+     </li>
+     <li>
+      <a href="filebrowser.htm#doubleclick">3.4. Double-Click</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="filebrowser.htm#copy_paste">4. Cutting, Copying, and Pasting</a>
+   </li>
+   <li>
+    <a href="filebrowser.htm#play_bin">5. Audio Playback of Memory Image Files</a>
+   </li>
+   <li><a href="filebrowser.htm#etc">6. Further Functions</a></li>
+   <li><a href="filebrowser.htm#keyboard">7. Keyboard Operation</a></li>
+   <li>
+    <a href="filebrowser.htm#settings">8. Settings</a>
+    <ul>
+     <li>
+      <a href="filebrowser.htm#auto_upd">8.1. Monitoring Displayed Directories for Changes</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+  The File Browser lets you
+  load or open programs and files especially conveniently.
+  While loading in the usual way with a file selection dialog
+  requires many mouse clicks, the File Browser can stay open,
+  so that a file can be selected at any time and loaded or opened
+  with just a few mouse clicks.
+  In addition, depending on the settings, hidden files are also visible,
+  which is not the case with the JKCEMU file selection dialog.
+ <br/><br/>
+  Besides making it convenient to load files into the emulator,
+  the File Browser also offers many of the functions
+  of a file manager, such as copying files and directories,
+  moving them (cut and paste), deleting them, etc.
+ <br/><br/>
+
+ <h2><a name="layout">1. View</a></h2>
+  The File Browser shows the file system on the left-hand side
+  in a tree view.
+  Using the entries in the
+  <a href="filebrowser.htm#settings">Settings</a> menu,
+  you can specify
+  how the files and directories are sorted and whether hidden
+  files or directories should also be shown.
+ <br/><br/>
+  The right-hand side is used to display details.
+  Between the two sides there is a divider
+  that you can drag left and right.
+  When you click a file,
+  detail information is shown on the right-hand side.
+  For an image file, you see the whole image, provided
+  the file format is supported and the configured
+  maximum file size for the preview
+  has not been exceeded.
+  For an archive file (TAR and ZIP), as well as for a directory,
+  its contents are shown.
+ <br/><br/>
+
+ <h2><a name="dragdrop">2. Drag&amp;Drop</a></h2>
+  The File Browser can be used both as the source and as the target
+  of a drag&amp;drop operation,
+  i.e. you can select a file,
+  drag it with the mouse button held down into another window,
+  and release it there.
+  It is then up to the other window what happens with the file.
+  The JKCEMU emulator window will, in such a case, load the file.
+ <br/><br/>
+  In the other direction, i.e. if you drag a file into the left-hand view
+  of the File Browser and release it there over a directory,
+  the file is copied or moved into that directory.
+  It is also possible to drag a file out of a web browser
+  into the File Browser, provided the web browser supports this.
+  In that case, JKCEMU will download the file and save it
+  in the directory in question.
+ <br/><br/>
+  Drag&amp;drop can transfer not only a single file,
+  but also several files as well as directories.
+  However, it may be that the target window can only do something
+  with a single file, but not with several files or with directories.
+  For instance, it usually makes little sense to drag a directory
+  into a text editor and try to open it there.
+ <br/><br/>
+
+ <h2><a name="load_start">3. Loading and Starting Files</a></h2>
+  The File Browser's main task is
+  to load files conveniently and, if applicable, also start them.
+  The <em>File</em> menu offers various functions for this,
+  the most important of which can also be found in the toolbar
+  at the top of the window.
+ <br/><br/>
+  <b>Caution!</b> If the File Browser was started with the JKCEMU
+  command-line option
+  <em>--fb</em> or <em>--filebrowser</em> without the emulator
+  (see <a href="../cmdline.htm">Invocation and Command Line</a>),
+  nothing can be loaded into the emulator either.
+  In that case, the menu items and buttons
+  for loading into the emulator are not visible,
+  and double-clicking does not perform a load either.
+ <br/><br/>
+
+ <h3><a name="load_with">3.1. Load into Emulator With...</a></h3>
+  With this function, the dialog with the
+  <a href="../loadsave.htm#options">load options</a>
+  is always shown before the selected file is loaded.
+  This lets you, for example, load the file to an address other than
+  the one specified in the file.
+ <br/><br/>
+
+ <h3><a name="load">3.2. Load into Emulator</a></h3>
+  With this function, the selected file is loaded into the emulator's
+  main memory without prompting.
+  However, this requires
+  that the file's format also has load addresses.
+  If that is not the case, a load address must be specified.
+  In that case, the dialog with the
+  <a href="../loadsave.htm#options">load options</a> appears after all.
+ <br/><br/>
+
+ <h3><a name="start">3.3. Start in Emulator</a></h3>
+  If the selected file contains an executable
+  machine code program and a start address,
+  the file is loaded without prompting and the program is started.
+ <br/><br/>
+
+ <h3><a name="doubleclick">3.4. Double-Click</a></h3>
+  Double-clicking a file performs the action
+  that makes sense for that file.
+  A text file is opened in the <a href="texteditor.htm">Text Editor</a>,
+  an image file is shown in the
+  <a href="imageviewer.htm">Image Viewer</a>
+  (if the file format is supported),
+  and a sound file is played
+  (if the file format is supported).
+  If JKCEMU does not know what to do with the file,
+  the operating system is asked to open the file.
+ <br/><br/>
+
+ <h2><a name="copy_paste">4. Cutting, Copying, and Pasting</a></h2>
+  Using the <em>Edit</em> menu as well as the
+  context menu, you can cut, copy, and paste
+  files and directories.
+  For this, the operating system's clipboard
+  is used (if available), i.e. this also lets you
+  transfer files back and forth between the File Browser
+  and other windows or programs.
+ <br/><br/>
+  <b>Caution!</b> The <em>Cut</em> function only works
+  within the File Browser.
+  If you cut a file in the File Browser and paste it
+  into a different program,
+  the file is copied, not moved.
+ <br/><br/>
+  As a special feature, the File Browser also offers the option
+  of copying just the full names of files and directories,
+  both as plain text and in the form of a URL.
+ <br/><br/>
+
+ <h3>
+  <a name="play_bin">5. Audio Playback of Memory Image Files</a>
+ </h3>
+  A special feature of the JKCEMU File Browser is
+  that it can play back memory image files in the tape recording format
+  of some of the emulated computers.
+  This makes JKCEMU suitable as a playback source for these 8-bit computers.
+  You find the corresponding functions in the submenu
+  <em>File</em> &rarr; <em>Play In</em>.
+ <br/><br/>
+  The table shows which file formats can be played back
+  in which tape recording format:
+  <table border="1">
+   <tr>
+    <th>Memory Image File Format</th>
+    <th>Audio Playback in Tape Recording Format</th>
+   </tr>
+   <tr>
+    <td valign="top">Plain memory image files (*.bin)</td>
+    <td valign="top">
+     <ul>
+      <li>AC1</li>
+      <li>AC1/LLC2 TurboSave</li>
+      <li>Z1013</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">Headersave files (*.z80)</td>
+    <td valign="top">
+     <ul>
+      <li>Z1013 Headersave</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     Headersave files (*.z80)<br/>
+     with type <em>B</em> and start address 60F7<br/>
+     (the format in which JKCEMU stores AC1 and LLC2 BASIC programs)
+    </td>
+    <td valign="top">
+     <ul>
+      <li>AC1 BASIC</li>
+      <li>AC1/LLC2 TurboSave</li>
+      <li>Z1013 Headersave</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     KC system files (*.kcc)<br/>
+     KC system files with a BASIC program (*.kcb)<br/>
+    </td>
+    <td valign="top">
+     <ul>
+      <li>KC format</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">KC BASIC files (*.sss)</td>
+    <td valign="top">
+     <ul>
+      <li>KC format</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">KC TAP files (*.tap)</td>
+    <td valign="top">
+     <ul>
+      <li>KC format</li>
+     </ul>
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+  The <a href="fileconverter.htm">File Converter</a> also offers
+  the option of audio playback of memory image files.
+  Thanks to the conversion functions it provides, even more
+  memory image file formats can be played back in the supported
+  tape recording formats.
+ <br/><br/>
+
+ <h2><a name="etc">6. Further Functions</a></h2>
+  Besides loading or opening files, the File Browser
+  also offers further functions,
+  such as creating directories,
+  renaming and deleting directories and files,
+  calculating checksum/hash values,
+  packing and unpacking, and
+  setting the modification time to any value.
+  You find all these functions in the <em>File</em> menu.
+ <br/><br/>
+
+ <h2><a name="keyboard">7. Keyboard Operation</a></h2>
+  The File Browser can also be operated conveniently and quickly
+  with just the four cursor keys.
+  Directories are expanded and collapsed with the
+  <em>Left</em> and <em>Right</em> keys.
+  The <em>Enter</em> key has the same function as a
+  <a href="filebrowser.htm#doubleclick">double-click</a>.
+ <br/><br/>
+
+ <h2><a name="settings">8. Settings</a></h2>
+  In the <em>Settings</em> menu, you can adapt the File Browser
+  to your needs.
+  These settings,
+  the position of the divider between the tree view and the preview,
+  and the window size and position
+  can also be permanently saved in a profile.
+  You do that in the separate
+  <a href="../settings.htm">Settings</a> window.
+ <br/><br/>
+
+ <h3>
+  <a name="auto_upd">8.1. Monitoring Displayed Directories for Changes</a>
+ </h3>
+  If the option
+  <em>Monitor Displayed Directories for Changes</em>
+  is switched on, the display is automatically updated
+  as soon as there are changes in the directories.
+  The technical implementation depends
+  on the operating system and the file system.
+  If this directory monitoring causes unpleasant effects
+  or other problems for you,
+  then please switch the option off and save the settings
+  in a profile (preferably in the <em>standard</em> profile),
+  so that the option stays permanently switched off.
+</body>
+</html>

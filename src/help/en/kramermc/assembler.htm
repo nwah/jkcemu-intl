@@ -1,0 +1,47 @@
+<html>
+<body>
+ <h1>Kramer-MC: Assembler</h1>
+  By default, the assembler expects the source code to be
+  translated in the text buffer of the
+  <a href="editor.htm">editor</a>, i.e., you write the assembler
+  program with the <a href="editor.htm">editor</a>.
+  Since the assembler requires about 8k of RAM, only short
+  programs producing at most 1 KByte of object code can be
+  created, due to the memory layout.
+ <br/><br/>
+  If the screen is assigned as the listing device (LT), the
+  listing appears 16 lines at a time.
+  After pressing the space bar, the next 16 follow.
+ <br/><br/>
+
+ <h2>Pseudo-Instructions</h2>
+  <table border="1">
+   <tr><th>Pseudo-instruction</th><th>Meaning</th></tr>
+   <tr><td>EQU</td><td>One-time value assignment</td></tr>
+   <tr><td>DEF</td><td>Repeated value assignment</td></tr>
+   <tr><td>DB</td><td>Value assignment for bytes</td></tr>
+   <tr><td>DA</td><td>Value assignment for addresses</td></tr>
+   <tr><td>BER</td><td>Reservation of a memory area</td></tr>
+   <tr>
+    <td>ORG</td>
+    <td>Value assignment for the address of the following program</td>
+   </tr>
+   <tr><td>*</td><td>current address value</td></tr>
+   <tr><td>PN</td><td>Program name, start of a program</td></tr>
+   <tr><td>END</td><td>End of a program</td></tr>
+  </table>
+ <br/><br/>
+
+ <h2>Error Messages</h2>
+  <table border="1">
+   <tr><td>20</td><td>Faulty program name</td></tr>
+   <tr><td>21</td><td>Label error (too long, syntax)</td></tr>
+   <tr><td>22</td><td>Duplicate label</td></tr>
+   <tr><td>24</td><td>Faulty mnemonic</td></tr>
+   <tr><td>25</td><td>Operand error</td></tr>
+   <tr><td>27</td><td>String too long</td></tr>
+   <tr><td>28</td><td>Symbol table full</td></tr>
+   <tr><td>29</td><td>Relative jump too far</td></tr>
+  </table>
+</body>
+</html>

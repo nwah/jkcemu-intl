@@ -1,0 +1,87 @@
+<html>
+<head><title>Debugger and Disassembler: Importing Labels</title></head>
+<body>
+ <h1>Importing Labels</h1>
+  <a href="debugger.htm">Debugger</a> and
+  <a href="reassembler.htm">Disassembler</a> offer the ability to
+  import a label table (e.g. from an assembler).
+  In the debugger, a breakpoint/logpoint is created for each label,
+  so this is equivalent to importing breakpoints/logpoints as well.
+  Since you usually do not want to stop at every label,
+  the imported breakpoints/logpoints are initially disabled
+  by default, i.e., stopping and logging are switched off.
+  If needed, you must enable
+  the individual breakpoints/logpoints manually.
+ <br/><br/>
+  The label table does not have to conform to a strict format:
+  for each line, the first two groups of digits/letters are evaluated.
+  One of them must be a four-digit hexadecimal number,
+  which may have an <em>H</em> appended.
+  Case does not matter.
+  This hexadecimal number is interpreted as an address.
+  The other group of digits/letters is accordingly the label,
+  provided it contains only letters, digits, the underscore
+  and/or the dollar sign, e.g.:
+ <br/><br/>
+  <table border="0">
+   <tr><td>&nbsp;</td><td><tt>1234</tt></td><td><tt>Label1</tt></td></tr>
+   <tr><td>&nbsp;</td><td><tt>2345h</tt></td><td><tt>Label2</tt></td></tr>
+   <tr><td>&nbsp;</td><td><tt>ABCD</tt></td><td><tt>Label3</tt></td></tr>
+   <tr><td>&nbsp;</td><td><tt>BCDEh</tt></td><td><tt>Label4</tt></td></tr>
+   <tr><td>&nbsp;</td><td><tt>0CDEF</tt></td><td><tt>Label5</tt></td></tr>
+   <tr><td>&nbsp;</td><td><tt>0FFFFh</tt></td><td><tt>Label6</tt></td></tr>
+   <tr><td>&nbsp;</td><td><tt>0BCDE</tt></td><td><tt>Label7</tt></td></tr>
+   <tr><td>&nbsp;</td><td><tt>Label8</tt></td><td><tt>3456</tt></td></tr>
+   <tr><td>&nbsp;</td><td><tt>Label9</tt></td><td><tt>4567h</tt></td></tr>
+  </table>
+ <br/><br/>
+  Spaces and tabs before the first group of digits/letters
+  do not matter and are simply ignored:
+ <br/><br/>
+  <table border="0">
+   <tr><td>&nbsp;</td><td><tt>1234</tt></td><td><tt>Label1</tt></td></tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td><tt>&nbsp;&nbsp;2345h</tt></td>
+    <td><tt>Label2</tt></td>
+   </tr>
+   <tr><td>&nbsp;</td><td><tt>ABCD</tt></td><td><tt>Label3</tt></td></tr>
+  </table>
+ <br/><br/>
+  If the label comes before the address,
+  it may also be terminated with a colon, e.g.:
+ <br/><br/>
+  <table border="0">
+   <tr><td>&nbsp;</td><td><tt>Label8:</tt></td><td><tt>3456</tt></td></tr>
+   <tr><td>&nbsp;</td><td><tt>Label9:</tt></td><td><tt>4567h</tt></td></tr>
+  </table>
+ <br/><br/>
+  Text after the address and the label (e.g. a comment) is ignored.
+  Accordingly, lines like the following are also possible:
+ <br/><br/>
+  <table border="0">
+   <tr>
+    <td>&nbsp;</td>
+    <td><tt>1234</tt></td>
+    <td><tt>Label1</tt></td>
+    <td><tt>Comment</tt></td>
+   </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td><tt>2345h</tt></td>
+    <td><tt>Label2</tt></td>
+    <td><tt>;Comment</tt></td>
+   </tr>
+  </table>
+ <br/><br/>
+  If a line contains only a four-digit hexadecimal number
+  without a label, it is still imported into the debugger
+  and a breakpoint/logpoint is created for it there.
+  The disassembler, on the other hand, cannot do anything
+  with a single address and ignores such a line.
+ <br/><br/>
+  All other lines are ignored.
+  Accordingly, it usually does not matter either
+  if the label table contains other text before or after it.
+</body>
+</html>

@@ -1,0 +1,502 @@
+<html>
+<head><title>BASIC Compiler: Constants</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Constants</h2>
+  Constants contain a numeric value
+  that cannot change during the run of the program.
+  However, it is possible for the value of a constant
+  to differ from one target system to another
+  (e.g. with the colors), or from one compiler run
+  to the next (e.g. with addresses).
+ <br/><br/>
+  With the exception of the mathematical constants, all constants
+  have the data type <a href="datatypes.htm#integer">Integer</a>.
+  The mathematical constants have the type
+  <a href="datatypes.htm#single">Single</a>.
+ <br/><br/>
+  <ul>
+   <li><a href="constants.htm#boolean">1. Boolean Values</a></li>
+   <li><a href="constants.htm#math">2. Mathematical Constants</a></li>
+   <li><a href="constants.htm#round">3. Rounding Methods</a></li>
+   <li><a href="constants.htm#color">4. Colors</a></li>
+   <li><a href="constants.htm#pen">5. Graphics Pens</a></li>
+   <li><a href="constants.htm#joyst">6. Joystick</a></li>
+   <li><a href="constants.htm#error">7. Error Codes</a></li>
+   <li><a href="constants.htm#target">8. Target Systems</a></li>
+   <li><a href="constants.htm#system">9. System Constants</a></li>
+  </ul>
+ <br/>
+
+ <h3><a name="boolean">1. Boolean Values</a></h3>
+  <table border="1">
+   <tr><th>Constant</th><th>Value</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">FALSE</td>
+    <td valign="top">0</td>
+    <td valign="top">
+     value for &quot;false&quot; (no bit set)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TRUE</td>
+    <td valign="top">-1</td>
+    <td valign="top">
+     value for &quot;true&quot; (all bits set)
+    </td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="math">2. Mathematical Constants</a></h3>
+  <table border="1">
+   <tr><th>Constant</th><th>Value</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">DOUBLEPI</td>
+    <td valign="top">6.283185</td>
+    <td valign="top">double the circle constant 2&pi;</td>
+   </tr>
+   <tr>
+    <td valign="top">HALFPI</td>
+    <td valign="top">1.570796</td>
+    <td valign="top">half the circle constant &frac12;&pi;</td>
+   </tr>
+   <tr>
+    <td valign="top">PI</td>
+    <td valign="top">3.141593</td>
+    <td valign="top">the circle constant &pi;</td>
+   </tr>
+   <tr>
+    <td valign="top">EULER</td>
+    <td valign="top">2.718282</td>
+    <td valign="top">Euler's number</td>
+   </tr>
+  </table>
+ <br/>
+  The mathematical constants have the data type
+  <a href="datatypes.htm#single">Single</a>.
+ <br/><br/>
+  <b>Note:</b> The advantage of the mathematical constants over
+  specifying the respective numeric value directly is that
+  the mathematical constants contain their respective value
+  with the maximum possible precision
+  that the data type <a href="datatypes.htm#single">Single</a> offers.
+  This eliminates any rounding errors that would otherwise result
+  from converting a directly specified decimal number
+  into the internal binary number.
+ <br/><br/>
+
+ <h3><a name="round">3. Rounding Methods</a></h3>
+  These constants are used with the function
+  <a href="functions.htm#round">ROUND</a> and specify
+  how to round when the value to be rounded lies exactly halfway
+  between two possible result values.
+ <br/><br/>
+  <table border="1">
+   <tr><th>Constant</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">ROUND_HALF_DOWN</td>
+    <td valign="top">round the magnitude down, i.e. towards zero</td>
+   </tr>
+   <tr>
+    <td valign="top">ROUND_HALF_EVEN</td>
+    <td valign="top">round the magnitude to the nearest whole number</td>
+   </tr>
+   <tr>
+    <td valign="top">ROUND_HALF_UP</td>
+    <td valign="top">round the magnitude up, i.e. away from zero</td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="color">4. Colors</a></h3>
+  The constants for the colors are intended for use
+  with the statements
+  <a href="instructions.htm#border">BORDER</a>,
+  <a href="instructions.htm#color">COLOR</a>,
+  <a href="instructions.htm#ink">INK</a> and
+  <a href="instructions.htm#paper">PAPER</a>.
+  This means you do not need to know the concrete color numbers
+  of the target system, at least for the eight primary colors,
+  and can therefore write BASIC programs that work across platforms.
+ <br/><br/>
+  <table border="1">
+   <tr><th>Constant</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">BLACK</td>
+    <td valign="top">code for the color black</td>
+   </tr>
+   <tr>
+    <td valign="top">BLINKING</td>
+    <td valign="top">
+     code for blinking,<br/>
+     BLINKING is only used in combination with a foreground color,
+     e.g.:<br/><br/>
+     <tt>
+      &nbsp;INK RED+BLINKING: &nbsp;PRINT "I am blinking red";<br/>
+      &nbsp;INK WHITE: &nbsp;PRINT "white without blinking";
+     </tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">BLUE</td>
+    <td valign="top">code for the color blue</td>
+   </tr>
+   <tr>
+    <td valign="top">CYAN</td>
+    <td valign="top">code for the color cyan</td>
+   </tr>
+   <tr>
+    <td valign="top">GREEN</td>
+    <td valign="top">code for the color green</td>
+   </tr>
+   <tr>
+    <td valign="top">MAGENTA</td>
+    <td valign="top">code for the color magenta</td>
+   </tr>
+   <tr>
+    <td valign="top">RED</td>
+    <td valign="top">code for the color red</td>
+   </tr>
+   <tr>
+    <td valign="top">WHITE</td>
+    <td valign="top">code for the color white</td>
+   </tr>
+   <tr>
+    <td valign="top">YELLOW</td>
+    <td valign="top">code for the color yellow</td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="pen">5. Graphics Pens</a></h3>
+  The constants for the graphics pens are used as a parameter for the
+  <a href="instructions.htm#pen">PEN</a> statement
+  and are also described there.
+ <br/><br/>
+  <table border="1">
+   <tr><th>Constant</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top"><tt>PEN_ERASER</tt></td>
+    <td>erase mode</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>PEN_NONE</tt></td>
+    <td>pen raised</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>PEN_NORMAL</tt></td>
+    <td>normal drawing mode</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>PEN_XOR</tt></td>
+    <td>XOR mode</td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="joyst">6. Joystick</a></h3>
+  The joystick constants are used to evaluate the return value
+  of the <a href="functions.htm#joyst">JOYST</a> function.
+  For this, the return value must be combined with the respective
+  constant using
+  <a href="expressions.htm#operators2"><tt>AND</tt></a>.
+ <br/><br/>
+  <table border="1">
+   <tr><th>Constant</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top"><tt>JOYST_LEFT</tt></td>
+    <td>joystick pushed left</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>JOYST_RIGHT</tt></td>
+    <td>joystick pushed right</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>JOYST_UP</tt></td>
+    <td>joystick pushed up</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>JOYST_DOWN</tt></td>
+    <td>joystick pushed down</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>JOYST_BUTTON1</tt></td>
+    <td>action button&nbsp;1 pressed</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>JOYST_BUTTON2</tt></td>
+    <td>action button&nbsp;2 pressed</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>JOYST_BUTTONS</tt></td>
+    <td>action button&nbsp;1 or 2 pressed</td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="error">7. Error Codes</a></h3>
+  The error code constants are used to evaluate the system variable
+  <a href="functions.htm#err">ERR</a>.
+ <br/><br/>
+  <table border="1">
+   <tr><th>Constant</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">E_CHANNEL_ALREADY_OPEN</td>
+    <td valign="top">
+     An attempt was made to open an I/O channel
+     that is already open.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_CHANNEL_CLOSED</td>
+    <td valign="top">
+     A statement or function for I/O was called
+     on a channel that is not open.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_DEVICE_LOCKED</td>
+    <td valign="top">
+     The I/O device is already in use and
+     cannot be used multiple times at the same time.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_DEVICE_NOT_FOUND</td>
+    <td valign="top">
+     The specified I/O device was not found.
+     Either the device does not exist or is not ready,
+     or the device is not supported for the target system,
+     or the device name was misspelled.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_DIGITS_TRUNCATED</td>
+    <td valign="top">
+     During the last calculation with the data type
+     <a href="datatypes.htm#decimal">Decimal</a>,
+     decimal places were truncated
+     because they did not fit into the data type
+     (max. 7&nbsp;decimal places).
+     The result is therefore no longer mathematically exact.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_DISK_FULL</td>
+    <td valign="top">
+     The file could not be opened for writing, or
+     the output operation could not be performed,
+     because the storage medium is full.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_EOF</td>
+    <td valign="top">
+     An attempt was made to read past the end of the file.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_ERROR</td>
+    <td valign="top">
+     A general or unspecified error
+     has occurred.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_FILE_NOT_FOUND</td>
+    <td valign="top">
+     The specified file was not found.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_INVALID</td>
+    <td valign="top">
+     The operation is not permitted, or a parameter
+     contains an invalid value.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_IO_ERROR</td>
+    <td valign="top">The I/O operation failed.</td>
+   </tr>
+   <tr>
+    <td valign="top">E_IO_MODE</td>
+    <td valign="top">
+     The operation is not possible with the mode
+     with which the channel was opened.
+     The error occurs, for example, when an attempt is made
+     to read from an output channel or
+     to write to an input channel.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_NO_DISK</td>
+    <td valign="top">
+     The storage medium is not present,
+     e.g. no floppy disk inserted or no USB storage device connected.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_OK</td>
+    <td valign="top">
+     The statement or function in question was executed
+     successfully, i.e. no error occurred.
+     E_OK has the numeric value&nbsp;0.
+     This means an error can also be tested for
+     without a comparison operator:
+     <br/><br/>
+     <tt>IF ERR THEN PRINT "Error"</tt>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_OVERFLOW</td>
+    <td valign="top">
+     A numeric overflow has occurred.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_PATH_NOT_FOUND</td>
+    <td valign="top">
+     The specified path was not found.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">E_READ_ONLY</td>
+    <td valign="top">
+     An attempt was made to open a write-protected file, or
+     a file on a write-protected storage medium,
+     for writing.
+    </td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="target">8. Constants for Target Systems</a></h3>
+  <table border="1">
+   <tr><th>Constant</th><th>Target System</th></tr>
+   <tr>
+    <td valign="top">TARGET_AC1</td>
+    <td valign="top">
+     <a href="targets.htm#ac1">AC1-2010, AC1-SCCH with optional color graphics card</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_CPM</td>
+    <td valign="top">
+     <a href="targets.htm#cpm">CP/M-compatible</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_HUEBLER</td>
+    <td valign="top">
+     <a href="targets.htm#huebler">H&uuml;bler-Grafik-MC</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_KC85</td>
+    <td valign="top">
+     <a href="targets.htm#kc85">KC85/2..5, HC900</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_KC85_4</td>
+    <td valign="top">
+     <a href="targets.htm#kc85_4">KC85/4..5 with support for both video memories</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_KC85_CAOS48</td>
+    <td valign="top">
+     <a href="targets.htm#kc85_caos48">KC85/5 with CAOS&nbsp;&gt;=&nbsp;48</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_KRAMER</td>
+    <td valign="top">
+     <a href="targets.htm#kramer">Kramer-MC</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_LLC2</td>
+    <td valign="top">
+     <a href="targets.htm#llc2">LLC2 with HIRES graphics</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_SCCH</td>
+    <td valign="top">
+     <a href="targets.htm#scch">SCCH (AC1-2010, AC1-SCCH, LLC2)</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_Z1013</td>
+    <td valign="top">
+     <a href="targets.htm#z1013">Z1013</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_Z1013_64X16</td>
+    <td valign="top">
+     <a href="targets.htm#z1013_64x16">Z1013 with Peters board</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_Z1013_KRT</td>
+    <td valign="top">
+     <a href="targets.htm#z1013krt">Z1013 with KRT graphics</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_Z1013_ZX</td>
+    <td valign="top">
+     <a href="targets.htm#z1013zx">Z1013 with ZX graphics</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_Z9001</td>
+    <td valign="top">
+     <a href="targets.htm#z9001">KC85/1, KC87, Z9001</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">TARGET_Z9001_KRT</td>
+    <td valign="top">
+     <a href="targets.htm#z9001krt">KC85/1, KC87, Z9001 with KRT graphics</a>
+    </td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="system">9. System Constants</a></h3>
+  <table border="1">
+   <tr><th>Constant</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">GRAPHICSCREEN</td>
+    <td valign="top">
+     This constant is intended as a parameter for the
+     <a href="instructions.htm#screen">SCREEN</a> statement
+     and contains the number of the graphics-capable screen.
+     If the target system does not support graphics,
+     the constant has the value&nbsp;-1.
+   </tr>
+   <tr>
+    <td valign="top">LASTSCREEN</td>
+    <td valign="top">
+     the highest possible screen number
+     that can be set with the <a href="instructions.htm#screen">SCREEN</a>
+     statement
+   </tr>
+   <tr>
+    <td valign="top">TOP</td>
+    <td valign="top">
+     address of the first free byte behind the memory
+     occupied or used by the compiled BASIC program
+    </td>
+   </tr>
+  </table>
+ <br/>
+</body>
+</html>
+

@@ -1,0 +1,101 @@
+<html>
+<body>
+ <h1>Disassembler</h1>
+  With the disassembler, also called a reassembler,
+  you can translate the bytes located in the emulator's
+  working memory into assembler syntax.
+ <br/><br/>
+  <ul>
+   <li>
+    <a href="reassembler.htm#reass">1. Disassembling a Memory Range</a>
+   </li>
+   <li>
+    <a href="reassembler.htm#break">2. Creating a Breakpoint/Logpoint in the Debugger</a>
+   </li>
+   <li>
+    <a href="reassembler.htm#asm">3. Generating Assembler Source Code</a>
+   </li>
+   <li><a href="reassembler.htm#settings">4. Settings</a></li>
+  </ul>
+ <br/>
+
+ <h2><a name="reass">1. Disassembling a Memory Range</a></h2>
+  After starting the disassembler, you need to enter the start
+  and end address of the memory range to be disassembled.
+  Then choose the menu item
+  <em>File</em> &rarr; <em>Disassemble</em>,
+  and the disassembly listing is displayed in the window.
+  You can now save or print this listing.
+  Undocumented processor instructions are marked
+  with an asterisk at the beginning of the mnemonic.
+ <br/><br/>
+  You can also start the actual disassembly by pressing
+  the <em>Enter</em> key,
+  as long as the cursor is in the input field for the end address.
+ <br/><br/>
+  Optionally, you can
+  <a href="labelimport.htm">import a label table</a>
+  (e.g. from an assembler)
+  in order to also see labels or logical names in the disassembler.
+ <br/><br/>
+  <b>Caution!</b> The memory range disassembled is the one
+  the microprocessor sees at that point in time.
+  If the emulated system has several memory banks
+  overlapping in that address range,
+  you must make sure yourself
+  that the correct bank is switched in.
+ <br/><br/>
+  <b>Caution!</b> The disassembler is not able
+  to understand the semantics of the disassembled program code, i.e.,
+  non-executable data areas are not recognized as such.
+  All bytes in the memory range to be disassembled are therefore
+  always interpreted as machine instructions of the microprocessor,
+  regardless of whether they actually represent
+  executable program code.
+ <br/><br/>
+
+ <h2><a name="break">2. Creating a Breakpoint/Logpoint in the Debugger</a></h2>
+  In the context menu (right mouse button) you find a menu item
+  with which you can create a
+  <a href="debugger.htm#bp_pc">breakpoint/logpoint on a program address</a>
+  in the <a href="debugger.htm">Debugger</a>.
+  The address over which you opened the context menu
+  is then adopted into the new breakpoint/logpoint.
+  The same applies to the optional name,
+  if you have imported labels into the disassembler and
+  opened the context menu over such a label.
+ <br/><br/>
+
+ <h2><a name="asm">3. Generating Assembler Source Code</a></h2>
+  The disassembler is able
+  to generate assembler source code from the disassembly listing.
+  You find the functions for this in the <em>File</em> menu
+  (&rarr; <em>Open as Source Code in Text Editor...</em>
+  or &rarr; <em>Export as Source Code...</em>).
+ <br/><br/>
+  When generating assembler source code, assembler labels
+  are also generated.
+  These consist of a prefix and
+  the corresponding address in hexadecimal form.
+  You are asked for the prefix
+  before the source code is generated, i.e., you can specify it yourself.
+  However, the prefix must conform to the naming conventions
+  for assembler labels.
+ <br/><br/>
+  <b>Caution!</b> Undocumented processor instructions
+  that are marked with an asterisk in the disassembly listing
+  no longer contain an asterisk in the generated assembler listing,
+  so that the assembler does not report a syntax error.
+  If the undocumented instruction is merely a different byte sequence
+  for a documented instruction,
+  this automatically converts the undocumented instruction
+  into a documented one.
+ <br/><br/>
+
+ <h2><a name="settings">4. Settings</a></h2>
+  The font for the disassembler output can be changed
+  in the <a href="../settings.htm">JKCEMU Settings</a> window,
+  on the <em>Fonts/Icons</em> tab, under
+  <em>Font for code areas</em>.
+</body>
+</html>

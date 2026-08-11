@@ -1,0 +1,104 @@
+<html>
+<body>
+ <h1>Joysticks</h1>
+  <ul>
+   <li><a href="joystick.htm#intro">1. General</a></li>
+   <li>
+    <a href="joystick.htm#real_joy">2. Joystick Emulation with Connected Joysticks</a>
+   </li>
+   <li>
+    <a href="joystick.htm#virtual_joy">3. Joystick Emulation without Connected Joysticks</a>
+   </li>
+   <li>
+    <a href="joystick.htm#by_keyboard">4. Operating Emulated Joysticks with the Keyboard</a>
+   </li>
+   <li><a href="joystick.htm#buttons">5. Action Buttons</a></li>
+  </ul>
+ <br/>
+
+ <h2><a name="intro">1. General</a></h2>
+  The emulator supports joysticks under the Windows and Linux
+  operating systems.
+  If the emulated system originally has joystick ports
+  that are emulated by JKCEMU,
+  these emulated joysticks can be operated with the joysticks
+  connected to the computer running the emulator.
+ <br/><br/>
+
+ <h2>
+  <a name="real_joy">2. Joystick Emulation with Connected Joysticks</a>
+ </h2>
+  JKCEMU automatically connects the emulated joysticks in order
+  to the connected joysticks,
+  i.e., if two joysticks are emulated,
+  emulated joystick&nbsp;1 is connected to the first
+  connected joystick
+  and emulated joystick&nbsp;2 to the second.
+  If only one joystick is connected,
+  it is connected to the first emulated joystick.
+  The second emulated joystick then has no &quot;real&quot;
+  joystick.
+ <br/><br/>
+  However, you can change the assignment between emulated joysticks
+  and connected joysticks.
+  To do so, in the emulator window, open the <em>Extra</em> menu
+  and select the <em>Joystick...</em> menu item.
+  The <em>JKCEMU Joysticks</em> window opens,
+  in which you can connect and disconnect each emulated joystick
+  to a connected joystick individually.
+  This makes it possible, with only one joystick connected,
+  to map it to only emulated joystick&nbsp;1,
+  or only to joystick&nbsp;2, or to both at the same time.
+  In the latter case, you then operate both emulated joysticks
+  in parallel with the one connected joystick.
+ <br/><br/>
+
+ <h2>
+  <a name="virtual_joy">3. Joystick Emulation without Connected Joysticks</a>
+ </h2>
+  If you have no joysticks connected to the computer running the emulator,
+  or if they are not supported,
+  you can still use the joystick emulation.
+  To do so, click the arrows and action buttons
+  in the joystick window with the mouse.
+ <br/><br/>
+
+ <h2>
+  <a name="by_keyboard">4. Operating Emulated Joysticks with the Keyboard</a>
+ </h2>
+  The emulated joysticks can also be operated with the keyboard,
+  without the joystick window needing to be open.
+  Pressing the Alt key,
+  or the Command key on a Mac, together with a cursor key,
+  <em>F1</em>, <em>F2</em> or <em>Enter</em> at the same time
+  operates the first emulated joystick.
+  The second emulated joystick is reached by also
+  pressing the Shift key at the same time.
+ <br/><br/>
+  The four cursor keys are responsible for the directions,
+  <em>Enter</em> and <em>F1</em> for the first action button,
+  and <em>F2</em> for the second action button.
+ <br/><br/>
+  In the joystick window, pressing the Alt or Command key
+  is not necessary in order to operate the emulated joysticks
+  with the keyboard.
+ <br/><br/>
+
+ <h2><a name="buttons">5. Action Buttons</a></h2>
+  JKCEMU simulates two action buttons per joystick.
+  However, some of the emulated systems support
+  only one action button.
+  In that case, both simulated buttons have the same effect.
+  Both of them trigger the one action button
+  supported by the emulated system.
+ <br/><br/>
+  If you use joysticks connected to the computer running the emulator
+  that have more than two action buttons,
+  these are mapped in turn, alternating, to the two buttons
+  simulated by JKCEMU.
+  However, if the operating system running on the computer running the emulator,
+  or the joystick driver used, reports the same number
+  for all action buttons, then they logically all trigger
+  the same action button simulated by JKCEMU as well.
+</body>
+</html>

@@ -1,0 +1,354 @@
+<html>
+<body>
+ <h1>Poly-Computer&nbsp;880</h1>
+  The Poly-Computer&nbsp;880, sometimes also written Polycomputer,
+  is a learning computer with a 7-segment display
+  and a hexadecimal keyboard, manufactured by
+  VEB Polytechnik Karl-Marx-Stadt (today Chemnitz).
+  As a special feature, the Poly-Computer offers a hardware
+  single-step mode in which even the individual clock cycles
+  of the microprocessor can be tracked.
+  LEDs display the signals of the address, data, and control bus.
+  However, this hardware single-step mode, and thus the display
+  of the bus signals, is not emulated by JKCEMU.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="poly880.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="poly880.htm#keyboard">1.1. Keyboard</a></li>
+     <li><a href="poly880.htm#hwstep">1.2. Hardware Single-Step Mode</a></li>
+     <li><a href="poly880.htm#audio">1.3. Cassette and Sound Output</a></li>
+    </ul>
+   </li>
+   <li>
+    <a href="poly880.htm#software">2. Software Contained in ROM</a>
+    <ul>
+     <li>
+      <a href="poly880.htm#mem">2.1.1. Displaying/Changing Memory Cells</a>
+     </li>
+     <li>
+      <a href="poly880.htm#reg">2.1.2. Displaying/Changing Registers</a>
+     </li>
+     <li><a href="poly880.htm#run">2.1.3. Starting a Program</a></li>
+     <li><a href="poly880.htm#step">2.1.4. Single-Step Mode</a></li>
+     <li><a href="poly880.htm#port_in">2.1.5. Port Input</a></li>
+     <li><a href="poly880.htm#port_out">2.1.6. Port Output</a></li>
+     <li><a href="poly880.htm#trans">2.1.7. Moving a Data Range</a></li>
+     <li><a href="poly880.htm#fill">2.1.8. Filling a Data Range</a></li>
+     <li>
+      <a href="poly880.htm#load">2.1.9. Loading a Data Range from Tape</a>
+     </li>
+     <li>
+      <a href="poly880.htm#save">2.1.10. Saving a Data Range to Tape</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="poly880.htm#etc">3. Miscellaneous</a>
+    <ul>
+     <li>
+      <a href="poly880.htm#ext_rom">3.1. Loading External ROM Files</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  <ul>
+   <li>2 KByte ROM in the address range 0000-03FF and 1000-03FF</li>
+   <li>1 KByte RAM in the address range 4000-43FF</li>
+   <li>8-digit 7-segment display</li>
+   <li>hexadecimal keyboard with additional function keys</li>
+   <li>cassette recorder connector</li>
+   <li>
+    optional:
+    <ul>
+     <li>32&nbsp;KByte RAM expansion (8000h-FFFFh)</li>
+     <li>ROM&nbsp;2 (2000h-23FFh)</li>
+     <li>ROM&nbsp;3 (3000h-33FFh)</li>
+    </ul>
+   </li>
+  </ul>
+  Due to incomplete address decoding,
+  except for the optional RAM expansion,
+  the individual ROM and RAM memory ranges are each
+  visible four times in succession,
+  i.e. you also see X000-X3FF in X400-X7FF, in X800-XBFF, and in XC00-XFFF,
+  where X stands for 0...4.
+ <br/><br/>
+
+ <h3><a name="keyboard">1.1. Keyboard</a></h3>
+  The table shows how the keys of the Poly-Computer are mapped
+  to the keys of the emulator computer's keyboard:
+ <br/>
+  <table border="1">
+   <tr>
+    <th>Poly880 Key</th>
+    <th>Key in JKCEMU</th>
+    <th>Meaning</th>
+   </tr>
+   <tr>
+    <td valign="top">BACK</td>
+    <td valign="top">- or BackSpace</td>
+    <td>previous address</td>
+   </tr>
+   <tr>
+    <td valign="top">EXEC</td>
+    <td valign="top">X or Enter</td>
+    <td>execute action</td>
+   </tr>
+   <tr>
+    <td valign="top">RES</td>
+    <td valign="top">Escape</td>
+    <td>RESET</td>
+   </tr>
+   <tr>
+    <td valign="top">FCT</td>
+    <td valign="top">F1</td>
+    <td>function</td>
+   </tr>
+   <tr>
+    <td valign="top">GO</td>
+    <td valign="top">G</td>
+    <td>start program</td>
+   </tr>
+   <tr>
+    <td valign="top">REG</td>
+    <td valign="top">R</td>
+    <td>register</td>
+   </tr>
+   <tr>
+    <td valign="top">STEP</td>
+    <td valign="top">S</td>
+    <td>single-step mode</td>
+   </tr>
+   <tr>
+    <td valign="top">MEM</td>
+    <td valign="top">M</td>
+    <td>display/change memory</td>
+   </tr>
+   <tr>
+    <td valign="top">0...9, A...F</td>
+    <td valign="top">0...9, A...F</td>
+    <td>address/data entry</td>
+   </tr>
+   <tr>
+    <td valign="top">CYCL</td>
+    <td></td>
+    <td>
+     single step (one clock cycle) in hardware single-step mode,<br/>
+     not emulated by JKCEMU
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">MCYCL</td>
+    <td></td>
+    <td>
+     enable hardware single-step mode,<br/>
+     not emulated by JKCEMU
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">MON</td>
+    <td valign="top">F2</td>
+    <td>
+     return to the monitor program<br/>
+     (On the original, this also disables hardware single-step mode,
+     which JKCEMU does not emulate anyway.)
+    </td>
+   </tr>
+  </table>
+ <br/>
+  <b>Caution!</b> For simplicity, Escape triggers
+  RESET without a confirmation prompt,
+  even if the confirmation prompt is enabled
+  for this in the settings.
+ <br/><br/>
+
+ <h3><a name="hwstep">1.2. Hardware Single-Step Mode</a></h3>
+  On the original, there is a hardware single-step mode
+  with which you can execute the individual clock cycles
+  of the microprocessor step by step.
+  JKCEMU does not emulate this hardware single-step mode.
+  However, the software single-step mode that also exists
+  is emulated (<em>STEP</em> key),
+  which is used to execute complete machine instructions step by step.
+ <br/><br/>
+
+ <h3><a name="audio">1.3. Cassette and Sound Output</a></h3>
+  You can listen to the sound signals output at the emulated
+  cassette recorder connector
+  (PIO&nbsp;1, port&nbsp;B, bit&nbsp;0) in the
+  <a href="audio.htm">Audio/Tape</a> window
+  on the <em>Tape Output</em> tab,
+  or record them and save them to a file.
+  The <em>Speaker</em> tab is responsible for the sound signals
+  output via PIO&nbsp;1, port&nbsp;B, bit&nbsp;2
+  (speaker connector).
+ <br/><br/>
+
+
+ <h2><a name="software">2. Software Contained in ROM</a></h2>
+  <ul>
+   <li>original monitor program</li>
+  </ul>
+ <br/>
+
+
+ <h3><a name="mon">2.1. Notes on Operating the Monitor Program</a></h3>
+
+ <h3><a name="mem">2.1.1. Displaying/Changing Memory Cells</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>MEM&nbsp;(M)</em>
+  &rarr; &lt;address&gt; &rarr; <em>EXEC&nbsp;(Enter)</em>
+  [ &rarr; &lt;value&gt; &rarr; <em>EXEC&nbsp;(Enter)</em> ]
+ <br/><br/>
+  Each time you press the <em>EXEC&nbsp;(Enter)</em> key,
+  the next memory cell is displayed.
+ <br/><br/>
+
+ <h3><a name="reg">2.1.2. Displaying/Changing Registers</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>REG&nbsp;(R)</em>
+  &rarr; &lt;register selection&gt;
+  [ &rarr; <em>EXEC&nbsp;(Enter)</em> &rarr; &lt;high value&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em> &rarr; &lt;low value&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em> ]
+ <br/><br/>
+  After pressing <em>REG&nbsp;(R)</em>, you select
+  the desired register pair by pressing
+  a specific key.
+  The following assignment applies:
+  <table border="1">
+   <tr><th>Key</th><th>Register Pair</th></tr>
+   <tr><td>0</td><td>AF</td></tr>
+   <tr><td>1</td><td>BC</td></tr>
+   <tr><td>2</td><td>DE</td></tr>
+   <tr><td>3</td><td>HL</td></tr>
+   <tr><td>4</td><td>AF'</td></tr>
+   <tr><td>5</td><td>BC'</td></tr>
+   <tr><td>6</td><td>DE'</td></tr>
+   <tr><td>7</td><td>HL'</td></tr>
+   <tr><td>8</td><td>I and status of the EI flip-flop</td></tr>
+   <tr><td>9</td><td>IX</td></tr>
+   <tr><td>A</td><td>IY</td></tr>
+   <tr><td>B</td><td>SP</td></tr>
+   <tr><td>C</td><td>PC</td></tr>
+  </table>
+ <br/>
+  If you want to change the register contents,
+  press <em>EXEC&nbsp;(Enter)</em>,
+  enter the value of the high-order register,
+  press <em>EXEC&nbsp;(Enter)</em> again,
+  then enter the value of the low-order register
+  and press <em>EXEC&nbsp;(Enter)</em> once more.
+ <br/><br/>
+
+ <h3><a name="run">2.1.3. Starting a Program</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>GO&nbsp;(G)</em>
+  [ &rarr; &lt;start address&gt; ] &rarr; <em>EXEC&nbsp;(Enter)</em>
+  [ &rarr; &lt;breakpoint&gt; ] &rarr; <em>EXEC&nbsp;(Enter)</em>
+ <br/><br/>
+  The start address and the breakpoint can be omitted.
+  If the start address is omitted, the value currently stored
+  for <em>PC</em> in the register save area is used.
+ <br/><br/>
+
+ <h3><a name="step">2.1.4. Single-Step Mode</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>STEP&nbsp;(S)</em>
+  [ &rarr; &lt;address&gt; ] &rarr; <em>EXEC&nbsp;(Enter)</em>
+ <br/><br/>
+  This command executes the instruction at the specified address
+  and then halts again.
+  The address can be omitted.
+  In that case, the value currently stored
+  for <em>PC</em> in the register save area is used.
+ <br/><br/>
+
+ <h3><a name="port_in">2.1.5. Port Input</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>FCT&nbsp;(F1)</em>
+  &rarr; <em>0</em> &rarr; &lt;port address&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em>
+ <br/><br/>
+  Each time you press the <em>EXEC&nbsp;(Enter)</em> key,
+  the specified input port is read and the value is displayed.
+ <br/><br/>
+
+ <h3><a name="port_out">2.1.6. Port Output</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>FCT&nbsp;(F1)</em>
+  &rarr; <em>1</em> &rarr; &lt;port address&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em>
+  &rarr; &lt;value&gt; &rarr; <em>EXEC&nbsp;(Enter)</em>
+ <br/><br/>
+  After pressing the <em>EXEC&nbsp;(Enter)</em> key the first time,
+  you enter the value to be output,
+  which is then written to the output port
+  when you press <em>EXEC&nbsp;(Enter)</em> a second time.
+  You can now enter further values as often as you like,
+  each of which is likewise output on the port
+  by pressing <em>EXEC&nbsp;(Enter)</em>.
+ <br/><br/>
+
+ <h3><a name="trans">2.1.7. Moving a Data Range</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>FCT&nbsp;(F1)</em>
+  &rarr; <em>2</em> &rarr; &lt;destination address&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em> &rarr; &lt;source address&gt;
+  &rarr; &lt;length&gt; &rarr; <em>EXEC&nbsp;(Enter)</em>
+ <br/><br/>
+  This command moves a data range to another
+  address. Strictly speaking, the data is not moved,
+  but copied.
+  The source and destination ranges may overlap.
+  After the move, an <em>F</em> for "finished" appears in the display.
+ <br/><br/>
+
+ <h3><a name="fill">2.1.8. Filling a Data Range</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>FCT&nbsp;(F1)</em>
+  &rarr; <em>3</em> &rarr; &lt;start address&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em> &rarr; &lt;length&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em> &rarr; &lt;value&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em>
+ <br/><br/>
+
+ <h3><a name="load">2.1.9. Loading a Data Range from Tape</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>FCT&nbsp;(F1)</em>
+  &rarr; <em>4</em> &rarr; &lt;start address&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em> &rarr; &lt;end address&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em> &rarr; <em>EXEC&nbsp;(Enter)</em>
+ <br/><br/>
+  After entering the end address, you must press
+  <em>EXEC&nbsp;(Enter)</em> twice
+  before loading begins.
+  After loading has finished, an <em>F</em> appears in the display.
+ <br/><br/>
+
+ <h3><a name="save">2.1.10. Saving a Data Range to Tape</a></h3>
+  <em>RES&nbsp;(Escape)</em> &rarr; <em>FCT&nbsp;(F1)</em>
+  &rarr; <em>5</em> &rarr; &lt;start address&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em> &rarr; &lt;end address&gt;
+  &rarr; <em>EXEC&nbsp;(Enter)</em> &rarr; <em>EXEC&nbsp;(Enter)</em>
+ <br/><br/>
+  After entering the end address, you must press
+  <em>EXEC&nbsp;(Enter)</em> twice
+  before saving begins.
+  After saving has finished, an <em>F</em> appears in the display.
+ <br/><br/>
+
+
+ <h2><a name="etc">3. Miscellaneous</a></h2>
+
+ <h3><a name="ext_rom">3.1. Loading External ROM Files</a></h3>
+  On the original Poly-Computer&nbsp;880, the data lines are inverted,
+  i.e. the bytes in the ROMs are correspondingly inverted as well.
+  If you want to load such ROM contents, JKCEMU needs to know
+  whether the ROM files are inverted in the same way as the original.
+  For this purpose, the <a href="settings.htm">Settings</a> provide
+  the option <em>ROM bytes are inverted</em>.
+  You must set this option correctly in every case
+  as soon as you load an external ROM file!
+  This option applies equally to all loaded ROM files.
+</body>
+</html>

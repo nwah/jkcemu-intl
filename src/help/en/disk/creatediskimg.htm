@@ -1,0 +1,114 @@
+<html>
+<body>
+ <h1>Creating an Image File</h1>
+
+ <h2>1. Creating an Image File from a Floppy Disk or Other Volume</h2>
+  You can create a
+  <a href="diskimgformats.htm#plain">plain image file</a>
+  from a floppy disk or other volume,
+  if a corresponding drive is present in or connected to
+  the computer running the emulator and is supported by the operating system.
+  For floppy disk drives, it is especially important
+  that the physical floppy disk format
+  (number of tracks, number of sectors per track, sector size)
+  is supported.
+  To create the image file, open the menu item
+  <em>Extras</em> &rarr; <em>Tools</em> &rarr;
+  <em>Create Image File from Volume...</em> in the main window.
+ <br/><br/>
+  <b>Caution!</b> Access to physical drives depends
+  on various factors and therefore cannot be guaranteed
+  on all platforms and operating system environments.
+  Depending on the operating system and the type of volume,
+  e.g. whether it is partitioned,
+  JKCEMU may need to run under a user with special
+  privileges (e.g. administrator).
+  However, it is also possible that access to the volume
+  is denied despite administrator privileges, or that
+  the function is not available at all on your system.
+ <br/><br/>
+
+ <h2><a name="manually">2. Creating an Image File Manually</a></h2>
+  JKCEMU offers the option
+  of manually creating disk image files
+  that correspond to the CP/M&nbsp;2.2 floppy disk format.
+  You can find the tool for this in the main window in the menu
+  <em>Extras</em> &rarr; <em>Tools</em> &rarr;
+  <em>Create CP/M-Compatible Disk Image Manually...</em>.
+  It can also be started as a standalone program
+  without the emulator.
+  To do this, specify the option <em>--dc</em> or <em>--diskcreator</em>
+  on the command line when invoking JKCEMU.
+ <br/><br/>
+  The tool's window contains two subwindows,
+  between which you can switch using the two tabs.
+  In the first tab, you add the files
+  that the image file is to contain.
+  You do this using the menu item <em>File</em> &rarr;
+  <em>Add...</em> or by <em>drag&amp;drop</em>.
+  Files that have been copied to the clipboard
+  can be added with the menu item <em>Edit</em> &rarr;
+  <em>Paste</em>.
+ <br/><br/>
+  Since the file name in the image file must conform to the 8.3 format,
+  you will be asked for a suitable name for files that do not
+  conform to this convention.
+  If the order of the files in the image file matters,
+  you can change it with the arrow keys in the toolbar.
+ <br/><br/>
+  In the second subwindow, you specify the format.
+  Both the physical format (number of sides, number of tracks,
+  sectors per track, and sector size) and
+  the logical format (block size, block number format,
+  and directory size) must be specified.
+  For the most common CP/M variants of some emulated
+  computer types, there is a dedicated selection button each,
+  so that you do not need to specify the format in detail for those.
+ <br/><br/>
+  If the selected format contains one or more system tracks,
+  you can specify a file in the lower area
+  that is then copied to the system tracks.
+ <br/><br/>
+  After you have added all the desired files
+  and selected the format,
+  you still need to generate the actual image file.
+  You do this with the menu item
+  <em>Save Disk Image File...</em>.
+  You will be asked for the file name.
+  JKCEMU determines the file format from the file name's extension.
+  Therefore, choose a file name with an extension
+  customary for disk image files.
+ <br/><br/>
+
+ <h2><a name="interleave">2.1. Interleave</a></h2>
+  In the <em>Format</em> subwindow, several floppy disk formats are shown,
+  for which an <a href="interleave.htm">interleave</a> is specified,
+  or which differ only in the interleave.
+  Interleave serves to reduce access time when sequentially
+  reading from and writing to real floppy disks
+  and has no effect whatsoever in the emulator.
+  The only reason an interleave is specified here at all,
+  and thus made selectable, is to be able to create
+  disk images with the same physical sector arrangement
+  as the respective original formatting programs produce.
+  If you select a format without an interleave, or the wrong interleave,
+  that is not a problem.
+  A real floppy disk written with such an image file would,
+  in certain cases, only have somewhat longer access times.
+ <br/><br/>
+
+ <h2>2.2. DateStamper</h2>
+  If you have selected a floppy disk format with DateStamper support
+  for the disk image file to be created,
+  the file <em>!!!TIME&amp;.DAT</em> is automatically created,
+  which contains the timestamps of the individual files.
+ <br/><br/>
+
+ <h2>3. Creating an Image File from the Emulated System</h2>
+  With this variant, you create a new, i.e. empty,
+  disk image file in the <em>JKCEMU Floppy Disk Station</em> window
+  and <a href="formatdisk.htm">format</a>
+  it from the emulated system with a suitable program.
+  During formatting, the image file receives its content.
+</body>
+</html>

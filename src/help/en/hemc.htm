@@ -1,0 +1,46 @@
+<html>
+<body>
+ <h1>H&uuml;bler/Evert-MC</h1>
+  Bernd H&uuml;bler and Klaus-Peter Evert developed a computer
+  whose construction plans were published in 1984 in the magazine
+  <em>electronica&nbsp;227/228</em>.
+  Since this computer has no name of its own,
+  it is called the <em>H&uuml;bler/Evert-MC</em> in JKCEMU.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+
+ <h2>1. Emulated Hardware</h2>
+  <ul>
+   <li>3&nbsp;KByte ROM (F000h-FBFFh)</li>
+   <li>1&nbsp;KByte SRAM (FC00h-FFFFh)</li>
+   <li>2&nbsp;KByte video RAM (E800h-EFFFh)</li>
+   <li>58&nbsp;KByte DRAM (0000h-E7FFh)</li>
+   <li>CTC</li>
+   <li>2&nbsp;PIOs</li>
+  </ul>
+  Of the universal I/O board, only the CTC and
+  the two PIOs are emulated.
+  The SIO and the cassette recorder interface, as well as
+  any hardware connected to the PIOs, are not emulated.
+ <br/><br/>
+
+ <h3>1.1. Printer</h3>
+  A printer is emulated
+  by JKCEMU intercepting the operating system calls for print output
+  and appending the data to the current print job.
+  This function can be switched off in the <a href="settings.htm">Settings</a>.
+ <br/><br/>
+
+
+ <h2>2. Software Contained in ROM</h2>
+  <ul>
+   <li>Monitor program version&nbsp;2.1</li>
+  </ul>
+  In the monitor program, you can display a list of all commands
+  with <em>HELP</em>.
+  The list contains both the commands of the monitor program itself
+  and those that may be found
+  elsewhere in memory.
+</body>
+</html>

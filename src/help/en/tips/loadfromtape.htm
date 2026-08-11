@@ -1,0 +1,145 @@
+<html>
+<head><title>Loading Files Stored on Magnetic Tape</title></head>
+<body>
+ <h1>Tips &amp; Tricks</h1>
+
+ <h2>Loading Files Stored on Magnetic Tape</h2>
+
+ <h3>Preliminary Remarks</h3>
+  In order to load files stored on magnetic tape,
+  they must be playable back from the tape
+  in sufficiently good quality.
+  This is of course more difficult
+  the older the recordings are,
+  since quality degrades over time.
+  This in turn can lead to errors when reading the data back in.
+  You should therefore be patient
+  and not give up after the first failed attempt.
+ <br/><br/>
+
+ <h3>Requirements</h3>
+  <ol>
+   <li>
+    You must connect the magnetic tape device (e.g. a cassette recorder)
+    to the line-in or microphone jack
+    of the computer running the emulator.
+   </li>
+   <li>
+    You need software in the emulator
+    that can read the format
+    in which the files were stored on the magnetic tape.
+    The operating systems and monitor programs included in JKCEMU
+    offer the ability to load machine code programs
+    stored in the respective standard format.
+   </li>
+  </ol>
+ <br/><br/>
+
+ <h3>Procedure</h3>
+  <ol>
+   <li>
+    Connect the magnetic tape device to the line-in jack, or,
+    if that is not available or the signal level is too low,
+    to the microphone jack of the computer running the emulator.
+    Suitable cables and adapters are available from specialty retailers.
+   </li>
+   <li>
+    Use the volume control or a mixer to make sure
+    that the playback from the magnetic tape device is audible
+    on the computer running the emulator with slight overdrive.
+   </li>
+   <li>
+    In the emulator, enter the command to load the file,
+    but do not press <em>ENTER</em> yet.
+   </li>
+   <li>
+    Activate the function
+    <a href="../audio.htm#data_in">Read Audio Data from Sound System</a>.
+   </li>
+   <li>Start playback on the magnetic tape device.</li>
+   <li>
+    As soon as you hear the synchronization tone
+    at the beginning of the file to be loaded,
+    press the <em>ENTER</em> key.
+    This starts the actual loading process.
+   </li>
+   <li>
+    After the file has been loaded,
+    deactivate the audio function and,
+    ideally, immediately save the memory range you just loaded.
+   </li>
+  </ol>
+ <br/><br/>
+
+ <h3>Notes on Read Errors</h3>
+  If loading causes problems, try the following tips:
+  <ul>
+   <li>
+    Check whether the audio data is actually
+    reaching the emulator (see the level meter in the
+    <em>Audio/Tape</em> window).
+    Use the volume control or
+    a mixer to increase the input level of the line-in
+    or microphone input.
+    The input signal should be slightly to noticeably overdriven.
+   </li>
+   <li>
+    Check whether the emulation speed specified in the
+    <a href="../settings.htm">Settings</a>
+    matches the speed
+    at which the file was stored on the tape.
+   </li>
+   <li>
+    Switch between the left and right channel,
+    especially if the tape is being played back
+    on a stereo cassette recorder.
+   </li>
+   <li>
+    Connect the magnetic tape device to a different
+    audio input (e.g. switch between the line-in and microphone jack).
+   </li>
+   <li>
+    Change the speed of the emulator to a value
+    about 10 to 20 percent lower or higher.
+    This is particularly useful if the loading routine
+    does not recognize the synchronization tone,
+    and therefore not even the first block.
+    The playback speed may differ
+    too much from the speed at which the tape was recorded.
+   </li>
+   <li>Try different sample rates.</li>
+  </ul>
+ <br/><br/>
+  If these tips do not lead to success,
+  a real computer can be of great help:
+  <ol>
+   <li>
+    First load the file into the real computer.
+    Due to the different hardware, the chances of success are better.
+   </li>
+   <li>
+    Connect this computer to the audio input
+    of the computer running the emulator.
+   </li>
+   <li>Start the load in the emulator as described above.</li>
+   <li>
+    On the connected computer, save the file
+    so that the data is transferred directly to the computer
+    running the emulator.
+   </li>
+  </ol>
+ <br/><br/>
+  Another option is to
+  play the file on the magnetic tape device
+  and record it as a sound file using the operating system's tools.
+  You then read this sound file into JKCEMU
+  (see also <a href="readsoundfile.htm">Loading a Program Contained
+  in a Sound File</a>).
+  This approach is particularly useful
+  if your computer's processing power is not sufficient
+  to maintain the emulation speed while reading the data in.
+  This is the case when the emulated clock frequency shown
+  in the status bar is significantly lower than the one
+  specified in the settings.
+</body>
+</html>

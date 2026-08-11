@@ -1,0 +1,133 @@
+<html>
+<body>
+ <h1>Recording Screen Video</h1>
+  JKCEMU offers the option of recording the screen output
+  of the emulated system or a JKCEMU window as a video
+  and afterwards playing it back
+  or saving it.
+  The video is saved in the form of an animated GIF file.
+  While this is not the most common or best way
+  to store videos,
+  it does allow the resulting movie sequences to be
+  embedded in web pages or played back in web browsers
+  without any problems.
+ <br/><br/>
+  To record a screen video, use the menu item
+  <em>Extra</em> &rarr; <em>Screen Video...</em> in the JKCEMU main window.
+  A window opens in which you control the recording
+  of the video.
+  The remaining description refers to this window.
+ <br/><br/>
+  <b>Caution</b> The animated GIF files are generated with
+  the help of corresponding functionality of the Java runtime environment.
+  Should the Java runtime environment you are using
+  not provide this functionality, contrary to expectations,
+  you cannot record screen videos.
+ <br/><br/>
+
+
+ <h2>1. Area to Record</h2>
+  Here you specify what is recorded.
+  With the first item, the screen output of the emulated system
+  is recorded.
+  With the other two items, an entire window
+  is recorded, including its frame and decoration,
+  exactly as you see it on the screen.
+  This means that if you cover the window to be recorded
+  with another window, the covering window
+  will be visible in the recording.
+ <br/><br/>
+
+
+ <h2>2. Options</h2>
+
+ <h3>2.1. Time for Window Selection</h3>
+  This option is only relevant when recording any JKCEMU window
+  and specifies how much time you have to select the
+  window to be recorded.
+  Once the set time has elapsed, recording starts for
+  whichever JKCEMU window is active at that moment.
+ <br/><br/>
+
+ <h3>2.2. Frames per Second</h3>
+  Here you specify how many frames per second
+  should be recorded.
+  The more there are, the smoother the video runs,
+  but the larger the output file also becomes.
+ <br/><br/>
+
+ <h3>2.3. Start Recording Only After RESET</h3>
+  If this option is checked, after pressing
+  <em>Record</em> you must first trigger a RESET
+  in the emulator window before the actual recording begins.
+ <br/><br/>
+
+ <h3>2.4. Automatic Pause When the Window Is Inactive</h3>
+  If this option is checked, frames are only ever recorded
+  while the emulator window or the window being recorded is active.
+  This option is useful if, during the recording,
+  you need to do things that should not be seen in the recording
+  and that would otherwise force the viewer of the video
+  to sit through an annoying wait.
+  Such things that need to be done can be, for example, inserting
+  a floppy disk into the emulated floppy disk station
+  or preparing a tape recording
+  for the emulated tape interface.
+  With this option enabled, you can calmly
+  do these things (in another window)
+  without the time they take showing up in the video.
+ <br/><br/>
+
+ <h3>2.5. Always Create Output File With 256&nbsp;Colors</h3>
+  Animated GIF files can contain up to 256&nbsp;colors.
+  However, the more colors there are,
+  the larger the file becomes.
+  Since the screen outputs of the emulated systems offer
+  significantly fewer colors, only these few colors are written
+  as the color palette
+  into the GIF file,
+  so that the file is not needlessly bloated.
+  Problems can occur, however, if during the recording
+  the number of possible colors, and thus the color palette,
+  changes, e.g. because you switch
+  to a different emulated system, or because the emulated system
+  offers several graphics modes
+  and the graphics mode is changed.
+  In that case, you should enable the option
+  <em>Always create output file with 256&nbsp;colors</em>.
+  This causes a standard color palette to be used
+  that covers the entire color spectrum,
+  so that every color output by the emulated system
+  is displayed correctly (at least approximately).
+ <br/><br/>
+
+ <h3>2.6. Color Adjustment</h3>
+  When you record a window, more colors are likely
+  to be captured than the output file can store.
+  In that case, a color adjustment must be performed.
+  A color adjustment can also become necessary
+  if the option <em>Always create output file with 256&nbsp;colors</em>
+  is enabled, since in that case a standard color palette is used
+  that does not necessarily reproduce every color
+  output by the emulated system exactly.
+ <br/><br/>
+  You can choose whether the color adjustment should be
+  <em>hard</em> or <em>soft</em>.
+  With <em>hard</em>, colors are converted 1:1,
+  so that areas containing only one color
+  will also contain only one color afterwards.
+  With <em>soft</em>, an attempt is made
+  to visually reconstruct missing intermediate colors through dithering,
+  which, however, can turn single-colored areas multicolored.
+  Which color adjustment method you use
+  depends on personal taste and the use case.
+ <br/><br/>
+
+ <h3>2.7. Playback</h3>
+  Animated GIF files can store the information
+  as to whether, during playback, the movie sequence should be
+  played back only once or repeated continuously in a loop.
+  With the option <em>Playback</em>, you specify
+  which playback mode should be stored in the file.
+</body>
+</html>

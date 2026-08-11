@@ -1,0 +1,312 @@
+<html>
+<body>
+ <h1>Audio/Tape</h1>
+  Many of the systems emulated by JKCEMU originally use a
+  cassette recorder as mass storage,
+  i.e. the data is converted into tones and stored on tape.
+  JKCEMU is able to emulate the connection for
+  the cassette recorder, both for input and output.
+  For this, you can use either the emulator computer's audio system
+  or sound or
+  <a href="fileformats.htm#tape">tape</a> files.
+ <br/><br/>
+  Also part of the <em>Audio/Tape</em> category is
+  the emulation of a tone or sound generator,
+  provided the emulated system originally has one
+  and JKCEMU also emulates it.
+ <br/><br/>
+  <ul>
+   <li>
+    <a href="audio.htm#fct">1. Audio Functions</a>
+    <ul>
+     <li>
+      <a href="audio.htm#tape_in">1.1. Tape Input</a>
+      <ul>
+       <li>
+	<a href="audio.htm#data_in">1.1.1. Reading Audio Data from the Sound System (e.g. Microphone or Line-In Connector)</a>
+       </li>
+       <li>
+	<a href="audio.htm#file_in">1.1.2. Reading Audio Data from a Sound or Tape File</a>
+       </li>
+       <li>
+	<a href="audio.htm#lastfile_in">1.1.3. Reading the Last Sound or Tape File Again</a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="audio.htm#tape_out">1.2. Tape Output</a>
+      <ul>
+       <li>
+	<a href="audio.htm#data_out">1.2.1. Outputting Audio Data via the Sound System</a>
+       </li>
+       <li>
+	<a href="audio.htm#file_out">1.2.2. Recording Audio Data and Saving It to a File</a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="audio.htm#sound_out">1.3. Loudspeaker, Sound Generator</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="audio.htm#opt">2. Options</a>
+    <ul>
+     <li><a href="audio.htm#device">2.1. Device</a></li>
+     <li><a href="audio.htm#sample_rate">2.2. Sample Rate</a></li>
+    </ul>
+   </li>
+   <li>
+    <a href="audio.htm#note">3. Notes</a>
+    <ul>
+     <li><a href="audio.htm#volume">3.1. Volume</a></li>
+     <li><a href="audio.htm#etc">3.2. Miscellaneous</a></li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="fct">1. Audio Functions</a></h2>
+  To emulate the cassette recorder connection or a tone generator,
+  you must activate an audio function.
+  To do this, call up the menu item
+  <em>Extra</em> &rarr; <em>Audio/Tape...</em>.
+  If the emulated computer has
+  a cassette recorder connection or a tone generator,
+  a window appears in which you see a tab for each direction of
+  the cassette recorder connection or for each loudspeaker
+  connection.
+ <br/><br/>
+
+ <h3><a name="tape_in">1.1. Tape&nbsp;Input</a></h3>
+  If a cassette recorder connection is emulated,
+  the <em>Tape Input</em> tab is present,
+  which controls the input-side emulation of the cassette
+  interface, i.e. it lets you read cassette recordings
+  into the emulator.
+ <br/><br/>
+
+ <h3>
+  <a name="data_in">1.1.1. Reading Audio Data from the Sound System (e.g. Microphone or Line-In Connector)</a>
+ </h3>
+  This function is used to load files stored on magnetic tape,
+  and programs or data from another computer, directly
+  into the emulator.
+  JKCEMU opens an audio channel to the emulator computer's sound system.
+  With the <em>Device</em> selection field, you can specify
+  which audio device the channel is opened to.
+  So if, with the <em>Default</em> selection, the audio channel
+  is not opened to your desired audio source
+  but, for example, to a built-in microphone,
+  then try the individual selection options one by one
+  until the correct audio source is found.
+  The level meter on the right side of the window is useful for this.
+  However, it only shows the level
+  once an audio function is active.
+ <br/><br/>
+  Loading from tape can sometimes be difficult and problematic.
+  Tips and tricks on this topic can be found
+  <a href="tips/loadfromtape.htm">here</a>.
+ <br/><br/>
+  JKCEMU opens the audio channel in stereo.
+  In the options, you can choose
+  whether the data is read from the left or the right channel.
+  If the audio channel can only be opened in mono,
+  this switching option is of course
+  not available.
+ <br/><br/>
+
+ <h3>
+  <a name="file_in">1.1.2. Reading Audio Data from a Sound or Tape File</a>
+ </h3>
+  This function emulates the connection for the cassette recorder
+  by reading the audio data from a sound or tape file.
+  A progress bar visualizes the reading process.
+  Sound files compressed with GZIP can also be read
+  if they have the file extension <em>.gz</em>,
+  e.g. <em>file.wav.gz</em>.
+ <br/><br/>
+  <b>Caution!</b> After activating this audio function,
+  you still have to press <em>Play</em>
+  to start the actual reading.
+  You can also pause at any time with <em>Pause</em> and
+  resume by pressing <em>Play</em> again.
+  In addition, reading can be sped up with the <em>Turbo</em>
+  button.
+  This switches off the speed control
+  until the end of the file is reached,
+  so that the emulator runs at maximum speed.
+ <br/><br/>
+  <b>Note:</b> You can also activate the audio function
+  <em>Reading Audio Data from a Sound or Tape File</em>
+  by dragging and dropping a suitable file into the
+  Audio/Tape window and releasing it over the <em>File</em> field
+  on the <em>Tape Input</em> tab.
+ <br/><br/>
+  <b>Note:</b> With the <em>Monitor Through</em> selection field,
+  you can enable monitoring while the file is being read.
+  To do this, select the entry <em>Default</em> or a specific
+  audio device.
+  This opens an audio channel with the same format as the audio file
+  to the selected device.
+  If a channel cannot be opened with this format,
+  monitoring through the audio device
+  is not possible and the selection jumps back to
+  <em>no monitoring</em>.
+  Using the same selection field, you can stop monitoring
+  or switch to a different device
+  at any time.
+ <br/><br/>
+
+ <h3>
+  <a name="lastfile_in">1.1.3. Reading the Last Sound or Tape File Again</a>
+ </h3>
+  This audio function is the same as the previous one, except
+  that no file selection dialog appears; instead, the
+  last-read sound or tape file is read again.
+ <br/><br/>
+
+ <h3><a name="tape_out">1.2. Tape&nbsp;Output</a></h3>
+  The functions on this tab relate
+  to the output-side emulation of the cassette interface,
+  i.e. they let you output or record
+  the audio data that the system running in the emulator generates
+  when &quot;saving&quot;.
+ <br/><br/>
+
+ <h3>
+  <a name="data_out">1.2.1. Outputting Audio Data via the Sound System</a>
+ </h3>
+  With this function, the tones output at the emulated
+  cassette recorder connection are output through the emulator
+  computer's sound system,
+  i.e. you hear the tones through the built-in or connected
+  loudspeakers.
+ <br/><br/>
+  If you want to save programs to magnetic tape or transfer them
+  directly to another computer with a cassette recorder connection,
+  then connect the cassette recorder or the computer
+  to the headphone or line-out connector.
+  Tips &amp; tricks on saving data to magnetic tape can be found
+  <a href="tips/savetotape.htm">here</a>.
+ <br/><br/>
+
+ <h3>
+  <a name="file_out">1.2.2. Recording Audio Data and Saving It to a File</a>
+ </h3>
+  With this function, the tones output at the emulated connection
+  for the magnetic tape device
+  are recorded.
+  After deactivating the audio function, the
+  recorded tones can be saved to a sound or tape file.
+  This file begins with the first phase change
+  after the function is activated and ends with the last phase change
+  before it is deactivated, i.e.
+  the file contains no pause,
+  either at its beginning or at its end.
+ <br/><br/>
+  The function deactivates itself automatically
+  if a pause longer than five seconds occurs
+  in the output tones.
+ <br/><br/>
+  <b>Note:</b> JKCEMU offers the option
+  of compressing sound files with GZIP right away
+  when saving them.
+  If you want to use this, simply append the extension
+  <em>.gz</em> to the file name after its extension,
+  e.g. <em>output.wav.gz</em>.
+  Such compression is not possible for tape files.
+ <br/><br/>
+
+ <h3>
+  <a name="sound_out">1.3. Loudspeaker, Sound Generator</a>
+ </h3>
+  For every additional emulated audio connection
+  (e.g. loudspeaker, sound generator), a separate tab
+  is shown in the window.
+  In it, you can activate the tone output
+  and additionally record it,
+  if needed also only recording it temporarily.
+  The recording can of course
+  also be saved as a sound file.
+ <br/><br/>
+
+
+ <h2><a name="opt">2. Options</a></h2>
+  In the Options area, you can influence the properties of the
+  respective audio function.
+  Depending on the selected function, only the relevant
+  options are available.
+ <br/><br/>
+
+ <h3><a name="device">2.1. Device</a></h3>
+  Normally, you should leave the selection field set to &quot;Default&quot;.
+  However, if several sound cards are present,
+  or several sound engines (e.g. mixers) are installed,
+  or the sound driver offers several access points,
+  then you can select here the device
+  you want to work with.
+ <br/><br/>
+
+ <h3><a name="sample_rate">2.2. Sample Rate</a></h3>
+  Normally, you should leave the selection field set to &quot;Default&quot;.
+  However, you can try the various sample rates individually
+  if you should have problems with the audio functions.
+ <br/><br/>
+  <b>Note:</b> If you want to play and listen to so-called
+  1-bit music, you should set as high a sample rate
+  as possible, e.g. 96000.
+  However, not every computer's hardware
+  supports such a high sample rate.
+ <br/><br/>
+
+
+ <h2><a name="note">3. Notes</a></h2>
+
+ <h3><a name="volume">3.1. Volume</a></h3>
+  You control the volume with the appropriate
+  control software of your computer's operating system.
+ <br/><br/>
+
+ <h3><a name="etc">3.2. Miscellaneous</a></h3>
+  <ul>
+   <li>
+    If another application is already using the audio system,
+    it may not be possible to open a further audio channel.
+    In that case, close the other application.
+    This can sometimes also be the operating system's level meter.
+   </li>
+   <li>
+    If the processing power is not sufficient
+    to generate or process the audio data in real time,
+    a data transfer via the audio system will fail.
+    In that case, only sound files are promising.
+    Please use the appropriate tools of the operating system
+    to record and play back these files.
+    JKCEMU offers, with the
+    <a href="tools/audiorecorder.htm">Audio Recorder</a>
+    and the <a href="tools/filebrowser.htm">File Browser</a>,
+    tools for recording and playback as well,
+    but if the processing power is too low,
+    these tools may not function correctly
+    (interruptions in the audio data stream).
+    In any case, if you have correctly recorded a sound file,
+    you can load it into the emulator even if
+    the processing power is so low
+    that JKCEMU does not reach the target clock frequency
+    to be emulated.
+    For sound and tape files, what matters is always the
+    configured clock frequency, not the one actually
+    currently being emulated.
+   </li>
+   <li>
+    You should deactivate the audio functions again
+    when you no longer need them, or if you have problems
+    with performance, because using the audio functions
+    requires additional processing power
+    that you might otherwise be able to put to good use.
+   </li>
+  </ul>
+</body>
+</html>

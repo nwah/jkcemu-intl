@@ -1,0 +1,104 @@
+<html>
+<head><title>BASIC Compiler: Program Structures</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Program Structures</h2>
+  The BASIC language includes statements for controlling
+  the program flow (structural statements) as well as statements
+  that are used for actual data processing.
+  This section describes the structural statements.
+ <br/><br/>
+
+ <h3>1. Branches</h3>
+  For branches, there is the statement
+  <a href="instructions.htm#if">IF</a>.
+  It can be used in single-line or multi-line form.
+  For more specialized cases,
+  where an expression must be tested against constant values,
+  the statement
+  &nbsp;<a href="instructions.htm#select_case"><tt>SELECT&nbsp;CASE</tt></a>
+  is recommended.
+  Further branching options are provided by
+  <a href="instructions.htm#on_goto">ON...GOTO</a>
+  and <a href="instructions.htm#on_gosub">ON...GOSUB</a>.
+ <br/><br/>
+
+ <h3><a name="loops">2. Loops</a></h3>
+  The table shows the types of loops:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Loop</th><th>Remark</th></tr>
+   <tr>
+    <td nowrap="nowrap">
+     <a href="instructions.htm#do">DO</a>
+     ...
+     <a href="instructions.htm#loop">LOOP</a>
+    </td>
+    <td>infinite loop</td>
+   </tr>
+   <tr>
+    <td nowrap="nowrap">
+     <a href="instructions.htm#do">DO</a>
+     ...
+     <a href="instructions.htm#loop">LOOP</a>&nbsp;UNTIL
+    </td>
+    <td>post-test loop</td>
+   </tr>
+   <tr>
+    <td nowrap="nowrap">
+     <a href="instructions.htm#do">DO</a>
+     ...
+     <a href="instructions.htm#loop">LOOP</a>&nbsp;WHILE
+    </td>
+    <td>post-test loop</td>
+   </tr>
+   <tr>
+    <td nowrap="nowrap">
+     <a href="instructions.htm#for">FOR</a>
+     ...
+     <a href="instructions.htm#next">NEXT</a>
+    </td>
+    <td>post-test loop</td>
+   </tr>
+   <tr>
+    <td nowrap="nowrap">
+     <a href="instructions.htm#while">WHILE</a>
+     ...
+     <a href="instructions.htm#wend">WEND</a>
+    </td>
+    <td>pre-test loop</td>
+   </tr>
+  </table>
+ <br/>
+  All loops can be exited early with the
+  <a href="instructions.htm#exit">EXIT</a> statement.
+ <br/><br/>
+  A loop can also be implemented using the
+  <a href="instructions.htm#goto">GOTO</a> statement known
+  from classic BASIC.
+  However, since this does not correspond to structured programming,
+  GOTO should be avoided wherever possible.
+ <br/><br/>
+
+ <h3>3. Subroutines</h3>
+  In classic BASIC, subroutines are implemented with the
+  statements <a href="instructions.htm#gosub">GOSUB</a>
+  and <a href="instructions.htm#return">RETURN</a>,
+  which are also understood by the JKCEMU BASIC compiler.
+  However, it is recommended to use the much more powerful
+  <a href="usersubs.htm">user-defined functions and procedures</a>
+  instead.
+  These allow BASIC programs to be structured far better,
+  since you can pass arguments, use local variables,
+  and, in the case of a function, also return a value.
+ <br/><br/>
+
+ <h3>4. Program End</h3>
+  The
+  <a href="instructions.htm#end">END</a> statement is used
+  to terminate a BASIC program.
+ <br/>
+</body>
+</html>
+

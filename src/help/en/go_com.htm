@@ -1,0 +1,53 @@
+<html>
+<body>
+ <h1>G.COM and GO.COM</h1>
+  The files <em>G.COM</em> and <em>GO.COM</em>
+  are used to start a CP/M-compatible program that is already
+  located in memory.
+  <em>GO.COM</em> is included on all disk images
+  for CP/M-compatible operating systems contained in JKCEMU.
+  On the MicroDOS disk images, <em>G.COM</em> is included as well,
+  because of the short commands customary there.
+ <br/><br/>
+  <em>G.COM</em> and <em>GO.COM</em> are empty files
+  (0&nbsp;bytes in size) and work as follows:
+  CP/M-compatible operating systems have internal and external
+  commands.
+  Internal commands are contained in the command processor (CCP),
+  external commands are loaded from floppy disk
+  (or also from RAM floppy or hard disk) and started.
+  When the user has entered a command line
+  and the entered command is not found in the CCP,
+  an attempt is made to load into memory the file
+  whose name matches the command with the extension
+  <em>.COM</em> appended.
+  CP/M-compatible program files are loaded into memory
+  starting at address 100h and are also started at that address.
+  Since the file <em>GO.COM</em> is empty,
+  calling the command <em>GO</em> loads nothing
+  into memory,
+  but the program is started at address&nbsp;100h anyway.
+  This starts the program
+  that is already located in memory.
+  The same applies to the file <em>G.COM</em>,
+  which is only included on the MicroDOS disk images.
+ <br/><br/>
+  <b>Caution!</b> If there is no program in memory,
+  calling <em>G</em> or <em>GO</em> results in a crash.
+ <br/><br/>
+  In JKCEMU, the file <em>GO.COM</em>
+  (and, for MicroDOS, also <em>G.COM</em>) is therefore included on the
+  disk images so that CP/M-compatible programs
+  can conveniently be loaded into memory using the emulator's facilities
+  and then started there,
+  without these programs first having to be available
+  on an emulated floppy disk.
+ <br/><br/>
+  If you have a floppy disk or RAM floppy without <em>GO.COM</em>,
+  you can create this file with the following command line:
+ <br/><br/>
+  <tt>SAVE 0 GO.COM</tt>
+ <br/><br/>
+  Of course, the storage medium must be writable for this.
+</body>
+</html>

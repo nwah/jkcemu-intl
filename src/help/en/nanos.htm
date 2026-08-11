@@ -1,0 +1,270 @@
+<html>
+<body>
+ <h1>NANOS</h1>
+  NANOS is a modular system developed by the Ingenieurhochschule
+  f&uuml;r Seefahrt Warnem&uuml;nde/Wustrow,
+  based on the K1520 bus system that was widely used
+  for industrial applications in the GDR.
+  NANOS thus does not describe a specific computer,
+  but only a set of boards (modules)
+  from which a computer could be assembled.
+  Several operating systems were available
+  for such a computer.
+ <br/><br/>
+  JKCEMU emulates the most important NANOS boards
+  as well as some more recent developments.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="nanos.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="nanos.htm#zre">1.1. ZRE Board</a></li>
+     <li><a href="nanos.htm#video">1.2. Screen Control</a></li>
+     <li><a href="nanos.htm#ram_256k">1.3. 256 KByte DRAM</a></li>
+     <li><a href="nanos.htm#io">1.4. IO Board</a></li>
+     <li><a href="nanos.htm#cassette">1.5. Cassette Interface</a></li>
+     <li><a href="nanos.htm#fdc">1.6. Floppy Disk Controller</a></li>
+     <li><a href="nanos.htm#gide">1.7. GIDE</a></li>
+     <li><a href="nanos.htm#k1520sound">1.8. K1520 Sound Card</a></li>
+     <li><a href="nanos.htm#kcnet">1.9. KCNet</a></li>
+     <li><a href="nanos.htm#vdip">1.10. USB Connector</a></li>
+     <li><a href="nanos.htm#keyboard">1.11. Keyboard</a></li>
+     <li><a href="nanos.htm#printer">1.12. Printer</a></li>
+    </ul>
+   </li>
+   <li><a href="nanos.htm#software">2. Software Contained in ROM</a></li>
+   <li><a href="nanos.htm#disks">3. Included Disk Images</a></li>
+  </ul>
+ <br/>
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  JKCEMU emulates the most important NANOS boards
+  as well as some more recent developments.
+ <br/><br/>
+
+ <h3><a name="zre">1.1. ZRE Board</a></h3>
+  The <em>Zentrale Recheneinheit&nbsp;1</em>
+  (ZRE&nbsp;1, central processing unit) board is emulated.
+  It contains the U880 microprocessor,
+  2 or 4&nbsp;KByte of ROM (starting at address&nbsp;0000h),
+  1&nbsp;KByte of RAM (1000h-1400h),
+  and a PIO at I/O base address&nbsp;00h.
+  Due to incomplete address decoding, the PIO
+  can also be addressed up to I/O address 7Fh.
+  Writing a&nbsp;0 to bit&nbsp;7 of PIO port&nbsp;B
+  disables the memory on the ZRE board.
+ <br/><br/>
+
+ <h3><a name="video">1.2. Screen Control</a></h3>
+  Depending on the setting, the following is emulated:
+ <br/>
+  <ul>
+   <li><em>Video&nbsp;2</em> screen control with 64x32 characters</li>
+   <li><em>Video&nbsp;3</em> screen control with 80x24 characters</li>
+   <li><em>Video&nbsp;3</em> screen control with 80x25 characters</li>
+   <li>
+    Heiko Poppe's color graphics card, switchable between 64x32
+    and 80x24 characters
+   </li>
+  </ul>
+ <br/>
+  In all variants, the video RAM begins at address F800h.
+ <br/><br/>
+  <b>Caution!</b> The <em>Video&nbsp;3</em> screen control is
+  emulated in the configuration with 8-bit characters.
+  The configuration selectable on the original, which uses bit&nbsp;7
+  for cursor control and thus only allows 7-bit characters,
+  is not emulated.
+ <br/><br/>
+
+ <h3><a name="ram_256k">1.3. 256 KByte DRAM</a></h3>
+  The memory board is divided into 4&nbsp;banks of 64&nbsp;KByte RAM each.
+  One bank is used as working memory
+  (selected via bits&nbsp;4 and 5 of output address&nbsp;C2h).
+  The other banks are used as a RAM floppy.
+  They are accessed through a 256-byte window
+  in the address range&nbsp;F700h to F7FFh.
+ <br/><br/>
+
+ <h3><a name="io">1.4. IO Board</a></h3>
+  The emulated IO board contains:
+ <br/>
+  <ul>
+   <li>2&nbsp;PIOs at I/O base addresses&nbsp;80h and 88h</li>
+   <li>an SIO at I/O base address&nbsp;84h</li>
+   <li>a CTC at I/O base address&nbsp;8Ch</li>
+  </ul>
+ <br/>
+
+ <h3><a name="cassette">1.5. Cassette Interface</a></h3>
+  The cassette interface is <a href="audio.htm">emulated</a>
+  as follows:
+ <br/>
+  <ul>
+   <li>Input: ZRE PIO port&nbsp;B bit&nbsp;5</li>
+   <li>Output: ZRE PIO port&nbsp;B bit&nbsp;6</li>
+  </ul>
+ <br/>
+
+ <h3><a name="fdc">1.6. Floppy Disk Controller</a></h3>
+  The Floppy Disk Controller is <a href="floppydisk.htm">emulated</a>
+  as follows:
+ <br/>
+  <table border="1">
+   <tr><th>I/O Address</th><th>Meaning</th></tr>
+   <tr>
+    <td align="left" valign="top">92h</td>
+    <td align="left" valign="top">
+     Clock frequency, terminal count, and motor control:<br/>
+     <ul>
+      <li>Bit&nbsp;0: FDC clock frequency (0: 8&nbsp;MHz, 1: 4&nbsp;MHz)</li>
+      <li>Bit&nbsp;1: terminal&nbsp;count</li>
+      <li>Bit&nbsp;2: precompensation (has no effect in JKCEMU)</li>
+      <li>Bits&nbsp;3 to 6: motor control signals (have no effect in JKCEMU)</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td align="left" valign="top">94h</td>
+    <td align="left" valign="top">main status register</td>
+   </tr>
+   <tr>
+    <td align="left" valign="top">95h</td>
+    <td align="left" valign="top">data register</td>
+   </tr>
+  </table>
+ <br/>
+
+ <h3><a name="gide">1.7. GIDE</a></h3>
+  <a href="gide.htm">GIDE</a> is optionally emulated
+  at I/O base address&nbsp;D0h.
+ <br/><br/>
+
+ <h3><a name="k1520sound">1.8. K1520 Sound Card</a></h3>
+  A <a href="k1520sound.htm">K1520 sound card</a> is optionally emulated
+  at I/O base address&nbsp;E0h.
+ <br/><br/>
+  <b>Caution!</b> The K1520 sound card is normally
+  operated in the I/O address range 38h to 3Fh.
+  Since this range is blocked by the ZVE card in the NANOS,
+  the I/O address range E0h to E7h is used instead.
+ <br/><br/>
+  <table border="1">
+   <tr><th>I/O Address</th><th>Meaning</th></tr>
+   <tr><td>E0h</td><td>select or read sound register</td></tr>
+   <tr><td>E1h</td><td>write sound register</td></tr>
+   <tr><td>E4h</td><td>CTC channel&nbsp;0</td></tr>
+   <tr><td>E5h</td><td>CTC channel&nbsp;1</td></tr>
+   <tr><td>E6h</td><td>CTC channel&nbsp;2</td></tr>
+   <tr><td>E7h</td><td>CTC channel&nbsp;3</td></tr>
+  </table>
+ <br/>
+
+ <h3><a name="kcnet">1.9. KCNet</a></h3>
+  A <a href="kcnet.htm">KCNet</a> card is optionally emulated
+  at the first PIO of the IO board (I/O base address&nbsp;80h).
+ <br/><br/>
+
+ <h3><a name="vdip">1.10. USB Connector</a></h3>
+  A <a href="usb.htm">USB</a> connector (Vinculum VDIP module) is optionally
+  emulated at the second PIO of the IO board (I/O base address&nbsp;88h).
+ <br/><br/>
+
+ <h3><a name="keyboard">1.11. Keyboard</a></h3>
+  There is no dedicated NANOS keyboard and thus no
+  uniform keyboard interface.
+  The keyboard was simply connected to one of the
+  numerous interfaces available.
+  JKCEMU emulates three different variants of the keyboard connection:
+ <br/>
+  <ul>
+   <li>ZRE board: PIO port&nbsp;A, handshake with Ready/Strobe</li>
+   <li>
+    ZRE board: PIO port&nbsp;A,
+    strobe on bit&nbsp;7
+    (bit&nbsp;7 is set while a key is pressed).
+   </li>
+   <li>IO board: SIO channel&nbsp;A</li>
+  </ul>
+ <br/>
+
+ <h3><a name="printer">1.12. Printer</a></h3>
+  A printer is <a href="print.htm">emulated</a>,
+  connected to the IO card, SIO channel&nbsp;A, with hardware
+  handshake (CTS).
+ <br/><br/>
+
+
+ <h2><a name="software">2. Software Contained in ROM</a></h2>
+  <ul>
+   <li>boot ROM for booting NANOS&nbsp;2.2</li>
+   <li>boot ROM for booting EPOS&nbsp;2.1</li>
+  </ul>
+ <br/>
+  Both boot ROMs each contain a bootstrap loader
+  that, after power-on or reset, tries
+  to boot from the first drive.
+  For this reason, you must insert a floppy disk
+  into the first emulated drive and then
+  trigger <em>Power On</em> or <em>RESET</em>.
+ <br/><br/>
+  <b>Caution!</b> To boot other operating systems, it may be necessary
+  to fill the boot ROM with different content.
+  This is possible in the <a href="settings.htm">Settings</a>
+  by loading an appropriate ROM file.
+ <br/><br/>
+
+
+ <h2><a name="disks">3. Included Disk Images</a></h2>
+  For the NANOS emulation, JKCEMU includes
+  the following disk images:
+  <ul>
+   <li>
+    <u>NANOS&nbsp;2.2 Boot Disk</u><br/>
+    To use this disk image, you must
+    set the following configuration:
+    <ul>
+     <li>Video&nbsp;3 screen control with 80x25 characters</li>
+     <li>keyboard on ZRE PIO port&nbsp;A with Ready/Strobe handshake</li>
+     <li>boot ROM for NANOS&nbsp;2.2</li>
+    </ul>
+    <br/><br/>
+   </li>
+   <li>
+    <u>EPOS&nbsp;2.1 Boot Disk (64x32 characters)</u><br/>
+    To use this disk image, you must
+    set the following configuration:
+    <ul>
+     <li>
+      Graphics:
+      <ul>
+       <li>Video&nbsp;2 screen control with 64x32 characters, or</li>
+       <li>color graphics card, switchable between 64x32 and 80x24 characters</li>
+      </ul>
+     </li>
+     <li>keyboard on ZRE PIO port&nbsp;A with strobe on bit&nbsp;7</li>
+     <li>boot ROM for EPOS&nbsp;2.1</li>
+    </ul>
+    <br/><br/>
+   </li>
+   <li>
+    <u>EPOS&nbsp;2.1 Boot Disk (80x24 characters)</u><br/>
+    To use this disk image, you must
+    set the following configuration:
+    <ul>
+     <li>
+      Graphics:
+      <ul>
+       <li>Video&nbsp;3 screen control with 80x24 characters, or</li>
+       <li>color graphics card, switchable between 64x32 and 80x24 characters</li>
+      </ul>
+     </li>
+     <li>keyboard on ZRE PIO port&nbsp;A with strobe on bit&nbsp;7</li>
+     <li>boot ROM for EPOS&nbsp;2.1</li>
+    </ul>
+   </li>
+  </ul>
+</body>
+</html>

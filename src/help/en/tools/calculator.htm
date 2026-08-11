@@ -1,0 +1,286 @@
+<html>
+<body>
+ <h1>Calculator</h1>
+  JKCEMU includes a built-in calculator that, in addition to the
+  usual pocket calculator functions, also supports calculating with binary,
+  octal and hexadecimal numbers, as well as converting between
+  a Unicode character and its numeric value.
+  Besides the four basic arithmetic operations, the calculator also
+  supports a whole range of mathematical functions and operations
+  that are particularly useful in the context of computers.
+ <br/><br/>
+  A special feature of the calculator is that you can enter decimal numbers
+  with up to 1000&nbsp;digits before and 1000&nbsp;digits after the decimal
+  point, and the four basic arithmetic operations are calculated
+  with this precision as well.
+  However, there is the following exception for division:
+  if the result has an infinitely long fractional part,
+  it is truncated to a reasonable number of digits for output.
+  All calculations beyond the four basic arithmetic operations
+  are performed with the precision usual for computers,
+  of about 15&nbsp;digits (64-bit number format).
+ <br/><br/>
+  The calculator can also be started as a standalone program
+  without the emulator.
+  To do so, specify the option <em>--ca</em> or <em>--calculator</em>
+  on the command line when starting JKCEMU.
+ <br/><br/>
+  <ul>
+   <li><a href="calculator.htm#tabs">1. Sub-Windows</a></li>
+   <li><a href="calculator.htm#usage">2. Operation</a></li>
+   <li><a href="calculator.htm#radix">3. Number Base</a></li>
+   <li><a href="calculator.htm#constants">4. Constants</a></li>
+   <li>
+    <a href="calculator.htm#operands">5. Operators</a>
+    <ul>
+     <li>
+      <a href="calculator.htm#operands_1">5.1. Operators with One Operand</a>
+     </li>
+     <li>
+      <a href="calculator.htm#operands_2">5.2. Operators with Two Operands</a>
+     </li>
+    </ul>
+   </li>
+   <li><a href="calculator.htm#functions">6. Functions</a></li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="tabs">1. Sub-Windows</a></h2>
+  The JKCEMU calculator supports multiple sub-windows
+  (also called tabs).
+  An independent calculator operates in each sub-window.
+  You can find the functions for opening and closing sub-windows
+  in the <em>File</em> menu.
+  This lets you have several calculators open at the same time
+  and thus perform several calculations in parallel.
+ <br/><br/>
+  When you close the last sub-window,
+  the calculator window is also closed.
+ <br/><br/>
+
+
+ <h2><a name="usage">2. Operation</a></h2>
+  Each sub-window has an area for input at the top
+  and one for the result output at the bottom.
+  In the upper area, in the <em>Expression</em> field, please
+  enter any character or a numeric expression, e.g.:
+ <br/><br/>
+  &nbsp; <tt>sqrt(1600)</tt>
+ <br/><br/>
+  The result is recalculated with every keystroke.
+  It can happen that, while you are typing,
+  there are moments when the text entered so far
+  does not yet correspond to a valid expression,
+  and an error message therefore appears in the result field.
+  Do not let this bother you; simply keep typing
+  until your input is complete and syntactically correct.
+ <br/><br/>
+  If the result is not recalculated after every keystroke,
+  simply press the <em>Enter</em> key.
+ <br/><br/>
+  In addition to the numeric value in various number bases,
+  the result field also shows the Unicode character
+  that has the same code.
+  However, this character is only displayed correctly
+  if the character set for the corresponding Unicode range
+  is also installed on your computer.
+ <br/><br/>
+
+
+ <h2><a name="radix">3. Number Base</a></h2>
+  Binary numbers are marked with a leading <em>$</em>,
+  hexadecimal numbers with a leading <em>0x</em>
+  or a trailing <em>H</em>, and
+  octal numbers with a trailing <em>Q</em>.
+  A decimal point turns a number into a floating-point number.
+  A comma as a decimal point is not permitted, however.
+  All other numbers are interpreted as decimal integers.
+ <br/><br/>
+
+
+ <h2><a name="constants">4. Constants</a></h2>
+  The following constants are allowed in a numeric expression:
+  <table border="1">
+   <tr><th>Constant</th><th>Meaning</th></tr>
+   <tr><td>E</td><td nowrap="nowrap">Euler's number 2.71828...</td></tr>
+   <tr><td>PI</td><td nowrap="nowrap">Pi 3.1415926...</td></tr>
+  </table>
+ <br/>
+
+
+ <h2><a name="operands">5. Operators</a></h2>
+
+ <h2><a name="operands_1">5.1. Operators with One Operand</a></h2>
+  <table border="1">
+   <tr><th>Operator</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">+</td>
+    <td valign="top" nowrap="nowrap">Positive sign</td>
+   </tr>
+   <tr>
+    <td valign="top">-</td>
+    <td valign="top" nowrap="nowrap">Negative sign</td>
+   </tr>
+   <tr>
+    <td valign="top">~</td>
+    <td valign="top" nowrap="nowrap">
+     Bitwise negation<br/>
+     (only allowed between integers)
+    </td>
+   </tr>
+  </table>
+ <br/>
+
+ <h2><a name="operands_2">5.2. Operators with Two Operands</a></h2>
+  <table border="1">
+   <tr><th>Operator</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">+</td>
+    <td valign="top" nowrap="nowrap">Addition</td>
+   </tr>
+   <tr>
+    <td valign="top">-</td>
+    <td valign="top" nowrap="nowrap">Subtraction</td>
+   </tr>
+   <tr>
+    <td valign="top">*</td>
+    <td valign="top" nowrap="nowrap">Multiplication</td>
+   </tr>
+   <tr>
+    <td valign="top">/</td>
+    <td valign="top" nowrap="nowrap">Division</td>
+   </tr>
+   <tr>
+    <td valign="top">\</td>
+    <td valign="top" nowrap="nowrap">
+     Integer division<br/>
+     (only allowed between integers)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">%</td>
+    <td valign="top" nowrap="nowrap">
+     Modulo (remainder of integer division)<br/>
+     (only allowed between integers)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">|</td>
+    <td valign="top" nowrap="nowrap">
+     Bitwise OR (inclusive OR)<br/>
+     (only allowed between integers)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">^</td>
+    <td valign="top" nowrap="nowrap">
+     Bitwise exclusive OR<br/>
+     (only allowed between integers)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">&amp;</td>
+    <td valign="top" nowrap="nowrap">
+     Bitwise AND<br/>
+     (only allowed between integers)
+    </td>
+   </tr>
+  </table>
+ <br/>
+
+
+ <h2><a name="functions">6. Functions</a></h2>
+  A numeric expression can also contain functions,
+  whose arguments are written after the function name,
+  separated by commas and enclosed in parentheses.
+  <table border="1">
+   <tr><th>Function</th><th>Meaning</th></tr>
+   <tr><td>ABS( <em>x</em> )</td><td>Absolute value</td></tr>
+   <tr>
+    <td>ACOS( <em>x</em> )<br/>ARCCOS( <em>x</em> )</td>
+    <td>Arccosine</td>
+   </tr>
+   <tr>
+    <td>ASIN( <em>x</em> )<br/>ASIN( <em>x</em> )</td>
+    <td>Arcsine</td>
+   </tr>
+   <tr>
+    <td>ATAN( <em>x</em> )<br/>ARCTAN( <em>x</em> )</td>
+    <td>Arctangent</td></tr>
+   <tr><td>COS( <em>x</em> )</td><td>Cosine</td></tr>
+   <tr><td>COSH( <em>x</em> )</td><td>Hyperbolic cosine</td></tr>
+   <tr>
+    <td>EXP( <em>x</em> )</td>
+    <td>Exponential function <em>e</em> to the power of <em>x</em></td>
+   </tr>
+   <tr>
+    <td>
+     LB( <em>x</em> )<br/>
+     LOG2( <em>x</em> )
+    </td>
+    <td>
+     Binary logarithm,<br/>
+     i.e. logarithm to base&nbsp;2
+    </td>
+   </tr>
+   <tr>
+    <td>
+     LG( <em>x</em> )<br/>
+     LOG10( <em>x</em> )
+    </td>
+    <td>
+     Decadic logarithm,<br/>
+     i.e. logarithm to base 10
+    </td>
+   </tr>
+   <tr>
+    <td>
+     LOG( <em>x</em> )<br/>
+     LN( <em>x</em> )
+    </td>
+    <td>
+     Natural logarithm,<br/>
+     i.e. logarithm to base <em>e</em>
+    </td>
+   </tr>
+   <tr>
+    <td>MAX( <em>x1</em>, <em>x2</em> [, ...] )</td>
+    <td>Returns the argument with the largest value</td>
+   </tr>
+   <tr>
+    <td>MIN( <em>x1</em>, <em>x2</em> [, ...] )</td>
+    <td>Returns the argument with the smallest value</td>
+   </tr>
+   <tr>
+    <td>POW( <em>x</em>, <em>y</em> )</td>
+    <td>Exponential function <em>x</em> to the power of <em>y</em></td>
+   </tr>
+   <tr>
+    <td>RND( <em>x</em> )<br/>RANDOM( <em>x</em> )</td>
+    <td>Random number in the range 0 to x</td>
+   </tr>
+   <tr><td>ROUND( <em>x</em> )</td><td>Round to an integer</td></tr>
+   <tr>
+    <td>SIG( <em>x</em> )<br/>SIGNUM( <em>x</em> )</td>
+    <td>Determine sign,<br/>Return values: -1, 0 or 1</td>
+   </tr>
+   <tr><td>SIN( <em>x</em> )</td><td>Sine</td></tr>
+   <tr><td>SINH( <em>x</em> )</td><td>Hyperbolic sine</td></tr>
+   <tr>
+    <td>SQR( <em>x</em> )<br/>SQRT( <em>x</em> )</td>
+    <td>Square root</td>
+   </tr>
+   <tr><td>TAN( <em>x</em> )</td><td>Tangent</td></tr>
+   <tr><td>TANH( <em>x</em> )</td><td>Hyperbolic tangent</td></tr>
+   <tr>
+    <td>TO_DEGREES( <em>x</em> )<br/>TODEGREES( <em>x</em> )</td>
+    <td>Convert an angle from radians to degrees</td>
+   </tr>
+   <tr>
+    <td>TO_RADIANS( <em>x</em> )<br/>TORADIANS( <em>x</em> )</td>
+    <td>Convert an angle from degrees to radians</td>
+   </tr>
+  </table>
+</body>
+</html>

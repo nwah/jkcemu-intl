@@ -1,0 +1,272 @@
+<html>
+<head><title>BASIC Compiler: Command Line</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Calling the BASIC Compiler from the Command Line</h2>
+  The JKCEMU BASIC compiler can also be called from the command line
+  as a standalone program, without the actual emulator.
+  Under Windows, you need to start the command prompt for this
+  (search for <em>cmd.exe</em> if necessary).
+  The command line for calling the BASIC compiler looks
+  as follows
+  (adjust the name and path of the JKCEMU JAR file accordingly):
+ <br/><br/>
+  <tt>java -jar jkcemu.jar --bc [options] &lt;source file&gt;</tt>
+ <br/><br/>
+   or
+ <br/><br/>
+  <tt>java -jar jkcemu.jar --basiccompiler [options] &lt;source file&gt;</tt>
+ <br/><br/>
+  The following options can be specified
+  (case-sensitive!):
+ <br/>
+  <table border="1">
+   <tr><th>Option</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">-h</td>
+    <td>show help on the BASIC compiler options</td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">-f&nbsp;&lt;file&gt;</td>
+    <td>
+     read further command line from a file
+     <br/><br/>
+     The command line can be quite long,
+     possibly longer than supported by the command prompt
+     or the operating system.
+     For this reason, the command line can be read from a file.
+     <br/><br/>
+     When it reaches the <em>-f</em> option, the compiler opens
+     the specified file and reads the further command line from it.
+     Once the end of the file has been reached,
+     the rest of the original command line is processed.
+     The compiler thus behaves as if the contents of the file
+     stood in the command line in place of the <em>-f</em> option.
+     <br/><br/>
+     Within the file, the individual command line arguments
+     do not have to be on a single line, but can be split
+     across multiple lines.
+     If a command line argument contains spaces,
+     it must be enclosed in double quotes
+     so that the compiler processes it as a single argument.
+    <td/>
+   </tr>
+   <tr>
+    <td valign="top">-g</td>
+    <td>
+     output the line number if aborted due to an error
+     (generates additional program code)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">-o&nbsp;&lt;output file&gt;</td>
+    <td>
+     The generated program code is written to the specified file.
+     The format of the output file depends on the extension
+     (*.com; *.bin; *.hex; *.kcc; *.tap; *.z80).
+     <br/>
+     If the option is omitted, the output file has the same name
+     as the source file, except for the extension.
+     The extension is then either <em>*.s</em>
+     (if the option&nbsp;<em>-S</em> was specified)
+     or <em>*.com</em>
+     (if the target system is <em>CPM</em> with start address&nbsp;0100h)
+     or <em>*.bin</em> (in all other cases).
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-t&nbsp;&lt;system&gt;</td>
+    <td>
+     specify the <a href="targets.htm">target system</a>,<br/>
+     This option must be specified.
+     Possible keywords are:
+     <ul>
+      <li><tt>AC1</tt></li>
+      <li><tt>CPM</tt></li>
+      <li><tt>HUEBLER</tt></li>
+      <li><tt>KC85</tt></li>
+      <li><tt>KC85_4</tt></li>
+      <li><tt>KRAMER</tt></li>
+      <li><tt>LLC2_HIRES</tt></li>
+      <li><tt>SCCH</tt></li>
+      <li><tt>Z1013</tt></li>
+      <li><tt>Z1013_64X16</tt></li>
+      <li><tt>Z1013_KRT</tt></li>
+      <li><tt>Z1013_ZX</tt></li>
+      <li><tt>Z9001</tt></li>
+      <li><tt>Z9001_KRT</tt></li>
+     </ul>
+     The keywords can be written in upper or lower case.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     -A&nbsp;&lt;start address&gt;<br/>
+     -A&nbsp;&lt;start address&gt;:&lt;BSS address&gt
+    </td>
+    <td>
+     specify the start address for the program code and, if applicable,
+     also for the BSS area (Block Storage Segment: variables, memory cells, stack)
+     (hexadecimal),<br/>
+     If the option is omitted, the following start address applies
+     depending on the target system:
+     <ul>
+      <li>0100h for CPM, HUEBLER and all Z1013 target systems</li>
+      <li>0300h for KC85, KC85_4, Z9001 and Z9001_KRT</li>
+      <li>1000h for KRAMER</li>
+      <li>2000h for AC1, LLC2_HIRES and SCCH</li>
+     </ul>
+     If the BSS address is not specified, the variables,
+     the memory cells and, if a dedicated stack is used, that as well,
+     are located directly behind the program code.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-D&nbsp;&lt;driver list&gt;</td>
+    <td>
+     This option specifies which drivers are to be included
+     in the compiled program.
+     For this, the drivers are given after the option, separated by commas.
+     The driver list can also be enclosed in double quotes.
+     <br/><br/>
+     Examples:<br/>
+     &nbsp;<tt>-D vdip</tt><br/>
+     &nbsp;<tt>-D crt,lpt</tt><br/>
+     &nbsp;<tt>-D "CRT,LPT"</tt><br/>
+     <br/>
+     The following drivers are available:
+     <em>CRT</em>, <em>FILE</em>, <em>LPT</em>, <em>VDIP</em>
+     <br/>
+     The case of the driver names does not matter.
+     <br/><br/>
+     If a driver is specified even though the BASIC program does not
+     contain any statement or function
+     that could use the driver
+     (CRT, FILE, LPT and VDIP, for example, are only used by
+     <a href="instructions.htm#open">OPEN</a>),
+     the driver is not included.
+     <br/><br/>
+     If the <tt>-D</tt> option is not specified,
+     all drivers that make sense are included.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-L&nbsp;&lt;language&gt;</td>
+    <td>
+     specify the language of the run-time messages (e.g. error messages),<br/>
+     The language is specified as a two-letter ISO code,
+     where case does not matter.
+     Possible languages are <em>de</em> (German)
+     and <em>en</em> (English).
+     If the option is omitted, run-time messages appear in German.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-M&nbsp;&lt;number&gt;</td>
+    <td>
+     specify the stack size,<br/>
+     With a stack size of&nbsp;0, the system stack is used
+     and thus no dedicated stack area is created.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-N&nbsp;&lt;name&gt;</td>
+    <td>
+     specify the program name,<br/>
+     This name is used to start the program on the target system
+     (only relevant for KC85, HUEBLER, Z9001 and Z9001_KRT).
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-B...</td>
+    <td>
+     specify the abort option:<br/>
+     <table border="1">
+      <tr><th>Option</th><th>Meaning</th></tr>
+      <tr>
+       <td valign="top"><tt>-B0</tt></td>
+       <td>CTRL-C does not abort the program</td>
+      </tr>
+      <tr>
+       <td valign="top"><tt>-B1</tt></td>
+       <td>CTRL-C aborts the program only during input</td>
+      </tr>
+      <tr>
+       <td valign="top"><tt>-B2</tt></td>
+       <td>CTRL-C aborts the program</td>
+      </tr>
+     </table>
+     <br/>
+     If the option is omitted, <em>-B2</em> is assumed automatically,
+     <br/><br/>
+     <b>Caution!</b> With the option <em>-B2</em>, the program will run
+     correspondingly slower due to the constant keyboard polling!
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-O...</td>
+    <td>
+     specify program code optimization:<br/>
+     <table border="1">
+      <tr><th>Option</th><th>Meaning</th></tr>
+      <tr>
+       <td valign="top"><tt>-O1</tt></td>
+       <td>disable stack checks</td>
+      </tr>
+      <tr>
+       <td valign="top"><tt>-O2</tt></td>
+       <td>additionally disable array bounds checks</td>
+      </tr>
+      <tr>
+       <td valign="top"><tt>-O3</tt></td>
+       <td>additionally prefer relative jumps</td>
+      </tr>
+     </table>
+     <br/>
+     The option <tt>-O</tt> has the same effect as <tt>-O2</tt>.<br/>
+     If no program code optimization option was specified,
+     all run-time checks are active (identical to <em>-O0</em>).
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-S</td>
+    <td>
+     output assembler source code only,<br/>
+     In this case, the output file always has the format
+     of a plain text file, regardless of its extension.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">-W&nbsp;&lt;keyword&gt;</td>
+    <td>
+     specify the warnings that the compiler should output,<br/>
+     The following keywords are possible:<br/>
+     <table border="1">
+      <tr><th>Keyword</th><th>Meaning</th></tr>
+      <tr>
+       <td valign="top"><tt>ALL</tt></td>
+       <td>enable all warnings</td>
+      </tr>
+      <tr>
+       <td valign="top"><tt>NONASCII</tt></td>
+       <td>warn about non-ASCII characters</td>
+      </tr>
+      <tr>
+       <td valign="top"><tt>UNUSED</tt></td>
+       <td>
+        warn about unused functions, procedures and variables
+       </td>
+      </tr>
+      <tr>
+       <td valign="top"><tt>NONE</tt></td>
+       <td>do not output any warnings</td>
+      </tr>
+     </table>
+    </td>
+   </tr>
+  </table>
+ <br/>
+</body>
+</html>
+

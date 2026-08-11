@@ -1,0 +1,108 @@
+<html>
+<body>
+ <h1>Printing</h1>
+  JKCEMU offers several ways to print.
+  You can, for example, <a href="about.htm#print">print help pages</a>
+  or the text currently shown in the
+  <a href="tools/texteditor.htm#print">Text Editor</a>.
+  A special topic is printing within the emulated systems,
+  i.e. the emulation of a printer.
+  This is covered here.
+ <br/><br/>
+  <ul>
+   <li>
+    <a href="print.htm#emu">1. Printing in the Emulated Systems</a>
+    <ul>
+     <li>
+      <a href="print.htm#jobs">1.1. Printing and Print Jobs</a>
+     </li>
+     <li>
+      <a href="print.htm#management">1.2. Managing Print Jobs</a>
+     </li>
+     <li>
+      <a href="print.htm#charset">1.3. Character Set</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="emu">1. Printing in the Emulated Systems</a></h2>
+  Some systems offer a hardware printer connector
+  (possibly also as an add-on module).
+  This connector is reproduced by JKCEMU.
+ <br/><br/>
+  Frequently, a software interface was also defined
+  that application programs could use for printing.
+  The data connection from this software interface
+  to the actual printer connector is handled by a driver,
+  which usually has to be loaded separately.
+  JKCEMU can also intercept the system calls made to this
+  software interface, so that no special driver
+  needs to be loaded in the emulator.
+ <br/><br/>
+  You can disable the interception of system calls
+  for printer output in the settings.
+ <br/><br/>
+
+ <h3><a name="jobs">1.1. Printing and Print Jobs</a></h3>
+  The printer is emulated in such a way that
+  the bytes sent to the printer are first collected
+  in the form of print jobs.
+  You can save these print jobs,
+  open them in the <a href="tools/texteditor.htm">Text Editor</a>,
+  and of course also print them on paper.
+  To do so, call up the function <em>Print Jobs</em>
+  in the <em>Extras</em> menu of the JKCEMU main window.
+  You manage the print jobs in the window that opens.
+ <br/><br/>
+
+ <h3><a name="management">1.2. Managing Print Jobs</a></h3>
+  A new print job is created with the first data byte
+  that a program outputs for printing.
+  This print job is now active, i.e.
+  all further data bytes go into it.
+ <br/><br/>
+  Since the printer emulation does not know
+  when the application program has finished printing,
+  the print job is usually not closed automatically.
+  You must therefore do this manually.
+  In certain cases, e.g. on a RESET,
+  an active print job is, however, also closed automatically.
+ <br/><br/>
+  You can print or save print jobs,
+  and open them in the <a href="tools/texteditor.htm">Text</a>
+  or <a href="tools/hexeditor.htm">Hex Editor</a>.
+  If you no longer need a print job,
+  e.g. because you have already printed it on paper,
+  you can also delete it.
+  You will find all these functions in the
+  <em>JKCEMU Print Jobs</em> window, in the <em>File</em> menu.
+ <br/><br/>
+  With the function <em>Print Options...</em> you set
+  the font size used for printing.
+  You also specify whether the page number should appear.
+ <br/><br/>
+
+ <h3><a name="charset">1.3. Character Set</a></h3>
+  To display a print job in the
+  <a href="tools/texteditor.htm">Text Editor</a>
+  or print it on paper, the character set
+  underlying this print job must be known.
+  For this purpose there is the <em>Character Set</em> menu.
+  This menu thus corresponds to the character set setting
+  that used to be made directly on the printer.
+ <br/><br/>
+  When converting the print bytes into characters, bytes
+  for which there is no equivalent in the selected character set
+  are ignored.
+  These bytes, or characters, are then missing from the displayed
+  or printed text.
+ <br/><br/>
+  When a print job is opened in the
+  <a href="tools/hexeditor.htm">Hex Editor</a>
+  or saved, the print job is not changed,
+  i.e. in that case the selected character set does not matter.
+</body>
+</html>

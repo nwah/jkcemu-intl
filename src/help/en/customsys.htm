@@ -1,0 +1,253 @@
+<html>
+<body>
+ <h1>User-Defined Computer</h1>
+  With the user-defined computer, you can, within certain limits,
+  virtually assemble your own computer, which is then emulated.
+  In its basic configuration, the computer has a Z80&nbsp;CPU
+  and 64&nbsp;KByte of RAM.
+  In the <a href="settings.htm">Settings</a>,
+  you can add further hardware components,
+  which are described below.
+ <br/><br/>
+  <b>Caution!</b> Not all possible
+  hardware variants can be reproduced,
+  only certain common standard configurations.
+ <br/><br/>
+  <ul>
+   <li><a href="customsys.htm#rom">ROM</a></li>
+   <li><a href="customsys.htm#screen">Screen Output</a></li>
+   <li><a href="customsys.htm#keyboard">Keyboard</a></li>
+   <li><a href="customsys.htm#io">I/O Devices</a></li>
+   <li><a href="customsys.htm#fdc">FDC (Floppy Disk Controller)</a></li>
+   <li><a href="customsys.htm#gide">GIDE (Hard Disks)</a></li>
+  </ul>
+ <br/>
+
+ <h2><a name="rom">ROM</a></h2>
+  You can define as many ROM areas as you like,
+  even ones that lie in the same address range.
+  You set the ROM content by selecting a corresponding file.
+  If no file is specified, the ROM area contains FFh bytes.
+ <br/><br/>
+  Each ROM area can optionally be switchable,
+  i.e. either only capable of being switched out, or capable of being
+  switched both in and out.
+  To do this, you must specify the I/O address
+  used to switch it in and out.
+  If the ROM area can only be switched out,
+  an output instruction to this address causes it to be switched out,
+  regardless of the value output.
+  For a ROM that can be switched both in and out, a bit as well as its
+  polarity (H-active or L-active) must be specified, used for switching.
+ <br/><br/>
+  Program execution after RESET usually starts
+  at address 0000h.
+  If the computer being emulated has a different start address,
+  then mark the ROM
+  at which program execution is to begin as the boot ROM.
+ <br/><br/>
+  When reading from a ROM area, the list of ROMs is
+  traversed from top to bottom, and the first matching ROM,
+  i.e. the one switched in at the relevant address, is used.
+  So if several ROMs are defined in the same address range
+  and are also switched in, the first one is read from.
+ <br/><br/>
+  In the user-defined computer, the ROMs are write-through,
+  i.e. on a write access to a ROM address,
+  the byte in question is written to the RAM underneath.
+  If the ROM at that address is later switched out,
+  the written value can be read.
+ <br/><br/>
+
+ <h2><a name="screen">Screen Output</a></h2>
+  Screen output is emulated by defining
+  part of the RAM as video RAM.
+  Every character stored in that RAM area
+  is output to the screen.
+  The screen output is alphanumeric.
+  Pixel graphics or full graphics are not emulated.
+ <br/><br/>
+  To define the screen output, specify the start address
+  of the video RAM as well as the number of columns and rows.
+  The rows and columns are organized in ascending order
+  in the video RAM, i.e. row&nbsp;1 comes first,
+  with its characters from left to right,
+  then row&nbsp;2, and so on.
+ <br/><br/>
+  The English DOS character set Codepage&nbsp;437
+  is used as the character set.
+  Optionally, you can load your own character set file.
+ <br/><br/>
+  The video RAM is always located in RAM.
+  Even if a ROM is switched in at that address range,
+  the characters displayed are read from RAM.
+  In combination with the property
+  that the ROMs are write-through (see above),
+  this allows a ROM and video RAM
+  to be operated in the same address range.
+ <br/><br/>
+
+ <h2><a name="keyboard">Keyboard</a></h2>
+  Various variants for connecting a keyboard
+  are emulated, from which you can choose one.
+  What all variants have in common
+  is that the characters supplied by the keyboard must be read
+  with input instructions.
+  Accordingly, specifying an I/O address is also necessary.
+  For emulation via a simple input port,
+  you specify the I/O address next to it.
+  For the other variants, the keyboard is connected to a PIO or SIO.
+  You must activate this PIO or SIO in the <em>I/O Devices</em> tab
+  (see below) and specify the I/O address there as well.
+ <br/><br/>
+  Keyboard connection variants:
+  <ul>
+   <li>
+    <u>Simple input port:</u><br/>
+    With this variant, when a key is pressed,
+    the 8-bit character code is applied to the input port.
+    If no key is pressed, a zero byte is read.
+    <br/><br/>
+   </li>
+   <li>
+    <u>PIO port A or B with Ready/Strobe handshake:</u><br/>
+    When a key is pressed, the 8-bit character code
+    is applied to the corresponding PIO port and the
+    strobe line responsible for that port is activated.
+    With this connection variant, the PIO is usually
+    operated in <em>byte input</em> mode
+    and can therefore also trigger an interrupt.
+    <br/><br/>
+   </li>
+   <li>
+    <u>PIO port A or B with strobe on bit&nbsp;7:</u><br/>
+    With this variant, when a key is pressed,
+    the 7-bit character code is applied to the PIO port
+    and bit&nbsp;7 is set to H.
+    If no key is pressed, bit&nbsp;7 is L
+    and bits&nbsp;0 through 6 are undefined.
+    The PIO is usually operated in
+    <em>bit I/O</em> mode.
+    Through appropriate programming, bit&nbsp;7
+    can trigger an interrupt
+    that signals that a key has been pressed.
+    <br/><br/>
+   </li>
+   <li>
+    <u>SIO channel&nbsp;A or B:</u><br/>
+    The 8-bit character code can be read via the corresponding
+    SIO channel.
+    If the SIO channel is programmed for 5-, 6-, or 7-bit reception,
+    only the lower 5, 6, or 7 bits are read.
+    The SIO's interrupt capabilities are available.
+    A hardware or software handshake is not emulated.
+   </li>
+  </ul>
+ <br/>
+
+ <h2><a name="io">I/O Devices</a></h2>
+  In this tab, you can activate the PIO, SIO and CTC devices
+  belonging to the Z80 system, as well as a <a href="kcnet.htm">KCNet</a>
+  card and a <a href="usb.htm">VDIP module (USB port)</a>.
+  For each I/O device, you must specify the I/O base address.
+  Each of these devices occupies four consecutive addresses
+  starting at the specified base address:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Device</th><th>I/O Address</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">PIO</td>
+    <td valign="top" nowrap="nowrap">
+     I/O base address:<br/>
+     I/O base address&nbsp;+&nbsp;1:<br/>
+     I/O base address&nbsp;+&nbsp;2:<br/>
+     I/O base address&nbsp;+&nbsp;3:
+    </td>
+    <td valign="top" nowrap="nowrap">
+     Port&nbsp;A&nbsp;data<br/>
+     Port&nbsp;B&nbsp;data<br/>
+     Port&nbsp;A&nbsp;control<br/>
+     Port&nbsp;B&nbsp;control<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">SIO</td>
+    <td valign="top" nowrap="nowrap">
+     I/O base address:<br/>
+     I/O base address&nbsp;+&nbsp;1:<br/>
+     I/O base address&nbsp;+&nbsp;2:<br/>
+     I/O base address&nbsp;+&nbsp;3:
+    </td>
+    <td valign="top" nowrap="nowrap">
+     Channel&nbsp;A&nbsp;data<br/>
+     Channel&nbsp;B&nbsp;data<br/>
+     Channel&nbsp;A&nbsp;control<br/>
+     Channel&nbsp;B&nbsp;control<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">CTC</td>
+    <td valign="top" nowrap="nowrap">
+     I/O base address:<br/>
+     I/O base address&nbsp;+&nbsp;1:<br/>
+     I/O base address&nbsp;+&nbsp;2:<br/>
+     I/O base address&nbsp;+&nbsp;3:
+    </td>
+    <td valign="top" nowrap="nowrap">
+     Counter/timer&nbsp;0<br/>
+     Counter/timer&nbsp;1<br/>
+     Counter/timer&nbsp;2<br/>
+     Counter/timer&nbsp;3
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">KCNet and VDIP</td>
+    <td valign="top" nowrap="nowrap">
+     I/O base address:<br/>
+     I/O base address&nbsp;+&nbsp;1:<br/>
+     I/O base address&nbsp;+&nbsp;2:<br/>
+     I/O base address&nbsp;+&nbsp;3:
+    </td>
+    <td valign="top" nowrap="nowrap">
+     PIO&nbsp;port&nbsp;A&nbsp;data<br/>
+     PIO&nbsp;port&nbsp;B&nbsp;data<br/>
+     PIO&nbsp;port&nbsp;A&nbsp;control<br/>
+     PIO&nbsp;port&nbsp;B&nbsp;control<br/>
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+  For the SIO, you can specify whether a <a href="print.htm">printer</a>
+  is connected to its outputs.
+  If you specify a printer on both channels,
+  the bytes output via them are appended
+  to the same print job,
+  since JKCEMU only emulates one printer.
+ <br/><br/>
+  For the CTC, the counters/timers are chained through,
+  i.e. the output of counter/timer&nbsp;0 goes to the input of
+  counter/timer&nbsp;1, and so on.
+ <br/><br/>
+  Finally, in this tab you specify
+  which value should be read from unoccupied I/O addresses.
+ <br/><br/>
+
+ <h2><a name="fdc">FDC (Floppy Disk Controller)</a></h2>
+  Here you specify whether, and at which I/O addresses, a
+  <a href="disk/floppydiskintro.htm">floppy disk controller</a>
+  with four connected <a href="floppydisk.htm">floppy disk drives</a>
+  should be emulated.
+  If the original hardware contains additional I/O addresses
+  for controlling the floppy disk drives
+  (e.g. for switching the drive motors on and off),
+  these are not emulated by JKCEMU
+  or play no role in the emulation (there are no motors
+  that could be switched on and off).
+ <br/><br/>
+
+ <h2><a name="gide">GIDE (Hard Disks)</a></h2>
+  In this tab, you specify whether <a href="gide.htm">GIDE</a>
+  should be emulated with up to two connected hard disks.
+  GIDE occupies 16 consecutive I/O addresses.
+</body>
+</html>

@@ -1,0 +1,36 @@
+<html>
+<body>
+ <h1>Formatting Emulated Floppy Disks</h1>
+  JKCEMU is able to format emulated floppy disks.
+  However, there are a few things to keep in mind:
+  <ol>
+   <li>The emulated floppy disk must be writable.</li>
+   <li>
+    If the emulated floppy disk already has a format
+    (which is always the case, e.g., when using real floppy disks),
+    the existing format cannot be changed.
+    In that case, formatting is possible
+    as long as only sectors are written
+    that already exist on the emulated floppy disk.
+   </li>
+   <li>
+    To write an image file with any format you like,
+    you must create a new, i.e. empty,
+    disk image file.
+    You will find the corresponding menu items
+    in the menu of the <em>Load/Open</em> button
+    in the <em>JKCEMU Floppy Disk Station</em> window.
+    Then start the appropriate formatting program in the emulator.
+   </li>
+   <li>
+    If track&nbsp;2 is formatted after track&nbsp;0, JKCEMU assumes
+    that a 40-track floppy disk is being formatted
+    in an 80-track drive.
+    JKCEMU then converts the track number accordingly,
+    i.e. track&nbsp;2 as set in the drive
+    results in track&nbsp;1 on the floppy disk
+    (see <a href="cyls_40_80.htm">The 40/80-Track Problem</a>).
+   </li>
+  </ol>
+</body>
+</html>

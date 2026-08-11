@@ -1,0 +1,461 @@
+<html>
+<body>
+ <h1>Text Editor</h1>
+  <ul>
+   <li><a href="texteditor.htm#intro">1. Preliminary Remarks</a></li>
+   <li><a href="texteditor.htm#start">2. Starting the Text Editor</a></li>
+   <li>
+    <a href="texteditor.htm#fct">3. Functions</a>
+    <ul>
+     <li>
+      <a href="texteditor.htm#open">3.1. Opening a File</a>
+      <ul>
+       <li>
+	<a href="texteditor.htm#emusys">3.1.1. Files of the Emulated Systems</a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="texteditor.htm#open_with">3.2. Opening a File with Character Set</a>
+     </li>
+     <li><a href="texteditor.htm#save">3.3. Saving a File</a></li>
+     <li>
+      <a href="texteditor.htm#save_as">3.4. Save File As...</a>
+     </li>
+     <li><a href="texteditor.htm#print">3.5. Printing</a></li>
+     <li><a href="texteditor.htm#props">3.6. Properties</a></li>
+     <li>
+      <a href="texteditor.htm#check_bracket">3.7. Check Bracket</a>
+     </li>
+     <li><a href="texteditor.htm#select_char">3.8. Character Selection</a></li>
+     <li>
+      <a href="texteditor.htm#newpage">3.9. Inserting and Removing Page Break Characters</a>
+     </li>
+     <li><a href="texteditor.htm#tabsize">3.10. Tab Width</a></li>
+     <li>
+      <a href="texteditor.htm#wordstar">3.11. Remove WordStar Formatting</a>
+     </li>
+     <li>
+      <a href="texteditor.htm#conv_umlauts">3.12. Convert German Umlauts</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="texteditor.htm#prg">4. Programming with Assembler and BASIC Compiler</a>
+    <ul>
+     <li><a href="texteditor.htm#prj">4.1. Project Files</a></li>
+    </ul>
+   </li>
+   <li><a href="texteditor.htm#settings">5. Settings</a></li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="intro">1. Preliminary Remarks</a></h2>
+  A text editor is of course used for displaying and editing
+  text files.
+  The JKCEMU text editor, however, is specifically designed
+  to meet the needs of the emulator.
+  On the one hand, it provides access to the <a href="assembler.htm">Assembler</a>
+  and the <a href="basicc.htm">BASIC Compiler</a>,
+  and on the other hand it can handle the usual character sets
+  and, in some cases, also the file formats of the emulated systems.
+  Old file formats are supported in that,
+  when opening EDAS*4 assembler source files
+  and various BASIC program files, the respective source code is extracted
+  and made available in the form of a new text file.
+ <br/><br/>
+
+
+ <h2><a name="start">2. Starting the Text Editor</a></h2>
+  In the JKCEMU main window, click the item
+  <em>Text Editor/Programming...</em> in the menu <em>File</em>.
+ <br/><br/>
+  The remaining description refers to the window of the text editor.
+ <br/><br/>
+
+
+ <h2><a name="fct">3. Functions</a></h2>
+  Several text files can be displayed and edited
+  in the editor at the same time.
+  If you create a new text (item <em>New Text</em>
+  in the menu <em>File</em>) or open a file
+  (menu items <em>Open...</em> and
+  <em>Open with Character Set...</em>),
+  a new subwindow is created for it.
+  The text already displayed remains in its subwindow.
+  For each subwindow, you see a tab with the file name
+  above the text area.
+  By clicking the corresponding tab, you can switch
+  back and forth between the individual subwindows,
+  i.e. between the individual texts.
+ <br/><br/>
+  You find the editing functions in the menu
+  <em>Edit</em>, e.g. undo last change,
+  working with the clipboard, find and replace,
+  jump with the cursor to a specific line, etc.
+ <br/><br/>
+  Some functions are discussed in more detail below.
+  Functions not explained in detail correspond to those
+  of ordinary text editors.
+ <br/><br/>
+
+ <h3><a name="open">3.1. Opening a File</a></h3>
+  With this function you open a file and load
+  the text it contains into the editor.
+  A file selection dialog appears, in which you select the file
+  to be opened.
+ <br/><br/>
+  The text editor automatically detects the file properties and
+  remembers them internally, so that when the text is saved,
+  the same properties are used again.
+  Character set detection works as follows:
+  if the file begins with a byte order mark,
+  the character set is derived from it (UTF-8, UTF-16BE, or UTF-16LE).
+  Without a byte order mark, the file is read in with the preferred
+  character set UTF-8.
+  If character mapping errors occur in the process,
+  the file is read in again with the local system character set
+  or with ISO-8859-1.
+  If, on the other hand, reading with UTF-8 was successful,
+  the text editor also checks whether it might be a pure
+  ASCII file (a subset of UTF-8).
+ <br/><br/>
+  If character set detection produces an incorrect result,
+  you can load the file with the menu item
+  <a href="texteditor.htm#open_with">Open File with Character Set</a>
+  and select the character set there.
+ <br/><br/>
+
+ <h3><a name="emusys">3.1.1. Files of the Emulated Systems</a></h3>
+  The text editor is able to read some files of the emulated systems
+  and extract the text they may contain.
+  This is then displayed as a new text file (<em>New Text</em>).
+  If this text is now saved, the file has thus been converted
+  into a text file common today.
+ <br/><br/>
+  Specifically, the editor can extract text from the following file types:
+ <br/>
+  <ul>
+   <li>
+    BASIC program file of the following BASIC interpreters:
+    <ul>
+     <li>AC1 8K BASIC</li>
+     <li>AC1 12K BASIC</li>
+     <li>AC1 BASIC6</li>
+     <li>AC1 BACOBAS&nbsp;2 (normal mode only, no BASICODE)</li>
+     <li>AC1 BACOBAS&nbsp;3 (normal mode only, no BASICODE)</li>
+     <li>H&uuml;bler/Grafik-MC BASIC</li>
+     <li>Kramer-MC BASIC</li>
+     <li>LLCBASIC (normal mode only, no BASICODE)</li>
+    </ul>
+   </li>
+   <li>
+    Headersave file with file type &quot;A&quot;,
+    if the file contains an EDAS*4 source code
+   </li>
+   <li>
+    Headersave file with file type &quot;B&quot;
+    (BASIC program from one of the BASIC interpreters listed above)
+   </li>
+   <li>
+    Headersave file with file type &quot;b&quot; (Mini/Tiny BASIC):
+    <ul>
+     <li>AC1 Mini-BASIC&nbsp;V2.1</li>
+     <li>LLC1-BASIC&nbsp;V1.2</li>
+     <li>Z1013 BASIC&nbsp;3.01</li>
+    </ul>
+   </li>
+   <li>
+    Headersave file with file type &quot;I&quot; or &quot;T&quot;,
+    if the file contains a text file.
+    In this case, the hexadecimal value 1E
+    is also supported as a line ending.
+   </li>
+   <li>KCB file</li>
+   <li>KC-BASIC program file</li>
+   <li>
+    KC-TAP file, if the bytes it contains correspond to the format of a
+    KC-BASIC program file.
+    However, KC-BASIC programs are often not stored as a
+    KC-BASIC program file, but as a KC system file,
+    in order to enable an autostart.
+    These files cannot be opened directly in the text editor,
+    but you can load these files into the emulator
+    and extract the BASIC program from working memory
+    (see also <a href="../tips/kcc_tap_basic.htm">Extracting a
+    KC-BASIC Program from a KCC/KC-TAP File</a>).
+   </li>
+  </ul>
+ <br/><br/>
+
+ <h3><a name="open_with">3.2. Opening a File with Character Set</a></h3>
+  With this function you open a file
+  that was saved in a character set other than the system character set.
+  After selecting the file, you are asked for the character set
+  with which the file should be loaded.
+ <br/><br/>
+  <b>Caution!</b> If you load a file with a character set other than
+  the one it was originally created or saved with,
+  some characters may be displayed incorrectly
+  or may be missing entirely.
+ <br/><br/>
+  Furthermore, you have the option of enabling the option
+  <em>Ignore any end-of-file character present</em>.
+  This causes a file to be read in up to its physical end,
+  even if an end-of-file character occurs earlier.
+  An end-of-file character (byte 1Ah) is usually used as the end
+  of a text file when it is stored on a block-oriented medium
+  (e.g. tape recording, CP/M floppy disk storage).
+  Today, files are stored byte-exact,
+  so that an end-of-file character is no longer necessary.
+  However, with block-oriented storage, a file is read in up to the
+  end of the block.
+  This can leave confusing bytes following the text.
+  This is prevented by the end-of-file character.
+ <br/><br/>
+
+ <h3><a name="save">3.3. Saving a File</a></h3>
+  This function saves the displayed text to a file.
+  It uses the same name, the same character set, and
+  otherwise the same properties as when it was opened
+  or last saved.
+ <br/><br/>
+  If you have created a new text and are saving it
+  for the first time, the function <em>Save As...</em>
+  is called automatically, i.e. you must specify the file name and
+  the properties.
+ <br/><br/>
+  <b>Caution!</b> If a file was opened with a character set
+  that only covers a limited character repertoire (e.g. ASCII)
+  and you now type a character that is not contained in that repertoire
+  (e.g. a German umlaut in an ASCII file),
+  a message appears when saving stating that the text cannot be
+  saved completely in this character set.
+  In this case, you must use the function
+  <a href="texteditor.htm#save_as">Save File As...</a>
+  and select a suitable character set (e.g. UTF-8).
+ <br/><br/>
+
+ <h3><a name="save_as">3.4. Save File As...</a></h3>
+  You can save the displayed text in a file with a
+  different name and/or with different properties.
+  First, a file selection dialog appears, in which you specify
+  the name of the file to be saved.
+  After confirming, you see a new window,
+  in which you can specify the properties.
+  This also makes it possible
+  to save a text file in a different character set
+  or to change the line ending bytes
+  (DOS/Windows or Unix/Linux format).
+ <br/><br/>
+
+ <h3><a name="print">3.5. Printing</a></h3>
+  The displayed text is printed.
+  With the function <em>Print Options...</em> you specify the
+  font size to be used and determine
+  whether the page number and the file name should be printed.
+ <br/><br/>
+
+ <h3><a name="props">3.6. Properties</a></h3>
+  Every text file has properties, which you can display with
+  this function.
+  The properties include the full file name,
+  the character set, the tab width, the line ending format, and
+  the option specifying whether invisible characters at the end of a line
+  (trailing spaces and tabs) should be stripped when saving.
+ <br/><br/>
+  If you want to change the properties,
+  save the file with the function <em>Save As...</em>
+  and specify the new properties there.
+ <br/><br/>
+
+ <h3><a name="check_bracket">3.7. Check Bracket</a></h3>
+  With this function you find the matching bracket
+  if the cursor is positioned immediately before a bracket.
+  If, on the other hand, the cursor is somewhere else,
+  it jumps to the next closing bracket.
+ <br/><br/>
+
+ <h3><a name="select_char">3.8. Character Selection</a></h3>
+  The menu item <em>Character Selection...</em> opens a window,
+  in which you can select any Unicode characters that can be displayed
+  in the currently set font, and insert them into the text or
+  copy them to the clipboard.
+ <br/><br/>
+  The Unicode characters are divided into pages.
+  One page is always displayed.
+  With the arrow keys at the top you can navigate to the next
+  and to the previous page.
+  In the field with the hexadecimal page number, you can
+  also jump directly to any page by typing a number and then pressing
+  the Enter key.
+ <br/><br/>
+  Every Unicode character has a numeric code.
+  On the far left you find the codes of the characters in the first
+  column, and at the top the last two digits of the codes
+  of the other columns.
+ <br/><br/>
+
+ <h3>
+  <a name="newpage">3.9. Inserting and Removing Page Break Characters</a>
+ </h3>
+  Page break characters (form&nbsp;feed, code&nbsp;0Ch)
+  can be inserted and also removed again (all at once).
+  However, these characters only have an effect when printing.
+  In the editor, page break characters are treated like normal characters.
+  However, since a page break character is a so-called non-printing
+  character, whether and how this character is displayed
+  depends on the font being used.
+ <br/><br/>
+
+ <h3><a name="tabsize">3.10. Tab Width</a></h3>
+  The tab width is not saved in the text file,
+  i.e. the tab width you currently have set
+  is always used.
+ <br/><br/>
+  You can set the tab width in the menu
+  <em>Edit</em>.
+  There you can specify
+  whether the value should be set as the default.
+  If not, the tab width only applies to the
+  current subwindow.
+  If yes, all further text files that you open
+  or newly create are displayed with this tab width.
+  However, the default tab width is only saved permanently
+  once you save a profile in the <a href="../settings.htm">Settings</a>.
+ <br/><br/>
+
+ <h3><a name="wordstar">3.11. Remove WordStar Formatting</a></h3>
+  WordStar was a widely used word processor
+  in the days of 8-bit computers.
+  For this reason, many documentation files were created in WordStar.
+  So that you can read such files,
+  the JKCEMU text editor offers special support:
+  if, after opening a file, you notice
+  that it is a WordStar file,
+  you can use the menu item to remove the
+  WordStar formatting and thus turn it into a plain text file.
+  A WordStar file can usually be recognized
+  by the fact that the last letter of each word is
+  represented by a strange character.
+ <br/><br/>
+  <b>Caution!</b> With a file containing German-language content,
+  after removing the WordStar formatting you will probably
+  still need to convert the umlauts.
+ <br/><br/>
+
+ <h3><a name="conv_umlauts">3.12. Convert German Umlauts</a></h3>
+  In their original state, the emulated computers
+  do not know German umlauts.
+  In order to be able to display German-language texts anyway,
+  some users used the German variant of the
+  ISO-646 character set,
+  in which the umlauts are found in place of the characters
+  <tt>[\]{|}~</tt>.
+  If such a text is now displayed in an ordinary text editor,
+  the characters
+  <tt>[\]{|}~</tt> appear in place of the German umlauts.
+ <br/><br/>
+  Some users have also installed a DOS-compatible character set.
+  If you now open a text file created in the DOS character set,
+  you will likewise see different characters in place of the
+  German umlauts.
+ <br/><br/>
+  While you can use the function
+  <em>Open with Character Set...</em>
+  to load the file directly with the correct character set,
+  if you do not know it, it is cumbersome to
+  try out all possible character sets first.
+  With the functions in the submenu <em>Convert German Umlauts</em>
+  you can subsequently convert the German umlauts from the DOS
+  character set or from the German variant of the ISO-646 character set,
+  so that they are displayed correctly.
+ <br/><br/>
+  <b>Caution!</b> Before each conversion, please make sure
+  which character set the text was created with,
+  and please consider carefully
+  whether and how you need to convert characters.
+ <br/><br/>
+
+
+ <h2>
+  <a name="prg">4. Programming with Assembler and BASIC Compiler</a>
+ </h2>
+  This section deals with programming with
+  <a href="assembler.htm">Assembler</a> and
+  <a href="basicc.htm">BASIC Compiler</a>
+  using the text editor integrated into JKCEMU.
+  If, however, you want to use a different
+  text editor for programming,
+  you can call the Assembler and the BASIC Compiler from the
+  command line (see <a href="assembler.htm#cmdline">here</a>
+  and <a href="basicc/cmdline.htm">here</a>).
+ <br/><br/>
+  With the JKCEMU text editor you can write assembler
+  and BASIC programs and have them translated directly.
+  The <a href="assembler.htm">Assembler</a> or
+  <a href="basicc.htm">BASIC Compiler</a> is called via
+  the corresponding menu items in the menu
+  <em>Programming</em>.
+  The first time you call the menu items <em>Assemble</em> and
+  <em>Compile BASIC Program</em>, a dialog for entering
+  or adjusting the options appears.
+  On subsequent calls of these two menu items, you
+  no longer see the dialog,
+  and assembling or compiling is done with the same options.
+ <br/><br/>
+  If you want to change the options,
+  use the menu items <em>Assemble With...</em> and
+  <em>Compile BASIC Program With...</em>.
+  With these two, the dialog with the options always appears.
+  If the checkbox at <em>Load program code into emulator</em>
+  is checked in the options, the program code is loaded directly
+  into the working memory (RAM) of the emulator,
+  i.e. you can run the program or
+  <a href="debugger.htm">debug</a> it.
+ <br/><br/>
+  After assembling, the respective addresses are displayed on the left,
+  provided <em>Programming</em> &rarr;
+  <em>Show Address Column After Assembling</em> is switched on in the menu.
+  This lets you see at which addresses the respective source code lines
+  were assembled.
+  This makes it easier to keep track of things when working with the
+  <a href="debugger.htm">Debugger</a>.
+  Furthermore, this also makes it possible,
+  via the context menu in the text editor, to directly
+  create a breakpoint/logpoint or a variable in the debugger.
+  If the cursor is positioned on a line with a label,
+  that label is used as the name for the breakpoint/logpoint
+  or for the variable.
+ <br/><br/>
+
+ <h3><a name="prj">4.1. Project Files</a></h3>
+  The JKCEMU text editor offers the option
+  of saving an assembler or BASIC program in progress as a project
+  (menu items <em>Programming</em> &rarr; <em>Save Project</em>
+  as well as <em>Programming</em> &rarr; <em>Save Project As...</em>).
+  This creates a project file that contains the configured options
+  as well as a reference to the source code file.
+  You can only save a project
+  after the source code has been saved once,
+  so that the name of the source code file is known.
+ <br/><br/>
+  A project is opened via the menu item
+  <em>Programming</em> &rarr; <em>Open Project...</em>.
+  This loads the assembler or BASIC compiler options
+  and opens the associated source code file.
+ <br/><br/>
+  <b>Caution!</b> If you open only the source code file
+  instead of the project file, the assembler or compiler options
+  are not restored to the state they were in when the project was saved.
+ <br/><br/>
+
+
+ <h2><a name="settings">5. Settings</a></h2>
+  You can change the font in the
+  <a href="../settings.htm">JKCEMU Settings</a>
+  on the tab <em>Fonts/Icons</em> under
+  <em>Font for Code Areas</em>.
+</body>
+</html>

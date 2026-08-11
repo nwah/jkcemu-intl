@@ -1,0 +1,253 @@
+<html>
+<head><title>BCS3: BASIC-SE&nbsp;2.4</title></head>
+<body>
+ <h1>BASIC-SE&nbsp;2.4</h1>
+  BASIC-SE&nbsp;2.4 is a simple BASIC dialect
+  with 16-bit integer arithmetic.
+ <br/><br/>
+
+ <h2>1. Commands</h2>
+  <table border="1">
+   <tr>
+    <td valign="top">LIST</td>
+    <td valign="top">Display the program</td>
+   </tr>
+   <tr>
+    <td valign="top">NEW</td>
+    <td valign="top">Delete the program</td>
+   </tr>
+   <tr>
+    <td valign="top">RUN</td>
+    <td valign="top">Start the program</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>2. Line Format, Entering a Program Line</h2>
+  A program line begins with the line number (1 to 9998),
+  followed by one or more statements,
+  which must be separated by a semicolon.
+  The line <em>9999&nbsp;END</em> is appended automatically.
+ <br/><br/>
+
+ <h2>3. Number Format</h2>
+  The numbers (always integers) are represented internally with 1 sign bit
+  and a 15-bit magnitude, i.e. not in two's complement.
+ <br/><br/>
+
+ <h2>4. Constants</h2>
+  <table border="1">
+   <tr>
+    <td valign="top">Decimal numbers:</td>
+    <td valign="top">-32627 to 32627</td>
+   </tr>
+   <tr>
+    <td valign="top">Hexadecimal numbers:</td>
+    <td valign="top">0 to 0FFFH</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>5. Variables</h2>
+  Variable names consist of one or two letters.
+  The names <em>IF</em>, <em>OR</em>, and any name
+  beginning with the letter <em>H</em>, are forbidden.
+ <br/><br/>
+
+ <h2>6. Operators</h2>
+  <table border="1">
+   <tr>
+    <td valign="top"><tt>*</tt></td>
+    <td valign="top">Multiplication</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>/</tt></td>
+    <td valign="top">Division, always rounds down</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>-</tt></td>
+    <td valign="top">Subtraction</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>+</tt></td>
+    <td valign="top">Addition</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>OR</tt></td>
+    <td valign="top">Bitwise inclusive OR</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>AND</tt></td>
+    <td valign="top">Bitwise AND</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&gt;</tt></td>
+    <td valign="top">
+     Greater than,<br/>
+     Result is 0 or 1.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>&lt;</tt></td>
+    <td valign="top">
+     Less than,<br/>
+     Result is 0 or 1.
+    </td>
+   </tr>
+  </table>
+ <br/>
+  Operators listed higher up have precedence,
+  i.e. if all 8 operators occur in a numerical expression,
+  the multiplication is performed first and the comparison
+  <em>greater than</em> last.
+  Round brackets can be used to enforce a different
+  execution order.
+ <br/><br/>
+
+ <h2>7. Statements</h2>
+  <table border="1">
+   <tr><th>Statement</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">CLEAR</td>
+    <td valign="top">Clear the screen</td>
+   </tr>
+   <tr>
+    <td valign="top">END</td>
+    <td valign="top">
+     End the program,<br/>
+     The line <em>9999&nbsp;END</em> is appended automatically.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">GOSUB&nbsp;&lt;line number&gt;</td>
+    <td valign="top">
+     Calls a subroutine,<br/>
+     The line number can also be given as a variable numerical
+     expression.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">GOTO&nbsp;&lt;line number&gt;</td>
+    <td valign="top">
+     Jumps to a program line,<br/>
+     The line number can also be given as a variable numerical
+     expression.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     IF &lt;numerical expression&gt; THEN &lt;statements&gt;
+    </td>
+    <td valign="top">
+     Conditional program execution,<br/>
+     If the expression has a value not equal to zero,
+     the statements following THEN are executed.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     INPUT [ &lt;string literal&gt; , ]
+     [ &lt;space expression&gt; , ] Variable&gt; [ , ... ]
+    </td>
+    <td valign="top">
+     Reads numbers and writes the entered value
+     into a variable,<br/>
+     The screen output is described under the PRINT statement.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     LET &lt;variable&gt; = &lt;numerical expression&gt;
+    </td>
+    <td valign="top">
+     Value assignment,<br/>
+     The keyword <em>LET</em> can be omitted.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     OUT &lt;port address&gt; , &lt;numerical expression&gt;
+    </td>
+    <td valign="top">
+     The value of the numerical expression is output on the
+     specified I/O port.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     POKE &lt;address&gt; , &lt;numerical expression&gt;
+    </td>
+    <td valign="top">
+     The value of the numerical expression is written into the
+     memory cell at the specified address.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     PRINT [ &lt;string literal&gt; ] [ , ]
+     [ &lt;space expression&gt; ] [ , ]
+     [ [ BYTE ] &lt;numerical expression&gt; ] [ , ... ]
+    </td>
+    <td valign="top">
+     Output on the screen:<br/>
+     <ul>
+      <li>
+       String literal:<br/>
+       A character string enclosed in single quote characters
+      </li>
+      <li>
+       Space expression:<br/>
+       Syntax: # &lt;numerical expression&gt<br/>
+       As many spaces are output
+       as the value of the numerical expression.
+      </li>
+      <li>
+       BYTE:<br/>
+       If the keyword BYTE precedes a numerical expression,
+       the low-order byte of the value is output in
+       hexadecimal.
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">REM &lt;comment&gt;</td>
+    <td>
+     The text following REM is treated as a comment
+     up to the next semicolon or the end of the line.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">RETURN</td>
+    <td>Ends a subroutine</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>8. Functions</h2>
+  <table border="1">
+   <tr><th>Function</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">IN( &lt;port address&gt; )</td>
+    <td valign="top">Reads the specified I/O port</td>
+   </tr>
+   <tr>
+    <td valign="top">PEEK( &lt;port address&gt; )</td>
+    <td valign="top">Reads the specified memory cell</td>
+   </tr>
+   <tr>
+    <td valign="top">RND( &lt;numerical expression&gt; )</td>
+    <td valign="top">
+     Determines a random number between 1 and the specified expression
+     (max. 255)
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h2>9. Literature</h2>
+  Schiller, Eckhard: Basic-Heimcomputer,<br/>
+  in radio fernsehen elektronik, issue 1/1985, pp. 13-18,<br/>
+  Berlin 1985
+</body>
+</html>

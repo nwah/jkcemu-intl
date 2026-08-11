@@ -1,0 +1,698 @@
+<html>
+<body>
+ <h1>Z9001, KC85/1 and KC87</h1>
+  The Z9001, KC85/1, and KC87 computers were manufactured at
+  VEB Robotron-Me&szlig;elektronik Dresden.
+  The KC85/1 is actually just a renamed Z9001.
+  Over time, however, the operating system was debugged,
+  so that the first units shipped as Z9001
+  contained operating system version&nbsp;1.1, and only later
+  was version&nbsp;1.2 introduced.
+  Since the renaming to KC85/1 also took place a few months
+  after the start of production, the following rough mapping applies:
+  <em>Z9001 &rarr; operating system version&nbsp;1.1</em> and
+  <em>KC85/1 &rarr; operating system version&nbsp;1.2</em>.
+  Although this mapping does not entirely correspond to reality
+  (the version jump has nothing to do with the renaming;
+  the two events just happened to be relatively close in time),
+  JKCEMU emulates both devices as separate systems
+  with different operating system versions.
+ <br/><br/>
+  The Z9001 operating system is also included in the KC87, as version&nbsp;1.3.
+  This is why the KC87 also identifies itself as a Z9001.
+ <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="z9001.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li><a href="z9001.htm#keyboard">1.1. Keyboard</a></li>
+     <li>
+      <a href="z9001.htm#printer">1.2. Printer</a>
+      <ul>
+       <li>
+	<a href="z9001.htm#v24">1.2.1. Emulation of a V24 Printer Module</a>
+       </li>
+       <li>
+	<a href="z9001.htm#print_calls">1.2.2. Intercepting BOS Calls for Printer Output</a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="z9001.htm#graphic">1.3. Full Graphics</a>
+      <ul>
+       <li>
+	<a href="z9001.htm#gr_robotron">1.3.1. Robotron Full Graphics Expansion</a>
+       </li>
+       <li>
+	<a href="z9001.htm#gr_krt">1.3.2. KRT Full Graphics Expansion</a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="z9001.htm#prg_font">1.4. Programmable Character Generator</a>
+     </li>
+     <li>
+      <a href="z9001.htm#80chars">1.5. 80-Character Mode with Character Set Switching</a>
+      <ul>
+       <li>
+	<a href="z9001.htm#screensize">1.5.1. Size and Aspect Ratio of the Screen Output</a>
+       </li>
+      </ul>
+     </li>
+     <li><a href="z9001.htm#fdc">1.6. Floppy Disk Module</a></li>
+     <li><a href="z9001.htm#boot">1.7. Boot Module</a></li>
+     <li><a href="z9001.htm#mega">1.8. Mega-ROM Module</a></li>
+     <li><a href="z9001.htm#rom16k">1.9. 10/16&nbsp;KByte ROM Module</a></li>
+     <li><a href="z9001.htm#rom32k">1.10. 32&nbsp;KByte ROM Module</a></li>
+     <li><a href="z9001.htm#ram64k">1.11. 64&nbsp;KByte RAM Module</a></li>
+     <li>
+      <a href="z9001.htm#kcnet">1.12. KCNet-Compatible Network Card</a>
+     </li>
+     <li><a href="z9001.htm#rtc">1.13. Real-Time Clock Module</a></li>
+     <li><a href="z9001.htm#audio">1.14. Cassette and Sound Output</a></li>
+     <li><a href="z9001.htm#interrupts">1.15. Interrupt Handling with Modules</a></li>
+    </ul>
+   </li>
+   <li><a href="z9001.htm#software">2. Software Contained in ROM</a></li>
+   <li><a href="z9001.htm#disks">3. Included Disk Images</a></li>
+   <li>
+    <a href="z9001.htm#etc">4. Miscellaneous</a>
+    <ul>
+     <li>
+      <a href="z9001.htm#save_basic">4.1. Saving and Loading BASIC Programs</a>
+     </li>
+     <li><a href="z9001.htm#paste_text">4.2. Pasting Text</a></li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  <ul>
+   <li>4&nbsp;KByte ROM for the operating system</li>
+   <li>
+    on the KC87, an additional 10&nbsp;KByte ROM
+    for the BASIC interpreter
+   </li>
+   <li>16&nbsp;KByte RAM</li>
+   <li>1&nbsp;KByte video RAM</li>
+   <li>Cassette recorder connector</li>
+   <li>2&nbsp;<a href="joystick.htm">joysticks</a></li>
+   <li>
+    optional:
+    <ul>
+     <li>
+      RAM expansion:
+      <ul>
+       <li>one 16&nbsp;KByte RAM module, or</li>
+       <li>two 16&nbsp;KByte RAM modules, or</li>
+       <li>
+	one <a href="z9001.htm#ram64k">64&nbsp;KByte RAM module</a>
+	(only 58&nbsp;KByte of which is usable)
+       </li>
+      </ul>
+     </li>
+     <li>
+      ROM modules:
+      <ul>
+       <li><a href="z9001.htm#rom16k">10/16&nbsp;KByte ROM module</a></li>
+       <li><a href="z9001.htm#rom32k">32&nbsp;KByte ROM module</a></li>
+       <li><a href="z9001.htm#boot">Boot module</a></li>
+       <li><a href="z9001.htm#mega">Mega-ROM module</a></li>
+      </ul>
+     </li>
+     <li>
+      <a href="print.htm">Printer</a>:
+      <ul>
+       <li>
+	<a href="z9001.htm#v24">Emulation of a V24 printer module</a>, or
+       </li>
+       <li>
+	<a href="z9001.htm#print_calls">interception of the corresponding BOS calls</a>
+       </li>
+      </ul>
+     </li>
+     <li>Color module including 1&nbsp;KByte color attribute memory</li>
+     <li>
+      <a href="z9001.htm#gr_robotron">Robotron full graphics expansion</a>
+      (only in combination with the color module)
+     </li>
+     <li><a href="z9001.htm#gr_krt">KRT full graphics expansion</a></li>
+     <li><a href="z9001.htm#prg_font">Programmable character generator</a></li>
+     <li>
+      <a href="z9001.htm#80chars">80-character mode with character set switching</a>
+     </li>
+     <li><a href="z9001.htm#boot">Boot module</a></li>
+     <li><a href="z9001.htm#mega">Mega-ROM module</a></li>
+     <li><a href="z9001.htm#fdc">Floppy disk module</a></li>
+     <li>
+      up to 2&nbsp;<a href="ramfloppy.htm">RAM floppies</a>
+      of 128, 512, or 2048&nbsp;KByte each
+      at I/O addresses&nbsp;20h/21h and 24h/25h
+     </li>
+     <li>
+      <a href="gide.htm">GIDE</a> with up to two hard disks
+      at the I/O base address&nbsp;50h
+     </li>
+     <li><a href="k1520sound.htm">K1520 sound card</a></li>
+     <li>
+      <a href="z9001.htm#kcnet">KCNet-compatible network card</a>
+      at the I/O base address&nbsp;C0h
+     </li>
+     <li>
+      <a href="usb.htm">USB connector</a> (Vinculum VDIP module)
+      at the I/O base address&nbsp;DCh
+     </li>
+     <li><a href="z9001.htm#rtc">Real-time clock module</a></li>
+     <li><a href="plotter.htm">Plotter</a> XY4131 / XY4140</li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="keyboard">1.1. Keyboard</a></h3>
+  For some keys on the Z9001 keyboard, there is usually
+  no directly corresponding key of the same name on the keyboard
+  of the computer running the emulator.
+  These keys are nevertheless emulated, namely:
+ <br/>
+  <table border="1">
+   <tr><th>Z9001 Key</th><th>Emulated Using</th></tr>
+   <tr><td>Home</td><td>Control-Left</td></tr>
+   <tr><td>End</td><td>Control-Right</td></tr>
+   <tr><td>ESC</td><td>Escape</td></tr>
+   <tr><td>INS</td><td>Insert</td></tr>
+   <tr><td>DEL</td><td>Delete or Shift-Insert</td></tr>
+   <tr><td>LIST</td><td>F1</td></tr>
+   <tr><td>RUN</td><td>F2</td></tr>
+   <tr><td>STOP</td><td>F3</td></tr>
+   <tr><td>PAUSE</td><td>F4</td></tr>
+   <tr><td>CONT</td><td>F5 or Shift-F4</td></tr>
+   <tr><td>CR-LN</td><td>F6 or Shift-Escape</td></tr>
+   <tr><td>COLOR</td><td>F7</td></tr>
+   <tr><td>GRAPHIC</td><td>F8</td></tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="printer">1.2. Printer</a></h3>
+  In the <a href="settings.htm">settings</a>, you can enable
+  one of two ways to emulate a printer:
+  emulation of a V24 printer module, or interception of the BOS calls
+  for printer output.
+ <br/><br/>
+
+ <h3><a name="v24">1.2.1. Emulation of a V24 Printer Module</a></h3>
+  If you have enabled this option,
+  a CTC and an SIO are additionally emulated,
+  and the data output on channel&nbsp;A of the SIO is appended
+  to the active print job
+  (see <a href="print.htm#jobs">printing and print jobs</a>).
+  For printing to also work from within application programs,
+  you still need to load a driver
+  that establishes the data connection between the operating system
+  and the printer module.
+  The printer module also contains a ROM, in the address range B800h-BFFFh,
+  with the fairly universal drivers
+  <em>V24A1</em>, <em>V24A2</em>, and <em>V24A3</em>.
+  However, this ROM must be switched off
+  if a RAM module is active in the same address range.
+  For this reason, JKCEMU only emulates this ROM
+  if the emulated RAM size is at most 32 KByte.
+ <br/><br/>
+
+ <h3>
+  <a name="print_calls">1.2.2. Intercepting BOS Calls for Printer Output</a>
+ </h3>
+  With this option, you can also print without a driver,
+  because JKCEMU simply intercepts the corresponding operating system calls.
+  However, in that case you also cannot take advantage of a driver,
+  such as special formatting of the print data.
+ <br/><br/>
+
+ <h3><a name="graphic">1.3. Full Graphics</a></h3>
+  The Z9001 and its successors have no full graphics on board,
+  only block graphics.
+  However, full graphics expansions exist.
+ <br/><br/>
+
+ <h3><a name="gr_robotron">1.3.1. Robotron Full Graphics Expansion</a></h3>
+  The full graphics expansion developed by Robotron
+  was not sold as an industrially manufactured module,
+  but was only available as a construction guide for hobbyist replication.
+  The full graphics expansion comes with a separate video RAM
+  for 320x192&nbsp;pixels and works with only two colors,
+  which can be selected in software
+  from the color module's color palette.
+  The color module is therefore mandatory.
+  For this reason, JKCEMU emulates the Robotron full graphics expansion
+  only in combination with the color module.
+ <br/><br/>
+
+ <h3><a name="gr_krt">1.3.2. KRT Full Graphics Expansion</a></h3>
+  Issue&nbsp;11 of Kleinstrechnertips presented a relatively
+  simple full graphics expansion for the Z1013.
+  Volker Pohlers and Ulrich Zander adapted this circuit
+  to the Z9001 with small modifications
+  (different I/O addresses, non-inverting pixel data)
+  and, in reference to
+  <em>Kleinstrechnertips</em>, gave it the name
+  <em>KRT full graphics expansion</em>.
+ <br/><br/>
+  In the address range of the video RAM, there are also
+  8&nbsp;parallel memory banks.
+  Each of these banks contains the pixel data
+  for a particular pixel row within a character position
+  (bank&nbsp;0: topmost pixel row within a character row,
+  bank&nbsp;7: bottommost pixel row within a character row).
+  A byte in these memory banks represents
+  8&nbsp;pixels side by side (most significant bit on the left).
+ <br/><br/>
+  Control is via output port B8h.
+  A set bit&nbsp;3 activates full graphics,
+  i.e. the original video RAM is switched out of the address space
+  and the memory bank specified by bits&nbsp;0 to 2
+  is switched in instead.
+ <br/><br/>
+
+ <h3><a name="prg_font">1.4. Programmable Character Generator</a></h3>
+  The programmable character generator is an
+  additional 1&nbsp;KByte RAM
+  that can be activated and deactivated in software
+  for the graphical display of the upper 128&nbsp;characters
+  (starting at code 80h).
+ <br/><br/>
+  A write access to address EBFCh maps the character generator
+  into working memory in the range E800h-EBFFh.
+  This allows it to be programmed and read back.
+ <br/><br/>
+  A write access to address EBFEh activates the programmable
+  character generator, i.e. the pixel data for the upper
+  128&nbsp;characters is then read from it.
+  For characters below 80h, the standard character generator
+  continues to be used.
+ <br/><br/>
+  A write access to address EBFFh restores the default state,
+  i.e. the programmable character generator is neither mapped
+  into the address space nor active for display.
+ <br/><br/>
+
+ <h3><a name="80chars">1.5. 80-Character Mode with Character Set Switching</a></h3>
+  Issue&nbsp;6/1990 of the magazine <em>Mikroprozessortechnik</em>
+  presented a circuit that enables an 80-character mode
+  that can be switched on and off in software.
+  Control uses I/O addresses that, however, are also occupied
+  by the floppy disk and printer modules.
+  Based on this publication, Ulrich Zander developed a new circuit
+  that additionally offers character set switching,
+  but which also uses different I/O addresses
+  and therefore no longer conflicts with other modules.
+ <br/><br/>
+  For the 80-character mode, the video memory and, if applicable,
+  the color attribute memory as well, is duplicated.
+  The additional memory this creates lies at the same addresses
+  as the original and can be switched in and out via I/O instructions.
+ <br/><br/>
+  JKCEMU optionally emulates the 80-character mode,
+  with control possible using either the I/O addresses from the
+  publication or those according to Ulrich Zander.
+  If the floppy disk and/or printer module is emulated,
+  the conflicting I/O addresses have no effect on the 80-character mode.
+ <br/><br/>
+  The 80-character mode is controlled by write accesses to the
+  following I/O addresses:
+  <table border="1">
+   <tr><th>I/O Address</th><th>Function</th></tr>
+   <tr>
+    <td valign="top">
+     A8h&nbsp;(not&nbsp;with&nbsp;printer&nbsp;module)<br/>
+     BCh
+    </td>
+    <td valign="top">
+     Switch off 80-character mode<br/>
+     (state after RESET)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     A9h&nbsp;(not&nbsp;with&nbsp;printer&nbsp;module)<br/>
+     BDh
+    </td>
+    <td valign="top">Switch on 80-character mode</td>
+   </tr>
+   <tr>
+    <td valign="top">
+     A0h&nbsp;(not&nbsp;with&nbsp;floppy&nbsp;disk&nbsp;module)<br/>
+     BEh
+    </td>
+    <td valign="top">
+     Switch in the original video and color attribute memory<br/>
+     (state after RESET)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">
+     A1h&nbsp;(not&nbsp;with&nbsp;floppy&nbsp;disk&nbsp;module)<br/>
+     BFh
+    </td>
+    <td valign="top">
+     Switch in the additional video and color attribute memory
+    </td>
+   </tr>
+  </table>
+ <br/>
+  If the 40/80-character switching is emulated, the switchable
+  character generator according to Ulrich Zander's circuit is also
+  available; besides the original, it also contains a character set
+  with German umlauts.
+  Each write access to I/O address 0BBh switches between
+  these two character sets.
+  Character set switching also works with an externally
+  loaded character set file, provided
+  it is larger than 2&nbsp;KByte.
+  In that case, switching takes place between the lower and the upper
+  2&nbsp;KByte.
+ <br/><br/>
+  The <a href="z9001.htm#disks">Z9001 CP/A system disk</a>
+  included in JKCEMU also contains drivers for the 80-character mode.
+  Since these drivers address the hardware via the I/O addresses
+  according to Ulrich Zander,
+  the file names start with <em>UZ80...</em>.
+ <br/><br/>
+
+ <h3><a name="screensize">1.5.1. Size and Aspect Ratio of the Screen Output</a></h3>
+  When switching between 40- and 80-character mode, the size
+  of the emulator window and the aspect ratio change.
+  On the original, in contrast, the size of the screen output area
+  always stays the same;
+  instead, the characters are displayed narrower.
+  With the option
+  <em>Same window size in both screen modes</em>,
+  you can adapt the behavior to match the original.
+  In that case, however, the emulator window is also always
+  as large as needed to display the 80-character mode.
+ <br/><br/>
+
+ <h3><a name="fdc">1.6. Floppy Disk Module</a></h3>
+  There is a floppy disk module from Robotron and one from the
+  Zentralinstitut f&uuml;r Kernforschung of the GDR in Rossendorf.
+  The two variants differ only in the I/O addresses
+  and in how the TC pulse is triggered.
+  JKCEMU <a href="floppydisk.htm">emulates</a> both variants.
+ <br/><br/>
+  <b>Caution!</b> The emulator includes an image of a CP/A system disk
+  (a CP/M variant for the Z9001 by Dr. Frank Schwarzenberg).
+  To boot this CP/M system, the
+  <a href="z9001.htm#ram64k">64&nbsp;KByte RAM module</a> must also be
+  enabled, together with either the <a href="z9001.htm#boot">boot module</a>
+  or the <a href="z9001.htm#mega">Mega-ROM module</a>.
+ <br/><br/>
+
+ <h3><a name="boot">1.7. Boot Module</a></h3>
+  The boot module is a special ROM module
+  that can be switched off in software with a write access to the
+  address range F800h-FBFFh.
+  After a RESET, it identifies itself with <em>CP/M-System</em>
+  and, by entering the command <tt>BOOT</tt>,
+  allows booting from disk.
+  This naturally also requires the floppy disk module
+  to be enabled.
+ <br/><br/>
+  In the emulation, the boot module cannot be combined
+  with any other ROM module.
+ <br/><br/>
+  <b>Caution!</b> The ROM of the boot module lies in the same address
+  range as that of the KC87's BASIC interpreter.
+  For this reason, the KC87 BASIC ROM is disabled by default.
+  It can be enabled in software,
+  but there is no user command for doing so.
+  For this reason, when the boot module is emulated,
+  BASIC on the KC87 is practically unusable.
+ <br/><br/>
+
+ <h3><a name="mega">1.8. Mega-ROM Module</a></h3>
+  The Mega-ROM module offers 2.5&nbsp;MByte of memory,
+  divided into 256 individual 10&nbsp;KByte segments.
+  The currently active segment is mapped into the address range C000h-E7FFh.
+  Switching the active segment is done via an output instruction
+  to I/O address FFh.
+  A write access to the address range F800h-FBFFh switches the
+  Mega-ROM module off, and a write access to FC00h-FFFFh switches it on.
+ <br/><br/>
+  The content included in JKCEMU for this module
+  by no means fills the available memory,
+  but nevertheless contains quite a number of programs,
+  including a management program.
+  This starts automatically after a RESET and is operated with commands.
+  Especially interesting is the command <em>MENU</em>,
+  which starts a graphical interface
+  through which you can invoke the other programs
+  contained in the Mega-ROM module.
+ <br/><br/>
+  The command <em>BOOT</em> tries to boot from disk,
+  i.e. the Mega-ROM module can also replace the
+  <a href="z9001.htm#boot">boot module</a>.
+ <br/><br/>
+  In the emulation, the Mega-ROM module cannot be combined
+  with any other ROM module.
+ <br/><br/>
+
+ <h3><a name="rom16k">1.9. 10/16&nbsp;KByte ROM Module</a></h3>
+  A ROM module is emulated that can appear, as selected,
+  in the address range 4000h-7FFFh, 8000h-BFFFh (16&nbsp;KByte each),
+  or C000-E7FF (10&nbsp;KByte).
+  You must set the content of the ROM module in the
+  <a href="settings.htm">settings</a>
+  by specifying a ROM file.
+ <br/><br/>
+  Only one ROM module can be emulated at a time,
+  i.e. the ROM module cannot be combined with any other,
+  including the boot module or the Mega-ROM module.
+ <br/><br/>
+
+ <h3><a name="rom32k">1.10. 32&nbsp;KByte ROM Module</a></h3>
+  The 32&nbsp;KByte ROM module resides in the address range
+  4000h to BFFFh.
+  You set its content by specifying a ROM file.
+  For example, if you specify the content of the KCPASCAL module
+  as the file, the KCPASCAL module is emulated.
+ <br/><br/>
+  The 32&nbsp;KByte ROM module cannot be combined with any other
+  ROM or RAM module,
+  including the boot module or the Mega-ROM module.
+ <br/><br/>
+
+ <h3><a name="ram64k">1.11. 64&nbsp;KByte RAM Module</a></h3>
+  This module provides additional RAM in the range
+  from 4000h to E7FFh, as well as a background RAM in the range 4000h-7FFFh.
+  Since the range from E800h onward is reserved for the color attribute
+  and video memory as well as the operating system ROM
+  and therefore cannot be occupied by the RAM module,
+  only 58&nbsp;KByte of the module can be used.
+  In total, 74&nbsp;KByte of RAM are thus available.
+ <br/><br/>
+  An I/O instruction to port&nbsp;5 switches in the background RAM
+  starting at 4000h.
+  An I/O instruction to port&nbsp;4 switches it off again.
+  Port&nbsp;7 is used to switch in the RAM in the range from C000h onward.
+  On the KC87, this also switches out the BASIC ROM.
+  An I/O instruction to port&nbsp;6 reverses this.
+ <br/><br/>
+
+ <h3><a name="kcnet">1.12. KCNet-Compatible Network Card</a></h3>
+  The original network card contains a socket
+  for an EEPROM with which the boot module can be replaced.
+  If you want to emulate this EEPROM,
+  enable the boot module and, if necessary, load a corresponding
+  ROM image file there.
+  Please also read the notes on
+  <a href="kcnet.htm">network emulation</a>.
+ <br/><br/>
+
+ <h3><a name="rtc">1.13. Real-Time Clock Module</a></h3>
+  A real-time clock RTC-62421 or RTC-72421 is emulated at
+  I/O addresses&nbsp;60h to 6Fh.
+  The clock can only be read, not set.
+ <br/><br/>
+
+ <h3><a name="audio">1.14. Cassette and Sound Output</a></h3>
+  You can make the sound signals output at the emulated cassette
+  recorder connector (CTC channel&nbsp;1 output) audible
+  or record them in the
+  <a href="audio.htm">Audio/Tape</a> window, on the
+  <a href="audio.htm#tape_out">Tape Output</a> tab,
+  and then save them to a file.
+  In the original, the same signal can also be heard through a speaker,
+  and can additionally be switched on and off via
+  I/O address&nbsp;88h, bit&nbsp;7.
+  The <a href="audio.htm#sound_out">Speaker</a> tab is responsible for this speaker signal.
+  A further tab appears if you have enabled emulation of the
+  <a href="k1520sound.htm">K1520 sound card</a>.
+ <br/><br/>
+
+ <h3><a name="interrupts">1.15. Interrupt Handling with Modules</a></h3>
+  On the original hardware, modules plugged into the module rack
+  (e.g. the <a href="k1520sound.htm">K1520 sound card</a>)
+  have problems with interrupt handling
+  when the interrupt service routine runs in the RAM of the main board
+  (address range 0000h to 3FFFh).
+  Specifically, a data bus driver blocks the module rack
+  whenever the address is below 4000h.
+  If a RETI instruction is then executed in the address range below 4000h,
+  the modules cannot recognize this instruction
+  and therefore cannot reset their interrupt status.
+  JKCEMU also emulates this limitation.
+ <br/><br/>
+
+
+ <h2><a name="software">2. Software Contained in ROM</a></h2>
+  <table border="1">
+   <tr><th>Emulated System</th><th>Software</th></tr>
+   <tr><td valign="top">Z9001</td><td>Z9001-OS&nbsp;1.1</td></tr>
+   <tr><td valign="top">KC85/1</td><td>Z9001-OS&nbsp;1.2</td></tr>
+   <tr>
+    <td valign="top">KC87</td>
+    <td>
+     Z9001-OS&nbsp;1.3<br/>
+     HC-BASIC&nbsp;86 (plotter BASIC)
+    </td>
+   </tr>
+  </table>
+ <br/>
+  The boot module contains the Robotron software for booting
+  from disk.
+  Various programs can be found in the Mega-ROM module
+  (Mega-ROM management software, games, programming languages,
+  office and utility programs).
+ <br/><br/>
+  The ROM contents can be replaced in the
+  <a href="settings.htm">settings</a>
+  by specifying external ROM files.
+ <br/><br/>
+
+
+ <h2><a name="disks">3. Included Disk Images</a></h2>
+  JKCEMU includes the following disk image
+  for the KC85/1, KC87, and Z9001 emulation:
+  <ul>
+   <li>Z9001 CP/A system disk</li>
+  </ul>
+ <br/>
+  To use the disk image, you must set at least
+  the following configuration:
+  <ul>
+   <li>KC85/1, KC87, or Z9001</li>
+   <li>64K RAM module</li>
+   <li>Boot ROM or Mega-ROM module</li>
+   <li>Floppy disk module</li>
+  </ul>
+ <br/>
+  On startup, the boot ROM module identifies itself with the message
+  <em>CP/M-System</em>, and the Mega-ROM module
+  with its own interface.
+  Regardless of which of the two modules you use,
+  once the CP/A system disk is inserted and the prompt is visible,
+  enter the command <em>BOOT</em> to start CP/A.
+ <br/><br/>
+  The drive assignment is simple:
+ <br/>
+  &nbsp;&nbsp;A: first drive<br/>
+  &nbsp;&nbsp;B: second drive
+ <br/><br/>
+  The disk itself is thus accessible under drive&nbsp;<em>A:</em>.
+ <br/><br/>
+  The disk also contains drivers for using specific
+  Z9001 hardware features or some hardware expansions:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Program</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">20Z.COM</td>
+    <td>Set screen to 20&nbsp;lines</td>
+   </tr>
+   <tr>
+    <td valign="top">24Z.COM</td>
+    <td>Set screen to 24&nbsp;lines</td>
+   </tr>
+   <tr>
+    <td valign="top">CLOCK.COM</td>
+    <td>Install or uninstall the system clock</td>
+   </tr>
+   <tr>
+    <td valign="top">RAF2X20P.COM</td>
+    <td>
+     Install the RAM floppy at I/O address 20h/21h as drive P:<br/>
+     (emulation of the first RAM floppy must be enabled)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">RAF2X24O.COM</td>
+    <td>
+     Install the RAM floppy at I/O address 24h/25h as drive O:<br/>
+     (emulation of the second RAM floppy must be enabled)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">UZ80BW.COM</td>
+    <td>
+     Install the 80-character driver for black-and-white graphics<br/>
+     (emulation of the 40/80-character switching must be enabled)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">UZ80C.COM</td>
+    <td>
+     Install the 80-character driver for color graphics<br/>
+     (emulation of the 40/80-character switching must be enabled)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">UZ80EX.COM</td>
+    <td>Uninstall the 80-character driver</td>
+   </tr>
+  </table>
+ <br/>
+  <b>Caution!</b> The disk also contains the empty file
+  <a href="go_com.htm">GO.COM</a>.
+  This is used to start a CP/M-compatible program
+  that is already located in RAM.
+  If <em>GO</em> is called without a program present in RAM,
+  this leads to a crash.
+ <br/><br/>
+
+
+ <h2><a name="etc">4. Miscellaneous</a></h2>
+
+ <h3><a name="save_basic">4.1. Saving and Loading BASIC Programs</a></h3>
+  JKCEMU offers special support for
+  <a href="loadsavebasic.htm">saving and loading BASIC programs</a>.
+  When a Z9001 or KC85/1 is emulated,
+  i.e. when the ROM contains no BASIC interpreter,
+  JKCEMU looks for the BASIC program in the address range
+  of the RAM BASIC interpreter (starting at address&nbsp;2C01h).
+  On the KC87, on the other hand, the BASIC program that is saved
+  is the one located in the address range of the ROM BASIC interpreter
+  (starting at address&nbsp;0401h).
+ <br/><br/>
+
+ <h3><a name="paste_text">4.2. Pasting Text</a></h3>
+  Pasting text from the clipboard is usually done
+  by simulating, for each character to be pasted,
+  the pressing of the corresponding key or key combination.
+  This approach is fairly slow.
+  For the KC85/1, KC87, and Z9001, the
+  <a href="settings.htm">settings</a> offer the option
+  <em>Paste text directly into the keyboard buffer</em>.
+  With this option, the characters to be pasted are written
+  directly into the keyboard buffer.
+  This is considerably faster, since it avoids having to simulate
+  the pressing of the corresponding keys.
+ <br/><br/>
+  However, if you use an operating system other than the one built
+  into JKCEMU,
+  this option may no longer work,
+  since keyboard polling may be implemented differently there.
+  In that case, you must turn the option off.
+</body>
+</html>

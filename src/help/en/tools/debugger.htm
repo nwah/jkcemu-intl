@@ -1,0 +1,437 @@
+<html>
+<body>
+ <h1>Debugger</h1>
+  The debugger lets you stop program execution
+  at any point,
+  step through individual instructions,
+  and thereby monitor what is happening in the emulator.
+  It also lets you
+  view the memory and register contents.
+  The register contents can also be changed.
+  To change the memory contents, there is the
+  <a href="memeditor.htm">Memory Editor</a>.
+ <br/><br/>
+  <ul>
+   <li><a href="debugger.htm#window">1. Debugger Window</a></li>
+   <li>
+    <a href="debugger.htm#stop">2. Stopping Program Execution</a>
+   </li>
+   <li>
+    <a href="debugger.htm#run">3. Running the Program to a Breakpoint</a>
+   </li>
+   <li>
+    <a href="debugger.htm#walk">4. Running the Program Slowly to a Breakpoint</a>
+   </li>
+   <li>
+    <a href="debugger.htm#breakpoint">5. Breakpoints/Logpoints</a>
+    <ul>
+     <li>
+      <a href="debugger.htm#bp_pc">5.1. Breakpoint/Logpoint on a Program Address</a>
+     </li>
+     <li>
+      <a href="debugger.htm#bp_mem">5.2. Breakpoint/Logpoint on a Memory Range</a>
+     </li>
+     <li>
+      <a href="debugger.htm#bp_in">5.3. Breakpoint/Logpoint on an Input Port</a>
+     </li>
+     <li>
+      <a href="debugger.htm#bp_out">5.4. Breakpoint/Logpoint on an Output Port</a>
+     </li>
+     <li>
+      <a href="debugger.htm#bp_int">5.5. Breakpoint/Logpoint on an Interrupt Source</a>
+     </li>
+     <li>
+      <a href="debugger.htm#bp_management">5.6. Managing Breakpoints/Logpoints</a>
+     </li>
+     <li>
+      <a href="debugger.htm#bp_import">5.7. Importing Breakpoints/Logpoints</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="debugger.htm#step">6. Step Mode</a>
+    <ul>
+     <li>
+      <a href="debugger.htm#step_over">6.1. Single Step Over a Call</a>
+     </li>
+     <li>
+      <a href="debugger.htm#step_into">6.2. Single Step Into a Call</a>
+     </li>
+     <li>
+      <a href="debugger.htm#run_to_ret">6.3. Run to RET</a>
+     </li>
+     <li>
+      <a href="debugger.htm#change_flags">6.4. Changing Register Contents and Flags</a>
+     </li>
+    </ul>
+   </li>
+   <li><a href="debugger.htm#trace">7. Recording Instructions</a></li>
+   <li><a href="debugger.htm#var">8. Variables</a></li>
+   <li>
+    <a href="debugger.htm#load_save">9. Saving and Loading Breakpoints/Logpoints and Variables</a>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="window">1. Debugger Window</a></h2>
+  You open the debugger in the main window via the menu item
+  <em>Extra</em> &rarr; <em>Tools</em> &rarr; <em>Debugger...</em>.
+  The rest of this description refers to the debugger window.
+  It consists of several subwindows (tabs).
+  The <em>CPU</em> subwindow is the most important one
+  and offers a view, on the left-hand side,
+  of the flags, the registers, and the program execution.
+  The right-hand side contains lists for the various
+  kinds of breakpoints and logpoints.
+  You can resize these lists
+  by dragging the dividers between them.
+ <br/><br/>
+  If you press the right mouse button over such a list,
+  a context menu opens.
+  This context menu applies only to the breakpoints/logpoints
+  in the list over which it was opened.
+  By contrast, the window menu
+  <em>Breakpoints/Logpoints</em>, which partly contains the same entries
+  as the context menu,
+  applies to all breakpoints/logpoints.
+ <br/><br/>
+
+
+ <h2><a name="stop">2. Stopping Program Execution</a></h2>
+  To view the memory and register contents,
+  program execution must be stopped.
+  There are two ways to do this:
+  <ol>
+   <li>
+    You set one or more breakpoints.
+    If such a breakpoint is met
+    while instructions are being executed, execution stops.
+   </li>
+   <li>
+    You click the item
+    <em>Halt program execution</em> in the <em>Debug</em> menu.
+   </li>
+  </ol>
+  Every time program execution stops,
+  the contents of the debugger window are updated, i.e.
+  you see the register contents in the left-hand area of the window,
+  the first bytes of the memory ranges pointed to
+  by the double registers in the middle,
+  and the next instructions to be executed at the bottom.
+ <br/><br/>
+
+
+ <h2><a name="run">3. Running the Program to a Breakpoint</a></h2>
+  This function resumes program execution at normal
+  or full speed.
+  If the program then hits a breakpoint
+  whose condition is met, execution stops.
+ <br/><br/>
+
+
+ <h2><a name="walk">4. Running the Program Slowly to a Breakpoint</a></h2>
+  With this function, the debugger runs the program slowly.
+  This lets you follow the program's execution in the debugger.
+  The speed of program execution can be chosen in three steps.
+  If the program hits a breakpoint
+  whose condition is met, execution stops.
+ <br/><br/>
+
+
+ <h2><a name="breakpoint">5. Breakpoints/Logpoints</a></h2>
+  A breakpoint/logpoint embodies a condition
+  under which program execution is stopped (breakpoint)
+  and/or a log message is issued (logpoint).
+  There are five different kinds of breakpoints/logpoints.
+ <br/><br/>
+  You create breakpoints/logpoints via the window's menu
+  or via the context menu (right mouse button)
+  over the respective breakpoint/logpoint area.
+ <br/><br/>
+
+ <h3>
+  <a name="bp_pc">5.1. Breakpoint/Logpoint on a Program Address</a>
+ </h3>
+  This is the classic form of a breakpoint/logpoint.
+  Execution stops, or a log message is issued,
+  when program execution
+  reaches the specified address.
+  In addition, you can have a register value and/or
+  a flag condition checked.
+  In that case, execution stops, or a log message is issued,
+  only if, in addition to the specified address, the register value check
+  succeeds and/or the flag condition is met.
+  The register value check works as follows:
+  before the instruction at the breakpoint/logpoint address is executed,
+  the value of the selected register is combined with a mask you specify
+  using AND, and the result is then compared with a comparison value
+  you likewise specify.
+  Not only a comparison for equality is possible here,
+  but also for inequality as well as greater than
+  and less than.
+ <br/><br/>
+  Optionally, a breakpoint/logpoint on a program address
+  can also be given a name.
+  Besides giving you a better overview, this name is used for matching when
+  <a href="debugger.htm#bp_import">importing breakpoints/logpoints</a>.
+ <br/><br/>
+
+ <h3><a name="bp_mem">5.2. Breakpoint/Logpoint on a Memory Range</a></h3>
+  A breakpoint/logpoint of this kind reacts to accesses to a
+  memory cell or a memory range.
+  You can specify whether execution should stop, or a log message
+  be issued, only on read access, only on write access,
+  or on both read and write access.
+  In addition, you can have the value of the memory cell in question
+  (read access) or the value being written (write access)
+  checked.
+  Here too, you specify a mask, a comparison operator, and a comparison value.
+ <br/><br/>
+  <b>Caution!</b> Before executing
+  each machine instruction, the debugger checks whether it
+  accesses the specified memory range.
+  Because of this way of working, however, memory accesses
+  made during interrupt acknowledgment
+  (reading the interrupt table in interrupt mode&nbsp;2 and
+  pushing the return address onto the stack) are not detected
+  by any breakpoint/logpoint.
+ <br/><br/>
+
+ <h3><a name="bp_in">5.3. Breakpoint/Logpoint on an Input Port</a></h3>
+  For this breakpoint/logpoint, you specify the address or
+  the address range of an input port.
+  Execution then stops, or a log message is issued,
+  before an input instruction that reads from this input port.
+ <br/><br/>
+  The input address can be specified either as 8&nbsp;bits
+  (2&nbsp;hexadecimal digits)
+  or as 16&nbsp;bits (4&nbsp;hexadecimal digits).
+  The address is then checked accordingly as 8 or 16&nbsp;bits.
+ <br/><br/>
+
+ <h3><a name="bp_out">5.4. Breakpoint/Logpoint on an Output Port</a></h3>
+  This breakpoint/logpoint is similar to one on an input port,
+  except that it reacts to output instructions.
+  In addition, you can have the value being output
+  checked.
+ <br/><br/>
+
+ <h3><a name="bp_int">5.5. Breakpoint/Logpoint on an Interrupt Source</a></h3>
+  For this form of breakpoint/logpoint, you specify an interrupt source
+  present in the emulated system (e.g. PIO or CTC).
+  Execution then stops as soon as the interrupt source
+  triggers an interrupt and this interrupt
+  is also accepted by the microprocessor, i.e.
+  execution stops, or a log message is issued,
+  before the first instruction of the interrupt service routine.
+ <br/><br/>
+
+ <h3><a name="bp_management">5.6. Managing Breakpoints/Logpoints</a></h3>
+  Via the <em>Debug</em> menu, you can create
+  any number of breakpoints/logpoints.
+  This is also possible with the context menu
+  over the respective breakpoint list.
+ <br/><br/>
+  To remove a breakpoint/logpoint again,
+  select it in the right-hand area of the debugger window
+  by clicking it.
+  You can also select several breakpoints/logpoints.
+  Then click the entry
+  <em>Remove Selected Breakpoints/Logpoints</em>
+  in the <em>Debug</em> menu.
+ <br/><br/>
+  Optionally, you can also remove all breakpoints at once
+  (menu item <em>Remove All Breakpoints/Logpoints</em>).
+ <br/><br/>
+  Breakpoints/logpoints that you do not need temporarily
+  do not necessarily have to be removed.
+  You can simply disable them
+  by disabling both actions (stopping and logging).
+  If needed, you can re-enable the desired
+  action later.
+ <br/><br/>
+  The debugger is only active as long as the debugger window
+  is visible.
+  If you have created breakpoints/logpoints and you close
+  the window, the breakpoints/logpoints are not deleted,
+  but they are no longer active.
+ <br/><br/>
+
+ <h3><a name="bp_import">5.7. Importing Breakpoints/Logpoints</a></h3>
+  The debugger offers the option
+  of <a href="labelimport.htm">importing</a>
+  breakpoints/logpoints from a file or from the clipboard.
+  These breakpoints/logpoints can also have a name.
+  This makes it possible, for example, to import an assembler's label table
+  in order to create a breakpoint/logpoint for each label.
+ <br/><br/>
+  The name serves to update breakpoints/logpoints
+  that already exist, i.e. if a breakpoint/logpoint to be imported
+  with the same name already exists,
+  only its address is updated and no new
+  breakpoint/logpoint is created.
+ <br/><br/>
+  You can have the label table of the
+  <a href="assembler.htm">JKCEMU assembler</a>
+  imported into the debugger automatically.
+  To do so, enable the assembler option
+  <em>Use labels in the debugger</em>.
+  In that case, a distinction is also made between breakpoints/logpoints
+  on program addresses and on memory ranges.
+  Normally, a breakpoint/logpoint on a program address
+  is created or adjusted for each label.
+  However, if the assembler source line in question
+  contains a <tt>DEFS</tt> or <tt>DS</tt> instruction,
+  it is treated as a breakpoint/logpoint on a memory range.
+ <br/><br/>
+
+ <h2><a name="step">6. Step Mode</a></h2>
+  Step mode means that after program execution has stopped,
+  individual instructions or groups of instructions
+  are executed and then program execution
+  automatically stops again.
+ <br/><br/>
+  You find the step-mode functions in the
+  <em>Debug</em> menu, under the items
+  <em>Single Step Over Call</em>,
+  <em>Single Step Into Call</em>, and
+  <em>Run to RETURN</em>.
+ <br/><br/>
+  You end step mode simply by resuming
+  program execution.
+  To do so, click the item
+  <em>Run to Breakpoint</em> in the <em>Debug</em> menu.
+ <br/><br/>
+  If you are in step mode and you close
+  the debugger window, the emulator switches to the paused state.
+  You can then click <em>Continue</em>
+  in the <em>Extra</em> menu of the main window,
+  or open the debugger again.
+ <br/><br/>
+
+ <h3><a name="step_over">6.1. Single Step Over a Call</a></h3>
+  A single machine instruction is executed.
+  However, if it is a call to a subroutine,
+  the entire subroutine is executed
+  and only then does execution stop again.
+  The same applies to block instructions and empty DJNZ loops.
+ <br/><br/>
+
+ <h3><a name="step_into">6.2. Single Step Into a Call</a></h3>
+  Only ever a single machine instruction is executed.
+  If it is a call to a subroutine,
+  only the CALL instruction is executed, so execution
+  stops again before the first machine instruction of the subroutine.
+ <br/><br/>
+  For block instructions, only one cycle of the block instruction
+  is executed, and execution then stops again.
+ <br/><br/>
+
+ <h3><a name="run_to_ret">6.3. Run to RET</a></h3>
+  The machine instructions are executed up to the next
+  return instruction.
+  If subroutines are called along the way,
+  they are executed in full.
+ <br/><br/>
+
+ <h3>
+  <a name="change_flags">6.4. Changing Register Contents and Flags</a>
+ </h3>
+  In step mode, i.e. when program execution has been stopped,
+  the contents of the registers can be changed.
+  To do so, enter the desired new value into the respective field
+  in hexadecimal.
+  You can set the values of the individual flags
+  by clicking the corresponding boxes in the upper area of the window,
+  thereby setting or clearing a check mark.
+ <br/><br/>
+
+
+ <h2><a name="trace">7. Recording Instructions</a></h2>
+  Another way of following what is happening
+  in the emulator is instruction recording.
+  Before each machine instruction is executed,
+  the address, the contents of the most important registers, and the
+  upcoming machine instruction are written, in the form of a line,
+  to a text file.
+  You can then view this file with a suitable editor.
+ <br/><br/>
+  You switch instruction recording on and off
+  with the <em>Record Instructions</em> switch
+  in the <em>Debug</em> menu.
+  Every time you switch instruction recording on,
+  you are asked for the name of the file
+  in which the instructions are to be recorded.
+ <br/><br/>
+  <b>Caution!</b> Instruction recording writes a whole line
+  per machine instruction to a text file.
+  This text file therefore grows very quickly and very large.
+  You should therefore leave instruction recording switched on
+  only for a short time and make sure that
+  enough space is available on the storage medium.
+  In addition, program execution is slowed down noticeably,
+  depending on the write speed of the storage medium.
+ <br/><br/>
+  To view the generated text file, you must use an editor
+  that can really handle very, very large files.
+  This is not necessarily the case with the
+  <a href="texteditor.htm">Text Editor</a> built into JKCEMU.
+ <br/><br/>
+
+
+ <h2><a name="var">8. Variables</a></h2>
+  A program usually stores its data in variables.
+  Since it is very helpful, while debugging,
+  to see the current variable contents and, if necessary, change them,
+  the JKCEMU debugger provides support for this.
+  However, the debugger does not know which memory ranges
+  are used for variables and what data types they have.
+  For this reason, the variables must first be made known
+  to the debugger, i.e. they must be created in the debugger.
+  For each variable, you specify an address, a data type,
+  and optionally a name.
+  Once you have done this,
+  the debugger displays the current variable contents
+  whenever program execution stops.
+ <br/><br/>
+  Besides being created manually, variables can also be
+  created and adjusted by the <a href="assembler.htm">assembler</a>
+  built into JKCEMU.
+  To do so, the assembler option <em>Use labels in the debugger</em>
+  must be switched on.
+  If it is, every label that immediately precedes a
+  <tt>DS</tt> or <tt>DEFS</tt> statement
+  is passed to the debugger as a variable.
+ <br/><br/>
+  In a technical sense, a variable is only a declaration
+  that states how a range of one or more bytes
+  in main memory is to be interpreted,
+  i.e. whether a numeric, alphanumeric, or binary value
+  is stored there.
+  You can create any number of variables.
+ <br/><br/>
+  You can also display the contents of main memory
+  with the <a href="memeditor.htm">Memory Editor</a>
+  and also change them.
+  However, creating variables in the debugger has the advantage
+  that the display is automatically updated when program execution
+  stops, and that you see only the bytes
+  you are interested in,
+  even if the bytes are scattered throughout main memory.
+ <br/><br/>
+
+ <h2>
+  <a name="load_save">9. Saving and Loading Breakpoints/Logpoints and Variables</a>
+ </h2>
+  If you have a larger project ahead of you
+  that you want to continue debugging the next day,
+  it can be tedious to have to create
+  all the breakpoints/logpoints and variables again.
+  To save you this work,
+  the debugger offers the option of saving all breakpoints/logpoints
+  and all variables to an XML file
+  and loading them again as well.
+  You find the functions for this in the <em>File</em> menu.
+</body>
+</html>

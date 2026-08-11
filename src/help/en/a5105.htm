@@ -1,0 +1,590 @@
+<html>
+<body>
+ <h1>A5105 (BIC, ALBA-PC&nbsp;1505)</h1>
+  The educational computer A5105, often called simply the
+  educational computer, BIC, or BIC&nbsp;A5105 for short, was developed
+  by Robotron for the educational system of the GDR and introduced
+  in the fall of 1989.
+  As standard, the system consisted of the following components:
+  <ul>
+   <li>
+    Basic computer unit (CGG) K1505
+    <ul>
+     <li>the actual computer with keyboard in a single unit</li>
+     <li>
+      can also be used as a BASIC home computer with a separate power supply
+      (connectors for cassette recorder and joysticks are present)
+     </li>
+     <li>
+      monitor connection only via RGB,<br/>
+      a separate RF modulator is required for a TV connection
+     </li>
+    </ul>
+   </li>
+   <li>
+    Floppy disk storage unit (DSE) K5651
+    <ul>
+     <li>floppy disk controller (FDC) with one floppy disk drive</li>
+     <li>CP/M-compatible operating system SCPX&nbsp;1505 in ROM</li>
+     <li>network connection (BICLAN)</li>
+     <li>power supply, also used to power the basic computer unit</li>
+     <li>plugs directly onto the basic computer unit</li>
+    </ul>
+   </li>
+   <li>
+    Monitor K7222 (black/green)
+    <ul>
+     <li>
+      Although the A5105 offers color output, it was usually
+      shipped only with a black/green monitor.
+     </li>
+    </ul>
+   </li>
+  </ul>
+  <br/>
+   Remaining stock of the A5105 was also sold as the ALBA-PC&nbsp;1505.
+   It consisted of the basic computer unit K1505,
+   the power supply K0309, and the RF modulator 690034.
+   An FDC module with a floppy disk drive was optionally available too.
+  <br/><br/>
+
+ <h2>Notes on the Emulation</h2>
+  <ul>
+   <li>
+    <a href="a5105.htm#hardware">1. Emulated Hardware</a>
+    <ul>
+     <li>
+      <a href="a5105.htm#keyboard">1.1. Keyboard</a>
+      <ul>
+       <li><a href="a5105.htm#autoinput">1.1.1. AutoInput</a></li>
+      </ul>
+     </li>
+     <li>
+      <a href="a5105.htm#sound">1.2. Sound Generator / Sound Output</a>
+      <ul>
+       <li>
+	<a href="a5105.htm#sound_ex">1.2.1. Sound Example Programs</a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="a5105.htm#printer">1.3. V24 Interface with Printer</a>
+     </li>
+     <li>
+      <a href="a5105.htm#gdc">1.4. Graphics Display Controller U82720</a>
+     </li>
+    </ul>
+   </li>
+   <li><a href="a5105.htm#software">2. Software Contained in ROM</a></li>
+   <li>
+    <a href="a5105.htm#disks">3. Included Floppy Disk Images</a>
+    <ul>
+     <li>
+      <a href="a5105.htm#rbas_picdisk">3.1. RBASIC Disk with Images</a>
+     </li>
+     <li>
+      <a href="a5105.htm#rbas_prgdisk">3.2. RBASIC Program Disk</a>
+     </li>
+     <li>
+      <a href="a5105.htm#rbas_sysdisk">3.3. RBASIC System Disk</a>
+     </li>
+     <li>
+      <a href="a5105.htm#scpx_disk">3.4. SCPX System Disk</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="a5105.htm#etc">4. Miscellaneous</a>
+    <ul>
+     <li>
+      <a href="a5105.htm#basic_open">4.1. Opening BASIC Programs in the Text Editor</a>
+     </li>
+     <li>
+      <a href="a5105.htm#basic_io">4.2. Saving and Loading BASIC Programs</a>
+      <ul>
+       <li>
+	<a href="a5105.htm#audio_io">4.2.1. Saving BASIC Programs via the Emulated Cassette Interface</a>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="a5105.htm#load_into_mem">4.3. Loading Files into Main Memory</a>
+     </li>
+     <li><a href="a5105.htm#font">4.4. Character Set</a></li>
+     <li>
+      <a href="a5105.htm#screensize">4.5. Size and Aspect Ratio of the Screen Output</a>
+     </li>
+     <li>
+      <a href="a5105.htm#paste">4.6 Pasting Text from the Clipboard</a>
+     </li>
+     <li>
+      <a href="a5105.htm#images">4.7. A5105 Image Files</a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/><br/>
+
+ <h2><a name="hardware">1. Emulated Hardware</a></h2>
+  Emulated:
+  <ul>
+   <li>Basic unit</li>
+   <li><a href="print.htm">Printer</a></li>
+   <li>Two <a href="joystick.htm">joysticks</a></li>
+   <li>
+    Optional:
+    <ul>
+     <li><a href="floppydisk.htm">Floppy Disk Station</a></li>
+     <li>
+      <a href="gide.htm">GIDE</a> with up to two hard disks
+      at I/O base address&nbsp;D0h
+     </li>
+     <li>Two <a href="ramfloppy.htm">RAM floppies</a></li>
+     <li><a href="k1520sound.htm">K1520 sound card</a></li>
+     <li>
+      <a href="kcnet.htm">KCNet</a>-compatible network card
+      at I/O base address&nbsp;C0h
+     </li>
+     <li>
+      <a href="usb.htm">USB port</a> (Vinculum VDIP module)
+      at I/O base addresses&nbsp;2Ch and FCh
+     </li>
+    </ul>
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="keyboard">1.1. Keyboard</a></h3>
+  Some keys of the A5105 are usually not found on the emulator
+  computer's keyboard, or are labeled differently.
+  These keys are therefore mapped as follows:
+ <br/>
+  <table border="1">
+   <tr><th>A5105 Key</th><th>JKCEMU Key</th></tr>
+   <tr><td>PF1</td><td>F1</td></tr>
+   <tr><td>PF2</td><td>F2</td></tr>
+   <tr><td>PF3</td><td>F3</td></tr>
+   <tr><td>PF4</td><td>F4</td></tr>
+   <tr><td>PF5</td><td>F5</td></tr>
+   <tr><td>HOME</td><td>F6 or Home</td></tr>
+   <tr><td>STOP</td><td>F7</td></tr>
+   <tr><td>INS&nbsp;MODE</td><td>Insert</td></tr>
+   <tr><td>DEL</td><td>Delete</td></tr>
+  </table>
+ <br/>
+  The key click is not emulated.
+ <br/><br/>
+
+
+ <h3><a name="autoinput">1.1.1. AutoInput</a></h3>
+  If you use the AutoInput function while the option
+  <em>Paste text by intercepting the system call</em> is also
+  activated, it can happen that the first character
+  is not entered automatically.
+  To prevent this, it is best to enter the control key
+  <em>Enter / Return</em> before the first command.
+ <br/><br/>
+
+ <h3><a name="sound">1.2. Sound Generator / Sound Output</a></h3>
+  To hear the key click as well as the sound generator
+  contained in the basic unit, you must activate the tone output
+  in the <em>Audio/Tape</em> window, on the
+  <a href="audio.htm#sound_out">Sound Generator</a> tab.
+ <br/><br/>
+  <b>Caution!</b> In the original, the data storage unit
+  contains a loudspeaker that can be switched on and off
+  via I/O address&nbsp;70h.
+  However, this does not switch off the sound
+  at the audio/video connector.
+  As far as tone output is concerned, JKCEMU emulates the audio/video
+  connector, i.e. output to I/O address&nbsp;70h has no effect
+  in the emulator.
+ <br/><br/>
+  <b>Note:</b> The sound generator is always emulated at the
+  original clock frequency, i.e. if you specify a different
+  clock frequency in the <a href="settings.htm">settings</a>,
+  it only affects the emulation of the microprocessor,
+  not the sound generator.
+ <br/><br/>
+
+ <h3><a name="sound_ex">1.2.1. Sound Example Programs</a></h3>
+  Here you will find a few example programs
+  that demonstrate the capabilities of the sound generator.
+  The program <em>Hubschrauber</em> is based on an example program
+  in the documentation
+  <em>BILDUNGSCOMPUTER robotron A5105 - Das Musiksystem</em>.
+  The other programs come from the JKCEMU developer himself.
+ <br/><br/>
+  <table border="0">
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <tt>
+      100&nbsp;PRINT:PRINT&nbsp;"Hubschrauber"&#10;<br/>
+      110&nbsp;SOUND&nbsp;0,111&#10;<br/>
+      120&nbsp;SOUND&nbsp;1,0&#10;<br/>
+      130&nbsp;SOUND&nbsp;6,30&#10;<br/>
+      140&nbsp;SOUND&nbsp;8,16&#10;<br/>
+      150&nbsp;SOUND&nbsp;11,44&#10;<br/>
+      160&nbsp;SOUND&nbsp;12,1&#10;<br/>
+      170&nbsp;SOUND&nbsp;13,14&#10;<br/>
+      180&nbsp;SOUND&nbsp;7,9&#10;<br/>
+      190&nbsp;PRINT:PRINT&nbsp;"Abbruch&nbsp;mit&nbsp;beliebiger&nbsp;Taste"&#10;<br/>
+      200&nbsp;IF LEN(INKEY$)=0 THEN 200&#10;<br/>
+      210&nbsp;SOUND&nbsp;7,0&#10;<br/>
+      220&nbsp;SOUND&nbsp;13,0&#10;<br/>
+      230&nbsp;END
+     </tt>
+    </td>
+    <td>&nbsp;</td>
+    <td valign="top" nowrap="nowrap">
+     <tt>
+      10&nbsp;PRINT:PRINT&nbsp;"Explosion"&#10;<br/>
+      20&nbsp;SOUND&nbsp;5,20&#10;<br/>
+      30&nbsp;SOUND&nbsp;11,0&#10;<br/>
+      40&nbsp;SOUND&nbsp;12,31&#10;<br/>
+      50&nbsp;SOUND&nbsp;13,0&#10;<br/>
+      60&nbsp;SOUND&nbsp;9,16&#10;<br/>
+      70&nbsp;SOUND&nbsp;7,16&#10;<br/>
+      80&nbsp;END
+     </tt>
+    </td>
+    <td>&nbsp;</td>
+    <td valign="top" nowrap="nowrap">
+     <tt>
+      100&nbsp;PRINT:PRINT&nbsp;"Meeresrauschen"&#10;<br/>
+      110&nbsp;SOUND&nbsp;6,20&#10;<br/>
+      120&nbsp;SOUND&nbsp;8,0&#10;<br/>
+      130&nbsp;SOUND&nbsp;9,16&#10;<br/>
+      140&nbsp;SOUND&nbsp;10,8&#10;<br/>
+      150&nbsp;SOUND&nbsp;11,0&#10;<br/>
+      160&nbsp;SOUND&nbsp;12,50&#10;<br/>
+      170&nbsp;SOUND&nbsp;13,14&#10;<br/>
+      180&nbsp;SOUND&nbsp;7,48&#10;<br/>
+      190&nbsp;PRINT:PRINT&nbsp;"Abbruch&nbsp;mit&nbsp;beliebiger&nbsp;Taste"&#10;<br/>
+      200&nbsp;IF LEN(INKEY$)=0 THEN 200&#10;<br/>
+      210&nbsp;SOUND&nbsp;7,0&#10;<br/>
+      220&nbsp;SOUND&nbsp;13,0&#10;<br/>
+      230&nbsp;END
+     </tt>
+    </td>
+    <td>&nbsp;</td>
+    <td valign="top" nowrap="nowrap">
+     <tt>
+      100&nbsp;PRINT:PRINT&nbsp;"Schranke"&#10;<br/>
+      110&nbsp;SOUND&nbsp;2,200&#10;<br/>
+      120&nbsp;SOUND&nbsp;3,1&#10;<br/>
+      130&nbsp;SOUND&nbsp;9,16&#10;<br/>
+      140&nbsp;SOUND&nbsp;11,0&#10;<br/>
+      150&nbsp;SOUND&nbsp;12,40&#10;<br/>
+      160&nbsp;SOUND&nbsp;13,8&#10;<br/>
+      170&nbsp;SOUND&nbsp;7,2&#10;<br/>
+      180&nbsp;PRINT:PRINT&nbsp;"Abbruch&nbsp;mit&nbsp;beliebiger&nbsp;Taste"&#10;<br/>
+      190&nbsp;IF LEN(INKEY$)=0 THEN 190&#10;<br/>
+      200&nbsp;SOUND&nbsp;7,0&#10;<br/>
+      210&nbsp;SOUND&nbsp;13,0&#10;<br/>
+      220&nbsp;END
+     </tt>
+    </td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="printer">1.3. V24 Interface with Printer</a></h3>
+  A <a href="print.htm">printer</a> connected to the basic unit's
+  V24 interface is emulated.
+  Both this interface and the emulated V24 parameters
+  correspond to the A5105's default settings,
+  i.e. no special printer setting is necessary
+  in the A5105 operating system.
+ <br/><br/>
+
+ <h3><a name="gdc">1.4. Graphics Display Controller U82720</a></h3>
+  The graphics display controller (GDC) U82720 is only partially
+  emulated. Functions such as ZOOM, PAN, and the drawing of
+  graphical elements and figures are not implemented.
+  The A5105's system software contained in ROM does not use
+  these functions of the GDC.
+  As a result, application programs that exclusively use the
+  facilities provided by the operating system for outputting
+  text and graphics
+  should not be affected by this limitation.
+ <br/><br/>
+  RBASIC draws graphical elements such as circles, lines,
+  and sprites itself, i.e. it calculates the pixel data
+  in software and passes it on to the GDC.
+  This works without any problems in the emulation.
+  SCPX has no graphics functions and usually works
+  only in text mode.
+  This also works without any problems.
+ <br/><br/>
+
+ <h2><a name="software">2. Software Contained in ROM</a></h2>
+  <ul>
+   <li>RBASIC version&nbsp;2.01</li>
+   <li>
+    RBASIC Disk version&nbsp;2.00
+    (only when emulating the Floppy Disk Station)
+   </li>
+  </ul>
+ <br/><br/>
+
+ <h2><a name="disks">3. Included Floppy Disk Images</a></h2>
+  For A5105 emulation, JKCEMU includes
+  the following floppy disk images:
+  <ul>
+   <li>RBASIC Disk with Images</li>
+   <li>RBASIC Program Disk</li>
+   <li>RBASIC System Disk</li>
+   <li>SCPX System Disk</li>
+  </ul>
+ <br/>
+  To use the floppy disk images, emulation
+  of the Floppy Disk Station must be activated.
+ <br/><br/>
+
+ <h3><a name="rbas_picdisk">3.1. RBASIC Disk with Images</a></h3>
+  This disk contains photos that were processed with the image editor
+  included in JKCEMU and converted into the A5105 format.
+  The images can be displayed as a slideshow.
+  The RBASIC program for displaying the slideshow starts itself
+  automatically, i.e. after inserting the disk into the Floppy Disk
+  Station, you only need to trigger a RESET and the program starts.
+ <br/><br/>
+  If you want to start the slideshow manually, this is how:
+ <br/><br/>
+  &nbsp;&nbsp;<tt>run "autoexec.bas"</tt>
+ <br/><br/>
+  It is also possible to display the images individually:
+ <br/><br/>
+  &nbsp;&nbsp;<tt>run "viewscr.bas"</tt>
+ <br/><br/>
+
+ <h3><a name="rbas_prgdisk">3.2. RBASIC Program Disk</a></h3>
+  The RBASIC Program Disk contains a selection of
+  demonstration, game, and application programs.
+  The programs are started with:
+ <br/><br/>
+  &nbsp;&nbsp;<tt>run "program.bas"</tt>
+ <br/><br/>
+  In place of <em>program.bas</em>, the correct file name
+  must be specified.
+ <br/><br/>
+
+ <h3><a name="rbas_sysdisk">3.3. RBASIC System Disk</a></h3>
+  The RBASIC System Disk contained in the emulator largely
+  corresponds in content to the original system disk and also
+  contains, among other things, the BIC demonstration program.
+  This is started as follows:
+ <br/><br/>
+  &nbsp;&nbsp;<tt>run "bicdemo"</tt>
+ <br/><br/>
+  Furthermore, the image viewer program
+  <em>viewscr.bas</em> can also be found on the disk.
+ <br/><br/>
+
+ <h3><a name="scpx_disk">3.4. SCPX System Disk</a></h3>
+  SCPX requires a writable disk when booting.
+  Since the floppy disk images built into the emulator are not
+  writable, the SCPX system disk should first be exported
+  in the <em>JKCEMU Floppy Disk Station</em> window
+  and the resulting image file then opened
+  without write protection.
+  For this reason, you will find the SCPX system disk only in the
+  submenus <em>Insert Different Floppy Disk</em>
+  and <em>Export Floppy Disk</em>.
+ <br/><br/>
+  However, you can also insert the SCPX system disk directly
+  via the <em>Insert Different Floppy Disk</em> submenu
+  and boot from it.
+  In that case, though, an error message appears.
+  You can dismiss it with a keypress, though,
+  and still work with SCPX anyway.
+ <br/><br/>
+  The SCPX system disk appears as drive <em>A:</em>
+  and also contains drivers for the two RAM floppies
+  (<em>RAFBIC20.COM</em> and <em>RAFBIC24.COM</em>).
+ <br/><br/>
+  <b>Caution!</b> The disk also contains the empty file
+  <a href="go_com.htm">GO.COM</a>.
+  It is used to start a CP/M-compatible program
+  residing in main memory.
+  If <em>GO</em> is invoked without a program present
+  in main memory, this causes a crash.
+ <br/><br/>
+
+
+ <h2><a name="etc">4. Miscellaneous</a></h2>
+
+ <h3>
+  <a name="basic_open">4.1. Opening BASIC Programs in the Text Editor</a>
+ </h3>
+  The menu item <em>File</em> &rarr;
+  <em>Open BASIC Program in Text Editor...</em>
+  is not active in the A5105 emulation,
+  because the binary format of RBASIC programs is not documented
+  and is therefore also not fully known.
+  However, you can still open a BASIC program residing in main memory
+  in the text editor by &quot;printing&quot; it with the command
+  <tt>LLIST</tt> and then opening the print result
+  in the text editor.
+  You can reach the print result via the menu item
+  <em>Extra</em> &rarr; <em>Print Jobs...</em>
+  (see <a href="print.htm">Printing</a>).
+ <br/><br/>
+
+ <h3><a name="basic_io">4.2. Saving and Loading BASIC Programs</a></h3>
+  JKCEMU offers special support for
+  <a href="loadsavebasic.htm">saving and loading BASIC programs</a>.
+  To save, please use the function
+  <em>Save BASIC Program...</em> in the <em>File</em> menu
+  and save the respective program as a
+  <a href="fileformats.htm#rbasic">BASIC/RBASIC program file (*.bas)</a>.
+  Alternatively, you can also save it as a
+  <a href="fileformats.htm#headersave">Headersave file (*.z80)</a>
+  with file type&nbsp;<em>B</em>.
+ <br/><br/>
+  If you save a BASIC program in a different file format,
+  JKCEMU will no longer recognize, when later loading the file,
+  that it is a BASIC program, and will not adjust the
+  system cells of the BASIC interpreter accordingly.
+  The loaded program cannot then be used.
+ <br/><br/>
+  If you have activated emulation of the floppy disk module
+  in the <a href="settings.htm">settings</a> for the A5105,
+  you can alternatively also save BASIC programs
+  to an emulated disk using the RBASIC commands <em>SAVE</em>
+  and <em>LOAD</em>, and load them from there again.
+ <br/><br/>
+
+ <h3>
+  <a name="audio_io">4.2.1. Saving BASIC Programs via the Emulated Cassette Interface</a>
+ </h3>
+  If you want to save a BASIC program via the emulated cassette
+  interface, please do so at speed&nbsp;1.
+  The program name can be up to 6&nbsp;characters long.
+  In this example, the BASIC program is saved under the name
+  <em>prog</em>:
+ <br/><br/>
+  &nbsp;&nbsp;<tt>csave "prog",1</tt>
+ <br/><br/>
+  You can then read the program back in with:
+ <br/><br/>
+  &nbsp;&nbsp;<tt>cload</tt>
+ <br/><br/>
+  or
+ <br/><br/>
+  &nbsp;&nbsp;<tt>cload "prog"</tt>
+ <br/><br/>
+
+ <h3>
+  <a name="load_into_mem">4.3. Loading Files into Main Memory</a>
+ </h3>
+  In SCPX mode, the operating system automatically switches
+  the ROM in and out cyclically.
+  So that loading files into main memory using the emulator's
+  functions works reliably despite this behavior,
+  files are always loaded into RAM,
+  even if it is not currently switched in.
+ <br/><br/>
+
+ <h3><a name="font">4.4. Character Set</a></h3>
+  The A5105 contains a programmable character generator,
+  which by default is filled with the old DOS character set
+  (code page&nbsp;437).
+  If the character generator is reprogrammed by software,
+  the emulator cannot know this.
+  For this reason, when copying from the A5105's screen output,
+  JKCEMU always converts the characters into the emulator
+  computer's character set according to code page&nbsp;437,
+  regardless of how the character generator is actually
+  programmed.
+ <br/><br/>
+
+ <h3>
+  <a name="screensize">4.5. Size and Aspect Ratio of the Screen Output</a>
+ </h3>
+  The A5105 offers various screen resolutions.
+  When switching between these
+  (e.g. with the BASIC command <tt>screen&nbsp;1</tt> for the
+  80-character mode), the size of the emulator window
+  and the aspect ratio also change.
+  In the original, on the other hand, the size
+  of the screen output area always stays the same. With the option
+  <em>Same window size in all screen modes</em>
+  you can adapt the behavior to match the original.
+  However, the emulator window is then always
+  large enough that the highest screen resolution can be displayed.
+ <br/><br/>
+
+ <h3>
+  <a name="paste">4.6. Pasting Text from the Clipboard</a>
+ </h3>
+  Pasting text from the clipboard is usually done
+  by simulating, for each character to be pasted,
+  the pressing of the corresponding key or key combination.
+  This principle is quite slow.
+  For the A5105, there is an option in the
+  <a href="settings.htm">settings</a> called
+  <em>Paste text by intercepting the system call</em>.
+  With this option, the emulator listens at the entry point
+  for the CONIN system function.
+  When this system function is called, JKCEMU checks
+  whether a character should be pasted.
+  If so, it writes the next character to be pasted
+  into the corresponding processor register and simulates a
+  RETURN instruction.
+  If the operating system or the application program does not
+  query the keyboard via the CONIN system function,
+  pasting text will not work,
+  and you will have to switch the option off.
+ <br/><br/>
+  <b>Caution!</b> If nothing happens when pasting text from the
+  clipboard, the operating system is currently in a state that is
+  unfavorable for keyboard input.
+  In that case, press a key on the keyboard,
+  ideally the key for the first character to be pasted,
+  to &quot;wake up&quot; the operating system.
+ <br/><br/>
+
+ <h3><a name="images">4.7. A5105 Image Files</a></h3>
+  The <a href="tools/imageviewer.htm">JKCEMU Image Viewer</a>
+  supports both reading and writing A5105 image files
+  that correspond to the RBASIC graphics mode <em>SCREEN&nbsp;5</em>
+  (320x200&nbsp;pixels, 16&nbsp;colors).
+  To display them in the JKCEMU Image Viewer, the files must
+  have the extension <em>*.scr</em>.
+  Conversely, such image files can also be created
+  with the Image Viewer.
+  Loading and displaying such files on the A5105
+  is possible with the following short RBASIC program:
+ <br/>
+  <tt>
+   &#10;<br/>
+   10 SCREEN 0:CLS&#10;<br/>
+   20 FILES "*.scr"&#10;<br/>
+   30 PRINT:INPUT "Bilddatei:";F$&#10;<br/>
+   40 IF INSTR(F$,".")=0 THEN F$=F$+".SCR"&#10;<br/>
+   50 SCREEN 5,0:CLS&#10;<br/>
+   60 BLOAD F$,S:PAUSE 50&#10;<br/>
+   70 IF INKEY$="" THEN 70&#10;<br/>
+   80 GOTO 10&#10;<br/>
+  </tt>
+ <br/>
+  The program displays the list of existing image files
+  and asks for the name of the file to be loaded.
+  The file name can also be entered without the extension
+  <em>.SCR</em>.
+ <br/><br/>
+  An extended version of this program is included on the
+  floppy disk images contained in the emulator,
+  <em>BIC A5105 RBASIC Disk with Images</em> and
+  <em>BIC A5105 RBASIC System Disk</em>.
+  If you have inserted one of these two disks in the
+  <em>JKCEMU Floppy Disk Station</em> window
+  and are in RBASIC,
+  you can start the program with:
+ <br/><br/>
+  &nbsp;&nbsp;<tt>run &quot;viewscr.bas&quot;</tt>
+ <br/><br/>
+</body>
+</html>

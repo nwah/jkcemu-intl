@@ -1,0 +1,302 @@
+<html>
+<head><title>BASIC Compiler: Data Types</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Data Types</h2>
+  The JKCEMU BASIC compiler knows the following data types:
+  <ul>
+   <li>
+    <em><a href="datatypes.htm#integer">Integer</a></em>
+    for whole numbers in the range -32767 to +32767
+   </li>
+   <li>
+    <em><a href="datatypes.htm#long">Long</a></em>
+    for whole numbers in the range -2147483647 to +2147483647
+   </li>
+   <li>
+    <em><a href="datatypes.htm#decimal">Decimal</a></em>
+    for whole numbers and floating-point numbers
+    with up to 11&nbsp;decimal digits,
+    of which a maximum of 7&nbsp;are decimal places
+   </li>
+   <li>
+    <em><a href="datatypes.htm#single">Single</a></em>
+    for floating-point numbers in the range
+    &plusmn;10<sup>-38</sup> to &plusmn;10<sup>+38</sup>
+    with a precision of 6&nbsp;decimal digits
+   </li>
+   <li>
+    <em><a href="datatypes.htm#string">String</a></em>
+    for character strings
+   </li>
+  </ul>
+ <br/>
+
+ <h3><a name="integer">Integer</a></h3>
+  With the numeric data type <em>Integer</em>, numbers are stored
+  internally in 16-bit two's complement.
+  This means the value range also includes the number -32768.
+  However, this number cannot always be computed,
+  because its absolute value (+32768),
+  which must be formed internally for some calculations,
+  is no longer within the value range.
+  For this reason, only numbers from -32767 to +32767
+  are fully usable with <em>Integer</em>.
+  Mathematical calculations with the data type <em>Integer</em>
+  are especially fast, faster than with any other
+  numeric data type.
+ <br/><br/>
+
+ <h3><a name="long">Long</a></h3>
+  <em>Long</em> is a numeric data type
+  that stores whole numbers in 32-bit two's complement.
+  Analogous to <em>Integer</em>, there is also a number for Long
+  that belongs to the value range
+  but is not fully usable: -2147483648.
+ <br/><br/>
+
+ <h3><a name="decimal">Decimal</a></h3>
+  This data type stores numbers as packed BCD numbers
+  in 6&nbsp;bytes (BCD: Binary Coded Decimal,
+  packed: two digits per byte).
+  The uppermost nibble contains the sign (1&nbsp;bit)
+  and the number of decimal places (3&nbsp;bit).
+  This results in 11&nbsp;decimal digits,
+  0 to 7 of which are decimal places.
+  The following numbers can therefore be stored:
+ <br/><br/>
+  &nbsp;&nbsp;-99999999999 to 99999999999 or<br/>
+  &nbsp;&nbsp;-9999999999.9 to 9999999999.9 or<br/>
+  &nbsp;&nbsp;...<br/>
+  &nbsp;&nbsp;-9999.9999999 to 9999.9999999
+ <br/><br/>
+  The smallest representable magnitude is: 0.0000001
+ <br/><br/>
+  As you can see, <em>Decimal</em> can also be used
+  to store floating-point numbers.
+  Unlike the data type <em>Single</em> (see further below),
+  which can likewise store floating-point numbers,
+  <em>Decimal</em> represents the numbers in the decimal system.
+  As a result, mathematical calculations are considerably slower,
+  but no rounding errors arise from conversions between
+  the decimal and binary systems.
+  <em>Decimal</em> is therefore especially suited to cases
+  where even the last digit must be calculated exactly,
+  e.g. for monetary amounts.
+  Rounding errors can nevertheless still occur,
+  namely whenever the result of a calculation has more
+  decimal places than the data type can hold.
+  In that case, the error variables
+  <a href="functions.htm#err">ERR</a> and
+  <a href="functions.htm#err$">ERR$</a> are set accordingly.
+  This allows you to check in the program with
+ <br/><br/>
+  &nbsp;&nbsp;<tt>IF ERR=E_DIGITS_TRUNCATED THEN ...</tt>
+ <br/><br/>
+  whether decimal places were truncated during the last
+  <em>Decimal</em> calculation, or whether the mathematically
+  exact result could be calculated.
+ <br/><br/>
+
+ <h3><a name="single">Single</a></h3>
+  <em>Single</em> is a numeric data type for binary
+  floating-point numbers of single precision, corresponding to the
+  IEEE&nbsp;754 standard.
+  The numbers are represented with an 8&nbsp;bit exponent and
+  a 24&nbsp;bit mantissa (32&nbsp;bit total).
+  This results in a number range of roughly
+  &plusmn;10<sup>-38</sup> to &plusmn;10<sup>+38</sup>
+  with a precision of about seven decimal digits.
+  However, the data type stores the numbers in approximated form.
+  This means that not every decimal floating-point number
+  can be represented exactly in numeric form.
+  Many numbers must be stored with a numeric value
+  that only approximately corresponds to the decimal value.
+  This results in rounding errors,
+  which grow larger with every mathematical calculation.
+  The precision can therefore also be less than seven decimal digits.
+  In order not to feign a higher precision
+  than is actually present,
+  numbers of the data type <em>Single</em> are rounded
+  to 6&nbsp;decimal digits on output,
+  i.e. when converted to a decimal number.
+ <br/><br/>
+  Because of the large number range of <em>Single</em>,
+  numbers can also be written with a decimal exponent,
+  both in the BASIC source code and when entering data with the
+  <a href="instructions.htm#input"><tt>INPUT</tt></a> statement.
+  Here are a few examples:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Example</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top"><tt>1.23E7</tt></td>
+    <td valign="top">1.23 * 10^7 = 12300000</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>2E+4</tt></td>
+    <td valign="top">2 * 10^4 = 20000</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>4.5e-3</tt></td>
+    <td valign="top">4.5 * 10^-3 = 0.0045</td>
+   </tr>
+   <tr>
+    <td valign="top"><tt>-0.00678E5</tt></td>
+    <td valign="top">-0.00678 * 10^5 = -678</td>
+   </tr>
+  </table>
+ <br/>
+  The smallest representable magnitude greater than zero is
+  1.17549E-38.
+  If a mathematical calculation results in a value with a smaller
+  magnitude, the result is zero,
+  even if it is mathematically not actually zero.
+ <br/><br/>
+  Example:
+ <br/><br/>
+  2E-30 * 3E-20 mathematically gives 6E-50.
+  However, this cannot be represented with the data type <em>Single</em>.
+  The result is therefore&nbsp;0.
+ <br/><br/>
+  The largest representable magnitude is 3.40283E+38.
+  If the result of a mathematical calculation is larger than that,
+  the compiled program aborts with a numeric
+  overflow error.
+ <br/><br/>
+  The advantage of <em>Single</em> over <em>Decimal</em>
+  lies in the considerably higher calculation speed.
+  For this reason, some mathematical functions
+  that require complex calculations
+  are available only for <em>Single</em>.
+ <br/><br/>
+  The name <em>Single</em> is only customary
+  in the BASIC programming language. In other programming languages,
+  this data type is often called <em>Float</em>.
+  For this reason, the JKCEMU BASIC compiler also allows the
+  keyword <em>FLOAT</em> to be used instead of <em>SINGLE</em>.
+ <br/><br/>
+  <b>Note:</b> Although the data type <em>Single</em> corresponds
+  in its properties to the single-precision floating-point data type
+  defined in the IEEE&nbsp;754 standard,
+  it is not implemented exactly according to the standard.
+  Specifically, the sign and exponent are swapped,
+  since this is considerably easier to implement
+  on an 8-bit processor.
+  Furthermore, the special values <em>+Infinity</em>,
+  <em>-Infinity</em> and <em>NaN</em> are not supported,
+  since they do not occur in the language concept
+  of the JKCEMU BASIC compiler.
+ <br/><br/>
+
+ <h3><a name="string">String</a></h3>
+  The data type <em>String</em> is used to store character strings
+  and is always marked with a trailing $ character,
+  i.e. all variables and functions whose names end
+  in a dollar sign are string variables or string functions
+  that store or return a character string.
+  Further information can be found on the page:
+  <a href="strings.htm">String Handling</a>
+ <br/><br/>
+
+ <h3><a name="typeconv">Type Conversions</a></h3>
+  There are implicit and explicit type conversions.
+  Implicit means that the compiler automatically
+  performs the necessary type conversion.
+  This happens wherever a numeric data type
+  with a smaller value range is specified at a position
+  where a numeric data type with a larger value range
+  is expected.
+  This affects, for example,
+  <a href="expressions.htm#operators2">operators with two operands</a>
+  and certain function arguments.
+  The implicit type conversion always goes from the smaller
+  to the larger value range, i.e. in this direction:
+ <br/><br/>
+  Integer &rarr; Long &rarr; Decimal &rarr; Single
+ <br/><br/>
+  In the other direction,
+  i.e. when a numeric data type was specified
+  that has a larger value range
+  than intended at the position in question,
+  the type conversion must be performed explicitly.
+  In that case, the software developer must ensure
+  that the value range is not exceeded.
+  If it is, the compiled program aborts
+  with an overflow error.
+ <br/><br/>
+  For an explicit type conversion, a BASIC function explicitly
+  specified by the software developer in the source code
+  of the BASIC program is called, which performs the type conversion.
+  The following functions are available for this:
+ <br/>
+  <ul>
+   <li>
+    <a href="functions.htm#cdec"><tt>CDEC</tt></a>
+    (Integer, Long, Single &rarr; Decimal)
+   </li>
+   <li>
+    <a href="functions.htm#cint"><tt>CINT</tt></a>
+    (Decimal, Long, Single &rarr; Integer)
+   </li>
+   <li>
+    <a href="functions.htm#clng"><tt>CLNG</tt></a>
+     (Decimal, Integer, Single &rarr; Long)
+   </li>
+   <li>
+    <a href="functions.htm#csng"><tt>CSNG</tt></a>
+     (Decimal, Integer, Long &rarr; Single)
+   </li>
+   <li>
+    <a href="functions.htm#decval"><tt>DECVAL</tt></a>
+    (String &rarr; Decimal)
+   </li>
+   <li>
+    <a href="functions.htm#intval"><tt>INTVAL</tt></a>
+    (String &rarr; Integer)
+   </li>
+   <li>
+    <a href="functions.htm#lngval"><tt>LNGVAL</tt></a>
+    (String &rarr; Long)
+   </li>
+   <li>
+    <a href="functions.htm#sngval"><tt>SNGVAL</tt></a>
+    (String &rarr; Single)
+   </li>
+   <li>
+    <a href="functions.htm#val"><tt>VAL</tt></a>
+    (String &rarr; Integer)
+   </li>
+  </ul>
+ <br/>
+  In a broader sense, these functions also serve type conversion:
+ <br/>
+  <ul>
+   <li>
+    <a href="functions.htm#asc"><tt>ASC</tt></a>
+    (String &rarr; Integer)
+   </li>
+   <li>
+    <a href="functions.htm#bin$"><tt>BIN$</tt></a>
+    (Integer, Long &rarr; String)
+   </li>
+   <li>
+    <a href="functions.htm#chr$"><tt>CHR$</tt></a>
+    (Integer &rarr; String)
+   </li>
+   <li>
+    <a href="functions.htm#hex$"><tt>HEX$</tt></a>
+    (Integer, Long &rarr; String)
+   </li>
+   <li>
+    <a href="functions.htm#oct$"><tt>OCT$</tt></a>
+    (Integer, Long &rarr; String)
+   </li>
+   <li>
+    <a href="functions.htm#str$"><tt>STR$</tt></a>
+    (Decimal, Integer, Long, Single &rarr; String)
+   </li>
+  </ul>
+</body>
+</html>

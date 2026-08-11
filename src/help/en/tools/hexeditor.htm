@@ -1,0 +1,140 @@
+<html>
+<body>
+ <h1>Hex Editor</h1>
+  The Hex Editor lets you
+  view and change files in their binary form.
+ <br/><br/>
+  <ul>
+   <li><a href="hexeditor.htm#start">1. Starting the Hex Editor</a></li>
+   <li>
+    <a href="hexeditor.htm#functions">2. Functions</a>
+    <ul>
+     <li>
+      <a href="hexeditor.htm#overwrite">2.1. Overwriting Bytes Directly</a>
+     </li>
+    </ul>
+   </li>
+   <li><a href="hexeditor.htm#goto">3. Jumping to a Position</a></li>
+   <li><a href="hexeditor.htm#mark">4. Selecting a Range</a></li>
+   <li>
+    <a href="hexeditor.htm#copy">5. Copying Selected Bytes</a>
+   </li>
+   <li><a href="hexeditor.htm#font">6. Font</a></li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="start">1. Starting the Hex Editor</a></h2>
+  You open the Hex Editor in the emulator window via the menu
+  <em>Extra</em> &rarr; <em>Tools</em> &rarr; <em>Hex Editor...</em>.
+  However, it is also possible to open this tool with a file selected
+  in the <a href="filebrowser.htm">File Browser</a>,
+  or to start the Hex Editor as a standalone program
+  without the emulator.
+  For the latter, specify the option <em>--he</em> or <em>--hexeditor</em>
+  on the command line when starting JKCEMU.
+  Optionally, a file can also be specified after it,
+  which is then opened.
+ <br/><br/>
+  If the Hex Editor was started without a file to open,
+  you find yourself in <em>New File</em> mode.
+  In this mode, you can create a new file
+  by using <em>Append Bytes at the End...</em> and then saving.
+ <br/><br/>
+
+
+ <h2><a name="functions">2. Functions</a></h2>
+  The <em>File</em> menu contains the functions for opening
+  and saving the file.
+  You change the file contents using the functions
+  in the <em>Edit</em> menu.
+  Many functions require you to select a byte
+  on, or starting from, which the function acts
+  (see the section <em>Jumping to a Position</em> further below).
+  Some functions also allow the selection of several bytes
+  (see the section <em>Selecting a Range</em> further below).
+ <br/><br/>
+  Bytes are entered in a separate dialog window,
+  in which you also specify the form
+  in which the bytes are to be entered.
+  If you choose <em>16-bit decimal numbers</em> or
+  <em>32-bit decimal numbers</em> as the form,
+  the toggle option between <em>little endian</em> and
+  <em>big endian</em> becomes active.
+  <em>Little endian</em> means that the low-order byte comes before the
+  high-order byte.
+  This is the byte order also found
+  in the emulated systems.
+  With <em>big endian</em>, on the other hand, the high-order byte
+  comes before the low-order byte.
+ <br/><br/>
+  With the menu item <em>Append File at the End...</em>,
+  you have the option
+  of chaining several files together into one.
+  Conversely, you can use <em>Save Selected Bytes...</em>
+  followed by <em>Remove Selected Bytes</em>
+  to split the open file into several files.
+ <br/><br/>
+
+ <h3><a name="overwrite">2.1. Overwriting Bytes Directly</a></h3>
+  As already indicated above,
+  you change or overwrite data bytes
+  by first clicking the first byte to be changed
+  to select it, and then calling up the menu item
+  <em>Edit</em> &rarr; <em>Overwrite Bytes...</em>.
+  In addition, there is also the option
+  of changing the data bytes directly in the display,
+  by simply entering two hexadecimal digits,
+  thereby setting the new value of the selected data byte.
+  However, this direct input option can easily lead to
+  accidentally overwriting the file's contents.
+  For this reason, it is disabled by default.
+  You enable this input option
+  via the menu item <em>Settings</em> &rarr;
+  <em>Overwrite Bytes by Direct Input</em>.
+  This setting is saved along with the rest
+  when <a href="../settings.htm#profiles">saving a profile</a>.
+ <br/><br/>
+
+
+ <h2><a name="goto">3. Jumping to a Position</a></h2>
+  You set the cursor to the desired position
+  with a mouse click.
+  However, you can also enter the desired position in one of the two
+  fields in the <em>Cursor Position</em> area
+  and press <em>Enter</em>.
+ <br/><br/>
+
+
+ <h2><a name="mark">4. Selecting a Range</a></h2>
+  You select a range by dragging the mouse
+  with the mouse button held down,
+  or by using the cursor keys while holding down the Shift key.
+ <br/><br/>
+  Another option, which is especially useful when selecting
+  larger ranges,
+  is provided by remembering a position:
+  first click the first of the bytes to be selected
+  and call up the menu item <em>Remember Position</em>.
+  Then jump to the last byte to be selected
+  and use the menu item
+  <em>Select up to Remembered Position</em>.
+ <br/><br/>
+
+
+ <h2><a name="copy">5. Copying Selected Bytes</a></h2>
+  With this function, which you find in the <em>Edit</em> menu,
+  you can copy the selected bytes as a hex string
+  to the clipboard
+  and then paste them from there, for example, into the dialog
+  for entering bytes.
+ <br/><br/>
+
+
+ <h2><a name="font">6. Font</a></h2>
+  You can change the font used for the data display
+  in the <a href="../settings.htm">JKCEMU Settings</a> window,
+  on the <em>Fonts/Icons</em> tab, under
+  <em>Font for code areas:</em>.
+</body>
+</html>

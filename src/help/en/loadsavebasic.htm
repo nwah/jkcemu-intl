@@ -1,0 +1,324 @@
+<html>
+<body>
+ <h1>Loading and Saving BASIC Programs</h1>
+  Loading and saving BASIC programs requires
+  a special procedure.
+  For the usual BASIC interpreters of the emulated systems,
+  JKCEMU offers dedicated functions.
+  You will find them in the <em>File</em> menu.
+ <br/><br/>
+  <ul>
+   <li>
+    <a href="loadsavebasic.htm#load">1. Loading a BASIC Program</a>
+   </li>
+   <li>
+    <a href="loadsavebasic.htm#save">2. Saving a BASIC Program</a>
+   </li>
+   <li>
+    <a href="loadsavebasic.htm#fileformats">3. File Formats for BASIC Programs</a>
+   </li>
+  </ul>
+ <br/>
+
+
+ <h2><a name="load">1. Loading a BASIC Program</a></h2>
+  <ol>
+   <li>
+    Load the BASIC interpreter into the emulator's working memory
+    (not relevant if the BASIC interpreter is already in ROM).
+   </li>
+   <li>Perform a cold start.</li>
+   <li>Exit the BASIC interpreter, usually with <tt>BYE</tt>.</li>
+   <li>
+    Load the BASIC program into working memory like an ordinary file
+    (see
+    <a href="loadsave.htm#loadfile">Load File</a>).
+    <br/>
+    For this, the BASIC program must be saved in a file format
+    that is also recognized as BASIC (see the section
+    <em>File Formats for BASIC Programs</em> further below).
+    If the BASIC program is loaded from a non-BASIC file,
+    the system cells of the BASIC interpreter are not adjusted,
+    which can lead to undesired effects, up to and including
+    a crash of the entire BASIC interpreter.
+   </li>
+   <li>Perform a warm start of the BASIC interpreter.</li>
+   <li>
+	You can now start the BASIC program with <tt>RUN</tt>.
+   </li>
+  </ol>
+  <b>Caution!</b> With some BASIC interpreters there are no problems
+  if you omit steps 3 and 5,
+  i.e. if you load the BASIC program
+  while you are currently in the command loop
+  of the BASIC interpreter.
+  However, the interpreter must not be doing anything else at that moment,
+  and must certainly not be running a BASIC program!
+  In contrast, with AC1 Mini-BASIC, LLC1 BASIC,
+  and Z1013 Tiny-BASIC you must always
+  perform steps 3 and 5!
+ <br/><br/>
+  If the BASIC program is stored in a KCC or KC-TAP system file
+  (KC-BASIC program)
+  such that JKCEMU does not recognize this file as a BASIC program,
+  you must proceed as follows:
+  <a href="tips/kcc_tap_basic.htm">Extracting a KC-BASIC Program from a KCC/KC-TAP File</a>.
+ <br/><br/>
+
+
+ <h2><a name="save">2. Saving a BASIC Program</a></h2>
+  In the <em>File</em> menu, click on the item
+  <em>Save BASIC Program...</em>.
+  Depending on the emulated system, you may then be asked
+  which BASIC interpreter is in use, so that JKCEMU knows
+  in which address range to look for the BASIC program.
+  The dialog for saving a file then appears
+  (see <a href="loadsave.htm#savefile">Save File</a>).
+  The input fields for the address range to be saved
+  are already filled in, and the file format for BASIC programs
+  that matches the emulated system is already preselected.
+ <br/><br/>
+  <b>Caution!</b> In principle, you can save the BASIC program
+  in any file format supported by JKCEMU,
+  but using the wrong format
+  (see the section
+  <em>File Formats for BASIC Programs</em> further below)
+  would cause problems when loading it later.
+  In that case, the system cells of the BASIC interpreter
+  are not adjusted, and as a result the BASIC program
+  cannot be used within the interpreter.
+  For this reason, you should always save a BASIC program
+  in the file format preselected by JKCEMU.
+ <br/><br/>
+
+
+ <h2><a name="fileformats">3. File Formats for BASIC Programs</a></h2>
+  <table border="1">
+   <tr>
+    <th>Emulated System</th>
+    <th>File Format for BASIC Programs</th>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul><li><a href="a5105.htm">A5105</a></li></ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li><a href="fileformats.htm#rbasic">RBASIC program file</a></li>
+      <li>
+       alternatively a
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>B</em> and start address&nbsp;8001
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="ac1.htm">AC1</a> with Mini-BASIC</li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li>
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>b</em> and start address&nbsp;18C0
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="ac1.htm">AC1</a> with 8K-BASIC</li>
+      <li>
+       <a href="ac1.htm">AC1</a> with BACOBAS&nbsp;2
+       (BASIC only, not BASICODE)
+      </li>
+      <li>
+       <a href="ac1.htm">AC1</a> with BACOBAS&nbsp;3
+       (BASIC only, not BASICODE)
+      </li>
+      <li><a href="ac1.htm">AC1</a> with SCCH-BASIC</li>
+      <li>
+       <a href="llc2.htm">LLC2</a> with LLCBASIC
+       (BASIC only, not BASICODE)
+      </li>
+      <li><a href="llc2.htm">LLC2</a> with SCCH-BASIC</li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li><a href="fileformats.htm#basic">BASIC program file</a></li>
+      <li>
+       alternatively a
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>B</em> and start address&nbsp;60F7
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="ac1.htm">AC1</a> with BASIC6</li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li><a href="fileformats.htm#basic">BASIC program file</a></li>
+      <li>
+       alternatively a
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>B</em> and start address&nbsp;6300
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="ac1.htm">AC1</a> with 12K-BASIC</li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li><a href="fileformats.htm#basic">BASIC program file</a></li>
+      <li>
+       alternatively a
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>B</em> and start address&nbsp;6FB7
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="bcs3.htm">BCS3</a></li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li>
+       <a href="fileformats.htm#bin">memory image file</a>
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="hgmc.htm">H&uuml;bler-Grafik-MC</a></li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li><a href="fileformats.htm#basic">BASIC program file</a></li>
+      <li>
+       alternatively a
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>B</em> and start address&nbsp;3770
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="kc85.htm">HC900</a></li>
+      <li><a href="z9001.htm">KC85/1</a></li>
+      <li><a href="kc85.htm">KC85/2...5</a></li>
+      <li><a href="z9001.htm">KC87</a></li>
+      <li><a href="z9001.htm">Z9001</a></li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li><a href="fileformats.htm#kcbasic">KC-BASIC program file</a></li>
+      <li>
+       alternatively a
+       <a href="fileformats.htm#kctap">KC-TAP file</a>
+       in KC-BASIC format
+      </li>
+      <li>
+       alternatively a
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>B</em> and start address&nbsp;2BC0 (RAM-BASIC)
+       or&nbsp;03C0 (ROM-BASIC)
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="kramermc.htm">Kramer-MC</a></li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li><a href="fileformats.htm#basic">BASIC program file</a></li>
+      <li>
+       alternatively a
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>B</em> and start address&nbsp;1001
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="llc1.htm">LLC1</a></li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li>
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>b</em> and start address&nbsp;1400
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="z1013.htm">Z1013</a> with KC-BASIC</li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li><a href="fileformats.htm#kcbasic">KC-BASIC program file</a></li>
+      <li>
+       <a href="fileformats.htm#kctap">KC-TAP file</a>
+       in KC-BASIC format
+      </li>
+      <li>
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>B</em> and start address&nbsp;2BC0 (RAM-BASIC)
+       or&nbsp;03C0 (ROM-BASIC)
+      </li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <ul>
+      <li><a href="z1013.htm">Z1013</a> with Tiny-BASIC</li>
+     </ul>
+    </td>
+    <td valign="top">
+     <ul>
+      <li>
+       <a href="fileformats.htm#headersave">Headersave file</a>
+       with file type <em>b</em> and start address&nbsp;1000
+      </li>
+     </ul>
+    </td>
+   </tr>
+  </table>
+</body>
+</html>

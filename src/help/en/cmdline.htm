@@ -1,0 +1,273 @@
+<html>
+<head><title>JKCEMU: Invocation and Command Line</title></head>
+<body>
+ <h1>Invocation and Command Line</h1>
+  In general, JKCEMU is started with the following command:
+ <br/><br/>
+  <tt>java -jar jkcemu.jar [arguments ...]</tt>
+ <br/><br/>
+  If necessary, the Java call and/or the name or path
+  of the JKCEMU program file must be adapted.
+ <br/><br/>
+  If JKCEMU is called without arguments, the emulator starts
+  and loads its settings from the &quot;standard&quot; profile.
+  It therefore makes sense to <a href="settings.htm#profiles">save</a>
+  the most frequently used settings in this profile.
+  If the profile does not exist (e.g. the first time),
+  JKCEMU starts with default settings.
+ <br/><br/>
+  The emulator can also be started with a different profile.
+  To do this, simply specify the name of the profile as an argument.
+ <br/><br/>
+  If the first argument begins with a minus sign,
+  it is not interpreted as the name of a profile, but as an option.
+  With an option, it is not the actual emulator that is invoked,
+  but a different JKCEMU function.
+  The table shows the possible options:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Option</th><th>Command Line</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      -?<br/>
+      -h<br/>
+      --help<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+      java -jar jkcemu.jar -?<br/>
+      java -jar jkcemu.jar -h<br/>
+      java -jar jkcemu.jar --help<br/>
+    </td>
+    <td valign="top">
+     Output a short help text on the console (text mode)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      -l<br/>
+      --list<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar -l<br/>
+     java -jar jkcemu.jar --list<br/>
+    </td>
+    <td valign="top">
+     Before the emulator starts, a list of the profiles is shown,
+     from which one can be selected.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      -v<br/>
+      --version<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar -v<br/>
+     java -jar jkcemu.jar --version<br/>
+    </td>
+    <td valign="top">
+     Output the JKCEMU version number on the console (text mode)
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --ar<br/>
+      --audiorecorder<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --ar<br/>
+     java -jar jkcemu.jar --audiorecorder<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="tools/audiorecorder.htm">Audio Recorder</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --as<br/>
+      --assembler<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --as [options] &lt;file&gt;<br/>
+     java -jar jkcemu.jar --assembler [options] &lt;file&gt;<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="tools/assembler.htm#cmdline">Assembler</a>
+     in text mode
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --bc<br/>
+      --basiccompiler<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --bc [options] &lt;file&gt;<br/>
+     java -jar jkcemu.jar --basiccompiler [options] &lt;file&gt;<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="tools/basicc/cmdline.htm">BASIC Compiler</a>
+     in text mode
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --ca<br/>
+      --calculator<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --ca<br/>
+     java -jar jkcemu.jar --calculator<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="tools/calculator.htm">Calculator</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --dc<br/>
+      --diskcreator<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --dc<br/>
+     java -jar jkcemu.jar --diskcreator<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="disk/creatediskimg.htm#manually">tool for creating a disk image file</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --dv<br/>
+      --diskviewer<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --dv &lt;file&gt;<br/>
+     java -jar jkcemu.jar --diskviewer &lt;file&gt;<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="disk/diskimgviewer.htm">Disk Image Inspector</a>,<br/>
+     A file can optionally be specified.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --fb<br/>
+      --filebrowser<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --fb<br/>
+     java -jar jkcemu.jar --filebrowser<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="tools/filebrowser.htm">File Browser</a>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --fc<br/>
+      --fileconverter<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --fc [&lt;file&gt;]<br/>
+     java -jar jkcemu.jar --fileconverter [&lt;file&gt;]<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="tools/fileconverter.htm">File Converter</a>,<br/>
+     A file can optionally be specified.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --ff<br/>
+      --findfiles<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --ff [&lt;directory&gt;]<br/>
+     java -jar jkcemu.jar --findfiles [&lt;directory&gt;]<br/>
+    </td>
+    <td valign="top">
+     Start <a href="tools/findfiles.htm">Find Files</a>,<br/>
+     A directory to be searched can optionally be specified.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --hd<br/>
+      --hexdiff<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --hd [&lt;file&gt; [...]] <br/>
+     java -jar jkcemu.jar --hexdiff [&lt;file&gt; [...]] <br/>
+    </td>
+    <td valign="top">
+     Start the <a href="tools/hexdiff.htm">Hex File Comparator</a>,<br/>
+     Files can optionally be specified.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --he<br/>
+      --hexeditor<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --he [&lt;file&gt;]<br/>
+     java -jar jkcemu.jar --hexeditor [&lt;file&gt;]<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="tools/hexeditor.htm">Hex Editor</a>,<br/>
+     A file can optionally be specified.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --iv<br/>
+      --imageviewer<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --iv [&lt;file&gt;]<br/>
+     java -jar jkcemu.jar --imageviewer [&lt;file&gt;]<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="tools/imageviewer.htm">Image Viewer</a>,<br/>
+     A file can optionally be specified.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      --te<br/>
+      --texteditor<br/>
+    </td>
+    <td valign="top" nowrap="nowrap">
+     java -jar jkcemu.jar --te [&lt;file&gt;]<br/>
+     java -jar jkcemu.jar --texteditor [&lt;file&gt;]<br/>
+    </td>
+    <td valign="top">
+     Start the <a href="tools/texteditor.htm">Text Editor</a>,<br/>
+     A file can optionally be specified.
+    </td>
+   </tr>
+  </table>
+ <br/>
+  If an option is specified, the settings saved in the
+  &quot;standard&quot; profile are applied.
+ <br/><br/>
+
+ <h2>Note for Windows Users</h2>
+  Under Windows, the two programs <em>java.exe</em> and
+  <em>javaw.exe</em> are available for invoking Java.
+  With <em>java.exe</em>, the console output appears
+  in the command prompt.
+  With <em>javaw.exe</em>, on the other hand, the console output
+  is lost.
+  In return, however, no window that might be disruptive
+  is opened for the console output.
+  So if you call JKCEMU with one of the options <em>-?</em>, <em>-h</em>,
+  <em>--help</em>, <em>-v</em> or <em>--version</em>,
+  you must do so in the command prompt and with
+  <em>java.exe</em>.
+  In all other cases,
+  i.e. when JKCEMU is to start as a window application,
+  <em>javaw.exe</em> is recommended instead.
+</body>
+</html>
