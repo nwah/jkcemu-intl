@@ -737,8 +737,8 @@ public class VdipLibrary
 	BasicUtil.appendSetError(
 			compiler,
 			BasicLibrary.E_INVALID,
-			BasicLibrary.TEXT_INVALID_PARAM_DE,
-			BasicLibrary.TEXT_INVALID_PARAM_EN );
+			BasicLibrary.MSG_INVALID_PARAM_DE,
+			BasicLibrary.MSG_INVALID_PARAM_EN );
 	buf.append( "\tSCF\n"
 			+ "\tRET\n"
 			+ "VDIP_CHECK_RESULT_4:\n"

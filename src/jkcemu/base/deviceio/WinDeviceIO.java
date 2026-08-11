@@ -26,6 +26,7 @@ import jkcemu.Main;
 import jkcemu.base.DesktopHelper;
 import jkcemu.base.DeviceIO;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class WinDeviceIO
@@ -1067,12 +1068,12 @@ public class WinDeviceIO
     }
     if( libVersion < REQUIRED_LIB_VERSION ) {
       StringBuilder buf = new StringBuilder( 256 );
-      buf.append( "Die Bibliothek \'" );
-      buf.append( libFile.getPath() );
-      buf.append( "\'\n"
-		+ "ist veraltet und muss aktualisiert werden.\n"
-		+ "Solange das nicht geschehen ist,"
-		+ " stehen einige Funktionen nicht zur Verf\u00FCgung." );
+      buf.append( LangUtil.tr(
+		"Die Bibliothek ''{0}''\n"
+			+ "ist veraltet und muss aktualisiert werden.\n"
+			+ "Solange das nicht geschehen ist, stehen einige"
+			+ " Funktionen nicht zur Verf\u00FCgung.",
+		libFile.getPath() ) );
       if( (updFile != null) && libCopyable ) {
 	/*
 	 * Update-Datei als Merker fuer eine
@@ -1081,33 +1082,39 @@ public class WinDeviceIO
 	createEmptyFile( updFile );
 	libUpdRequested = true;
 	if( updFile.exists() ) {
-	  buf.append( "\n\nDie Bibliothek wird beim n\u00E4chsten"
-		+ " Start von JKCEMU aktualisiert.\n"
-		+ "Beenden Sie bitte alle laufenden Instanzen"
-		+ " des Emulators und starten Sie anschlie\u00DFend neu." );
+	  buf.append( LangUtil.tr(
+		"\n\nDie Bibliothek wird beim n\u00E4chsten"
+			+ " Start von JKCEMU aktualisiert.\n"
+			+ "Beenden Sie bitte alle laufenden Instanzen"
+			+ " des Emulators und starten Sie"
+			+ " anschlie\u00DFend neu." ) );
 	} else {
-	  buf.append( "\n\nZum Aktualisieren beenden Sie bitte JKCEMU"
-		+ " und l\u00F6schen danach\n"
-		+ "die Bibliotheksdatei."
-		+ " Anschlie\u00DFend k\u00F6nnen Sie den Emulator"
-		+ " neu starten." );
+	  buf.append( LangUtil.tr(
+		"\n\nZum Aktualisieren beenden Sie bitte JKCEMU"
+			+ " und l\u00F6schen danach\n"
+			+ "die Bibliotheksdatei."
+			+ " Anschlie\u00DFend k\u00F6nnen Sie den Emulator"
+			+ " neu starten." ) );
 	  if( DesktopHelper.isOpenSupported() ) {
 	    File configDir = Main.getConfigDir();
 	    if( configDir != null ) {
 	      try {
 		DesktopHelper.open( configDir );
-		buf.append( "\n\n"
-			+ "In dem gerade neu ge\u00F6ffneten Fenster"
-			+ " k\u00F6nnen Sie die" );
 		String fileName = libFile.getName();
 		if( fileName != null ) {
-		  buf.append( " Datei " );
-		  buf.append( fileName );
+		  buf.append( LangUtil.tr(
+			"\n\nIn dem gerade neu ge\u00F6ffneten Fenster"
+				+ " k\u00F6nnen Sie die Datei {0}\n"
+				+ "l\u00F6schen, aber erst, nachdem alle"
+				+ " JKCEMU-Instanzen beendet wurden.",
+			fileName ) );
 		} else {
-		  buf.append( " Bibliotheksdatei" );
+		  buf.append( LangUtil.tr(
+			"\n\nIn dem gerade neu ge\u00F6ffneten Fenster"
+				+ " k\u00F6nnen Sie die Bibliotheksdatei\n"
+				+ "l\u00F6schen, aber erst, nachdem alle"
+				+ " JKCEMU-Instanzen beendet wurden." ) );
 		}
-		buf.append( "\nl\u00F6schen, aber erst, nachdem alle"
-			+ " JKCEMU-Instanzen beendet wurden." );
 	      }
 	      catch( IOException ex ) {}
 	    }
@@ -1171,11 +1178,12 @@ public class WinDeviceIO
 	      }
 	      if( errCode != 0 ) {
 		StringBuilder buf = new StringBuilder( 256 );
-		buf.append( "Das auf dem Datentr\u00E4ger liegende"
-				+ " Laufwerk " );
-		buf.append( driveName );
-		buf.append( "\nkonnte nicht aus dem Dateisystem"
-				+ " ausgeh\u00E4ngt werden." );
+		buf.append( LangUtil.tr(
+			"Das auf dem Datentr\u00E4ger liegende"
+				+ " Laufwerk {0}\n"
+				+ "konnte nicht aus dem Dateisystem"
+				+ " ausgeh\u00E4ngt werden.",
+			driveName ) );
 		String errMsg = getErrorMsg( errCode );
 		if( errMsg != null ) {
 		  if( !errMsg.isEmpty() ) {
@@ -1427,19 +1435,23 @@ public class WinDeviceIO
   {
     StringBuilder msgBuf = new StringBuilder( 1024 );
     msgBuf.append( msg );
-    msgBuf.append( "\nDadurch ist aktuell der Zugriff auf physische"
-	+ " Datentr\u00E4ger, Joysticks und andere\n"
-	+ "am Emulatorrechner angeschlossene Ger\u00E4te nicht"
-	+ " oder nur eingeschr\u00E4nkt m\u00F6glich.\n"
-	+ "Ansonsten ist JKCEMU voll funktionsf\u00E4hig.\n\n"
-	+ "M\u00F6glicherweise stimmt etwas mit den Dateien"
-	+ " oder den Berechtigungen im\n"
-	+ "Konfigurationsverzeichnis nicht"
-	+ " (siehe JKCEMU-Einstellungen, Bereich Sonstiges, ganz unten)." );
+    msgBuf.append( LangUtil.tr(
+	"\nDadurch ist aktuell der Zugriff auf physische"
+		+ " Datentr\u00E4ger, Joysticks und andere\n"
+		+ "am Emulatorrechner angeschlossene Ger\u00E4te nicht"
+		+ " oder nur eingeschr\u00E4nkt m\u00F6glich.\n"
+		+ "Ansonsten ist JKCEMU voll funktionsf\u00E4hig.\n\n"
+		+ "M\u00F6glicherweise stimmt etwas mit den Dateien"
+		+ " oder den Berechtigungen im\n"
+		+ "Konfigurationsverzeichnis nicht"
+		+ " (siehe JKCEMU-Einstellungen, Bereich Sonstiges,"
+		+ " ganz unten)." ) );
     String exMsg = t.getMessage();
     if( exMsg != null ) {
       if( !exMsg.isEmpty() ) {
-	msgBuf.append( "\n\nDetaillierte Fehlermeldung:\n" );
+	msgBuf.append( "\n\n" );
+	msgBuf.append( LangUtil.tr( "Detaillierte Fehlermeldung:" ) );
+	msgBuf.append( '\n' );
 	msgBuf.append( exMsg );
       }
     }
@@ -1457,14 +1469,19 @@ public class WinDeviceIO
       libUpdRequested = true;
     }
     StringBuilder buf = new StringBuilder( 1024 );
-    buf.append( "Die Bibliothek \'" );
-    buf.append( libFile.getPath() );
-    buf.append( "\'\nkonnte nicht geladen werden" );
     if( libUpdRequested ) {
-      buf.append( " und wird deshalb beim n\u00E4chsten Start"
-				+ " von JKCEMU aktualisiert" );
+      buf.append( LangUtil.tr(
+		"Die Bibliothek ''{0}''\n"
+			+ "konnte nicht geladen werden und wird deshalb"
+			+ " beim n\u00E4chsten Start von JKCEMU"
+			+ " aktualisiert.",
+		libFile.getPath() ) );
+    } else {
+      buf.append( LangUtil.tr(
+		"Die Bibliothek ''{0}''\n"
+			+ "konnte nicht geladen werden.",
+		libFile.getPath() ) );
     }
-    buf.append( '.' );
     showLibError( buf.toString(), t );
   }
 

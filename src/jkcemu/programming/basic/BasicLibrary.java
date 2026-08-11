@@ -300,8 +300,17 @@ public class BasicLibrary
   public static final String SUB_RESET_ERROR_END = "\tPOP\tHL\n"
 						+ "\tRET\n";
 
-  public static final String TEXT_INVALID_PARAM_DE = "Ungueltiger Parameter";
-  public static final String TEXT_INVALID_PARAM_EN = "Invalid parameter";
+  /*
+   * Diese Texte werden als Zeichenketten in den erzeugten Maschinencode
+   * eingebettet und auf dem emulierten Rechner ausgegeben.
+   * Sie duerfen deshalb nicht ueber LangUtil uebersetzt werden,
+   * denn die Sprache waehlt hier der BASIC-Compiler
+   * anhand von BasicOptions.getLangCode() aus.
+   * Ausserdem sind nur ASCII-Zeichen zulaessig,
+   * da die Zeichensaetze der emulierten Rechner keine Umlaute enthalten.
+   */
+  public static final String MSG_INVALID_PARAM_DE = "Ungueltiger Parameter";
+  public static final String MSG_INVALID_PARAM_EN = "Invalid parameter";
 
 
   public static void appendCodeTo( BasicCompiler compiler )
@@ -5579,8 +5588,8 @@ public class BasicLibrary
       buf.append( "E_INVALID_PARAM:\n" );
       target.appendSwitchToTextScreenTo( buf );
       String msg = (compiler.isLangCode( "DE" ) ?
-					TEXT_INVALID_PARAM_DE
-					: TEXT_INVALID_PARAM_EN);
+					MSG_INVALID_PARAM_DE
+					: MSG_INVALID_PARAM_EN);
       String label = compiler.lazyGetStringLiteralLabel( msg );
       if( label != null ) {
 	buf.append_LD_HL_xx( label );

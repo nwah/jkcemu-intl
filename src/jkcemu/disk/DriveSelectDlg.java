@@ -25,6 +25,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.DeviceIO;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class DriveSelectDlg extends BaseDlg
@@ -270,24 +271,19 @@ public class DriveSelectDlg extends BaseDlg
       boolean status = false;
       if( specialPriv ) {
 	StringBuilder buf = new StringBuilder( 0x200 );
-	buf.append( "Wahrscheinlich sind f\u00FCr den Zugriff auf"
-		+ " das Laufwerk spezielle Rechte notwendig.\n"
-		+ "Wenn " );
-	buf.append( Main.APPNAME );
-	buf.append( " unter einem Benutzer gestartet wurde,"
-		+ " der diese Rechte\n"
-		+ "(i.d.R. " );
-	if( Main.isUnixLikeOS() ) {
-	  buf.append( "root" );
-	} else {
-	  buf.append( "Administrator" );
-	}
-	buf.append( "-Rechte) nicht hat, wird der Vorgang zu einer"
-		+ " Fehlermeldung f\u00FChren." );
+	buf.append( LangUtil.tr(
+		"Wahrscheinlich sind f\u00FCr den Zugriff auf"
+			+ " das Laufwerk spezielle Rechte notwendig.\n"
+			+ "Wenn {0} unter einem Benutzer gestartet wurde,"
+			+ " der diese Rechte\n"
+			+ "(i.d.R. {1}-Rechte) nicht hat, wird der Vorgang"
+			+ " zu einer Fehlermeldung f\u00FChren.",
+		Main.APPNAME,
+		Main.isUnixLikeOS() ? "root" : "Administrator" ) );
 	if( JOptionPane.showConfirmDialog(
 		this,
 		buf.toString(),
-		"Achtung",
+		LangUtil.tr( "Achtung" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) == JOptionPane.OK_OPTION )
 	{

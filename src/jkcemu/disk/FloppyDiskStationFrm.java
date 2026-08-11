@@ -77,6 +77,7 @@ import jkcemu.emusys.Z9001;
 import jkcemu.file.DirSelectDlg;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import jkcemu.tools.fileconverter.FileConvertFrm;
 
@@ -1031,7 +1032,7 @@ public class FloppyDiskStationFrm
       if( buf.length() > 0 ) {
 	buf.append( ", " );
       }
-      buf.append( "schreibgesch\u00FCtzt" );
+      buf.append( LangUtil.tr( "schreibgesch\u00FCtzt" ) );
     }
     String remark = disk.getRemark();
     if( remark != null ) {
@@ -1042,8 +1043,10 @@ public class FloppyDiskStationFrm
       }
     }
     if( skipOddCyls ) {
-      buf.append( "\n\nEmulation einer SD-Diskette in einem DD-Laufwerk"
-		+ "\n(Umrechnung der Spurnummern)" );
+      buf.append( "\n\n" );
+      buf.append( LangUtil.tr(
+		"Emulation einer SD-Diskette in einem DD-Laufwerk"
+			+ "\n(Umrechnung der Spurnummern)" ) );
     }
     return buf.toString();
   }
@@ -1739,16 +1742,18 @@ public class FloppyDiskStationFrm
 		StringBuilder buf = new StringBuilder( 512 );
 		int           pos = fileName.lastIndexOf( '.' );
 		if( (pos >= 0) && (pos < (fileName.length() - 1)) ) {
-		  buf.append( "Dateiendung \'" );
-		  buf.append( fileName.substring( pos ) );
-		  buf.append( "\': Unbekannter Dateityp\n\n" );
+		  buf.append( LangUtil.tr(
+			"Dateiendung ''{0}'': Unbekannter Dateityp\n\n",
+			fileName.substring( pos ) ) );
 		}
-		buf.append( "JKCEMU kann den Dateityp nicht erkennen,\n"
-			+ "da die Dateiendung keiner der bei"
-			+ " Diskettenabbilddateien\n"
-			+ "\u00FCblicherweise verwendeten entspricht.\n"
-			+ "Die Datei wird deshalb als einfache Abbilddatei"
-			+ " ge\u00F6ffnet." );
+		buf.append( LangUtil.tr(
+			"JKCEMU kann den Dateityp nicht erkennen,\n"
+				+ "da die Dateiendung keiner der bei"
+				+ " Diskettenabbilddateien\n"
+				+ "\u00FCblicherweise verwendeten"
+				+ " entspricht.\n"
+				+ "Die Datei wird deshalb als einfache"
+				+ " Abbilddatei ge\u00F6ffnet." ) );
 		if( JOptionPane.showConfirmDialog(
 			this,
 			buf.toString(),
@@ -1817,20 +1822,25 @@ public class FloppyDiskStationFrm
     if( (fmt != null) && (readOnly != null) ) {
       if( (fileLen >= 0) && (fileLen != fmt.getDiskSize()) ) {
 	StringBuilder buf = new StringBuilder( 512 );
-	buf.append( "Das von Ihnen ausgew\u00E4hlte"
-			+ " Diskettenformat scheint nicht zu passen.\n" );
 	if( !readOnly.booleanValue() ) {
-	  buf.append( "Sie k\u00F6nnen trotzdem fortsetzen,"
-			+ "allerdings wird dann\n"
-			+ "die Datei nur mit Schreibschutz ge\u00F6ffnet.\n\n"
-			+ "M\u00F6chten Sie fortsetzen?" );
+	  buf.append( LangUtil.tr(
+		"Das von Ihnen ausgew\u00E4hlte Diskettenformat"
+			+ " scheint nicht zu passen.\n"
+			+ "Sie k\u00F6nnen trotzdem fortsetzen,"
+			+ " allerdings wird dann\n"
+			+ "die Datei nur mit Schreibschutz"
+			+ " ge\u00F6ffnet.\n\n"
+			+ "M\u00F6chten Sie fortsetzen?" ) );
 	} else {
-	  buf.append( "M\u00F6chten Sie trotzdem fortsetzen?" );
+	  buf.append( LangUtil.tr(
+		"Das von Ihnen ausgew\u00E4hlte Diskettenformat"
+			+ " scheint nicht zu passen.\n"
+			+ "M\u00F6chten Sie trotzdem fortsetzen?" ) );
 	}
 	if( !BaseDlg.showYesNoWarningDlg(
 					this,
 					buf.toString(),
-					"Diskettenformat" ) )
+					LangUtil.tr( "Diskettenformat" ) ) )
 	{
 	  fmt = null;
 	}

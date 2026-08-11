@@ -82,6 +82,7 @@ import jkcemu.joystick.JoystickFrm;
 import jkcemu.image.ImageCaptureFrm;
 import jkcemu.image.ImageFrm;
 import jkcemu.image.VideoCaptureFrm;
+import jkcemu.lang.LangUtil;
 import jkcemu.print.PrintListFrm;
 import jkcemu.settings.SettingsFrm;
 import jkcemu.text.TextEditFrm;
@@ -365,7 +366,7 @@ public class ScreenFrm
 
     // Menu Ansicht
     this.mnuView = createScaleMenu();
-    this.mnuView.setMnemonic( KeyEvent.VK_A );
+    this.mnuView.setMnemonic( LangUtil.mnemonic( "Ansicht", KeyEvent.VK_A ) );
     this.mnuView.addSeparator();
 
     this.mnuToolBar = GUIFactory.createCheckBoxMenuItem(
@@ -393,7 +394,7 @@ public class ScreenFrm
 
     // Menu Extra
     this.mnuExtra = GUIFactory.createMenu( "Extra" );
-    this.mnuExtra.setMnemonic( KeyEvent.VK_E );
+    this.mnuExtra.setMnemonic( LangUtil.mnemonic( "Extra", KeyEvent.VK_E ) );
 
     this.mnuAudio = createMenuItemWithNonControlAccelerator(
 				"Audio/Kassette...",
@@ -1782,7 +1783,7 @@ public class ScreenFrm
   private void doFileScreenImageSave()
   {
     if( doScreenImageSave() ) {
-      showStatusText( "Bilddatei gespeichert" );
+      showStatusText( LangUtil.tr( "Bilddatei gespeichert" ) );
     }
   }
 
@@ -1790,7 +1791,7 @@ public class ScreenFrm
   private void doFileScreenTextSave()
   {
     if( doScreenTextSave() ) {
-      showStatusText( "Textdatei gespeichert" );
+      showStatusText( LangUtil.tr( "Textdatei gespeichert" ) );
     }
   }
 
@@ -2419,8 +2420,8 @@ public class ScreenFrm
 	  } else {
 	    String mhzText = createMHzText( z80cpu );
 	    if( mhzText != null ) {
-	      msg = String.format(
-			"Emulierte Taktfrequenz: %s MHz",
+	      msg = LangUtil.tr(
+			"Emulierte Taktfrequenz: {0} MHz",
 			mhzText );
 
 	      EmuSys emuSys = this.emuThread.getEmuSys();
@@ -2432,8 +2433,8 @@ public class ScreenFrm
 		{
 		  mhzText = createMHzText( secondCPU );
 		  if( mhzText != null ) {
-		    msg = String.format(
-					"%s, %s: %s MHz",
+		    msg = LangUtil.tr(
+					"{0}, {1}: {2} MHz",
 					msg,
 					secondName,
 					mhzText );

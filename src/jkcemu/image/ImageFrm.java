@@ -73,6 +73,7 @@ import jkcemu.file.FileComparator;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
 import jkcemu.file.RecentFilesMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.print.PrintUtil;
 
 
@@ -1105,16 +1106,15 @@ public class ImageFrm extends AbstractImageFrm implements
       {
 	BaseDlg.showSuppressableInfoDlg(
 		this,
-		"M\u00F6glicherweise m\u00FCssen Sie das Bild aufhellen"
-			+ " und den Kontrast erh\u00F6hen,"
-			+ " um die Konturen zu sehen.\n"
-			+ "Auch die Funktion \'"
-			+ this.mnuToBW.getText()
-			+ "\' \u2192 \'"
-			+ this.mnuThreshold.getText()
-			+ "\'\n"
-			+ "kann f\u00FCr die weitere Bearbeitung"
-			+ " n\u00FCtzlich sein." );
+		LangUtil.tr(
+			"M\u00F6glicherweise m\u00FCssen Sie das Bild aufhellen"
+				+ " und den Kontrast erh\u00F6hen,"
+				+ " um die Konturen zu sehen.\n"
+				+ "Auch die Funktion \'{0}\' \u2192 \'{1}\'\n"
+				+ "kann f\u00FCr die weitere Bearbeitung"
+				+ " n\u00FCtzlich sein.",
+			this.mnuToBW.getText(),
+			this.mnuThreshold.getText() ) );
       }
     }
   }
@@ -1416,17 +1416,17 @@ public class ImageFrm extends AbstractImageFrm implements
       } else {
 	BaseDlg.showErrorDlg(
 		this,
-		"Sie m\u00FCssen das Bild zuerst mit der entsprechenden"
-			+ " Funktion\n"
-			+ "im Men\u00FC \""
-			+ this.mnuEdit.getText()
-			+ "\" \u2192 \""
-			+ this.mnuConvert.getText() + "\"\n"
-			+ "in das entsprechende Format umwandeln,\n"
-			+ "bevor Sie es in dem Format exportieren"
-			+ " k\u00F6nnen.\n"
-			+ "Lesen Sie dazu bitte auch die Hinweise"
-			+ " in der Hilfe!",
+		LangUtil.tr(
+			"Sie m\u00FCssen das Bild zuerst mit der entsprechenden"
+				+ " Funktion\n"
+				+ "im Men\u00FC \"{0}\" \u2192 \"{1}\"\n"
+				+ "in das entsprechende Format umwandeln,\n"
+				+ "bevor Sie es in dem Format exportieren"
+				+ " k\u00F6nnen.\n"
+				+ "Lesen Sie dazu bitte auch die Hinweise"
+				+ " in der Hilfe!",
+			this.mnuEdit.getText(),
+			this.mnuConvert.getText() ),
 		"Exportieren" );
       }
     }
@@ -2205,9 +2205,11 @@ public class ImageFrm extends AbstractImageFrm implements
       if( (idx + 2) < this.imgStack.size() ) {
 	state = BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie die letzten "
-			+ String.valueOf( this.imgStack.size() - idx - 1 )
-			+ " Bildbearbeitungsschritte verwerfen?" );
+		LangUtil.tr(
+			"M\u00F6chten Sie die letzten {0}"
+				+ " Bildbearbeitungsschritte verwerfen?",
+			String.valueOf(
+				this.imgStack.size() - idx - 1 ) ) );
       }
       if( state ) {
 	ImageEntry curEntry     = getCurImageEntry();
@@ -3121,15 +3123,15 @@ public class ImageFrm extends AbstractImageFrm implements
 	errMsg = ex.getMessage();
       }
       if( entry == null ) {
-	StringBuilder buf = new StringBuilder( 64 );
-	buf.append( "Bilddatei kann nicht geladen werden" );
 	if( errMsg != null ) {
-	  buf.append( ":\n" );
-	  buf.append( errMsg );
+	  BaseDlg.showErrorDlg( this, LangUtil.tr(
+		"Bilddatei kann nicht geladen werden:\n{0}",
+		errMsg ) );
 	} else {
-	  buf.append( '.' );
+	  BaseDlg.showErrorDlg(
+			this,
+			"Bilddatei kann nicht geladen werden." );
 	}
-	BaseDlg.showErrorDlg( this, buf.toString() );
       }
       if( rv && (this.recentFilesMngr != null) ) {
 	this.recentFilesMngr.setRecentFile( file );

@@ -62,6 +62,7 @@ import javax.swing.text.JTextComponent;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeModel;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class GUIFactory
@@ -167,6 +168,37 @@ public class GUIFactory
   };
 
 
+  /*
+   * Diese Klasse sorgt dafuer, dass die Texte und Tooltips
+   * aller ueber addTab(...) bzw. insertTab(...) hinzugefuegten
+   * Registerkarten uebersetzt werden,
+   * da alle addTab(...)-Methoden auf insertTab(...) zurueckgreifen.
+   */
+  private static class TranslatingTabbedPane extends JTabbedPane
+  {
+    public TranslatingTabbedPane()
+    {
+      super( JTabbedPane.TOP );
+    }
+
+    @Override
+    public void insertTab(
+			String    title,
+			Icon      icon,
+			Component component,
+			String    tip,
+			int       index )
+    {
+      super.insertTab(
+			LangUtil.tr( title ),
+			icon,
+			component,
+			LangUtil.tr( tip ),
+			index );
+    }
+  };
+
+
   private static final String SMALL_IMG_RES_PREFIX = "/images/s/";
   private static final String LARGE_IMG_RES_PREFIX = "/images/x/";
 
@@ -183,7 +215,7 @@ public class GUIFactory
 
   public static JButton createButton( String text )
   {
-    return initFont( new JButton( text ) );
+    return initFont( new JButton( LangUtil.tr( text ) ) );
   }
 
 
@@ -249,13 +281,13 @@ public class GUIFactory
 
   public static JCheckBox createCheckBox( String text )
   {
-    return initFont( new JCheckBox( text ) );
+    return initFont( new JCheckBox( LangUtil.tr( text ) ) );
   }
 
 
   public static JCheckBox createCheckBox( String text, boolean selected )
   {
-    return initFont( new JCheckBox( text, selected ) );
+    return initFont( new JCheckBox( LangUtil.tr( text ), selected ) );
   }
 
 
@@ -263,7 +295,8 @@ public class GUIFactory
 							String  text,
 							boolean selected )
   {
-    return initFont( new JCheckBoxMenuItem( text, selected ) );
+    return initFont(
+		new JCheckBoxMenuItem( LangUtil.tr( text ), selected ) );
   }
 
 
@@ -322,7 +355,7 @@ public class GUIFactory
     Image   img = Main.getLoadedImage( owner, imgName );
     if( img != null ) {
       btn = createButton( new ImageIcon( img ) );
-      btn.setToolTipText( text );
+      btn.setToolTipText( LangUtil.tr( text ) );
     } else {
       btn = createButton( text );
     }
@@ -344,7 +377,7 @@ public class GUIFactory
 
   public static JLabel createLabel( String text )
   {
-    return initFont( new JLabel( text ) );
+    return initFont( new JLabel( LangUtil.tr( text ) ) );
   }
 
 
@@ -355,7 +388,11 @@ public class GUIFactory
 				float  relFontSize )
   {
     return initFont(
-		new StyledLabel( text, fontName, fontStyle, relFontSize ) );
+		new StyledLabel(
+			LangUtil.tr( text ),
+			fontName,
+			fontStyle,
+			relFontSize ) );
   }
 
 
@@ -373,7 +410,7 @@ public class GUIFactory
 
   public static JMenu createMenu( String text )
   {
-    return initFont( new JMenu( text ) );
+    return initFont( new JMenu( LangUtil.tr( text ) ) );
   }
 
 
@@ -391,7 +428,7 @@ public class GUIFactory
 
   public static JMenuItem createMenuItem( String text )
   {
-    return initFont( new JMenuItem( text ) );
+    return initFont( new JMenuItem( LangUtil.tr( text ) ) );
   }
 
 
@@ -436,7 +473,7 @@ public class GUIFactory
 
   public static JRadioButton createRadioButton( String text )
   {
-    return initFont( new JRadioButton( text ) );
+    return initFont( new JRadioButton( LangUtil.tr( text ) ) );
   }
 
 
@@ -444,13 +481,13 @@ public class GUIFactory
 					String  text,
 					boolean selected )
   {
-    return initFont( new JRadioButton( text, selected ) );
+    return initFont( new JRadioButton( LangUtil.tr( text ), selected ) );
   }
 
 
   public static JRadioButtonMenuItem createRadioButtonMenuItem( String text )
   {
-    return initFont( new JRadioButtonMenuItem( text ) );
+    return initFont( new JRadioButtonMenuItem( LangUtil.tr( text ) ) );
   }
 
 
@@ -458,7 +495,8 @@ public class GUIFactory
 							String  text,
 							boolean selected )
   {
-    return initFont( new JRadioButtonMenuItem( text, selected ) );
+    return initFont(
+		new JRadioButtonMenuItem( LangUtil.tr( text ), selected ) );
   }
 
 
@@ -469,6 +507,7 @@ public class GUIFactory
   {
     JButton btn = null;
     Image   img = getRelResourceImage( owner, relResource );
+    text        = LangUtil.tr( text );
     if( img != null ) {
       btn = new RelImgResourceButton(
 				relResource,
@@ -534,7 +573,7 @@ public class GUIFactory
 
   public static JTabbedPane createTabbedPane()
   {
-    return initFont( new JTabbedPane( JTabbedPane.TOP ) );
+    return initFont( new TranslatingTabbedPane() );
   }
 
 
@@ -616,7 +655,8 @@ public class GUIFactory
 
   public static TitledBorder createTitledBorder( String title )
   {
-    TitledBorder border = BorderFactory.createTitledBorder( title );
+    TitledBorder border = BorderFactory.createTitledBorder(
+						LangUtil.tr( title ) );
     Font font = FontMngr.getFont( FontMngr.FontUsage.GENERAL, false );
     if( font != null ) {
       border.setTitleFont( font );

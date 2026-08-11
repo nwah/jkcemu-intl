@@ -37,6 +37,7 @@ import jkcemu.Main;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RAFInputStream;
+import jkcemu.lang.LangUtil;
 
 
 public class CPCDisk extends AbstractFloppyDisk
@@ -437,14 +438,18 @@ public class CPCDisk extends AbstractFloppyDisk
       }
     }
     if( msgBuf != null ) {
-      msgBuf.append( "\nDie angezeigten Informationen k\u00F6nnen"
-		+ " in einer CPC-Disk-Datei nicht gespeichert werden\n"
-		+ "und sind deshalb in der erzeugten Datei"
-		+ " nicht mehr enthalten.\n" );
+      msgBuf.append( LangUtil.tr(
+		"\nDie angezeigten Informationen k\u00F6nnen"
+			+ " in einer CPC-Disk-Datei nicht gespeichert"
+			+ " werden\n"
+			+ "und sind deshalb in der erzeugten Datei"
+			+ " nicht mehr enthalten.\n" ) );
       if( dataDeleted ) {
-	msgBuf.append( "\nSektoren mit gel\u00F6schten Daten werden"
-		+ " in CPC-Disk-Dateien nicht unterst\u00FCtzt\n"
-		+ "und sind deshalb als normale Sektoren enthalten.\n" );
+	msgBuf.append( LangUtil.tr(
+		"\nSektoren mit gel\u00F6schten Daten werden"
+			+ " in CPC-Disk-Dateien nicht unterst\u00FCtzt\n"
+			+ "und sind deshalb als normale Sektoren"
+			+ " enthalten.\n" ) );
       }
     }
     return msgBuf != null ? msgBuf.toString() : null;

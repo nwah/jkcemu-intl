@@ -25,6 +25,7 @@ import java.util.zip.GZIPInputStream;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RAFInputStream;
+import jkcemu.lang.LangUtil;
 
 
 public class AnaDisk extends AbstractFloppyDisk
@@ -114,14 +115,18 @@ public class AnaDisk extends AbstractFloppyDisk
       out = null;
 
       if( msgBuf != null ) {
-	msgBuf.append( "\nDie angezeigten Informationen k\u00F6nnen"
-		+ " in einer AnaDisk-Datei nicht gespeichert werden\n"
-		+ "und sind deshalb in der erzeugten Datei"
-		+ " nicht mehr enthalten.\n" );
+	msgBuf.append( LangUtil.tr(
+		"\nDie angezeigten Informationen k\u00F6nnen"
+			+ " in einer AnaDisk-Datei nicht gespeichert"
+			+ " werden\n"
+			+ "und sind deshalb in der erzeugten Datei"
+			+ " nicht mehr enthalten.\n" ) );
 	if( dataDeleted ) {
-	  msgBuf.append( "\nSektoren mit gel\u00F6schten Daten werden"
-		+ " in AnaDisk-Dateien nicht unterst\u00FCtzt\n"
-		+ "und sind deshalb als normale Sektoren enthalten.\n" );
+	  msgBuf.append( LangUtil.tr(
+		"\nSektoren mit gel\u00F6schten Daten werden"
+			+ " in AnaDisk-Dateien nicht unterst\u00FCtzt\n"
+			+ "und sind deshalb als normale Sektoren"
+			+ " enthalten.\n" ) );
 	}
       }
     }

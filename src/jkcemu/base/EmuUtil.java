@@ -60,6 +60,7 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.text.JTextComponent;
 import jkcemu.Main;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class EmuUtil
@@ -1153,23 +1154,29 @@ public class EmuUtil
 
     // Fehlerausschrift
     if( errFile != null ) {
-      errBuf.append( "\nEin Protokoll des Fehlers wurde"
-			+ " in die Textdatei\n\'" );
-      errBuf.append( errFile.getPath() );
-      errBuf.append( "\' geschrieben.\n"
-			+ "Bitte senden Sie diese Textdatei" );
+      errBuf.append( LangUtil.tr(
+		"\nEin Protokoll des Fehlers wurde in die Textdatei\n"
+			+ "''{0}'' geschrieben.\n"
+			+ "Bitte senden Sie diese Textdatei"
+			+ " einschlie\u00DFlich einer\n"
+			+ "kurzen Beschreibung Ihrer letzten Aktionen"
+			+ " per E-Mail an:\n"
+			+ "info@jens-mueller.org\n\n"
+			+ "Vielen Dank!",
+		errFile.getPath() ) );
     } else {
-      errBuf.append( "\nBitte melden Sie diesen Fehler" );
+      errBuf.append( LangUtil.tr(
+		"\nBitte melden Sie diesen Fehler"
+			+ " einschlie\u00DFlich einer\n"
+			+ "kurzen Beschreibung Ihrer letzten Aktionen"
+			+ " per E-Mail an:\n"
+			+ "info@jens-mueller.org\n\n"
+			+ "Vielen Dank!" ) );
     }
-    errBuf.append( " einschlie\u00DFlich einer\n"
-		+ "kurzen Beschreibung Ihrer letzten Aktionen"
-		+ " per E-Mail an:\n"
-		+ "info@jens-mueller.org\n\n"
-		+ "Vielen Dank!" );
     BaseDlg.showErrorDlg(
 		owner != null ? owner : new Frame(),
 		errBuf.toString(),
-		"Applikationsfehler" );
+		LangUtil.tr( "Applikationsfehler" ) );
   }
 
 

@@ -36,6 +36,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -181,19 +182,27 @@ public class DiskImgProcessDlg extends BaseDlg implements Runnable
 	    }
 	    if( drvFileName != null ) {
 	      StringBuilder buf = new StringBuilder( 0x100 );
-	      buf.append( "Die Abbilddatei wird nun"
-				+ " auf den Datentr\u00E4ger" );
 	      String displayDriveName = getDisplayDriveName( drvFileName );
 	      if( displayDriveName != null ) {
-		buf.append( " im Laufwerk " );
-		buf.append( displayDriveName );
+		buf.append( LangUtil.tr(
+			"Die Abbilddatei wird nun auf den Datentr\u00E4ger"
+				+ " im Laufwerk {0} geschrieben.\n"
+				+ "Dabei werden alle bisherigen Daten"
+				+ " auf dem Datentr\u00E4ger gel\u00F6scht!"
+				+ "\n\nIst der Datentr\u00E4ger im"
+				+ " Dateisystem eingeh\u00E4ngt,"
+				+ " wird er nun ausgeh\u00E4ngt.",
+			displayDriveName ) );
+	      } else {
+		buf.append( LangUtil.tr(
+			"Die Abbilddatei wird nun auf den Datentr\u00E4ger"
+				+ " geschrieben.\n"
+				+ "Dabei werden alle bisherigen Daten"
+				+ " auf dem Datentr\u00E4ger gel\u00F6scht!"
+				+ "\n\nIst der Datentr\u00E4ger im"
+				+ " Dateisystem eingeh\u00E4ngt,"
+				+ " wird er nun ausgeh\u00E4ngt." ) );
 	      }
-	      buf.append( " geschrieben.\n"
-			+ "Dabei werden alle bisherigen Daten"
-			+ " auf dem Datentr\u00E4ger gel\u00F6scht!"
-			+ "\n\nIst der Datentr\u00E4ger im"
-			+ " Dateisystem eingeh\u00E4ngt,"
-			+ " wird er nun ausgeh\u00E4ngt." );
 	      if( JOptionPane.showConfirmDialog(
 			owner,
 			buf.toString(),

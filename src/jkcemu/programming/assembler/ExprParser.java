@@ -12,6 +12,7 @@ import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.Arrays;
 import java.util.Map;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.*;
 
 
@@ -127,8 +128,8 @@ public class ExprParser
 	value = Integer.parseInt( buf.toString(), 16 );
       }
       catch( NumberFormatException ex ) {
-	throw new PrgException(
-			buf.toString() + ": Ung\u00FCltige Hexadezimalzahl" );
+	throw new PrgException( LangUtil.tr(
+			"{0}: Ung\u00FCltige Hexadezimalzahl", buf.toString() ) );
       }
     }
     else if( (ch == 'O') || (ch == 'o') || (ch == 'Q') || (ch == 'q') ) {
@@ -137,8 +138,8 @@ public class ExprParser
 	value = Integer.parseInt( buf.toString(), 8 );
       }
       catch( NumberFormatException ex ) {
-	throw new PrgException(
-			buf.toString() + ": Ung\u00FCltige Oktalzahl" );
+	throw new PrgException( LangUtil.tr(
+			"{0}: Ung\u00FCltige Oktalzahl", buf.toString() ) );
       }
     } else {
       boolean done = false;
@@ -152,8 +153,8 @@ public class ExprParser
 	    value = Integer.parseInt( buf.toString(), 2 );
 	  }
 	  catch( NumberFormatException ex ) {
-	    throw new PrgException(
-			buf.toString() + ": Ung\u00FCltige Bin\u00E4rzahl" );
+	    throw new PrgException( LangUtil.tr(
+			"{0}: Ung\u00FCltige Bin\u00E4rzahl", buf.toString() ) );
 	  }
 	}
       }
@@ -162,8 +163,8 @@ public class ExprParser
 	  value = Integer.parseInt( buf.toString() );
 	}
 	catch( NumberFormatException ex ) {
-	  throw new PrgException(
-			buf.toString() + ": Ung\u00FCltige Zahl" );
+	  throw new PrgException( LangUtil.tr(
+			"{0}: Ung\u00FCltige Zahl", buf.toString() ) );
 	}
       }
     }
@@ -213,8 +214,9 @@ public class ExprParser
     Integer value = parseExpr();
     char    ch    = skipSpaces();
     if( ch != CharacterIterator.DONE ) {
-      throw new PrgException( "\'" + ch
-			+ "\': Unerwartetes Zeichen hinter Ausdruck" );
+      throw new PrgException( LangUtil.tr(
+			"''{0}'': Unerwartetes Zeichen hinter Ausdruck",
+			String.valueOf( ch ) ) );
     }
     return value;
   }
@@ -514,8 +516,9 @@ public class ExprParser
       else if( AsmLabel.isIdentifierStart( ch ) ) {
 	value = parseLabel();
       } else {
-	throw new PrgException(
-		"\'" + ch + "\': Ung\u00FCltiges Zeichen im Argument" );
+	throw new PrgException( LangUtil.tr(
+		"''{0}'': Ung\u00FCltiges Zeichen im Argument",
+		String.valueOf( ch ) ) );
       }
     }
     return value;
@@ -547,10 +550,12 @@ public class ExprParser
 	upperText = labelText.toUpperCase();
       }
       if( AsmArg.isFlagCondition( upperText ) ) {
-	throw new PrgException( labelText + ": Unerwartete Flag-Bedingung" );
+	throw new PrgException( LangUtil.tr(
+			"{0}: Unerwartete Flag-Bedingung", labelText ) );
       }
       if( AsmArg.isRegister( upperText ) ) {
-	throw new PrgException( labelText + ": Unerwartete Register-Angabe" );
+	throw new PrgException( LangUtil.tr(
+			"{0}: Unerwartete Register-Angabe", labelText ) );
       }
       AsmLabel label = this.labels.get( labelText );
       if( label != null ) {
@@ -562,8 +567,8 @@ public class ExprParser
 	}
       } else {
 	if( this.checkLabels ) {
-	  throw new PrgException(
-			"Marke \'" + buf.toString() + "\' nicht definiert" );
+	  throw new PrgException( LangUtil.tr(
+			"Marke ''{0}'' nicht definiert", buf.toString() ) );
 	}
       }
     }
@@ -574,7 +579,8 @@ public class ExprParser
   private void parseToken( char token ) throws PrgException
   {
     if( skipSpaces() != token ) {
-      throw new PrgException( "\'" + token + "\' erwartet" );
+      throw new PrgException( LangUtil.tr(
+			"''{0}'' erwartet", String.valueOf( token ) ) );
     }
     iter.next();
   }

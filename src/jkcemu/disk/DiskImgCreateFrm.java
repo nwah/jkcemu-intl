@@ -65,6 +65,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.HelpFrm;
 import jkcemu.base.ReplyTextDlg;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import jkcemu.file.FileEntry;
 import jkcemu.file.FileNameFld;
@@ -468,7 +469,9 @@ public class DiskImgCreateFrm
     boolean       status = true;
     StringBuilder buf    = new StringBuilder( 256 );
     if( this.dataChanged ) {
-      buf.append( "Die letzten \u00C3nderungen wurden nicht gespeichert!" );
+      buf.append( LangUtil.tr(
+		"Die letzten \u00C4nderungen wurden"
+			+ " nicht gespeichert!" ) );
     }
     if( (this.tableModel.getRowCount() > 0)
 	|| (this.fldSysTrackFileName.getFile() != null) )
@@ -476,7 +479,8 @@ public class DiskImgCreateFrm
       if( buf.length() > 0 ) {
 	buf.append( '\n' );
       }
-      buf.append( "Die hinzugef\u00FCgten Dateien werden entfernt." );
+      buf.append( LangUtil.tr(
+		"Die hinzugef\u00FCgten Dateien werden entfernt." ) );
     }
     if( buf.length() > 0 ) {
       status = BaseDlg.showConfirmDlg( this, buf.toString() );
@@ -1214,9 +1218,11 @@ public class DiskImgCreateFrm
 	    done = true;
 	    if( BaseDlg.showYesNoDlg(
 			this,
-			"Sollen die Dateien im Verzeichnis " + s 
-				+ "\nin der Benutzerebene " + s
-				+ " hinzugef\u00FCgt werden?" ) )
+			LangUtil.tr(
+				"Sollen die Dateien im Verzeichnis {0}\n"
+					+ "in der Benutzerebene {0}"
+					+ " hinzugef\u00FCgt werden?",
+				s ) ) )
 	    {
 	      File[] files = file.listFiles();
 	      if( files != null ) {

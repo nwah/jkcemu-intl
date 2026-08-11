@@ -24,6 +24,7 @@ import jkcemu.file.FileFormat;
 import jkcemu.file.FileSaver;
 import jkcemu.file.FileUtil;
 import jkcemu.file.LoadData;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 import jkcemu.programming.PrgLogger;
 import jkcemu.programming.PrgOptions;
@@ -721,8 +722,8 @@ public class Z80Assembler
 	  if( labelName != null ) {
 	    if( this.passNum == 1 ) {
 	      if( this.labels.containsKey( labelName ) ) {
-		throw new PrgException(
-			"Marke " + labelName + " bereits vergeben" );
+		throw new PrgException( LangUtil.tr(
+			"Marke {0} bereits vergeben", labelName ) );
 	      }
 	      this.labels.put(
 			labelName,
@@ -1326,8 +1327,8 @@ public class Z80Assembler
 		  parseCPU( asmLine, Syntax.ZILOG_ONLY, true );
 		  listCode = false;
 		} else {
-		  throw new PrgException(
-			    "\'" + instruction + "\': Unbekannte Mnemonik" );
+		  throw new PrgException( LangUtil.tr(
+			    "''{0}'': Unbekannte Mnemonik", instruction ) );
 		}
 	      }
 	    }
@@ -1714,8 +1715,9 @@ public class Z80Assembler
 		throw new PrgException( "Zeichenkette nicht geschlossen" );
 	      }
 	      if( pos < len ) {
-		throw new PrgException( "\'" + text.charAt( pos )
-			  + "\': Unerwartetes Zeichen hinter Zeichenkette" );
+		throw new PrgException( LangUtil.tr(
+			  "''{0}'': Unerwartetes Zeichen hinter Zeichenkette",
+			  String.valueOf( text.charAt( pos ) ) ) );
 	      }
 	    }
 	  } else {
@@ -1743,8 +1745,8 @@ public class Z80Assembler
 	  putCode( v );
 	}
 	catch( NumberFormatException ex ) {
-	  throw new PrgException( "\'" + text
-			+ "\': Ung\u00FCltige Hexadezimalzahl" );
+	  throw new PrgException( LangUtil.tr(
+			"''{0}'': Ung\u00FCltige Hexadezimalzahl", text ) );
 	}
       }
     } while( asmLine.hasMoreArgs() );
@@ -3431,8 +3433,9 @@ public class Z80Assembler
 	char ch = text.charAt( 0 );
 	if( (ch == '\'') || (ch == '\"') ) {
 	  if( (len < 2) || (text.charAt( len - 1 ) != ch) ) {
-	    throw new PrgException( itemDesc
-			  + " nicht mit " + ch + " abgeschlossen" );
+	    throw new PrgException( LangUtil.tr(
+			  "{0} nicht mit {1} abgeschlossen",
+			  itemDesc, String.valueOf( ch ) ) );
 	  }
 	  if( len > 2 ) {
 	    text = text.substring( 1, len - 1 );

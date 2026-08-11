@@ -66,6 +66,7 @@ import jkcemu.file.FileNameFld;
 import jkcemu.file.FileTimesData;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -467,25 +468,39 @@ public class DiskImgUnpackFrm
 
 	// Fertigmeldung
 	if( this.unpackErr ) {
-	  String errMsg = "Beim Entpacken traten Fehler auf!";
+	  String errMsg = LangUtil.tr(
+				"Beim Entpacken traten Fehler auf!" );
 	  if( this.blockSizeTooBig || this.blockSizeTooSmall ) {
-	    StringBuilder buf = new StringBuilder();
-	    buf.append( errMsg );
-	    buf.append( "\n\nWahrscheinlich ist die ausgew\u00E4hlte"
-		+ " Blockgr\u00F6\u00DFe" );
+	    String sizeHint = null;
 	    if( this.blockSizeTooBig && !this.blockSizeTooSmall ) {
-	      buf.append( " zu gro\u00DF" );
+	      sizeHint = LangUtil.tr(
+		"\n\nWahrscheinlich ist die ausgew\u00E4hlte"
+			+ " Blockgr\u00F6\u00DFe zu gro\u00DF\n"
+			+ "oder das Blocknummernformat (8/16 Bit)"
+			+ " falsch eingestellt.\n"
+			+ "Wenn dem so ist,"
+			+ " dann k\u00F6nnen auch die ohne Fehlermeldung\n"
+			+ "entpackten Dateien falsche Daten enthalten!" );
 	    } else if( !this.blockSizeTooBig && this.blockSizeTooSmall ) {
-	      buf.append( " zu klein" );
+	      sizeHint = LangUtil.tr(
+		"\n\nWahrscheinlich ist die ausgew\u00E4hlte"
+			+ " Blockgr\u00F6\u00DFe zu klein\n"
+			+ "oder das Blocknummernformat (8/16 Bit)"
+			+ " falsch eingestellt.\n"
+			+ "Wenn dem so ist,"
+			+ " dann k\u00F6nnen auch die ohne Fehlermeldung\n"
+			+ "entpackten Dateien falsche Daten enthalten!" );
 	    } else {
-	      buf.append( " falsch" );
+	      sizeHint = LangUtil.tr(
+		"\n\nWahrscheinlich ist die ausgew\u00E4hlte"
+			+ " Blockgr\u00F6\u00DFe falsch\n"
+			+ "oder das Blocknummernformat (8/16 Bit)"
+			+ " falsch eingestellt.\n"
+			+ "Wenn dem so ist,"
+			+ " dann k\u00F6nnen auch die ohne Fehlermeldung\n"
+			+ "entpackten Dateien falsche Daten enthalten!" );
 	    }
-	    buf.append( "\noder das Blocknummernformat (8/16 Bit)"
-		+ " falsch eingestellt.\n"
-		+ "Wenn dem so ist,"
-		+ " dann k\u00F6nnen auch die ohne Fehlermeldung\n"
-		+ "entpackten Dateien falsche Daten enthalten!" );
-	    errMsg = buf.toString();
+	    errMsg = errMsg + sizeHint;
 	  }
 	  appendToLog( "\n" + errMsg + "\n" );
 	  throw new IOException( errMsg );
@@ -996,16 +1011,20 @@ public class DiskImgUnpackFrm
 	for( int i = 0; status && (i < this.sectorsPerBlock); i++ ) {
 	  if( sectorIdx >= this.dataSectors.size() ) {
 	    StringBuilder buf = new StringBuilder();
-	    buf.append( "  Block " );
-	    buf.append( blockNum );
-	    buf.append( " liegt au\u00DFerhalb des Datenbereichs" );
 	    if( this.dataAreaTruncated ) {
-	      buf.append( "\n  oder in einem Bereich mit"
-			  + " unregelm\u00E4\u00DFigem Sektor-Layout" );
+	      buf.append( LangUtil.tr(
+			"  Block {0} liegt au\u00DFerhalb des"
+				+ " Datenbereichs\n"
+				+ "  oder in einem Bereich mit"
+				+ " unregelm\u00E4\u00DFigem Sektor-Layout.\n",
+			blockNum ) );
 	    } else {
 	      this.blockSizeTooBig = true;
+	      buf.append( LangUtil.tr(
+			"  Block {0} liegt au\u00DFerhalb des"
+				+ " Datenbereichs.\n",
+			blockNum ) );
 	    }
-	    buf.append( ".\n" );
 	    appendToLog( buf.toString() );
 	    this.fileTruncated = true;
 	    this.unpackErr     = true;
@@ -1434,9 +1453,10 @@ public class DiskImgUnpackFrm
 	  if( dirBytes != null ) {
 	    StringBuilder buf = new StringBuilder();
 	    if( this.sysBytesOffs > 0 ) {
-	      buf.append( "Festplattenabbilddatei mit " );
-	      buf.append( this.sysBytesOffs );
-	      buf.append( " Byte gro\u00DFem Kopfblock erkannt\n\n" );
+	      buf.append( LangUtil.tr(
+			"Festplattenabbilddatei mit {0}"
+				+ " Byte gro\u00DFem Kopfblock erkannt\n\n",
+			this.sysBytesOffs ) );
 	    }
 	    if( dirBytes.length > 0 ) {
 	      java.util.List<FileEntry> entries = CPMDirUtil.extractDir(
@@ -1444,13 +1464,15 @@ public class DiskImgUnpackFrm
 								true );
 	      if( !entries.isEmpty() ) {
 		if( dataTruncReason != null ) {
-		  buf.append( "Unregelm\u00E4\u00DFigkeit bei den"
-			+ " Sektoren im Datenbereich gefunden:\n" );
-		  buf.append( dataTruncReason );
-		  buf.append( "\n\nEs k\u00F6nnen nur die Dateien"
-			+ " vollst\u00E4ndig entpackt werden,\n"
-			+ "deren Daten vor der Unregelm\u00E4\u00DFigkeit"
-			+ " liegen.\n\n" );
+		  buf.append( LangUtil.tr(
+			"Unregelm\u00E4\u00DFigkeit bei den"
+				+ " Sektoren im Datenbereich gefunden:\n"
+				+ "{0}\n\n"
+				+ "Es k\u00F6nnen nur die Dateien"
+				+ " vollst\u00E4ndig entpackt werden,\n"
+				+ "deren Daten vor der"
+				+ " Unregelm\u00E4\u00DFigkeit liegen.\n\n",
+			dataTruncReason ) );
 		}
 		buf.append( "Directory:\n" );
 		for( FileEntry entry : entries ) {

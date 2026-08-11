@@ -26,6 +26,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.HelpFrm;
 import jkcemu.base.ScreenFrm;
 import jkcemu.image.ImageUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class ChessboardFrm extends BaseFrm
@@ -165,7 +166,7 @@ public class ChessboardFrm extends BaseFrm
 
     // Menu Ansicht
     JMenu mnuView = GUIFactory.createMenu( "Ansicht" );
-    mnuView.setMnemonic( KeyEvent.VK_A );
+    mnuView.setMnemonic( LangUtil.mnemonic( "Ansicht", KeyEvent.VK_A ) );
 
     this.mnuSwap = createMenuItem( "Seite wechseln" );
     mnuView.add( this.mnuSwap );

@@ -126,6 +126,7 @@ import jkcemu.file.FileTableModel;
 import jkcemu.file.FileTreeCellRenderer;
 import jkcemu.file.FileUtil;
 import jkcemu.file.TransferableFileList;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import jkcemu.tools.findfiles.FindFilesFrm;
 
@@ -1330,7 +1331,8 @@ public class FileBrowserFrm
 
     // Menu Einstellungen
     this.mnuSettings = GUIFactory.createMenu( EmuUtil.TEXT_SETTINGS );
-    this.mnuSettings.setMnemonic( KeyEvent.VK_E );
+    this.mnuSettings.setMnemonic(
+		LangUtil.mnemonic( EmuUtil.TEXT_SETTINGS, KeyEvent.VK_E ) );
 
     this.mnuHiddenFiles = GUIFactory.createCheckBoxMenuItem(
 		"Versteckte Dateien anzeigen",

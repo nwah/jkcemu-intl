@@ -1093,8 +1093,8 @@ public class KC85Caos48Target extends KC854Target
     BasicUtil.appendSetError(
 		compiler,
 		BasicLibrary.E_INVALID,
-		BasicLibrary.TEXT_INVALID_PARAM_DE,
-		BasicLibrary.TEXT_INVALID_PARAM_EN );
+		BasicLibrary.MSG_INVALID_PARAM_DE,
+		BasicLibrary.MSG_INVALID_PARAM_EN );
     buf.append( "\tOR\tA\n"				// CY=0
 		+ "\tRET\n"
 		+ "X_CAOS48_VDIP_CHECK_ERR_2:\n"

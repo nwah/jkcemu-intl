@@ -36,6 +36,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class AboutDlg extends BaseDlg
@@ -298,24 +299,29 @@ public class AboutDlg extends BaseDlg
 		+ "<tr><td align=\"left\">Status:</td><td align=\"left\">" );
 	switch( libInfo.getStatus() ) {
 	  case NOT_USED:
-	    buf.append( "Bibliothek nicht geladen,"
-		+ " da noch nicht ben\u00F6tigt" );
+	    buf.append( LangUtil.tr(
+		"Bibliothek nicht geladen, da noch nicht ben\u00F6tigt" ) );
 	    break;
 	  case LOADED:
-	    buf.append( "Bibliothek geladen" );
 	    if( (recognizedVersion >= 0) && (requiredVersion >= 0) ) {
 	      if( recognizedVersion >= requiredVersion ) {
-		buf.append( " und in Verwendnung" );
+		buf.append( LangUtil.tr(
+			"Bibliothek geladen und in Verwendnung" ) );
 	      } else {
-		buf.append( ", aber nicht in Verwendnung" );
+		buf.append( LangUtil.tr(
+			"Bibliothek geladen, aber nicht in Verwendnung" ) );
 	      }
+	    } else {
+	      buf.append( LangUtil.tr( "Bibliothek geladen" ) );
 	    }
 	    break;
 	  case LOAD_ERROR:
-	    buf.append( "Bibliothek konnte nicht geladen werden." );
+	    buf.append( LangUtil.tr(
+		"Bibliothek konnte nicht geladen werden." ) );
 	    break;
 	  case INSTALL_ERROR:
-	    buf.append( "Bibliothek konnte nicht installiert werden." );
+	    buf.append( LangUtil.tr(
+		"Bibliothek konnte nicht installiert werden." ) );
 	    break;
 	}
 	buf.append( "</td></tr>\n" );

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import jkcemu.Main;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.CmdLineArgIterator;
 import jkcemu.programming.PrgException;
 import jkcemu.programming.PrgLogger;
@@ -164,8 +165,9 @@ public class CmdLineAssembler
 		  labelTableFlag = true;
 		  break;
 		default:
-		  throw new IOException(
-			String.format( "Unbekannte Option \'%c\'", ch ) );
+		  throw new IOException( LangUtil.tr(
+			"Unbekannte Option ''{0}''",
+			String.valueOf( ch ) ) );
 	      }
 	    }
 	  } else {
@@ -293,7 +295,8 @@ public class CmdLineAssembler
 	String  s = label.getKey();
 	Integer v = label.getValue();
 	if( !asm.addLabel( s, v != null ? v.intValue() : -1, false ) ) {
-	  throw new IOException( "Marke " + s + " bereits vorhanden" );
+	  throw new IOException( LangUtil.tr(
+			"Marke {0} bereits vorhanden", s ) );
 	}
       }
       status = asm.assemble( forZ9001 );
@@ -400,25 +403,26 @@ public class CmdLineAssembler
       }
     }
     if( !status ) {
-      throw new IOException(
-	labelName + ": Marke enth\u00E4lht ung\u00FCltige Zeichen" );
+      throw new IOException( LangUtil.tr(
+	"{0}: Marke enth\u00E4lht ung\u00FCltige Zeichen", labelName ) );
     }
     int labelValue = -1;
     if( valueText != null ) {
       CharacterIterator iter = new StringCharacterIterator( valueText );
       if( iter.first() == CharacterIterator.DONE ) {
-	throw new IOException(
-		"Marke " + labelName + ": Wert fehlt" );
+	throw new IOException( LangUtil.tr(
+		"Marke {0}: Wert fehlt", labelName ) );
       }
       try {
 	labelValue = ExprParser.parseNumber( iter );
       }
       catch( PrgException ex ) {
-	throw new IOException(
-		"Marke " + labelName + ": " + ex.getMessage() );
+	throw new IOException( LangUtil.tr(
+		"Marke {0}: {1}", labelName, ex.getMessage() ) );
       }
       if( ExprParser.skipSpaces( iter ) != CharacterIterator.DONE ) {
-	throw new IOException( "Ung\u00FCltige Zahl bei Marke " + labelName );
+	throw new IOException( LangUtil.tr(
+		"Ung\u00FCltige Zahl bei Marke {0}", labelName ) );
       }
     }
     labels.add( new AbstractMap.SimpleImmutableEntry<>(

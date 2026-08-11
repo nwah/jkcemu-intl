@@ -47,6 +47,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -140,11 +141,12 @@ public class HardDiskListDlg extends BaseDlg implements ListSelectionListener
     if( this.btnSave.isEnabled() ) {
       switch( JOptionPane.showConfirmDialog(
 		this,
-		"Das Festplattenverzeichnis wurde ge\u00E4ndert,"
-			+ " aber nicht gespeichert.\n"
-			+ "M\u00F6chten Sie es speichern,"
-			+ " bevor das Fenster geschlossen wird?",
-		"Daten ge\u00E4ndert",
+		LangUtil.tr(
+			"Das Festplattenverzeichnis wurde ge\u00E4ndert,"
+				+ " aber nicht gespeichert.\n"
+				+ "M\u00F6chten Sie es speichern,"
+				+ " bevor das Fenster geschlossen wird?" ),
+		LangUtil.tr( "Daten ge\u00E4ndert" ),
 		JOptionPane.YES_NO_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) )
       {

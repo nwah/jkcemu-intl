@@ -35,6 +35,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.FontMngr;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 
 
 public class LAFSettingsFld extends AbstractSettingsFld
@@ -128,13 +129,14 @@ public class LAFSettingsFld extends AbstractSettingsFld
       {
 	BaseDlg.showInfoDlg(
 		this,
-		"Die \u00C4nderung an der Option \'"
-			+ this.cbScreenMenuBar.getText()
-			+ "\' ist nur wirksam,\n"
-			+ "wenn Sie die Einstellungen als Profil speichern"
-			+ " und anschlie\u00DFend "
-			+ Main.APPNAME
-			+ " mit diesem Profil neu starten." );
+		LangUtil.tr(
+			"Die \u00C4nderung an der Option \'{0}\'"
+				+ " ist nur wirksam,\n"
+				+ "wenn Sie die Einstellungen als Profil"
+				+ " speichern und anschlie\u00DFend {1}"
+				+ " mit diesem Profil neu starten.",
+			this.cbScreenMenuBar.getText(),
+			Main.APPNAME ) );
       }
     }
   }

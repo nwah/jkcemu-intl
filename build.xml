@@ -8,6 +8,7 @@
   <property name="disks"   location="${source}/disks"/>
   <property name="help"    location="${source}/help"/>
   <property name="images"  location="${source}/images"/>
+  <property name="lang"    location="${source}/lang"/>
   <property name="rom"     location="${source}/rom"/>
 
   <presetdef name="javac">
@@ -33,6 +34,10 @@
       <fileset dir="${images}"/>
     </copy>
 
+    <copy todir="${build}/lang">
+      <fileset dir="${lang}"/>
+    </copy>
+
     <copy todir="${build}/rom">
       <fileset dir="${rom}"/>
     </copy>
@@ -42,8 +47,14 @@
     <javac srcdir="${source}" destdir="${build}" debug="on"/>
   </target>
 
+  <!--
+    Die PO-Vorlage, die Kandidatenliste und das Extraktionswerkzeug
+    werden nur zur Entwicklungszeit benoetigt
+    und deshalb nicht mit ausgeliefert.
+  -->
   <target name="jar" depends="compile">
-    <jar destfile="${basedir}/jkcemu.jar" basedir="${build}">
+    <jar destfile="${basedir}/jkcemu.jar" basedir="${build}"
+         excludes="lang/jkcemu.pot,lang/candidates.txt,lang/*.md,lang/TRANSLATING.txt,lang/GLOSSARY.txt,jkcemu/lang/POExtractor*.class">
       <manifest>
         <attribute name="Built-By" value="${user.name}"/>
         <attribute name="Main-Class" value="jkcemu.Main"/>
@@ -63,6 +74,27 @@
 
   <target name="jkcemu" depends="compile">
     <java classname="jkcemu.Main" fork="true">
+      <classpath>
+        <pathelement path="${build}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="pot" depends="compile"
+          description="Regeneriert die PO-Vorlage src/lang/jkcemu.pot">
+    <java classname="jkcemu.lang.POExtractor" fork="true" failonerror="true">
+      <arg value="${source}"/>
+      <arg value="${lang}/jkcemu.pot"/>
+      <classpath>
+        <pathelement path="${build}"/>
+      </classpath>
+    </java>
+  </target>
+
+  <target name="lang-report" depends="compile"
+          description="Zeigt je Sprachkatalog die Anzahl uebersetzter Texte">
+    <java classname="jkcemu.lang.POFile" fork="true" failonerror="true">
+      <arg value="${lang}"/>
       <classpath>
         <pathelement path="${build}"/>
       </classpath>

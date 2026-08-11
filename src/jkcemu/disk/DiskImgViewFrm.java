@@ -65,6 +65,7 @@ import jkcemu.file.FileEntry;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
 import jkcemu.file.RecentFilesMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class DiskImgViewFrm extends BaseFrm
@@ -1268,13 +1269,15 @@ public class DiskImgViewFrm extends BaseFrm
 	  if( sectorSize > 0 ) {
 	    if( formatText.indexOf( "Spuren a " ) < 0 ) {
 	      buf.append( formatText );
-	      buf.append( ',' );
 	      if( occurence.intValue() < totalCount.intValue() ) {
-		buf.append( " h\u00E4ufigste" );
+		buf.append( LangUtil.tr(
+			", h\u00E4ufigste Sektorgr\u00F6\u00DFe: {0} Byte",
+			sectorSize ) );
+	      } else {
+		buf.append( LangUtil.tr(
+			", Sektorgr\u00F6\u00DFe: {0} Byte",
+			sectorSize ) );
 	      }
-	      buf.append( " Sektorgr\u00F6\u00DFe: " );
-	      buf.append( sectorSize );
-	      buf.append( " Byte" );
 	      formatText = buf.toString();
 	    }
 	  } else {
@@ -1540,44 +1543,54 @@ public class DiskImgViewFrm extends BaseFrm
 			|| hasDeletedDataSectors
 			|| hasErrorSectors )
 	    {
+	      buf.append( "<br/>\n" );
+	      buf.append( LangUtil.tr( "Agenda:" ) );
 	      buf.append( "<br/>\n"
-			+ "Agenda:<br/>\n"
 			+ "<table border=\"0\">\n"
 			+ "<tr><td valign=\"top\">" );
 	      buf.append( MARK_BEG );
-	      buf.append( "farblich hervorgehoben" );
+	      buf.append( LangUtil.tr( "farblich hervorgehoben" ) );
 	      buf.append( MARK_END );
-	      buf.append( ":</td><td valign=\"top\">"
-			+ "allgemeine Kennzeichnung,"
-			+ " dass es an dieser Stelle eine Besonderheit gibt"
-			+ "</td></tr>\n" );
+	      buf.append( ":</td><td valign=\"top\">" );
+	      buf.append( LangUtil.tr(
+			"allgemeine Kennzeichnung,"
+				+ " dass es an dieser Stelle"
+				+ " eine Besonderheit gibt" ) );
+	      buf.append( "</td></tr>\n" );
 	      if( hasBogusIdSectors ) {
 		buf.append( "<tr><td valign=\"top\">" );
 		buf.append( MARK_BEG );
 		buf.append( MARK_BOGUS_ID );
 		buf.append( MARK_END );
-		buf.append( ":</td><td valign=\"top\">Sektor-ID generiert,"
-			+ " da Sektorkopf nicht gelesen werden konnte"
-			+ "</td></tr>\n" );
+		buf.append( ":</td><td valign=\"top\">" );
+		buf.append( LangUtil.tr(
+			"Sektor-ID generiert,"
+				+ " da Sektorkopf nicht gelesen"
+				+ " werden konnte" ) );
+		buf.append( "</td></tr>\n" );
 	      }
 	      if( hasNoDataSectors ) {
 		buf.append( "<tr><td valign=\"top\">" );
 		buf.append( MARK_NO_DATA );
-		buf.append( ":</td><td valign=\"top\">"
-			+ "Sektor ohne Datenbereich</td></tr>\n" );
+		buf.append( ":</td><td valign=\"top\">" );
+		buf.append( LangUtil.tr( "Sektor ohne Datenbereich" ) );
+		buf.append( "</td></tr>\n" );
 	      }
 	      if( hasDeletedDataSectors ) {
 		buf.append( "<tr><td valign=\"top\">" );
 		buf.append( MARK_DELETED );
-		buf.append( ":</td><td valign=\"top\">"
-			+ "Sektor mit <em>Deleted Data Address Mark</em>"
-			+ "</td></tr>\n" );
+		buf.append( ":</td><td valign=\"top\">" );
+		buf.append( LangUtil.tr(
+			"Sektor mit <em>Deleted Data Address Mark</em>" ) );
+		buf.append( "</td></tr>\n" );
 	      }
 	      if( hasDeletedDataSectors ) {
 		buf.append( "<tr><td>" );
 		buf.append( MARK_ERROR );
-		buf.append( ":</td><td valign=\"top\">"
-			+ "Sektordaten mit CRC-Fehler gelesen</td></tr>\n" );
+		buf.append( ":</td><td valign=\"top\">" );
+		buf.append( LangUtil.tr(
+			"Sektordaten mit CRC-Fehler gelesen" ) );
+		buf.append( "</td></tr>\n" );
 	      }
 	      buf.append( "</table>\n" );
 	    }
@@ -1745,19 +1758,20 @@ public class DiskImgViewFrm extends BaseFrm
       {
 	StringBuilder buf = new StringBuilder( 128 );
 	if( sector.getDataDeleted() ) {
-	  buf.append( "Daten als gel\u00F6scht markiert" );
+	  buf.append( LangUtil.tr( "Daten als gel\u00F6scht markiert" ) );
 	}
 	if( sector.checkError() ) {
 	  if( buf.length() > 0 ) {
 	    buf.append( ", " );
 	  }
-	  buf.append( "Lesefehler" );
+	  buf.append( LangUtil.tr( "Lesefehler" ) );
 	}
 	if( sector.hasBogusID() ) {
 	  if( buf.length() > 0 ) {
 	    buf.append( ", " );
 	  }
-	  buf.append( "Sektor-ID generiert (Sektorkopf war nicht lesbar)" );
+	  buf.append( LangUtil.tr(
+		"Sektor-ID generiert (Sektorkopf war nicht lesbar)" ) );
 	}
 	etcText = buf.toString();
       }

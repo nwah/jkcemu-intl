@@ -26,6 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileTimesData;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class DirectoryFloppyDisk extends RegularFormatFloppyDisk
@@ -1388,12 +1389,13 @@ public class DirectoryFloppyDisk extends RegularFormatFloppyDisk
 	  }
 	  int userNum = (entryName.charAt( 0 ) - '0');
 	  if( (userNum == 0) && fileName.equals( SYS_FILE_NAME ) ) {
-	    throw new IOException(
-		"Eine Datei mit dem Namen " + SYS_FILE_NAME
-			+ " kann vom emulierten System aus nicht angelegt"
-			+ "  werden,\n"
+	    throw new IOException( LangUtil.tr(
+		"Eine Datei mit dem Namen {0}"
+			+ " kann vom emulierten System aus nicht"
+			+ " angelegt werden,\n"
 			+ "da JKCEMU diese Datei f\u00FCr die Systemspuren"
-			+ " verwendet." );
+			+ " verwendet.",
+		SYS_FILE_NAME ) );
 	  }
 	  File dirFile = this.dirFile;
 	  if( userNum > 0 ) {

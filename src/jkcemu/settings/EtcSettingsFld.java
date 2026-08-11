@@ -24,6 +24,7 @@ import java.util.Properties;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -42,6 +43,7 @@ import jkcemu.base.deviceio.WinDeviceIO;
 import jkcemu.disk.HardDiskListDlg;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentFilesMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class EtcSettingsFld extends AbstractSettingsFld
@@ -50,20 +52,22 @@ public class EtcSettingsFld extends AbstractSettingsFld
 		= "Beenden Sie bitte den Emulator und l\u00F6schen Sie\n"
 			+ "das Konfigurationsverzeichnis selbst.";
 
-  private boolean      notified;
-  private JRadioButton rbFileDlgEmu;
-  private JRadioButton rbFileDlgSwing;
-  private JRadioButton rbFileDlgNative;
-  private JRadioButton rbSRAMInit00;
-  private JRadioButton rbSRAMInitRandom;
-  private JCheckBox    cbClearRFsOnPowerOn;
-  private JCheckBox    cbReloadROMsOnPowerOn;
-  private JCheckBox    cbWarnOnOverwriteFile;
-  private JLabel       labelWarnOnOverwriteFile1;
-  private JLabel       labelWarnOnOverwriteFile2;
-  private JTextField   fldConfigDir;
-  private JButton      btnOpenConfigDir;
-  private JButton      btnDeleteConfigDir;
+  private boolean           notified;
+  private JComboBox<String> comboLang;
+  private JRadioButton      rbFileDlgEmu;
+  private JRadioButton      rbFileDlgSwing;
+  private JRadioButton      rbFileDlgNative;
+  private JRadioButton      rbSRAMInit00;
+  private JRadioButton      rbSRAMInitRandom;
+  private JCheckBox         cbClearRFsOnPowerOn;
+  private JCheckBox         cbReloadROMsOnPowerOn;
+  private JCheckBox         cbWarnOnOverwriteFile;
+  private JLabel            labelWarnOnOverwriteFile1;
+  private JLabel            labelWarnOnOverwriteFile2;
+  private JLabel            labelLangNote;
+  private JTextField        fldConfigDir;
+  private JButton           btnOpenConfigDir;
+  private JButton           btnDeleteConfigDir;
 
 
   public EtcSettingsFld( SettingsFrm settingsFrm )
@@ -85,6 +89,31 @@ public class EtcSettingsFld extends AbstractSettingsFld
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
+    panel.add(
+	GUIFactory.createLabel( "Sprache der Benutzeroberfl\u00E4che:" ),
+	gbc );
+
+    this.comboLang = GUIFactory.createComboBox();
+    this.comboLang.setEditable( false );
+    this.comboLang.addItem( EmuUtil.TEXT_DEFAULT );
+    for( String langCode : LangUtil.getAvailableLangCodes() ) {
+      this.comboLang.addItem( langCode );
+    }
+    gbc.insets.top  = 0;
+    gbc.insets.left = 50;
+    gbc.gridy++;
+    panel.add( this.comboLang, gbc );
+
+    this.labelLangNote = GUIFactory.createLabel(
+	"Eine ge\u00E4nderte Sprache wird erst nach einem Neustart"
+		+ " von JKCEMU wirksam." );
+    gbc.insets.top = 5;
+    gbc.gridy++;
+    panel.add( this.labelLangNote, gbc );
+
+    gbc.insets.top  = 20;
+    gbc.insets.left = 5;
+    gbc.gridy++;
     panel.add(
 	GUIFactory.createLabel( "Zu verwendenter Dateiauswahldialog:" ),
 	gbc );
@@ -236,6 +265,7 @@ public class EtcSettingsFld extends AbstractSettingsFld
     super.addNotify();
     if( !this.notified ) {
       this.notified = true;
+      this.comboLang.addActionListener( this );
       this.rbFileDlgEmu.addActionListener( this );
       this.rbFileDlgSwing.addActionListener( this );
       this.rbFileDlgNative.addActionListener( this );
@@ -256,6 +286,12 @@ public class EtcSettingsFld extends AbstractSettingsFld
   @Override
   public void applyInput( Properties props, boolean selected )
   {
+    Object selLang  = this.comboLang.getSelectedItem();
+    String langText = selLang != null ? selLang.toString() : "";
+    props.setProperty(
+		Main.PROP_LANG,
+		!langText.equals( EmuUtil.TEXT_DEFAULT ) ? langText : "" );
+
     String value = FileUtil.VALUE_FILEDIALOG_JKCEMU;
     if( this.rbFileDlgSwing.isSelected() ) {
       value = FileUtil.VALUE_FILEDIALOG_SWING;
@@ -289,7 +325,11 @@ public class EtcSettingsFld extends AbstractSettingsFld
     boolean rv  = false;
     Object  src = e.getSource();
     if( src != null ) {
-      if( src == this.btnOpenConfigDir ) {
+      if( src == this.comboLang ) {
+	rv = true;
+	fireDataChanged();
+      }
+      else if( src == this.btnOpenConfigDir ) {
 	rv = true;
 	doOpenConfigDir( false );
       }
@@ -320,6 +360,7 @@ public class EtcSettingsFld extends AbstractSettingsFld
     super.removeNotify();
     if( this.notified ) {
       this.notified = false;
+      this.comboLang.removeActionListener( this );
       this.rbFileDlgEmu.removeActionListener( this );
       this.rbFileDlgSwing.removeActionListener( this );
       this.rbFileDlgNative.removeActionListener( this );
@@ -340,6 +381,10 @@ public class EtcSettingsFld extends AbstractSettingsFld
   @Override
   public void updFields( Properties props )
   {
+    String langCode = EmuUtil.getProperty( props, Main.PROP_LANG );
+    this.comboLang.setSelectedItem(
+		!langCode.isEmpty() ? langCode : EmuUtil.TEXT_DEFAULT );
+
     switch( EmuUtil.getProperty( props, FileUtil.PROP_FILEDIALOG ) ) {
       case FileUtil.VALUE_FILEDIALOG_NATIVE:
 	this.rbFileDlgNative.setSelected( true );

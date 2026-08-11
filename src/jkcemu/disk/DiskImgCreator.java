@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.Properties;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileTimesData;
+import jkcemu.lang.LangUtil;
 
 
 public class DiskImgCreator
@@ -342,13 +343,15 @@ public class DiskImgCreator
       if( (this.begTimeFile >= 0)
 	  && entryName.equals( DateStamper.FILENAME ) )
       {
-	throw new IOException( "Bei einem Diskettenformat mit"
-		+ " DateStamper-Unterst\u00FCtzung\n"
-		+ "werden die Zeitstempel in der Datei "
-		+ DateStamper.FILENAME + " gespeichert.\n"
-		+ "Diese Datei wird automatisch angelegt und"
-		+ " kann deshalb\n"
-		+ "nicht vom Anwender hinzugef\u00FCgt werden." );
+	throw new IOException( LangUtil.tr(
+		"Bei einem Diskettenformat mit"
+			+ " DateStamper-Unterst\u00FCtzung\n"
+			+ "werden die Zeitstempel in der Datei {0}"
+			+ " gespeichert.\n"
+			+ "Diese Datei wird automatisch angelegt und"
+			+ " kann deshalb\n"
+			+ "nicht vom Anwender hinzugef\u00FCgt werden.",
+		DateStamper.FILENAME ) );
       }
       InputStream in = null;
       try {

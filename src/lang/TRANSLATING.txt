@@ -1,0 +1,176 @@
+JKCEMU - Uebersetzungen / Translations
+======================================
+
+This file explains how to translate JKCEMU into your language.
+You do NOT need to know Java, and you do not need to write any code.
+
+Diese Datei beschreibt, wie JKCEMU in eine andere Sprache uebersetzt wird.
+Java-Kenntnisse sind dafuer nicht erforderlich.
+
+
+1. What you need
+----------------
+
+Poedit, a free translation editor for Windows, macOS and Linux:
+
+    https://poedit.net/
+
+Any other gettext-compatible editor works too (Lokalize, GTranslator,
+Gtranslator, Weblate, Crowdin). The files are standard GNU gettext
+catalogs with the extension ".po".
+
+
+2. The files in this directory
+------------------------------
+
+  jkcemu.pot        The template. It contains every translatable text
+                    of JKCEMU in the original German, with no
+                    translations. It is generated from the source code
+                    and must NOT be edited by hand.
+
+  en.po             The English translation.
+
+  <code>.po         One file per language, named after the ISO 639-1
+                    language code, e.g. fr.po, cs.po, pl.po, ru.po.
+
+  languages.txt     The list of languages offered in the settings
+                    dialog. One line per language, in the form
+                    <code>=<name in that language>, e.g.
+
+                        de=Deutsch
+                        en=English
+                        fr=Francais
+
+  GLOSSARY.txt      Binding terminology. Please read it before you
+                    start - it lists the retro-computing terms that are
+                    easy to get wrong.
+
+
+3. Translating an existing language
+-----------------------------------
+
+  1. Open the .po file of your language in Poedit.
+  2. Choose "Translation" -> "Update from POT file" and select
+     jkcemu.pot. This adds texts that are new in this JKCEMU version
+     and marks changed ones.
+  3. Translate the entries. The German original is shown on the left,
+     your translation goes on the right.
+  4. Save the file. That is all.
+
+Entries that you leave empty are not a problem: JKCEMU then simply
+shows the German original. A partial translation never breaks the
+program.
+
+
+4. Starting a new language
+--------------------------
+
+  1. In Poedit choose "File" -> "New from POT/PO file" and select
+     jkcemu.pot.
+  2. Poedit asks for the language. Choose yours.
+  3. Save the file in this directory as <code>.po, using the ISO 639-1
+     code of your language, e.g. fr.po.
+  4. Add one line for your language to languages.txt, e.g.
+
+        fr=Francais
+
+  5. Translate as described in section 3.
+
+
+5. Rules you have to follow
+---------------------------
+
+These are not style preferences - breaking them causes visible bugs.
+
+5.1. Placeholders
+
+Some texts contain placeholders {0}, {1}, {2}. JKCEMU replaces them at
+runtime with a file name, a number, an address and so on. Example:
+
+    German      Die Datei {0} konnte nicht geoeffnet werden.
+    English     The file {0} could not be opened.
+
+  - Every placeholder of the original MUST appear in the translation.
+  - Never renumber them. If your language needs a different word order,
+    reuse the same numbers in the new order, e.g. "{1} before {0}".
+  - Do not add placeholders that are not in the original.
+
+5.2. Apostrophes in texts that contain placeholders
+
+In a text that contains a placeholder, a literal apostrophe must be
+written twice. This is a rule of the Java message formatter.
+
+    wrong       Don't open {0}
+    right       Don''t open {0}
+
+In texts without any placeholder, write the apostrophe normally.
+About 22 of the German originals contain an apostrophe; watch out for
+them.
+
+Likewise, a literal curly brace in such a text must be written as '{'.
+
+5.3. Line breaks and spaces
+
+  - \n is a line break. Keep them where the original has them.
+  - Some texts begin or end with a space. Keep those spaces, they
+    separate the text from what comes before or after it.
+
+5.4. Do not translate
+
+  - Names of the emulated computers and their software:
+    KC85/2..5, KC87, Z1013, Z9001, A5105, LC80, AC1, BCS3, HC900,
+    PC/M, SLC1, VCS80, CP/M, CP/A, MicroDOS, CAOS, KCNet, D004, D008,
+    GIDE, RAM-Floppy.
+  - File format names and extensions: KCC, TAP, SSS, JTC, *.wav ...
+  - Z80 register and instruction names: A, BC, IX, LD, CALL, JP ...
+
+5.5. Keyboard mnemonics
+
+Entries with the context "mnemonic" are single letters underlined in
+the menu bar. Choose a letter that occurs in your translated menu
+title, and do not use the same letter twice in one menu bar.
+
+
+6. Testing your translation
+---------------------------
+
+If you have Apache Ant and a JDK installed:
+
+    ant jar
+    java -jar jkcemu.jar --lang=<code>
+
+for example:
+
+    java -jar jkcemu.jar --lang=fr
+
+The language can also be selected permanently in JKCEMU under
+"Einstellungen" -> "Sonstiges" ("Settings" -> "Miscellaneous").
+A change takes effect after restarting JKCEMU.
+
+To see how complete a translation is:
+
+    ant lang-report
+
+If you cannot build JKCEMU yourself, just send the .po file to the
+JKCEMU authors - the file is all that is needed.
+
+
+7. For maintainers: regenerating the template
+---------------------------------------------
+
+After changing texts in the Java sources:
+
+    ant pot
+
+This regenerates jkcemu.pot from the sources. Translators then use
+"Update from POT file" in Poedit to pick up the changes; existing
+translations are preserved.
+
+    ant pot        regenerates src/lang/jkcemu.pot
+    ant lang-report  shows how complete each language is
+
+The file src/lang/candidates.txt is also written by "ant pot". It
+lists German-looking texts in the sources that are NOT yet
+translatable, so they can be reviewed and, where appropriate, routed
+through jkcemu.lang.LangUtil. It is a development aid only and is not
+shipped in jkcemu.jar.

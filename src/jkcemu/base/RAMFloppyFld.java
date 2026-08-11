@@ -28,6 +28,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class RAMFloppyFld extends JComponent implements ActionListener
@@ -251,8 +252,9 @@ public class RAMFloppyFld extends JComponent implements ActionListener
 	catch( IOException ex ) {
 	  BaseDlg.showErrorDlg(
 		this,
-		"Die RAM-Floppy kann nicht geladen werden.\n\n"
-						+ ex.getMessage() );
+		LangUtil.tr(
+			"Die RAM-Floppy kann nicht geladen werden.\n\n{0}",
+			ex.getMessage() ) );
 	}
       }
     }
@@ -278,8 +280,9 @@ public class RAMFloppyFld extends JComponent implements ActionListener
 	catch( IOException ex ) {
 	  BaseDlg.showErrorDlg(
 		this,
-		"RAM-Floppy kann nicht gespeichert werden.\n\n"
-						+ ex.getMessage() );
+		LangUtil.tr(
+			"RAM-Floppy kann nicht gespeichert werden.\n\n{0}",
+			ex.getMessage() ) );
 	}
       }
     }

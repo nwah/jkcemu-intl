@@ -103,6 +103,7 @@ import jkcemu.base.PopupMenusOwner;
 import jkcemu.base.ReplyIntDlg;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import jkcemu.tools.ToolUtil;
 import org.w3c.dom.Document;
@@ -447,7 +448,8 @@ public class DebugFrm extends BaseFrm implements
 
     // Menu Programmausfuehrung
     JMenu mnuExec = GUIFactory.createMenu( "Programmausf\u00FChrung" );
-    mnuExec.setMnemonic( KeyEvent.VK_A );
+    mnuExec.setMnemonic(
+		LangUtil.mnemonic( "Programmausf\u00FChrung", KeyEvent.VK_A ) );
 
     this.mnuExecStop = createMenuItemWithDirectAccelerator(
 						TEXT_STOP,
@@ -500,7 +502,8 @@ public class DebugFrm extends BaseFrm implements
 
     // Menu Halte-/Log-Punkte
     JMenu mnuBp = GUIFactory.createMenu( "Halte-/Log-Punkte" );
-    mnuBp.setMnemonic( KeyEvent.VK_P );
+    mnuBp.setMnemonic(
+		LangUtil.mnemonic( "Halte-/Log-Punkte", KeyEvent.VK_P ) );
 
     this.mnuBpPCAdd = createMenuItemWithStandardAccelerator(
 		"Halte-/Log-Punkt auf Programmadresse hinzuf\u00FCgen...",
@@ -571,7 +574,7 @@ public class DebugFrm extends BaseFrm implements
 
     // Menu Log-Meldungen
     JMenu mnuLog = GUIFactory.createMenu( "Log-Meldungen" );
-    mnuLog.setMnemonic( KeyEvent.VK_L );
+    mnuLog.setMnemonic( LangUtil.mnemonic( "Log-Meldungen", KeyEvent.VK_L ) );
 
     this.mnuLogCopy = createMenuItem( TEXT_LOG_COPY );
     mnuLog.add( this.mnuLogCopy );
@@ -593,7 +596,7 @@ public class DebugFrm extends BaseFrm implements
 
     // Menu Variablen
     JMenu mnuVar = GUIFactory.createMenu( "Variablen" );
-    mnuVar.setMnemonic( KeyEvent.VK_V );
+    mnuVar.setMnemonic( LangUtil.mnemonic( "Variablen", KeyEvent.VK_V ) );
 
     this.mnuVarAdd = createMenuItem( TEXT_VAR_ADD );
     mnuVar.add( this.mnuVarAdd );
@@ -1558,8 +1561,11 @@ public class DebugFrm extends BaseFrm implements
 	if( reader != null ) {
 	  BaseDlg.showErrorDlg(
 		this,
-		"Der Inhalt" + sourceText + " konnte nicht als Liste\n"
-		  + "mit Halte-/Log-Punkten interpretiert werden." );
+		LangUtil.tr(
+			"Der Inhalt{0} konnte nicht als Liste\n"
+				+ "mit Halte-/Log-Punkten interpretiert"
+				+ " werden.",
+			sourceText ) );
 	}
       }
     }
@@ -2930,10 +2936,11 @@ public class DebugFrm extends BaseFrm implements
 			EmuUtil.TEXT_CANCEL };
 	action = BaseDlg.showOptionDlg(
 		this,
-		"Soll die Befehlsaufzeichnung an die alte Datei\n"
-			+ this.lastTraceFile.getPath()
-			+ "\nangeh\u00E4ngt werden oder m\u00F6chten Sie\n"
-			+ "eine neue Datei anlegen?",
+		LangUtil.tr(
+			"Soll die Befehlsaufzeichnung an die alte Datei\n"
+				+ "{0}\nangeh\u00E4ngt werden oder m\u00F6chten"
+				+ " Sie\neine neue Datei anlegen?",
+			this.lastTraceFile.getPath() ),
 		"Entscheidung",
 		options );
 	if( action == 0 ) {
@@ -3979,12 +3986,10 @@ public class DebugFrm extends BaseFrm implements
       setDebuggerEditable( true );
       String text = "Programmausf\u00FChrung angehalten";
       if( iSource != null ) {
-	StringBuilder buf = new StringBuilder( 128 );
-	buf.append( text );
-	buf.append( ", Interrupt von " );
-	buf.append( iSource.toString() );
-	buf.append( " angenommen" );
-	text = buf.toString();
+	text = LangUtil.tr(
+		"{0}, Interrupt von {1} angenommen",
+		text,
+		iSource.toString() );
       }
       this.labelStatus.setText( text );
     }

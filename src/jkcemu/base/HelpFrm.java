@@ -42,6 +42,7 @@ import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import javax.swing.text.Document;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
@@ -277,22 +278,30 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 	StringBuilder resultBuf = new StringBuilder( 0x1000 );
 	resultBuf.append( "<html>\n"
 			+ "<body>\n"
-			+ "<h1>Hilfe durchsuchen</h1>\n" );
+			+ "<h1>" );
+	resultBuf.append( LangUtil.tr( "Hilfe durchsuchen" ) );
+	resultBuf.append( "</h1>\n" );
+	StringBuilder findTextBuf = new StringBuilder();
+	EmuUtil.appendHTML( findTextBuf, this.findInHelpText );
+	String findTextHTML = findTextBuf.toString();
 	if( page2Hits.isEmpty() ) {
-	  resultBuf.append( "Zum Suchtext <em>" );
-	  EmuUtil.appendHTML( resultBuf, this.findInHelpText );
-	  resultBuf.append( "</em> wurden keine Treffer gefunden.\n" );
+	  resultBuf.append( LangUtil.tr(
+		"Zum Suchtext <em>{0}</em> wurden keine Treffer gefunden.\n",
+		findTextHTML ) );
 	} else {
 	  java.util.List<String> pages = new ArrayList<>();
 	  pages.addAll( page2Hits.keySet() );
-	  resultBuf.append( "Zum Suchtext <em>" );
-	  EmuUtil.appendHTML( resultBuf, this.findInHelpText );
-	  resultBuf.append( "</em>" );
 	  if( pages.size() == 1 ) {
-	    resultBuf.append( " wurde folgender Treffer gefunden:\n" );
+	    resultBuf.append( LangUtil.tr(
+		"Zum Suchtext <em>{0}</em> wurde folgender Treffer"
+			+ " gefunden:\n",
+		findTextHTML ) );
 	  } else {
-	    resultBuf.append( " wurden folgende Treffer gefunden,\n"
-			+ "absteigend sortiert nach Anzahl der Treffer:\n" );
+	    resultBuf.append( LangUtil.tr(
+		"Zum Suchtext <em>{0}</em> wurden folgende Treffer"
+			+ " gefunden,\n"
+			+ "absteigend sortiert nach Anzahl der Treffer:\n",
+		findTextHTML ) );
 	  }
 	  resultBuf.append( "<ul>\n" );
 
@@ -349,30 +358,46 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 	      resultBuf.append( "\">" );
 	      resultBuf.append( title );
 	      resultBuf.append( "</a>&nbsp;&nbsp;" );
-	      EmuUtil.appendHTML( resultBuf, hits.toString() );
-	      resultBuf.append( "&nbsp;Treffer</li>\n" );
+	      resultBuf.append( LangUtil.tr(
+				"{0}&nbsp;Treffer", hits ) );
+	      resultBuf.append( "</li>\n" );
 	      if( hits.intValue() > 1 ) {
 		multiHits = true;
 	      }
 	    }
 	  }
 	  resultBuf.append( "</ul>\n"
-			+ "<br/>\n"
-			+ "Wenn Sie auf " );
+			+ "<br/>\n" );
 	  if( pages.size() == 1 ) {
-	    resultBuf.append( "diesen Link" );
-	  } else {
-	    resultBuf.append( "einen dieser Links" );
-	  }
-	  resultBuf.append( " klicken,\n"
-			+ "wird auf der folgenden Seite automatisch" );
-	  if( multiHits ) {
-	    resultBuf.append( " zum ersten Treffer gesprungen.\n"
+	    if( multiHits ) {
+	      resultBuf.append( LangUtil.tr(
+		"Wenn Sie auf diesen Link klicken,\n"
+			+ "wird auf der folgenden Seite automatisch"
+			+ " zum ersten Treffer gesprungen.\n"
 			+ "Mit dem Men&uuml;eintrag <em>Weitersuchen</em>"
 			+ " oder der Taste&nbsp;<em>F3</em>"
-			+ " gelangen Sie zum n&auml;chsten Treffer.\n" );
+			+ " gelangen Sie zum n&auml;chsten Treffer.\n" ) );
+	    } else {
+	      resultBuf.append( LangUtil.tr(
+		"Wenn Sie auf diesen Link klicken,\n"
+			+ "wird auf der folgenden Seite automatisch"
+			+ " zu dem Treffer gesprungen.\n" ) );
+	    }
 	  } else {
-	    resultBuf.append( " zu dem Treffer gesprungen.\n" );
+	    if( multiHits ) {
+	      resultBuf.append( LangUtil.tr(
+		"Wenn Sie auf einen dieser Links klicken,\n"
+			+ "wird auf der folgenden Seite automatisch"
+			+ " zum ersten Treffer gesprungen.\n"
+			+ "Mit dem Men&uuml;eintrag <em>Weitersuchen</em>"
+			+ " oder der Taste&nbsp;<em>F3</em>"
+			+ " gelangen Sie zum n&auml;chsten Treffer.\n" ) );
+	    } else {
+	      resultBuf.append( LangUtil.tr(
+		"Wenn Sie auf einen dieser Links klicken,\n"
+			+ "wird auf der folgenden Seite automatisch"
+			+ " zu dem Treffer gesprungen.\n" ) );
+	    }
 	  }
 	}
 	resultBuf.append( "</body\n"
@@ -423,7 +448,7 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
     mnuFile.addSeparator();
 
     JMenu mnuNav = GUIFactory.createMenu( "Navigation" );
-    mnuNav.setMnemonic( KeyEvent.VK_N );
+    mnuNav.setMnemonic( LangUtil.mnemonic( "Navigation", KeyEvent.VK_N ) );
 
     this.mnuNavBack = createMenuItemWithStandardAccelerator(
 						"Zur\u00FCck",

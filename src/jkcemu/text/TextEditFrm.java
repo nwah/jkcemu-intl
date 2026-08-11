@@ -95,6 +95,7 @@ import jkcemu.file.Downloader;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
 import jkcemu.file.RecentFilesMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.print.PlainTextPrintable;
 import jkcemu.print.PrintOptionsDlg;
 import jkcemu.print.PrintUtil;
@@ -2463,7 +2464,7 @@ public class TextEditFrm extends BaseFrm implements
 
     // Menu Programmierung
     JMenu mnuPrg = GUIFactory.createMenu( "Programmierung" );
-    mnuPrg.setMnemonic( KeyEvent.VK_P );
+    mnuPrg.setMnemonic( LangUtil.mnemonic( "Programmierung", KeyEvent.VK_P ) );
 
     this.mnuPrgCompile = createMenuItemWithDirectAccelerator(
 				"BASIC-Programm compilieren",

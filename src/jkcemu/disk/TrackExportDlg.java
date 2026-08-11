@@ -44,6 +44,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.PopupMenuOwner;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.LogTextActionMngr;
 
 
@@ -391,32 +392,43 @@ public class TrackExportDlg
 	  if( legendCyl || legendHead || legendSize
 	      || legendDel || legendErr || legendBogusID )
 	  {
-	    this.fldLog.append( "\nLegende:\n" );
+	    this.fldLog.append( "\n" );
+	    this.fldLog.append( LangUtil.tr( "Legende:" ) );
+	    this.fldLog.append( "\n" );
 	    if( legendCyl ) {
-	      this.fldLog.append( "  c?:  Spur-Nr. in der Sektor-ID stimmt"
-			+ " nicht mit der physischen Spur \u00FCberein\n" );
+	      this.fldLog.append( LangUtil.tr(
+			"  c?:  Spur-Nr. in der Sektor-ID stimmt"
+				+ " nicht mit der physischen Spur"
+				+ " \u00FCberein\n" ) );
 	    }
 	    if( legendHead ) {
-	      this.fldLog.append( "  h?:  Kopf-Nr. in der Sektor-ID stimmt"
-			+ " nicht mit der physischen Seite \u00FCberein\n" );
+	      this.fldLog.append( LangUtil.tr(
+			"  h?:  Kopf-Nr. in der Sektor-ID stimmt"
+				+ " nicht mit der physischen Seite"
+				+ " \u00FCberein\n" ) );
 	    }
 	    if( legendBogusID ) {
-	      this.fldLog.append( "  r?:  Sektor-ID konnte nicht gelesen"
-			+ " werden und wurde deshalb generiert"
-			+ " (erfunden)\n" );
+	      this.fldLog.append( LangUtil.tr(
+			"  r?:  Sektor-ID konnte nicht gelesen"
+				+ " werden und wurde deshalb generiert"
+				+ " (erfunden)\n" ) );
 	    }
 	    if( legendSize ) {
-	      this.fldLog.append( "  n?:  Gr\u00F6\u00DFe in der Sektor-ID"
-			+ " stimmt nicht mit der realen Sektorgr\u00F6\u00DFe"
-			+ " (Anzahl Bytes) \u00FCberein\n" );
+	      this.fldLog.append( LangUtil.tr(
+			"  n?:  Gr\u00F6\u00DFe in der Sektor-ID"
+				+ " stimmt nicht mit der realen"
+				+ " Sektorgr\u00F6\u00DFe"
+				+ " (Anzahl Bytes) \u00FCberein\n" ) );
 	    }
 	    if( legendDel ) {
-	      this.fldLog.append( "  del: Sektor hat L\u00F6schmarkierung"
-			+ " (Deleted Data Address Mark)\n" );
+	      this.fldLog.append( LangUtil.tr(
+			"  del: Sektor hat L\u00F6schmarkierung"
+				+ " (Deleted Data Address Mark)\n" ) );
 	    }
 	    if( legendErr ) {
-	      this.fldLog.append( "  err: Sektor wurde mit CRC-Fehler"
-			+ " gelesen\n" );
+	      this.fldLog.append( LangUtil.tr(
+			"  err: Sektor wurde mit CRC-Fehler"
+				+ " gelesen\n" ) );
 	    }
 	  }
 	  success        = true;

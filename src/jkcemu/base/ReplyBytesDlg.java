@@ -24,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import jkcemu.lang.LangUtil;
 
 
 public class ReplyBytesDlg extends BaseDlg
@@ -90,7 +91,8 @@ public class ReplyBytesDlg extends BaseDlg
     this.rbHex8 = GUIFactory.createRadioButton(
 					"8-Bit hexadezimale Zahlen",
 					true );
-    this.rbHex8.setMnemonic( KeyEvent.VK_H );
+    this.rbHex8.setMnemonic(
+		LangUtil.mnemonic( "8-Bit hexadezimale Zahlen", KeyEvent.VK_H ) );
     grpType.add( this.rbHex8 );
     gbc.insets.top = 0;
     gbc.gridx      = 0;
@@ -100,13 +102,15 @@ public class ReplyBytesDlg extends BaseDlg
     this.rbLittleEndian = GUIFactory.createRadioButton(
 						"Little Endian",
 						!bigEndian );
-    this.rbLittleEndian.setMnemonic( KeyEvent.VK_L );
+    this.rbLittleEndian.setMnemonic(
+		LangUtil.mnemonic( "Little Endian", KeyEvent.VK_L ) );
     grpOrder.add( this.rbLittleEndian );
     gbc.gridx++;
     add( this.rbLittleEndian, gbc );
   
     this.rbDec8 = GUIFactory.createRadioButton( "8-Bit Dezimalzahlen" );
-    this.rbDec8.setMnemonic( KeyEvent.VK_8 );
+    this.rbDec8.setMnemonic(
+		LangUtil.mnemonic( "8-Bit Dezimalzahlen", KeyEvent.VK_8 ) );
     grpType.add( this.rbDec8 );
     gbc.gridx = 0;
     gbc.gridy++;
@@ -115,26 +119,30 @@ public class ReplyBytesDlg extends BaseDlg
     this.rbBigEndian = GUIFactory.createRadioButton(
 						"Big Endian",
 						bigEndian );
-    this.rbBigEndian.setMnemonic( KeyEvent.VK_B );
+    this.rbBigEndian.setMnemonic(
+		LangUtil.mnemonic( "Big Endian", KeyEvent.VK_B ) );
     grpOrder.add( this.rbBigEndian );
     gbc.gridx++;
     add( this.rbBigEndian, gbc );
   
     this.rbDec16 = GUIFactory.createRadioButton( "16-Bit Dezimalzahlen" );
-    this.rbDec16.setMnemonic( KeyEvent.VK_6 );
+    this.rbDec16.setMnemonic(
+		LangUtil.mnemonic( "16-Bit Dezimalzahlen", KeyEvent.VK_6 ) );
     grpType.add( this.rbDec16 );
     gbc.gridx = 0;
     gbc.gridy++;
     add( this.rbDec16, gbc );
 
     this.rbDec32 = GUIFactory.createRadioButton( "32-Bit Dezimalzahlen" );
-    this.rbDec32.setMnemonic( KeyEvent.VK_3 );
+    this.rbDec32.setMnemonic(
+		LangUtil.mnemonic( "32-Bit Dezimalzahlen", KeyEvent.VK_3 ) );
     grpType.add( this.rbDec32 );
     gbc.gridy++;
     add( this.rbDec32, gbc );
 
     this.rbString = GUIFactory.createRadioButton( "ASCII-Zeichenkette" );
-    this.rbString.setMnemonic( KeyEvent.VK_A );
+    this.rbString.setMnemonic(
+		LangUtil.mnemonic( "ASCII-Zeichenkette", KeyEvent.VK_A ) );
     grpType.add( this.rbString );
     gbc.insets.bottom = 5;
     gbc.gridy++;

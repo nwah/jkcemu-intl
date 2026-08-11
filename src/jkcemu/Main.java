@@ -28,6 +28,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import javax.print.attribute.PrintRequestAttributeSet;
@@ -52,6 +53,7 @@ import jkcemu.disk.DiskImgViewFrm;
 import jkcemu.disk.FloppyDiskStationFrm;
 import jkcemu.etc.ChessboardFrm;
 import jkcemu.image.ImageFrm;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.assembler.CmdLineAssembler;
 import jkcemu.programming.basic.CmdLineBasicCompiler;
 import jkcemu.text.TextEditFrm;
@@ -76,6 +78,7 @@ public class Main
   public static final String PROP_COUNT          = "count";
   public static final String PROP_CURRENT        = "current";
   public static final String PROP_LAF_CLASSNAME  = "jkcemu.laf.classname";
+  public static final String PROP_LANG           = "jkcemu.lang";
   public static final String PROP_PROFILE_NAME   = "jkcemu.profile.name";
   public static final String PROP_SCREEN_HEIGHT  = "jkcemu.screen.height";
   public static final String PROP_SCREEN_WIDTH   = "jkcemu.screen.width";
@@ -135,6 +138,8 @@ public class Main
 	"  --he oder --hexeditor        Hex-Editor starten",
 	"  --iv oder --imageviewer      Bildbetrachter/Bildbearbeitung"
 								+ " starten",
+	"  --lang=<code>                Anzeigesprache festlegen"
+								+ " (z.B. de, en)",
 	"  --te oder --texteditor       Texteditor starten",
 	"" };
 
@@ -158,6 +163,15 @@ public class Main
   private static List<Image>              iconImages        = null;
 
   private static volatile int activeWindowMask = 0;
+
+  /*
+   * true, sobald die Anzeigesprache feststeht (per --lang oder per
+   * applyLangCode(...)), damit sie nicht mehrfach bzw. nachtraeglich
+   * mit niedrigerer Prioritaet ueberschrieben wird.
+   * LangUtil.getLangCode() eignet sich dafuer nicht, da es nie null,
+   * sondern im unkonfigurierten Fall "de" liefert.
+   */
+  private static boolean langCodeResolved = false;
 
 
   public static void main( String[] args )
@@ -220,6 +234,18 @@ public class Main
 	lastDirsFile.renameTo( recentDirsFile );
       }
     }
+
+    /*
+     * Anzeigesprache auswerten
+     *
+     * Die Option --lang wird vorab aus der Argumentliste herausgeloest,
+     * da nachfolgend nur das jeweils erste Argument ausgewertet wird
+     * und sich --lang somit mit den anderen Optionen kombinieren
+     * laesst, z.B. "--lang=en --texteditor".
+     * Ausserdem muss die Sprache feststehen,
+     * bevor GUI-Elemente erzeugt werden.
+     */
+    args = extractLangCode( args );
 
     // Kommenadozeile auswerten
     boolean done    = false;
@@ -521,6 +547,10 @@ public class Main
       catch( IOException ex ) {
 	propsEx = ex;
       }
+
+      // Anzeigesprache festlegen, auch wenn kein Profil geladen werden konnte
+      applyLangCode( props );
+
       final boolean     prfDlgFlag1 = prfDlgFlag;
       final String      prfName1    = prfName;
       final Properties  props1      = props;
@@ -574,30 +604,34 @@ public class Main
     boolean rv = true;
     if( props != null ) {
       if( !EmuUtil.getProperty( props, PROP_VERSION ).equals( VERSION ) ) {
-	String[]    options = new String[] { "Ja", "Nein" };
-	String      title   = APPNAME + "-Profil laden";
+	String[]    options = new String[] {
+				LangUtil.tr( "Ja" ),
+				LangUtil.tr( "Nein" ) };
+	String      title   = LangUtil.tr( "{0}-Profil laden", APPNAME );
 	Window      dlg     = null;
 	JOptionPane pane    = new JOptionPane(
-		"Das zu ladende Profil wurde mit einer anderen "
-			+ APPNAME + "-Version gespeichert,\n"
-			+ "deren Profilformat nicht unbedingt"
-			+ " kompatibel zur dieser Version ist.\n"
-			+ "Es kann somit sein, dass die im Profil"
-			+ " gespeicherten Einstellungen nicht korrekt\n"
-			+ "\u00FCbernommen oder dass in einigen Fenstern"
-			+ " nicht alles richtig angezeigt wird.\n"
-			+ "\nSollte das bei Ihnen der Fall sein, dann"
-			+ " schlie\u00DFen Sie " + APPNAME
-			+ " und starten erneut.\n"
-			+ "Erscheint dabei dieser Dialog, so brechen Sie"
-			+ " ihn bitte ab,\n"
-			+ "damit " + APPNAME + " mit Standardeinstellungen"
-			+ " startet.\n"
-			+ "Anschlie\u00DFend stellen Sie alles nach Ihren"
-			+ " W\u00FCnschen ein und speichern\n"
-			+ "die Einstellungen als Profil erneut ab.\n"
-			+ "\nM\u00F6chten Sie das eventuell inkompatible"
-			+ " Profil jetzt laden?",
+		LangUtil.tr(
+			"Das zu ladende Profil wurde mit einer anderen"
+				+ " {0}-Version gespeichert,\n"
+				+ "deren Profilformat nicht unbedingt"
+				+ " kompatibel zur dieser Version ist.\n"
+				+ "Es kann somit sein, dass die im Profil"
+				+ " gespeicherten Einstellungen nicht korrekt\n"
+				+ "\u00FCbernommen oder dass in einigen Fenstern"
+				+ " nicht alles richtig angezeigt wird.\n"
+				+ "\nSollte das bei Ihnen der Fall sein, dann"
+				+ " schlie\u00DFen Sie {0}"
+				+ " und starten erneut.\n"
+				+ "Erscheint dabei dieser Dialog, so brechen Sie"
+				+ " ihn bitte ab,\n"
+				+ "damit {0} mit Standardeinstellungen"
+				+ " startet.\n"
+				+ "Anschlie\u00DFend stellen Sie alles nach Ihren"
+				+ " W\u00FCnschen ein und speichern\n"
+				+ "die Einstellungen als Profil erneut ab.\n"
+				+ "\nM\u00F6chten Sie das eventuell inkompatible"
+				+ " Profil jetzt laden?",
+			APPNAME ),
 		JOptionPane.WARNING_MESSAGE );
 	pane.setOptions( options );
 	if( owner != null ) {
@@ -921,7 +955,9 @@ public class Main
 	}
 	if( !found ) {
 	  throw new IOException(
-		"Datei ist keine " + APPNAME + "-Profildatei" );
+		LangUtil.tr(
+			"Datei ist keine {0}-Profildatei",
+			APPNAME ) );
 	}
       }
       catch( IOException ex ) {
@@ -1095,6 +1131,78 @@ public class Main
 
 	/* --- private Methoden --- */
 
+  /*
+   * Die Methode legt die Anzeigesprache fest, sofern das nicht bereits
+   * geschehen ist (z.B. durch die Kommandozeilenoption --lang, die
+   * die hoechste Prioritaet hat).
+   * Rangfolge:
+   *   1. --lang (bereits ausgewertet, siehe main(...))
+   *   2. im Profil gespeicherte Sprache
+   *   3. Sprache der JVM-Standard-Locale, sofern dafuer ein Katalog
+   *      existiert
+   *   4. Deutsch (keine Aktion, LangUtil bleibt ohne Sprachcode)
+   */
+  /*
+   * Die Methode entfernt die Option --lang aus der Argumentliste
+   * und stellt die damit angegebene Anzeigesprache ein.
+   * Zurueckgeliefert wird die Argumentliste ohne diese Option.
+   */
+  private static String[] extractLangCode( String[] args )
+  {
+    String[] rv = args;
+    if( args != null ) {
+      List<String> remaining = new ArrayList<>( args.length );
+      for( String arg : args ) {
+	if( (arg != null)
+	    && arg.regionMatches( true, 0, "--lang=", 0, 7 ) )
+	{
+	  String code = arg.substring( 7 ).trim();
+	  if( !code.isEmpty() ) {
+	    LangUtil.setLangCode( code );
+	    langCodeResolved = true;
+	  }
+	} else {
+	  remaining.add( arg );
+	}
+      }
+      rv = remaining.toArray( new String[ remaining.size() ] );
+    }
+    return rv;
+  }
+
+
+  private static void applyLangCode( Properties props )
+  {
+    if( !langCodeResolved ) {
+      langCodeResolved = true;
+      String code = null;
+      if( props != null ) {
+	String s = props.getProperty( PROP_LANG );
+	if( s != null ) {
+	  s = s.trim();
+	  if( !s.isEmpty() ) {
+	    code = s;
+	  }
+	}
+      }
+      if( code == null ) {
+	String jvmLang = Locale.getDefault().getLanguage();
+	if( jvmLang != null ) {
+	  for( String c : LangUtil.getAvailableLangCodes() ) {
+	    if( jvmLang.equalsIgnoreCase( c ) ) {
+	      code = c;
+	      break;
+	    }
+	  }
+	}
+      }
+      if( code != null ) {
+	LangUtil.setLangCode( code );
+      }
+    }
+  }
+
+
   private static File buildProfileFile( String prfName )
   {
     File file = null;
@@ -1168,6 +1276,10 @@ public class Main
       }
     }
     catch( Exception ex ) {}
+
+    // Anzeigesprache festlegen, auch wenn kein Profil geladen werden konnte
+    applyLangCode( properties );
+
     if( !lafDone ) {
       setDefaultLAF();
     }
@@ -1259,14 +1371,16 @@ public class Main
       if( !configDir.mkdirs() ) {
 	BaseDlg.showErrorDlg(
 		screenFrm,
-		"Das Verzeichnis " + configDir.getPath()
-			+ "\nkonnte nicht angelegt werden."
-			+ "\nDadurch ist "
-			+ APPNAME
-			+ " nur mit einigen"
-			+ " Einschr\u00E4nkungen lauff\u00E4hig."
-			+ "\nInsbesondere k\u00F6nnen keine Einstellungen"
-			+ " und Profile gespeichert werden." );
+		LangUtil.tr(
+			"Das Verzeichnis {0}"
+				+ "\nkonnte nicht angelegt werden."
+				+ "\nDadurch ist {1} nur mit einigen"
+				+ " Einschr\u00E4nkungen lauff\u00E4hig."
+				+ "\nInsbesondere k\u00F6nnen keine"
+				+ " Einstellungen und Profile"
+				+ " gespeichert werden.",
+			configDir.getPath(),
+			APPNAME ) );
 	configDir = null;
       }
     }
@@ -1303,16 +1417,19 @@ public class Main
     // ggf. Fehlermeldung, dass das Profil nicht geladen werden konnte
     if( !firstExec && (propsEx != null) && (prfName != null) ) {
       StringBuilder buf = new StringBuilder( 256 );
-      buf.append( "Profil \'" );
-      buf.append( prfName );
-      buf.append( "\' kann nicht geladen werden.\n" );
-      buf.append( APPNAME );
-      buf.append( " wird ohne benutzerdefinierte Einstellungen gestartet" );
+      buf.append( LangUtil.tr(
+		"Profil ''{0}'' kann nicht geladen werden.\n"
+			+ "{1} wird ohne benutzerdefinierte"
+			+ " Einstellungen gestartet",
+		prfName,
+		APPNAME ) );
       String msg = propsEx.getMessage();
       if( msg != null ) {
 	msg = msg.trim();
 	if( !msg.isEmpty() ) {
-	  buf.append( "\n\nDetails:\n" );
+	  buf.append( "\n\n" );
+	  buf.append( LangUtil.tr( "Details:" ) );
+	  buf.append( '\n' );
 	  buf.append( msg );
 	}
       }
@@ -1384,6 +1501,7 @@ public class Main
     }
 
     // sonstiges
+    applyLangCode( props );
     FontMngr.putProperties( props );
     GUIFactory.putProperties( props );
   }

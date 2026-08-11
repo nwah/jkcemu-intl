@@ -1,0 +1,244 @@
+JKCEMU - Terminology glossary (German -> English)
+=================================================
+
+Encoding of this file: UTF-8.
+
+Binding terminology for the translation catalogs in this directory.
+The German terms are written exactly as they appear in the catalogs,
+including umlauts, so that you can search for them.
+
+If you translate into a language other than English, use the English
+column as the reference meaning - it resolves the German terms that are
+ambiguous out of context.
+
+
+1. House rules
+--------------
+
+  - Menus, buttons, tab titles, check boxes, labels: Title Case.
+    "Save As...", "Find Next", "Floppy Disk Station".
+  - Dialog messages and status texts: sentence case, full sentences,
+    keep the final punctuation of the German.
+  - Keep a trailing "..." on any command that opens a further dialog.
+    The German uses this consistently and so does English.
+  - German addresses the user formally ("Sie"). In English use plain
+    "you".  "Möchten Sie ... ?" -> "Do you want to ... ?"
+  - Keep leading and trailing spaces. Several texts are fragments that
+    are joined with other text at runtime.
+  - Keep placeholders {0}, {1} unchanged; see TRANSLATING.txt.
+
+
+2. Terms that are easy to get wrong
+-----------------------------------
+
+These are the ones worth checking twice. The wrong choice is listed so
+you can recognise it.
+
+  Marke               -> label            (assembler label)
+                         NOT "mark", NOT "brand"
+
+  Anweisung           -> statement        in the BASIC compiler
+                      -> instruction      in the assembler
+                         Check the source reference shown by Poedit:
+                         programming/basic/... or programming/assembler/...
+
+  Löschen             -> Delete           for files, entries, images
+                      -> Clear            for a log window or an input field
+
+  Einfügen            -> Paste            in an Edit menu
+                      -> Insert / Add     everywhere else
+
+  Erweiterung         -> extension        for a file name suffix
+                      -> expansion        for a hardware expansion
+
+  Spur                -> track            (floppy disk)
+                         NOT "trace"
+
+  Reassembler         -> Disassembler     the German word is a Germanism;
+                         "Disassembler" is the established English term
+
+  Testmonitor         -> Debugger         the author's older name for it
+
+  Zeichensatz         -> character set    the character ROM of the
+                         emulated machine. Only use "font" where a host
+                         GUI font is meant.
+
+  Symbol              -> icon             in "Große/Kleine Symbole"
+                         (Large/Small Icons)
+
+  Bis Rücksprung      -> Step Out         literally "until return"
+
+  Seite               -> page             both for memory banking and for
+                         help pages
+
+  Anschluss           -> port             hardware
+                      -> connection       network
+
+
+3. Core nouns
+-------------
+
+  Datei               file
+  Dateien             files
+  Dateiname           file name
+  Dateityp            file type
+  Dateiformat         file format
+  Verzeichnis         directory
+  Programm            program
+  Programmdatei       program file
+  Programmcode        program code
+  Quelltext           source code
+  Ausgabedatei        output file
+  Textdatei           text file
+  Zeichen             character
+  Wert                value
+  Inhalt              content
+  Daten               data
+  Bereich             range (memory), area (otherwise)
+  Größe               size
+  Anzahl              count, number of
+  Zahl                number
+  Name                name
+  Fenster             window
+  Einstellungen       Settings
+  Option / Optionen   option / options
+  Profil              profile
+  Vorlage             template
+  Standard            Default
+
+
+4. Addresses, memory, CPU
+-------------------------
+
+  Adresse             address
+  Anfangsadresse      start address
+  Endadresse          end address
+  Speicherabbild      memory image
+  Arbeitsspeicher     main memory
+  Speicherbereich     memory range
+  Befehl              instruction (CPU), command (UI)
+  Sprungziel          jump target
+  Registersatz        register set
+  Interrupt           interrupt
+  Baustein            chip
+
+
+5. Debugger
+-----------
+
+  Haltepunkt          breakpoint
+  Log-Punkt           logpoint
+  Halte-/Log-Punkte   Breakpoints/Logpoints
+  Einzelschritt       single step
+  Variable            variable
+
+
+6. Disks and storage
+--------------------
+
+  Diskette                floppy disk
+  Diskettenstation        Floppy Disk Station
+  Diskettenabbilddatei    disk image file
+  Abbilddatei             image file
+  Sektor                  sector
+  Laufwerk                drive
+  Datenträger             volume
+  Treiber                 driver
+  Modul                   module (KC85 expansion module)
+  Sicherungskopie         backup copy
+
+
+7. Screen, image, sound
+-----------------------
+
+  Bild                image
+  Bildschirmausgabe   Screen Output
+  Farbe / Farben      color / colors     (US spelling throughout)
+  Farbpalette         color palette
+  Kanal               channel
+  Kassette            tape
+  Wiedergabe          Playback
+  Aufnehmen           Record
+
+
+8. Menus and common controls
+----------------------------
+
+  Datei (menu)        File
+  Bearbeiten          Edit
+  Ansicht             View
+  Extra               Extra          (keep - it is the author's menu name)
+  Werkzeuge           Tools
+  Hilfe               Help
+  Beenden             Quit
+  Schließen           Close
+  Öffnen              Open
+  Laden               Load
+  Speichern           Save
+  Speichern unter...  Save As...
+  Übernehmen          Apply
+  Abbrechen           Cancel
+  Zurücksetzen        Reset
+  Auswählen           Select
+  Alles auswählen     Select All
+  Ausschneiden        Cut
+  Kopieren            Copy
+  Hinzufügen          Add
+  Entfernen           Remove
+  Suchen              Find  ("Dateien suchen" -> "Find Files")
+  Weitersuchen        Find Next
+  Rückwärts suchen    Find Previous
+  Suchen und ersetzen Find and Replace
+  Ersetzen            Replace
+  Drucken             Print
+  Werkzeugleiste      Toolbar
+  Statuszeile         Status Bar
+  Zielsystem          target system
+  Tastatur            keyboard
+  Eingabe             input
+  ein / aus           on / off       (lowercase, used inside status text)
+
+
+9. Settings tabs
+----------------
+
+  System              System
+  Geschwindigkeit     Speed
+  Bestätigungen       Confirmations
+  Bildschirmausgabe   Screen Output
+  Schriften/Symbole   Fonts/Icons
+  Fensterskalierung   Window Scaling
+  Erscheinungsbild    Appearance
+  KCNet               KCNet
+  Sonstiges           Miscellaneous
+
+
+10. Message boilerplate
+-----------------------
+
+  Fehler                          Error
+  Ungültig / Ungültige            Invalid
+  Bitte ...                       Please ...
+  Möchten Sie ... ?               Do you want to ... ?
+  ... wird nicht unterstützt.     ... is not supported.
+  ... konnte nicht ... werden.    ... could not be ...
+  Datei nicht gefunden            File not found
+  Datei nicht lesbar              File not readable
+  ... ist nicht möglich.          ... is not possible.
+  ... bereits vergeben            ... already in use
+  Keine / Alle                    None / All
+  Überschreiben                   Overwrite
+  Fortsetzen                      Continue
+
+
+11. Two typos in the German originals
+-------------------------------------
+
+The German source contains two spelling mistakes. Translate them
+correctly; do not reproduce the mistake.
+
+  "Hex-Dateivergeicher"                should be Dateivergleicher
+                                       -> "Hex File Comparator"
+
+  "Statusmeldungen in der Taskleise"   should be Taskleiste
+                                       -> "... in the taskbar"

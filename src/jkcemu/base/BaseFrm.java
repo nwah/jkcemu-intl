@@ -30,6 +30,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class BaseFrm extends JFrame implements
@@ -166,7 +167,7 @@ public class BaseFrm extends JFrame implements
   protected static JMenu createMenuEdit()
   {
     JMenu menu = GUIFactory.createMenu( "Bearbeiten" );
-    menu.setMnemonic( KeyEvent.VK_B );
+    menu.setMnemonic( LangUtil.mnemonic( "Bearbeiten", KeyEvent.VK_B ) );
     return menu;
   }
 
@@ -174,7 +175,7 @@ public class BaseFrm extends JFrame implements
   protected static JMenu createMenuFile()
   {
     JMenu menu = GUIFactory.createMenu( "Datei" );
-    menu.setMnemonic( KeyEvent.VK_D );
+    menu.setMnemonic( LangUtil.mnemonic( "Datei", KeyEvent.VK_D ) );
     return menu;
   }
 
@@ -182,7 +183,7 @@ public class BaseFrm extends JFrame implements
   protected static JMenu createMenuHelp()
   {
     JMenu menu = GUIFactory.createMenu( "Hilfe" );
-    menu.setMnemonic( KeyEvent.VK_H );
+    menu.setMnemonic( LangUtil.mnemonic( "Hilfe", KeyEvent.VK_H ) );
     return menu;
   }
 
@@ -190,7 +191,8 @@ public class BaseFrm extends JFrame implements
   public static JMenu createMenuSettings()
   {
     JMenu menu = GUIFactory.createMenu( EmuUtil.TEXT_SETTINGS );
-    menu.setMnemonic( KeyEvent.VK_E );
+    menu.setMnemonic(
+		LangUtil.mnemonic( EmuUtil.TEXT_SETTINGS, KeyEvent.VK_E ) );
     return menu;
   }
 
@@ -525,6 +527,13 @@ public class BaseFrm extends JFrame implements
       int       y      = (screenSize.height - mySize.height) / 2;
       setLocation( x >= 0 ? x : 0, y >= 0 ? y : 0 );
     }
+  }
+
+
+  @Override
+  public void setTitle( String title )
+  {
+    super.setTitle( LangUtil.tr( title ) );
   }
 
 
