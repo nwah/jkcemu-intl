@@ -69,7 +69,7 @@ import jkcemu.tools.hexedit.HexEditFrm;
 public class Main
 {
   public static final String APPNAME   = "JKCEMU";
-  public static final String VERSION   = "0.9.9";
+  public static final String VERSION   = "0.9.10";
   public static final String APPINFO   = APPNAME + " Version " + VERSION;
   public static final String COPYRIGHT = "(c) 2008-2026 Jens M\u00FCller";
 
