@@ -27,6 +27,7 @@ import jkcemu.disk.FloppyDiskDrive;
 import jkcemu.disk.GIDE;
 import jkcemu.emusys.customsys.CustomSysROM;
 import jkcemu.etc.K1520Sound;
+import jkcemu.lang.LangUtil;
 import jkcemu.net.KCNet;
 import jkcemu.text.CharConverter;
 import jkcemu.text.TextUtil;
@@ -726,9 +727,13 @@ public class CustomSys
   @Override
   public void appendStatusHTMLTo( StringBuilder buf, Z80CPU cpu )
   {
-    buf.append( "<h1>Benutzerdefinierter Computer</h1>\n"
+    buf.append( "<h1>" );
+    buf.append( LangUtil.tr( "Benutzerdefinierter Computer" ) );
+    buf.append( "</h1>\n"
 	+ "<table border=\"1\">\n"
-	+ "<tr><td>Bezeichnung:</td><td>" );
+	+ "<tr><td>" );
+    buf.append( LangUtil.tr( "Bezeichnung:" ) );
+    buf.append( "</td><td>" );
     EmuUtil.appendHTML( buf, this.title );
     buf.append( "</td></tr>\n" );
     for( CustomSysROM rom : this.roms ) {

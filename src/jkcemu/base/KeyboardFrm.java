@@ -18,6 +18,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JSeparator;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class KeyboardFrm extends BaseFrm
@@ -253,9 +254,10 @@ public class KeyboardFrm extends BaseFrm
   {
     String kbName = this.keyboardFld.getKeyboardName();
     if( kbName != null ) {
-      setTitle( String.format( "JKCEMU: %s", kbName ) );
+      setTitle( LangUtil.tr( "JKCEMU" ) + ": " + kbName );
     } else {
-      setTitle( String.format( "JKCEMU: %s Tastatur", emuSys.getTitle() ) );
+      setTitle( LangUtil.tr(
+			"JKCEMU: {0} Tastatur", emuSys.getTitle() ) );
     }
     boolean state = this.keyboardFld.hasShiftKeys();
     this.mnuHoldShiftBtn.setVisible( state );

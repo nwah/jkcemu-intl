@@ -114,10 +114,10 @@
   Functions whose name ends with a $ character
   return a string.
   All others have a numeric return value,
-  whose data type is given in the
-  <em>Return</em> row of the respective table.
+  whose data type is given in the respective table
+  in the <em>Return</em> row.
   System variables whose name ends with a $ character
-  contain a string, all others an Integer value.
+  contain a string, all others an integer value.
  <br/><br/>
 
  <h3><a name="func_args">2. Arguments</a></h3>
@@ -130,16 +130,16 @@
 
  <h3><a name="sys_vars">3. System Variables</a></h3>
   System variables behave like functions without arguments.
-  They can be read, but not written to directly.
+  They can be read but not written to directly.
   System variables are set by the system.
   Some can also be set with the help of special statements
   (e.g. <a href="functions.htm#xpos">XPOS</a> and
-  <a href="functions.htm#ypos">YPOS</a> by the
+  <a href="functions.htm#ypos">YPOS</a> via the
   <a href="instructions.htm#move">MOVE</a> statement).
  <br/><br/>
-  Since system variables behave like functions from the
-  software developer's point of view, they are listed and described
-  here in the function overview.
+  Since system variables behave like functions from the software
+  developer's point of view, they are listed and described here
+  in the function overview.
  <br/><br/>
 
  <h3>
@@ -158,22 +158,22 @@
   approximation method.
   For this reason, and because of the limited accuracy
   of the <a href="datatypes.htm#single">Single</a> data type,
-  these functions usually do not return the mathematically exact result,
-  but a value that comes very close to it.
+  these functions usually do not deliver the mathematically exact result,
+  but rather a value that comes very close to it.
   As a rule, the accuracy is 6&nbsp;decimal places,
   which also corresponds to the accuracy with which values of the
   Single data type are displayed.
   However, this accuracy cannot be guaranteed in every case.
-  Especially at the edges of the range, e.g. with very small
+  Especially at the boundaries, e.g. for very small
   or very large numbers or near zero crossings,
   the accuracy can be lower.
  <br/><br/>
   For the trigonometric functions,
   which expect an angle in radians as their argument,
-  the accuracy also decreases if the angle lies outside the
-  normal range of 0 to 2&pi;
+  the accuracy also degrades if the angle
+  lies outside the normal range of 0 to 2&pi;
   (especially if it lies far outside that range),
-  since the angle first has to be converted into that range.
+  since it must first be converted back into that range.
  <br/><br/>
 
  <h3>
@@ -195,7 +195,7 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#atn"><tt>ATN</tt></a></td>
-    <td>calculate the arc tangent</td>
+    <td>calculate arc tangent</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#bin$"><tt>BIN$</tt></a></td>
@@ -219,15 +219,15 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#cos"><tt>COS</tt></a></td>
-    <td>calculate the cosine</td>
+    <td>calculate cosine</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#crslin"><tt>CRSLIN</tt></a></td>
-    <td>determine the current line the cursor is in</td>
+    <td>determine the current line the cursor is positioned on</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#crspos"><tt>CRSPOS</tt></a></td>
-    <td>determine the current column the cursor is in</td>
+    <td>determine the current column the cursor is positioned on</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#csng"><tt>CSNG</tt></a></td>
@@ -235,7 +235,7 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#datetime$"><tt>DATETIME$</tt></a></td>
-    <td>generate a string with the current date and/or time</td>
+    <td>create a string with the current date and/or time</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#decval"><tt>DECVAL</tt></a></td>
@@ -243,7 +243,7 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#deek"><tt>DEEK</tt></a></td>
-    <td>read a 16-bit value (2&nbsp;bytes) from memory</td>
+    <td>read a 16-bit value (2&nbsp;bytes) from main memory</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#div10"><tt>DIV10</tt></a></td>
@@ -268,7 +268,7 @@
    <tr valign="top">
     <td><a href="functions.htm#exp"><tt>EXP</tt></a></td>
     <td>
-     exponential function with base&nbsp;e (Euler's number 2.718282):
+     exponential function to the base&nbsp;e (Euler's number 2.718282):
      e<sup>x</sup>
     </td>
    </tr>
@@ -295,8 +295,7 @@
    <tr valign="top">
     <td><a href="functions.htm#h_char"><tt>H_CHAR</tt></a></td>
     <td>
-     determine the screen height in character positions
-     (number of text lines)
+     determine the screen height in character positions (number of text lines)
     </td>
    </tr>
    <tr valign="top">
@@ -309,7 +308,7 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#inkey$"><tt>INKEY$</tt></a></td>
-    <td>query the keyboard status</td>
+    <td>query keyboard status</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#in"><tt>INP</tt></a></td>
@@ -343,11 +342,11 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#joyst"><tt>JOYST</tt></a></td>
-    <td>query the joystick</td>
+    <td>query joystick</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#lcase$"><tt>LCASE$</tt></a></td>
-    <td>convert a string into lowercase letters</td>
+    <td>convert a string to lowercase letters</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#left$"><tt>LEFT$</tt></a></td>
@@ -371,7 +370,7 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#lower$"><tt>LOWER$</tt></a></td>
-    <td>convert a string into lowercase letters</td>
+    <td>convert a string to lowercase letters</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#lobyte"><tt>LOWORD</tt></a></td>
@@ -387,7 +386,7 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#memstr$"><tt>MEMSTR$</tt></a></td>
-    <td>access a string located in memory</td>
+    <td>access a string located in main memory</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#mid$"><tt>MID$</tt></a></td>
@@ -415,7 +414,7 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#peek"><tt>PEEK</tt></a></td>
-    <td>read an 8-bit value (1&nbsp;byte) from memory</td>
+    <td>read an 8-bit value (1&nbsp;byte) from main memory</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#point"><tt>POINT</tt></a></td>
@@ -423,11 +422,11 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#pos"><tt>POS</tt></a></td>
-    <td>determine the current column the cursor is in</td>
+    <td>determine the current column the cursor is positioned on</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#pow"><tt>POW</tt></a></td>
-    <td>exponential function for any base: x<sup>y</sup></td>
+    <td>exponential function to an arbitrary base: x<sup>y</sup></td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#ptest"><tt>PTEST</tt></a></td>
@@ -459,7 +458,7 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#sin"><tt>SIN</tt></a></td>
-    <td>calculate the sine</td>
+    <td>calculate sine</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#sngval"><tt>SNGVAL</tt></a></td>
@@ -467,7 +466,7 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#space$"><tt>SPACE$</tt></a></td>
-    <td>generate a string filled with spaces</td>
+    <td>create a string filled with spaces</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#sqr"><tt>SQR</tt></a></td>
@@ -487,7 +486,7 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#tan"><tt>TAN</tt></a></td>
-    <td>calculate the tangent</td>
+    <td>calculate tangent</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#trim$"><tt>TRIM$</tt></a></td>
@@ -499,11 +498,11 @@
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#ucase$"><tt>UCASE$</tt></a></td>
-    <td>convert a string into uppercase letters</td>
+    <td>convert a string to uppercase letters</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#ucase$"><tt>UPPER$</tt></a></td>
-    <td>convert a string into uppercase letters</td>
+    <td>convert a string to uppercase letters</td>
    </tr>
    <tr valign="top">
     <td><a href="functions.htm#usr"><tt>USR</tt></a></td>
@@ -520,8 +519,7 @@
    <tr valign="top">
     <td><a href="functions.htm#w_char"><tt>W_CHAR</tt></a></td>
     <td>
-     determine the screen width in character positions
-     (number of text columns)
+     determine the screen width in character positions (number of text columns)
     </td>
    </tr>
    <tr valign="top">
@@ -543,9 +541,8 @@
   <a name="func_descr">6. Description of the Functions and System Variables</a>
  </h3>
   Elements enclosed in angle brackets serve as placeholders
-  and must be replaced accordingly.
+  and are to be replaced accordingly.
  <br/><br/>
-
  <h3><a name="abs">ABS</a></h3>
   <table border="1">
    <tr valign="top">
@@ -558,12 +555,12 @@
    </tr>
    <tr>
     <td>Return:</td>
-    <td>same type as the value passed</td>
+    <td>same type as the value passed in</td>
    </tr>
   </table>
  <br/>
    The function returns the absolute value
-   of the value passed.
+   of the value passed in.
  <br/><br/>
 
  <h3><a name="asc">ASC</a></h3>
@@ -577,7 +574,7 @@
   </table>
  <br/>
    The function returns the code of the first character
-   in the string passed.
+   in the string passed in.
    If the string is empty, 0 is returned.
  <br/><br/>
 
@@ -599,14 +596,14 @@
   Unlike the <a href="instructions.htm#asm">ASM</a> statement,
   the ASM function returns the value in the HL register
   to the BASIC program.
-  In combination with the <a href="functions.htm#memstr$">MEMSTR$</a>
-  function, strings generated in your own assembler routines
-  can also be returned to the BASIC program.
+  Combined with the <a href="functions.htm#memstr$">MEMSTR$</a> function,
+  it can also be used to return strings created in
+  your own assembler routines to the BASIC program.
  <br/><br/>
   The example shows a possible use of the ASM function
   in combination with <a href="functions.htm#usr">USR</a>,
-  as a way of passing a parameter to the assembler routine
-  and having it return a numeric value:
+  in order to pass a parameter to the assembler routine this way
+  and have it return a numeric value:
  <br/>
   <tt>
    &#10;<br/>
@@ -635,7 +632,7 @@
    ASM DATA "mein_string: DB 'ABC',0"&#10;<br/>
   </tt>
  <br/>
-  <b>Caution!</b> Please read the notes on
+  <b>Attention!</b> Please read the notes on
   <a href="userasm.htm">including your own assembler source code</a>!
  <br/><br/>
 
@@ -655,8 +652,8 @@
    </tr>
   </table>
  <br/>
-  The function calculates the arc tangent of the value passed.
-  Please also read the notes on
+  The function calculates the arc tangent of the value passed in.
+  Please also read the notes on the
   <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
  <br/><br/>
 
@@ -675,23 +672,23 @@
    <tr><td>Return:</td><td>String</td></tr>
   </table>
  <br/>
-  The function BIN$ generates a string
-  that represents the value passed as a binary number.
-  Negative values are represented in two's complement.
+  The BIN$ function creates a string
+  that represents the value passed in as a binary number.
+  Negative values are represented as two's complement.
   If the second argument is omitted,
-  the generated string is 16&nbsp;characters long for an Integer value
+  the string created is 16 characters long for an Integer value
   and 32&nbsp;characters long for a Long value.
  <br/><br/>
-  The optional second argument can be used to specify the length
-  of the binary number to be generated.
+  With the optional second argument, the length
+  of the binary number to be created can be specified.
   Possible values are 0 to 16 for an Integer expression
   and 0 to 32 for a Long expression.
-  With a value of 0, the binary number is generated without
-  leading zeros, with as many digits as are needed
-  to represent the value completely.
+  With a value of 0, the binary number is created without leading zeros,
+  using as many digits as are necessary to represent the value
+  in full.
   With a digit count greater than&nbsp;0, the binary number has
   as many digits as specified,
-  starting from the right, i.e. with the least significant digits.
+  counted from the right, i.e. starting with the least significant digits.
  <br/><br/>
 
  <h3><a name="cdec">CDEC</a></h3>
@@ -707,9 +704,9 @@
     <td>Decimal</td>
   </table>
  <br/>
-  The function converts the value passed into a Decimal value.
+  The function converts the value passed in into a Decimal value.
   If the conversion is not possible,
-  e.g. because the magnitude of the value passed is too large,
+  e.g. because the magnitude of the value passed in is too large,
   the program aborts with an overflow error.
  <br/><br/>
 
@@ -725,16 +722,16 @@
    <tr><td>Return:</td><td>String</td></tr>
   </table>
  <br/>
-  The function CHR$ generates a string
+  The CHR$ function creates a string
   consisting of only the one character
-  that corresponds to the character code passed
-  (usually the&nbsp;ASCII code).
-  If the value&nbsp;0 is passed, the returned
-  string is empty.
+  that corresponds to the character code passed in
+  (usually&nbsp;an ASCII code).
+  If the value&nbsp;0 is passed in, the string returned
+  is empty.
  <br/><br/>
-  <b>Caution!</b> With the statements
+  <b>Attention!</b> With the
   <a href="instructions.htm#print">PRINT</a> and
-  <a href="instructions.htm#lprint">LPRINT</a>, <tt>CHR$(0)</tt>
+  <a href="instructions.htm#lprint">LPRINT</a> statements, <tt>CHR$(0)</tt>
   outputs a null byte.
  <br/><br/>
 
@@ -751,7 +748,7 @@
     <td>Integer</td>
   </table>
  <br/>
-  The function converts the integer part of the value passed
+  The function converts the integer part of the value passed in
   into an Integer value.
   The fractional part is lost in the process.
   If the conversion is not possible because the magnitude is too large,
@@ -771,7 +768,7 @@
     <td>Long</td>
   </table>
  <br/>
-  The function converts the integer part of the value passed
+  The function converts the integer part of the value passed in
   into a Long value.
   The fractional part is lost in the process.
   If the conversion is not possible because the magnitude is too large,
@@ -796,13 +793,13 @@
  <br/>
   The function calculates the cosine of the angle,
   which must be given in radians.
-  Please also read the notes on
+  Please also read the notes on the
   <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
  <br/><br/>
 
  <h3><a name="crslin">CRSLIN</a></h3>
   This system variable contains the current line number
-  the cursor is in, starting at 0.
+  on which the cursor is positioned, starting at 0.
   If the cursor is outside the visible area, or
   the target system does not support reading the cursor position,
   the variable contains the value&nbsp;-1.
@@ -810,14 +807,14 @@
 
  <h3><a name="crspos">CRSPOS</a></h3>
   This system variable contains the current column number
-  the cursor is in, starting at 0.
+  on which the cursor is positioned, starting at 0.
   If the cursor is outside the visible area, or
   the target system does not support reading the cursor position,
   the variable contains the value&nbsp;-1.
  <br/><br/>
   The system variable provides the same information as the function
-  <a href="functions.htm#pos">POS</a> and is included for reasons
-  of name analogy with <a href="functions.htm#crslin">CRSLIN</a>.
+  <a href="functions.htm#pos">POS</a> and is included for the sake of
+  naming symmetry with <a href="functions.htm#crslin">CRSLIN</a>.
  <br/><br/>
 
  <h3><a name="csng">CSNG</a></h3>
@@ -833,7 +830,7 @@
     <td>Single</td>
   </table>
  <br/>
-  The function converts the value passed into a Single value.
+  The function converts the value passed in into a Single value.
  <br/><br/>
 
  <h3><a name="datetime$">DATETIME$</a></h3>
@@ -851,18 +848,18 @@
    </tr>
   </table>
  <br/>
-  The function DATETIME$ returns a string
+  The DATETIME$ function returns a string
   with the current date and/or the current time.
-  You specify the appearance of the string with a format string.
-  In the format string, certain letters or groups of letters
+  You determine the appearance of the string with a format string.
+  In the format string, certain letters or letter groups
   serve as placeholders for the individual elements of the date
-  or the time.
-  The returned string corresponds to the format string,
+  and/or the time.
+  The string returned corresponds to the format string,
   with the placeholders replaced accordingly.
  <br/><br/>
   The placeholders can be written in either upper or lower case.
   All characters that are not placeholders are copied unchanged
-  into the returned string.
+  into the string returned.
  <br/><br/>
   The following placeholders are possible:
  <br/><br/>
@@ -886,19 +883,20 @@
  <br/><br/>
   <tt>
    PRINT "Heute ist der ";DATETIME$("D.MM.YYYY.")&#10;<br/>
-   PRINT "Datum heute:  ";DATETIME$("DD.MM.YYYY")&#10;<br/>
-   PRINT "Akt. Zeit:    ";DATETIME$("H:MI:SS")&#10;<br/>
-   PRINT "Datum / Zeit: ";DATETIME$("YYYY-MM-DD HH:MI:SS")&#10;<br/>
+   PRINT "Date today:   ";DATETIME$("DD.MM.YYYY")&#10;<br/>
+   PRINT "Current time: ";DATETIME$("H:MI:SS")&#10;<br/>
+   PRINT "Date / time:  ";DATETIME$("YYYY-MM-DD HH:MI:SS")&#10;<br/>
   </tt>
  <br/>
-  <b>Caution:</b> The function can only return a meaningful string
+  <b>Attention:</b> The function can only return a meaningful string
   if the computer on which the compiled BASIC program is running
   also has a clock.
-  By default, an attempt is made to read the date and time
-  from the real-time clock of a connected GIDE.
+  By default, the function tries to read the date and time
+  from the real-time clock
+  of a connected GIDE.
   If no GIDE is connected, or the
-  <a href="targets.htm">target system</a> supports neither a GIDE
-  nor any other way of reading the system time,
+  <a href="targets.htm">target system</a> supports neither a GIDE nor
+  any other way of reading the system time,
   an empty string is returned.
  <br/><br/>
 
@@ -917,7 +915,7 @@
    </tr>
   </table>
  <br/>
-  The function DECVAL attempts to read the contents of a string
+  The DECVAL function tries to read the content of a string
   as a number and returns its numeric value as a Decimal
   value.
   The function sets the error variables
@@ -940,28 +938,27 @@
      The number could be read, but contains too many
      decimal places that do not fit into the Decimal data type.
      These decimal places were truncated, i.e.
-     the returned value does not exactly correspond
-     to the number in the string passed.
+     the value returned does not exactly correspond to
+     the number in the string passed in.
     </td>
    </tr>
    <tr>
     <td valign="top"><a href="constants.htm#error">E_INVALID</a></td>
     <td>
-     invalid characters read,
+     invalid characters encountered,
      return value is&nbsp;0
     </td>
    </tr>
    <tr>
     <td valign="top"><a href="constants.htm#error">E_OVERFLOW</a></td>
     <td>
-     numeric overflow, i.e. the number has too many digits
-     before the decimal point,
-     return value is&nbsp;0
+     numeric overflow, i.e. the number has too many digits before the
+     decimal point, return value is&nbsp;0
     </td>
    </tr>
   </table>
  <br/>
-  For converting a string into another numeric data type,
+  For converting a string into a different numeric data type,
   there are the functions
   <a href="functions.htm#intval">INTVAL</a>
   (identical to <a href="functions.htm#val">VAL</a>),
@@ -981,9 +978,9 @@
    <tr><td>Return:</td><td>Integer</td></tr>
   </table>
  <br/>
-  The function reads two consecutive bytes from memory
+  The function reads two consecutive bytes from main memory
   starting at the specified address and returns them as a 16-bit value.
-  The first byte is the least significant.
+  The first byte is the low-order one.
  <br/><br/>
 
  <h3><a name="div10">DIV10</a></h3>
@@ -1002,7 +999,7 @@
   by shifting the decimal point one place to the left.
   That is exactly what the function <tt>DIV10</tt> does.
   This makes it considerably faster than dividing by&nbsp;10
-  using the division operator.
+  with the division operator.
   Since this fast division is only possible with decimal numbers,
   the function can only be used with the
   <a href="datatypes.htm#decimal">Decimal</a> data type.
@@ -1019,7 +1016,7 @@
    </tr>
    <tr>
     <td>Return:</td>
-    <td>same data type that was passed</td>
+    <td>same data type that was passed in</td>
    </tr>
   </table>
  <br/>
@@ -1051,34 +1048,33 @@
   </table>
  <br/>
   The function tests
-  whether the end of the input channel or file has been reached.
-  This sets the error variables&nbsp;<a href="functions.htm#err">ERR</a>
-  and <a href="functions.htm#err$">ERR$</a>.
+  whether the end of the input channel or the file has been reached.
+  In doing so, the error variables&nbsp;<a href="functions.htm#err">ERR</a>
+  and <a href="functions.htm#err$">ERR$</a> are set.
  <br/><br/>
   For files, the function only reliably returns
   <a href="constants.htm#boolean">TRUE</a>
   once an attempt has been made to read past the end of the file.
  <br/><br/>
-
  <h3><a name="err">ERR</a></h3>
   The system variable ERR contains the last error code.
   The value&nbsp;0 (constant&nbsp;E_OK) means
-  that no error occurred in the last statement or function
+  that no error occurred during the last statement or function
   that affects the error variable.
-  A value other than&nbsp;0 stands for an error.
-  <a href="constants.htm#error">Error code constants</a> are available
-  for evaluating the ERR&nbsp;system variable.
+  A value other than&nbsp;0 indicates an error.
+  For evaluating the error variable&nbsp;ERR, there are
+  <a href="constants.htm#error">error code constants</a>.
  <br/><br/>
-  The ERR system variable is reset at the beginning of each BASIC
-  statement in which the system variable is itself set or affected
-  by the statement or by function calls.
-  This ensures that no error condition is lost even when
-  several function calls within one statement affect the error variable.
+  The ERR system variable is reset at the beginning of every BASIC
+  statement in which the system variable is set or affected
+  by the statement itself or by function calls.
+  This ensures that no error state is lost even if several
+  function calls within one statement affect the error variable.
   The following example illustrates this:
  <br/><br/>
   <tt>
    OPEN #1,"datei.dat"&#10;<br/>
-   ...:REM Pruefen, ob Oeffnen der Datei erfolgreich war&#10;<br/>
+   ...:REM Check whether opening the file succeeded&#10;<br/>
    PRINT "Hex=";HEX$(VAL(INPUT$(5,#1));" Text=";INPUT$(10,#1)&#10;<br/>
    IF ERR THEN&#10;<br/>
    &nbsp;&nbsp;PRINT ERR$&#10;<br/>
@@ -1094,70 +1090,69 @@
   <ol>
    <li>The first data field is read from the file as a string.</li>
    <li>
-    The string that was read is converted into a numeric value.
+    The string read is converted into a numeric value.
    </li>
    <li>
     This value is converted into a hexadecimal number
-    and output on the screen.
+    and output to the screen.
    </li>
    <li>
     The second data field is read from the file and output.
    </li>
   </ol>
  <br/>
-  Both read operations, as well as the conversion into a
+  Both of the read operations, as well as the conversion into a
   numeric value, can fail and affect the ERR variable.
   If, for example, the first data field contained something
   that cannot be interpreted as a number,
-  the VAL function sets the ERR system variable.
-  If the subsequent reading of the second data field
-  is then successful, the error information from the VAL function
-  should nevertheless not be lost.
-  And that is exactly what is ensured by resetting the ERR
-  system variable only at the beginning of the relevant statement.
+  the VAL function would set the ERR system variable.
+  If the subsequent reading of the second data field then
+  succeeds, the error information from the VAL function
+  must not be lost.
+  And that is exactly what is ensured by resetting the ERR system
+  variable only at the beginning of the relevant statement.
   In the example above, the ERR variable (apart from at program start)
   is reset to&nbsp;zero only at the beginning of the first PRINT statement.
-  Since the subsequent IF statement only reads the ERR variable
-  and does not set it, no reset takes place there,
-  and, as intended, you read
+  Since the following IF statement only reads the ERR variable and does not
+  set it, no reset takes place there, and, as desired, you read
   the error information from the preceding statement.
  <br/><br/>
   Another case where this behavior is important
   is calculations with the
   <a href="datatypes.htm#decimal">DECIMAL</a> data type.
   You can safely perform several individual
-  DECIMAL calculations within one statement and then test
+  DECIMAL calculations within one statement and afterward test
   whether decimal places were truncated in the process
   (<tt>IF ERR=E_DIGITS_TRUNCATED THEN ...</tt>).
-  If the result had to be shortened in one of the calculations,
+  If the result had to be truncated in any one of the calculations,
   the ERR system variable is guaranteed to be set accordingly,
-  even if subsequent DECIMAL calculations within the same statement
+  even if subsequent DECIMAL calculations in the same statement
   completed correctly.
  <br/><br/>
-  <b>Caution!</b> The fact that the ERR system variable is reset
-  at the beginning of the relevant statement must be taken into account
+  <b>Attention!</b> The resetting of the ERR system variable
+  at the beginning of the relevant statement must be kept in mind
   when reading it.
-  If the ERR variable is both read and set within one statement,
-  the error information from the preceding
+  If, within one statement, the ERR variable is both read
+  and set, the error information from the preceding
   statement is lost.
   The statements in a THEN or ELSE branch of an IF
-  or ELSEIF statement count as separate statements in this respect,
+  or ELSEIF statement are considered separate statements in this regard,
   i.e. you can safely evaluate the error status
   of the preceding statement in the condition
   of an IF or ELSEIF statement
   and then use statements in the THEN or ELSE branch
-  that affect the ERR system variable again.
+  that again affect the ERR system variable.
  <br/><br/>
 
  <h3><a name="err$">ERR$</a></h3>
   The system variable ERR$ contains the last error text.
-  In combination with the system variable&nbsp;ERR,
-  error handling can be implemented quite simply
-  and still conveniently for the user, e.g.:
+  Combined with the system variable&nbsp;ERR,
+  error handling can be made quite simple while still being
+  comfortable for the user, e.g.:
  <br/>
   <tt>
    &#10;<br/>
-   ...:'Funktion oder Anweisung, die die Fehlervariablen setzt&#10;<br/>
+   ...:'Function or statement that sets the error variables&#10;<br/>
    IF ERR THEN&#10;<br/>
    &nbsp;&nbsp;PRINT ERR$&#10;<br/>
    ELSE&#10;<br/>
@@ -1165,16 +1160,16 @@
    ENDIF&#10;<br/>
   </tt>
  <br/>
-  <b>Caution!</b> If you use the system variable&nbsp;ERR$,
+  <b>Attention!</b> If you use the system variable&nbsp;ERR$,
   the compiled program becomes correspondingly larger,
   since all error messages that can occur
   also have to be compiled into the program.
-  If you are aiming for as small a program as possible
+  If you want as small a program as possible
   and can do without the detailed error texts,
   you should evaluate only the error code variable&nbsp;ERR
   and not use ERR$.
  <br/><br/>
-  <b>Caution!</b> Regarding the resetting of the system variable&nbsp;ERR$,
+  <b>Attention!</b> Regarding the resetting of the system variable&nbsp;ERR$,
   the same applies as for the system variable
   <a href="functions.htm#err">ERR</a>.
  <br/><br/>
@@ -1196,11 +1191,11 @@
  <br/>
   The function EXP is the exponential function with base&nbsp;e
   (see constant <a href="constants.htm#math">EULER</a>)
-  and is thus the inverse function of the natural logarithm
+  and thus forms the inverse function of the natural logarithm
   (see function <a href="functions.htm#ln">LN</a>).
-  For exponentiation with any base,
+  For exponentiation with an arbitrary base,
   there is the function <a href="functions.htm#pow">POW</a>.
-  Please also read the notes on
+  Please also read the notes on the
   <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
  <br/><br/>
 
@@ -1214,11 +1209,11 @@
    </tr>
    <tr>
     <td>Return:</td>
-    <td>same data type that was passed</td>
+    <td>same data type that was passed in</td>
    </tr>
   </table>
  <br/>
-  The function returns the integer part of the value passed,
+  The function returns the integer part of the value passed in,
   i.e. the part before the decimal point.
  <br/><br/>
 
@@ -1233,51 +1228,51 @@
    <tr><td>Value:</td><td>numeric expression</td></tr>
    <tr>
     <td>Return:</td>
-    <td>same data type that was passed</td>
+    <td>same data type that was passed in</td>
    </tr>
   </table>
  <br/>
   The function returns the fractional part
-  of the value passed.
+  of the value passed in.
   The result is always greater than or equal to zero,
-  even if the value passed is less than zero.
+  even if the value passed in is less than zero.
  <br/><br/>
-  <b>Caution!</b> If you pass the function a Single value
-  and output both the value passed and the result on the
+  <b>Attention!</b> If you pass a Single value to the function
+  and output both the value passed in and the result to the
   screen, the decimal digits shown for the two numbers
-  may differ.
-  This is because the binary stored values do not necessarily
-  correspond exactly to the displayed or entered decimal numbers
-  (see approximate values under the
-  <a href="datatypes.htm#single">Single</a> data type), and these
-  values are rounded to 6&nbsp;decimal places when output.
+  can differ.
+  This is because the values stored in binary do not necessarily
+  correspond exactly to the decimal numbers displayed or entered
+  (see the approximated values for the
+  <a href="datatypes.htm#single">Single</a> data type), and these values
+  are rounded to 6&nbsp;decimal places for output.
  <br/><br/>
   Example:
  <br/><br/>
   <tt>PRINT FRAC(654.321)</tt>
  <br/><br/>
   Mathematically, the example should return 0.321,
-  but 0.320984 is displayed.
+  but 0.320984 is displayed instead.
   This is because the number 654.321 cannot be stored exactly
-  as such using the Single data type,
-  and the resulting error component is magnified enough
-  by separating out the fractional part and converting it
-  into a new floating-point number
-  that it becomes visible in the output.
-  The FRAC function in combination with the Single data type
-  is therefore intended primarily for internal calculations.
-  So
+  as such with the Single data type,
+  and the resulting error component is magnified during the
+  separation of the fractional part and its conversion into a new
+  floating-point number, to the point where it becomes
+  visible in the output.
+  The FRAC function used with the Single data type
+  is therefore intended mainly for internal calculations.
+  For example,
  <br/><br/>
   <tt>PRINT FIX(654.321)+FRAC(654.321)</tt>
  <br/><br/>
   again yields the value 654.321
   (<a href="functions.htm#fix">FIX</a> returns the integer part).
-  The following program shows
-  that the split into an integer and a fractional part is numerically exact.
+  With the following program you can see
+  that the separation into integer and fractional parts is numerically exact.
   To remove all doubt, the integer part is converted with
   <a href="functions.htm#cint">CINT</a> into an Integer value
-  and then with <a href="functions.htm#csng">CSNG</a>
-  back into a Single value.
+  and then back into a Single value with
+  <a href="functions.htm#csng">CSNG</a>.
  <br/><br/>
   <tt>
    DIM A AS SINGLE&#10;<br/>
@@ -1292,7 +1287,7 @@
   With the <a href="datatypes.htm#decimal">Decimal</a> data type,
   this effect does not occur,
   since the values are stored numerically exactly.
-  So
+  For example,
  <br/><br/>
   <tt>PRINT FRAC(654.321D)</tt>
  <br/><br/>
@@ -1316,23 +1311,23 @@
    <tr><td>Return:</td><td>String</td></tr>
   </table>
  <br/>
-  The function HEX$ generates a string
-  that represents the value passed as a hexadecimal number.
-  Negative values are represented in two's complement.
+  The function HEX$ creates a string
+  that represents the value passed in as a hexadecimal number.
+  Negative values are represented as two's complement.
   If the second argument is omitted,
-  the generated string is four characters long for an Integer value
+  the string created is four characters long for an Integer value
   and eight characters long for a Long value.
  <br/><br/>
-  The optional second argument can be used to specify the length
-  of the hexadecimal number to be generated.
+  With the optional second argument, the length
+  of the hexadecimal number to be created can be specified.
   Possible values are 0 to 4 for an Integer expression
   and 0 to 8 for a Long expression.
-  With a value of 0, the hexadecimal number is generated without
-  leading zeros, with as many digits as are needed
-  to represent the value completely.
+  With a value of 0, the hexadecimal number is created without leading zeros,
+  using as many digits as are necessary to represent the value
+  in full.
   With a digit count greater than&nbsp;0, the hexadecimal number has
   as many digits as specified,
-  starting from the right, i.e. with the least significant digits.
+  counted from the right, i.e. starting with the least significant digits.
  <br/><br/>
 
  <h3><a name="hibyte">HIBYTE</a></h3>
@@ -1346,12 +1341,12 @@
   </table>
  <br/>
   The function returns only the value of the high-order byte
-  of the value passed,
+  of the value passed in,
   i.e. the return value is always in the range 0 to 255.
  <br/><br/>
   The function HIBYTE has the same effect as
   <tt>(&lt;value&gt;&nbsp;SHR&nbsp;8)&nbsp;AND&nbsp;&amp;H00FF</tt>,
-  but generates shorter and faster program code.
+  but produces shorter and faster program code.
  <br/><br/>
 
  <h3><a name="hiword">HIWORD</a></h3>
@@ -1365,12 +1360,12 @@
   </table>
  <br/>
   The function returns only the value of the high-order 16&nbsp;bits
-  of the Long value passed,
+  of the Long value passed in,
   i.e. the return value is always in the range 0 to 32767.
  <br/><br/>
   The function HIWORD has the same effect as
   <tt>(&lt;value&gt;&nbsp;SHR&nbsp;16)&nbsp;AND&nbsp;&amp;H0000FFFF</tt>,
-  but generates shorter and faster program code.
+  but produces shorter and faster program code.
  <br/><br/>
 
  <h3><a name="h_char">H_CHAR</a></h3>
@@ -1383,8 +1378,8 @@
  <br/><br/>
   A&nbsp;0 is returned if the
   <a href="instructions.htm#screen">SCREEN</a> statement
-  has set a graphics screen
-  that does not permit text output.
+  was used to set a graphics screen
+  that does not allow text output.
  <br/><br/>
 
  <h3><a name="h_pixel">H_PIXEL</a></h3>
@@ -1396,7 +1391,7 @@
  <br/><br/>
 
  <h3><a name="inkey$">INKEY$</a></h3>
-  The function checks whether a key is currently pressed.
+  The function checks whether a key is currently being pressed.
   If so, the function returns a string containing the
   character entered.
   Otherwise, an empty string is returned.
@@ -1422,13 +1417,13 @@
   Both functions are identical. For reasons of compatibility
   with various BASIC dialects, both function names are supported.
  <br/><br/>
-  <b>Caution!</b> Although the microprocessor officially only
+  <b>Attention!</b> Although the microprocessor officially only
   supports 8-bit input/output addresses,
-  using 16-bit addresses is possible.
+  it is possible to use 16-bit addresses.
   The compiler translates the statement into program code
   that, due to the undocumented behavior of the microprocessor,
-  also makes a 16-bit input/output address
-  take effect.
+  also causes a 16-bit input/output address
+  to take effect.
  <br/><br/>
 
  <h3><a name="input$">INPUT$</a></h3>
@@ -1454,38 +1449,38 @@
    <tr><td>Return:</td><td>String</td></tr>
   </table>
  <br/>
-  There are two variants of this function, with and without a channel number.
+  There are two variants of the function, with and without a channel number.
   In the variant without a channel number, the specified number of characters
   is read from the keyboard and returned as a string.
   Control keys (e.g. cursor keys, Enter) are not evaluated.
   Instead, the corresponding control codes appear
   in the string.
-  Nothing is output on the screen.
+  No output to the screen takes place.
  <br/><br/>
   In the variant with a channel number, the function reads
   the specified number of characters from the input channel
-  or the file and returns them as a string.
-  This sets the error variables <a href="functions.htm#err">ERR</a>
-  and <a href="functions.htm#err$">ERR$</a>.
+  or the file, and returns them as a string.
+  In doing so, the error variables <a href="functions.htm#err">ERR</a>
+  and <a href="functions.htm#err$">ERR$</a> are set.
  <br/><br/>
-  <b>Caution!</b> Null bytes serve as terminators for strings,
-  i.e. if a null byte is read, the
-  returned string contains only the bytes up to the first
-  null byte read.
+  <b>Attention!</b> Null bytes serve as terminators for strings,
+  i.e. if a null byte is read, the string returned
+  contains only the bytes up to the first null byte
+  read.
   Nevertheless, as many bytes are read from the input channel
   as were specified in the first argument.
-  So if the returned string is shorter
+  So if the string returned is shorter
   than the number of bytes read, and the error variable
   <a href="functions.htm#err">ERR</a> contains the value&nbsp;0
   (constant E_OK, no error occurred),
   then a null byte was read after the string.
   This also makes it possible, in general, to read binary files.
   The example shows how a file is read byte by byte
-  and output as a hex dump on the screen:
+  and output to the screen as a hex dump:
  <br/>
   <tt>
    &#10;<br/>
-   INPUT "Datei:";F$&#10;<br/>
+   INPUT "File:";F$&#10;<br/>
    OPEN F$ FOR BINARY INPUT AS #1&#10;<br/>
    IF ERR THEN&#10;<br/>
    &nbsp;&nbsp;PRINT ERR$&#10;<br/>
@@ -1513,31 +1508,31 @@
    <tr valign="top">
     <td>Syntax:</td>
     <td>
-     <tt>INSTR</tt> <tt>(</tt> &lt;string to search in&gt;
-	<tt>,</tt> &lt;string to search for&gt; <tt>)</tt><br/>
+     <tt>INSTR</tt> <tt>(</tt> &lt;string searched&gt;
+	<tt>,</tt> &lt;string sought&gt; <tt>)</tt><br/>
      <tt>INSTR</tt> <tt>(</tt> &lt;position&gt;
-	<tt>,</tt> &lt;string to search in&gt;
-	<tt>,</tt> &lt;string to search for&gt; <tt>)</tt>
+	<tt>,</tt> &lt;string searched&gt;
+	<tt>,</tt> &lt;string sought&gt; <tt>)</tt>
     </td>
    </tr>
    <tr><td>Position:</td><td>Integer expression</td></tr>
    <tr>
-    <td>String to search in:</td>
+    <td>String searched:</td>
     <td>simple string expression</td>
    </tr>
    <tr>
-    <td>String to search for:</td>
+    <td>String sought:</td>
     <td>simple string expression</td>
    </tr>
    <tr><td>Return:</td><td>Integer</td></tr>
   </table>
  <br/>
-  The function searches the first string passed
-  for the second string passed and returns the position
-  where it was found.
+  The function searches the first string passed in
+  for the second string passed in and returns the position
+  of the match.
   If the second string is not contained in the first,
   0 is returned.
-  If a position was specified, the search starts from that position.
+  If a position was specified, the search starts at that position.
  <br/><br/>
   Examples:
  <br/><br/>
@@ -1549,12 +1544,12 @@
  <br/><br/>
   returns&nbsp;4.
  <br/><br/>
-  <b>Caution!</b> With this function, there are differences
+  <b>Attention!</b> With this function, there are differences
   in argument order between the various BASIC dialects.
-  In most of the internationally common BASIC dialects,
-  the first string is the one to be searched
-  and the second is the one to search for.
-  For this reason, JKCEMU implements it the same way.
+  In most internationally common BASIC dialects,
+  the first string is the one searched
+  and the second is the one sought.
+  For this reason, this is also how it is implemented in JKCEMU.
   In KC-BASIC, however, it is exactly the other way around.
   So if you want to compile or port KC-BASIC programs,
   you must swap the two strings.
@@ -1574,9 +1569,9 @@
    </tr>
   </table>
  <br/>
-  The function rounds the value passed down to the
+  The function rounds the value passed in down to the
   next smaller whole number.
-  If the value passed is already a whole number,
+  If the value passed in is already a whole number,
   the same value is returned.
  <br/><br/>
   Examples:
@@ -1590,7 +1585,6 @@
   the same results as
   <a href="functions.htm#fix">FIX</a>.
  <br/><br/>
-
  <h3><a name="intval">INTVAL</a></h3>
   <table border="1">
    <tr valign="top">
@@ -1615,8 +1609,8 @@
   The function INTVAL is identical to the function
   <a href="functions.htm#val">VAL</a> and is described there.
   The function name INTVAL makes it clear
-  that an Integer value is returned
-  and exists for reasons of name analogy with
+  that an Integer value is returned,
+  and it exists for the sake of naming symmetry with
   <a href="functions.htm#decval">DECVAL</a>
   (returns Decimal),
   <a href="functions.htm#lngval">LNGVAL</a>
@@ -1630,7 +1624,7 @@
   whether the program was compiled for a specific target system.
   This lets you write portable BASIC programs while still
   adapting them to very specific characteristics of the target system.
-  The function is usually called with a
+  You usually call the function with a
   <a href="constants.htm#target">constant for the target system</a>.
   The following example demonstrates its use:
  <br/>
@@ -1641,23 +1635,22 @@
    IF IS_TARGET(TARGET_Z1013) THEN PRINT "Ich bin ein Z1013"&#10;<br/>
   </tt>
  <br/>
-  <b>Caution!</b> The function IS_TARGET also returns
+  <b>Attention!</b> The function IS_TARGET also returns
   <a href="constants.htm#boolean">TRUE</a>
-  if compiling for a derived target system
+  when compiling for a derived target system
   and testing against the more general target system,
-  i.e. if, for example, the target system
+  i.e. if, for example, the compiler options have the target system
   <em>TARGET_KC85_4</em> (KC85/4..5 with support for both video memories)
-  is set in the compiler options,
-  the function returns TRUE for both
+  set, the function returns TRUE for both
   <em>TARGET_KC85</em> and <em>TARGET_KC85_4</em>.
  <br/><br/>
-  <b>Caution!</b> The function IS_TARGET does not determine
+  <b>Attention!</b> The function IS_TARGET does not determine
   which type of computer the program is actually running on,
-  but for which type of computer the BASIC program was compiled.
+  but rather which type of computer the BASIC program was compiled for.
   For example, a program can be compiled for the AC1
   but still run on an LLC2,
   if it does not use anything AC1-specific.
-  The function IS_TARGET(TARGET_AC1) would then still return TRUE,
+  The function IS_TARGET(TARGET_AC1) would then still return TRUE
   and IS_TARGET(TARGET_LLC2) would return FALSE.
  <br/><br/>
 
@@ -1678,9 +1671,9 @@
  <br/>
   The function reads the current status of the specified joystick.
   The first joystick has the number&nbsp;0.
-  The bit assignment of the return value differs between
-  the individual <a href="targets.htm">target systems</a> and should
-  therefore be evaluated using the following constants:
+  The bit layout of the return value differs between
+  the various <a href="targets.htm">target systems</a> and should therefore
+  be evaluated using the following constants:
  <br/><br/>
   <table border="1">
    <tr><th>Constant</th><th>Meaning</th></tr>
@@ -1715,12 +1708,12 @@
   </table>
  <br/>
   The JOYST function returns an Integer value
-  in which each set bit stands for a specific action.
+  in which each set bit stands for a particular action.
   Several bits can be set at the same time,
   e.g. the bits for left and up,
   when the joystick is pushed to the upper left.
   The joystick constants are defined such
-  that the respective bit for the action in question is set.
+  that the respective bit for the relevant action is set.
   With the help of the
   <a href="expressions.htm#operators2">AND</a> operator,
   the individual actions can be tested:
@@ -1737,11 +1730,1315 @@
    IF A AND JOYST_BUTTONS THEN PRINT "Feuer 1 oder 2"&#10;<br/>
   </tt>
  <br/>
-  On a target system that supports only one fire button per joystick,
-  the constant <tt>JOYST_BUTTONS</tt> has
-  the same value as <tt>JOYST_BUTTON1</tt>,
+  On a target system that only supports one fire button per joystick,
+  the constant <tt>JOYST_BUTTONS</tt>
+  has the same value as <tt>JOYST_BUTTON1</tt>,
   and <tt>JOYST_BUTTON2</tt> is&nbsp;0.
-  On systems that offer no joystick support,
+  On systems that offer no joystick support at all,
   the JOYST function always returns&nbsp;0,
   and the joystick constants also all have the value&nbsp;0.
  <br/><br/>
+
+ <h3><a name="lcase$">LCASE$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>LCASE$</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function LCASE$ converts, in the string passed in,
+  the uppercase letters, according to the ASCII character set,
+  into lowercase and returns the converted string.
+  Any German umlauts present remain unchanged.
+ <br/><br/>
+  LCASE$ is identical to the function LOWER$.
+  For reasons of compatibility with various BASIC dialects,
+  both function names are supported.
+ <br/><br/>
+
+ <h3><a name="left$">LEFT$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>LEFT$</tt> <tt>(</tt> &lt;string&gt;
+	<tt>,</tt> &lt;number of characters&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Number of characters:</td><td>Integer expression</td></tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function LEFT$ extracts from the string passed in
+  a substring consisting of the leftmost <em>number of characters</em>.
+ <br/><br/>
+
+ <h3><a name="len">LEN</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>LEN</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function returns the length of the string passed in.
+ <br/><br/>
+  <b>Attention!</b> For strings containing more than 32767&nbsp;characters,
+  the return value is less than&nbsp;0!
+  The internal string handling cannot actually create such long strings,
+  but with the function
+  <a href="functions.htm#memstr$">MEMSTR$</a>, overlong
+  strings are possible in principle.
+ <br/><br/>
+
+ <h3><a name="ln">LN</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>LN</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>Value:</td><td>numeric expression</td></tr>
+   <tr>
+    <td>Return:</td>
+    <td>Single</td>
+   </tr>
+  </table>
+ <br/>
+  The function LN calculates the natural logarithm
+  of the value passed in.
+  It thus forms the inverse function of the exponential function
+  <a href="functions.htm#exp">EXP</a>.
+  Please also read the notes on the
+  <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
+ <br/><br/>
+
+ <h3><a name="lngval">LNGVAL</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>LNGVAL</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt><br/>
+     <tt>LNGVAL</tt> <tt>(</tt> &lt;string&gt;
+	<tt>,</tt> &lt;number base&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr>
+    <td>Number base:</td>
+    <td>Integer expression with the value 2, 10 or 16</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Long</td>
+   </tr>
+  </table>
+ <br/>
+  The function LNGVAL tries to read the content of a string
+  as a number and returns its numeric value as a Long value.
+  Regarding the arguments, the format of the string, and the setting
+  of the error variables, the same applies as for the function
+  <a href="functions.htm#val">VAL</a>
+  (identical to <a href="functions.htm#intval">INTVAL</a>),
+  which is used to convert a string into an Integer value.
+  There are also the functions
+  <a href="functions.htm#decval">DECVAL</a> and
+  <a href="functions.htm#sngval">SNGVAL</a>,
+  which convert a string into a Decimal or Single value respectively.
+ <br/><br/>
+
+ <h3><a name="lobyte">LOBYTE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>LOBYTE</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>Value:</td><td>Integer or Long expression</td></tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function returns only the value of the low-order byte
+  of the value passed in,
+  i.e. the return value is always in the range 0 to 255.
+ <br/><br/>
+  The function LOBYTE has the same effect as
+  <tt>&lt;value&gt;&nbsp;AND&nbsp;&amp;H00FF</tt>,
+  but produces faster program code.
+ <br/><br/>
+
+ <h3><a name="lower$">LOWER$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>LOWER$</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function LOWER$ converts, in the string passed in,
+  the uppercase letters, according to the ASCII character set,
+  into lowercase and returns the converted string.
+  Any German umlauts present remain unchanged.
+ <br/><br/>
+  LOWER$ is identical to the function LCASE$.
+  For reasons of compatibility with various BASIC dialects,
+  both function names are supported.
+ <br/><br/>
+
+ <h3><a name="loword">LOWORD</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>LOWORD</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>Value:</td><td>Long expression</td></tr>
+   <tr><td>Return:</td><td>Long</td></tr>
+  </table>
+ <br/>
+  The function returns only the value of the low-order 16&nbsp;bits
+  of the Long value passed in,
+  i.e. the return value is always in the range 0 to 32767.
+ <br/><br/>
+  The function LOWORD has the same effect as
+  <tt>&lt;value&gt;&nbsp;AND&nbsp;&amp;H0000FFFF</tt>,
+  but produces faster program code.
+ <br/><br/>
+
+ <h3><a name="ltrim$">LTRIM$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>LTRIM$</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function LTRIM$ returns a substring
+  that starts with the first character
+  that is not a space or control character.
+  This trims the leading whitespace.
+ <br/><br/>
+
+ <h3><a name="max">MAX</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>MAX</tt>
+     <tt>(</tt>
+     &lt;numeric expression&gt;
+     <tt>,</tt>
+     &lt;numeric expression&gt;
+     [ <tt>,</tt> &lt;numeric expression&gt; [ , ... ] ]
+     <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Return:</td>
+    <td>
+     Decimal, if one of the expressions passed in is Decimal,
+     <br/>
+     otherwise Long, if one of the expressions passed in is Long,
+     <br/>
+     otherwise Integer
+    </td>
+   </tr>
+  </table>
+ <br/>
+  The function returns the largest of the values
+  specified in the argument list.
+ <br/><br/>
+
+ <h3><a name="memstr$">MEMSTR$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>MEMSTR$</tt> <tt>(</tt> &lt;address&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>Address:</td><td>Integer expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function MEMSTR$ makes it possible to use a string
+  located at the specified address in main memory as a BASIC string.
+  A null byte marks the end of the string.
+  The following example creates a string in main memory
+  containing the alphabet, which is then accessed with MEMSTR$:
+ <br/>
+  <tt>
+   &#10;<br/>
+   A=TOP&#10;<br/>
+   FOR I=65 TO 90&#10;<br/>
+   &nbsp;&nbsp;POKE A,I&#10;<br/>
+   &nbsp;&nbsp;A=A ADD 1&#10;<br/>
+   NEXT I&#10;<br/>
+   POKE A,0&#10;<br/>
+   PRINT MEMSTR$(TOP)&#10;<br/>
+  </tt>
+ <br/>
+  The counterpart to MEMSTR$ is the function
+  <a href="functions.htm#strptr">STRPTR</a>.
+ <br/><br/>
+
+ <h3><a name="mid$">MID$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>MID$</tt> <tt>(</tt> &lt;string&gt; <tt>,</tt>
+	&lt;position&gt; <tt>)</tt><br/>
+     <tt>MID$</tt> <tt>(</tt> &lt;string&gt; <tt>,</tt>
+	&lt;position&gt; <tt>,</tt> &lt;number of characters&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Position:</td><td>Integer expression</td></tr>
+   <tr><td>Number of characters:</td><td>Integer expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function MID$ extracts a substring from the string passed in,
+  starting at the specified position,
+  and returns it.
+  If the third argument is specified, the substring is at most
+  <em>number of characters</em> long.
+  Otherwise, the substring extends to the end of the string.
+ <br/><br/>
+
+ <h3><a name="min">MIN</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>MIN</tt>
+     <tt>(</tt>
+     &lt;numeric expression&gt;
+     <tt>,</tt>
+     &lt;numeric expression&gt;
+     [ <tt>,</tt> &lt;numeric expression&gt; [ , ... ] ]
+     <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Return:</td>
+    <td>
+     Decimal, if one of the expressions passed in is Decimal,
+     <br/>
+     otherwise Long, if one of the expressions passed in is Long,
+     <br/>
+     otherwise Integer
+    </td>
+  </table>
+ <br/>
+  The function returns the smallest of the values
+  specified in the argument list.
+ <br/><br/>
+
+ <h3><a name="mirror$">MIRROR$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>MIRROR$</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function MIRROR$ returns a mirrored image of the
+  string passed in, i.e.
+  the last character in the string passed in
+  is the first character in the string returned.
+ <br/><br/>
+ <h3><a name="mul10">MUL10</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td> <tt>MUL10</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr valign="top">
+    <td>Value:</td><td>numeric expression</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>same data type that was passed in</td>
+   </tr>
+  </table>
+ <br/>
+  Decimal numbers can be multiplied by&nbsp;10 very quickly
+  by shifting the decimal point one place to the right.
+  That is exactly what the function <tt>MUL10</tt> does in combination
+  with the <a href="datatypes.htm#decimal">Decimal</a> data type.
+  This makes it considerably faster than multiplying by&nbsp;10
+  with the multiplication operator.
+ <br/><br/>
+  However, the function can also be used with the data types
+  <a href="datatypes.htm#integer">Integer</a>,
+  <a href="datatypes.htm#long">Long</a> and
+  <a href="datatypes.htm#single">Single</a>,
+  which are not based on the decimal system.
+  In that case, the multiplication by&nbsp;10 is achieved
+  through four additions.
+  This does not have the same speedup effect as with the
+  <a href="datatypes.htm#decimal">Decimal</a> data type,
+  but it is still faster than using
+  the multiplication operator.
+ <br/><br/>
+  Specifically, for the operation <tt>B = A * 10</tt>,
+  the following steps are carried out:
+ <br/>
+  <tt>
+   &#10;<br/>
+   B = A + A&#10;<br/>
+   B = B + B&#10;<br/>
+   B = B + A&#10;<br/>
+   B = B + B&#10;<br/>
+  </tt>
+ <br/><br/>
+
+ <h3><a name="mul2">MUL2</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td> <tt>MUL2</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr valign="top">
+    <td>Value:</td><td>Integer, Long or Single expression</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>same data type that was passed in</td>
+   </tr>
+  </table>
+ <br/>
+  Just as decimal numbers can be multiplied by&nbsp;10 very quickly
+  by shifting the decimal point,
+  binary numbers can be multiplied by&nbsp;2 very quickly.
+  That is what the function <tt>MUL2</tt> is for.
+  It can only be used with the data types
+  <a href="datatypes.htm#integer">Integer</a>,
+  <a href="datatypes.htm#long">Long</a> and
+  <a href="datatypes.htm#single">Single</a>,
+  but not with <a href="datatypes.htm#decimal">Decimal</a>.
+ <br/><br/>
+
+ <h3><a name="oct$">OCT$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>OCT$</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt><br/>
+     <tt>OCT$</tt> <tt>(</tt> &lt;value&gt;
+	<tt>,</tt> &lt;number of digits&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>Value:</td><td>Integer or Long expression</td></tr>
+   <tr><td>Number of digits:</td><td>Integer</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function OCT$ creates a string
+  that represents the value passed in as an octal number.
+  Negative values are represented as two's complement.
+  If the second argument is omitted,
+  the string created is six characters long for an Integer value
+  and eleven characters long for a Long value.
+ <br/><br/>
+  With the optional second argument, the length
+  of the octal number to be created can be specified.
+  Possible values are 0 to 6 for an Integer expression
+  and 0 to 11 for a Long expression.
+  With a value of 0, the octal number is created without leading zeros,
+  using as many digits as are necessary to represent the value
+  in full.
+  With a digit count greater than&nbsp;0, the octal number has
+  as many digits as specified,
+  counted from the right, i.e. starting with the least significant digits.
+ <br/><br/>
+
+ <h3><a name="peek">PEEK</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>PEEK</tt> <tt>(</tt> &lt;address&gt; <tt>)</tt></td>
+   </tr>
+   <tr valign="top"><td>Address:</td><td>Integer expression</td></tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function reads the byte from main memory
+  located at the specified address
+  and returns the value of the byte.
+ <br/><br/>
+
+ <h3><a name="point">POINT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>POINT</tt> <tt>(</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>Integer expression with a value &gt;= 0</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>Integer expression with a value &gt;= 0</td>
+   </tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function determines the current color of the pixel.
+  On error, i.e. if the specified point lies outside
+  the screen or no graphics environment is available,
+  -1 is returned.
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+  <b>Attention!</b> If the BASIC program was compiled for a target system
+  with color support but is started on a computer
+  without color support,
+  the function returns incorrect values,
+  since it reads the color from the color memory,
+  which does not exist in that case.
+ <br/><br/>
+
+ <h3><a name="pos">POS</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>POS</tt> <tt>(</tt> <tt>)</tt> <br/>
+     <tt>POS</tt> <tt>(</tt> &lt;dummy&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Dummy:</td>
+    <td>Integer expression, any value, has no meaning</td>
+   </tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function returns the current column number
+  on which the cursor is positioned, starting at 0.
+  If the cursor is outside the visible area, or
+  the target system does not support reading the cursor position,
+  the function returns the value&nbsp;-1.
+ <br/><br/>
+  The argument passed in has no meaning and is accepted syntactically
+  only for reasons of compatibility with other BASIC dialects.
+ <br/><br/>
+  The function&nbsp;POS returns the same information
+  as the system variable <a href="functions.htm#crspos">CRSPOS</a>.
+ <br/><br/>
+
+ <h3><a name="pow">POW</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>POW</tt> <tt>(</tt> &lt;X&gt; , &lt;Y&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr>
+    <td>X:</td>
+    <td>numeric expression</td>
+   </tr>
+   <tr>
+    <td>Y:</td>
+    <td>numeric expression</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Single</td>
+   </tr>
+  </table>
+ <br/>
+  The function POW is the exponential function to an arbitrary base,
+  i.e. it calculates the value of X<sup>Y</sup></td>.
+  For exponentiation to the base&nbsp;e (Euler's number 2.718282)
+  there is the function <a href="functions.htm#exp">EXP</a>.
+  Please also read the notes on the
+  <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
+ <br/><br/>
+
+ <h3><a name="ptest">PTEST</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>PTEST</tt> <tt>(</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>Integer expression with a value &gt;= 0</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>Integer expression with a value &gt;= 0</td>
+   </tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function determines the state of a pixel.
+  If the pixel at the specified position is set,
+  1 is returned; if it is not set, 0.
+  On error, i.e. if the specified point lies outside
+  the screen or no graphics environment is available,
+  -1 is returned.
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+
+ <h3><a name="right$">RIGHT$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>RIGHT$</tt> <tt>(</tt> &lt;string&gt;
+	<tt>,</tt> &lt;number of characters&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Number of characters:</td><td>Integer expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function RIGHT$ extracts from the string passed in
+  a substring consisting of the rightmost <em>number of characters</em>.
+ <br/><br/>
+
+ <h3><a name="rnd">RND</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>RND</tt><br/>
+     <tt>RND</tt> <tt>(</tt> &lt;maximum value&gt; <tt>)</tt>
+     </td>
+   </tr>
+   <tr valign="top">
+    <td>Maximum value:</td>
+    <td>Integer expression with a value &gt;&nbsp;0</td>
+   </tr>
+   <tr><td>Return:</td><td>Single or Integer</td></tr>
+  </table>
+ <br/>
+  There are two variants of the function.
+  The first variant, without an argument, i.e. without parentheses,
+  returns a random Single value greater than&nbsp;0
+  and less than&nbsp;1.0.
+  The second variant, with an argument in parentheses,
+  returns a random Integer value between&nbsp;0 (inclusive)
+  and the maximum value passed in (exclusive).
+ <br/><br/>
+  Example, rolling a die (result 1 to 6):
+ <br/><br/>
+  <tt>PRINT "Wuerfelergebnis:";RND(6)+1</tt>
+ <br/><br/>
+
+ <h3><a name="round">ROUND</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>ROUND</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt><br/>
+     <tt>ROUND</tt> <tt>(</tt> &lt;value&gt; <tt>,</tt>
+	&lt;mode&gt; <tt>)</tt><br/>
+     <tt>ROUND</tt> <tt>(</tt> &lt;value&gt; <tt>,</tt>
+	&lt;mode&gt; <tt>,</tt>
+	&lt;decimal places&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Value:</td>
+    <td>
+     Decimal value to be rounded,<br/>
+     In the syntax variant with only one argument, a
+     Single value can also be given.
+   </tr>
+   <tr valign="top">
+    <td>Mode:</td>
+    <td>
+     One of the <a href="constants.htm#round">constants</a>:
+     <ul>
+      <li>
+       <tt>ROUND_HALF_UP</tt> (round the magnitude up, i.e. away from zero)
+      </li>
+      <li>
+       <tt>ROUND_HALF_EVEN</tt> (round to the even number)
+      </li>
+      <li>
+       <tt>ROUND_HALF_DOWN</tt> (round the magnitude down, i.e. toward zero)
+      </li>
+     </ul>
+     The mode can also be given as a variable expression
+     (e.g. a variable or function call).
+     However, the value must correspond to one of the three constants.
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Decimal places:</td>
+    <td>number of decimal places to keep (Integer)</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>same data type that was passed in for <em>value</em></td>
+   </tr>
+  </table>
+ <br/>
+  The function rounds a Single or Decimal value.
+  The data type is not changed by this.
+  Single values can only be rounded to whole numbers,
+  Decimal values can also be rounded to a specified number of decimal places.
+  In addition, for Decimal, specifying a rounding mode is also
+  possible.
+ <br/><br/>
+  If the number of desired decimal places is
+  greater than or equal to the actual number,
+  nothing happens.
+  The number of desired decimal places can also be negative.
+  In that case, rounding occurs to tens, hundreds, etc.
+  If all digits are "rounded away," the function returns&nbsp;0.
+ <br/><br/>
+  Examples:
+ <br/>
+  <table border="1">
+   <tr><th>BASIC code</th><th>Output</th></tr>
+   <tr>
+    <td><tt>PRINT ROUND( 1.234 )</tt></td>
+    <td align="right">1</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( 1.4 )</tt></td>
+    <td align="right">1</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( 2.6 )</tt></td>
+    <td align="right">3</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( 1.234D, ROUND_HALF_DOWN, 2 )</tt></td>
+    <td align="right">1.23</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( 1.234D, ROUND_HALF_UP, 2 )</tt></td>
+    <td align="right">1.24</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( 1.23400D, ROUND_HALF_UP, 3 )</tt></td>
+    <td align="right">1.234</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( 1.23401D, ROUND_HALF_UP, 3 )</tt></td>
+    <td align="right">1.235</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( -1.2345D, ROUND_HALF_EVEN, 3 )</tt></td>
+    <td align="right">-1.234</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( 1.23451D, ROUND_HALF_EVEN, 3 )</tt></td>
+    <td align="right">1.235</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( 12345D, ROUND_HALF_EVEN, -1 )</tt></td>
+    <td align="right">12340</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( 123450D, ROUND_HALF_EVEN, -2 )</tt></td>
+    <td align="right">123400</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT ROUND( 123451D, ROUND_HALF_EVEN, -2 )</tt></td>
+    <td align="right">123500</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3><a name="rtrim$">RTRIM$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>RTRIM$</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function RTRIM$ trims trailing spaces or control characters
+  from the string passed in and returns the string,
+  possibly shortened.
+  This trims the trailing whitespace.
+ <br/><br/>
+
+ <h3><a name="scale">SCALE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>SCALE</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>Value:</td><td>Decimal expression</td></tr>
+   <tr>
+    <td>Return:</td>
+    <td>Integer (0 to 7)</td>
+   </tr>
+  </table>
+ <br/>
+  The function SCALE returns the number of decimal places
+  of the value passed in.
+  Zeros at the very right after the decimal point,
+  i.e. appended or trailing zeros,
+  are not counted.
+ <br/><br/>
+  Examples:
+ <br/>
+  <table border="1">
+   <tr><th>BASIC code</th><th>Output</th></tr>
+   <tr>
+    <td><tt>PRINT SCALE( 1.000 )</tt></td>
+    <td align="right">0</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT SCALE( 1.123 )</tt></td>
+    <td align="right">3</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT SCALE( -1.123400 )</tt></td>
+    <td align="right">4</td>
+   </tr>
+   <tr>
+    <td><tt>PRINT SCALE( 123.001 )</tt></td>
+    <td align="right">3</td>
+   </tr>
+  </table>
+ <br/><br/>
+ <h3><a name="sgn">SGN</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>SGN</tt> <tt>(</tt> &lt;numeric expression&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function returns -1
+  if the value of the given expression is less than&nbsp;0,
+  1 if the value is greater than&nbsp;0,
+  and 0 if the value is&nbsp;0.
+ <br/><br/>
+
+ <h3><a name="sin">SIN</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>SIN</tt> <tt>(</tt> &lt;angle&gt; <tt>)</tt></td>
+   </tr>
+   <tr>
+    <td>Angle:</td>
+    <td>numeric expression with the angle in radians</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Single</td>
+   </tr>
+  </table>
+ <br/>
+  The function calculates the sine of the angle,
+  which must be given in radians.
+  Please also read the notes on the
+  <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
+ <br/><br/>
+
+ <h3><a name="sngval">SNGVAL</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>SNGVAL</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr>
+    <td>Return:</td>
+    <td>Single</td>
+   </tr>
+  </table>
+ <br/>
+  The function SNGVAL tries to read the content of a string
+  as a number and returns its numeric value as a Single
+  value.
+  The function sets the error variables
+  <a href="functions.htm#err">ERR</a> and
+  <a href="functions.htm#err$">ERR$</a>.
+  These, especially the ERR variable, can be used to check
+  whether the function was successful:
+ <br/><br/>
+  <table border="1">
+   <tr><th>ERR value</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top"><a href="constants.htm#error">E_OK</a></td>
+    <td>the number could be read</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="constants.htm#error">E_INVALID</a></td>
+    <td>
+     invalid characters encountered,
+     return value is&nbsp;0
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="constants.htm#error">E_OVERFLOW</a></td>
+    <td>
+     numeric overflow, i.e. the number has too many digits before the
+     decimal point, return value is&nbsp;0
+    </td>
+   </tr>
+  </table>
+ <br/>
+  For converting a string into a different numeric data type,
+  there are the functions
+  <a href="functions.htm#decval">DECVAL</a>,
+  <a href="functions.htm#intval">INTVAL</a>
+  (identical to <a href="functions.htm#val">VAL</a>) and
+  <a href="functions.htm#lngval">LNGVAL</a>.
+ <br/><br/>
+
+ <h3><a name="space$">SPACE$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>SPACE$</tt> <tt>(</tt> &lt;count&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>Count:</td><td>Integer expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function SPACE$ creates a string
+  consisting of <em>count</em> spaces.
+ <br/><br/>
+
+ <h3><a name="sqr">SQR</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>SQR</tt> <tt>(</tt> &lt;numeric expression&gt; <tt>)</tt></td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Single</td>
+   </tr>
+  </table>
+ <br/>
+  The function calculates the square root of the value passed in.
+  Please also read the notes on the
+  <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
+ <br/><br/>
+
+ <h3><a name="str$">STR$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>STR$</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>Value:</td><td>numeric expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function STR$ creates a string
+  that represents the value passed in as a decimal number.
+  The first character of the string created is either
+  a space or a minus sign.
+ <br/><br/>
+
+ <h3><a name="string$">STRING$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>STRING$</tt> <tt>(</tt> &lt;count&gt;
+	<tt>,</tt> &lt;character code&gt; <tt>)</tt><br/>
+     <tt>STRING$</tt> <tt>(</tt> &lt;count&gt;
+	<tt>,</tt> &lt;string&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>Count:</td><td>Integer expression</td></tr>
+   <tr><td>Character code:</td><td>Integer expression</td></tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function STRING$ returns a string
+  consisting of <em>count</em> repetitions of the string passed in,
+  or of the character passed in by its code.
+  The number of repetitions is passed in the first argument
+  and can also be&nbsp;0.
+  In that case, an empty string is returned.
+ <br/><br/>
+
+ <h3><a name="strptr">STRPTR</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>STRPTR</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt></td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>Integer</td></tr>
+  </table>
+ <br/>
+  The function STRPTR determines the start address of a string.
+  This makes it possible, for example, to use <a href="functions.htm#peek">PEEK</a>
+  to access the string, or to pass the string to an
+  assembler routine:
+ <br/>
+  <tt>
+   &#10;<br/>
+   A$="..."&#10;<br/>
+   B=USR0(STRPTR(A$))&#10;<br/>
+  </tt>
+ <br/>
+  In principle, the string could also be modified with
+  <a href="instructions.htm">POKE</a>.
+  However, this should not be done if the string is a
+  literal contained in the BASIC program,
+  since that would overwrite the generated program code.
+  Under no circumstances may you write beyond the end of the string!
+ <br/><br/>
+  The counterpart to STRPTR is the function
+  <a href="functions.htm#memstr$">MEMSTR$</a>.
+ <br/><br/>
+
+ <h3><a name="tan">TAN</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td><tt>TAN</tt> <tt>(</tt> &lt;angle&gt; <tt>)</tt></td>
+   </tr>
+   <tr>
+    <td>Angle:</td>
+    <td>numeric expression with the angle in radians</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Single</td>
+   </tr>
+  </table>
+ <br/>
+  The function calculates the tangent of the angle,
+  which must be given in radians.
+  Please also read the notes on the
+  <a href="functions.htm#accuracy">accuracy of the mathematical functions</a>!
+ <br/><br/>
+
+ <h3><a name="trim$">TRIM$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>TRIM$</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The function TRIM$ trims spaces or control characters from both
+  the beginning and the end of the string passed in,
+  and returns the string, possibly shortened as a result.
+  This trims the leading and trailing
+  whitespace.
+ <br/><br/>
+
+ <h3><a name="trunc">TRUNC</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>TRUNC</tt> <tt>(</tt> &lt;value&gt; <tt>)</tt><br/>
+     <tt>TRUNC</tt> <tt>(</tt> &lt;value&gt; <tt>,</tt>
+	&lt;decimal places&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Value:</td>
+    <td>
+     Decimal value from which decimal places are to be truncated,
+     <br/>
+     In the syntax variant with only one argument, a
+     Single value can also be given.
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Decimal places:</td>
+    <td>number of decimal places to keep (Integer, &gt;= 0)</td>
+   </tr>
+   <tr valign="top">
+    <td>Return:</td>
+    <td>same data type that was passed in as <em>value</em></td>
+   </tr>
+  </table>
+ <br/>
+  The function truncates decimal places from the value passed in.
+  With the <a href="datatypes.htm#decimal">Decimal</a> data type,
+  the number of decimal places to keep can also be specified.
+  If the parameter is omitted,
+  all decimal places are truncated.
+  If the number of desired decimal places is
+  greater than or equal to the actual number,
+  nothing happens.
+ <br/><br/>
+
+ <h3><a name="ucase$">UCASE$<br/>UPPER$</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>UCASE$</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt><br/>
+     <tt>UPPER$</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr><td>Return:</td><td>String</td></tr>
+  </table>
+ <br/>
+  The functions UCASE$ and UPPER$ convert, in the string passed in,
+  the lowercase letters, according to the ASCII character set,
+  into uppercase and return the converted string.
+  Any German umlauts present remain unchanged.
+ <br/><br/>
+  Both functions are identical. For reasons of compatibility
+  with various BASIC dialects, both function names are supported.
+ <br/><br/>
+
+ <h3><a name="usr">USR</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>USR</tt> &lt;function number&gt;
+	<tt>(</tt> &lt;argument&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr><td>Function number:</td><td>0...9</td></tr>
+   <tr><td>Argument:</td><td>Integer expression</td></tr>
+   <tr><td>Return:</td><td>Integer value</td></tr>
+  </table>
+ <br/>
+  USR calls one of 10 possible functions
+  that you can freely implement in machine code.
+  The address must have been set beforehand with the statement
+  <a href="instructions.htm#defusr">DEF&nbsp;USR</a>.
+  The argument is passed to the user function in the DE register.
+  The user function itself must end with a return instruction.
+  The value that is in the HL register when the function ends
+  is returned to the BASIC program.
+ <br/><br/>
+  The keyword <tt>USR</tt> and the function number can be
+  written either together or separately, e.g.:
+ <br/>
+  <tt>
+   &#10;<br/>
+   PRINT USR 0 (123)&#10;<br/>
+   PRINT USR0 (123)&#10;<br/>
+   PRINT USR 0(123)&#10;<br/>
+   PRINT USR0(123)&#10;<br/>
+  </tt>
+ <br/>
+  Unlike the <a href="instructions.htm#call">CALL</a> statement,
+  with USR you can pass a value to the machine code subroutine
+  and have it return one.
+ <br/><br/>
+
+ <h3><a name="val">VAL</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>VAL</tt> <tt>(</tt> &lt;string&gt; <tt>)</tt><br/>
+     <tt>VAL</tt> <tt>(</tt> &lt;string&gt;
+	<tt>,</tt> &lt;number base&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr><td>String:</td><td>simple string expression</td></tr>
+   <tr>
+    <td>Number base:</td>
+    <td>Integer expression with the value 2, 10 or 16</td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Integer</td>
+   </tr>
+  </table>
+ <br/>
+  The function VAL tries to read the content of a string
+  as a number and returns its numeric value
+  as an Integer.
+  If a number base is specified, the function expects
+  a binary, decimal or hexadecimal number according to that base.
+  Without the second argument, a decimal number is always expected.
+  Numbers with any other base are not supported.
+ <br/><br/>
+  For hexadecimal numbers, the letters A to F
+  can be written in either upper or lower case.
+ <br/><br/>
+  The VAL function sets the error variables
+  <a href="functions.htm#err">ERR</a> and
+  <a href="functions.htm#err$">ERR$</a>.
+  These, especially the ERR variable, can be used to check
+  whether the function was successful:
+ <br/><br/>
+  <table border="1">
+   <tr><th>ERR value</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top"><a href="constants.htm#error">E_OK</a></td>
+    <td>the number could be read</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="constants.htm#error">E_INVALID</a></td>
+    <td>
+     invalid characters encountered,
+     return value is&nbsp;0
+    </td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="constants.htm#error">E_OVERFLOW</a></td>
+    <td>
+     numeric overflow, i.e. the number is too large or too small,
+     return value is&nbsp;0
+    </td>
+   </tr>
+  </table>
+ <br/>
+  The example shows the VAL function in combination with the
+  error variable&nbsp;ERR:
+ <br/>
+  <tt>
+   &#10;<br/>
+   DO&#10;<br/>
+   &nbsp;&nbsp;INPUT "Input:";E$&#10;<br/>
+   &nbsp;&nbsp;V=VAL(E$,2)&#10;<br/>
+   &nbsp;&nbsp;IF ERR=E_OK THEN PRINT "Binaerzahl, Dezimalwert=";V&#10;<br/>
+   &nbsp;&nbsp;V=VAL(E$,10)&#10;<br/>
+   &nbsp;&nbsp;IF ERR=E_OK THEN PRINT "Dezimalzahl, Dezimalwert=";V&#10;<br/>
+   &nbsp;&nbsp;V=VAL(E$,16)&#10;<br/>
+   &nbsp;&nbsp;IF ERR=E_OK THEN PRINT "Hexadezimalzahl, Dezimalwert=";V&#10;<br/>
+   LOOP&#10;<br/>
+  </tt>
+ <br/>
+  <b>Note:</b> In classic BASIC dialects that are not strictly typed,
+  the function VAL can return different data types
+  depending on the string passed in.
+  Since the JKCEMU BASIC compiler, however, is strictly typed,
+  the data type to be returned must already be known
+  at compile time.
+  And that type is Integer.
+  If you want to convert larger numbers
+  that lie outside the range of the Integer data type,
+  you can use <a href="functions.htm#decval">DECVAL</a>,
+  <a href="functions.htm#lngval">LNGVAL</a> and
+  <a href="functions.htm#sngval">SNGVAL</a>.
+  <a href="functions.htm#decval">DECVAL</a> and
+  <a href="functions.htm#sngval">SNGVAL</a>
+  are also suitable for floating-point numbers.
+  By analogy with the names DECVAL, LNGVAL and SNGVAL, there is also
+  the function <a href="functions.htm#intval">INTVAL</a>,
+  which returns Integer and is identical to VAL.
+ <br/><br/>
+
+ <h3><a name="varptr">VARPTR</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td>
+     <tt>VARPTR</tt> <tt>(</tt> &lt;variable&gt; <tt>)</tt><br/>
+    </td>
+   </tr>
+   <tr>
+    <td>Return:</td>
+    <td>Integer</td>
+   </tr>
+  </table>
+ <br/>
+  The function VARPTR returns the address of the variable
+  or the variable array element passed in.
+  This makes it possible, for example, to access BASIC variables
+  from your own assembler routines.
+ <br/><br/>
+  If the variable passed in is an array variable,
+  you must specify the specific element
+  whose address is to be returned.
+ <br/><br/>
+  <b>Attention!</b> With the statements
+  <a href="instructions.htm#poke">POKE</a> and
+  <a href="instructions.htm#doke">DOKE</a>,
+  you can assign a value to the variable.
+  However, please never assign a value to a string variable
+  in this way!
+  This can throw the internal memory management into disarray.
+  And if you assign a value to a Decimal variable with POKE or DOKE,
+  the variable must
+  absolutely have a valid BCD format afterward!
+  Otherwise, it is possible for a division
+  using this variable to hang in an infinite loop.
+ <br/><br/>
+
+ <h3><a name="w_char">W_CHAR</a></h3>
+  The system variable contains the width of the screen
+  in character positions, i.e.
+  the number of visible text columns is returned.
+  If this value is not clearly defined, or if the target system
+  allows different values (e.g. with CP/M),
+  the variable contains the value&nbsp;-1.
+ <br/><br/>
+  A&nbsp;0 is returned if the
+  <a href="instructions.htm#screen">SCREEN</a> statement
+  was used to set a graphics screen
+  that does not allow text output.
+ <br/><br/>
+
+ <h3><a name="w_pixel">W_PIXEL</a></h3>
+  The system variable contains the width of the fully
+  graphics-capable screen in pixels.
+  If no full graphics mode is available,
+  the value&nbsp;0 is returned.
+  In that case, the graphics commands cannot be used.
+ <br/><br/>
+
+ <h3><a name="xpos">XPOS</a></h3>
+  The system variable contains the current X coordinate
+  of the graphics cursor.
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+
+ <h3><a name="ypos">YPOS</a></h3>
+  The system variable contains the current Y coordinate
+  of the graphics cursor.
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/>
+</body>
+</html>

@@ -1550,7 +1550,7 @@ public class FloppyDiskStationFrm
       }
       rv = setDisk(
 		idx,
-		"Laufwerk: " + driveName,
+		LangUtil.tr( "Laufwerk: {0}", driveName ),
 		PlainDisk.createForDrive(
 				this,
 				fileName,
@@ -1568,9 +1568,9 @@ public class FloppyDiskStationFrm
 	  errMsg = msg.replace( fileName, driveName );
 	}
       } else {
-	errMsg = "Diskette in Laufwerk "
-			+ driveName
-			+ " nicht gefunden oder nicht nutzbar";
+	errMsg = LangUtil.tr(
+		"Diskette in Laufwerk {0} nicht gefunden oder nicht nutzbar",
+		driveName );
       }
       if( usb
 	  && !Main.isUnixLikeOS()
@@ -1887,7 +1887,7 @@ public class FloppyDiskStationFrm
     int n = Math.min( this.textAreas.length, this.driveCnt );
     for( int i = 0; i < n; i++ ) {
       this.tabbedPane.addTab(
-			String.format( "Laufwerk %d", i + 1 ),
+			LangUtil.tr( "Laufwerk {0}", i + 1 ),
 			this.textAreas[ i ] );
     }
   }

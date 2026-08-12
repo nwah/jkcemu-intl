@@ -116,7 +116,25 @@ public class POExtractor
   private static final String DEFAULT_OUTPUT     = "src/lang/jkcemu.pot";
   private static final String CANDIDATES_FILE    = "candidates.txt";
 
-  private static final String PREFIX_TEXT_FIELD = "TEXT_";
+  private static final String[] PREFIXES_TEXT_FIELD = { "TEXT_", "LABEL_" };
+
+  /*
+   * Feldnamen mit diesen Praefixen enthalten trotz des Namens
+   * keinen anzuzeigenden Text, sondern Bestandteile des erzeugten
+   * Programmcodes (Praefixe von Assembler-Marken im BASIC-Compiler).
+   * Sie duerfen auf keinen Fall uebersetzt werden.
+   */
+  private static final String[] PREFIXES_NO_TEXT_FIELD = { "LABEL_PREFIX" };
+
+  /*
+   * Namen von String-Feldern, die uebersetzbare Texte enthalten,
+   * aber nicht mit TEXT_ beginnen.
+   * SYSTEXT ist die Bezeichnung des emulierten Systems,
+   * die u.a. in den Einstellungen als Auswahlknopf erscheint.
+   */
+  private static final String[] TEXT_FIELDS = {
+					"SYSTEXT",
+					"DEFAULT_TITLE" };
 
   /*
    * Namen von String-Array-Feldern, deren Elemente uebersetzbare
@@ -125,7 +143,10 @@ public class POExtractor
    * da die Felder statisch initialisiert werden,
    * also bevor die Sprache feststeht.
    */
-  private static final String[] TEXT_ARRAY_FIELDS = { "colNames" };
+  private static final String[] TEXT_ARRAY_FIELDS = {
+					"colNames",
+					"SIO_CLOCK_ITEMS",
+					"SIO_OUT_ITEMS" };
 
 
   public static void main( String[] args )
@@ -289,7 +310,7 @@ public class POExtractor
       if( (t.type == TokType.IDENT) && t.text.equals( "String" )
 	  && ((i + 1) < n)
 	  && (tokens.get( i + 1 ).type == TokType.IDENT)
-	  && tokens.get( i + 1 ).text.startsWith( PREFIX_TEXT_FIELD )
+	  && isTextField( tokens.get( i + 1 ).text )
 	  && ((i + 2) < n)
 	  && (tokens.get( i + 2 ).type == TokType.EQUALS) )
       {
@@ -526,6 +547,32 @@ public class POExtractor
 	}
       }
     }
+  }
+
+
+  private static boolean isTextField( String fieldName )
+  {
+    boolean rv = false;
+    for( int i = 0; i < PREFIXES_NO_TEXT_FIELD.length; i++ ) {
+      if( fieldName.startsWith( PREFIXES_NO_TEXT_FIELD[ i ] ) ) {
+	return false;
+      }
+    }
+    for( int i = 0; i < PREFIXES_TEXT_FIELD.length; i++ ) {
+      if( fieldName.startsWith( PREFIXES_TEXT_FIELD[ i ] ) ) {
+	rv = true;
+	break;
+      }
+    }
+    if( !rv ) {
+      for( int i = 0; i < TEXT_FIELDS.length; i++ ) {
+	if( TEXT_FIELDS[ i ].equals( fieldName ) ) {
+	  rv = true;
+	  break;
+	}
+      }
+    }
+    return rv;
   }
 
 

@@ -49,6 +49,7 @@ import jkcemu.emusys.ac1_llc2.SCCHAudioCreator;
 import jkcemu.emusys.kc85.KCAudioCreator;
 import jkcemu.emusys.z1013.Z1013AudioCreator;
 import jkcemu.image.ImageFrm;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextEditFrm;
 import jkcemu.tools.FileChecksumFrm;
 import jkcemu.tools.filebrowser.FileBrowserFrm;
@@ -1497,8 +1498,8 @@ public class FileActionMngr
       catch( IOException ex ) {
 	BaseDlg.showErrorDlg(
 		this.owner,
-		"Die RAM-Floppy kann nicht geladen werden.\n\n"
-						+ ex.getMessage() );
+		LangUtil.tr( "Die RAM-Floppy kann nicht geladen werden." )
+						+ "\n\n" + ex.getMessage() );
       }
     }
   }
@@ -1658,8 +1659,10 @@ public class FileActionMngr
 	else if( !file.isFile() ) {
 	  BaseDlg.showErrorDlg(
 		this.owner,
-		file.getPath() + " existiert bereits\n"
-			+ "und kann nicht als Datei angelegt werden." );
+		LangUtil.tr(
+			"{0} existiert bereits\n"
+				+ "und kann nicht als Datei angelegt werden.",
+			file.getPath() ) );
 	  file = null;
 	}
       }

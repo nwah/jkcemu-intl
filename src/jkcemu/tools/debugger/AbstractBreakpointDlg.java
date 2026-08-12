@@ -20,6 +20,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public abstract class AbstractBreakpointDlg extends BaseDlg
@@ -211,7 +212,7 @@ public abstract class AbstractBreakpointDlg extends BaseDlg
   {
     showErrorDlg(
 		this,
-		fldName + " hat ung\u00FCltiges Format." );
+		LangUtil.tr( "{0} hat ung\u00FCltiges Format.", fldName ) );
   }
 
 

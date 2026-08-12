@@ -2979,9 +2979,10 @@ public class DebugFrm extends BaseFrm implements
 	  this.traceWriter = null;
 	  BaseDlg.showErrorDlg(
 		this,
-		"Die Befehlsaufzeichnungsdatei kann nicht\n"
-			+ "zum Schreiben ge\u00F6ffnet werden.\n\n"
-			+ ex.getMessage() );
+		LangUtil.tr(
+			"Die Befehlsaufzeichnungsdatei kann nicht\n"
+				+ "zum Schreiben ge\u00F6ffnet werden." )
+			+ "\n\n" + ex.getMessage() );
 	}
       }
     } else {

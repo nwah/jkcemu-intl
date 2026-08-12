@@ -47,6 +47,7 @@ import jkcemu.base.PopupMenuOwner;
 import jkcemu.base.ScreenFrm;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.CharConverter;
 import jkcemu.tools.hexedit.HexEditFrm;
 
@@ -319,7 +320,7 @@ public class PrintListFrm
     catch( IOException ex ) {
       BaseDlg.showErrorDlg(
 		this,
-		"Der Druckauftrag kann nicht gespeichert werden."
+		LangUtil.tr( "Der Druckauftrag kann nicht gespeichert werden." )
 						+ ex.getMessage() );
     }
   }

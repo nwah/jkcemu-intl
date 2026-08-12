@@ -1222,8 +1222,8 @@ public class TextEditFrm extends BaseFrm implements
       catch( IOException ex ) {
         BaseDlg.showErrorDlg(
                 this,
-                "Die Datei kann nicht gespeichert werden.\n\n"
-                        + ex.getMessage() );
+                LangUtil.tr( "Die Datei kann nicht gespeichert werden." )
+                        + "\n\n" + ex.getMessage() );
       }
     }
     return wasSaved;
@@ -1505,8 +1505,8 @@ public class TextEditFrm extends BaseFrm implements
 	      editText.setCaretPosition( crsPos );
 	      BaseDlg.showInfoDlg(
 			this,
-			String.format(
-				"%d Seitenumbruchzeichen entfernt",
+			LangUtil.tr(
+				"{0} Seitenumbruchzeichen entfernt",
 				cnt ) );
 	    } else {
 	      BaseDlg.showInfoDlg(
@@ -3267,7 +3267,7 @@ public class TextEditFrm extends BaseFrm implements
   {
     BaseDlg.showInfoDlg(
 		this,
-		String.format( "%d Ersetzungen", cnt ) );
+		LangUtil.tr( "{0} Ersetzungen", cnt ) );
   }
 
 

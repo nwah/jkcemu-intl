@@ -433,8 +433,9 @@ public class BaseDlg extends JDialog implements
     showErrorDlg(
 	owner,
 	EmuUtil.createErrorMsg(
-		"Die Datei \'" + file.getPath()
-			+ "\'\nkann nicht ge\u00F6ffnet werden.",
+		LangUtil.tr(
+			"Die Datei ''{0}''\nkann nicht ge\u00F6ffnet werden.",
+			file.getPath() ),
 		ex ) );
   }
 

@@ -25,6 +25,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.HexDocument;
 import jkcemu.base.UserCancelException;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 import jkcemu.emusys.CustomSys;
 import jkcemu.settings.AbstractSettingsFld;
 
@@ -134,7 +135,8 @@ public class IOSettingsFld
     gbc.gridy++;
     add( this.labelSioClockA, gbc );
 
-    this.comboSioClockA = GUIFactory.createComboBox( SIO_CLOCK_ITEMS );
+    this.comboSioClockA = GUIFactory.createComboBox(
+				LangUtil.tr( SIO_CLOCK_ITEMS ) );
     this.comboSioClockA.setEditable( false );
     gbc.insets.left = 5;
     gbc.gridx++;
@@ -147,7 +149,8 @@ public class IOSettingsFld
     gbc.gridy++;
     add( this.labelSioClockB, gbc );
 
-    this.comboSioClockB = GUIFactory.createComboBox( SIO_CLOCK_ITEMS );
+    this.comboSioClockB = GUIFactory.createComboBox(
+				LangUtil.tr( SIO_CLOCK_ITEMS ) );
     this.comboSioClockB.setEditable( false );
     gbc.insets.left = 5;
     gbc.gridx++;
@@ -159,7 +162,8 @@ public class IOSettingsFld
     gbc.gridy++;
     add( this.labelSioOutA, gbc );
 
-    this.comboSioOutA = GUIFactory.createComboBox( SIO_OUT_ITEMS );
+    this.comboSioOutA = GUIFactory.createComboBox(
+				LangUtil.tr( SIO_OUT_ITEMS ) );
     this.comboSioOutA.setEditable( false );
     gbc.insets.left = 5;
     gbc.gridx++;
@@ -171,7 +175,8 @@ public class IOSettingsFld
     gbc.gridy++;
     add( this.labelSioOutB, gbc );
 
-    this.comboSioOutB = GUIFactory.createComboBox( SIO_OUT_ITEMS );
+    this.comboSioOutB = GUIFactory.createComboBox(
+				LangUtil.tr( SIO_OUT_ITEMS ) );
     this.comboSioOutB.setEditable( false );
     gbc.insets.left = 5;
     gbc.gridx++;

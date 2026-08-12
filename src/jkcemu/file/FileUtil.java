@@ -225,9 +225,11 @@ public class FileUtil
 	    } else {
 	      BaseDlg.showErrorDlg(
 			owner,
-			dirFile.getPath() + " existiert bereits\n"
-				+ "und kann nicht als Verzeichnis"
-				+ " angelegt werden." );
+			LangUtil.tr(
+				"{0} existiert bereits\n"
+					+ "und kann nicht als Verzeichnis"
+					+ " angelegt werden.",
+				dirFile.getPath() ) );
 	      dirFile = null;
 	    }
 	  }
@@ -1286,11 +1288,14 @@ public class FileUtil
 	  String msg = ex.getMessage();
 	  BaseDlg.showErrorDlg(
 			owner,
-			String.format(
-				"%s kann nicht geladen werden%s%s",
-				objName,
-				msg != null ? ":\n" : ".",
-				msg != null ? msg : "" ) );
+			msg != null ?
+				LangUtil.tr(
+					"{0} kann nicht geladen werden:\n{1}",
+					objName,
+					msg )
+				: LangUtil.tr(
+					"{0} kann nicht geladen werden.",
+					objName ) );
 	  rv = null;
 	}
       }

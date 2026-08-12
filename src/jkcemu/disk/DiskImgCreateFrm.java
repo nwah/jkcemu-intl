@@ -1266,9 +1266,10 @@ public class DiskImgCreateFrm
 	}
 	if( !BaseDlg.showYesNoDlg(
 		this,
-		"Datei " + fName
-			+ ":\nDie Datei ist leer!\n"
-			+ "Trotzdem hinzuf\u00FCgen?" ) )
+		LangUtil.tr(
+			"Datei {0}:\nDie Datei ist leer!\n"
+				+ "Trotzdem hinzuf\u00FCgen?",
+			fName ) ) )
 	{
 	  file = null;
 	}
@@ -1285,12 +1286,13 @@ public class DiskImgCreateFrm
 	    if( BaseDlg.showYesNoDlg(
 			this,
 			DirectoryFloppyDisk.SYS_FILE_NAME + ":\n"
-				+ "JKCEMU verwendet Dateien mit diesem Namen"
-				+ " f\u00FCr den Inhalt der Systemspuren.\n"
-				+ "M\u00F6chten Sie deshalb nun diese Datei"
-				+ " f\u00FCr die Systemspuren verwenden,\n"
-				+ "anstelle Sie als gew\u00F6hnliche Datei"
-				+ " im Directory einzubinden?" ) )
+				+ LangUtil.tr(
+					"JKCEMU verwendet Dateien mit diesem Namen"
+					+ " f\u00FCr den Inhalt der Systemspuren.\n"
+					+ "M\u00F6chten Sie deshalb nun diese Datei"
+					+ " f\u00FCr die Systemspuren verwenden,\n"
+					+ "anstelle Sie als gew\u00F6hnliche Datei"
+					+ " im Directory einzubinden?" ) ) )
 	    {
 	      this.fldSysTrackFileName.setFile( file );
 	      this.btnSysTrackFileRemove.setEnabled( true );

@@ -47,6 +47,7 @@ import jkcemu.emusys.NANOS;
 import jkcemu.emusys.Z1013;
 import jkcemu.emusys.Z9001;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class SaveDlg extends BaseDlg implements DocumentListener
@@ -790,8 +791,8 @@ public class SaveDlg extends BaseDlg implements DocumentListener
 	  catch( IOException ex ) {
 	    showErrorDlg(
 		  this,
-		  "Datei kann nicht gespeichert werden.\n\n"
-			  + ex.getMessage() );
+		  LangUtil.tr( "Datei kann nicht gespeichert werden." )
+			  + "\n\n" + ex.getMessage() );
 	  }
 	  catch( Exception ex ) {
 	    showErrorDlg( this, ex.getMessage() );

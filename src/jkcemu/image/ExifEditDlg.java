@@ -24,6 +24,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.CharConverter;
 
 
@@ -272,9 +273,10 @@ public class ExifEditDlg extends BaseDlg
     catch( UnsupportedEncodingException ex ) {
       showErrorDlg(
 		this,
-		label.getText() + "Der Text enth\u00E4lt Zeichen"
-			+ " aus einem Zeichensatz,\n"
-			+ "der hier nicht unterst\u00FCtzt wird." );
+		label.getText() + LangUtil.tr(
+			"Der Text enth\u00E4lt Zeichen"
+				+ " aus einem Zeichensatz,\n"
+				+ "der hier nicht unterst\u00FCtzt wird." ) );
     }
   }
 

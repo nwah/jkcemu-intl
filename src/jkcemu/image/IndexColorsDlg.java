@@ -488,9 +488,9 @@ public class IndexColorsDlg extends BaseDlg
 	  if( oldIdxColors <= maxColors ) {
 	    state = BaseDlg.showYesNoDlg(
 		this,
-		String.format(
+		LangUtil.tr(
 			"Das Bild hat bereits ein indexiertes Farbmodell"
-				+ " mit %d Farben.\n"
+				+ " mit {0} Farben.\n"
 				+ "M\u00F6glicherweise werden nicht alle"
 				+ " diese Farben verwendet,\n"
 				+ "so dass die Farbpalette vielleicht"

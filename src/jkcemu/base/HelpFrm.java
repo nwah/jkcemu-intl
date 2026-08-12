@@ -1022,8 +1022,8 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 	catch( Exception ex ) {
 	  BaseDlg.showErrorDlg(
 		this,
-		"Die Hilfeseite kann nicht angezeigt werden.\n\n"
-			+ ex.getMessage() );
+		LangUtil.tr( "Die Hilfeseite kann nicht angezeigt werden." )
+			+ "\n\n" + ex.getMessage() );
 	}
       }
     }

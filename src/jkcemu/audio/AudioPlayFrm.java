@@ -39,6 +39,7 @@ import jkcemu.base.BaseDlg;
 import jkcemu.base.BaseFrm;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class AudioPlayFrm
@@ -306,7 +307,7 @@ public class AudioPlayFrm
 
   private AudioPlayFrm( PCMDataSource pcm, String title )
   {
-    setTitle( Main.APPNAME + " Audioplayer" );
+    setTitle( Main.APPNAME + " " + LangUtil.tr( "Audioplayer" ) );
     this.pcm         = pcm;
     this.frameCount  = pcm.getFrameCount();
     this.dFrameCount = (double) frameCount;

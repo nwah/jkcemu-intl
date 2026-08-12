@@ -151,6 +151,28 @@ public class LangUtil
   }
 
 
+  /*
+   * Uebersetzung eines Textarrays,
+   * wobei ein neues Array zurueckgeliefert wird.
+   * Die Methode ist fuer Auswahlfelder gedacht,
+   * deren Auswahl ueber den Index und nicht ueber den angezeigten
+   * Text ausgewertet wird.
+   * Bei Auswahlfeldern, die den Text selbst als Wert verwenden,
+   * darf sie nicht angewendet werden!
+   */
+  public static String[] tr( String[] texts )
+  {
+    String[] rv = texts;
+    if( texts != null ) {
+      rv = new String[ texts.length ];
+      for( int i = 0; i < texts.length; i++ ) {
+	rv[ i ] = tr( texts[ i ] );
+      }
+    }
+    return rv;
+  }
+
+
   public static String tr( String text, Object... args )
   {
     String rv = tr( text );

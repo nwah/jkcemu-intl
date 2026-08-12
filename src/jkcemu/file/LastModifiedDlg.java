@@ -348,7 +348,9 @@ public class LastModifiedDlg
 	catch( ClassCastException ex ) {}
 	for( String s : a ) {
 	  JCheckBox cb = GUIFactory.createCheckBox(
-		"In " + s.toUpperCase() + "-Dateien hinein wechseln" );
+		LangUtil.tr(
+			"In {0}-Dateien hinein wechseln",
+			s.toUpperCase() ) );
 	  cb.setEnabled( hasDirs || foundVfsSuffixes.contains( s ) );
 	  gbc.insets.top = 0;
 	  gbc.gridy++;

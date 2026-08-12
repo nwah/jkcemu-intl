@@ -8350,7 +8350,7 @@ msgid ""
 "als Zeichen im Systemzeichensatz abbilden lassen.\n"
 "Diese Bytes wurden ignoriert. Sie sollten evtl. versuchen,\n"
 "die Datei mit einem anderen Zeichensatz zu öffnen\n"
-"(siehe Menüpunkt ''Öffnen mit Zeichensatz...'')."
+"(siehe Menüpunkt 'Öffnen mit Zeichensatz...')."
 msgstr ""
 "The file contains bytes or byte sequences that cannot be\n"
 "mapped to characters in the system character set.\n"
@@ -8364,7 +8364,7 @@ msgid ""
 "als Zeichen im dem ausgewählten Zeichensatz abbilden lassen.\n"
 "Diese Bytes wurden ignoriert. Sie sollten evtl. versuchen,\n"
 "die Datei mit einem anderen Zeichensatz zu öffnen\n"
-"(siehe Menüpunkt ''Öffnen mit Zeichensatz...'')."
+"(siehe Menüpunkt 'Öffnen mit Zeichensatz...')."
 msgstr ""
 "The file contains bytes or byte sequences that cannot be\n"
 "mapped to characters in the selected character set.\n"
@@ -10204,3 +10204,223 @@ msgstr "transmitter interrupt"
 #: z80emu/Z80SIO.java:53
 msgid "Externer Status-Interrupt"
 msgstr "external status interrupt"
+
+#: jkcemu/image/ImageFrm.java:2511
+msgid "LLC2-HIRES-Format (512x256, monochrom) ohne Anpassung für 4:3-Anzeige"
+msgstr "LLC2 HIRES format (512x256, monochrome) without adjustment for 4:3 display"
+
+#: jkcemu/image/ImageFrm.java:2516
+msgid "LLC2-HIRES-Format (512x256, monochrom) mit Anpassung für 4:3-Anzeige"
+msgstr "LLC2 HIRES format (512x256, monochrome) with adjustment for 4:3 display"
+
+#: jkcemu/emusys/A5105.java
+msgid "A5105 (BIC)"
+msgstr "A5105 (BIC)"
+
+#: jkcemu/emusys/C80.java
+msgid "C-80"
+msgstr "C-80"
+
+#: jkcemu/emusys/CustomSys.java
+msgid "Benutzerdefinierter Computer"
+msgstr "User-Defined Computer"
+
+#: jkcemu/emusys/HueblerEvertMC.java
+msgid "Hübler/Evert-MC"
+msgstr "Hübler/Evert-MC"
+
+#: jkcemu/emusys/HueblerGraphicsMC.java
+msgid "Hübler-Grafik-MC"
+msgstr "Hübler-Grafik-MC"
+
+#: jkcemu/emusys/KCcompact.java
+msgid "KC compact"
+msgstr "KC compact"
+
+#: jkcemu/emusys/KramerMC.java
+msgid "Kramer-MC"
+msgstr "Kramer-MC"
+
+#: jkcemu/emusys/LC80.java
+msgid "LC-80"
+msgstr "LC-80"
+
+#: jkcemu/emusys/PCM.java
+msgid "PC/M"
+msgstr "PC/M"
+
+#: jkcemu/emusys/Poly880.java
+msgid "Poly-880"
+msgstr "Poly-880"
+
+#: jkcemu/emusys/ZXSpectrum.java
+msgid "ZX Spectrum"
+msgstr "ZX Spectrum"
+
+msgid "Suchen nach:"
+msgstr "Search for:"
+
+msgid "E/A-Adresse Datenregister (hex):"
+msgstr "I/O address of data register (hex):"
+
+msgid "E/A-Adresse Statusregister (hex):"
+msgstr "I/O address of status register (hex):"
+
+msgid "E/A-Adresse Terminal Count (hex):"
+msgstr "I/O address of terminal count (hex):"
+
+msgid "Terminal Count auslösen bei:"
+msgstr "Trigger terminal count on:"
+
+msgid "Gelesener Wert von nicht belegten E/A-Adressen (hex):"
+msgstr "Value read from unused I/O addresses (hex):"
+
+msgid "CTC Ausgang 0"
+msgstr "CTC output 0"
+
+msgid "CTC Ausgang 1"
+msgstr "CTC output 1"
+
+msgid "CTC Ausgang 2"
+msgstr "CTC output 2"
+
+msgid "nichts angeschlossen"
+msgstr "nothing connected"
+
+msgid "Anfangsadresse (hex):"
+msgstr "Start address (hex):"
+
+msgid "Größe (hex):"
+msgstr "Size (hex):"
+
+msgid "E/A-Adresse (hex):"
+msgstr "I/O address (hex):"
+
+msgid "Anzahl Textspalten:"
+msgstr "Number of text columns:"
+
+msgid "Anzahl Textzeilen:"
+msgstr "Number of text rows:"
+
+msgid "Anfangsadresse Bildspeicher (hex):"
+msgstr "Start address of video RAM (hex):"
+
+msgid "Inhalt der ROM-Erweiterung:"
+msgstr "Content of the ROM expansion:"
+
+msgid "Suchen in:"
+msgstr "Search in:"
+
+msgid "Wartezeit vor Eingabe:"
+msgstr "Wait time before input:"
+
+msgid "Ladeadresse (optional):"
+msgstr "Load address (optional):"
+
+msgid "Wartezeit vor dem Laden:"
+msgstr "Wait time before loading:"
+
+msgid "Laufwerk {0}"
+msgstr "Drive {0}"
+
+msgid "Laufwerk: {0}"
+msgstr "Drive: {0}"
+
+msgid "Diskette in Laufwerk {0} nicht gefunden oder nicht nutzbar"
+msgstr "Floppy disk in drive {0} not found or not usable"
+
+msgid "Audioplayer"
+msgstr "Audio Player"
+
+msgid "Speichern der Datei fehlgeschlagen"
+msgstr "Saving the file failed"
+
+msgid "Die Datei ''{0}''\nkann nicht geöffnet werden."
+msgstr "The file ''{0}''\ncannot be opened."
+
+msgid "Die Hilfeseite kann nicht angezeigt werden."
+msgstr "The help page cannot be displayed."
+
+msgid "JKCEMU: {0} Tastatur"
+msgstr "JKCEMU: {0} keyboard"
+
+msgid "Datei {0}:\nDie Datei ist leer!\nTrotzdem hinzufügen?"
+msgstr "File {0}:\nThe file is empty!\nAdd it anyway?"
+
+msgid "JKCEMU verwendet Dateien mit diesem Namen für den Inhalt der Systemspuren.\nMöchten Sie deshalb nun diese Datei für die Systemspuren verwenden,\nanstelle Sie als gewöhnliche Datei im Directory einzubinden?"
+msgstr "JKCEMU uses files with this name for the content of the system tracks.\nWould you therefore like to use this file for the system tracks\ninstead of including it as an ordinary file in the directory?"
+
+msgid "Die RAM-Floppy kann nicht geladen werden."
+msgstr "The RAM floppy cannot be loaded."
+
+msgid "{0} existiert bereits\nund kann nicht als Datei angelegt werden."
+msgstr "{0} already exists\nand cannot be created as a file."
+
+msgid "{0} existiert bereits\nund kann nicht als Verzeichnis angelegt werden."
+msgstr "{0} already exists\nand cannot be created as a directory."
+
+msgid "{0} kann nicht geladen werden:\n{1}"
+msgstr "{0} cannot be loaded:\n{1}"
+
+msgid "{0} kann nicht geladen werden."
+msgstr "{0} cannot be loaded."
+
+msgid "In {0}-Dateien hinein wechseln"
+msgstr "Descend into {0} files"
+
+msgid "Datei, die die Liste enthält, konnte nicht gelöscht werden.\n"
+msgstr "The file containing the list could not be deleted.\n"
+
+msgid "Datei kann nicht gespeichert werden."
+msgstr "The file cannot be saved."
+
+msgid "Der Text enthält Zeichen aus einem Zeichensatz,\nder hier nicht unterstützt wird."
+msgstr "The text contains characters from a character set\nthat is not supported here."
+
+msgid "Das Bild hat bereits ein indexiertes Farbmodell mit {0} Farben.\nMöglicherweise werden nicht alle diese Farben verwendet,\nso dass die Farbpalette vielleicht verkleinert werden kann.\nMöchten Sie versuchen, die Farbpalette zu verkleinern?"
+msgstr "The image already has an indexed color model with {0} colors.\nPossibly not all of these colors are used,\nso the color palette may be reducible.\nWould you like to try to reduce the color palette?"
+
+msgid "Der Druckauftrag kann nicht gespeichert werden."
+msgstr "The print job cannot be saved."
+
+msgid "Erzeugter Programmcode:"
+msgstr "Generated program code:"
+
+msgid "DISK-Treiber (Zugriff auf Laufwerke, nur relevant bei Zielsystemen ''{0}'' und ''{1}'')"
+msgstr "DISK driver (access to drives, only relevant for the target systems ''{0}'' and ''{1}'')"
+
+msgid "Im Konfigurationsverzeichnis befindet sich eine Bibliothek,\ndie durch JKCEDMU selbst verwendet wird.\nAus diesem Grund kann das Verzeichnis erst nach\ndem Schließen gelöscht werden."
+msgstr "The configuration directory contains a library\nthat is used by JKCEMU itself.\nFor this reason the directory can only be deleted\nafter closing the program."
+
+msgid "Das JKCEMU-Konfigurationsverzeichnis konnte nicht gelöscht werden."
+msgstr "The JKCEMU configuration directory could not be deleted."
+
+msgid "Datei ''{0}''\nkann nicht gespeichert werden."
+msgstr "The file ''{0}''\ncannot be saved."
+
+msgid "Die Datei kann nicht gespeichert werden."
+msgstr "The file cannot be saved."
+
+msgid "{0} Seitenumbruchzeichen entfernt"
+msgstr "{0} page break characters removed"
+
+msgid "{0} Ersetzungen"
+msgstr "{0} replacements"
+
+msgid "1 Textersetzung durchgeführt."
+msgstr "1 text replacement performed."
+
+msgid "{0} Textersetzungen durchgeführt."
+msgstr "{0} text replacements performed."
+
+msgid "{0} hat ungültiges Format."
+msgstr "{0} has an invalid format."
+
+msgid "Die Befehlsaufzeichnungsdatei kann nicht\nzum Schreiben geöffnet werden."
+msgstr "The instruction recording file cannot be\nopened for writing."
+
+msgid "{0} des ausgewählten Bereichs: {1}"
+msgstr "{0} of the selected range: {1}"
+
+msgid "{0}: Unbekannter bzw. nicht unterstützter Algorithmus"
+msgstr "{0}: Unknown or unsupported algorithm"

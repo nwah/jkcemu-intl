@@ -49,6 +49,7 @@ import jkcemu.emusys.LLC2;
 import jkcemu.emusys.Z1013;
 import jkcemu.emusys.Z9001;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class LoadDlg extends BaseDlg implements DocumentListener
@@ -808,7 +809,8 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     catch( IOException ex ) {
       showErrorDlg(
 		owner,
-		"Datei kann nicht geladen werden.\n\n" + ex.getMessage() );
+		LangUtil.tr( "Datei kann nicht geladen werden." )
+					+ "\n\n" + ex.getMessage() );
     }
     return rv;
   }

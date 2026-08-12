@@ -48,6 +48,11 @@ import jkcemu.lang.LangUtil;
 
 public class EtcSettingsFld extends AbstractSettingsFld
 {
+  /*
+   * Der Text wird erst bei der Verwendung uebersetzt,
+   * da statische Felder initialisiert werden,
+   * bevor die Sprache feststeht.
+   */
   private static final String MSG_DELETE_CONFIG_DIR_MANUALLY
 		= "Beenden Sie bitte den Emulator und l\u00F6schen Sie\n"
 			+ "das Konfigurationsverzeichnis selbst.";
@@ -497,14 +502,15 @@ public class EtcSettingsFld extends AbstractSettingsFld
 		    if( libDir.equals( configDir ) ) {
 		      BaseDlg.showErrorDlg(
 			this,
-			"Im Konfigurationsverzeichnis befindet sich"
-				+ " eine Bibliothek,\n"
-				+ "die durch JKCEDMU selbst verwendet wird.\n"
-				+ "Aus diesem Grund kann das Verzeichnis"
-				+ " erst nach\n"
-				+ "dem Schlie\u00DFen gel\u00F6scht"
-				+ " werden.\n\n"
-				+ MSG_DELETE_CONFIG_DIR_MANUALLY );
+			LangUtil.tr(
+				"Im Konfigurationsverzeichnis befindet sich"
+					+ " eine Bibliothek,\n"
+					+ "die durch JKCEDMU selbst verwendet wird.\n"
+					+ "Aus diesem Grund kann das Verzeichnis"
+					+ " erst nach\n"
+					+ "dem Schlie\u00DFen gel\u00F6scht"
+					+ " werden." )
+				+ "\n\n" + LangUtil.tr( MSG_DELETE_CONFIG_DIR_MANUALLY ) );
 		      doOpenConfigDir( true );
 		      state = false;
 		    }
@@ -536,9 +542,10 @@ public class EtcSettingsFld extends AbstractSettingsFld
 	  } else {
 	    BaseDlg.showErrorDlg(
 		this,
-		"Das JKCEMU-Konfigurationsverzeichnis"
-			+ " konnte nicht gel\u00F6scht werden.\n"
-			+ MSG_DELETE_CONFIG_DIR_MANUALLY );
+		LangUtil.tr(
+			"Das JKCEMU-Konfigurationsverzeichnis"
+				+ " konnte nicht gel\u00F6scht werden." )
+			+ "\n" + LangUtil.tr( MSG_DELETE_CONFIG_DIR_MANUALLY ) );
 	    doOpenConfigDir( true );
 	  }
 	}

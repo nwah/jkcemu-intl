@@ -550,8 +550,8 @@ public abstract class AbstractHexCharFrm
 	  if( value != null ) {
 	    BaseDlg.showInfoDlg(
 		this,
-		String.format(
-			"%s des ausgew\u00E4hlten Bereichs: %s",
+		LangUtil.tr(
+			"{0} des ausgew\u00E4hlten Bereichs: {1}",
 			cc.getAlgorithm(),
 			value ) );
 	  }
@@ -559,8 +559,10 @@ public abstract class AbstractHexCharFrm
 	catch( NoSuchAlgorithmException ex ) {
 	  BaseDlg.showErrorDlg(
 		this,
-		algorithm + ": Unbekannter bzw. nicht"
-			+ " unterst\u00FCtzter Algorithmus" );
+		LangUtil.tr(
+			"{0}: Unbekannter bzw. nicht"
+				+ " unterst\u00FCtzter Algorithmus",
+			algorithm ) );
 	}
       }
     }

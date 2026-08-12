@@ -1,0 +1,3101 @@
+<html>
+<head><title>BASIC Compiler: Statements</title></head>
+<body>
+ <h1><a href="../basicc.htm">BASIC Compiler</a></h1>
+
+ <h2>Statements</h2>
+  <ul>
+   <li>
+    <a href="instructions.htm#instr_list">1. List of Statements</a>
+   </li>
+   <li>
+    <a href="instructions.htm#instr_descr">2. Description of the Statements</a>
+   </li>
+  </ul>
+ <br/>
+  The compiler supports the following BASIC statements:
+ <br/>
+  &nbsp;<a href="instructions.htm#asm"><tt>ASM</tt></a>
+  &nbsp;<a href="instructions.htm#border"><tt>BORDER</tt></a>
+  &nbsp;<a href="instructions.htm#call"><tt>CALL</tt></a>
+  &nbsp;<a href="instructions.htm#circle"><tt>CIRCLE</tt></a>
+  &nbsp;<a href="instructions.htm#close"><tt>CLOSE</tt></a>
+  &nbsp;<a href="instructions.htm#cls"><tt>CLS</tt></a>
+  &nbsp;<a href="instructions.htm#color"><tt>COLOR</tt></a>
+  &nbsp;<a href="instructions.htm#cursor"><tt>CURSOR</tt></a>
+  &nbsp;<a href="instructions.htm#data"><tt>DATA</tt></a>
+  &nbsp;<a href="instructions.htm#declare"><tt>DECLARE</tt></a>
+  &nbsp;<a href="instructions.htm#defusr"><tt>DEF</tt></a>
+  &nbsp;<a href="instructions.htm#defusr"><tt>DEFUSR</tt></a>
+  &nbsp;<a href="instructions.htm#dim"><tt>DIM</tt></a>
+  &nbsp;<a href="instructions.htm#do"><tt>DO</tt></a>
+  &nbsp;<a href="instructions.htm#doke"><tt>DOKE</tt></a>
+  &nbsp;<a href="instructions.htm#draw"><tt>DRAW</tt></a>
+  &nbsp;<a href="instructions.htm#drawr"><tt>DRAWR</tt></a>
+  &nbsp;<a href="instructions.htm#if"><tt>ELSE</tt></a>
+  &nbsp;<a href="instructions.htm#if"><tt>ELSEIF</tt></a>
+  &nbsp;<a href="instructions.htm#end"><tt>END</tt></a>
+  &nbsp;<a href="instructions.htm#if"><tt>ENDIF</tt></a>
+  &nbsp;<a href="instructions.htm#exit"><tt>EXIT</tt></a>
+  &nbsp;<a href="instructions.htm#for"><tt>FOR</tt></a>
+  &nbsp;<a href="instructions.htm#function"><tt>FUNCTION</tt></a>
+  &nbsp;<a href="instructions.htm#gosub"><tt>GOSUB</tt></a>
+  &nbsp;<a href="instructions.htm#goto"><tt>GOTO</tt></a>
+  &nbsp;<a href="instructions.htm#if"><tt>IF</tt></a>
+  &nbsp;<a href="instructions.htm#include"><tt>INCLUDE</tt></a>
+  &nbsp;<a href="instructions.htm#ink"><tt>INK</tt></a>
+  &nbsp;<a href="instructions.htm#input"><tt>INPUT</tt></a>
+  &nbsp;<a href="instructions.htm#label"><tt>LABEL</tt></a>
+  &nbsp;<a href="instructions.htm#let"><tt>LET</tt></a>
+  &nbsp;<a href="instructions.htm#line"><tt>LINE</tt></a>
+  &nbsp;<a href="instructions.htm#line_input"><tt>LINE&nbsp;INPUT</tt></a>
+  &nbsp;<a href="instructions.htm#local"><tt>LOCAL</tt></a>
+  &nbsp;<a href="instructions.htm#locate"><tt>LOCATE</tt></a>
+  &nbsp;<a href="instructions.htm#loop"><tt>LOOP</tt></a>
+  &nbsp;<a href="instructions.htm#lprint"><tt>LPRINT</tt></a>
+  &nbsp;<a href="instructions.htm#move"><tt>MOVE</tt></a>
+  &nbsp;<a href="instructions.htm#mover"><tt>MOVER</tt></a>
+  &nbsp;<a href="instructions.htm#next"><tt>NEXT</tt></a>
+  &nbsp;<a href="instructions.htm#on_gosub"><tt>ON...GOSUB</tt></a>
+  &nbsp;<a href="instructions.htm#on_goto"><tt>ON...GOTO</tt></a>
+  &nbsp;<a href="instructions.htm#open"><tt>OPEN</tt></a>
+  &nbsp;<a href="instructions.htm#out"><tt>OUT</tt></a>
+  &nbsp;<a href="instructions.htm#paint"><tt>PAINT</tt></a>
+  &nbsp;<a href="instructions.htm#paper"><tt>PAPER</tt></a>
+  &nbsp;<a href="instructions.htm#password_input"><tt>PASSWORD&nbsp;INPUT</tt></a>
+  &nbsp;<a href="instructions.htm#pause"><tt>PAUSE</tt></a>
+  &nbsp;<a href="instructions.htm#pen"><tt>PEN</tt></a>
+  &nbsp;<a href="instructions.htm#plot"><tt>PLOT</tt></a>
+  &nbsp;<a href="instructions.htm#plotr"><tt>PLOTR</tt></a>
+  &nbsp;<a href="instructions.htm#poke"><tt>POKE</tt></a>
+  &nbsp;<a href="instructions.htm#preset"><tt>PRESET</tt></a>
+  &nbsp;<a href="instructions.htm#print"><tt>PRINT</tt></a>
+  &nbsp;<a href="instructions.htm#pset"><tt>PSET</tt></a>
+  &nbsp;<a href="instructions.htm#read"><tt>READ</tt></a>
+  &nbsp;<a href="instructions.htm#rem"><tt>REM</tt></a>
+  &nbsp;<a href="instructions.htm#restore"><tt>RESTORE</tt></a>
+  &nbsp;<a href="instructions.htm#return"><tt>RETURN</tt></a>
+  &nbsp;<a href="instructions.htm#screen"><tt>SCREEN</tt></a>
+  &nbsp;<a href="instructions.htm#select_case"><tt>SELECT&nbsp;CASE</tt></a>
+  &nbsp;<a href="instructions.htm#sub"><tt>SUB</tt></a>
+  &nbsp;<a href="instructions.htm#swap"><tt>SWAP</tt></a>
+  &nbsp;<a href="instructions.htm#wait"><tt>WAIT</tt></a>
+  &nbsp;<a href="instructions.htm#wend"><tt>WEND</tt></a>
+  &nbsp;<a href="instructions.htm#while"><tt>WHILE</tt></a>
+ <br/><br/>
+  Click on a statement to jump to its detailed
+  description with syntax and meaning.
+  If no syntax is given there,
+  the statement has no arguments.
+ <br/><br/>
+
+ <h3><a name="instr_list">1. List of Statements</a></h3>
+  <table border="1">
+   <tr><th nowrap="nowrap">Statement</th><th nowrap="nowrap">Meaning</th></tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#asm"><tt>ASM</tt></a></td>
+    <td>Insert assembler source code</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#border"><tt>BORDER</tt></a></td>
+    <td>Set border color</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#call"><tt>CALL</tt></a></td>
+    <td>Call a subroutine present in machine code</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#circle"><tt>CIRCLE</tt></a></td>
+    <td>Draw a circle</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#close"><tt>CLOSE</tt></a></td>
+    <td>Close a file or I/O channel</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#cls"><tt>CLS</tt></a></td>
+    <td>Clear the screen</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#color"><tt>COLOR</tt></a></td>
+    <td>Set colors</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#cursor"><tt>CURSOR</tt></a></td>
+    <td>Turn the cursor off or on</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#data"><tt>DATA</tt></a></td>
+    <td>
+     Specification of numeric values and strings
+     that can be read with READ
+    </td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#declare"><tt>DECLARE</tt></a></td>
+    <td>Declare a user-defined function or procedure</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#defusr"><tt>DEF</tt></a></td>
+    <td>Set the address of a USR function</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#defusr"><tt>DEFUSR</tt></a></td>
+    <td>Set the address of a USR function</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#dim"><tt>DIM</tt></a></td>
+    <td>Declare global variables</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#do"><tt>DO</tt></a></td>
+    <td>Beginning of a DO loop</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#doke"><tt>DOKE</tt></a></td>
+    <td>Write a 16-bit value to memory</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#draw"><tt>DRAW</tt></a></td>
+    <td>Draw a line</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#drawr"><tt>DRAWR</tt></a></td>
+    <td>Draw a line</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#if"><tt>ELSE</tt></a></td>
+    <td>Part of an IF statement</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#if"><tt>ELSEIF</tt></a></td>
+    <td>Additional branch in an IF statement</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#end"><tt>END</tt></a></td>
+    <td>Terminate a function, procedure, or BASIC program</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#if"><tt>ENDIF</tt></a></td>
+    <td>End of an IF statement</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#exit"><tt>EXIT</tt></a></td>
+    <td>Exit a loop early</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#for"><tt>FOR</tt></a></td>
+    <td>Beginning of a FOR loop</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#function"><tt>FUNCTION</tt></a></td>
+    <td>Implementation of a user-defined function</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#gosub"><tt>GOSUB</tt></a></td>
+    <td>Call a subroutine</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#goto"><tt>GOTO</tt></a></td>
+    <td>Jump to another point in the program</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#if"><tt>IF</tt></a></td>
+    <td>Conditional branch</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#include"><tt>INCLUDE</tt></a></td>
+    <td>Include another source code file</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#ink"><tt>INK</tt></a></td>
+    <td>Set foreground color</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#input"><tt>INPUT</tt></a></td>
+    <td>
+     Enter numbers and strings from the keyboard or
+     read them from an input channel
+    </td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#label"><tt>LABEL</tt></a></td>
+    <td>Output text in graphics mode</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#let"><tt>LET</tt></a></td>
+    <td>Assign a value to a variable</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#line"><tt>LINE</tt></a></td>
+    <td>Draw a line or rectangle</td>
+   </tr>
+   <tr valign="top">
+    <td>
+     <a href="instructions.htm#line_input"><tt>LINE&nbsp;INPUT</tt></a>
+    </td>
+    <td>Enter a line of text or read it from an input channel</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#local"><tt>LOCAL</tt></a></td>
+    <td>Declare local variables</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#locate"><tt>LOCATE</tt></a></td>
+    <td>Position the cursor</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#loop"><tt>LOOP</tt></a></td>
+    <td>End of a DO loop</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#lprint"><tt>LPRINT</tt></a></td>
+    <td>Output to the printer</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#move"><tt>MOVE</tt></a></td>
+    <td>Position the graphics cursor absolutely</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#mover"><tt>MOVER</tt></a></td>
+    <td>Position the graphics cursor relatively</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#next"><tt>NEXT</tt></a></td>
+    <td>End of a FOR loop</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#on_gosub"><tt>ON...GOSUB</tt></a></td>
+    <td>Call a subroutine from a list of subroutines</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#on_goto"><tt>ON...GOTO</tt></a></td>
+    <td>
+     Jump to a line from a list of line numbers or labels
+    </td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#open"><tt>OPEN</tt></a></td>
+    <td>Open a file or I/O channel</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#out"><tt>OUT</tt></a></td>
+    <td>Output a value to an output port</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#paint"><tt>PAINT</tt></a></td>
+    <td>Fill an area</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#paper"><tt>PAPER</tt></a></td>
+    <td>Set background color</td>
+   </tr>
+   <tr valign="top">
+    <td>
+     <a href="instructions.htm#password_input"><tt>PASSWORD&nbsp;INPUT</tt></a>
+    </td>
+    <td>Enter a password</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#pause"><tt>PAUSE</tt></a></td>
+    <td>Pause the program</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#pen"><tt>PEN</tt></a></td>
+    <td>Set the graphics pen (pixel-setting mode)</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#plot"><tt>PLOT</tt></a></td>
+    <td>Position the graphics cursor absolutely and set a pixel</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#plotr"><tt>PLOTR</tt></a></td>
+    <td>Position the graphics cursor relatively and set a pixel</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#poke"><tt>POKE</tt></a></td>
+    <td>Write an 8-bit value to memory</td>
+   </tr>
+   <tr valign="top">
+    <td>
+     <a href="instructions.htm#preset"><tt>PRESET</tt></a>
+    </td>
+    <td>Reset a pixel on the screen</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#print"><tt>PRINT</tt></a></td>
+    <td>Output to the screen or an output channel</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#pset"><tt>PSET</tt></a></td>
+    <td>Set a pixel on the screen</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#read"><tt>READ</tt></a></td>
+    <td>Read values from data specified with DATA</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#rem"><tt>REM</tt></a></td>
+    <td>Comment</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#restore"><tt>RESTORE</tt></a></td>
+    <td>Set or reset the read position for READ</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#return"><tt>RETURN</tt></a></td>
+    <td>End of a subroutine</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#screen"><tt>SCREEN</tt></a></td>
+    <td>Set a screen or graphics mode</td>
+   </tr>
+   <tr valign="top">
+    <td>
+     <a href="instructions.htm#select_case"><tt>SELECT&nbsp;CASE</tt></a>
+    </td>
+    <td>Conditional branches</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#sub"><tt>SUB</tt></a></td>
+    <td>Implementation of a user-defined procedure</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#swap"><tt>SWAP</tt></a></td>
+    <td>Swap the values of two variables</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#wait"><tt>WAIT</tt></a></td>
+    <td>Wait for a specific value at an input port</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#wend"><tt>WEND</tt></a></td>
+    <td>End of a WHILE loop</td>
+   </tr>
+   <tr valign="top">
+    <td><a href="instructions.htm#while"><tt>WHILE</tt></a></td>
+    <td>Beginning of a WHILE loop</td>
+   </tr>
+  </table>
+ <br/><br/>
+
+ <h3>
+  <a name="instr_descr">2. Description of the Statements</a>
+ </h3>
+  Elements enclosed in angle brackets serve as placeholders
+  and must be replaced accordingly.
+  Elements enclosed in square brackets are optional
+  and can be omitted.
+ <br/><br/>
+
+ <h3><a name="asm">ASM</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>ASM</tt> [ <tt>CODE</tt> ] &lt;string&gt;
+     [, &lt;string&gt; [, ...]]<br/>
+     <tt>ASM</tt> <tt>DATA</tt> &lt;string&gt;
+     [, &lt;string&gt; [, ...]]<br/>
+     <tt>ASM</tt> <tt>BSS</tt> &lt;string&gt;
+     [, &lt;string&gt; [, ...]]
+    </td>
+   </tr>
+   <tr><td>string:</td><td>string literal</td></tr>
+  </table>
+ <br/>
+  With the ASM statement, you can write your own assembler
+  routines within the BASIC program.
+  The specified strings are inserted unchanged
+  into the assembler source code generated by the compiler.
+ <br/><br/>
+  The first form, with the keyword CODE,
+  inserts the assembler text at the current position in the code segment.
+  The keyword CODE can also be omitted.
+  With the keyword DATA, the assembler code
+  is appended to the data segment.
+  The strings should therefore contain only the mnemonics
+  DB and DW, or their equivalent pseudo-instructions.
+  With BSS, the assembler code is written into the segment for
+  the memory cells and should therefore contain only
+  DS mnemonics.
+ <br/><br/>
+  In addition to the ASM statement, there is also the
+  <a href="functions.htm#asm">ASM</a> function.
+ <br/><br/>
+  <b>Attention!</b> Please read the notes on
+  <a href="userasm.htm">including your own assembler source code</a>!
+ <br/><br/>
+
+ <h3><a name="border">BORDER</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">BORDER&nbsp;&lt;integer expression&gt;</td>
+   </tr>
+  </table>
+ <br/>
+  This statement sets the color of the screen border.
+  The color number depends on the target system.
+  To write portable source code, you can also specify the color with a
+  <a href="constants.htm#color">constant</a>, e.g.:
+ <br/><br/>
+  <tt>&nbsp;BORDER&nbsp;GREEN</tt>
+ <br/><br/>
+  On a target system on which the border color cannot be set,
+  the statement has no effect.
+ <br/><br/>
+
+ <h3><a name="call">CALL</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>CALL</tt> &lt;address&gt;<br/>
+     <tt>CALL</tt> <tt>*</tt> &lt;hex address&gt;
+    </td>
+   </tr>
+   <tr><td>address:</td><td>integer expression</td></tr>
+   <tr><td>hex address:</td><td>address as a hexadecimal number</td></tr>
+  </table>
+ <br/>
+  The CALL statement calls a machine code subroutine
+  that begins at the specified address and
+  must be terminated with a return instruction.
+  Unlike the <a href="functions.htm#usr">USR</a> function,
+  no values can be passed.
+ <br/><br/>
+
+ <h3><a name="circle">CIRCLE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>CIRCLE</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;
+      <tt>,</tt> &lt;radius&gt;<br/>
+     <tt>CIRCLE (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt>
+      <tt>,</tt> &lt;radius&gt;
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>radius:</td>
+    <td>integer expression</td>
+   </tr>
+  </table>
+ <br/>
+  The CIRCLE statement draws a circle with the center
+  (X,Y) and the specified radius.
+  The graphics cursor is not affected.
+ <br/><br/>
+
+ <h3><a name="close">CLOSE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>CLOSE #</tt> &lt;channel&gt;
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>channel:</td>
+    <td>integer expression with the value 1 or 2</td>
+   </tr>
+  </table>
+ <br/>
+  The statement closes the specified I/O channel
+  and sets the error variables <a href="functions.htm#err">ERR</a>
+  and <a href="functions.htm#err$">ERR$</a>.
+  In the case of an output channel, any buffered data
+  is still written before the channel is closed.
+ <br/><br/>
+
+ <h3><a name="cls">CLS</a></h3>
+  The CLS statement clears the screen and moves the cursor
+  to the top left corner.
+  If a window has been set up in the monitor program or
+  via the corresponding system function,
+  the CLS statement applies only to the window area.
+ <br/><br/>
+
+ <h3><a name="color">COLOR</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>COLOR</tt> &lt;foreground color&gt;<br/>
+     <tt>COLOR</tt> &lt;foreground color&gt;
+	<tt>,</tt> &lt;background color&gt;<br/>
+     <tt>COLOR</tt> &lt;foreground color&gt;
+	<tt>,</tt> &lt;background color&gt;
+	<tt>,</tt> &lt;border color&gt;
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>foreground color:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>background color:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>border color:</td>
+    <td>integer expression</td>
+   </tr>
+  </table>
+ <br/>
+  The COLOR statement is used to set the foreground color and,
+  optionally, also the background or border color.
+  The colors can also be set individually with the statements
+  <a href="instructions.htm#ink">INK</a>,
+  <a href="instructions.htm#paper">PAPER</a> and
+  <a href="instructions.htm#border">BORDER</a>.
+ <br/><br/>
+
+ <h3><a name="cursor">CURSOR</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>CURSOR</tt> &lt;integer expression&gt;
+    </td>
+   </tr>
+  </table>
+ <br/>
+  The CURSOR statement is used to turn the text cursor on and off.
+  If the value&nbsp;0 is passed,
+  the statement turns the cursor off; any other value turns it on.
+ <br/><br/>
+  <b>Attention!</b> The CURSOR statement is not supported for
+  all target systems (see the notes on
+  <a href="targets.htm">target systems</a>).
+  If it is not supported for a particular system,
+  it can nevertheless still be used
+  when writing portable BASIC programs.
+  In that case it simply has no effect.
+ <br/><br/>
+
+ <h3><a name="data">DATA</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>DATA</tt> &lt;constant expression&gt; [ <tt>,</tt> ... ]
+    </td>
+   </tr>
+   <tr>
+    <td>constant expression:</td>
+    <td>numeric or string literal</td>
+   </tr>
+  </table>
+ <br/>
+  DATA is used to add data (numeric values or strings)
+  to an application-wide data area.
+  The values must be separated by commas and must be literals,
+  i.e. numbers or strings enclosed in double quotes.
+ <br/><br/>
+  Reading, and thereby making use of, this data
+  is done with the <a href="instructions.htm#read">READ</a> statement, e.g.:
+ <br/>
+  <tt>
+   &#10;<br/>
+   FOR I=1 TO 12&#10;<br/>
+   &nbsp;&nbsp;READ M$,N&#10;<br/>
+   &nbsp;&nbsp;PRINT M$;":";N;"days"&#10;<br/>
+   NEXT I&#10;<br/>
+   END&#10;<br/>
+   &#10;<br/>
+   DATA "Jan",31,"Feb",28,"Mar",31,"Apr",30,"May",31,"Jun",30&#10;<br/>
+   DATA "Jul",31,"Aug",31,"Sep",30,"Oct",31,"Nov",31,"Dec",30&#10;<br/>
+  </tt>
+ <br/>
+  <b>Attention!</b> Floating-point literals are by default
+  stored with the data type <a href="datatypes.htm#single">Single</a>.
+  However, this cannot be read with a
+  <a href="datatypes.htm#decimal">Decimal</a> variable.
+  If you want to specify values of the data type Decimal in a DATA
+  statement, you must append a <em>D</em> to the number.
+  This forces the data type Decimal.
+ <br/><br/>
+ <h3><a name="declare">DECLARE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>DECLARE FUNCTION</tt> &lt;function name&gt;<br/>
+     <tt>DECLARE FUNCTION</tt> &lt;function name&gt;
+	<tt>(</tt> &lt;argument&gt; [ <tt>,</tt> ... ] <tt>)</tt><br/>
+     <tt>DECLARE FUNCTION</tt> &lt;function name&gt;
+	 <tt>AS</tt> &lt;type&gt;<br/>
+     <tt>DECLARE FUNCTION</tt> &lt;function name&gt;
+	<tt>(</tt> &lt;argument&gt; [ <tt>,</tt> ... ] <tt>)</tt>
+	 <tt>AS</tt> &lt;type&gt;<br/>
+     <tt>DECLARE SUB</tt> &lt;procedure name&gt;<br/>
+     <tt>DECLARE SUB</tt> &lt;procedure name&gt;
+	<tt>(</tt> &lt;argument name&gt; [ <tt>,</tt> ... ] <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>type:</td>
+    <td>
+     <tt>DECIMAL</tt>, <tt>FLOAT</tt>, <tt>INTEGER</tt>,
+     <tt>LONG</tt>, <tt>SINGLE</tt> or <tt>STRING</tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  This statement declares a user-defined function
+  or procedure so that it can be called before its actual
+  implementation (statements
+  <a href="instructions.htm#function">FUNCTION</a>
+  and <a href="instructions.htm#sub">SUB</a>).
+  Please also read the notes on
+  <a href="usersubs.htm">user-defined functions and procedures</a>!
+ <br/><br/>
+
+ <h3>
+  <a name="defusr">
+   DEF&nbsp;USR<br/>
+   DEFUSR<br/>
+  </a>
+ </h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>DEF&nbsp;USR</tt> &lt;function number&gt; <tt>=</tt> &lt;address&gt;
+     <br/>
+     <tt>DEFUSR</tt> &lt;function number&gt; <tt>=</tt> &lt;address&gt;
+    </td>
+   </tr>
+   <tr valign="top"><td>function number:</td><td>0...9</td></tr>
+   <tr valign="top"><td>address:</td><td>integer expression</td></tr>
+  </table>
+ <br/>
+  This statement sets the address for one of the ten possible
+  <a href="functions.htm#usr">USR</a> functions.
+  The address can be reassigned as often as desired
+  during program execution.
+ <br/>
+  <tt>
+   &#10;<br/>
+   DEF USR 0 = &amp;H4000&#10;<br/>
+   PRINT USR 0 (123)&#10;<br/>
+  </tt>
+ <br/>
+  The individual parts can also be written partially or
+  completely together, e.g.:
+ <br/>
+  <tt>
+   &#10;<br/>
+   DEF USR0 = &amp;H4000&#10;<br/>
+   DEFUSR 0 = &amp;H4000&#10;<br/>
+   DEFUSR0 = &amp;H4000&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="dim">DIM</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>DIM</tt> &lt;Name&gt [, ... ]<br/>
+     <tt>DIM</tt> &lt;Name&gt <tt>AS</tt> &lt;type&gt; [, ... ]<br/>
+     <tt>DIM</tt> &lt;Name&gt; <tt>(</tt> &lt;dimension&gt; <tt>)</tt>
+	[, ... ]<br/>
+     <tt>DIM</tt> &lt;Name&gt; <tt>(</tt> &lt;dimension&gt;
+	<tt>) AS</tt> &lt;type&gt; [, ... ]<br/>
+     <tt>DIM</tt> &lt;Name&gt; <tt>(</tt> &lt;dimension&gt;
+	<tt>,</tt> &lt;dimension&gt; <tt>)</tt> [, ... ]<br/>
+     <tt>DIM</tt> &lt;Name&gt; <tt>(</tt> &lt;dimension&gt;
+	<tt>,</tt> &lt;dimension&gt;
+	<tt>) AS</tt> &lt;type&gt; [, ... ]
+    </td>
+   </tr>
+   <tr valign="top"><td>Name:</td>
+    <td>name of the variable to be declared</td>
+   </tr>
+   <tr valign="top"><td>type:</td>
+    <td>
+     <tt>DECIMAL</tt>, <tt>FLOAT</tt>, <tt>INTEGER</tt>,
+     <tt>LONG</tt>, <tt>SINGLE</tt> or <tt>STRING</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>dimension:</td><td>integer literal</td>
+   </tr>
+  </table>
+ <br/>
+  This statement declares variables that can be used throughout
+  the entire BASIC program (main program and user-defined
+  procedures/functions) and therefore have global visibility.
+  The variables can be either simple variables
+  or one- or two-dimensional arrays.
+  Array variables with more than two dimensions are not supported.
+  For arrays, the individual dimensions are given in parentheses
+  after the variable name.
+  Each dimension value must be a concrete value.
+  Variable dimension specifications are not possible.
+  The number of elements in a dimension is one greater
+  than the dimension value itself, since the first element has index&nbsp;0.
+ <br/><br/>
+  After the name, or after the dimensions, a type can be
+  specified with <tt>AS</tt>.
+  If this is omitted, the type is derived from the name:
+  if the name ends with a $ character, it is the type String,
+  otherwise the type Integer.
+ <br/><br/>
+  Examples with a type specification:
+ <br/><br/>
+  <tt>
+   DIM A AS INTEGER, grosse_zahl AS LONG, C(3) AS INTEGER,
+   ein_text$(4,5) AS STRING
+  </tt>
+ <br/><br/>
+  Examples without a type specification (only Integer and String possible):
+ <br/><br/>
+  <tt>DIM D, ein_feld(8), T$(4,5)</tt>
+ <br/><br/>
+  <b>Attention!</b> If a DIM statement declares several variables
+  with and without a type specification, errors can easily result.
+  In the following example, the variable <tt>A</tt> is created as
+  an Integer array, the variable <tt>B</tt> as a Single array, and
+  the variable <tt>C</tt> as a String array:
+ <br/><br/>
+  <tt>
+   DIM A(10), B(20) AS SINGLE, C$(10)
+  </tt>
+ <br/><br/>
+  To avoid errors, it is therefore advisable to explicitly
+  specify the type for Integer and String as well:
+ <br/><br/>
+  <tt>
+   DIM A(10) AS INTEGER, B(20) AS SINGLE, C$(10) AS STRING
+  </tt>
+ <br/><br/>
+  <b>Note:</b> <tt>FLOAT</tt> is a synonym for <tt>SINGLE</tt>
+  and thus declares a SINGLE variable.
+ <br/><br/>
+  The DIM statement must appear in the BASIC source code before
+  the first use of the variable.
+  This is independent of the actual program flow.
+  The following example would work in a BASIC interpreter,
+  but produces a syntax error on line&nbsp;110 in the JKCEMU BASIC
+  compiler, since at that point the DIM statement on line&nbsp;200
+  has not yet been compiled, and the variable&nbsp;<em>A</em> on
+  line&nbsp;110 is therefore treated as a simple variable:
+ <br/>
+  <tt>
+   &#10;<br/>
+   100 GOSUB 200&#10;<br/>
+   110 A(1,0)=12&#10;<br/>
+   120 ...&#10;<br/>
+   200 DIM A(10,20)&#10;<br/>
+   210 RETURN&#10;<br/>
+  </tt>
+ <br/>
+  The correct way is:
+ <br/>
+  <tt>
+   &#10;<br/>
+   100 DIM A(10,20)&#10;<br/>
+   110 A(1,0)=12&#10;<br/>
+   120 ...&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="do">DO</a></h3>
+  The DO statement marks the beginning of a loop whose body
+  is always executed at least once, i.e. the loop runs through
+  at least one iteration in every case
+  (unless the very first pass is already terminated with
+  <a href="instructions.htm#exit">EXIT</a>).
+  The end of the loop is defined by the
+  <a href="instructions.htm#loop">LOOP</a> statement.
+  There, a condition can be specified
+  that controls how many times the loop repeats.
+  Without a condition, the DO loop is an infinite loop.
+ <br/><br/>
+
+ <h3><a name="doke">DOKE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>DOKE</tt> &lt;address&gt; <tt>,</tt> &lt;value&gt;
+    </td>
+   </tr>
+   <tr valign="top"><td>address:</td><td>integer expression</td></tr>
+   <tr valign="top"><td>value:</td><td>integer expression</td></tr>
+  </table>
+ <br/>
+  The value of the second integer expression
+  is written to memory, as two bytes,
+  starting at the specified address.
+ <br/><br/>
+
+ <h3><a name="draw">DRAW</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>DRAW</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>DRAW TO</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>DRAW (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt><br/>
+     <tt>DRAW TO (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt><br/>
+     <tt>DRAW STEP (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt><br/>
+     <tt>DRAW</tt> &lt;macro&gt;
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>macro:</td>
+    <td>simple string expression</td>
+   </tr>
+  </table>
+ <br/>
+  There are three variants of the DRAW statement.
+  The first variant, with a position specification, draws a line
+  from the current position of the graphics cursor to the specified
+  absolute position (the end point of the line).
+  The graphics cursor moves along with it, i.e.
+  after drawing it is positioned at the line's end point.
+ <br/><br/>
+  The second variant, with the keyword <em>STEP</em>,
+  differs from the first only in that
+  the line's end point is given not absolutely but relatively,
+  i.e. this variant is identical to the
+  <a href="instructions.htm#drawr">DRAWR</a> statement.
+ <br/><br/>
+  The third variant, with a string expression as the argument,
+  is the so-called macro mode.
+  It is used to draw complex figures.
+  The string passed contains a macro,
+  i.e. a sequence of commands that are processed one after another.
+  Each individual command begins with a letter
+  (case does not matter),
+  which may be followed by an argument.
+  There are eight commands for drawing a line in a particular direction:
+ <br/><br/>
+  <table border="0">
+   <tr>
+    <td align="left">H</td>
+    <td></td>
+    <td align="center">U</td>
+    <td></td>
+    <td align="right">E</td>
+   </tr>
+   <tr>
+    <td></td>
+    <td align="center">\</td>
+    <td align="center">|</td>
+    <td align="center">/</td>
+    <td></td>
+   </tr>
+   <tr>
+    <td align="left">L</td>
+    <td align="center">-</td>
+    <td align="center">graphics cursor</td>
+    <td align="center">-</td>
+    <td align="right">R</td>
+   </tr>
+   <tr>
+    <td></td>
+    <td align="center">/</td>
+    <td align="center">|</td>
+    <td align="center">\</td>
+    <td></td>
+   </tr>
+   <tr>
+    <td align="left">G</td>
+    <td></td>
+    <td align="center">D</td>
+    <td></td>
+    <td align="right">F</td>
+   </tr>
+  </table>
+ <br/><br/>
+  Directly after the letter, a number can be given to specify
+  the length of the line to be drawn.
+  If the number is omitted, only a single pixel is drawn.
+ <br/><br/>
+  Further commands are M and B.
+  With M, a position is specified to which the line is drawn.
+  The position specification follows directly after the letter and
+  consists of the X coordinate, a comma, and the Y coordinate.
+  If the X coordinate begins with a sign (+ or -),
+  the position is treated as a relative position,
+  otherwise as an absolute one.
+ <br/><br/>
+  The last available command,&nbsp;B, specifies
+  that with the next command nothing is drawn;
+  instead only the graphics cursor is moved accordingly.
+ <br/><br/>
+  The following table summarizes the macro commands of the
+  DRAW statement:
+ <br/>
+  <table border="1">
+   <tr><th>Macro Command</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">U</td>
+    <td valign="top">
+     Draw a line one pixel upward<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">U&lt;count&gt;</td>
+    <td valign="top">
+     Draw a line <i>count</i> pixels upward<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">D</td>
+    <td valign="top">
+     Draw a line one pixel downward<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">D&lt;count&gt;</td>
+    <td valign="top">
+     Draw a line <i>count</i> pixels downward<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">L</td>
+    <td valign="top">
+     Draw a line one pixel to the left<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">L&lt;count&gt;</td>
+    <td valign="top">
+     Draw a line <i>count</i> pixels to the left<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">R</td>
+    <td valign="top">
+     Draw a line one pixel to the right<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">R&lt;count&gt;</td>
+    <td valign="top">
+     Draw a line <i>count</i> pixels to the right<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">E</td>
+    <td valign="top">
+     Draw a line one pixel up and to the right<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">E&lt;count&gt;</td>
+    <td valign="top">
+     Draw a line <i>count</i> pixels up and to the right<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">F</td>
+    <td valign="top">
+     Draw a line one pixel down and to the right<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">F&lt;count&gt;</td>
+    <td valign="top">
+     Draw a line <i>count</i> pixels down and to the right<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">G</td>
+    <td valign="top">
+     Draw a line one pixel down and to the left<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">G&lt;count&gt;</td>
+    <td valign="top">
+     Draw a line <i>count</i> pixels down and to the left<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">H</td>
+    <td valign="top">
+     Draw a line one pixel up and to the left<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">H&lt;count&gt;</td>
+    <td valign="top">
+     Draw a line <i>count</i> pixels up and to the left<br/>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">M&lt;X&gt;,&lt;Y&gt;</td>
+    <td valign="top">
+     Draw a line to the specified absolute position
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+      M&lt;sign&gt;&lt;X&gt;,[&lt;sign&gt;]&lt;Y&gt;
+    </td>
+    <td valign="top">
+     Draw a line to the specified relative position
+    </td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">B</td>
+    <td valign="top">
+     do not draw with the next macro command;
+     only move the graphics cursor
+    </td>
+   </tr>
+  </table>
+ <br/>
+  Example: drawing a row of adjacent houses:
+ <br/><br/>
+  <tt>
+   H$="U25E15F15D25L30BR4U18R8D17BM+6,7U10R8D10L8"&#10;<br/>
+   FOR X=0 TO W_PIXEL STEP 40&#10;<br/>
+   &nbsp; MOVE X,0&#10;<br/>
+   &nbsp; DRAW H$&#10;<br/>
+   NEXT X
+  </tt>
+ <br/><br/>
+  <b>Attention!</b>
+  For all variants of the DRAW statement,
+  the pixel at the starting point is not set.
+  Drawing begins only with the first pixel after the starting point.
+  This ensures that, when drawing polygons using DRAW macros or
+  several consecutive DRAW statements, no pixel is ever set twice.
+  This is especially important when using the XOR pen
+  (see the <a href="instructions.htm#pen">PEN</a> statement).
+  Because of this behavior, there are also the separate
+  statements <a href="instructions.htm#move">MOVE</a>
+  and <a href="instructions.htm#plot">PLOT</a>,
+  and their variants <a href="instructions.htm#mover">MOVER</a>
+  and <a href="instructions.htm#plotr">PLOTR</a>.
+  If you want to draw a closed polygon,
+  you must set the graphics cursor with <em>MOVE</em>
+  so that no pixel is drawn twice.
+  For an open polygon, <em>PLOT</em> is recommended,
+  so that no pixel is missing.
+ <br/><br/>
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+ <h3><a name="drawr">DRAWR</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>DRAWR</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>DRAWR (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>integer expression</td>
+   </tr>
+  </table>
+ <br/>
+  The DRAWR statement draws a line from the current position
+  of the graphics cursor to the position given by relative
+  coordinates (the end point of the line).
+  Otherwise, the same rules apply as for the
+  <a href="instructions.htm#draw">DRAW</a> statement.
+ <br/><br/>
+
+ <h3><a name="end">END</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>
+      END<br/>
+      END FUNCTION<br/>
+      END SUB
+     </tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  If the END statement appears within a user-defined function
+  or procedure, it terminates that function or procedure.
+  In that case, the keyword FUNCTION or SUB can additionally be
+  specified after END, depending on whether it is a function
+  or a procedure.
+  Outside of a function or procedure,
+  the END statement terminates the BASIC program.
+ <br/><br/>
+
+ <h3><a name="exit">EXIT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>
+      EXIT<br/>
+      EXIT DO<br/>
+      EXIT FOR<br/>
+      EXIT WHILE
+     </tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  An EXIT statement can be used to leave a loop early,
+  i.e. the loop is aborted and program execution
+  continues after the loop.
+  Optionally, the keyword <tt>EXIT</tt> can also be followed
+  by the type of the loop in question
+  (either the keyword <tt>DO</tt>, <tt>FOR</tt> or <tt>WHILE</tt>).
+ <br/>
+  <tt>
+   &#10;<br/>
+   I=0&#10;<br/>
+   DO&#10;<br/>
+   &nbsp;&nbsp;I=I+1&#10;<br/>
+   &nbsp;&nbsp;PRINT I&#10;<br/>
+   &nbsp;&nbsp;IF I=5 THEN EXIT DO&#10;<br/>
+   LOOP&#10;<br/>
+   PRINT "End of loop"&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="for">FOR</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>FOR</tt>
+     &lt;variable&gt;<tt>=</tt>&lt;start value&gt;
+     <tt>TO</tt>
+     &lt;end value&gt;
+     [ <tt>STEP</tt> &lt;step size&gt; ]
+    </td>
+   </tr>
+   <tr valign="top"><td>start value:</td><td>integer expression</td></tr>
+   <tr valign="top"><td>end value:</td><td>integer expression</td></tr>
+   <tr valign="top"><td>step size:</td><td>integer expression</td></tr>
+  </table>
+ <br/>
+  First, the start value is assigned to the variable,
+  also called the loop variable.
+  Program execution then continues with the first statement
+  after the FOR statement.
+  When the <a href="instructions.htm#next">NEXT</a> statement is
+  reached, the step size is added to the variable.
+  If the end value has not yet been reached,
+  execution jumps back to the first statement after the FOR statement.
+  Otherwise the FOR loop is exited, i.e.
+  program execution continues after the NEXT statement.
+ <br/><br/>
+  If the step size is greater than&nbsp;0,
+  the end value is considered reached when the value of the
+  variable is equal to or greater than the end value.
+  If, on the other hand, the step size is less than&nbsp;0,
+  the end value is considered reached
+  when the value of the variable is equal to or less than the end value.
+ <br/><br/>
+  The keyword STEP and the following step size
+  can be omitted.
+  In that case the step size is one.
+ <br/><br/>
+  <b>Attention!</b> The concrete memory location of the loop
+  variable must already be determinable at compile time.
+  This is the case for all simple variables.
+  If, on the other hand, the loop variable is an element of an
+  array variable, this condition is only met
+  if the indexes are given as constant values, e.g.:
+ <br/>
+  <tt>
+   &#10;<br/>
+   DIM A(5)&#10;<br/>
+   FOR A(2)=1 TO 10&#10;<br/>
+   ...&#10;<br/>
+   NEXT A(2)&#10;<br/>
+  </tt>
+ <br/>
+  A variable index, on the other hand, is answered by the compiler
+  with an error:
+ <br/>
+  <tt>
+   &#10;<br/>
+   DIM A(5)&#10;<br/>
+   I=2&#10;<br/>
+   FOR A(I)=1 TO 10 &nbsp; &nbsp; <em>Error!</em>&#10;<br/>
+   ...&#10;<br/>
+   NEXT A(I)&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="function">FUNCTION</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>FUNCTION</tt> &lt;function name&gt;<br/>
+     <tt>FUNCTION</tt> &lt;function name&gt;
+	<tt>(</tt> &lt;argument&gt; [ <tt>,</tt> ... ] <tt>)</tt><br/>
+     <tt>FUNCTION</tt> &lt;function name&gt; <tt>AS</tt> &lt;type&gt;<br/>
+     <tt>FUNCTION</tt> &lt;function name&gt;
+	<tt>(</tt> &lt;argument&gt; [ <tt>,</tt> ... ] <tt>)</tt>
+	 <tt>AS</tt> &lt;type&gt;
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>type:</td>
+    <td>
+     <tt>DECIMAL</tt>, <tt>FLOAT</tt>, <tt>INTEGER</tt>,
+     <tt>LONG</tt>, <tt>SINGLE</tt> or <tt>STRING</tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  This statement begins the implementation of a user-defined
+  function.
+  This implicitly also ends the main program.
+  The function ends with the <tt>END FUNCTION</tt> statement.
+ <br/><br/>
+  Please also read the notes on
+  <a href="usersubs.htm">user-defined functions and procedures</a>!
+ <br/><br/>
+
+ <h3><a name="gosub">GOSUB</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>
+      GOSUB &lt;line number&gt;<br/>
+      GOSUB &lt;label&gt;
+     </tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  This statement calls a subroutine
+  that begins at the specified location.
+  The subroutine must be terminated with
+  <a href="instructions.htm#return">RETURN</a>.
+ <br/><br/>
+
+ <h3><a name="goto">GOTO</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>
+      GOTO &lt;line number&gt;<br/>
+      GOTO &lt;label&gt;
+     </tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  This statement causes a jump to the specified location,
+  i.e. program execution continues from there.
+ <br/><br/>
+  <b>Attention!</b> The GOTO statement dates from a time
+  when BASIC did not yet support structured programming.
+  However, the JKCEMU BASIC compiler offers, with alternative
+  loop types (DO...LOOP..., WHILE...WEND) including
+  the corresponding control statement EXIT,
+  as well as multi-line IF constructs, various options
+  for structured programming that make the use of GOTO
+  largely, if not entirely, unnecessary.
+  It is therefore advisable, when developing new software,
+  to avoid using GOTO and instead
+  make use of the possibilities of structured programming.
+ <br/><br/>
+
+ <h3><a name="if">IF</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>IF</tt> &lt;condition&gt; [ <tt>THEN</tt> ] &lt;statements&gt;
+                 [ <tt>: ELSE :</tt> &lt;statements&gt; ]<br/>
+     <tt>IF</tt> &lt;condition&gt; [ <tt>THEN</tt> ] &lt;line number&gt;
+                 [ <tt>: ELSE :</tt> &lt;statements&gt; ]<br/><br/>
+     <tt>IF</tt> &lt;condition&gt; [ <tt>THEN</tt> ]<br/>
+     &nbsp;&nbsp;&lt;statements&gt;<br/>
+     &nbsp;&nbsp;&lt;statements&gt;<br/>
+     [ <tt>ELSEIF</tt> &lt;condition&gt; <tt>THEN</tt><br/>
+     &nbsp;&nbsp;&lt;statements&gt;<br/>
+     &nbsp;&nbsp;&lt;statements&gt; ]<br/>
+     [ <tt>ELSEIF</tt> &lt;condition&gt; <tt>THEN</tt><br/>
+     &nbsp;&nbsp;&lt;statements&gt;<br/>
+     &nbsp;&nbsp;&lt;statements&gt; ]<br/>
+     [ <tt>ELSE</tt><br/>
+     &nbsp;&nbsp;&lt;statements&gt;<br/>
+     &nbsp;&nbsp;&lt;statements&gt; ]<br/>
+     <tt>ENDIF</tt>
+    </td>
+   </tr>
+   <tr valign="top"><td>condition:</td><td>integer expression</td></tr>
+  </table>
+ <br/>
+  The IF statement represents a conditional program branch.
+  If the condition is satisfied,
+  the statements after <tt>THEN</tt> are executed.
+  If not, the condition after the first ELSEIF is checked
+  and, if satisfied, the statements following it are executed.
+  If that condition is also not satisfied,
+  the next ELSEIF is checked, and so on.
+  If none of the conditions were satisfied,
+  the statements after <tt>ELSE</tt> are executed.
+ <br/><br/>
+  Any number of ELSEIF branches is allowed.
+  ELSEIF can also be omitted entirely.
+  The ELSE branch is likewise optional and can be omitted.
+  The keyword <tt>THEN</tt> can also be omitted,
+  but this is not recommended, for the sake of readability
+  and in view of the syntax customary in other BASIC dialects.
+ <br/><br/>
+  A condition is satisfied
+  when the integer expression yields a value not equal to&nbsp;0.
+  The condition does not necessarily have to contain a comparison
+  operator.
+  However, comparison operators are particularly well suited
+  for conditions, since they return an integer value
+  (see <a href="expressions.htm#cond_op">comparison operators</a>).
+ <br/><br/>
+  The IF statement comes in a single-line and a
+  multi-line variant.
+  In the single-line variant, the IF statement ends at the end
+  of the line, e.g.:
+ <br/>
+  <tt>
+   &#10;<br/>
+   100 IF A=0 THEN PRINT "Zero" : ELSE : PRINT "not zero"&#10;<br/>
+   110 IF A&lt;100 THEN GOTO 200&#10;<br/>
+  </tt>
+ <br/>
+  As already mentioned above,
+  the keyword <tt>THEN</tt> can be omitted.
+  However, if it is present and is directly followed by a number,
+  that number is treated as the line number of a
+  <a href="instructions.htm#goto">GOTO</a> statement, e.g.:
+ <br/><br/>
+  <tt>100 IF A&lt;100 THEN 200</tt>
+ <br/><br/>
+  If nothing more follows on the line after the condition, or
+  after the keyword <tt>THEN</tt>, the IF statement is recognized
+  as multi-line, i.e. in that case there must be an ENDIF.
+ <br/>
+  <tt>
+   &#10;<br/>
+   IF A=1 THEN&#10;<br/>
+   &nbsp;&nbsp;PRINT "one"&#10;<br/>
+   ELSEIF A=2 THEN&#10;<br/>
+   &nbsp;&nbsp;PRINT "two"&#10;<br/>
+   ELSEIF A=3 THEN&#10;<br/>
+   &nbsp;&nbsp;PRINT "three"&#10;<br/>
+   ELSE&#10;<br/>
+   &nbsp;&nbsp;PRINT "none of these"&#10;<br/>
+   ENDIF&#10;<br/>
+  </tt>
+ <br/>
+  IF statements can be nested within each other:
+ <br/>
+  <tt>
+   &#10;<br/>
+   IF A=0 THEN&#10;<br/>
+   &nbsp;&nbsp;IF B=0 THEN&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT "A and B are zero."&#10;<br/>
+   &nbsp;&nbsp;ELSEIF B=1 THEN&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT "A=0 and B=1"&#10;<br/>
+   &nbsp;&nbsp;ENDIF&#10;<br/>
+   ELSE&#10;<br/>
+   &nbsp;&nbsp;PRINT "A is not zero."&#10;<br/>
+   ENDIF&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="include">INCLUDE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">INCLUDE&nbsp;"file name"</td>
+   </tr>
+  </table>
+ <br/>
+  This statement inserts the specified file into the source code
+  at the current position, i.e. this file is compiled along with
+  it and thus becomes part of the BASIC program.
+  The file name can be given with or without a path.
+  If the path is omitted, the included file is searched for in
+  the same directory, or, if the source code was typed into the
+  text editor and has not yet been saved, in the current directory.
+  If a path is given, it can be either relative or absolute.
+  The notation of the path (drive, separator) depends
+  on the operating system on which JKCEMU is running.
+  However, it is also possible
+  to specify the path in an operating-system-independent way,
+  although only as a relative path.
+  In that case, the slash&nbsp;(/) must be used as the separator.
+ <br/><br/>
+  Examples:
+<br/>
+  <table border="1">
+   <tr>
+    <td valign="top">Absolute path on Windows:</td>
+    <td nowrap="nowrap"><tt>INCLUDE "C:\basic\bibliothek.bas"</tt></td>
+   </tr>
+   <tr>
+    <td valign="top">Absolute path on Linux/Unix:</td>
+    <td nowrap="nowrap"><tt>INCLUDE "/home/benutzer/basic/bibliothek.bas"</tt></td>
+   </tr>
+   <tr>
+    <td valign="top">Relative path on Windows:</td>
+    <td nowrap="nowrap"><tt>INCLUDE "..\bibliothek.bas"</tt></td>
+   </tr>
+   <tr>
+    <td valign="top">
+     Relative, operating-system-independent path
+     (Linux/Unix/Windows):
+    </td>
+    <td nowrap="nowrap"><tt>INCLUDE "../bibliothek.bas"</tt></td>
+   </tr>
+  </table>
+ <br/>
+  <b>Attention!</b> No further BASIC statement may follow the
+  INCLUDE statement on the same line.
+  In addition, included files cannot themselves
+  include any further files,
+  i.e. nested INCLUDE statements are not allowed.
+ <br/><br/>
+
+ <h3><a name="ink">INK</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">INK&nbsp;&lt;integer expression&gt;</td>
+   </tr>
+  </table>
+ <br/>
+  This statement sets the foreground color.
+  The color number depends on the target system.
+  To write portable source code, you can also specify the color with a
+  <a href="constants.htm#color">constant</a>, e.g.:
+ <br/><br/>
+  <tt>&nbsp;INK&nbsp;YELLOW</tt>
+ <br/><br/>
+  On a target system without color support, the statement
+  has no effect.
+ <br/><br/>
+
+ <h3><a name="input">INPUT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>INPUT</tt> [ &lt;string literal&gt; <tt>;</tt> ] &lt;variable&gt;
+     [ <tt>;</tt> ... ]<br/>
+     <tt>INPUT #</tt> &lt;channel&gt; <tt>,</tt> &lt;variable&gt;
+     [ <tt>,</tt> ... ]
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>channel:</td>
+    <td>integer expression with the value 1 or 2</td>
+   </tr>
+  </table>
+ <br/>
+  There are two variants of the INPUT statement, with and without
+  a channel number.
+  The variant without a channel number reads input from the
+  keyboard and stores the values entered in variables.
+  For this, the statement can contain several sections,
+  separated by semicolons.
+  Each section represents a separate input.
+  Each section can consist of either just a variable, or a
+  <a href="strings.htm#literal">string literal</a>
+  followed by a semicolon and a variable.
+  If a string literal is present, it is output first.
+  Otherwise a question mark appears, prompting for input.
+  Pressing the ENTER key assigns the entered number,
+  or the entered text, to the variable.
+  If the variable is a numeric variable,
+  the input must correspond to a valid number.
+  If it does not, an error message appears
+  and the user is prompted to enter the value again.
+  In the case of a string variable, leading spaces
+  are stripped, and the text starting from the first non-space
+  character is stored in the variable.
+ <br/><br/>
+  The INPUT variant with a channel number reads text sections from
+  the specified input channel and stores them in the specified
+  variables.
+  Several variables can be specified.
+  For each variable, one text section is read and stored in the
+  variable.
+  If the variable is a numeric variable,
+  the text section is converted to a numeric value,
+  which is then stored.
+  Leading and trailing spaces are ignored during the conversion.
+  If the text section cannot be converted to a number,
+  the error variables are set accordingly and a&nbsp;0
+  is assigned to the variable.
+ <br/><br/>
+  The text sections are separated by commas and end-of-line
+  characters.
+  Both the DOS/Windows line-ending format
+  (end-of-line bytes&nbsp;0Dh/0Ah) and the Unix/Linux format
+  (end-of-line byte&nbsp;0Ah) are recognized as line endings.
+  When reading a text section, reading continues up to and
+  including the separator character or end of line.
+  If the input stream, or the file, already ends before the
+  separator or end-of-line character,
+  the error variables are set to &quot;end of file reached&quot;.
+ <br/><br/>
+
+ <h3><a name="label">LABEL</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>LABEL</tt> &lt;string expression&gt;
+    </td>
+   </tr>
+  </table>
+ <br/>
+  This statement outputs text in graphics mode.
+  Before doing so, the graphics cursor must have been moved
+  to the desired position, e.g. with the
+  <a href="instructions.htm#move">MOVE</a> statement.
+  After the output, the graphics cursor is positioned after the
+  text, i.e. several consecutive LABEL statements output the text
+  seamlessly one after another.
+ <br/>
+  <tt>
+   &#10;<br/>
+   MOVE 10,10&#10;<br/>
+   LABEL "ABC"&#10;<br/>
+   LABEL "DEF"&#10;<br/>
+   LINE 10,7,XPOS-3,7&#10;<br/>
+  </tt>
+ <br/>
+  Example: output of continuous, underlined text
+ <br/><br/>
+  On systems with a separate text and
+  graphics <a href="instructions.htm#screen">SCREEN</a>,
+  the LABEL statement is the only way
+  to output text in graphics mode.
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+
+ <h3><a name="let">LET</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     [ <tt>LET</tt> ]
+     &lt;variable&gt;
+     <tt>=</tt>
+     &lt;expression&gt;
+    </td>
+   </tr>
+  </table>
+ <br/>
+  The keyword LET can be omitted.
+ <br/><br/>
+
+ <h3><a name="line">LINE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>LINE</tt> &lt;X1&gt; <tt>,</tt> &lt;Y1&gt; <tt>,</tt>
+	&lt;X2&gt; <tt>,</tt> &lt;Y2&gt;<br/>
+     <tt>LINE (</tt> &lt;X1&gt; <tt>,</tt> &lt;Y1&gt; <tt>) - (</tt>
+	&lt;X2&gt; <tt>,</tt> &lt;Y2&gt; <tt>)</tt><br/><br/>
+     <tt>LINE</tt> &lt;X1&gt; <tt>,</tt> &lt;Y1&gt; <tt>,</tt>
+	&lt;X2&gt; <tt>,</tt> &lt;Y2&gt; <tt>, B</tt><br/>
+     <tt>LINE (</tt> &lt;X1&gt; <tt>,</tt> &lt;Y1&gt; <tt>) - (</tt>
+	&lt;X2&gt; <tt>,</tt> &lt;Y2&gt; <tt>) , B</tt><br/><br/>
+     <tt>LINE</tt> &lt;X1&gt; <tt>,</tt> &lt;Y1&gt; <tt>,</tt>
+	&lt;X2&gt; <tt>,</tt> &lt;Y2&gt; <tt>, BF</tt><br/>
+     <tt>LINE (</tt> &lt;X1&gt; <tt>,</tt> &lt;Y1&gt; <tt>) - (</tt>
+	&lt;X2&gt; <tt>,</tt> &lt;Y2&gt; <tt>) , BF</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X1:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>Y1:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>X1:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>Y2:</td>
+    <td>integer expression</td>
+   </tr>
+  </table>
+ <br/>
+  In the variant without the argument <tt>B</tt> or <tt>BF</tt>,
+  the statement draws a line from the point (X1,Y1) to the point (X2,Y2).
+  If, on the other hand, the argument <em>B</em> is given, a
+  rectangle appears with the four corner points (X1,Y1), (X1,Y2),
+  (X2,Y1) and (X2,Y2).
+  With the argument <em>BF</em>, a filled rectangle is drawn.
+ <br/><br/>
+  The LINE statement does not affect the graphics cursor.
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+ <h3><a name="line_input">LINE&nbsp;INPUT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>LINE INPUT</tt> [ &lt;string literal&gt; <tt>;</tt> ]
+	&lt;string variable&gt;<br/>
+     <tt>LINE INPUT #</tt> &lt;channel&gt; <tt>,</tt>
+	&lt;string variable&gt;
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>channel:</td>
+    <td>integer expression with the value 1 or 2</td>
+   </tr>
+  </table>
+ <br/>
+  The LINE&nbsp;INPUT statement is used to enter, or read,
+  a line of text.
+  In the variant without a channel number, the text is entered
+  via the keyboard.
+  Unlike the INPUT statement, leading spaces are
+  not stripped, i.e. the entered line of text is stored
+  unchanged in the specified string variable.
+  Optionally, a string literal can be specified,
+  which is output as a prompt.
+  If this string literal is omitted, unlike the
+  INPUT statement, no question mark appears.
+ <br/><br/>
+  In the variant with a channel number, a line of text is read
+  from the specified input channel.
+  Both the DOS/Windows line-ending format
+  (end-of-line bytes&nbsp;0Dh/0Ah) and the Unix/Linux format
+  (end-of-line byte&nbsp;0Ah) are recognized as line endings.
+  The statement reads the line of text up to and including the
+  end of line, but stores the text without the end-of-line bytes
+  in the variable.
+  Since the statement searches for the end of line,
+  when reading the last line the error status is usually
+  set to &quot;end of file reached&quot;, i.e.
+  the text stored in the variable is valid both with
+  <tt>ERR=E_OK</tt> and with <tt>ERR=E_EOF</tt>.
+  With any other error status, an empty string
+  is written to the variable.
+ <br/><br/>
+  Example: reading a text file and printing it to the screen
+  line by line:
+ <br/>
+  <tt>
+   &#10;<br/>
+   INPUT "File:";F$&#10;<br/>
+   OPEN F$ AS #1&#10;<br/>
+   IF ERR THEN&#10;<br/>
+   &nbsp;&nbsp;PRINT ERR$&#10;<br/>
+   ELSE&#10;<br/>
+   &nbsp;&nbsp;DO&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;LINE INPUT #1,S$&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT S$&#10;<br/>
+   &nbsp;&nbsp;LOOP UNTIL ERR OR EOF(#1)&#10;<br/>
+   &nbsp;&nbsp;IF ERR THEN PRINT ERR$&#10;<br/>
+   &nbsp;&nbsp;CLOSE #1&#10;<br/>
+   ENDIF&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="local">LOCAL</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>LOCAL</tt> &lt;Name&gt; [, ... ]<br/>
+     <tt>LOCAL</tt> &lt;Name&gt; AS &lt;type&gt; [, ... ]
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>Name:</td>
+    <td>name of the variable to be declared</td>
+   </tr>
+   <tr valign="top">
+    <td>type:</td>
+    <td>
+     <tt>DECIMAL</tt>, <tt>FLOAT</tt>, <tt>INTEGER</tt>,
+     <tt>LONG</tt>, <tt>SINGLE</tt> or <tt>STRING</tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  This statement declares one or more local variables
+  within a function or procedure.
+  If the data type is omitted, the type is derived from the
+  name of the variable:
+  if the variable name ends with a $ character, a local
+  string variable is declared, otherwise a local Integer variable.
+  Local array variables are not possible.
+ <br/><br/>
+  <b>Note:</b> <tt>FLOAT</tt> is a synonym for <tt>SINGLE</tt>
+  and thus declares a SINGLE variable.
+ <br/><br/>
+  Local variables hide global variables of the same name, i.e.
+  if a local variable has the same name as one in the main program,
+  the variable in the main program cannot be accessed
+  from within the function/procedure.
+ <br/><br/>
+  Local variables are created on the stack.
+  The stack must therefore be dimensioned large enough.
+  If a function/procedure calls itself (recursion),
+  the local variables are created anew with each call,
+  i.e. there are separate local variables for each call.
+ <br/><br/>
+
+ <h3><a name="locate">LOCATE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>LOCATE</tt> &lt;row&gt; <tt>,</tt> &lt;column&gt;
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>row:</td>
+    <td>integer expression with a value &gt;= 0</td>
+   </tr>
+   <tr valign="top">
+    <td>column:</td>
+    <td>integer expression with a value &gt;= 0</td>
+   </tr>
+  </table>
+ <br/>
+  The LOCATE statement positions the cursor at the specified
+  position.
+  The top left corner has the position (0,0).
+ <br/><br/>
+  <b>Attention!</b> The LOCATE statement is not supported for
+  all target systems (see the notes on
+  <a href="targets.htm">target systems</a>).
+ <br/><br/>
+
+ <h3><a name="loop">LOOP</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>LOOP</tt><br/>
+     <tt>LOOP UNTIL</tt> &lt;condition&gt;<br/>
+     <tt>LOOP WHILE</tt> &lt;condition&gt;
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>condition:</td>
+    <td>integer expression</td>
+   </tr>
+  </table>
+ <br/>
+  The LOOP statement marks the end of a loop
+  that was previously opened with the
+  <a href="instructions.htm#do">DO</a> statement.
+ <br/><br/>
+  The DO...LOOP loop comes in three different forms.
+  If nothing further is specified after the keyword LOOP,
+  it is an infinite loop:
+ <br/>
+  <tt>
+   &#10;<br/>
+   DO&#10;<br/>
+   &nbsp;&nbsp;PRINT "Infinite loop"&#10;<br/>
+   LOOP&#10;<br/>
+  </tt>
+ <br/>
+  With the keyword UNTIL, a condition can be specified.
+  The loop terminates as soon as the condition is satisfied:
+ <br/>
+  <tt>
+   &#10;<br/>
+   I=1&#10;<br/>
+   DO&#10;<br/>
+   &nbsp;&nbsp;PRINT I&#10;<br/>
+   &nbsp;&nbsp;I=I+1&#10;<br/>
+   LOOP UNTIL I=10&#10;<br/>
+  </tt>
+ <br/>
+  The opposite is achieved with the keyword WHILE.
+  In that case the loop runs for as long
+  as the specified condition is satisfied.
+  The loop therefore terminates
+  as soon as the condition is no longer satisfied:
+ <br/>
+  <tt>
+   &#10;<br/>
+   I=1&#10;<br/>
+   DO&#10;<br/>
+   &nbsp;&nbsp;PRINT I&#10;<br/>
+   &nbsp;&nbsp;I=I+1&#10;<br/>
+   LOOP WHILE I&lt;10&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="lprint">LPRINT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>LPRINT</tt><br/>
+     <tt>LPRINT</tt> &lt;section&gt;<br/>
+     <tt>LPRINT</tt> &lt;section&gt; &lt;separator&gt;<br/>
+     <tt>LPRINT</tt> &lt;section&gt; &lt;separator&gt;
+	&lt;further sections&gt;<br/>
+     <tt>LPRINT</tt> &lt;section&gt; &lt;separator&gt;
+	&lt;further sections&gt; &lt;separator&gt;
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>section:</td>
+    <td>string expression or integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>separator:</td>
+    <td>comma or semicolon</td>
+   </tr>
+  </table>
+ <br/>
+  The LPRINT statement performs output to the printer.
+  Its arguments are identical to those of the
+  <a href="instructions.htm#print">PRINT</a> statement in the
+  version without a channel number.
+ <br/><br/>
+  <b>Attention!</b> The LPRINT statement is not supported for
+  all target systems (see the notes on
+  <a href="targets.htm">target systems</a>).
+ <br/><br/>
+
+ <h3><a name="move">MOVE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>MOVE</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>MOVE TO</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>MOVE (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt><br/>
+     <tt>MOVE TO (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt><br/>
+     <tt>MOVE STEP (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>integer expression</td>
+   </tr>
+  </table>
+ <br/>
+  The MOVE statement sets the graphics cursor to the specified
+  position.
+  In the variant with the keyword <em>STEP</em>,
+  the graphics cursor is positioned not absolutely but relatively,
+  i.e. this variant is identical to the
+  <a href="instructions.htm#mover">MOVER</a> statement.
+ <br/><br/>
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+
+ <h3><a name="mover">MOVER</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>MOVER</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>MOVER (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>integer expression</td>
+   </tr>
+  </table>
+ <br/>
+  The MOVER statement moves the graphics cursor by the specified
+  X and Y value, i.e. the position given is relative.
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+
+ <h3><a name="next">NEXT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap"><tt>NEXT</tt> [ &lt;variable&gt; ]</td>
+   </tr>
+  </table>
+ <br/>
+  The loop variable has the step size added to it
+  (see the <a href="instructions.htm#for">FOR</a> statement).
+  If the end value has not yet been reached, execution jumps
+  back to the beginning of the FOR loop.
+  Otherwise the FOR loop is exited.
+ <br/><br/>
+  The NEXT statement must not be called without a preceding FOR!
+ <br/><br/>
+  Specifying a variable is optional.
+  However, if a variable is given,
+  it must be the same one as in the corresponding FOR statement.
+ <br/><br/>
+
+ <h3><a name="on_gosub">ON...GOSUB</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>ON</tt> &lt;selector&gt; <tt>GOSUB</tt>
+     &lt;line number&gt; <tt>,</tt> &lt;line number&gt;
+     [ <tt>,</tt> &lt;line number&gt; [ <tt>,</tt> ... ] ]<br/>
+     <tt>ON</tt> &lt;selector&gt; <tt>GOSUB</tt>
+     &lt;label&gt; <tt>,</tt> &lt;label&gt;
+     [ <tt>,</tt> &lt;label&gt; [ <tt>,</tt> ... ] ]
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>selector:</td><td>integer expression &gt;= 0</td>
+   </tr>
+  </table>
+ <br/>
+  This statement calls one subroutine from a list of
+  subroutines, with the selection made based on the value of
+  the expression after the keyword&nbsp;<tt>ON</tt>.
+  If the value is&nbsp;1, the subroutine at the first
+  line number or label after the keyword&nbsp;<tt>GOSUB</tt>
+  is called; for the value&nbsp;2, the second, and so on.
+  For the value&nbsp;0, or a value greater than the number
+  of line numbers given, no subroutine is called.
+ <br/><br/>
+  Example with BASIC line numbers:
+ <br/>
+  <tt>
+   &#10;<br/>
+   100 ON A GOSUB 1000,2000,3000&#10;<br/>
+   ...&#10;<br/>
+   1000 PRINT "SUB 1":RETURN&#10;<br/>
+   2000 PRINT "SUB 2":RETURN&#10;<br/>
+   3000 PRINT "SUB 3":RETURN&#10;<br/>
+  </tt>
+ <br/>
+  Example with labels:
+ <br/>
+  <tt>
+   &#10;<br/>
+   ON A GOSUB up1,up2,up3&#10;<br/>
+   ...&#10;<br/>
+   up1:&#10;<br/>
+   &nbsp;&nbsp;PRINT "SUB 1":RETURN&#10;<br/>
+   up2:&#10;<br/>
+   &nbsp;&nbsp;PRINT "SUB 2":RETURN&#10;<br/>
+   up3:&#10;<br/>
+   &nbsp;&nbsp;PRINT "SUB 3":RETURN&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="on_goto">ON...GOTO</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>ON</tt> &lt;selector&gt; <tt>GOTO</tt>
+     &lt;line number&gt; <tt>,</tt>  &lt;line number&gt;
+     [ <tt>,</tt> &lt;line number&gt; [ <tt>,</tt> ... ] ]<br/>
+     <tt>ON</tt> &lt;selector&gt; <tt>GOTO</tt>
+     &lt;label&gt; <tt>,</tt>  &lt;label&gt;
+     [ <tt>,</tt> &lt;label&gt; [ <tt>,</tt> ... ] ]
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>selector:</td><td>integer expression &gt;= 0</td>
+   </tr>
+  </table>
+ <br/>
+  This statement jumps to a line
+  that is selected from a list of BASIC line numbers or labels
+  according to the value of the expression after the
+  keyword&nbsp;<tt>ON</tt>.
+  If the value is&nbsp;1, execution jumps to the first
+  line after the keyword&nbsp;<tt>GOTO</tt>;
+  for the value&nbsp;2, to the second, and so on.
+  For the value&nbsp;0, or a value greater than the number
+  of line numbers given, no jump occurs, i.e.
+  in that case program execution continues with the next line.
+ <br/><br/>
+  Example with BASIC line numbers:
+ <br/>
+  <tt>
+   &#10;<br/>
+   100 ON A GOTO 1000,2000,3000&#10;<br/>
+   ...&#10;<br/>
+   1000 PRINT "A was 1":END&#10;<br/>
+   2000 PRINT "A was 2":END&#10;<br/>
+   3000 PRINT "A was 3":END&#10;<br/>
+  </tt>
+ <br/>
+  Example with labels:
+ <br/>
+  <tt>
+   &#10;<br/>
+   ON A GOTO up1,up2,up3&#10;<br/>
+   ...&#10;<br/>
+   up1:&#10;<br/>
+   &nbsp;&nbsp;PRINT "A was 1":END&#10;<br/>
+   up2:&#10;<br/>
+   &nbsp;&nbsp;PRINT "A was 2":END&#10;<br/>
+   up3:&#10;<br/>
+   &nbsp;&nbsp;PRINT "A was 3":END&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="open">OPEN</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>OPEN</tt> &lt;device/file name&gt; <tt>AS #</tt> channel
+     <br/>
+     <tt>OPEN</tt> &lt;device/file name&gt;
+	<tt>FOR</tt> &lt;mode&gt; <tt>AS #</tt> channel number
+     <br/>
+     <tt>OPEN</tt> &lt;device/file name&gt;
+	<tt>FOR BINARY</tt> &lt;mode&gt; <tt>AS #</tt> channel number
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>device/file name:</td>
+    <td>simple string expression</td>
+   </tr>
+   <tr valign="top">
+    <td>mode:</td>
+    <td valign="top">
+     <tt>INPUT</tt>, <tt>OUTPUT</tt> or <tt>APPEND</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>channel:</td>
+    <td>integer expression with the value 1 or 2</td>
+   </tr>
+  </table>
+ <br/>
+  This statement opens an input or output channel to the
+  specified device or file.
+  The modes have the following meaning:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th>Mode</th>
+    <th>Meaning</th>
+   </tr>
+   <tr>
+    <td valign="top">INPUT</td>
+    <td valign="top">input channel</td>
+   </tr>
+   <tr>
+    <td valign="top">OUTPUT</td>
+    <td valign="top">
+     output channel,<br/>
+     If a file was specified, it is newly created.
+     Any existing file is deleted in the process.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">APPEND</td>
+    <td valign="top">
+     output channel,<br/>
+     If a file was specified,
+     the data is appended to the file.
+     The contents of any existing file are not deleted.
+    </td>
+   </tr>
+  </table>
+ <br/>
+  If no mode is specified, the default mode applies,
+  which you can find in the following table:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th>Device</th>
+    <th>Meaning</th>
+    <th>Supported modes</th>
+    <th>Default mode</th>
+   </tr>
+   <tr>
+    <td valign="top"><a href="devices.htm#crt"><tt>CRT:</tt></a></td>
+    <td valign="top">screen</td>
+    <td valign="top">OUTPUT</td>
+    <td valign="top">OUTPUT</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="devices.htm#lpt"><tt>LPT:</tt></a></td>
+    <td valign="top">printer</td>
+    <td valign="top">OUTPUT</td>
+    <td valign="top">OUTPUT</td>
+   </tr>
+   <tr>
+    <td valign="top" nowrap="nowrap">
+     <a href="devices.htm#file"><tt>A:</tt> to <tt>P:</tt></a>
+    </td>
+    <td valign="top">drives in the file system</td>
+    <td valign="top">INPUT, OUTPUT, APPEND</td>
+    <td valign="top">INPUT</td>
+   </tr>
+   <tr>
+    <td valign="top"><a href="devices.htm#vdip"><tt>V:</tt></a></td>
+    <td valign="top">USB storage on the VDIP module</td>
+    <td valign="top">INPUT, OUTPUT, APPEND</td>
+    <td valign="top">INPUT</td>
+   </tr>
+  </table>
+ <br/>
+  If the keyword <em>BINARY</em> is specified before the mode,
+  the I/O channel is opened in binary mode,
+  otherwise in text mode.
+  There is only a difference between these two modes
+  when accessing a file system
+  that does not offer byte-exact file lengths
+  (see <a href="devices.htm#file">file system</a>).
+  For reasons of portability, however, you should always
+  specify the keyword <em>BINARY</em>
+  when dealing with binary files.
+ <br/><br/>
+  When opening a file for writing
+  (modes OUTPUT and APPEND) on the
+  device&nbsp;<em>V:</em> (USB storage),
+  the current system time is included as the timestamp for
+  the last modification, but only
+  if the system time can be read.
+  This is only the case if the function
+  <a href="functions.htm#datetime$">DATETIME$</a>
+  returns a non-empty string.
+  Otherwise, no timestamp is included when the file is opened or
+  created.
+ <br/><br/>
+  For an input channel, the statements
+  <a href="instructions.htm#input">INPUT</a> and
+  <a href="instructions.htm#line_input">LINE&nbsp;INPUT</a>
+  as well as the functions
+  <a href="functions.htm#eof">EOF</a> and
+  <a href="functions.htm#input$">INPUT$</a>
+  can be used.
+  For an output channel, the
+  <a href="instructions.htm#print">PRINT</a> statement is available.
+  When you are finished working with the channel, it must be
+  closed again with
+  <a href="instructions.htm#close">CLOSE</a>.
+  After that, the channel can be opened again with a different
+  device or a different file.
+  A total of two channels are available (1 and 2).
+ <br/><br/>
+  The OPEN statement sets the
+  error variables&nbsp;<a href="functions.htm#err">ERR</a>
+  and <a href="functions.htm#err$">ERR$</a>.
+ <br/><br/>
+  Example: saving numbers to the file <em>ZAHLEN.TXT</em>
+  in the top-level directory on the USB storage:
+ <br/>
+  <tt>
+   &#10;<br/>
+   OPEN "V:\ZAHLEN.TXT" FOR OUTPUT AS #1&#10;<br/>
+   IF ERR THEN&#10;<br/>
+   &nbsp;&nbsp;PRINT ERR$&#10;<br/>
+   ELSE&#10;<br/>
+   &nbsp;&nbsp;FOR I=1 TO 10&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT #1,I&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;IF ERR THEN PRINT ERR$:EXIT&#10;<br/>
+   &nbsp;&nbsp;NEXT I&#10;<br/>
+   &nbsp;&nbsp;CLOSE #1&#10;<br/>
+   &nbsp;&nbsp;IF ERR THEN PRINT ERR$&#10;<br/>
+   ENDIF&#10;<br/>
+  </tt>
+ <br/>
+  <b>Attention!</b> The file was only reliably saved
+  if no error occurred either while writing to the file
+  (statement PRINT&nbsp;#) or while closing the file
+  (statement CLOSE).
+ <br/><br/>
+  Examples of reading a file can be found with the
+  <a href="instructions.htm#line_input">LINE&nbsp;INPUT</a> statement
+  and the <a href="functions.htm#input$">INPUT$</a> function.
+ <br/><br/>
+ <h3><a name="out">OUT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>OUT</tt> <tt>(</tt> &lt;port&gt; <tt>)</tt> <tt>=</tt> &lt;value&gt;
+     <br/>
+     <tt>OUT</tt> &lt;port&gt; <tt>,</tt> &lt;value&gt;
+    </td>
+   </tr>
+   <tr valign="top"><td>port:</td><td>integer expression</td></tr>
+   <tr valign="top"><td>value:</td><td>integer expression</td></tr>
+  </table>
+ <br/>
+  The OUT statement outputs a value to an output port.
+  The first expression specifies the output address,
+  the second expression determines the value to be output,
+  whereby only the lower 8 bits are relevant.
+ <br/><br/>
+  <b>Attention!</b> Although the microprocessor officially supports
+  only 8-bit I/O addresses,
+  the use of 16-bit addresses is possible.
+  The compiler translates the statement into program code
+  that, due to the undocumented behavior of the microprocessor,
+  also makes a 16-bit I/O address
+  effective.
+ <br/><br/>
+
+ <h3><a name="paint">PAINT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>PAINT</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>PAINT (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>integer expression</td>
+   </tr>
+  </table>
+ <br/>
+  The PAINT statement fills the area
+  in which the specified point lies.
+  The area consists of all connected pixels
+  that are set to the background color.
+  This statement sets these pixels to the currently
+  configured foreground color.
+  If the pixel at the starting position already has the
+  foreground color, or if the starting position lies outside
+  the screen area, nothing happens.
+  The graphics cursor is not affected by this statement.
+ <br/><br/>
+  Example: drawing two circles of different sizes,
+  with the gap between them filled in,
+  producing a circle with a thick outline:
+ <br/><br/>
+  <tt>
+   CLS&#10;<br/>
+   X=W_PIXEL/2&#10;<br/>
+   Y=H_PIXEL/2&#10;<br/>
+   R1=H_PIXEL/4&#10;<br/>
+   R2=H_PIXEL/3&#10;<br/>
+   CIRCLE (X,Y),R1&#10;<br/>
+   CIRCLE (X,Y),R2&#10;<br/>
+   PAINT X-R2+(R2-R1)/2,Y
+  </tt>
+ <br/><br/>
+  To execute, the PAINT statement requires
+  temporary storage.
+  For this, a free area of the string memory is used.
+  The more often the area to be filled must be broken down
+  into sub-areas, e.g. when filling around corners,
+  the more memory is required.
+  If the memory area used from the string memory
+  is not sufficient, the program aborts with a corresponding
+  error message.
+ <br/><br/>
+
+ <h3><a name="paper">PAPER</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">PAPER&nbsp;&lt;integer expression&gt;</td>
+   </tr>
+  </table>
+ <br/>
+  This statement sets the background color.
+  The color number depends on the target system.
+  To write portable source code, you can also specify the color with a
+  <a href="constants.htm#color">constant</a>, e.g.:
+ <br/><br/>
+  <tt>&nbsp;PAPER&nbsp;BLUE</tt>
+ <br/><br/>
+  On a target system without color support, the statement
+  has no effect.
+ <br/><br/>
+
+ <h3><a name="password_input">PASSWORD INPUT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>PASSWORD INPUT</tt> [ &lt;string literal&gt; <tt>;</tt> ]
+	&lt;string variable&gt;
+    </td>
+   </tr>
+  </table>
+ <br/>
+  The PASSWORD&nbsp;INPUT statement is used to enter a password.
+  The characters entered are not shown in plain text on the
+  screen, but are echoed as asterisks instead.
+  Optionally, a string literal can be specified,
+  which is output as a prompt.
+ <br/><br/>
+
+ <h3><a name="pause">PAUSE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>PAUSE</tt><br/>
+     <tt>PAUSE</tt> &lt;integer expression&gt;
+    </td>
+   </tr>
+  </table>
+ <br/>
+  This statement pauses the program.
+  Pressing the space bar resumes the program.
+  Optionally, a wait time in tenths of a second can be specified.
+  In that case, the program resumes automatically after this
+  time, even if the space bar was not pressed.
+ <br/><br/>
+  <b>Attention!</b> The wait time only approximately
+  matches the specified value and depends significantly
+  on the clock frequency.
+  The value&nbsp;30 therefore corresponds to only roughly a wait
+  time of 3&nbsp;seconds.
+ <br/><br/>
+
+ <h3><a name="pen">PEN</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap"><tt>PEN</tt> &lt;integer expression&gt;</td>
+   </tr>
+  </table>
+ <br/>
+  This statement sets the pen used for drawing.
+  A pen represents a particular way
+  in which pixels are set.
+  There are four different pens.
+  A constant is defined for each pen.
+ <br/><br/>
+  <table border="1">
+   <tr><th>Pen</th><th>Constant</th><th>Meaning</th></tr>
+   <tr>
+    <td valign="top">0</td>
+    <td valign="top"><tt>PEN_NONE</tt></td>
+    <td>
+     Pen raised,<br/>
+     Nothing happens with this pen.
+     Nothing is drawn and nothing is erased.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">1</td>
+    <td valign="top"><tt>PEN_NORMAL</tt></td>
+    <td>
+     Drawing,<br/>
+     The pixels to be drawn are set to the foreground color.
+     Any text and graphics already on the screen
+     are thus overwritten.
+     This pen is the &quot;normal&quot; drawing pen and
+     is set automatically when the program starts.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">2</td>
+    <td valign="top"><tt>PEN_ERASER</tt></td>
+    <td>
+     Erasing,<br/>
+     The pixels to be drawn are set to the background color.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">3</td>
+    <td valign="top"><tt>PEN_XOR</tt></td>
+    <td>
+     XOR mode,<br/>
+     For each pixel to be drawn, a check is made
+     whether it is already set.
+     If so, the pixel is erased (set to the background color).
+     If not, it is drawn normally (set to the foreground color).
+     As a result, text and graphics already on the screen
+     remain visible, but inverted.
+    </td>
+   </tr>
+  </table>
+ <br/>
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+
+ <h3><a name="plot">PLOT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>PLOT</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>PLOT TO</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>PLOT (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt><br/>
+     <tt>PLOT TO (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt><br/>
+     <tt>PLOT STEP (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>integer expression</td>
+   </tr>
+  </table>
+ <br/>
+  The PLOT statement positions the graphics cursor
+  and sets the pixel there.
+  This makes the PLOT statement well suited, e.g. in combination
+  with the <a href="instructions.htm#draw">DRAW</a> statement,
+  for drawing open polygons.
+ <br/><br/>
+  In the variant with the keyword <em>STEP</em>,
+  relative coordinates are given.
+  This variant is identical to the
+  <a href="instructions.htm#plotr">PLOTR</a> statement.
+ <br/><br/>
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+
+ <h3><a name="plotr">PLOTR</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>PLOTR</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>PLOTR (</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt; <tt>)</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>integer expression</td>
+   </tr>
+  </table>
+ <br/>
+  The PLOTR statement moves the graphics cursor by the specified
+  X and Y value and sets the pixel there.
+  The position given is relative. Otherwise, what was written for
+  the <a href="instructions.htm#plot">PLOT</a> statement applies.
+ <br/><br/>
+
+ <h3><a name="poke">POKE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>POKE</tt> &lt;address&gt; <tt>,</tt> &lt;value&gt;
+    </td>
+   </tr>
+   <tr valign="top"><td>address:</td><td>integer expression</td></tr>
+   <tr valign="top"><td>value:</td><td>integer expression</td></tr>
+  </table>
+ <br/>
+  The memory cell specified by the address is
+  written with the lower 8 bits of the value of the second
+  integer expression.
+ <br/><br/>
+
+ <h3><a name="preset">PRESET</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>PRESET</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>PRESET</tt> ( &lt;X&gt; <tt>,</tt> &lt;Y&gt; )
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>integer expression with a value &gt;= 0</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>integer expression with a value &gt;= 0</td>
+   </tr>
+  </table>
+ <br/>
+  The PRESET statement resets a pixel on the screen
+  to the background color.
+  The pen set with the PEN statement plays no
+  role in this.
+  The position of the graphics cursor is not changed.
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+
+ <h3><a name="print">PRINT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>PRINT</tt><br/>
+     <tt>PRINT</tt> &lt;section&gt;<br/>
+     <tt>PRINT</tt> &lt;section&gt; &lt;separator&gt;<br/>
+     <tt>PRINT</tt> &lt;section&gt; &lt;separator&gt;
+	&lt;further sections&gt;<br/>
+     <tt>PRINT</tt> &lt;section&gt; &lt;separator&gt;
+	&lt;further sections&gt; &lt;separator&gt;<br/>
+     <tt>PRINT #</tt> &lt;channel&gt;<br/>
+     <tt>PRINT #</tt> &lt;channel&gt; <tt>,</tt> &lt;section&gt;<br/>
+     <tt>PRINT #</tt> &lt;channel&gt; <tt>,</tt> &lt;section&gt;
+	&lt;separator&gt;<br/>
+     <tt>PRINT #</tt> &lt;channel&gt; <tt>,</tt> &lt;section&gt;
+	&lt;separator&gt; &lt;further sections&gt;<br/>
+     <tt>PRINT #</tt> &lt;channel&gt; <tt>,</tt> &lt;section&gt;
+	&lt;separator&gt; &lt;further sections&gt;
+	&lt;separator&gt;
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>channel:</td>
+    <td>integer expression with the value 1 or 2</td>
+   </tr>
+   <tr valign="top">
+    <td>section:</td>
+    <td>string expression or integer expression</td>
+   </tr>
+   <tr valign="top">
+    <td>separator:</td>
+    <td>comma or semicolon</td>
+   </tr>
+  </table>
+ <br/>
+  The PRINT statement outputs numbers, text and/or a line break
+  to the screen or to an output channel.
+  The output goes to the output channel
+  if the number of the output channel was specified
+  after a hash sign.
+  In that case, the error variables
+  <a href="functions.htm#err">ERR</a> and
+  <a href="functions.htm#err$">ERR$</a> are also set.
+  Without a channel number, the output goes to the screen.
+ <br/><br/>
+  The PRINT statement can contain several sections,
+  separated by commas or semicolons.
+  A section serves to output either a string
+  or a numeric value,
+  depending on whether the section contains a string expression
+  or a numeric expression.
+ <br/>
+
+ <br/><br/>
+  <u>The CHR$ Function</u>
+ <br/><br/>
+  With the function&nbsp;<a href="functions.htm#chr$">CHR$</a>,
+  any byte, including null bytes, can be output.
+  If you pass the function the value&nbsp;0,
+  it normally returns an empty string.
+  However, this does not apply if the CHR$ function is a
+  stand-alone section in the PRINT statement.
+  In that case, the byte whose value was passed to the CHR$
+  function is always output,
+  even if the value is&nbsp;0.
+  The example shows writing a binary file
+  that consists of only a single null byte:
+ <br/>
+  <tt>
+   &#10;<br/>
+   OPEN "datei.bin" FOR BINARY OUTPUT AS #1&#10;<br/>
+   IF ERR THEN&#10;<br/>
+   &nbsp;&nbsp;PRINT ERR$&#10;<br/>
+   ELSE&#10;<br/>
+   &nbsp;&nbsp;PRINT #1,CHR$(0);&#10;<br/>
+   &nbsp;&nbsp;CLOSE #1&#10;<br/>
+   ENDIF&#10;<br/>
+  </tt>
+
+ <br/><br/>
+  <u>The SPC Function</u>
+ <br/><br/>
+  The SPC function is used to output a specific number
+  of spaces. You pass the function the number of spaces
+  as an argument, written in parentheses.
+  The example shows the output of 10&nbsp;spaces
+  between the angle brackets:
+ <br/>
+  <tt>
+   &#10;<br/>
+   PRINT "&gt;";SPC(10);"&lt;"&#10;<br/>
+  </tt>
+ <br/>
+  What is special about the SPC function is that it is only
+  available within the PRINT statement.
+  For this reason it is described here rather than among the
+  regular BASIC functions.
+ <br/><br/>
+  The SPC function has the same effect as the
+  function&nbsp;<a href="functions.htm#space$">SPACE$</a>.
+  However, the SPC function is particularly better suited
+  for outputting many spaces,
+  since it does not use the internal string processing
+  and is therefore also not subject to its size limit.
+ <br/>
+
+ <br/><br/>
+  <u>Right- and Left-Aligned Output</u>
+ <br/><br/>
+  Strings are always output left-aligned.
+  For numeric sections, the alignment depends
+  on the preceding separator.
+  If the section is separated from the previous section by a
+  comma, the number is output right-aligned in a field
+  14&nbsp;characters wide.
+  Otherwise, the output is left-aligned.
+  The following examples demonstrate this:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th>left-aligned output</th>
+    <th>right-aligned output</th>
+   </tr>
+   <tr>
+    <td>
+     <tt>
+      A=12&#10;<br/>
+      PRINT "A=";A
+     </tt>
+    </td>
+    <td>
+     <tt>
+      A=12&#10;<br/>
+      PRINT "A=",A
+     </tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  With left-aligned output, the first position contains
+  either the sign or a space.
+  If the space is undesired, you must convert the number
+  to a string before output and strip the leading spaces:
+ <br/>
+  <tt>
+   &#10;<br/>
+   A=12&#10;<br/>
+   PRINT "A=";LTRIM$(STR$(A))&#10;<br/>
+  </tt>
+ <br/>
+  If a section outputting a decimal number is followed by
+  another section, that section is separated from the number
+  by a space, in line with common BASIC dialects.
+  If this space is undesired,
+  the number must be converted to a string in this case as well.
+  The following example shows how to output the percent sign
+  directly after the number:
+ <br/>
+  <tt>
+   &#10;<br/>
+   P=17&#10;<br/>
+   PRINT "Share: ";STR$(P);"%"&#10;<br/>
+  </tt>
+ <br/>
+
+ <br/>
+  <u>Line Break</u>
+ <br/><br/>
+  By default, the PRINT statement moves the cursor to the
+  beginning of the next line after outputting all sections.
+  This line break can be suppressed
+  by ending the statement with a comma or semicolon:
+ <br/>
+  <tt>
+   &#10;<br/>
+   PRINT "A and ";&#10;<br/>
+   PRINT "B are on the same line"&#10;<br/>
+  </tt>
+ <br/>
+ <h3><a name="pset">PSET</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>PSET</tt> &lt;X&gt; <tt>,</tt> &lt;Y&gt;<br/>
+     <tt>PSET</tt> ( &lt;X&gt; <tt>,</tt> &lt;Y&gt; )
+    </td>
+   </tr>
+   <tr valign="top">
+    <td>X:</td>
+    <td>integer expression with a value &gt;= 0</td>
+   </tr>
+   <tr valign="top">
+    <td>Y:</td>
+    <td>integer expression with a value &gt;= 0</td>
+   </tr>
+  </table>
+ <br/>
+  The PSET statement sets a pixel on the screen
+  using the pen configured with the
+  <a href="instructions.htm#pen">PEN</a> statement.
+  The position of the graphics cursor is not changed.
+  Please also read the notes on
+  <a href="graphics.htm">graphics support</a>!
+ <br/><br/>
+
+ <h3><a name="read">READ</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap"><tt>READ</tt> &lt;variable&gt; [ <tt>,</tt> ... ]</td>
+   </tr>
+  </table>
+ <br/>
+  READ reads the next value from the data area
+  that was created with the <a href="instructions.htm#data">DATA</a>
+  statements and writes it to the specified variable.
+  Several variables can be given, separated by commas,
+  in which case several values are read as well.
+  Each value read must match the data type of the specified
+  variable, or be convertible to it
+  (see <a href="datatypes.htm#typeconv">implicit type conversions</a>).
+ <br/><br/>
+
+ <h3><a name="rem">REM</a></h3>
+  The rest of the program line is treated as a comment and
+  thus ignored.
+  Instead of the keyword REM, an exclamation mark
+  or an apostrophe (quote character) can also be used.
+ <br/><br/>
+
+ <h3><a name="restore">RESTORE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>RESTORE</tt><br/>
+     <tt>RESTORE</tt> &lt;line number&gt;<br/>
+     <tt>RESTORE</tt> &lt;label&gt;
+    </td>
+   </tr>
+  </table>
+ <br/>
+  RESTORE sets the read position of the
+  <a href="instructions.htm#read">READ</a> statement
+  to the first data field of the first
+  <a href="instructions.htm#data">DATA</a> statement
+  that appears on the specified line, or after the specified
+  label, e.g.:
+ <br/>
+  <tt>
+   &#10;<br/>
+   RESTORE Wochentage&#10;<br/>
+   FOR I=1 TO 7&#10;<br/>
+   &nbsp;&nbsp;READ A$&#10;<br/>
+   &nbsp;&nbsp;PRINT A$&#10;<br/>
+   NEXT I&#10;<br/>
+   END&#10;<br/>
+   &#10;<br/>
+   Wochentage:&#10;<br/>
+   &nbsp;&nbsp;DATA "Mon","Tue","Wed","Thu","Fri","Sat","Sun"&#10;<br/>
+  </tt>
+ <br/>
+  If no line number or label is given,
+  RESTORE sets the read position to the first data field
+  of the first DATA statement in the BASIC program,
+  i.e. the read position is reset to the value it had
+  at the start of the program.
+ <br/><br/>
+  <b>Attention!</b> If a label is given, it must be the label
+  that stands directly before the DATA statement in question.
+  If there is another label or a BASIC line number
+  between the given label and the DATA statement,
+  the compiler reports an error.
+ <br/><br/>
+
+ <h3><a name="return">RETURN</a></h3>
+  This statement ends a subroutine that was called with
+  <a href="instructions.htm#gosub">GOSUB</a>.
+  Program execution then continues after the calling
+  GOSUB statement.
+  The RETURN statement must not be called without a preceding
+  GOSUB!
+ <br/><br/>
+
+ <h3><a name="screen">SCREEN</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap"><tt>SCREEN</tt> &lt;integer expression&gt;</td>
+   </tr>
+  </table>
+ <br/>
+  The SCREEN statement can be used to set a screen or graphics
+  mode.
+  Which modes, and how many, are available
+  depends on the target system.
+  Please read the notes on
+  <a href="targets.htm">target systems</a> for this!
+ <br/><br/>
+  <tt>SCREEN&nbsp;0</tt> sets the default mode,
+  which offers the ability to output text and
+  is always available.
+  Whether graphics statements are also possible in this mode
+  again depends on the specific target system.
+  On some systems, the hardware switches between
+  text and graphics mode.
+  In such cases, several modes are available,
+  e.g. <tt>SCREEN&nbsp;0</tt> for text mode and
+  <tt>SCREEN&nbsp;1</tt> for graphics mode.
+  The constant <em>LASTSCREEN</em> contains the highest
+  screen number that can be used with SCREEN.
+ <br/><br/>
+  Another relevant constant is <em>GRAPHICSCREEN</em>,
+  which contains the number of the graphics-capable screen.
+  This lets you set the graphics mode in a simple and portable
+  way, provided the target system supports graphics:
+ <br/><br/>
+  <tt>&nbsp;SCREEN&nbsp;GRAPHICSCREEN</tt>
+ <br/><br/>
+  If the SCREEN statement is called with the number of the
+  screen mode you are already in, nothing happens.
+ <br/><br/>
+
+ <h3><a name="select_case">SELECT&nbsp;CASE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td valign="top">Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>SELECT CASE</tt> &lt;integer expression&gt;<br/>
+     &nbsp;&nbsp;<tt>CASE</tt> &lt;value list&gt; &lt;statements&gt;<br/>
+     &nbsp;&nbsp;[ <tt>CASE</tt> &lt;value list&gt; &lt;statements&gt; ]<br/>
+     &nbsp;&nbsp;[ <tt>CASE&nbsp;ELSE</tt> &lt;statements&gt; ]<br/>
+     <tt>END SELECT</tt>
+    </td>
+   </tr>
+   <tr valign="top">
+    <td valign="top">value list:</td>
+    <td>
+     comma-separated list of integer literals
+     and/or integer constants,<br/>
+     can also be just a single value
+    </td>
+   </table>
+ <br/>
+  With this statement, an integer expression is tested
+  against constant values.
+  If a value matches, the statements after that value or
+  value list are executed
+  and the <tt>SELECT&nbsp;CASE</tt> statement is exited.
+  If none of the given values match, the statements after
+  <tt>CASE&nbsp;ELSE</tt>, if present, are executed.
+ <br/><br/>
+  Example: dice game:
+ <br/>
+  <tt>
+   &#10;<br/>
+   N=0&#10;<br/>
+   DO&#10;<br/>
+   &nbsp;&nbsp;W=FALSE&#10;<br/>
+   &nbsp;&nbsp;P=RND(6)+1&#10;<br/>
+   &nbsp;&nbsp;SELECT CASE P&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;CASE 1 PRINT "one point"&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;CASE 2 PRINT "two points"&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;CASE 3 PRINT "three points"&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;CASE 4 PRINT "four points"&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;CASE 5 PRINT "five points"&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;CASE 6 PRINT "six points -&gt; roll again":W=TRUE&#10;<br/>
+   &nbsp;&nbsp;END SELECT&#10;<br/>
+   &nbsp;&nbsp;N=N+P&#10;<br/>
+   LOOP WHILE W&#10;<br/>
+   PRINT "Total rolled:";N
+  </tt>
+ <br/><br/>
+  Example: color evaluation:
+ <br/>
+  <tt>
+   &#10;<br/>
+   BUNT=FALSE&#10;<br/>
+   SELECT CASE POINT(X,Y)&#10;<br/>
+   &nbsp;&nbsp;CASE BLACK&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT "black"&#10;<br/>
+   &nbsp;&nbsp;CASE WHITE&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT "white"&#10;<br/>
+   &nbsp;&nbsp;CASE RED,GREEN,BLUE&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT "primary color"&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;BUNT=TRUE&#10;<br/>
+   &nbsp;&nbsp;CASE ELSE&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;PRINT "mixed color"&#10;<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;BUNT=TRUE&#10;<br/>
+   END SELECT&#10;<br/>
+  </tt>
+ <br/><br/>
+  <b>Note:</b> The <tt>SELECT&nbsp;CASE</tt> statement can also
+  be written on a single line.
+  In that case, a colon must be placed as a statement separator
+  before each <tt>CASE</tt> branch and before
+  <tt>END&nbsp;SELECT</tt>.
+  However, for the sake of readability, it is strongly
+  recommended to use one of the multi-line formats shown
+  in the two examples.
+ <br/><br/>
+
+ <h3><a name="sub">SUB</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     <tt>SUB</tt> &lt;procedure name&gt;<br/>
+     <tt>SUB</tt> &lt;procedure name&gt;
+	<tt>(</tt> &lt;argument&gt; [ <tt>,</tt> ... ] <tt>)</tt>
+    </td>
+   </tr>
+  </table>
+ <br/>
+  This statement begins the implementation of a user-defined
+  procedure.
+  This implicitly also ends the main program.
+  The procedure ends with the <tt>END SUB</tt> statement.
+ <br/><br/>
+  Please also read the notes on
+  <a href="usersubs.htm">user-defined functions and procedures</a>!
+ <br/><br/>
+
+ <h3><a name="swap">SWAP</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     SWAP &lt;variable_1&gt; <tt>,</tt> &lt;variable_2&gt;
+    </td>
+   </tr>
+  </table>
+ <br/>
+  This statement swaps the contents of two variables.
+  This is more efficient than three self-written LET statements.
+  The SWAP statement is especially beneficial when swapping
+  the contents of string variables,
+  since in that case the dynamic memory management of string
+  processing is not invoked.
+ <br/><br/>
+  Example:
+ <br/>
+  <tt>
+   &#10;<br/>
+   DIM T$(2) AS STRING&#10;<br/>
+   T$(1)="Text 1"&#10;<br/>
+   T$(2)="Text 2"&#10;<br/>
+   SWAP T$(1),T$(2)&#10;<br/>
+   PRINT "T$1=";T$(1)&#10;<br/>
+   PRINT "T$2=";T$(2)&#10;<br/>
+  </tt>
+ <br/>
+
+ <h3><a name="wait">WAIT</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap">
+     WAIT &lt;I/O address&gt; <tt>,</tt> &lt;mask&gt;
+     [ <tt>,</tt> &lt;inversion&gt; ]
+    </td>
+   </tr>
+   <tr><td>I/O address:</td><td>integer expression</td></tr>
+   <tr><td>mask:</td><td>integer expression</td></tr>
+   <tr><td>inversion:</td><td>integer expression</td></tr>
+  </table>
+ <br/>
+  This statement waits for a particular state to occur
+  at the input port specified by the first parameter.
+  To do this, it continuously reads from this input port
+  and ANDs the value read, bit by bit, with the mask.
+  If the result is&nbsp;0, it reads again.
+  The function thus waits until one of the bits read
+  and selected by the mask is set.
+ <br/><br/>
+  So that you can also wait for bits to be cleared,
+  there is an optional third parameter.
+  For all bits that are set there, the inverse logic applies,
+  i.e. the function waits until one of the bits read is&nbsp;0.
+ <br/><br/>
+  The WAIT function waits until the following expression
+  yields a value not equal to&nbsp;0:
+ <br/><br/>
+  (&lt;value read&gt; <tt>XOR</tt> &lt;inversion&gt;) AND &lt;mask&gt;
+ <br/><br/>
+
+ <h3><a name="wend">WEND</a></h3>
+  This statement marks the end of a loop
+  that was previously opened with the WHILE statement.
+ <br/><br/>
+
+ <h3><a name="while">WHILE</a></h3>
+  <table border="1">
+   <tr valign="top">
+    <td>Syntax:</td>
+    <td nowrap="nowrap"><tt>WHILE</tt> &lt;condition&gt;</td>
+   </tr>
+   <tr valign="top"><td>condition:</td><td>integer expression</td></tr>
+  </table>
+ <br/>
+  The WHILE statement marks the beginning of a pre-test loop,
+  i.e. before each pass through the loop, a check is made
+  whether the condition is satisfied.
+  If so, the statements in the loop are executed.
+  If not, execution jumps to the end of the loop
+  (see <a href="instructions.htm#wend">WEND</a>).
+  Every WHILE loop must be closed with WEND.
+ <br/>
+  <tt>
+   &#10;<br/>
+   I=1&#10;<br/>
+   WHILE i&lt;10&#10;<br/>
+   &nbsp;&nbsp;PRINT I&#10;<br/>
+   &nbsp;&nbsp;I=I+1&#10;<br/>
+   WEND&#10;<br/>
+  </tt>
+ <br/>
+</body>
+</html>

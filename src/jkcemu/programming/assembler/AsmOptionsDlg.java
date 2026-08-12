@@ -25,6 +25,7 @@ import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.AbstractOptionsDlg;
 import jkcemu.programming.PrgOptions;
 
@@ -381,7 +382,10 @@ public class AsmOptionsDlg extends AbstractOptionsDlg
 	doClose();
       }
       catch( UserInputException ex ) {
-	showErrorDlg( this, "Erzeugter Programmcode:\n" + ex.getMessage() );
+	showErrorDlg(
+		this,
+		LangUtil.tr( "Erzeugter Programmcode:" )
+			+ "\n" + ex.getMessage() );
       }
     }
     catch( NumberFormatException ex ) {

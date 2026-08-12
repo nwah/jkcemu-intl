@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class TextFinder
@@ -167,10 +168,12 @@ public class TextFinder
 	      } else {
 		BaseDlg.showInfoDlg(
 			textArea,
-			String.format(
-				"%d Textersetzung%s durchgef\u00FChrt.",
-				n,
-				n == 1 ? "" : "en" ),
+			n == 1
+				? LangUtil.tr(
+					"1 Textersetzung durchgef\u00FChrt." )
+				: LangUtil.tr(
+					"{0} Textersetzungen durchgef\u00FChrt.",
+					n ),
 			"Text ersetzen" );
 	      }
 	      break;
@@ -326,7 +329,11 @@ public class TextFinder
     } else {
       BaseDlg.showInfoDlg(
 		textArea,
-		String.valueOf( n ) + " Textersetzungen durchgef\u00FChrt.",
+		n == 1
+			? LangUtil.tr( "1 Textersetzung durchgef\u00FChrt." )
+			: LangUtil.tr(
+				"{0} Textersetzungen durchgef\u00FChrt.",
+				n ),
 		"Text ersetzen" );
     }
   }

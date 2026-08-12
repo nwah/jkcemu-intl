@@ -861,7 +861,7 @@ public class EditText implements
 			+ "die Datei mit einem anderen Zeichensatz"
 			+ " zu \u00F6ffnen\n"
 			+ "(siehe Men\u00FCpunkt"
-			+ " ''\u00D6ffnen mit Zeichensatz...'')." ) );
+			+ " '\u00D6ffnen mit Zeichensatz...')." ) );
 	} else {
 	  buf.append( LangUtil.tr(
 		"Die Datei enth\u00E4lt Bytes bzw. Bytefolgen,"
@@ -873,7 +873,7 @@ public class EditText implements
 			+ "die Datei mit einem anderen Zeichensatz"
 			+ " zu \u00F6ffnen\n"
 			+ "(siehe Men\u00FCpunkt"
-			+ " ''\u00D6ffnen mit Zeichensatz...'')." ) );
+			+ " '\u00D6ffnen mit Zeichensatz...')." ) );
 	}
 	BaseDlg.fireShowWarningDlg( this.textEditFrm, buf.toString() );
       }

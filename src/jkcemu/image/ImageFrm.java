@@ -2508,11 +2508,13 @@ public class ImageFrm extends AbstractImageFrm implements
     this.mnuConvert.add( this.mnuToKC854Hires );
 
     this.mnuToLLC2Hires21 = createMenuItem(
-		TEXT_LLC2HIRES_FMT + " ohne Anpassung f\u00FCr 4:3-Anzeige" );
+		"LLC2-HIRES-Format (512x256, monochrom)"
+			+ " ohne Anpassung f\u00FCr 4:3-Anzeige" );
     this.mnuConvert.add( this.mnuToLLC2Hires21 );
 
     this.mnuToLLC2Hires43 = createMenuItem(
-		TEXT_LLC2HIRES_FMT + " mit Anpassung f\u00FCr 4:3-Anzeige" );
+		"LLC2-HIRES-Format (512x256, monochrom)"
+			+ " mit Anpassung f\u00FCr 4:3-Anzeige" );
     this.mnuConvert.add( this.mnuToLLC2Hires43 );
 
     this.mnuToZ1013 = createMenuItem( TEXT_Z1013_FMT );

@@ -1,0 +1,1005 @@
+<html>
+<body>
+ <h1>Image Viewer/Image Editor</h1>
+  The image viewer is used to display, convert,
+  and save images.
+  The distinguishing feature of the JKCEMU image viewer
+  is that it also supports the file and image formats
+  of some of the emulated systems,
+  including converting images into these formats.
+  For this reason, the image viewer also offers
+  a number of common image editing functions.
+ <br/><br/>
+  The image viewer can also be started
+  as a standalone program without the emulator.
+  To do so, specify the option <em>--iv</em> or <em>--imageviewer</em>
+  on the command line when starting JKCEMU.
+  In addition, an image file can be given after it,
+  which is then displayed in the image viewer.
+ <br/><br/>
+  <ul>
+   <li><a href="imageviewer.htm#formats">1. File Formats</a></li>
+   <li>
+    <a href="imageviewer.htm#open">2. Opening and Displaying a File</a>
+    <ul>
+     <li>
+      <a href="imageviewer.htm#load_kc854img">2.1. KC85/4 Image Files</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="imageviewer.htm#save">3. Saving a File</a>
+    <ul>
+     <li>
+      <a href="imageviewer.htm#jpeg_param">3.1. JPEG Parameters When Saving</a>
+      <ul>
+       <li>
+        <a href="imageviewer.htm#jpeg_quality">3.1.1. Quality</a>
+       </li>
+       <li>
+        <a href="imageviewer.htm#jpeg_progressive">3.1.2. Forcing Progressive Mode</a>
+       </li>
+       <li>
+        <a href="imageviewer.htm#jpeg_optim_huffm">3.1.3. Generating Optimized Huffman Tables</a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li><a href="imageviewer.htm#export">4. Exporting</a></li>
+   <li>
+    <a href="imageviewer.htm#exif">5. Additional Information (EXIF Data)</a>
+   </li>
+   <li>
+    <a href="imageviewer.htm#edit">6. Image Editing</a>
+    <ul>
+     <li>
+      <a href="imageviewer.htm#rotate">6.1. Rotating</a>
+     </li>
+     <li>
+      <a href="imageviewer.htm#cut_out">6.2. Cropping</a>
+     </li>
+     <li>
+      <a href="imageviewer.htm#scale">6.3. Scaling</a>
+     </li>
+     <li>
+      <a href="imageviewer.htm#sharpen">6.4. Sharpening</a>
+     </li>
+     <li>
+      <a href="imageviewer.htm#flip_horizontal">6.5. Flipping</a>
+     </li>
+     <li>
+      <a href="imageviewer.htm#round_corners">6.6. Rounding Corners</a>
+     </li>
+     <li>
+      <a href="imageviewer.htm#adjust">6.7. Brightness, Contrast, Colors</a>
+     </li>
+     <li>
+      <a href="imageviewer.htm#index_colors">6.8. Reducing and Indexing Colors</a>
+      <ul>
+       <li>
+        <a href="imageviewer.htm#create_pal">6.8.1. Determining a Color Palette</a>
+       </li>
+       <li>
+        <a href="imageviewer.htm#import_pal">6.8.2. Importing a Color Palette</a>
+       </li>
+       <li>
+        <a href="imageviewer.htm#dithering">6.8.3. Dithering</a>
+        <ul>
+         <li>
+          <a href="imageviewer.htm#floyd_steinberg">6.8.3.1. Floyd-Steinberg</a>
+         </li>
+         <li>
+          <a href="imageviewer.htm#sierra3">6.8.3.2. Sierra-3</a>
+         </li>
+         <li>
+          <a href="imageviewer.htm#atkinson">6.8.3.3. Atkinson</a>
+         </li>
+        </ul>
+       </li>
+      </ul>
+     </li>
+     <li>
+      <a href="imageviewer.htm#black_white">6.9. Converting to Black/White</a>
+     </li>
+     <li><a href="imageviewer.htm#invert">6.10. Inverting</a></li>
+     <li>
+      <a href="imageviewer.htm#remove_transp">6.11. Removing Transparency</a>
+     </li>
+     <li>
+      <a href="imageviewer.htm#color_pal">6.12. Color Palette</a>
+     </li>
+    </ul>
+   </li>
+   <li>
+    <a href="imageviewer.htm#convert">7. Converting an Image to the Format of an Emulated System</a>
+    <ul>
+     <li>
+      <a href="imageviewer.htm#convert_manually">7.1 Manually Converting the Image Format</a>
+     </li>
+     <li>
+      <a href="imageviewer.htm#convert_llc2">7.2 Converting the Image Format for LLC2 HIRES</a>
+     </li>
+    </ul>
+   </li>
+   <li><a href="imageviewer.htm#etc">8. Further Functions</a></li>
+  </ul>
+ <br/>
+
+ <h2><a name="formats">1. File Formats</a></h2>
+  The file formats supported by the image viewer
+  depend on the Java runtime environment being used.
+  This usually supports the formats BMP, GIF,
+  JPEG, PNG, and WBMP, as well as TIFF from Java&nbsp;9 on.
+  Furthermore, the JKCEMU image viewer
+  also handles the IFF/ILBM format.
+  This is the standard graphics format of the Commodore Amiga
+  and has the file extensions
+  <em>*.iff</em>, <em>*.ilbm</em>, and <em>*.lbm</em>
+ <br/><br/>
+  The JKCEMU image viewer can generate images
+  for some of the emulated systems.
+  Depending on the system, these are saved either in a
+  special file format or as a
+  <a href="../fileformats.htm#memimg">memory image file</a>
+  (see <a href="imageviewer.htm#export">Exporting</a>).
+ <br/><br/>
+
+ <h2><a name="open">2. Opening and Displaying a File</a></h2>
+  There are several ways to open a file:
+  <ul>
+   <li>Menu item <em>File</em> &rarr; <em>Open</em></li>
+   <li>Click the leftmost icon in the toolbar</li>
+   <li>
+    Drag a file with drag&amp;drop
+    into the image viewer and drop it there
+   </li>
+   <li>
+    Double-click an image file in the
+    <a href="filebrowser.htm">File Browser</a>
+   </li>
+  </ul>
+ <br/>
+  Furthermore, with the menu item
+  <em>Edit</em> &rarr; <em>Paste</em>
+  you can also bring an image
+  that is on the clipboard into the image viewer.
+ <br/><br/>
+  Besides the file formats mentioned above, you can also open
+  A5105 image files with 16&nbsp;colors (*.scr) and LLC2 HIRES
+  image files (*.pix, 16384&nbsp;bytes in size).
+ <br/><br/>
+  After opening, the file is displayed.
+  If the checkbox next to the item
+  <em>Fit Window to Image Size</em>
+  is checked in the <em>Settings</em> menu,
+  the window is enlarged or reduced accordingly.
+  This setting, along with the background color,
+  which can likewise be set in that menu,
+  is also stored permanently
+  when you <a href="../settings.htm#profiles">save the JKCEMU settings</a>.
+ <br/><br/>
+  In the toolbar you find icons for rotating and scaling
+  the image.
+  Both of these apply only to the display
+  and do not change the actual image.
+  Clicking the icon to the right of the scaling icon
+  fits the image to the current window size.
+ <br/><br/>
+  On the right of the toolbar are two arrows
+  that take you to the previous or next image.
+  This lets you click your way through
+  all the supported image files in the same directory.
+ <br/><br/>
+
+ <h2><a name="load_kc854img">2.1. KC85/4 Image Files</a></h2>
+  KC85/4 images (this also applies to the KC85/5) consist of
+  two files each: one for the pixel data (*.hip; *.pip)
+  and one for the color information (*.hif; *.pif).
+  If you open one of the two files,
+  the corresponding second file is automatically loaded as well.
+  If the color file does not exist,
+  only the pixel file is loaded and the image is displayed
+  in black and white.
+ <br/><br/>
+  The file filter <em>Supported Image Files (...)</em>
+  in the file selection dialog (<em>File Type</em> selection)
+  shows only the pixel files, so as to avoid clutter.
+  If you want to see the color files as well,
+  you must switch the file filter to <em>All Files</em>.
+ <br/><br/>
+
+ <h2><a name="save">3. Saving a File</a></h2>
+  The displayed image can be saved in one of the file formats
+  mentioned above with the menu item
+  <em>File</em> &rarr; <em>Save&nbsp;As...</em>
+  or the second icon in the toolbar.
+  This way, images can be converted to other file formats.
+  Note, however, that not all image properties
+  can be saved in all formats.
+  Some file formats support no transparency or only limited
+  transparency, while others have a limited number of colors
+  (GIF, for example, can save at most 256&nbsp;colors).
+  Depending on the image and the selected file format,
+  saving may therefore resolve the transparency,
+  reduce the number of colors,
+  or abort the save with an error message.
+  In the last case, you must first convert the image with the
+  <a href="imageviewer.htm#edit">editing functions</a>
+  into an image format compatible with the file format
+  before you can save it.
+ <br/><br/>
+  The WBMP format has particularly severe limitations.
+  It can only be saved in black and white and only
+  in certain sizes.
+ <br/><br/>
+
+ <h2><a name="jpeg_param">3.1. JPEG Parameters When Saving</a></h2>
+  Via the menu item <em>Settings</em>
+  &rarr; <em>JPEG&nbsp;Parameters When Saving...</em> you can
+  specify parameters for saving JPEG files
+  and thereby influence how the files are generated.
+  If the JPEG implementation of the Java runtime environment
+  being used does not support some or all of these parameters,
+  the JPEG files are saved with the respective default values.
+ <br/><br/>
+
+ <h3><a name="jpeg_quality">3.1.1. Quality</a></h3>
+  You can specify the quality of the JPEG files when saving.
+  From a technical point of view, this specifies
+  how much the data should be compressed.
+  Since JPEG is a lossy compression method,
+  the more the data is compressed,
+  the more detail is lost.
+  So the higher the quality is to be,
+  the lower the compression rate must be
+  and the larger the saved JPEG files become.
+  With the setting <em>Default</em>, the files are saved
+  the way the JPEG implementation of the Java runtime environment
+  being used does by default.
+ <br/><br/>
+
+ <h3><a name="jpeg_progressive">3.1.2. Forcing Progressive Mode</a></h3>
+  This mode affects how the image data is arranged in the file.
+  You should only set this parameter if you know its effect
+  on JPEG file generation as well as on reading and displaying
+  such JPEG files.
+ <br/><br/>
+
+ <h3>
+  <a name="jpeg_optim_huffm">3.1.3. Generating Optimized Huffman Tables</a>
+ </h3>
+  Normally, standard Huffman tables are used.
+  With this parameter, you specify that Huffman tables
+  optimized specifically for the JPEG files being saved
+  should be generated.
+  This can somewhat reduce the amount of compressed data.
+  However, this also means the JPEG files always contain
+  their own Huffman tables, which in turn makes the files larger.
+  You should therefore only set this parameter
+  if you know its effect on JPEG file generation.
+ <br/><br/>
+
+ <h2><a name="export">4. Exporting</a></h2>
+  In the submenu <em>File</em> &rarr; <em>Export&nbsp;As</em>
+  there are functions for saving the displayed image
+  in a special format of one of the emulated systems.
+  To do so, the image must first be converted with the
+  corresponding function in the submenu
+  <em>Edit</em> &rarr; <em>Convert&nbsp;To</em>.
+  This adjusts both the resolution and the colors.
+  To achieve better results, these steps can also be
+  carried out manually
+  (see <a href="imageviewer.htm#edit">Image Editing</a>)
+  before you call the conversion function.
+ <br/><br/>
+  Depending on the emulated system, the converted image
+  can be saved as
+  <ul>
+   <li>a special image file,</li>
+   <li>a memory image file for the video RAM, and/or</li>
+   <li>a memory image file with a program for displaying the image</li>
+  </ul>
+  In the case of a special image file, you find information
+  on how the image files can be displayed
+  in the notes on the emulation of the respective system
+  (see <a href="../a5105.htm#images">A5105 image files</a> and
+  <a href="../llc2.htm#images">LLC2 HIRES image files</a>).
+ <br/><br/>
+
+ <h2><a name="exif">5. Additional Information (EXIF Data)</a></h2>
+  Some image files contain additional information,
+  such as a description or the date the image was taken.
+  The JKCEMU image viewer supports reading and writing
+  such additional information, also called metadata,
+  in GIF, IFF/ILBM, JPEG/JPG, and PNG files.
+  The table shows which additional information
+  is supported for which file formats:
+ <br/><br/>
+  <table border="1">
+   <tr>
+    <th>File Format</th>
+    <th>Supported Additional Information</th>
+   </tr>
+   <tr>
+    <td valign="top">GIF</td>
+    <td valign="top">
+     <ul>
+      <li>Comment</li>
+     </ul>
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">IFF/ILBM</td>
+    <td valign="top">
+     <ul>
+      <li>Name</li>
+      <li>Description/Remark</li>
+      <li>Author</li>
+      <li>Copyright</li>
+     </ul>
+   </tr>
+   <tr>
+    <td valign="top">JPEG/JPG</td>
+    <td valign="top">
+     <ul>
+      <li>
+       EXIF data
+      </li>
+     </ul>
+     <b>Note:</b> JKCEMU reads most of the generally
+     applicable entries from the EXIF data and also saves
+     them again. Manufacturer-specific EXIF entries,
+     however, are ignored.
+    </td>
+   </tr>
+   <tr>
+    <td valign="top">PNG</td>
+    <td valign="top">
+     <ul>
+      <li>Title</li>
+      <li>Description</li>
+      <li>Author</li>
+      <li>Copyright</li>
+      <li>Comment</li>
+      <li>Software</li>
+      <li>Date and time of capture or image creation</li>
+     </ul>
+     <b>Note:</b> The PNG format offers the three chunk types
+     <em>tEXt</em>, <em>iTXt</em>, and <em>zTXt</em>
+     for storing text information.
+     Of these, JKCEMU uses exclusively
+     the <em>tEXt</em>&nbsp;chunk.
+   </tr>
+  </table>
+ <br/>
+  To display the additional information, select
+  the image properties in the <em>File</em> menu.
+  The additional information can also be removed
+  or changed to a limited extent.
+ <br/><br/>
+  Where possible, the additional information is shared
+  between the individual file formats.
+  For example, if you open an IFF/ILBM file
+  in which the field <em>Description/Remark</em> is filled in,
+  this text is saved as EXIF data in the entry
+  <em>Description</em> when the image is saved as a JPEG/JPG file.
+  When saved as a GIF file, the text
+  is found again as a comment in the file.
+  It also works the same way in the other direction.
+ <br/><br/>
+
+ <h2><a name="edit">6. Image Editing</a></h2>
+  The image editing functions mainly serve to
+  adjust images so that they can be displayed on some
+  of the systems emulated by JKCEMU.
+  An exception is the <em>Round Corners...</em> function.
+  This is used for post-processing screenshots.
+ <br/><br/>
+  After an image editing function has been applied, a new image
+  is internally generated and displayed.
+  You can go back to the old image, i.e. to the unedited image
+  or to the previous editing step
+  (menu item <em>Edit</em> &rarr; <em>Undo</em>).
+  This discards the changes made
+  by the last image editing function.
+  The complete image editing history can be found in the
+  submenu <em>Edit</em> &rarr; <em>History</em>.
+  There, too, you can go back
+  one or more editing steps with a click.
+ <br/><br/>
+  You find the image editing functions in the
+  <em>Edit</em> menu:
+ <br/><br/>
+
+ <h2><a name="rotate">6.1. Rotating</a></h2>
+  As the name suggests, you can rotate the image.
+  Unlike the icons in the toolbar, this function
+  rotates not the display but the actual image,
+  and not only in 90&deg; steps, but in &frac14;&deg; steps.
+  After rotating, the image has become larger,
+  exactly large enough for the rotated image to fit exactly.
+ <br/><br/>
+  Rotation by an angle other than a multiple of 90&deg;
+  creates areas in the image with no content.
+  In the dialog that appears when you call the function,
+  you specify at the bottom, under <em>Background</em>,
+  whether these areas should become transparent, white, gray, or black.
+ <br/><br/>
+  <b>Caution!</b> If you rotate an image with transparent areas,
+  the background setting also affects these areas.
+ <br/><br/>
+
+ <h2><a name="cut_out">6.2. Cropping</a></h2>
+  Cropping an image works like this:
+  <ol>
+   <li>
+    Using the mouse, with the first (usually left)
+    mouse button held down, select the area
+    you want to keep.
+   </li>
+   <li>
+    Call the menu item <em>Edit</em>
+    &rarr; <em>Crop...</em>.
+    A dialog window appears.
+   </li>
+   <li>
+    In the dialog, you can adjust the selected area
+    pixel-precisely by changing the values
+    in the 4&nbsp;input fields.
+   </li>
+   <li>
+    In the dialog, click the button
+    <em>Crop</em>.
+   </li>
+  </ol>
+ <br/>
+  You can also open the dialog first and then
+  select the area with the mouse in the image viewer window.
+  This is particularly useful when the color used for the
+  selection does not stand out clearly enough from the image.
+  In that case, please select a different color
+  for the selection in the dialog.
+ <br/><br/>
+  If the area to be selected should correspond to a particular
+  aspect ratio, you can specify that in the
+  <em>Aspect Ratio</em> selection field.
+ <br/><br/>
+  <b>Caution!</b> In the list of aspect ratios, the LLC2
+  is found under 4:3. However, this computer has a resolution
+  of 512x256&nbsp;pixels, i.e. 2:1.
+  The screen output on the TV/monitor, however,
+  is in 4:3, i.e. the pixels are not square.
+  For this reason, you must crop an image for the LLC2
+  to 4:3 and then scale it to 2:1
+  (see the next section as well as
+  <a href="imageviewer.htm#convert_llc2">Converting the Image Format for LLC2 HIRES</a>),
+  so that it is reproduced largely without distortion on the LLC2.
+ <br/><br/>
+
+ <h2><a name="scale">6.3. Scaling</a></h2>
+  To scale an image, choose the menu item
+  <em>Edit</em> &rarr; <em>Scale...</em>.
+  A dialog window appears in which you enter the new width
+  and/or the new height and then click <em>Scale</em>.
+ <br/><br/>
+  If the aspect ratio should be kept during scaling,
+  check the corresponding option.
+  In that case, the corresponding new height
+  is calculated automatically when you change the width,
+  and vice versa.
+ <br/><br/>
+  <b>Caution!</b> Scaling can create new colors.
+  This is especially noticeable with a monochrome black/white image.
+  When adjacent black and white pixels are merged,
+  gray intermediate values result.
+  Since these newly created colors cannot always be represented
+  in an image with indexed colors,
+  the scaled image no longer has an indexed color model.
+  If you need one, however,
+  you can create one again with the menu item
+  <a href="imageviewer.htm#index_colors">Reduce and Index Colors...</a>.
+ <br/><br/>
+  <b>Caution!</b> Unlike the scaling in the toolbar,
+  the menu item <em>Scale...</em> changes the actual image.
+ <br/><br/>
+
+ <h2><a name="sharpen">6.4. Sharpening</a></h2>
+  To sharpen the image, call the menu item
+  <em>Edit</em> &rarr; <em>Sharpen...</em>.
+  This opens a dialog window
+  offering several degrees of sharpening.
+  You can try these one by one.
+  Clicking a sharpening degree immediately
+  sharpens the image accordingly.
+  Once you have found the optimal sharpening degree,
+  confirm with <em>OK</em>.
+ <br/><br/>
+
+ <h2><a name="flip_horizontal">6.5. Flipping</a></h2>
+  This function flips the image horizontally, i.e.
+  the sides are swapped.
+  If you want to flip the image vertically,
+  first <a href="imageviewer.htm#rotate">rotate</a> it
+  by 90&deg;, flip it, and rotate it back with -90&deg;.
+ <br/><br/>
+
+ <h2><a name="round_corners">6.6. Rounding Corners</a></h2>
+  This function is used for post-processing screenshots,
+  especially screenshots that show exactly one window.
+  On some operating and window systems, windows
+  have rounded corners.
+  A screenshot taken with JKCEMU, on the other hand, has no
+  rounded corners, so the corners may be considered
+  a cosmetic flaw.
+  With the <em>Round Corners</em> function you eliminate this flaw
+  by making the pixels in the corners transparent,
+  i.e. see-through.
+  You only need to specify how many pixels from each
+  respective corner should be made transparent.
+ <br/><br/>
+  <b>Caution!</b> Rounding the corners results in an image
+  with transparency.
+  So that the transparency is not lost,
+  you must select a format that supports transparency
+  (e.g. PNG) when saving the image.
+ <br/><br/>
+
+ <h2><a name="adjust">6.7. Brightness, Contrast, Colors</a></h2>
+  To change the brightness, the contrast, and the color saturation,
+  call the menu item
+  <em>Edit</em> &rarr; <em>Brightness, Contrast, Colors...</em>.
+  A dialog window appears with sliders and input fields
+  for setting these properties.
+  You can change the values both with the slider and with
+  the input field below it.
+ <br/><br/>
+  On the right-hand side of the dialog window you find sliders
+  and input fields for the three primary colors
+  red, green, and blue (RGB color model).
+  With these, you can change the respective red, green,
+  and blue value in all pixels of the image.
+  If you move all three sliders equally,
+  this corresponds to a change in brightness.
+ <br/><br/>
+  You can see the effect of the sliders immediately.
+  For this, a preview image with 256&nbsp;indexed colors
+  is generated first.
+  This is necessary for a performant preview,
+  because with every change to a value, only the
+  256&nbsp;entries in the color palette need to be changed,
+  not every pixel in the preview image.
+  However, generating the preview image can take a few seconds.
+  Clicking the <em>Apply</em> button
+  then computes the actual new image, which, again,
+  depending on the image size, can also take a few seconds.
+ <br/><br/>
+
+ <h2><a name="index_colors">6.8. Reducing and Indexing Colors</a></h2>
+  This function indexes the colors of the image
+  by applying a color palette.
+  The color palette to be applied can be determined from the image,
+  chosen from several predefined ones (A5105, KC85/4 HIRES,
+  grayscale, black/white), or imported from a file.
+  Since the color palette contains only a limited number of colors,
+  applying a color palette, i.e. indexing,
+  usually also means reducing the colors.
+ <br/><br/>
+
+ <h3><a name="create_pal">6.8.1. Determining a Color Palette</a></h3>
+  This function uses a modified octree method to determine
+  a color palette that covers the colors contained
+  in the image as well as possible.
+  You only need to specify
+  how many colors the palette should have (maximum 256).
+ <br/><br/>
+
+ <h3><a name="import_pal">6.8.2. Importing a Color Palette</a></h3>
+  With this function you import a color palette from a file.
+  The file can be a Paintshop&nbsp;Pro or IFF/ILBM color palette file,
+  or a supported image file
+  that contains a color palette.
+ <br/><br/>
+  The ability to import also lets you
+  use your own color palettes.
+  Since a Paintshop&nbsp;Pro color palette file is a text file
+  with a fairly simple format,
+  you can, following this format, simply type your own color palette
+  into a text editor, save it as a <em>*.pal</em> file,
+  and then import it.
+  The line-ending bytes must match the DOS/Windows format
+  (bytes&nbsp;0Dh/0Ah, which can be produced under Mac/Linux/Unix
+  in the <a href="texteditor.htm">JKCEMU text editor</a>
+  with <em>Save As...</em>).
+ <br/><br/>
+  A Paintshop&nbsp;Pro color palette file has the following structure:
+ <br/><br/>
+  <table border="1">
+   <tr><th>Line</th><th>Value/Meaning</th></tr>
+   <tr><td>1</td><td nowrap="nowrap">JASC-PAL</td></tr>
+   <tr><td>2</td><td nowrap="nowrap">0100</td></tr>
+   <tr><td>3</td><td>Number of colors as a decimal number</td></tr>
+   <tr>
+    <td>4</td>
+    <td>
+     Red, green, and blue value of the first color,
+     as three decimal numbers each separated by a space
+    </td>
+   </tr>
+   <tr>
+    <td>5</td>
+    <td>
+     Red, green, and blue value of the second color,
+     as three decimal numbers each separated by a space
+    </td>
+   </tr>
+   <tr><td>6</td><td nowrap="nowrap">3rd color, etc.</td></tr>
+  </table>
+ <br/>
+  The file for the KC85/4 HIRES color palette
+  (colors black, red, cyan, and white)
+  thus looks like this:
+ <br/><br/>
+  <tt>
+   JASC-PAL&#10;<br/>
+   0100&#10;<br/>
+   4&#10;<br/>
+   0 0 0&#10;<br/>
+   255 0 0&#10;<br/>
+   0 255 255&#10;<br/>
+   255 255 255&#10;<br/>
+  </tt>
+ <br/><br/>
+  <b>Caution!</b> Unlike importing a color palette as
+  described <a href="imageviewer.htm#color_pal">further below</a>,
+  here the image is recreated based on the imported color palette.
+  Any existing assignment of pixels to color palette indexes
+  is not necessarily preserved.
+ <br/><br/>
+
+ <h3><a name="dithering">6.8.3. Dithering</a></h3>
+  Applying a color palette reduces the number of colors,
+  and thus also the quality of the image.
+  Especially when reducing to very few colors,
+  the loss of quality is considerable.
+  With dithering, it is possible
+  to visually counteract this loss of quality.
+  Missing colors are simulated by cleverly placing
+  neighboring pixels of different colors.
+  In that case, the human eye perceives mixed colors
+  that are not actually present in the image at all.
+  Dithering works particularly well
+  when the image has so many pixels
+  that the eye does not perceive the individual pixels.
+ <br/><br/>
+  Specifically, dithering works as follows:
+  The first pixel is given the color from the color palette
+  that comes closest to the original pixel color.
+  The difference between the original and the new color
+  is a color error.
+  This color error, i.e. the respective difference amount
+  for the three primary colors red, green, and blue,
+  is distributed to the next pixels.
+  For the second and subsequent pixels, the original color
+  is then added to the proportional color error,
+  the closest matching color is again looked up,
+  a new error portion is again calculated,
+  this is again distributed to the following pixels, and so on.
+ <br/><br/>
+  There are various dithering algorithms
+  that differ in the way
+  they distribute the respective color error.
+  The JKCEMU image viewer includes three algorithms.
+  Which algorithm gives the best result
+  is a matter of personal taste and
+  should be tried out on a case-by-case basis.
+ <br/><br/>
+
+ <h3><a name="floyd_steinberg">6.8.3.1. Floyd-Steinberg</a></h3>
+  The Floyd-Steinberg algorithm was published in 1976
+  by the two gentlemen of the same name.
+  The algorithm distributes the respective color error in odd
+  fractions to the next pixel to the right
+  and to three pixels in the next row.
+  Floyd-Steinberg dithering delivers good results
+  and is essentially the standard method.
+ <br/><br/>
+
+ <h3><a name="sierra3">6.8.3.2. Sierra&nbsp;3</a></h3>
+  After the publication of the Floyd-Steinberg algorithm,
+  various other algorithms were proposed by different people
+  that are supposed to deliver a somewhat better image quality.
+  One of these algorithms is Sierra-3. The 3 in the name means
+  that the color error is distributed over three pixel rows
+  (instead of just two, as with Floyd-Steinberg).
+  This results in somewhat finer transitions and gradations.
+  Overall, though, the difference in quality compared to
+  Floyd-Steinberg is fairly small, as it is with all other
+  dithering algorithms published after Floyd-Steinberg.
+  The JKCEMU image viewer includes Sierra-3 as a representative
+  of the three-row dithering algorithms.
+ <br/><br/>
+
+ <h3><a name="atkinson">6.8.3.3. Atkinson</a></h3>
+  Atkinson worked at Apple and played a major part
+  in the development of Apple graphics software.
+  He published a dithering algorithm that differs
+  from the other algorithms in one significant way:
+  Atkinson does not distribute the entire color error
+  to the following pixels, but only three quarters of it.
+  This reduces color bleeding, i.e. the transfer
+  of a color portion to the following pixels.
+ <br/><br/>
+  This difference is also noticeable visually.
+  Bright and dark areas are less interspersed with pixels
+  of a different color, which makes the areas appear
+  more homogeneous and increases the contrast.
+  For this reason, the Atkinson algorithm is also
+  included in the JKCEMU image viewer.
+ <br/><br/>
+
+ <h2><a name="black_white">6.9. Converting to Black/White</a></h2>
+  In the submenu <em>Edit</em> &rarr;
+  <em>Convert to Black/White</em>, you find functions
+  for converting the image to grayscale or to a monochrome
+  black/white image.
+  The latter is possible by threshold as well as by
+  <a href="imageviewer.htm#dithering">dithering</a>.
+  When converting to grayscale, any existing transparency
+  is preserved; when converting to a monochrome black/white
+  image, it is not.
+ <br/><br/>
+
+ <h2><a name="invert">6.10. Inverting</a></h2>
+  The Invert function creates a kind of negative image,
+  which is only useful for special applications, though.
+  For this, each of the three primary colors in every pixel
+  is inverted.
+  The JKCEMU image viewer uses the RGB color model
+  with a resolution of one byte per primary color, i.e.
+  each primary color is represented with a value from 0 to 255.
+  When inverting, this value is converted as follows:
+ <br/><br/>
+  <em>New&nbsp;value</em> = 255 - <em>old&nbsp;value</em>
+ <br/><br/>
+  So, for example, if a pixel has the RGB color value [38,72,165],
+  it becomes the color [217,183,90].
+ <br/><br/>
+
+ <h2><a name="remove_transp">6.11. Removing Transparency</a></h2>
+  The JKCEMU image viewer can handle images
+  that contain transparent pixels.
+  However, there are functions where transparency gets in the way
+  or is not supported at all.
+  For example, saving transparent images
+  is not possible in the BMP and WBMP formats, and is only
+  possible in certain cases in the IFF/ILBM format.
+  For this reason, there is the menu item
+  <em>Edit</em> &rarr; <em>Remove Transparency...</em>,
+  which can only be called
+  when the displayed image contains transparency.
+  The function simply replaces the transparent pixels with the color
+  you specify in the dialog.
+  With the option <em>color stored in the pixels</em>,
+  the transparent pixels are displayed fully opaque, using the color
+  that is stored in the pixels themselves.
+  Even if a pixel is fully transparent,
+  it still contains a color value,
+  which is then used.
+ <br/><br/>
+
+ <h2><a name="color_pal">6.12. Color Palette</a></h2>
+  With this menu item, for an image with indexed colors,
+  you can view, change, export, and import the color palette.
+  When changing and importing, only the color values
+  in the palette are changed.
+  The assignment of pixels to the indexes
+  in the color palette remains unchanged.
+  This way, you can swap colors
+  and create false-color images.
+ <br/><br/>
+  The simplest way to change a color is to manually enter
+  a new color value as a hexadecimal number in the column
+  <em>New ARGB Value (hex)</em>.
+  To do so, double-click the table cell, enter the value,
+  and then press <em>Enter</em>.
+  The 8-digit color value contains, from left to right,
+  the alpha value followed by the values for the primary
+  colors red, green, and blue.
+ <br/><br/>
+  The alpha value specifies the opacity of the color.
+  At the value&nbsp;00, the color is fully transparent,
+  i.e. it has no opacity at all.
+  At the value FF, the color is fully opaque, i.e. no transparency.
+  If you enter only 6 or fewer hexadecimal digits,
+  the original alpha value is kept.
+ <br/><br/>
+  With the <em>Color...</em> button you can select the color
+  from a predefined palette or from the most recently
+  imported color palette.
+  For this, a table row for which the color value is to be
+  changed must be selected first.
+ <br/><br/>
+  The color palette can be exported
+  to either of two file formats:
+  <ul>
+   <li>Paintshop Pro color palette file</li>
+   <li>IFF/ILBM file without image data</li>
+  </ul>
+  Neither format supports alpha values,
+  i.e. the alpha values are not exported.
+ <br/><br/>
+  The IFF/ILBM format is actually meant for storing images,
+  but is also used, without image data, for storing color palettes.
+  The format can in principle also store alpha values,
+  but only in the image data, not in the color palette.
+  For this reason, the color palette is also exported
+  without alpha values in the IFF/ILBM format.
+ <br/><br/>
+  Color palettes can be imported from the two formats mentioned
+  above as well as from other supported image formats
+  that contain a color palette or color table.
+  When importing, the colors are matched
+  to the original colors as closely as possible.
+  If you do not like the automatic matching,
+  you can change it with the <em>Color...</em> button.
+  Alpha values are not imported, i.e.
+  the original alpha values are preserved.
+ <br/><br/>
+  <b>Caution!</b> Unlike importing a color palette as
+  described <a href="imageviewer.htm#import_pal">further above</a>,
+  here only the colors are swapped.
+  The existing assignment of pixels to color palette indexes
+  is preserved.
+ <br/><br/>
+
+ <h2>
+  <a name="convert">7. Converting an Image to the Format of an Emulated System</a>
+ </h2>
+  With the menu items in the submenu
+  <em>Edit</em> &rarr; <em>Convert&nbsp;To</em>
+  you convert the image to the format of a system
+  emulated by JKCEMU, referred to below as the target system.
+  This conversion applies only to the image format,
+  i.e. to the resolution and to the colors.
+  The matching file format is only created when you
+  <a href="imageviewer.htm#export">export</a> the image.
+  However, converting the image format beforehand is
+  a necessary prerequisite for that.
+ <br/><br/>
+  When converting to the format of the target system,
+  the image is first scaled to the necessary size.
+  If the aspect ratio does not match,
+  black bars are inserted on the left and right or top and bottom.
+  In the second step, the colors are converted to the
+  color palette of the target system. For this, the closest
+  matching color from the color palette is simply taken for
+  each pixel.
+  If the target system has block graphics,
+  the third step determines the best-matching
+  block graphics symbols.
+ <br/><br/>
+
+ <h2>
+  <a name="convert_manually">7.1 Manually Converting the Image Format</a>
+ </h2>
+  The automatic conversion of an image to the format
+  of the target system does not always deliver the result
+  you want.
+  In particular, adjusting the aspect ratio
+  by means of black bars is not always to your liking.
+  For this reason, it is sometimes better
+  to carry out the individual conversion steps manually.
+  To achieve the best possible results,
+  the steps should be carried out in the following order:
+  <ol>
+   <li>
+    <a href="imageviewer.htm#rotate">Rotate</a><br/>
+    only necessary if needed, e.g. to compensate for a skewed angle
+    <br/><br/>
+   </li>
+   <li>
+    <a href="imageviewer.htm#cut_out">Crop</a><br/>
+    Switch off the option <em>Keep&nbsp;aspect&nbsp;ratio</em>
+    and instead select the correct aspect ratio of the
+    target system, or ensure it yourself
+    <br/><br/>
+   </li>
+   <li>
+    <a href="imageviewer.htm#scale">Scale</a>
+    to the pixel resolution of the target system
+    <br/><br/>
+   </li>
+   <li>
+    <a href="imageviewer.htm#sharpen">Sharpen</a><br/>
+    only if needed
+    <br/><br/>
+   </li>
+   <li>
+    Adjust colors<br/>
+    If the target system supports colors, you usually
+    have to boost the contrast and the color saturation
+    considerably, and then adjust the brightness
+    so that a colorful and balanced image results
+    (all these functions are in the menu item
+    <a href="imageviewer.htm#adjust">Brightness, Contrast, Colors</a>).
+    After that, call the menu item
+    <a href="imageviewer.htm#index_colors">Reduce and Index Colors</a>,
+    select the correct color palette there, and convert
+    the colors to the color palette of the target system,
+    either with or without dithering.
+    <br/>
+    If the target system does not support colors,
+    use one of the two functions in the submenu
+    <a href="imageviewer.htm#black_white">Convert to Black/White</a>
+    to create a monochrome image.
+    It may be useful
+    to adjust the brightness and contrast of the image first.
+    <br/><br/>
+   </li>
+   <li>
+    call the corresponding menu item
+    in the submenu
+    <em>Edit</em> &rarr; <em>Convert&nbsp;To</em>
+   </li>
+  </ol>
+ <br/>
+  The order is particularly important when applying
+  <a href="imageviewer.htm#dithering">dithering</a>,
+  because after dithering the image should no longer be scaled.
+ <br/><br/>
+
+ <h2>
+  <a name="convert_llc2">7.2 Converting the Image Format for LLC2 HIRES</a>
+ </h2>
+  The LLC2 has a resolution of 512x256&nbsp;pixels, i.e. 2:1.
+  However, the screen output is usually in 4:3.
+  For this reason, the image must be distorted accordingly
+  so that it is then displayed correctly again
+  in the 4:3 presentation.
+  The menu item <em>Edit</em>
+  &rarr; <em>Convert&nbsp;To</em>
+  &rarr; <em>LLC2 HIRES format (512x256, monochrome) with
+  adjustment for 4:3 display</em> does this automatically.
+  However, if you perform the image format conversion yourself,
+  you must also ensure the necessary distortion yourself.
+  To do so, please follow the order given in the
+  previous section and note the following:
+  <ul>
+   <li>
+    <a href="imageviewer.htm#cut_out">Crop</a>:<br/>
+    Select the aspect&nbsp;ratio&nbsp;4:3
+    and crop the image to 4:3 accordingly.
+    <br/><br/>
+   </li>
+   <li>
+    <a href="imageviewer.htm#scale">Scale</a>:<br/>
+    Switch off the option <em>Keep aspect ratio</em>
+    and scale the image to 512x256 pixels.
+    This produces the necessary distortion.
+    <br/><br/>
+   </li>
+   <li>
+    Convert:<br/>
+    Call the menu item
+    <em>LLC2 HIRES format (512x256, monochrome) without
+    adjustment for 4:3 display</em>.
+    The adjustment (distortion) has already been done during scaling.
+    <br/><br/>
+   </li>
+  </ul>
+ <br/><br/>
+
+ <h2><a name="etc">8. Further Functions</a></h2>
+  While an image is displayed, besides the functions
+  described in the other sections you can also:
+  <ul>
+   <li>copy the image to the clipboard</li>
+   <li>print the image</li>
+   <li>view the image properties</li>
+  </ul>
+ <br/>
+  You find the corresponding menu items under <em>File</em>,
+  and, for copying to the clipboard, under <em>Edit</em>.
+</body>
+</html>

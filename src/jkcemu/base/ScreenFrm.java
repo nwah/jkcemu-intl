@@ -1006,7 +1006,7 @@ public class ScreenFrm
 	  String secondSysName = emuSys.getSecondSystemName();
 	  if( secondSysName != null ) {
 	    this.secondDebugFrm.setTitle(
-		      "JKCEMU Debugger: " + secondSysName );
+		      LangUtil.tr( "JKCEMU Debugger" ) + ": " + secondSysName );
 	  } else {
 	    this.secondDebugFrm.setTitle(
 		      "JKCEMU Debugger: Sekund\u00E4rsystem" );
@@ -1941,7 +1941,7 @@ public class ScreenFrm
 	this.secondMemEditFrm = new MemEditFrm( secondMem );
 	if( secondName != null ) {
 	  this.secondMemEditFrm.setTitle(
-			"JKCEMU Speichereditor: " + secondName );
+			LangUtil.tr( "JKCEMU Speichereditor" ) + ": " + secondName );
 	} else {
 	  this.secondMemEditFrm.setTitle(
 			"JKCEMU Speichereditor: Sekund\u00E4rsystem" );
@@ -2266,7 +2266,7 @@ public class ScreenFrm
     Z80CPU    secondCPU = emuSys.getSecondZ80CPU();
     Z80Memory secondMem = emuSys.getSecondZ80Memory();
 
-    setTitle( "JKCEMU: " + emuSys.getTitle() );
+    setTitle( LangUtil.tr( "JKCEMU" ) + ": " + emuSys.getTitle() );
     this.mnuHelpEmuSys.setEnabled( emuSys.getHelpPage() != null );
     this.copyEnabled  = emuSys.supportsCopyToClipboard();
     this.pasteEnabled = emuSys.supportsPasteFromClipboard();
@@ -2392,7 +2392,7 @@ public class ScreenFrm
 	this.secondReassFrm = new ReassFrm( this, secondMem );
 	if( secondName != null ) {
 	  this.secondReassFrm.setTitle(
-			"JKCEMU Reassembler: " + secondName );
+			LangUtil.tr( "JKCEMU Reassembler" ) + ": " + secondName );
 	} else {
 	  this.secondReassFrm.setTitle(
 			"JKCEMU Reassembler: Sekund\u00E4rsystem" );

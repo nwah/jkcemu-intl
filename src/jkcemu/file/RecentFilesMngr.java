@@ -31,6 +31,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class RecentFilesMngr implements ActionListener, MenuListener
@@ -187,8 +188,8 @@ public class RecentFilesMngr implements ActionListener, MenuListener
 	    BaseDlg.showErrorDlg(
 		this.menu,
 		this.listFile.getPath() + ":\n"
-			+ "Datei, die die Liste enth\u00E4lt,"
-			+ " konnte nicht gel\u00F6scht werden.\n" );
+			+ LangUtil.tr( "Datei, die die Liste enth\u00E4lt,"
+				+ " konnte nicht gel\u00F6scht werden.\n" ) );
 	  }
 	}
       }

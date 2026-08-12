@@ -31,6 +31,7 @@ import jkcemu.base.HexDocument;
 import jkcemu.base.IntegerDocument;
 import jkcemu.base.LimitedDocument;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.AbstractOptionsDlg;
 import jkcemu.programming.PrgOptions;
 import jkcemu.programming.basic.target.AC1Target;
@@ -507,12 +508,11 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     panelDriver.add( this.cbOpenLptEnabled, gbcDriver );
 
     this.cbOpenDiskEnabled = GUIFactory.createCheckBox(
-		"DISK-Treiber (Zugriff auf Laufwerke, nur relevant"
-			+ " bei Zielsystemen \'"
-			+ CPMTarget.DISPLAY_TARGET_NAME
-			+ "\' und \'"
-			+ KC85Caos48Target.DISPLAY_TARGET_NAME
-			+ "\')" );
+		LangUtil.tr(
+			"DISK-Treiber (Zugriff auf Laufwerke, nur relevant"
+				+ " bei Zielsystemen \'\'{0}\'\' und \'\'{1}\'\')",
+			CPMTarget.DISPLAY_TARGET_NAME,
+			KC85Caos48Target.DISPLAY_TARGET_NAME ) );
     gbcDriver.gridy++;
     panelDriver.add( this.cbOpenDiskEnabled, gbcDriver );
 
@@ -837,7 +837,10 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 	doClose();
       }
       catch( UserInputException ex ) {
-	showErrorDlg( this, "Erzeugter Programmcode:\n" + ex.getMessage() );
+	showErrorDlg(
+		this,
+		LangUtil.tr( "Erzeugter Programmcode:" )
+			+ "\n" + ex.getMessage() );
       }
     }
     catch( NumberFormatException ex ) {

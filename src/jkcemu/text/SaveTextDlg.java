@@ -28,6 +28,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class SaveTextDlg extends BaseDlg
@@ -450,9 +451,10 @@ public class SaveTextDlg extends BaseDlg
     catch( IOException ex ) {
       showErrorDlg(
 	this,
-	"Datei \'" + this.file.getPath()
-		+ "\'\nkann nicht gespeichert werden.\n\n"
-		+ ex.getMessage() );
+	LangUtil.tr(
+		"Datei \'\'{0}\'\'\nkann nicht gespeichert werden.",
+		this.file.getPath() )
+		+ "\n\n" + ex.getMessage() );
     }
   }
 }

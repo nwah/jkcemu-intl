@@ -45,6 +45,7 @@ import jkcemu.image.ImageFrm;
 import jkcemu.image.ImageSaver;
 import jkcemu.image.ImageUtil;
 import jkcemu.joystick.JoystickFrm;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -522,8 +523,9 @@ public abstract class AbstractScreenFrm
 	    catch( Exception ex ) {
 	      BaseDlg.showErrorDlg(
 		this,
-		fileName + ":\nSpeichern der Datei fehlgeschlagen\n\n"
-			+ ex.getMessage() );
+		fileName + ":\n"
+			+ LangUtil.tr( "Speichern der Datei fehlgeschlagen" )
+			+ "\n\n" + ex.getMessage() );
 	    }
 	    finally {
 	      EmuUtil.closeSilently( out );
