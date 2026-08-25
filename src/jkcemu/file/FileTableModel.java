@@ -13,6 +13,7 @@ import java.text.DateFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import javax.swing.table.AbstractTableModel;
+import jkcemu.lang.LangUtil;
 
 
 public class FileTableModel
@@ -221,47 +222,47 @@ public class FileTableModel
   @Override
   public String getColumnName( int col )
   {
-    String rv = "";
+    String rv = LangUtil.tr( "" );
     if( (col >= 0) && (col < this.cols.length) ) {
       switch( this.cols[ col ] ) {
 	case NAME:
-	  rv = "Name";
+	  rv = LangUtil.tr( "Name" );
 	  break;
 
 	case INFO:
-	  rv = "Typ/Gr\u00F6\u00DFe";
+	  rv = LangUtil.tr( "Typ/Gr\u00F6\u00DFe" );
 	  break;
 
 	case SIZE:
-	  rv = "Gr\u00F6\u00DFe";
+	  rv = LangUtil.tr( "Gr\u00F6\u00DFe" );
 	  break;
 
 	case LAST_MODIFIED:
-	  rv = "Zuletzt ge\u00E4ndert";
+	  rv = LangUtil.tr( "Zuletzt ge\u00E4ndert" );
 	  break;
 
 	case FILE:
-	  rv = "Datei";
+	  rv = LangUtil.tr( "Datei" );
 	  break;
 
 	case USER_NUM:
-	  rv = "User";
+	  rv = LangUtil.tr( "User" );
 	  break;
 
 	case VALUE:
-	  rv = "Wert";
+	  rv = LangUtil.tr( "Wert" );
 	  break;
 
 	case READ_ONLY:
-	  rv = "Schreibgesch\u00FCtzt";
+	  rv = LangUtil.tr( "Schreibgesch\u00FCtzt" );
 	  break;
 
 	case SYSTEM_FILE:
-	  rv = "System-Datei";
+	  rv = LangUtil.tr( "System-Datei" );
 	  break;
 
 	case ARCHIVE:
-	  rv = "Archiv";
+	  rv = LangUtil.tr( "Archiv" );
 	  break;
       }
     }

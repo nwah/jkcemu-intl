@@ -8,6 +8,8 @@
 
 package jkcemu.disk;
 
+import jkcemu.lang.LangUtil;
+
 
 public class FloppyDiskFormat
 {
@@ -159,20 +161,21 @@ public class FloppyDiskFormat
       this.infoText = infoText;
     } else {
       StringBuilder buf = new StringBuilder( 128 );
-      buf.append( diskSize / 1024 );
-      buf.append( " KByte, " );
-      buf.append( cyls );
-      buf.append( " Spuren a " );
-      buf.append( sectorsPerTrack );
-      buf.append( " * " );
-      buf.append( sectorSize );
-      buf.append( " Bytes" );
+      buf.append(
+		LangUtil.tr(
+			"{0} KByte, {1} Spuren a {2} * {3} Bytes",
+			diskSize / 1024,
+			cyls,
+			sectorsPerTrack,
+			sectorSize ) );
       switch( sides ) {
 	case 1:
-	  buf.append( ", einseitig" );
+	  buf.append( ", " );
+	  buf.append( LangUtil.tr( "einseitig" ) );
 	  break;
 	case 2:
-	  buf.append( ", doppelseitig" );
+	  buf.append( ", " );
+	  buf.append( LangUtil.tr( "doppelseitig" ) );
 	  break;
       }
       this.infoText = buf.toString();
@@ -338,8 +341,12 @@ public class FloppyDiskFormat
 	/* --- ueberschriebene Methoden --- */
 
   @Override
+  /*
+   * Die Bezeichnung wird in Auswahlfeldern angezeigt
+   * und deshalb uebersetzt zurueckgeliefert.
+   */
   public String toString()
   {
-    return this.infoText != null ? this.infoText : "";
+    return this.infoText != null ? LangUtil.tr( this.infoText ) : "";
   }
 }

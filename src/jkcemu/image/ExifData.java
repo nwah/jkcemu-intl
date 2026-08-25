@@ -24,6 +24,7 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicInteger;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class ExifData
@@ -1244,7 +1245,7 @@ public class ExifData
 	if( value != null ) {
 	  int idx = value.intValue();
 	  if( (idx >= 0) && (idx < items.length) ) {
-	    rv = items[ idx ];
+	    rv = LangUtil.tr( items[ idx ] );
 	  }
 	}
       }

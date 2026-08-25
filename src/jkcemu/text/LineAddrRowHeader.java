@@ -29,6 +29,7 @@ import javax.swing.JTextArea;
 import javax.swing.JViewport;
 import javax.swing.text.BadLocationException;
 import jkcemu.base.RolloverCloseBtn;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -67,7 +68,7 @@ public class LineAddrRowHeader extends JComponent
 	this.closeH = closeBtnSize.height;
       }
     }
-    setToolTipText( "Adressen im Arbeitsspeicher" );
+    setToolTipText( LangUtil.tr( "Adressen im Arbeitsspeicher" ) );
 
     addMouseListener(
 		new MouseAdapter()
@@ -165,7 +166,7 @@ public class LineAddrRowHeader extends JComponent
   public String getToolTipText( MouseEvent e )
   {
     return isOverClose( e ) ?
-		"Adressspalte ausblenden"
+		LangUtil.tr( "Adressspalte ausblenden" )
 		: super.getToolTipText( e );
   }
 

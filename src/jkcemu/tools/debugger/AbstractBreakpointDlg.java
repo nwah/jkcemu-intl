@@ -49,8 +49,12 @@ public abstract class AbstractBreakpointDlg extends BaseDlg
     super(
 	debugFrm,
 	breakpoint != null ?
-		("Halte-/Log-Punkt auf " + watchedObj + " bearbeiten")
-		: ("Neuer Halte-/Log-Punkt auf " + watchedObj) );
+		LangUtil.tr(
+			"Halte-/Log-Punkt auf {0} bearbeiten",
+			watchedObj )
+		: LangUtil.tr(
+			"Neuer Halte-/Log-Punkt auf {0}",
+			watchedObj ) );
     this.debugFrm           = debugFrm;
     this.oldBP              = breakpoint;
     this.approvedBreakpoint = null;

@@ -11,6 +11,7 @@ package jkcemu.tools.fileconverter;
 import java.io.File;
 import java.io.IOException;
 import jkcemu.audio.BitSampleBuffer;
+import jkcemu.lang.LangUtil;
 import jkcemu.audio.PCMDataSource;
 import jkcemu.audio.TZXFile;
 
@@ -26,7 +27,9 @@ public class TZXFileTarget extends AbstractConvertTarget
 		BitSampleBuffer samples )
   {
     super( fileConvertFrm,
-	"CDT/TZX-Datei (" + TZXFile.getFileExtensionText() + ")" );
+	LangUtil.tr(
+			"CDT/TZX-Datei ({0})",
+			TZXFile.getFileExtensionText() ) );
     this.samples     = samples;
     this.fileFilters = null;
   }

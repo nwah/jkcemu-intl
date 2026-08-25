@@ -11,6 +11,7 @@ package jkcemu.tools.fileconverter;
 import java.io.File;
 import java.io.IOException;
 import jkcemu.audio.AudioFile;
+import jkcemu.lang.LangUtil;
 import jkcemu.audio.BitSampleBuffer;
 import jkcemu.audio.PCMDataSource;
 import jkcemu.base.EmuUtil;
@@ -29,7 +30,9 @@ public class AudioFileTarget extends AbstractConvertTarget
   {
     super(
 	fileConvertFrm,
-	"Sound-Datei (" + AudioFile.getFileExtensionText() + ")" );
+	LangUtil.tr(
+			"Sound-Datei ({0})",
+			AudioFile.getFileExtensionText() ) );
     this.file        = file;
     this.fileFilters = null;
     this.samples     = null;
@@ -42,7 +45,9 @@ public class AudioFileTarget extends AbstractConvertTarget
   {
     super(
 	fileConvertFrm,
-	"Sound-Datei (" + AudioFile.getFileExtensionText() + ")" );
+	LangUtil.tr(
+			"Sound-Datei ({0})",
+			AudioFile.getFileExtensionText() ) );
     this.file        = null;
     this.fileFilters = null;
     this.samples     = samples;

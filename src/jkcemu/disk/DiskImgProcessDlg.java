@@ -206,7 +206,7 @@ public class DiskImgProcessDlg extends BaseDlg implements Runnable
 	      if( JOptionPane.showConfirmDialog(
 			owner,
 			buf.toString(),
-			"Achtung",
+			LangUtil.tr( "Achtung" ),
 			JOptionPane.OK_CANCEL_OPTION,
 			JOptionPane.WARNING_MESSAGE )
 					== JOptionPane.OK_OPTION )

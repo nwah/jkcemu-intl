@@ -35,6 +35,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import jkcemu.Main;
 import jkcemu.base.PopupMenuOwner;
+import jkcemu.lang.LangUtil;
 import jkcemu.print.PrintOptionsDlg;
 import jkcemu.print.PrintUtil;
 import jkcemu.text.TextFinder;
@@ -269,9 +270,10 @@ public class HTMLViewFrm extends BaseFrm implements
   {
     String reply = null;
 
-    final String[] options = { EmuUtil.TEXT_FIND, EmuUtil.TEXT_CANCEL };
+    final String[] options = LangUtil.tr(
+			new String[] { EmuUtil.TEXT_FIND, EmuUtil.TEXT_CANCEL } );
     JOptionPane pane = new JOptionPane(
-				EmuUtil.LABEL_SEARCH_FOR,
+				LangUtil.tr( EmuUtil.LABEL_SEARCH_FOR ),
 				JOptionPane.PLAIN_MESSAGE );
     pane.setOptions( options );
     pane.setInitialValue( options[ 0 ] );
@@ -279,7 +281,7 @@ public class HTMLViewFrm extends BaseFrm implements
     if( initialText != null ) {
       pane.setInitialSelectionValue( initialText );
     }
-    pane.createDialog( this, title ).setVisible( true );
+    pane.createDialog( this, LangUtil.tr( title ) ).setVisible( true );
     if( pane.getValue() == options[ 0 ] ) {
       Object o = pane.getInputValue();
       if( o != null ) {

@@ -35,6 +35,7 @@ import jkcemu.file.FileFormat;
 import jkcemu.joystick.JoystickThread;
 import jkcemu.print.PrintMngr;
 import jkcemu.text.TextUtil;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80InstrTStatesMngr;
 import z80emu.Z80InterruptSource;
@@ -1478,7 +1479,7 @@ public class KCcompact extends EmuSys implements
   @Override
   public String toString()
   {
-    return "Zentrale Zustandssteuerung";
+    return LangUtil.tr( "Zentrale Zustandssteuerung" );
   }
 
 

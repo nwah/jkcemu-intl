@@ -2145,17 +2145,19 @@ public class ScreenFrm
     int rv = -1;
 
     String[] options = {
-		"Grundger\u00E4t",
-		sysName != null ? sysName : "Zweitsystem",
-		EmuUtil.TEXT_CANCEL };
+		LangUtil.tr( "Grundger\u00E4t" ),
+		sysName != null ? sysName : LangUtil.tr( "Zweitsystem" ),
+		LangUtil.tr( EmuUtil.TEXT_CANCEL ) };
 
     JOptionPane pane = new JOptionPane(
-		"Auf welches Prozessorsystem m\u00F6chten Sie zugreifen?",
+		LangUtil.tr( "Auf welches Prozessorsystem m\u00F6chten Sie zugreifen?" ),
 		JOptionPane.QUESTION_MESSAGE );
     pane.setOptions( options );
     pane.setValue( options[ 0 ] );
     pane.setWantsInput( false );
-    pane.createDialog( this, "Auswahl Prozessorsystem" ).setVisible( true );
+    pane.createDialog(
+		this,
+		LangUtil.tr( "Auswahl Prozessorsystem" ) ).setVisible( true );
     Object value = pane.getValue();
     if( value != null ) {
       if( value.equals( options[ 0 ] ) ) {

@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Properties;
 import jkcemu.Main;
 import jkcemu.text.TextUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class RAMFloppy
@@ -130,9 +131,9 @@ public class RAMFloppy
 
   public String getInfoText()
   {
-    return this.infoText != null ?
+    return LangUtil.tr( this.infoText != null ?
 		this.infoText
-		: "RAM-Floppy nicht emuliert";
+		: "RAM-Floppy nicht emuliert" );
   }
 
 
@@ -193,7 +194,9 @@ public class RAMFloppy
 	    catch( IOException ex ) {
 	      EmuUtil.fireShowErrorDlg(
 			Main.getScreenFrm(),
-			infoText + " konnte nicht geladen werden.",
+			LangUtil.tr(
+				"{0} konnte nicht geladen werden.",
+				LangUtil.tr( infoText ) ),
 			ex );
 	    }
 	  }

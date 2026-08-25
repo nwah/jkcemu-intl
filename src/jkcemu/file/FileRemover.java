@@ -152,7 +152,9 @@ public class FileRemover extends AbstractFileWorker
   @Override
   public String getFileFailedMsg( String fileName )
   {
-    return "\'" + fileName + "\' kann nicht gel\u00F6scht werden.";
+    return LangUtil.tr(
+		"\'\'{0}\'\' kann nicht gel\u00F6scht werden.",
+		fileName );
   }
 
 
@@ -166,8 +168,9 @@ public class FileRemover extends AbstractFileWorker
   @Override
   public String getUncompletedWorkMsg()
   {
-    return "Es konnten nicht alle Dateien, Verzeichnisse bzw.\n"
-			+ "symbolische Links gel\u00F6scht werden.";
+    return LangUtil.tr(
+		"Es konnten nicht alle Dateien, Verzeichnisse bzw.\n"
+			+ "symbolische Links gel\u00F6scht werden." );
   }
 
 

@@ -39,6 +39,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.FontMngr;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class FontSelectDlg extends BaseDlg implements ListSelectionListener
@@ -531,7 +532,7 @@ public class FontSelectDlg extends BaseDlg implements ListSelectionListener
     if( font != null ) {
       this.selectedFont = font;
       this.fldFontExample.setFont( font );
-      this.fldFontExample.setText( EXAMPLE_TEXT );
+      this.fldFontExample.setText( LangUtil.tr( EXAMPLE_TEXT ) );
       this.btnApply.setEnabled( true );
     } else {
       this.selectedFont = null;

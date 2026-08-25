@@ -18,6 +18,7 @@ import jkcemu.Main;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileInfo;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class CSWFile
@@ -61,7 +62,9 @@ public class CSWFile
   {
     if( fileFilter == null ) {
       fileFilter = new FileNameExtensionFilter(
-			"CSW-Dateien (" + getFileExtensionText() + ")",
+			LangUtil.tr(
+				"CSW-Dateien ({0})",
+				getFileExtensionText() ),
 			fileExts );
     }
     return fileFilter;

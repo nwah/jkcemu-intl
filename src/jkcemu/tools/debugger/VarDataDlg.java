@@ -29,6 +29,7 @@ import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.HexDocument;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 
 
 public class VarDataDlg extends BaseDlg
@@ -152,7 +153,9 @@ public class VarDataDlg extends BaseDlg
   {
     super(
 	debugFrm,
-	varData != null ? "Variable bearbeiten" : "Variable anlegen" );
+	varData != null ?
+		LangUtil.tr( "Variable bearbeiten" )
+		: LangUtil.tr( "Variable anlegen" ) );
 
     this.debugFrm       = debugFrm;
     this.oldVarData     = varData;

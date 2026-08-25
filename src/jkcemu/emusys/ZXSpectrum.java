@@ -39,6 +39,7 @@ import jkcemu.etc.PSG8910;
 import jkcemu.etc.PSGSoundDevice;
 import jkcemu.joystick.JoystickThread;
 import jkcemu.text.TextUtil;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80InterruptSource;
 import z80emu.Z80MaxSpeedListener;
@@ -989,7 +990,7 @@ public class ZXSpectrum extends EmuSys implements
   @Override
   public String toString()
   {
-    return "ULA (Bildschirmsteuerung)";
+    return LangUtil.tr( "ULA (Bildschirmsteuerung)" );
   }
 
 

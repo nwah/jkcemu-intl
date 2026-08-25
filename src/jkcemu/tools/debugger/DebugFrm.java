@@ -53,6 +53,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -1339,6 +1340,35 @@ public class DebugFrm extends BaseFrm implements
     this.tabbedPane.addTab( "Interrupt-Quellen", panelIntSrc );
 
     this.listIntSrc = GUIFactory.createList();
+
+    /*
+     * Die Bezeichnungen der Interrupt-Quellen stammen aus dem Paket
+     * z80emu bzw. aus den Emulationsklassen und werden dort
+     * als deutscher Text erzeugt.
+     * Da sie nur angezeigt und nicht ausgewertet werden,
+     * wird die Uebersetzung hier bei der Anzeige vorgenommen.
+     */
+    this.listIntSrc.setCellRenderer(
+		new DefaultListCellRenderer()
+		{
+		  @Override
+		  public Component getListCellRendererComponent(
+					JList<?> list,
+					Object   value,
+					int      idx,
+					boolean  selected,
+					boolean  hasFocus )
+		  {
+		    return super.getListCellRendererComponent(
+				list,
+				value != null ?
+					LangUtil.tr( value.toString() )
+					: null,
+				idx,
+				selected,
+				hasFocus );
+		  }
+		} );
     this.listIntSrc.setDragEnabled( false );
     this.listIntSrc.setLayoutOrientation( JList.VERTICAL );
     this.listIntSrc.setSelectionMode(
@@ -1410,7 +1440,10 @@ public class DebugFrm extends BaseFrm implements
   public void appendLogEntry( Z80InterruptSource iSource )
   {
     if( iSource != null ) {
-      fireAppendLogEntry( "--- Interrupt: " + iSource.toString() + " ---" );
+      fireAppendLogEntry(
+		LangUtil.tr(
+			"--- Interrupt: {0} ---",
+			LangUtil.tr( iSource.toString() ) ) );
     }
     StringWriter stringWriter = new StringWriter( 128 );
     PrintWriter  printWriter  = new PrintWriter( stringWriter );
@@ -2876,7 +2909,8 @@ public class DebugFrm extends BaseFrm implements
   private void doExecWalk( int millis )
   {
     this.walkMillis = millis;
-    this.labelStatus.setText( "Programm wird langsam ausgef\u00FChrt..." );
+    this.labelStatus.setText(
+		LangUtil.tr( "Programm wird langsam ausgef\u00FChrt..." ) );
     this.cpu.fireAction( Z80CPU.Action.DEBUG_WALK );
   }
 
@@ -2887,7 +2921,8 @@ public class DebugFrm extends BaseFrm implements
       this.walkMillis = 0;
       fireUpdDebugger( null, null );
     }
-    this.labelStatus.setText( "Programmausf\u00FChrung wird angehalten..." );
+    this.labelStatus.setText(
+		LangUtil.tr( "Programmausf\u00FChrung wird angehalten..." ) );
     this.cpu.fireAction( Z80CPU.Action.DEBUG_STOP );
   }
 
@@ -3911,7 +3946,8 @@ public class DebugFrm extends BaseFrm implements
     this.btnStepToRET.setEnabled( false );
     this.btnResetTStates.setEnabled( false );
     this.tableModelVar.setValuesEnabled( false );
-    this.labelStatus.setText( "Programm wird gerade ausgef\u00FChrt..." );
+    this.labelStatus.setText(
+		LangUtil.tr( "Programm wird gerade ausgef\u00FChrt..." ) );
   }
 
 
@@ -3985,12 +4021,12 @@ public class DebugFrm extends BaseFrm implements
       this.walkTimer.restart();
     } else {
       setDebuggerEditable( true );
-      String text = "Programmausf\u00FChrung angehalten";
+      String text = LangUtil.tr( "Programmausf\u00FChrung angehalten" );
       if( iSource != null ) {
 	text = LangUtil.tr(
 		"{0}, Interrupt von {1} angenommen",
 		text,
-		iSource.toString() );
+		LangUtil.tr( iSource.toString() ) );
       }
       this.labelStatus.setText( text );
     }

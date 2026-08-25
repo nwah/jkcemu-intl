@@ -51,7 +51,7 @@ public class SaveTextDlg extends BaseDlg
   {
     super(
 	editText.getTextEditFrm(),
-	"Textdatei speichern: " + file.getName() );
+	LangUtil.tr( "Textdatei speichern: {0}", file.getName() ) );
 
     this.file               = file;
     this.editText           = editText;

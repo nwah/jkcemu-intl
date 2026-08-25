@@ -200,6 +200,7 @@ public class ImageUtil
 						String      text,
 						String[]... suffixes )
   {
+    text = LangUtil.tr( text );
     SortedSet<String> sortedSuffixes = new TreeSet<>();
     if( suffixes != null ) {
       for( String[] a : suffixes ) {
@@ -336,7 +337,7 @@ public class ImageUtil
   public static FileNameExtensionFilter createA5105ImageFileFilter()
   {
     return new FileNameExtensionFilter(
-				"A5105-Bilddateien",
+				LangUtil.tr( "A5105-Bilddateien" ),
 				"scr" );
   }
 
@@ -344,7 +345,7 @@ public class ImageUtil
   public static FileNameExtensionFilter createKC852ImageFileFilter()
   {
     return new FileNameExtensionFilter(
-				"KC85/2,3-Bilddateien",
+				LangUtil.tr( "KC85/2,3-Bilddateien" ),
 				"pic" );
   }
 
@@ -352,7 +353,7 @@ public class ImageUtil
   public static FileNameExtensionFilter createKC854HiresImageFileFilter()
   {
     return new FileNameExtensionFilter(
-				"KC85/4,5-HIRES-Bilddateien",
+				LangUtil.tr( "KC85/4,5-HIRES-Bilddateien" ),
 				"hip" );
   }
 
@@ -360,7 +361,7 @@ public class ImageUtil
   public static FileNameExtensionFilter createKC854LowresImageFileFilter()
   {
     return new FileNameExtensionFilter(
-				"KC85/4,5-LOWRES-Bilddateien",
+				LangUtil.tr( "KC85/4,5-LOWRES-Bilddateien" ),
 				"pip" );
   }
 
@@ -368,7 +369,7 @@ public class ImageUtil
   public static FileNameExtensionFilter createLLC2HiresImageFileFilter()
   {
     return new FileNameExtensionFilter(
-				"LLC2-HIRES-Bilddateien",
+				LangUtil.tr( "LLC2-HIRES-Bilddateien" ),
 				"pix" );
   }
 

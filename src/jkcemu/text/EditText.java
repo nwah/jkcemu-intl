@@ -1642,22 +1642,23 @@ public class EditText implements
 	}
 	else if( n > 1 ) {
 	  try {
-	    optionTexts.add( EmuUtil.TEXT_CANCEL );
+	    optionTexts.add( LangUtil.tr( EmuUtil.TEXT_CANCEL ) );
 	    String[] options = optionTexts.toArray( new String[ n + 1 ] );
 	    if( options != null ) {
 	      JOptionPane pane = new JOptionPane(
-		"Das KC-BASIC-Programm enth\u00E4lt Tokens,"
-			+ " die auf den einzelnen\n"
-			+ "Systemen unterschiedliche Anweisungen"
-			+ " repr\u00E4sentieren.\n"
-			+ "Auf welchem System wurde das BASIC-Programm"
-			+ " erstellt?",
+		LangUtil.tr(
+			"Das KC-BASIC-Programm enth\u00E4lt Tokens,"
+				+ " die auf den einzelnen\n"
+				+ "Systemen unterschiedliche Anweisungen"
+				+ " repr\u00E4sentieren.\n"
+				+ "Auf welchem System wurde das BASIC-Programm"
+				+ " erstellt?" ),
 		JOptionPane.QUESTION_MESSAGE );
 	      pane.setOptions( options );
 	      pane.setWantsInput( false );
 	      pane.createDialog(
 			this.textEditFrm,
-			"BASIC-Version" ).setVisible( true );
+			LangUtil.tr( "BASIC-Version" ) ).setVisible( true );
 	      Object value = pane.getValue();
 	      if( value != null ) {
 		rv = basicTexts.get( value );

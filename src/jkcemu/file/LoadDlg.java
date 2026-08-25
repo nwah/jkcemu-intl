@@ -629,21 +629,22 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     if( (file != null) && (fileBytes != null) && (nextTAPOffs > 0) ) {
       if( JOptionPane.showConfirmDialog(
 		owner,
-		"Die Datei ist eine Multi-TAP-Datei,"
-			+ " d.h., sie enth\u00E4lt mehrere Teildateien.\n"
-			+ "Es wurde aber nur die erste Teildatei in den"
-			+ " Arbeitsspeicher geladen.\n\n"
-			+ "H\u00E4ufig versucht das in der ersten Teildatei"
-			+ " enthaltene Programm,\n"
-			+ "die restlichen Teildateien von Kassette"
-			+ " nachzuladen.\n"
-			+ "Sie k\u00F6nnen jetzt die Emulation"
-			+ " des Kassettenrecorderanschlusses\n"
-			+ "mit den restlichen Teildateien aktivieren,\n"
-			+ "sodass das Nachladen auch im Emulator"
-			+ " funktioniert.\n\n"
-			+ "M\u00F6chten Sie das jetzt tun?",
-		"Multi-TAP-Datei",
+		LangUtil.tr(
+			"Die Datei ist eine Multi-TAP-Datei,"
+				+ " d.h., sie enth\u00E4lt mehrere Teildateien.\n"
+				+ "Es wurde aber nur die erste Teildatei in den"
+				+ " Arbeitsspeicher geladen.\n\n"
+				+ "H\u00E4ufig versucht das in der ersten Teildatei"
+				+ " enthaltene Programm,\n"
+				+ "die restlichen Teildateien von Kassette"
+				+ " nachzuladen.\n"
+				+ "Sie k\u00F6nnen jetzt die Emulation"
+				+ " des Kassettenrecorderanschlusses\n"
+				+ "mit den restlichen Teildateien aktivieren,\n"
+				+ "sodass das Nachladen auch im Emulator"
+				+ " funktioniert.\n\n"
+				+ "M\u00F6chten Sie das jetzt tun?" ),
+		LangUtil.tr( "Multi-TAP-Datei" ),
 		JOptionPane.YES_NO_OPTION,
 		JOptionPane.WARNING_MESSAGE ) == JOptionPane.YES_OPTION )
       {
@@ -664,7 +665,7 @@ public class LoadDlg extends BaseDlg implements DocumentListener
 	if( JOptionPane.showConfirmDialog(
 		owner,
 		infoMsg,
-		"Achtung",
+		LangUtil.tr( "Achtung" ),
 		JOptionPane.WARNING_MESSAGE,
 		JOptionPane.OK_CANCEL_OPTION ) != JOptionPane.OK_OPTION )
 	{

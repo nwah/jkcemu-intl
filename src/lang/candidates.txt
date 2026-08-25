@@ -3,35 +3,32 @@
 # Manuell pruefen und ggf. in CALL_SITES bzw. LangUtil.tr(...) einarbeiten.
 jkcemu/Main.java:74	-	(c) 2008-2026 Jens Müller
 jkcemu/Main.java:98	new ThreadGroup	 thread group
-jkcemu/Main.java:114	-	  java -jar jkcemu.jar <Argumente>
-jkcemu/Main.java:117	-	  <kein Argument>              Emulator mit Profil \"standard\" starten
-jkcemu/Main.java:119	-	  <Profil>                     Emulator mit dem angegebenen Profil starten
-jkcemu/Main.java:121	-	  -h oder --help               diese Hilfe anzeigen
-jkcemu/Main.java:122	-	  -l oder --list               Liste der Profile anzeigen
-jkcemu/Main.java:123	-	  -v oder --version            Versionsnummer anzeigen
-jkcemu/Main.java:124	-	  --ar oder --audiorecorder    Audiorecorder starten
-jkcemu/Main.java:125	-	  --as oder --assembler        Assembler starten
-jkcemu/Main.java:126	-	  --as -h                      Hilfe zum Assembler anzeigen
-jkcemu/Main.java:127	-	  --bc oder --basiccompiler    BASIC-Compiler starten
-jkcemu/Main.java:128	-	  --bc -h                      Hilfe zum BASIC-Compiler anzeigen
-jkcemu/Main.java:129	-	  --ca oder --calculator       Rechner starten
-jkcemu/Main.java:130	-	  --dc oder --diskcreator      Diskettenabbilddatei erstellen
-jkcemu/Main.java:131	-	  --du oder --diskunpacker     Diskettenabbilddatei entpacken
-jkcemu/Main.java:132	-	  --dv oder --diskviewer       Diskettenabbilddatei-Inspektor starten
-jkcemu/Main.java:134	-	  --fb oder --filebrowser      Datei-Browser starten
-jkcemu/Main.java:135	-	  --fc oder --fileconverter    Dateikonverter starten
-jkcemu/Main.java:136	-	  --ff oder --findfiles        Dateisuche starten
-jkcemu/Main.java:137	-	  --hd oder --hexdiff          Hex-Dateivergeicher starten
-jkcemu/Main.java:138	-	  --he oder --hexeditor        Hex-Editor starten
-jkcemu/Main.java:139	-	  --iv oder --imageviewer      Bildbetrachter/Bildbearbeitung starten
-jkcemu/Main.java:141	-	  --lang=<code>                Anzeigesprache festlegen (z.B. de, en)
-jkcemu/Main.java:143	-	  --te oder --texteditor       Texteditor starten
-jkcemu/Main.java:516	printlnErr	: Unbekannte Option
+jkcemu/Main.java:123	-	  java -jar jkcemu.jar <Argumente>
+jkcemu/Main.java:126	-	  <kein Argument>              Emulator mit Profil \"standard\" starten
+jkcemu/Main.java:128	-	  <Profil>                     Emulator mit dem angegebenen Profil starten
+jkcemu/Main.java:130	-	  -h oder --help               diese Hilfe anzeigen
+jkcemu/Main.java:131	-	  -l oder --list               Liste der Profile anzeigen
+jkcemu/Main.java:132	-	  -v oder --version            Versionsnummer anzeigen
+jkcemu/Main.java:133	-	  --ar oder --audiorecorder    Audiorecorder starten
+jkcemu/Main.java:134	-	  --as oder --assembler        Assembler starten
+jkcemu/Main.java:135	-	  --as -h                      Hilfe zum Assembler anzeigen
+jkcemu/Main.java:136	-	  --bc oder --basiccompiler    BASIC-Compiler starten
+jkcemu/Main.java:137	-	  --bc -h                      Hilfe zum BASIC-Compiler anzeigen
+jkcemu/Main.java:138	-	  --ca oder --calculator       Rechner starten
+jkcemu/Main.java:139	-	  --dc oder --diskcreator      Diskettenabbilddatei erstellen
+jkcemu/Main.java:140	-	  --du oder --diskunpacker     Diskettenabbilddatei entpacken
+jkcemu/Main.java:141	-	  --dv oder --diskviewer       Diskettenabbilddatei-Inspektor starten
+jkcemu/Main.java:143	-	  --fb oder --filebrowser      Datei-Browser starten
+jkcemu/Main.java:144	-	  --fc oder --fileconverter    Dateikonverter starten
+jkcemu/Main.java:145	-	  --ff oder --findfiles        Dateisuche starten
+jkcemu/Main.java:146	-	  --hd oder --hexdiff          Hex-Dateivergeicher starten
+jkcemu/Main.java:147	-	  --he oder --hexeditor        Hex-Editor starten
+jkcemu/Main.java:148	-	  --iv oder --imageviewer      Bildbetrachter/Bildbearbeitung starten
+jkcemu/Main.java:150	-	  --lang=<code>                Anzeigesprache festlegen (z.B. de, en)
+jkcemu/Main.java:152	-	  --te oder --texteditor       Texteditor starten
+jkcemu/Main.java:525	printlnErr	: Unbekannte Option
 jkcemu/audio/AbstractAudioIOFld.java:34	-	frame_rate
-jkcemu/audio/AbstractAudioIOFld.java:70	BaseDlg.showSuppressableConfirmDlg	Mit Öffnen des Audiokanals ist sowohl eingangs- als auch ausgangseitig\nein Audiokanal geöffnet, der durch den emulierten Mikroprozessor bedient wird.\nFalls Sie Daten über das Audiosystem einlesen möchten, sollte gleichzeitig\nkein ausgangsseitiger Audiokanal geöffnet sein, da dieser stören könnte.
-jkcemu/audio/AbstractAudioOutFld.java:53	BaseDlg.showYesNoWarningDlg	Die Aufnahme wurden noch nicht gespeichert!\nMöchten Sie die Aufnahme verwerfen?
 jkcemu/audio/AbstractAudioOutFld.java:122	AudioPlayFrm.open	Wiedergabe der Aufnahme...
-jkcemu/audio/AudioFile.java:114	new FileNameExtensionFilter	Sound-Dateien (
 jkcemu/audio/AudioFrm.java:171	util.Timer	jkcemu audio timer
 jkcemu/audio/AudioIO.java:21	-	Der Audiokanal ist nicht verfügbar.\nMöglicherweise wird er bereits durch eine andere Applikation verwendet.
 jkcemu/audio/AudioIO.java:26	-	Der Audiokanal konnte nicht geöffnet werden.
@@ -47,21 +44,14 @@ jkcemu/audio/AudioPlayFrm.java:199	buf.append	Wiedergabe nicht möglich
 jkcemu/audio/AudioPlayFrm.java:472	new Thread	 audio player
 jkcemu/audio/AudioRecorderFrm.java:589	new Thread	JKCEMU sound recorder
 jkcemu/audio/AudioRecorderFrm.java:615	AudioPlayFrm.open	Wiedergabe der Aufnahme...
-jkcemu/audio/AudioRecorderFrm.java:664	BaseDlg.showSuppressableConfirmDlg	Die Aufnahme wurde noch nicht gespeichert\nund wird somit verworfen.
 jkcemu/audio/AudioRecorderFrm.java:731	-	Es konnte kein Audiokanal mit den angegebenen Optionen geöffnet werden.
 jkcemu/audio/AudioRecorderFrm.java:734	-	Es konnte kein Audiokanal geöffnet werden.
 jkcemu/audio/AudioUtil.java:89	buf.append	 Kanäle
-jkcemu/audio/CSWFile.java:257	strBuf.append	 nicht unterstützt
-jkcemu/audio/TapeInFld.java:202	comboMonitorMixer.addItem	--- nicht mithören ---
-jkcemu/base/AbstractScreenFrm.java:292	new JOptionPane	Der Text enthält Zeichencodes, die nach ASCII die Zeichen [ \\ ] { | } ~\nund nach ISO646-DE deutsche Umlaute darstellen.\nDa sie eine externe Zeichensatzdatei eingebunden haben,\nkann JKCEMU nicht wissen, ob ASCII-Zeichen\noder deutsche Umlaute angezeigt werden.\nWie sind diese Zeichencodes zu interpretieren?
+jkcemu/audio/CSWFile.java:260	strBuf.append	 nicht unterstützt
 jkcemu/base/AutoInputEntry.java:20	-	input_text
-jkcemu/base/AutoInputWorker.java:72	super	JKCEMU auto input
-jkcemu/base/AutoLoader.java:145	super	JKCEMU auto loader
-jkcemu/base/BaseDlg.java:83	createSuppressCheckbox	Diesen Dialog nicht mehr anzeigen
-jkcemu/base/BaseDlg.java:309	createSuppressCheckbox	Diese Meldung nicht mehr anzeigen
-jkcemu/base/BaseDlg.java:363	showConfirmDlg	Bestätigung
-jkcemu/base/BaseDlg.java:422	LangUtil.tr	Unbekannter Fehler
-jkcemu/base/BaseDlg.java:520	JOptionPane.showConfirmDialog	Bestätigung
+jkcemu/base/BaseDlg.java:90	createSuppressCheckbox	Diesen Dialog nicht mehr anzeigen
+jkcemu/base/BaseDlg.java:316	createSuppressCheckbox	Diese Meldung nicht mehr anzeigen
+jkcemu/base/BaseDlg.java:429	LangUtil.tr	Unbekannter Fehler
 jkcemu/base/DeviceIO.java:633	new Thread	JKCEMU unreachable net path finder
 jkcemu/base/EmuSys.java:58	-	catch_print_calls
 jkcemu/base/EmuSys.java:59	-	fixed_screen_size
@@ -76,29 +66,21 @@ jkcemu/base/EmuUtil.java:1111	errWriter.println	Please send this file to info@je
 jkcemu/base/EmuUtil.java:1127	errWriter.println	--- Stack Trace ---
 jkcemu/base/EmuUtil.java:1263	String.format	Resource %s kann nicht geladen werden
 jkcemu/base/EmuUtil.java:1571	buf.append	Nicht-ASCII-Zeichen
-jkcemu/base/HTMLViewFrm.java:390	new PrinterException	Die Seite hat keinen bedruckbaren Bereich,\nda die Ränder zu groß sind.
+jkcemu/base/HTMLViewFrm.java:392	new PrinterException	Die Seite hat keinen bedruckbaren Bereich,\nda die Ränder zu groß sind.
 jkcemu/base/HelpFrm.java:497	createMenuBar	Seite durchsuchen...
 jkcemu/base/HelpFrm.java:498	createMenuBar	Hilfe durchsuchen...
-jkcemu/base/HexDocument.java:197	new NumberFormatException	Ungültiges Format!\nBitte geben Sie eine hexadezimale Zahl ein.
+jkcemu/base/HexDocument.java:199	new NumberFormatException	Ungültiges Format!\nBitte geben Sie eine hexadezimale Zahl ein.
 jkcemu/base/IntegerDocument.java:110	new NumberFormatException	Ungültiges Format!\nBitte geben Sie eine Zahl ein.
 jkcemu/base/IntegerDocument.java:123	new NumberFormatException	Wert zu groß, max. 
-jkcemu/base/ProcessExecuter.java:31	super	JKCEMU ProcessExecuter.ByteCatcher
 jkcemu/base/ProcessExecuter.java:96	new IOException	 nicht gefunden
 jkcemu/base/ProfileDlg.java:562	new IOException	:\nImportieren nicht müglich
-jkcemu/base/RAMFloppy.java:135	-	RAM-Floppy nicht emuliert
-jkcemu/base/RAMFloppy.java:196	EmuUtil.fireShowErrorDlg	 konnte nicht geladen werden.
+jkcemu/base/RAMFloppy.java:136	LangUtil.tr	RAM-Floppy nicht emuliert
 jkcemu/base/ReplyBytesDlg.java:95	LangUtil.mnemonic	8-Bit hexadezimale Zahlen
 jkcemu/base/ReplyBytesDlg.java:106	LangUtil.mnemonic	Little Endian
 jkcemu/base/ReplyBytesDlg.java:379	String.format	Das Zeichen '%c' ist kein ASCII-Zeichen.
 jkcemu/base/ReplyBytesDlg.java:433	String.format	%s: ungültiges Format
-jkcemu/base/ReplyIntDlg.java:27	super	Eingabe Ganzzahl
 jkcemu/base/ScreenFrm.java:160	-	find_files
 jkcemu/base/ScreenFrm.java:185	-	second_screen
-jkcemu/base/ScreenFrm.java:1727	new FileSelectDlg	Datei in Arbeitsspeicher laden
-jkcemu/base/ScreenFrm.java:1991	new ProfileDlg	Profil anwenden
-jkcemu/base/ScreenFrm.java:2148	-	Grundgerät
-jkcemu/base/ScreenFrm.java:2153	new JOptionPane	Auf welches Prozessorsystem möchten Sie zugreifen?
-jkcemu/base/ScreenFrm.java:2158	pane.createDialog	Auswahl Prozessorsystem
 jkcemu/base/TransferableHTML.java:36	addFlavor	text/html; class=java.lang.String
 jkcemu/base/TransferableHTML.java:37	addFlavor	text/html; class=java.io.Reader
 jkcemu/base/TransferableHTML.java:40	addFlavor	text/html; charset=utf-8; class=java.io.InputStream
@@ -107,14 +89,12 @@ jkcemu/base/deviceio/UnixDeviceIO.java:401	buf.append	 konnte nicht aus dem Date
 jkcemu/base/deviceio/WinDeviceIO.java:519	buf.append	 inkl. Bootsektor
 jkcemu/base/deviceio/WinDeviceIO.java:1025	showLibError	'\nkonnte nicht angelegt bzw. aktualisiert werden.
 jkcemu/base/jversion/DesktopHelper_9.java:200	new IOException	:\nKonnte nicht in den Papierkorb geworfen werden
-jkcemu/disk/AbstractFloppyDisk.java:286	String.format	Sektor [C=%d,H=%d,R=%d] kann nicht gelesen werden
-jkcemu/disk/AbstractFloppyDisk.java:302	String.format	Sektor [C=%d,H=%d,R=%d] kann nicht geschrieben werden
-jkcemu/disk/AbstractFloppyDisk.java:346	fireShowError	Formatieren einer bereits formatierten Diskettenabbilddatei mit einem\nanderen Format als das bereits vorhandene ist nicht möglich.
-jkcemu/disk/AbstractFloppyDisk.java:832	String.format	Seite %d, Spur %d, Sektor %d: Datenfeld zu klein,\nDer Sektor kann nicht geschrieben werden,\nweil das Datenfeld des Sektors kleiner ist,\nals es laut Diskettenformat sein müsste.
+jkcemu/disk/AbstractFloppyDisk.java:288	String.format	Sektor [C=%d,H=%d,R=%d] kann nicht gelesen werden
+jkcemu/disk/AbstractFloppyDisk.java:304	String.format	Sektor [C=%d,H=%d,R=%d] kann nicht geschrieben werden
+jkcemu/disk/AbstractFloppyDisk.java:850	String.format	Seite %d, Spur %d, Sektor %d: Datenfeld zu klein,\nDer Sektor kann nicht geschrieben werden,\nweil das Datenfeld des Sektors kleiner ist,\nals es laut Diskettenformat sein müsste.
 jkcemu/disk/AnaDisk.java:69	String.format	Seite %d, Spur %d, Sektor %d:
 jkcemu/disk/AnaDisk.java:75	msgBuf.append	 Sektor-ID generiert
 jkcemu/disk/AnaDisk.java:89	msgBuf.append	 Daten als gelöscht markiert
-jkcemu/disk/AnaDisk.java:315	fireShowError	Anhängen von Sektoren fehlgeschlagen
 jkcemu/disk/CPCDisk.java:137	String.format	%d Zylinder nicht unterstützt
 jkcemu/disk/CPCDisk.java:144	String.format	%d Seiten nicht unterstützt
 jkcemu/disk/CPCDisk.java:163	String.format	Spur %d, Seite %d: %d Sektoren nicht unterstützt
@@ -123,18 +103,15 @@ jkcemu/disk/CPCDisk.java:190	String.format	Spur %d, Seite %d, Sektor %d:
 jkcemu/disk/CPCDisk.java:196	msgBuf.append	 Sektor-ID generiert
 jkcemu/disk/CPCDisk.java:210	msgBuf.append	 Daten als gelöscht markiert
 jkcemu/disk/CPCDisk.java:394	String.format	Spur %d, Seite %d: Unterschiedliche Sektorgrößen auf einer Spur nicht unterstützt
-jkcemu/disk/CPCDisk.java:726	fireShowError	Formatieren fehlgeschlagen
 jkcemu/disk/CPMDirUtil.java:112	-	gelöscht: 
 jkcemu/disk/CPMDirUtil.java:303	String.format	Spur %d, Seite %d: Sektor [C=%d,H=%d,R=%d,N=%d] nicht gefunden
 jkcemu/disk/CPMDirUtil.java:315	String.format	Spur %d, Seite %d: Unerwarteter Sektor %d gefunden
-jkcemu/disk/ChangeFileAttrsDlg.java:46	super	Dateiattribute ändern
 jkcemu/disk/CopyQMDisk.java:251	EmuUtil.writeASCII	 Single-Sided
 jkcemu/disk/CopyQMDisk.java:253	EmuUtil.writeASCII	 Double-Sided
 jkcemu/disk/CopyQMDisk.java:433	msgBuf.append	\nDie angezeigten Informationen können in einer CopyQM-Datei nicht gespeichert werden\nund sind deshalb in der erzeugten Datei nicht mehr enthalten.\n
 jkcemu/disk/CopyQMDisk.java:492	String.format	%d Byte Sektorgröße nicht unterstützt
 jkcemu/disk/CopyQMDisk.java:504	String.format	%d Seiten nicht unterstützt
 jkcemu/disk/CopyQMDisk.java:536	String.format	%d Spuren nicht unterstützt
-jkcemu/disk/CopyQMDisk.java:642	rv.setWarningText	Die CopyQM-Datei scheint defekt zu sein (CRC-Fehler)!
 jkcemu/disk/CopyQMDisk.java:845	new IOException	Die Datei enthält ein nicht unterstütztes CopyQM-Format:\n
 jkcemu/disk/DirectoryFloppyDisk.java:34	-	auto_refresh
 jkcemu/disk/DirectoryFloppyDisk.java:35	-	block_number_size
@@ -143,35 +120,27 @@ jkcemu/disk/DirectoryFloppyDisk.java:40	-	force_lowercase
 jkcemu/disk/DirectoryFloppyDisk.java:41	-	system_tracks
 jkcemu/disk/DirectoryFloppyDisk.java:150	-	Automatische Aktualisierung aktiv
 jkcemu/disk/DirectoryFloppyDisk.java:152	-	Keine automatische Aktualisierung
-jkcemu/disk/DirectoryFloppyDisk.java:181	fireShowError	Formatieren einer emulierten Diskette,\ndie auf ein Verzeichnis im Dateisystem abgebildet ist,\nwird nicht unterstützt.
 jkcemu/disk/DirectoryFloppyDisk.java:761	fireShowError	: Lesen der zugrunde liegenden Datei fehlgeschlagen
 jkcemu/disk/DirectoryFloppyDisk.java:1217	new IOException	:\nDatei konnte nicht gelöscht werden
-jkcemu/disk/DiskImgCreateFrm.java:86	-	 CP/M-kompatible Diskettenabbilddatei erstellen
-jkcemu/disk/DiskImgCreateFrm.java:440	JOptionPane.showConfirmDialog	User-Bereich ändern
-jkcemu/disk/DiskImgCreateFrm.java:538	JOptionPane.showConfirmDialog	Sie haben ein Format ohne Systemspuren ausgewählt,\naber eine Datei für die Systemspuren angegeben.\nDiese Datei wird ignoriert.
-jkcemu/disk/DiskImgCreateFrm.java:667	-	 kann nicht hinzugefügt werden.
-jkcemu/disk/DiskImgCreateFrm.java:717	FileUtil.showMultiFileOpenDlg	Dateien hinzufügen
-jkcemu/disk/DiskImgCreateFrm.java:1045	new JLabel	Sektorgröße:
-jkcemu/disk/DiskImgCreateFrm.java:1362	ReplyTextDlg.showDlg	Dateiname im 8.3-Format:
-jkcemu/disk/DiskImgCreateFrm.java:1422	-	Datei nicht gefunden
-jkcemu/disk/DiskImgCreateFrm.java:1425	-	Datei ist keine reguläre Datei
-jkcemu/disk/DiskImgCreateFrm.java:1665	buf.append	 KByte hinzugefügt
-jkcemu/disk/DiskImgCreateFrm.java:1680	String.format	%dK/%dK Diskettenformat eingestellt
-jkcemu/disk/DiskImgCreateFrm.java:1686	-	 (abweichendes Format für Systemspuren)
-jkcemu/disk/DiskImgCreateFrm.java:1690	String.format	%dK Diskettenformat eingestellt
+jkcemu/disk/DiskImgCreateFrm.java:719	FileUtil.showMultiFileOpenDlg	Dateien hinzufügen
+jkcemu/disk/DiskImgCreateFrm.java:1047	new JLabel	Sektorgröße:
+jkcemu/disk/DiskImgCreateFrm.java:1364	ReplyTextDlg.showDlg	Dateiname im 8.3-Format:
+jkcemu/disk/DiskImgCreateFrm.java:1424	-	Datei nicht gefunden
+jkcemu/disk/DiskImgCreateFrm.java:1427	-	Datei ist keine reguläre Datei
+jkcemu/disk/DiskImgCreateFrm.java:1667	buf.append	 KByte hinzugefügt
+jkcemu/disk/DiskImgCreateFrm.java:1682	String.format	%dK/%dK Diskettenformat eingestellt
+jkcemu/disk/DiskImgCreateFrm.java:1688	-	 (abweichendes Format für Systemspuren)
+jkcemu/disk/DiskImgCreateFrm.java:1692	String.format	%dK Diskettenformat eingestellt
 jkcemu/disk/DiskImgCreator.java:88	-	Einfache Abbilddatei
 jkcemu/disk/DiskImgCreator.java:604	new IOException	: Datei zu groß!
 jkcemu/disk/DiskImgProcessDlg.java:110	buf.append	Erzeuge Abbilddatei
-jkcemu/disk/DiskImgProcessDlg.java:163	showYesNoWarningDlg	JKCEMU kann nur einfache Abbilddateien auf einen Datenträger schreiben.\nLaut Dateiendung scheint die Datei jedoch keine einfache Abbilddatei zu sein.\nMöchten Sie trotzdem fortsetzen?
 jkcemu/disk/DiskImgProcessDlg.java:215	buf.append	Schreibe Abbilddatei
 jkcemu/disk/DiskImgProcessDlg.java:453	new Thread	JKCEMU disk image writer
 jkcemu/disk/DiskImgProcessDlg.java:454	new Thread	JKCEMU disk image reader
 jkcemu/disk/DiskImgProcessDlg.java:514	-	Die Abbilddatei wurde erfolgreich erzeugt:\n
-jkcemu/disk/DiskImgUnpackFrm.java:78	-	 CP/M-kompatible Diskettenabbilddatei entpacken
 jkcemu/disk/DiskImgUnpackFrm.java:86	-	apply_readonly
 jkcemu/disk/DiskImgUnpackFrm.java:87	-	force_lowercase
 jkcemu/disk/DiskImgUnpackFrm.java:88	-	unpack_deleted_files
-jkcemu/disk/DiskImgUnpackFrm.java:354	BaseDlg.showConfirmWarningDlg	Das Ausgabeverzeichnis existiert bereits und ist nicht leer.\nGleichnamige Dateien in dem Verzeichnis werden überschrieben!
 jkcemu/disk/DiskImgUnpackFrm.java:366	new IOException	.\nDas Ausgabeverzeichnis konnte nicht angelegt werden.
 jkcemu/disk/DiskImgUnpackFrm.java:381	String.format	Ungültige Sektorgröße: %d Bytes\n
 jkcemu/disk/DiskImgUnpackFrm.java:389	buf.append	Die Blockgröße muss gleich oder ein Vielfaches der Sektorgröße sein.\nDie Sektorgröße beträgt 
@@ -182,14 +151,11 @@ jkcemu/disk/DiskImgUnpackFrm.java:1122	String.format	Ungültiger Directory-Eintr
 jkcemu/disk/DiskImgUnpackFrm.java:1129	String.format	Gelöscht: %s
 jkcemu/disk/DiskImgUnpackFrm.java:1165	logBuf.append	\n  Datei kann nicht entpackt werden,\n  da der Datenbereich bereits von anderen Dateien verwendet wird.\n
 jkcemu/disk/DiskImgUnpackFrm.java:1184	appendToLog	' konnte nicht angelegt werden.\n
-jkcemu/disk/DiskImgUnpackFrm.java:1511	-	Blockgröße nicht erkannt
-jkcemu/disk/DiskImgUnpackFrm.java:1524	-	 (nicht eindeutig erkannt)
-jkcemu/disk/DiskImgUnpackFrm.java:1567	-	Es gibt nichts zu entpacken,\nda das Directory leer ist.
-jkcemu/disk/DiskImgUnpackFrm.java:1572	-	Datei kann nicht entpackt werden,\nda kein CP/M-kompatibles Directory gefunden wurde.
-jkcemu/disk/DiskImgUnpackFrm.java:1576	-	Unbekanntes Dateiformat
-jkcemu/disk/DiskImgViewFrm.java:80	-	Diskettenabbilddatei-Inspektor
+jkcemu/disk/DiskImgUnpackFrm.java:1572	-	Es gibt nichts zu entpacken,\nda das Directory leer ist.
+jkcemu/disk/DiskImgUnpackFrm.java:1577	-	Datei kann nicht entpackt werden,\nda kein CP/M-kompatibles Directory gefunden wurde.
+jkcemu/disk/DiskImgUnpackFrm.java:1581	-	Unbekanntes Dateiformat
 jkcemu/disk/DiskImgViewFrm.java:107	-	nicht erkannt
-jkcemu/disk/DiskImgViewFrm.java:1213	-	Die Datei enthält mysteriöse Daten, die 
+jkcemu/disk/DiskImgViewFrm.java:1213	-	Die Datei enthält mysteriöse Daten, die JKCEMU beim Laden repariert hat.
 jkcemu/disk/DiskImgViewFrm.java:1214	-	 beim Laden repariert hat.
 jkcemu/disk/DiskImgViewFrm.java:1216	-	\nDie Datei selbst wurde durch die Reparatur nicht geändert.\nMöchten Sie den reparierten oder den originalen Dateiinhalt sehen?\n
 jkcemu/disk/DiskImgViewFrm.java:1289	-	Kein CP/M-kompatibles Directory gefunden
@@ -199,31 +165,22 @@ jkcemu/disk/DiskImgViewFrm.java:1375	buf.append	Diskettenabbilddatei ist leer!
 jkcemu/disk/DiskImgViewFrm.java:1631	-	Kopfpositionierung mit Doppelschritten
 jkcemu/disk/DiskImgViewFrm.java:1634	-	Kopfpositionierung nur auf gerade Spurnummern
 jkcemu/disk/DiskImgViewFrm.java:1742	String.format	Spur %d, Seite %d, Index %d\n
-jkcemu/disk/DiskUtil.java:111	BaseDlg.showYesNoWarningDlg	Die Dateiendung entspricht nicht der für diesen Dateityp üblichen Endung.\nWenn Sie die Datei später einmal öffnen möchten,\nwird JKCEMU den Dateityp nicht richtig erkennen können.\n\nMöchten Sie trotzdem fortsetzen?
-jkcemu/disk/DriveSelectDlg.java:47	super	Auswahl Laufwerk
 jkcemu/disk/DriveSelectDlg.java:96	comboDrive.addItem	Kein Diskettenlaufwerk gefunden
 jkcemu/disk/DriveSelectDlg.java:97	comboDrive.addItem	Kein Wechselmedium gefunden
 jkcemu/disk/FDC8272.java:333	out.printf	FDC: read status: %02X\n
 jkcemu/disk/FDC8272.java:358	out.printf	FDC: read data: %02X\n
 jkcemu/disk/FloppyDiskDrive.java:16	-	skip_odd_cylinders
-jkcemu/disk/FloppyDiskFormat.java:30	new FloppyDiskFormat	720K/702K mit Interleave 3:1 und DateStamper (ML-DOS)
-jkcemu/disk/FloppyDiskFormat.java:60	new FloppyDiskFormat	800K/780K mit Interleave 3:1 (MicroDOS)
-jkcemu/disk/FloppyDiskFormat.java:66	new FloppyDiskFormat	800K/780K mit Interleave 3:1 und DateStamper (ML-DOS)
-jkcemu/disk/FloppyDiskFormat.java:90	new FloppyDiskFormat	1760K/1738K mit Interleave 3:1 und DateStamper (KC85/D008 ML-DOS)
-jkcemu/disk/FloppyDiskFormatDlg.java:56	super	Datei laden
 jkcemu/disk/FloppyDiskFormatDlg.java:90	comboFmt.addItem	--- Bitte auswählen ---
 jkcemu/disk/FloppyDiskFormatDlg.java:114	comboFmt.addItem	--- Ältere Formate ---
 jkcemu/disk/FloppyDiskFormatSelectFld.java:710	String.format	Blöcke (%d Einträge)
-jkcemu/disk/FloppyDiskInfo.java:75	new IOException	 kann nicht geöffnet werden
-jkcemu/disk/FloppyDiskInfo.java:88	new IOException	 kann nicht gelesen werden
+jkcemu/disk/FloppyDiskInfo.java:76	new IOException	 kann nicht geöffnet werden
+jkcemu/disk/FloppyDiskInfo.java:89	new IOException	 kann nicht gelesen werden
 jkcemu/disk/FloppyDiskStationFrm.java:740	setDisk	Einfache Abbilddatei: 
 jkcemu/disk/FloppyDiskStationFrm.java:919	new Thread	JKCEMU disk closer
 jkcemu/disk/FloppyDiskStationFrm.java:949	-	Lesen & Schreiben
-jkcemu/disk/FloppyDiskStationFrm.java:999	new JOptionPane	Es wird jetzt eine Datei ohne Inhalt angelegt.\nVergessen Sie bitte nicht, die emulierte Diskette\nvom emulierten System aus zu formatieren,\ndamit die neue Datei einen Inhalt bekommt\nund somit genutzt werden kann.
-jkcemu/disk/FloppyDiskStationFrm.java:1291	JOptionPane.showConfirmDialog	Sie öffnen das Verzeichnis ohne Schreibschutz.\nSchreibzugriffe auf die emulierte Diskette wirken sich somit direkt auf die Dateien in dem Verzeichnis aus.\n\nWenn die falsche Directory-Größe eingestellt ist\noder die emulierte Diskette zu einem ungünstigen Zeitpunkt aktualisiert wird\noder nach dem Aktualisieren im Emulator das erneute Einlesen des Directorys nicht veranlasst wird,\nkann es zum ungewollten Löschen oder Überschreiben der in dem Verzeichnis liegenden Dateien kommen!\n\nStellen Sie bitte sicher, dass die Dateien in dem Verzeichnis an einer anderen Stelle nochmals gesichert sind\nund lesen Sie in der Hilfe den Abschnitt über die Emulation einer Diskette auf Basis eines Verzeichnisses!
-jkcemu/disk/FloppyDiskStationFrm.java:1580	-	\n\nMöglicherweise wurde das Diskettenlaufwerk vom Betriebssystem nicht richtig erkannt.\nIn dem Fall sollten Sie die Diskette auswerfen lassen und das Laufwerk vom Computer trennen.\nAnschließend schließen Sie es ohne eingelegte Diskette erneut an.\nLegen Sie die Diskette erst wieder ein, nachdem das Betriebssystem das Laufwerk erkannt hat.\nDanach können Sie die Diskette im JKCEMU öffnen.
-jkcemu/disk/FloppyDiskStationFrm.java:1668	setDisk	Einfache Abbilddatei: 
-jkcemu/disk/FloppyDiskStationFrm.java:1866	setDisk	Einfache Diskettenabbilddatei: 
+jkcemu/disk/FloppyDiskStationFrm.java:1583	-	\n\nMöglicherweise wurde das Diskettenlaufwerk vom Betriebssystem nicht richtig erkannt.\nIn dem Fall sollten Sie die Diskette auswerfen lassen und das Laufwerk vom Computer trennen.\nAnschließend schließen Sie es ohne eingelegte Diskette erneut an.\nLegen Sie die Diskette erst wieder ein, nachdem das Betriebssystem das Laufwerk erkannt hat.\nDanach können Sie die Diskette im JKCEMU öffnen.
+jkcemu/disk/FloppyDiskStationFrm.java:1671	setDisk	Einfache Abbilddatei: 
+jkcemu/disk/FloppyDiskStationFrm.java:1869	setDisk	Einfache Diskettenabbilddatei: 
 jkcemu/disk/GIDE.java:34	-	sectors_per_track
 jkcemu/disk/GIDE.java:216	out.printf	GIDE: read alternate status: %02X\n
 jkcemu/disk/GIDE.java:227	out.printf	GIDE: read drive+head: %02X\n
@@ -286,7 +243,6 @@ jkcemu/disk/PlainDisk.java:305	String.format	Spur %d, Seite %d, Sektor %d:
 jkcemu/disk/PlainDisk.java:311	msgBuf.append	 Sektor-ID generiert
 jkcemu/disk/PlainDisk.java:325	msgBuf.append	 Deleted Data Address Mark
 jkcemu/disk/PlainDisk.java:332	String.format	Seite %d, Spur %d: Sektor %d zu groß
-jkcemu/disk/PlainDisk.java:463	fireShowError	Anhängen von Sektoren fehlgeschlagen
 jkcemu/disk/PlainDisk.java:481	-	Einfache Abbilddatei
 jkcemu/disk/RegularFormatFloppyDisk.java:20	-	sectors_per_track
 jkcemu/disk/TeleDisk.java:458	throwUnsupportedTeleDiskFmt	Advanced Compression nicht unterstützt
@@ -294,16 +250,8 @@ jkcemu/disk/TeleDisk.java:468	String.format	Formatversion %02X nicht unterstütz
 jkcemu/disk/TeleDisk.java:626	String.format	Code=%02X für Sektorgröße nicht unterstützt
 jkcemu/disk/TeleDisk.java:727	String.format	Sektorunterkodierung %02X nicht unterstützt
 jkcemu/disk/TeleDisk.java:741	String.format	Sektorkodierung %02Xh nicht unterstützt
-jkcemu/disk/TeleDisk.java:956	rv.setWarningText	JKCEMU hat Sektoren repariert, die beim Erzeugen der\nTeledisk-Datei nicht korrekt gelesen werden konnten.
 jkcemu/disk/TeleDisk.java:1146	new IOException	Die Datei enthält ein nicht unterstütztes TeleDisk-Format:\n
-jkcemu/disk/TrackExportDlg.java:170	super	Spuren exportieren
 jkcemu/disk/TrackExportDlg.java:445	fldLog.append	\n\nExport fehlgeschlagen
-jkcemu/emusys/A5105.java:93	new FloppyDiskInfo	BIC A5105 RBASIC Diskette mit Bildern
-jkcemu/emusys/A5105.java:248	RAMFloppy.prepare	RAM-Floppy an E/A-Adressen 20h/21h
-jkcemu/emusys/A5105.java:256	RAMFloppy.prepare	RAM-Floppy an E/A-Adressen 24h/25h
-jkcemu/emusys/A5105.java:262	new PSGSoundDevice	Sound-Generator
-jkcemu/emusys/A5105.java:283	new KCNet	Netzwerk-PIO (E/A-Adressen C0h-C3h)
-jkcemu/emusys/AC1.java:545	RAMFloppy.prepare	RAM-Floppy E/A-Adressen E0h-E7h
 jkcemu/emusys/AC1.java:876	buf.append	ein (2000h-27FFh)</td></tr>\n<tr><td>PIO2 ROM Segment-Offset:</td><td>
 jkcemu/emusys/AC1.java:1823	-	BASIC-Programm speichern
 jkcemu/emusys/AC1.java:1828	-	Mini-BASIC-Programm speichern
@@ -313,30 +261,17 @@ jkcemu/emusys/CustomSys.java:72	-	swap_key_char_case
 jkcemu/emusys/CustomSys.java:748	buf.append	, Datei:&nbsp;
 jkcemu/emusys/HueblerEvertMC.java:22	-	HueblerEvertMC
 jkcemu/emusys/HueblerGraphicsMC.java:37	-	HueblerGraphicsMC
-jkcemu/emusys/HueblerGraphicsMC.java:114	new KCNet	Netzwerk-PIO (E/A-Adressen C0h-C3h)
-jkcemu/emusys/KC85.java:130	-	emulate_video_timing
-jkcemu/emusys/KC85.java:192	new FloppyDiskInfo	KC85 MicroDOS Systemdiskette
-jkcemu/emusys/KC85.java:447	new CPUSynchronSoundDevice	Tongeneratoren im Grundgerät
-jkcemu/emusys/KC85.java:747	buf.append	 Status</h1>\n<table border=\"1\">\n
-jkcemu/emusys/KC85.java:779	buf.append	von CAOS C &uuml;berdeckt
-jkcemu/emusys/KC85.java:903	buf.append	 (nicht schaltbar)
-jkcemu/emusys/KC85.java:1823	String.format	Datei in %s nach %04X-%04X geladen
-jkcemu/emusys/KCcompact.java:94	new FloppyDiskInfo	KC compact MicroDOS Systemdiskette
-jkcemu/emusys/KCcompact.java:256	new PSGSoundDevice	Sound-Generator
-jkcemu/emusys/KCcompact.java:686	buf.append	 (nicht vorhanden)
-jkcemu/emusys/KCcompact.java:1227	String.format	Datei in %s nach %04X-%04X geladen
-jkcemu/emusys/KCcompact.java:1481	-	Zentrale Zustandssteuerung
+jkcemu/emusys/KC85.java:131	-	emulate_video_timing
+jkcemu/emusys/KC85.java:748	buf.append	 Status</h1>\n<table border=\"1\">\n
+jkcemu/emusys/KC85.java:780	buf.append	von CAOS C &uuml;berdeckt
+jkcemu/emusys/KC85.java:904	buf.append	 (nicht schaltbar)
+jkcemu/emusys/KC85.java:1824	String.format	Datei in %s nach %04X-%04X geladen
+jkcemu/emusys/KCcompact.java:687	buf.append	 (nicht vorhanden)
+jkcemu/emusys/KCcompact.java:1228	String.format	Datei in %s nach %04X-%04X geladen
 jkcemu/emusys/LLC1.java:578	readROMFile	Monitorprogramm / BASIC-Interpreter
-jkcemu/emusys/LLC2.java:116	RAMFloppy.prepare	RAM-Floppy an E/A-Adressen D0h-D7h
-jkcemu/emusys/LLC2.java:124	RAMFloppy.prepare	RAM-Floppy an E/A-Adressen B0h-B7h
 jkcemu/emusys/NANOS.java:59	-	swap_case
-jkcemu/emusys/NANOS.java:87	new FloppyDiskInfo	EPOS 2.1 Boot-Diskette (64x32 Zeichen)
-jkcemu/emusys/NANOS.java:93	new FloppyDiskInfo	EPOS 2.1 Boot-Diskette (80x24 Zeichen)
-jkcemu/emusys/NANOS.java:168	new KCNet	Netzwerk-PIO (E/A-Adressen 80h-83h)
 jkcemu/emusys/NANOS.java:345	buf.append	Lesen und Schreiben
 jkcemu/emusys/PCM.java:51	-	auto_load_bdos
-jkcemu/emusys/PCM.java:60	new FloppyDiskInfo	PC/M Boot-Diskette (64x16 Zeichen)
-jkcemu/emusys/PCM.java:65	new FloppyDiskInfo	PC/M Boot-Diskette (80x24 Zeichen)
 jkcemu/emusys/PCM.java:148	ramFloppy.install	PC/M RAM-Bänke 1 und 2
 jkcemu/emusys/PCM.java:756	readROMFile	ROM-Inhalt (Grundbetriebssystem)
 jkcemu/emusys/Z1013.java:75	-	catch_joystick_calls
@@ -344,36 +279,19 @@ jkcemu/emusys/Z1013.java:96	-	centr7:practic0289
 jkcemu/emusys/Z1013.java:98	-	joyst:jute0687
 jkcemu/emusys/Z1013.java:99	-	joyst:practic0487
 jkcemu/emusys/Z1013.java:100	-	joyst:practic0188
-jkcemu/emusys/Z1013.java:161	new FloppyDiskInfo	Z1013 CP/M Boot-Diskette (64x16 Zeichen)
-jkcemu/emusys/Z1013.java:167	new FloppyDiskInfo	Z1013 CP/M Boot-Diskette (80x25 Zeichen)
-jkcemu/emusys/Z1013.java:298	RAMFloppy.prepare	RAM-Floppy an E/A-Adressen 98h-9Fh
-jkcemu/emusys/Z1013.java:306	RAMFloppy.prepare	RAM-Floppy an E/A-Adressen 58h-5Fh
-jkcemu/emusys/Z1013.java:357	new KCNet	Netzwerk-PIO (E/A-Adressen C0h-C3h)
 jkcemu/emusys/Z1013.java:1801	-	KC-BASIC-Programm speichern
 jkcemu/emusys/Z1013.java:1806	-	Tiny-BASIC-Programm speichern
-jkcemu/emusys/Z9001.java:434	new KCNet	Netzwerk-PIO (E/A-Adressen C0h-C3h)
-jkcemu/emusys/Z9001.java:473	RAMFloppy.prepare	RAM-Floppy an E/A-Adressen 20h/21h
-jkcemu/emusys/Z9001.java:481	RAMFloppy.prepare	RAM-Floppy an E/A-Adressen 24h/25h
-jkcemu/emusys/Z9001.java:499	new Z80PIO	Tastatur-PIO (E/A-Adressen 90h-93h)
-jkcemu/emusys/Z9001.java:500	new Z80PIO	System-PIO (E/A-Adressen 88h-8Bh)
-jkcemu/emusys/Z9001.java:501	new Z80CTC	System-CTC (E/A-Adressen 80h-83h)
-jkcemu/emusys/Z9001.java:506	new Z80CTC	Druckermodul-CTC (E/A-Adressen A8h-ABh)
-jkcemu/emusys/Z9001.java:507	new Z80SIO	Druckermodul-SIO (E/A-Adressen B0h-B3h)
 jkcemu/emusys/Z9001.java:876	buf.append	 Status</h1>\n<table border=\"1\">\n<tr><td>Bildausgabe:</td><td>
-jkcemu/emusys/ZXSpectrum.java:187	new PSGSoundDevice	Sound-Generator
 jkcemu/emusys/a5105/A5105KeyboardFld.java:111	addKey	ß
 jkcemu/emusys/a5105/A5105KeyboardFld.java:148	addKey	Ü
 jkcemu/emusys/a5105/A5105KeyboardFld.java:181	addKey	Ö
 jkcemu/emusys/a5105/A5105KeyboardFld.java:182	addKey	Ä
-jkcemu/emusys/ac1_llc2/AbstractSCCHSys.java:237	new KCNet	Netzwerk-PIO (E/A-Adressen C0h-C3h)
 jkcemu/emusys/customsys/CustomSysSettingsFld.java:118	String.format	E/A-Adresskonflikt bei Adresse %02Xh:\n%s <> %s\n\nDen E/A-Komponenten müssen unterschiedliche\nAdressen bzw. Adressbereiche zugewiesen werden.\nPIO, SIO, CTC, KCNet und USB verwenden jeweils 4,\nK1520-Sound 8 und GIDE 16 aufeinanderfolgende\nAdressen.
 jkcemu/emusys/customsys/FDCSettingsFld.java:124	comboTcBit.addItem	jedem Ausgabebefehl
 jkcemu/emusys/customsys/FDCSettingsFld.java:190	csSettingsFld.applyIOAddrInput	FDC Terminal Count
 jkcemu/emusys/customsys/IOSettingsFld.java:397	csSettingsFld.applyIOAddrInput	K1520-Sound-Karte
 jkcemu/emusys/customsys/KeyboardSettingsFld.java:209	csSettingsFld.applyIOAddrInput	Eingabeport Tastatur
 jkcemu/emusys/customsys/ROMSettingsDlg.java:226	String.format	Der ROM-Bereich ragt über die Adresse FFFFh hinaus.\nBei der Anfangsadresse %04Xh kann der ROM-Bereich maximal %04Xh Bytes groß sein.
-jkcemu/emusys/customsys/ROMSettingsDlg.java:368	super	ROM-Bereich bearbeiten
-jkcemu/emusys/customsys/ROMSettingsDlg.java:368	super	Neuer ROM-Bereich
 jkcemu/emusys/customsys/ScreenSettingsFld.java:250	new UserInputException	 Ungültiger Wert
 jkcemu/emusys/etc/C80KeyboardFld.java:87	addKey	+ oder Enter
 jkcemu/emusys/etc/SC2KeyboardFld.java:77	addKey	L oder Backspace
@@ -394,23 +312,27 @@ jkcemu/emusys/kc85/D005KeyboardFld.java:140	addKey	ß
 jkcemu/emusys/kc85/D005KeyboardFld.java:163	addKey	Ü
 jkcemu/emusys/kc85/D005KeyboardFld.java:197	addKey	Ö
 jkcemu/emusys/kc85/D005KeyboardFld.java:198	addKey	Ä
-jkcemu/emusys/kc85/KC85SettingsFld.java:83	-	Digital I/O mit angeschlossenem Plotter XY4131 / XY4140
-jkcemu/emusys/kc85/KC85SettingsFld.java:84	-	V.24 mit angeschlossenem Drucker
-jkcemu/emusys/kc85/KC85SettingsFld.java:90	-	Joystick/Centronics mit angeschlossenem Drucker
-jkcemu/emusys/kc85/KC85SettingsFld.java:118	-	ROM für erstes M052 (USB/Netzwerk)
-jkcemu/emusys/kc85/KC85SettingsFld.java:119	-	ROM für weitere M052 (nur USB)
-jkcemu/emusys/kc85/KC85SettingsFld.java:130	-	ROM für erstes M052 (USB/Netzwerk)
-jkcemu/emusys/kc85/KC85SettingsFld.java:131	-	ROM für weitere M052 (nur USB)
-jkcemu/emusys/kc85/KC85SettingsFld.java:143	-	ROM für erstes M052 (USB/Netzwerk)
-jkcemu/emusys/kc85/KC85SettingsFld.java:144	-	ROM für weitere M052 (nur USB)
-jkcemu/emusys/kc85/KC85SettingsFld.java:158	-	ROM für erstes M052 (USB/Netzwerk)
-jkcemu/emusys/kc85/KC85SettingsFld.java:159	-	ROM für weitere M052 (nur USB)
-jkcemu/emusys/kc85/KC85SettingsFld.java:942	doRomFileSelect	D004/D008-ROM-Datei auswählen
-jkcemu/emusys/kc85/KC85SettingsFld.java:970	doRomFileSelect	) auswählen
-jkcemu/emusys/kc85/KC85SettingsFld.java:1617	-	Datei ist leer
-jkcemu/emusys/kc85/KC85SettingsFld.java:1620	-	Datei nicht lesbar
-jkcemu/emusys/kc85/KC85SettingsFld.java:1623	-	Datei ist keine reguläre Datei
-jkcemu/emusys/kc85/KC85SettingsFld.java:1626	-	Datei nicht gefunden
+jkcemu/emusys/kc85/FujiNet.java:151	out.printf	FujiNet: %d Bytes empfangen\n
+jkcemu/emusys/kc85/FujiNet.java:174	buf.append	FujiNet-Gerät: 127.0.0.1:
+jkcemu/emusys/kc85/FujiNet.java:178	buf.append	 (nicht verbunden)
+jkcemu/emusys/kc85/FujiNet.java:311	out.println	FujiNet: Verbindung geschlossen
+jkcemu/emusys/kc85/KC85SettingsFld.java:84	-	Digital I/O mit angeschlossenem Plotter XY4131 / XY4140
+jkcemu/emusys/kc85/KC85SettingsFld.java:85	-	V.24 mit angeschlossenem Drucker
+jkcemu/emusys/kc85/KC85SettingsFld.java:91	-	Joystick/Centronics mit angeschlossenem Drucker
+jkcemu/emusys/kc85/KC85SettingsFld.java:119	-	ROM für erstes M052 (USB/Netzwerk)
+jkcemu/emusys/kc85/KC85SettingsFld.java:120	-	ROM für weitere M052 (nur USB)
+jkcemu/emusys/kc85/KC85SettingsFld.java:131	-	ROM für erstes M052 (USB/Netzwerk)
+jkcemu/emusys/kc85/KC85SettingsFld.java:132	-	ROM für weitere M052 (nur USB)
+jkcemu/emusys/kc85/KC85SettingsFld.java:144	-	ROM für erstes M052 (USB/Netzwerk)
+jkcemu/emusys/kc85/KC85SettingsFld.java:145	-	ROM für weitere M052 (nur USB)
+jkcemu/emusys/kc85/KC85SettingsFld.java:159	-	ROM für erstes M052 (USB/Netzwerk)
+jkcemu/emusys/kc85/KC85SettingsFld.java:160	-	ROM für weitere M052 (nur USB)
+jkcemu/emusys/kc85/KC85SettingsFld.java:943	doRomFileSelect	D004/D008-ROM-Datei auswählen
+jkcemu/emusys/kc85/KC85SettingsFld.java:971	doRomFileSelect	) auswählen
+jkcemu/emusys/kc85/KC85SettingsFld.java:1618	-	Datei ist leer
+jkcemu/emusys/kc85/KC85SettingsFld.java:1621	-	Datei nicht lesbar
+jkcemu/emusys/kc85/KC85SettingsFld.java:1624	-	Datei ist keine reguläre Datei
+jkcemu/emusys/kc85/KC85SettingsFld.java:1627	-	Datei nicht gefunden
 jkcemu/emusys/kc85/M040.java:50	buf.append	ROM-Größe: 
 jkcemu/emusys/lc80/LC80KeyboardFld.java:71	addKey	L oder F3#R oder F3
 jkcemu/emusys/lc80/LC80KeyboardFld.java:72	addKey	X oder Enter
@@ -425,8 +347,7 @@ jkcemu/emusys/poly880/Poly880KeyboardFld.java:112	addWhiteKey	- oder Backspace
 jkcemu/emusys/poly880/Poly880KeyboardFld.java:130	addKey	X oder Enter
 jkcemu/emusys/poly880/Poly880KeyboardFld.java:160	-	Poly-Computer Tastatur
 jkcemu/emusys/z1013/KeyboardMatrix8x8.java:31	-	!#%')=qetuo`adgjl:ycbm>~\"$&( {wrzip}sfhk;|xvn<?
-jkcemu/emusys/z1013/Z1013GraphicZX.java:246	-	: Z1013-Vollgrafik nach practic 2/88
-jkcemu/emusys/z1013/Z1013GraphicZX.java:253	-	ZX-Spectrum-kompatible S/W-Grafikkarte nach practic 2/88
+jkcemu/emusys/z1013/Z1013GraphicZX.java:247	-	: Z1013-Vollgrafik nach practic 2/88
 jkcemu/emusys/z1013/Z1013SettingsFld.java:774	confirmConflictSettings	Das im ROM-Modul enthaltene KC-BASIC läuft nicht mit dem Monitorprogramm A.2 zusammen.\nSie sollten deshalb entweder ein anderes Monitorprogramm auswählen oder für das ROM-Modul\neinen alternativen, an das Monitorprogramm angepassten Inhalt einbinden.
 jkcemu/emusys/z1013/Z1013SettingsFld.java:848	BaseDlg.fireShowSuppressableInfoDlg	Die Peters-Platine wurde deaktiviert, da diese und die ROM-Erweiterung\nentsprechend Z1013-128 die E/A-Adresse 4 unterschiedlich verwenden.
 jkcemu/emusys/z1013/Z1013SettingsFld.java:866	BaseDlg.fireShowSuppressableInfoDlg	Die ROM-Erweiterung ab Adresse 8000h entsprechend Z1013-128 wurde deaktiviert,\nda diese und die Peters-Platine die E/A-Adresse 4 unterschiedlich verwenden.
@@ -448,7 +369,6 @@ jkcemu/etc/GDC82720.java:681	out.println	GDC82720: WDAT: Grafikmode nicht implem
 jkcemu/etc/GDC82720.java:728	out.println	GDC82720: Zoomfaktor groesser 1 nicht implementiert
 jkcemu/etc/GraphicCCJena.java:62	FileUtil.readFile	Zeichensatzdatei für Grafikkarte CC Jena
 jkcemu/etc/GraphicPoppe.java:161	FileUtil.readFile	Zeichensatzdatei für Modus 64x32
-jkcemu/etc/K1520Sound.java:56	new PSGSoundDevice	K1520-Sound-Karte
 jkcemu/etc/PSG8910.java:137	buf.append	F&uuml;r Lesen/Schreiben ausgew&auml;hltes Register: 
 jkcemu/etc/PlotterFrm.java:465	JColorChooser.showDialog	Auswahl Papierfarbe
 jkcemu/etc/PlotterFrm.java:488	JColorChooser.showDialog	Auswahl Stiftfarbe
@@ -456,9 +376,8 @@ jkcemu/file/AbstractFileWorker.java:62	-	Erneut versuchen
 jkcemu/file/AbstractFileWorker.java:63	-	Überspringen
 jkcemu/file/AbstractFileWorker.java:64	-	Alle überspringen
 jkcemu/file/AbstractFileWorker.java:146	setProgressText	Vorgang abgebrochen, bitte warten...
-jkcemu/file/AbstractFileWorker.java:230	new JOptionPane	Das Fenster wird erst geschlossen, wenn die laufenden\nDatei-Operationen fertig sind oder abgebrochen wurden.
-jkcemu/file/AbstractFileWorker.java:236	pane.setOptions	Fenster nicht schließen
-jkcemu/file/AbstractFileWorker.java:519	new Thread	JKCEMU file worker
+jkcemu/file/AbstractFileWorker.java:238	LangUtil.tr	Fenster nicht schließen
+jkcemu/file/AbstractFileWorker.java:547	new Thread	JKCEMU file worker
 jkcemu/file/FileActionMngr.java:92	-	last_modified
 jkcemu/file/FileActionMngr.java:516	createAndRegisterRelImageResourceButton	Im Texteditor öffnen
 jkcemu/file/FileActionMngr.java:526	createAndRegisterRelImageResourceButton	In Emulator laden
@@ -467,37 +386,13 @@ jkcemu/file/FileActionMngr.java:556	createAndRegisterRelImageResourceButton	Im B
 jkcemu/file/FileActionMngr.java:1104	askForOutputFile	TGZ-Datei speichern
 jkcemu/file/FileActionMngr.java:1105	askForOutputFile	TAR-Datei speichern
 jkcemu/file/FileActionMngr.java:1407	-	AC1/LLC2-TurboSave-Wiedergabe von 
-jkcemu/file/FileActionMngr.java:1584	FileUtil.askForOutputDir	Entpacken nach:
-jkcemu/file/FileActionMngr.java:1585	FileUtil.askForOutputDir	Archiv-Datei entpacken
-jkcemu/file/FileActionMngr.java:1600	FileUtil.askForOutputDir	Entpacken nach:
-jkcemu/file/FileActionMngr.java:1601	FileUtil.askForOutputDir	Archiv-Datei entpacken
 jkcemu/file/FileActionMngr.java:1757	-	Es konnte nur eine Datei bzw. ein Verzeichnis kopiert werden.
 jkcemu/file/FileActionMngr.java:1761	String.format	Es konnten nur %d Dateien bzw. Verzeichnisse kopiert werden.
 jkcemu/file/FileActionMngr.java:1766	-	Die Datei bzw. das Verzeichnis\nkonnte nicht kopiert werden.
 jkcemu/file/FileActionMngr.java:1769	-	Die Dateien bzw. Verzeichnisse\nkonnten nicht kopiert werden.
 jkcemu/file/FileCopier.java:59	checkSrcPathsAgainstDstPath	Ein Verzeichnis kann nicht in sich selbst hinein kopiert werden.
-jkcemu/file/FileCopier.java:76	?	' kann nicht geladen werden.
-jkcemu/file/FileCopier.java:77	?	' kann nicht kopiert werden.
-jkcemu/file/FileCopier.java:91	-	Es konnten nicht alle Dateien, Verzeichnisse bzw.\nsymbolische Links kopiert werden.
-jkcemu/file/FileCopier.java:211	new IOException	'\nenthält keinen Dateinamen
-jkcemu/file/FileCopier.java:364	new IOException	: Zieldatei existiert bereits
-jkcemu/file/FileFormat.java:15	new FileFormat	BIN-Datei (Speicherabbild ohne Kopfdaten)
-jkcemu/file/FileFormat.java:18	new FileFormat	COM-Datei (CP/M-Programmdatei)
-jkcemu/file/FileFormat.java:30	new FileFormat	Headersave-Datei
-jkcemu/file/FileFormat.java:33	new FileFormat	Intel-HEX-Datei
-jkcemu/file/FileFormat.java:36	new FileFormat	KCB-Datei (BASIC-Programm)
-jkcemu/file/FileFormat.java:39	new FileFormat	KCB-Datei (BASIC-Programm, Dateityp B)
-jkcemu/file/FileFormat.java:42	new FileFormat	KCB-Datei (BASIC-Programm, Dateityp B+P)
-jkcemu/file/FileFormat.java:72	new FileFormat	KC-BASIC-Programmdatei (Dateityp K)
-jkcemu/file/FileFormat.java:75	new FileFormat	KC-BASIC-Programmdatei (Dateityp K+B)
-jkcemu/file/FileFormat.java:78	new FileFormat	KC-BASIC-Programmdatei (Dateityp K+B+P)
-jkcemu/file/FileFormat.java:81	new FileFormat	KC-BASIC-Datenfeld (Dateityp K)
-jkcemu/file/FileFormat.java:84	new FileFormat	KC-BASIC-Datenfeld (Dateityp K+B)
-jkcemu/file/FileFormat.java:87	new FileFormat	KC-BASIC-Datenfeld (Dateityp K+B+P)
-jkcemu/file/FileFormat.java:90	new FileFormat	KC-BASIC-ASCII-Listing (Dateityp K
-jkcemu/file/FileFormat.java:93	new FileFormat	KC-BASIC-ASCII-Listing (Dateityp K+B)
-jkcemu/file/FileFormat.java:96	new FileFormat	KC-BASIC-ASCII-Listing (Dateityp K+B+P)
-jkcemu/file/FileFormat.java:108	new FileFormat	ZX-Spectrum-Tape-Datei
+jkcemu/file/FileCopier.java:212	new IOException	'\nenthält keinen Dateinamen
+jkcemu/file/FileCopier.java:365	new IOException	: Zieldatei existiert bereits
 jkcemu/file/FileInfo.java:25	-	Compressed Square Wave\u001a
 jkcemu/file/FileInfo.java:363	-	BASIC-Programmdatei für KC-ROM-BASIC
 jkcemu/file/FileInfo.java:371	-	BASIC-Programmdatei für Kramer-MC
@@ -510,53 +405,29 @@ jkcemu/file/FileInfo.java:1302	-	Die Datei enthält mehrere nicht zusammenhänge
 jkcemu/file/FileInfo.java:1316	-	Die Datei enthält einen Datensatz für eine segmentierte Adresse,\nder von JKCEMU nicht unterstützt wird.\nEs werden nur die Daten bis zu diesem Datensatz geladen.
 jkcemu/file/FileInfo.java:1334	-	Die Datei enthält einen Datensatz für eine lineare 32-Bit-Adresse,\ndie außerhalb des von JKCEMU emulierten Adressraumes liegt.\nEs werden nur die Daten bis zu diesem Datensatz geladen.
 jkcemu/file/FileInfo.java:1347	String.format	Die Datei enthält einen Datensatzart des Typs %d,\nder von JKCEMU nicht unterstützt wird.\nEs werden nur die Daten bis zu diesem Datensatz geladen.
-jkcemu/file/FileMover.java:58	checkSrcPathsAgainstDstPath	Ein Verzeichnis kann nicht in sich selbst hinein verschoben werden.
-jkcemu/file/FileMover.java:75	?	' kann nicht geladen werden.
-jkcemu/file/FileMover.java:76	?	' kann nicht verschoben werden.
-jkcemu/file/FileMover.java:90	-	Es konnten nicht alle Dateien, Verzeichnisse bzw.\nsymbolische Links verschoben werden.
-jkcemu/file/FileMover.java:105	-	:\nDas Quellverzeichnis konnte nicht gelöscht werden.
-jkcemu/file/FileMover.java:187	new IOException	'\nenthält keinen Dateinamen
+jkcemu/file/FileMover.java:59	checkSrcPathsAgainstDstPath	Ein Verzeichnis kann nicht in sich selbst hinein verschoben werden.
+jkcemu/file/FileMover.java:109	-	:\nDas Quellverzeichnis konnte nicht gelöscht werden.
+jkcemu/file/FileMover.java:191	new IOException	'\nenthält keinen Dateinamen
 jkcemu/file/FilePropDlg.java:296	new Thread	JKCEMU directory size calculator
 jkcemu/file/FilePropDlg.java:376	-	wegen fehlender Berechtigung nicht ermittelbar
 jkcemu/file/FilePropDlg.java:379	-	konnte nicht ermittelt werden
-jkcemu/file/FileRemover.java:155	-	' kann nicht gelöscht werden.
-jkcemu/file/FileRemover.java:169	-	Es konnten nicht alle Dateien, Verzeichnisse bzw.\nsymbolische Links gelöscht werden.
-jkcemu/file/FileSelectDlg.java:900	-	\nkonnte nicht gelöscht werden.
-jkcemu/file/FileSelectDlg.java:902	-	Löschen fehlgeschlagen
-jkcemu/file/FileSelectDlg.java:1587	new Thread	JKCEMU directory reader of file select dialog
-jkcemu/file/FileTableModel.java:236	-	Größe
-jkcemu/file/FileTableModel.java:240	-	Zuletzt geändert
-jkcemu/file/FileTableModel.java:256	-	Schreibgeschützt
-jkcemu/file/FileTableModel.java:260	-	System-Datei
+jkcemu/file/FileSelectDlg.java:902	-	\nkonnte nicht gelöscht werden.
+jkcemu/file/FileSelectDlg.java:904	-	Löschen fehlgeschlagen
+jkcemu/file/FileSelectDlg.java:1589	new Thread	JKCEMU directory reader of file select dialog
 jkcemu/file/FileUtil.java:91	-	C - MC-Programm, selbststartend
 jkcemu/file/FileUtil.java:107	-	Die Datei ist durch ein anderes Programm gesperrt\nund kann deshalb nicht gespeichert werden.
 jkcemu/file/FileUtil.java:283	String.format	Die in den Kopfdaten angegebene Bezeichnung\nist zu lang (max. %d Zeichen).
-jkcemu/file/FileUtil.java:294	BaseDlg.showYesNoWarningDlg	Sie haben in den Kopfdaten keine Bezeichnung angegeben.\nDas kann beim Einlesen der Datei zu Problemen führen.\n\nMöchten Sie trotzdem fortsetzen?
 jkcemu/file/FileUtil.java:484	ReplyTextDlg.showDlg	Verzeichnis erstellen
 jkcemu/file/FileUtil.java:623	ErrorMsg.showLater	Bitte nur eine Datei hier hineinziehen!
-jkcemu/file/FileUtil.java:760	getFileFilter	AnaDisk-Dateien (*.dump)
-jkcemu/file/FileUtil.java:778	getFileFilter	Einfache Speicherabbilddateien (*.bin)
-jkcemu/file/FileUtil.java:790	getFileFilter	CP/M-kompatible Programmdateien (*.com)
-jkcemu/file/FileUtil.java:826	getFileFilter	Headersave-Dateien (*.z80)
-jkcemu/file/FileUtil.java:838	getFileFilter	ImageDisk-Dateien (*.imd)
-jkcemu/file/FileUtil.java:875	getFileFilter	Einfache Abbilddateien (*.dd; *.img; *.image, *.raw)
 jkcemu/file/FileUtil.java:1319	equals	[InternetShortcut]
 jkcemu/file/FileUtil.java:1390	-	Datei umbenennen
 jkcemu/file/FileUtil.java:1393	-	Symbolischer Link umbenennen
 jkcemu/file/FileUtil.java:1396	-	Verzeichnis umbenennen
-jkcemu/file/GZipPacker.java:88	super	JKCEMU gzip packer
-jkcemu/file/GZipUnpacker.java:89	super	JKCEMU gzip unpacker
-jkcemu/file/LastModifiedDlg.java:235	super	Änderungszeitpunkt
 jkcemu/file/LastModifiedDlg.java:480	new Thread	JKCEMU set last modified
 jkcemu/file/LoadDlg.java:80	-	--- Bitte auswählen ---
 jkcemu/file/LoadDlg.java:82	-	Die Datei enthält keine Daten,\ndie geladen werden könnten.
-jkcemu/file/LoadDlg.java:152	showSuppressableConfirmDlg	Die Datei kann nur über eine Audiofunktion geladen werden.\nDazu müssen Sie im emulierten System das Laden von Kassette\nund im Fenster Audio/Kassette das Abspielden der Datei starten.
-jkcemu/file/LoadDlg.java:334	super	Datei laden
-jkcemu/file/LoadDlg.java:632	JOptionPane.showConfirmDialog	Die Datei ist eine Multi-TAP-Datei, d.h., sie enthält mehrere Teildateien.\nEs wurde aber nur die erste Teildatei in den Arbeitsspeicher geladen.\n\nHäufig versucht das in der ersten Teildatei enthaltene Programm,\ndie restlichen Teildateien von Kassette nachzuladen.\nSie können jetzt die Emulation des Kassettenrecorderanschlusses\nmit den restlichen Teildateien aktivieren,\nsodass das Nachladen auch im Emulator funktioniert.\n\nMöchten Sie das jetzt tun?
-jkcemu/file/LoadDlg.java:646	JOptionPane.showConfirmDialog	Multi-TAP-Datei
-jkcemu/file/LoadDlg.java:828	String.format	Datei nach %04X-%04X geladen
+jkcemu/file/LoadDlg.java:829	String.format	Datei nach %04X-%04X geladen
 jkcemu/file/RecentDirsMngr.java:138	properties.storeToXML	 zuletzt verwendete Verzeichnisse
-jkcemu/file/RecentFilesMngr.java:181	BaseDlg.showSuppressableYesNoDlg	Möchte Sie die Liste der zuletzt verwendeten Dateien löschen?
 jkcemu/file/ReplyFileHeadDlg.java:113	-	Endadresse (optional):
 jkcemu/file/ReplyFileHeadDlg.java:120	-	Startadresse (optional):
 jkcemu/file/ReplyOnExistingFileDlg.java:229	-	Dateigröße und Zeitpunkt der letzten Änderung sind gleich.
@@ -567,10 +438,6 @@ jkcemu/file/ReplyOnExistingFileDlg.java:288	buf.append	Datei behalten und
 jkcemu/file/ReplyOnExistingFileDlg.java:301	buf.append	 Datei umbenennen
 jkcemu/file/ReplyOnExistingFileDlg.java:496	-	Datei kopieren
 jkcemu/file/ReplyOnExistingFileDlg.java:499	-	Datei verschieben
-jkcemu/file/SaveDlg.java:160	new HexDocument	Anfangsadresse des Speicherbereichs
-jkcemu/file/SaveDlg.java:178	new HexDocument	Endadresse des Speicherbereichs
-jkcemu/file/SaveDlg.java:359	new HexDocument	Anfangsadresse in den Kopfdaten
-jkcemu/file/SaveDlg.java:380	new HexDocument	Startadresse in den Kopfdaten
 jkcemu/file/SaveDlg.java:626	-	Datei speichern
 jkcemu/file/SaveDlg.java:640	String.format	Der angegebene Adressbereich beinhaltet nicht vollständig\ndas zu speichernde Programm (%04X-%04X).
 jkcemu/file/SaveDlg.java:657	-	Binärdatei speichern
@@ -591,11 +458,10 @@ jkcemu/file/TarEntry.java:275	-	Gerätedatei
 jkcemu/file/TarEntry.java:365	new EOFException	Unerwartetes Ende der TAR-Datei
 jkcemu/file/TarPacker.java:203	buf.append	 Lesen des symbolischen Links nicht möglich\n
 jkcemu/file/TarPacker.java:272	buf.append	\nFehler beim Schreiben in Datei 
-jkcemu/file/TarUnpacker.java:211	buf.append	\nFehler beim Lesen der Datei 
+jkcemu/file/TarUnpacker.java:212	buf.append	\nFehler beim Lesen der Datei 
 jkcemu/file/ZipPacker.java:207	buf.append	\nFehler beim Schreiben in Datei 
-jkcemu/file/ZipUnpacker.java:125	appendErrorToLog	CRC32-Prüfsumme differiert
-jkcemu/file/ZipUnpacker.java:154	buf.append	\nFehler beim Lesen der Datei 
-jkcemu/image/AbstractImageFrm.java:235	JOptionPane.showConfirmDialog	Soll das Bild gedreht gespeichert werden,\nso wie Sie es gerade sehen?
+jkcemu/file/ZipUnpacker.java:126	appendErrorToLog	CRC32-Prüfsumme differiert
+jkcemu/file/ZipUnpacker.java:155	buf.append	\nFehler beim Lesen der Datei 
 jkcemu/image/AnimatedGIFWriter.java:127	throwAnimatedGIFFailed	Keinen passenden GIF-ImageWriter gefunden
 jkcemu/image/AnimatedGIFWriter.java:235	node.setAttribute	backgroundColorIndex
 jkcemu/image/AnimatedGIFWriter.java:241	new IIOMetadataNode	ColorTableEntry
@@ -634,46 +500,25 @@ jkcemu/image/CropDlg.java:612	new Thread	JKCEMU image crop
 jkcemu/image/Dithering.java:194	-	Floyd-Steinberg (Standardverfahren)
 jkcemu/image/Dithering.java:197	-	Sierra-3 (feinere Abstufungen)
 jkcemu/image/Dithering.java:200	-	Atkinson (weniger Farbbluten, mehr Kontrast)
-jkcemu/image/ExifData.java:363	getChoice	automatische Belichtung
-jkcemu/image/ExifData.java:364	getChoice	manuelle Belichtung
-jkcemu/image/ExifData.java:365	getChoice	automatische Belichtungsreihe
-jkcemu/image/ExifData.java:380	getChoice	Programmautomatik für langsame Motive
-jkcemu/image/ExifData.java:381	getChoice	Programmautomatik für schnelle Motive
-jkcemu/image/ExifData.java:441	buf.append	, Rote-Augen-Funktion
-jkcemu/image/ExifData.java:500	String.format	über
-jkcemu/image/ExifEditDlg.java:131	super	Zusatzinformationen bearbeiten
+jkcemu/image/ExifData.java:442	buf.append	, Rote-Augen-Funktion
+jkcemu/image/ExifData.java:501	String.format	über
 jkcemu/image/FlipWorker.java:74	new Thread	JKCEMU flip worker
 jkcemu/image/GrayScaler.java:82	new CancelableProgressDlg	Graustufen erzeugen
 jkcemu/image/GrayScaler.java:87	new Thread	JKCEMU gray scaler
 jkcemu/image/IFFFile.java:704	String.format	Kompressionsmethode %d nicht unterstützt
 jkcemu/image/ImageAdjustDlg.java:96	ColorReducer.work	Erzeuge Vorschaubild...
-jkcemu/image/ImageAdjustDlg.java:308	super	Helligkeit, Kontrast, Farben
 jkcemu/image/ImageAdjustDlg.java:614	new CancelableProgressDlg	Einstellungen anwenden...
 jkcemu/image/ImageAdjustDlg.java:619	new Thread	JKCEMU image adjuster
-jkcemu/image/ImageCaptureFrm.java:372	-	Aufzunehmendes Fenster aktivieren! Noch 1 Sekunde...
-jkcemu/image/ImageCaptureFrm.java:375	String.format	Aufzunehmendes Fenster aktivieren! Noch %d Sekunden...
 jkcemu/image/ImageCopier.java:51	new Thread	JKCEMU image copier
 jkcemu/image/ImageFrm.java:89	-	auto_resize
 jkcemu/image/ImageFrm.java:451	String.format	Ausgewählter Bereich: X,Y=%d,%d  B,H=%d,%d
-jkcemu/image/ImageFrm.java:1043	showSameBoundsImage	Helligkeit,  Kontrast, Farben eingestellt
-jkcemu/image/ImageFrm.java:1063	showSameBoundsImage	Farbpalette geändert
 jkcemu/image/ImageFrm.java:1105	convolveAndShowImage	Konturen hervorgehoben
-jkcemu/image/ImageFrm.java:1134	showSameBoundsImage	Zusatzinformationen geändert
-jkcemu/image/ImageFrm.java:1154	showSameBoundsImage	Zusatzinformationen entfernt
-jkcemu/image/ImageFrm.java:1461	showSameBoundsImage	Horizontal gespiegelt
-jkcemu/image/ImageFrm.java:1485	showSameBoundsImage	Vertikal gespiegelt
 jkcemu/image/ImageFrm.java:1509	-	Indexierte Farben
 jkcemu/image/ImageFrm.java:1514	String.format	%d indexierte Farben
 jkcemu/image/ImageFrm.java:1644	builder.buildOf	Bild einfügen...
 jkcemu/image/ImageFrm.java:1653	showImageInternal	Eingefügtes Bild
-jkcemu/image/ImageFrm.java:1766	showSameBoundsImage	Ecken abgerundet
-jkcemu/image/ImageFrm.java:1803	BaseDlg.showSuppressableConfirmDlg	Statt zu schärfen wird der letzte Beabeitungsschritt 'Weichzeichnen' zurückgenommen.
-jkcemu/image/ImageFrm.java:1817	showSameBoundsImage	Geschärft
-jkcemu/image/ImageFrm.java:1833	BaseDlg.showSuppressableConfirmDlg	Statt weichzuzeichnen wird der letzte Beabeitungsschritt 'Schärfen' zurückgenommen.
-jkcemu/image/ImageFrm.java:2007	showSameBoundsImage	Transparenz entfernt
 jkcemu/image/ImageFrm.java:3003	-	kein Titel
 jkcemu/image/ImageFrm.java:3124	-	Dateiformat nicht unterstützt
-jkcemu/image/ImageLoader.java:87	ImageUtil.createFileFilter	Unterstützte Bilddateien
 jkcemu/image/ImageLoader.java:608	s.equals	CommentExtension
 jkcemu/image/ImageLoader.java:714	s.equals	CommentExtensions
 jkcemu/image/ImagePropsDlg.java:568	buf.append	Keine Zusatzinformationen bzw. EXIF-Daten verf&uuml;gbar
@@ -685,34 +530,26 @@ jkcemu/image/ImageSaver.java:827	filechooser.FileNameExtensionFilter	JPEG-Dateie
 jkcemu/image/ImageSaver.java:834	filechooser.FileNameExtensionFilter	TIFF-Dateien (*.tif; *.tiff)
 jkcemu/image/ImageSaver.java:1042	new IIOMetadataNode	CommentExtension
 jkcemu/image/ImageSaver.java:1046	new IIOMetadataNode	CommentExtensions
-jkcemu/image/ImageUtil.java:109	createFileFilter	Unterstützte Farbpaletten- und Bilddateien
-jkcemu/image/ImageUtil.java:830	ImageCopier.work	Runde Ecken ab...
-jkcemu/image/IndexColorsDlg.java:143	super	Farben reduzieren und indexieren
+jkcemu/image/ImageUtil.java:831	ImageCopier.work	Runde Ecken ab...
 jkcemu/image/IndexColorsDlg.java:348	comboDithering.addItem	Kein Dithering anwenden
 jkcemu/image/IndexColorsDlg.java:511	ColorReducer.work	Reduziere Farben...
-jkcemu/image/JASCPaletteFile.java:41	ImageUtil.createFileFilter	Paintshop Pro Farbpalettendatei
-jkcemu/image/JPEGSaveParamDlg.java:112	super	JPEG-Parameter beim Speichern
-jkcemu/image/RemoveTransparencyDlg.java:85	super	Transparenz entfernen
 jkcemu/image/RotateDlg.java:48	-	weiß
-jkcemu/image/RoundCornersDlg.java:43	super	Ecken abrunden
-jkcemu/image/SharpenDlg.java:123	super	Schärfen
 jkcemu/image/SharpenDlg.java:223	listModel.addElement	0 - nicht geschärft
 jkcemu/image/SharpenDlg.java:224	listModel.addElement	1 - leicht geschärft
 jkcemu/image/SharpenDlg.java:229	String.format	%d - stark geschärft
-jkcemu/image/VideoCaptureFrm.java:811	JOptionPane.showConfirmDialog	Sie überschreiben die Datei\n
-jkcemu/image/VideoCaptureFrm.java:847	buf.append	Das Aufnehmen eines Fensters ist nicht möglich,\nda die Erstellung von Bildschirmfotos (Screenshots) fehlschlägt.
-jkcemu/image/VideoCaptureFrm.java:923	new Thread	JKCEMU screen video recorder
-jkcemu/image/VideoCaptureFrm.java:984	EmuUtil.checkAndShowError	Aufnehmen des Bildschirmvideo fehlgeschlagen
-jkcemu/image/VideoCaptureFrm.java:1047	-	Aufnahme startet jetzt...
-jkcemu/image/VideoCaptureFrm.java:1052	-	Aufzunehmendes Fenster aktivieren! Noch 1 Sekunde...
-jkcemu/image/VideoCaptureFrm.java:1055	String.format	Aufzunehmendes Fenster aktivieren! Noch %d Sekunden...
-jkcemu/image/VideoCaptureFrm.java:1072	new Thread	JKCEMU screen video recorder
+jkcemu/image/VideoCaptureFrm.java:849	buf.append	Das Aufnehmen eines Fensters ist nicht möglich,\nda die Erstellung von Bildschirmfotos (Screenshots) fehlschlägt.
+jkcemu/image/VideoCaptureFrm.java:925	new Thread	JKCEMU screen video recorder
+jkcemu/image/VideoCaptureFrm.java:986	EmuUtil.checkAndShowError	Aufnehmen des Bildschirmvideo fehlgeschlagen
+jkcemu/image/VideoCaptureFrm.java:1049	-	Aufnahme startet jetzt...
+jkcemu/image/VideoCaptureFrm.java:1054	-	Aufzunehmendes Fenster aktivieren! Noch 1 Sekunde...
+jkcemu/image/VideoCaptureFrm.java:1057	String.format	Aufzunehmendes Fenster aktivieren! Noch %d Sekunden...
+jkcemu/image/VideoCaptureFrm.java:1074	new Thread	JKCEMU screen video recorder
 jkcemu/joystick/JoystickThread.java:40	String.format	JKCEMU joystick %d listener
 jkcemu/joystick/JoystickThread.java:111	emuThread.fireShowJoystickError	Joystick nicht angeschlossen oder nicht unterstützt
-jkcemu/lang/LangUtil.java:73	Main.printlnErr	 kann nicht gelesen werden: 
-jkcemu/lang/LangUtil.java:261	Main.printlnErr	 kann nicht geladen werden: 
-jkcemu/lang/LangUtil.java:271	Main.printlnErr	 nicht gefunden
-jkcemu/lang/LangUtil.java:301	err.println	 kann nicht geschrieben werden: 
+jkcemu/lang/LangUtil.java:74	Main.printlnErr	 kann nicht gelesen werden: 
+jkcemu/lang/LangUtil.java:300	Main.printlnErr	 kann nicht geladen werden: 
+jkcemu/lang/LangUtil.java:310	Main.printlnErr	 nicht gefunden
+jkcemu/lang/LangUtil.java:340	err.println	 kann nicht geschrieben werden: 
 jkcemu/lang/POExtractor.java:59	-	createLabel
 jkcemu/lang/POExtractor.java:60	-	createButton
 jkcemu/lang/POExtractor.java:61	-	createCheckBox
@@ -727,33 +564,47 @@ jkcemu/lang/POExtractor.java:72	-	createMenuItemWithStandardAccelerator
 jkcemu/lang/POExtractor.java:73	-	createMenuItemWithNonControlAccelerator
 jkcemu/lang/POExtractor.java:74	-	createMenuItemWithDirectAccelerator
 jkcemu/lang/POExtractor.java:75	-	createPopupMenuItem
-jkcemu/lang/POExtractor.java:83	-	showErrorDlg
-jkcemu/lang/POExtractor.java:86	-	showSuppressableInfoDlg
-jkcemu/lang/POExtractor.java:87	-	showOptionDlg
-jkcemu/lang/POExtractor.java:89	-	addJMenuItemWithControlShortcut
-jkcemu/lang/POExtractor.java:92	-	fireError
-jkcemu/lang/POExtractor.java:108	-	UserInputException
-jkcemu/lang/POExtractor.java:111	-	RAMFloppySettingsFld
-jkcemu/lang/POExtractor.java:112	-	RAMFloppiesSettingsFld
-jkcemu/lang/POExtractor.java:113	-	ReplyBytesDlg
-jkcemu/lang/POExtractor.java:156	err.println	Aufruf: POExtractor <Quellverzeichnis> [<Ausgabedatei>]
-jkcemu/lang/POExtractor.java:177	out.println	 eindeutige Texte extrahiert -> 
-jkcemu/lang/POExtractor.java:180	out.println	 unklare Fundstellen (Kandidaten) -> 
-jkcemu/lang/POExtractor.java:184	err.println	Ausgabedatei kann nicht geschrieben werden: 
-jkcemu/lang/POExtractor.java:218	err.println	 kann nicht gelesen werden: 
-jkcemu/lang/POExtractor.java:840	out.println	# automatisch erzeugt von jkcemu.lang.POExtractor
-jkcemu/lang/POExtractor.java:843	out.println	\"Project-Id-Version: JKCEMU\\n\"
-jkcemu/lang/POExtractor.java:845	out.println	\"Content-Type: text/plain; charset=UTF-8\\n\"
-jkcemu/lang/POExtractor.java:846	out.println	\"Content-Transfer-Encoding: 8bit\\n\"
-jkcemu/lang/POExtractor.java:888	out.println	# Nicht ueber CALL_SITES erreichte, deutsch aussehende Texte.
-jkcemu/lang/POExtractor.java:890	out.println	# Format: Datei:Zeile<TAB>umschliessender Aufruf<TAB>Text
-jkcemu/lang/POExtractor.java:892	out.println	# Manuell pruefen und ggf. in CALL_SITES bzw. LangUtil.tr(...) einarbeiten.
+jkcemu/lang/POExtractor.java:80	-	fireShowError
+jkcemu/lang/POExtractor.java:82	-	createFileFilter
+jkcemu/lang/POExtractor.java:86	-	showSameBoundsImage
+jkcemu/lang/POExtractor.java:100	-	showErrorDlg
+jkcemu/lang/POExtractor.java:103	-	showSuppressableInfoDlg
+jkcemu/lang/POExtractor.java:104	-	showOptionDlg
+jkcemu/lang/POExtractor.java:105	-	showConfirmDlg
+jkcemu/lang/POExtractor.java:106	-	showConfirmWarningDlg
+jkcemu/lang/POExtractor.java:107	-	showWarningDlg
+jkcemu/lang/POExtractor.java:108	-	showYesNoWarningDlg
+jkcemu/lang/POExtractor.java:109	-	showSuppressableConfirmDlg
+jkcemu/lang/POExtractor.java:110	-	showSuppressableYesNoDlg
+jkcemu/lang/POExtractor.java:111	-	showSuppressableYesNoCancelDlg
+jkcemu/lang/POExtractor.java:113	-	addJMenuItemWithControlShortcut
+jkcemu/lang/POExtractor.java:116	-	fireError
+jkcemu/lang/POExtractor.java:132	-	UserInputException
+jkcemu/lang/POExtractor.java:135	-	RAMFloppySettingsFld
+jkcemu/lang/POExtractor.java:136	-	RAMFloppiesSettingsFld
+jkcemu/lang/POExtractor.java:137	-	ReplyBytesDlg
+jkcemu/lang/POExtractor.java:141	-	CPUSynchronSoundDevice
+jkcemu/lang/POExtractor.java:142	-	PSGSoundDevice
+jkcemu/lang/POExtractor.java:143	-	FileNameExtensionFilter
+jkcemu/lang/POExtractor.java:147	-	FloppyDiskFormat
+jkcemu/lang/POExtractor.java:213	err.println	Aufruf: POExtractor <Quellverzeichnis> [<Ausgabedatei>]
+jkcemu/lang/POExtractor.java:234	out.println	 eindeutige Texte extrahiert -> 
+jkcemu/lang/POExtractor.java:237	out.println	 unklare Fundstellen (Kandidaten) -> 
+jkcemu/lang/POExtractor.java:241	err.println	Ausgabedatei kann nicht geschrieben werden: 
+jkcemu/lang/POExtractor.java:275	err.println	 kann nicht gelesen werden: 
+jkcemu/lang/POExtractor.java:986	out.println	# automatisch erzeugt von jkcemu.lang.POExtractor
+jkcemu/lang/POExtractor.java:989	out.println	\"Project-Id-Version: JKCEMU\\n\"
+jkcemu/lang/POExtractor.java:991	out.println	\"Content-Type: text/plain; charset=UTF-8\\n\"
+jkcemu/lang/POExtractor.java:992	out.println	\"Content-Transfer-Encoding: 8bit\\n\"
+jkcemu/lang/POExtractor.java:1034	out.println	# Nicht ueber CALL_SITES erreichte, deutsch aussehende Texte.
+jkcemu/lang/POExtractor.java:1036	out.println	# Format: Datei:Zeile<TAB>umschliessender Aufruf<TAB>Text
+jkcemu/lang/POExtractor.java:1038	out.println	# Manuell pruefen und ggf. in CALL_SITES bzw. LangUtil.tr(...) einarbeiten.
 jkcemu/lang/POFile.java:192	err.println	: Fehler beim Lesen: 
 jkcemu/net/DhcpProcess.java:32	-	jkcemu-dhcp-server
-jkcemu/net/KCNet.java:28	-	auto_config
-jkcemu/net/KCNet.java:30	-	subnet_mask
-jkcemu/net/KCNet.java:181	out.printf	KCNet reset: power_on=%b\n
-jkcemu/net/KCNetSettingsFld.java:278	new UserInputException	: Ungültige Eingabe
+jkcemu/net/KCNet.java:29	-	auto_config
+jkcemu/net/KCNet.java:31	-	subnet_mask
+jkcemu/net/KCNet.java:182	out.printf	KCNet reset: power_on=%b\n
+jkcemu/net/KCNetSettingsFld.java:279	new UserInputException	: Ungültige Eingabe
 jkcemu/net/W5100.java:327	out.printf	W5100 Socket %d: connected to %s\n
 jkcemu/net/W5100.java:346	out.printf	connect to: %s, timeout=%dms\n
 jkcemu/net/W5100.java:376	out.printf	W5100 Socket %d: tcp server socket bound at port %d\n
@@ -790,7 +641,6 @@ jkcemu/programming/PrgThread.java:176	String.format	Programmcode nach %04X-%04X 
 jkcemu/programming/PrgThread.java:185	String.format	Starte Programm auf Adresse %04X...\n
 jkcemu/programming/assembler/AsmLine.java:237	buf.append	Unerwartetes Argument
 jkcemu/programming/assembler/AsmLine.java:367	buf.append	Zeichen in Marke nicht erlaubt
-jkcemu/programming/assembler/AsmOptionsDlg.java:62	super	Assembler-Optionen
 jkcemu/programming/assembler/CmdLineAssembler.java:35	-	  java -jar jkcemu.jar --as [Optionen] <Datei>
 jkcemu/programming/assembler/CmdLineAssembler.java:36	-	  java -jar jkcemu.jar --assembler [Optionen] <Datei>
 jkcemu/programming/assembler/CmdLineAssembler.java:39	-	  -h              diese Hilfe anzeigen
@@ -845,7 +695,6 @@ jkcemu/programming/basic/BasicCompiler.java:2616	appendLineNumMsgToErrLog	 nicht
 jkcemu/programming/basic/BasicCompiler.java:2715	new PrgException	 oder Ende der Anweisung erwartet
 jkcemu/programming/basic/BasicCompiler.java:3084	-	Datei kann nicht geöffnet werden.
 jkcemu/programming/basic/BasicCompiler.java:4838	String.format	Name einer Prozedur darf nicht auf '%c' enden
-jkcemu/programming/basic/BasicCompilerThread.java:36	super	JKCEMU basic compiler
 jkcemu/programming/basic/BasicCompilerThread.java:75	new Z80Assembler	Assembler-Quelltext
 jkcemu/programming/basic/BasicCompilerThread.java:114	String.format	  %04X-%04X: Variablen, Speicherzellen%s\n
 jkcemu/programming/basic/BasicLibrary.java:313	-	Ungueltiger Parameter
@@ -861,7 +710,6 @@ jkcemu/programming/basic/BasicOptions.java:96	-	warn_too_many_digits
 jkcemu/programming/basic/BasicOptions.java:99	-	warn_unused_items
 jkcemu/programming/basic/BasicOptionsDlg.java:57	-	Anfangsadresse Programmcode:
 jkcemu/programming/basic/BasicOptionsDlg.java:59	-	Größe Zeichenkettenspeicher:
-jkcemu/programming/basic/BasicOptionsDlg.java:131	super	BASIC-Compiler-Optionen
 jkcemu/programming/basic/BasicOptionsDlg.java:241	comboTarget.addItem	Bitte auswählen
 jkcemu/programming/basic/BasicOptionsDlg.java:782	-	Anfangsadresse Variablen/Speicherzellen:
 jkcemu/programming/basic/BasicOptionsDlg.java:791	-	Stack-Größe:
@@ -971,17 +819,10 @@ jkcemu/settings/AutoInputEntryDlg.java:89	new AutoInputEntryDlg	AutoInput-Eintra
 jkcemu/settings/AutoInputEntryDlg.java:359	new NumberFormatException	: Ungültiges Format
 jkcemu/settings/AutoLoadEntryDlg.java:67	new AutoLoadEntryDlg	Neuer AutoLoad-Eintrag
 jkcemu/settings/AutoLoadEntryDlg.java:83	new AutoLoadEntryDlg	AutoLoad-Eintrag bearbeiten
-jkcemu/settings/AutoLoadEntryDlg.java:247	showYesNoWarningDlg	Das automatiche Laden wird nicht funktionieren,\nda Sie keine Ladeadresse angegeben haben\nund in der Datei keine enthalten ist.\n\nMöchten Sie trotzdem fortsetzen?
 jkcemu/settings/AutoLoadEntryDlg.java:269	new NumberFormatException	: Ungültiges Format
 jkcemu/settings/EtcSettingsFld.java:57	-	Beenden Sie bitte den Emulator und löschen Sie\ndas Konfigurationsverzeichnis selbst.
-jkcemu/settings/EtcSettingsFld.java:485	BaseDlg.showYesNoWarningDlg	Das JKCEMU-Datenverzeichnis enthält Dateien und/oder Unterverzeichnisse,\ndie offensichtlich nicht von JKCEMU stammen.\nSoll das Verzeichnis trotzdem gelöscht werden?
-jkcemu/settings/EtcSettingsFld.java:533	BaseDlg.showYesNoWarningDlg	Wenn Sie sichergehen wollen,\ndass keine alten Einstellungen übernommen werden,\nsollten Sie jetzt den Emulator beenden.\n\nMöchten Sie den Emulator jetzt beenden?
-jkcemu/settings/FontSelectDlg.java:175	super	Auswahl Schrift
-jkcemu/settings/FontSelectDlg.java:352	new Thread	JKCEMU font loader
-jkcemu/settings/RAMFloppySettingsFld.java:77	comboSize.addItem	Nicht emulieren
-jkcemu/settings/RAMFloppySettingsFld.java:189	selectFile	RAM-Floppy-Abbilddatei auswählen
-jkcemu/settings/SettingsFrm.java:297	new ProfileDlg	Profil laden
-jkcemu/settings/SettingsFrm.java:321	new ProfileDlg	Profil speichern
+jkcemu/settings/FontSelectDlg.java:353	new Thread	JKCEMU font loader
+jkcemu/settings/RAMFloppySettingsFld.java:190	selectFile	RAM-Floppy-Abbilddatei auswählen
 jkcemu/settings/SpeedSettingsFld.java:149	-	Sie müssen einen Wert für die max. Geschwindigkeit eingeben.
 jkcemu/settings/SpeedSettingsFld.java:154	-	Die eingegebene max. Geschwindigkeit ist ungültig.
 jkcemu/text/CharConverter.java:26	-	\u0000☺☻♥♦♣♠•◘○◙♂♀♪♫☼►◄↕‼¶§▬↨↑↓→←∟↔▲▼ !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~⌂ÇüéâäàåçêëèïîìÄÅÉæÆôöòûùÿÖÜ¢£¥₧ƒáíóúñÑªº¿⌐¬½¼¡«»░▒▓│┤╡╢╖╕╣║╗╝╜╛┐└┴┬├─┼╞╟╚╔╩╦╠═╬╧╨╤╥╙╘╒╓╫╪┘┌█▄▌▐▀αßΓπΣσµτΦΘΩδ∞φε∩≡±≥≤⌠⌡÷≈°∙·√ⁿ²■ 
@@ -999,28 +840,15 @@ jkcemu/text/EditText.java:1185	new IOException	: Der Zeichensatz wird auf dieser
 jkcemu/text/EditText.java:1275	props.storeToXML	Programming Options
 jkcemu/text/EditText.java:1306	-	Speichern des Projektes fehlgeschlagen:\n
 jkcemu/text/EditText.java:1315	-	Das Projekt kann nicht gespeichert werden,\nda kein Dateiname für den Quelltext bekannt ist.\nSpeichern Sie bitte zuerst den Quelltext\nund dann das Projekt.
-jkcemu/text/EditText.java:1649	new JOptionPane	Das KC-BASIC-Programm enthält Tokens, die auf den einzelnen\nSystemen unterschiedliche Anweisungen repräsentieren.\nAuf welchem System wurde das BASIC-Programm erstellt?
-jkcemu/text/EncodingSelectDlg.java:48	super	Zeichensatz auswählen
 jkcemu/text/EncodingSelectDlg.java:105	comboEncoding.addItem	UTF-16LE (Little Endian)
-jkcemu/text/LineAddrRowHeader.java:168	-	Adressspalte ausblenden
-jkcemu/text/ReplyShiftWidthDlg.java:95	super	Einrücktiefe ändern
-jkcemu/text/ReplyTabSizeDlg.java:100	super	Tabulatorbreite ändern
-jkcemu/text/SaveTextDlg.java:54	super	Textdatei speichern: 
-jkcemu/text/TextEditFrm.java:1325	String.format	%s wurde geändert und nicht gespeichert.\nMöchten Sie jetzt speichern?
-jkcemu/text/TextEditFrm.java:1334	pane.createDialog	Daten geändert
-jkcemu/text/TextEditFrm.java:1457	BaseDlg.showSuppressableYesNoDlg	Möchten Sie an der aktuellen Cursor-Position ein Seitenumbruchzeichen einfügen?\nDieses Zeichen hat nur beim Drucken eine Wirkung.\nIm Editor wird es abhängig von der aktuellen Schrift entweder gar nicht\noder mit einem speziellen Zeichen dargestellt.
-jkcemu/text/TextEditFrm.java:1870	-	Möchten Sie die WordStar-Formatierungen entfernen\nund so aus der Datei eine reine Textdatei machen?
-jkcemu/text/TextEditFrm.java:1873	-	Beim Öffnen der Datei konnten nicht alle Bytes in Zeichen gemappt werden.\nDadurch können Zeichen fehlen oder der Text anderweitig zerstört sein.\nAus diesem Grund sollten Sie die Datei zuerst mit dem Zeichensatz\nISO-8859-1 (Latin 1) öffnen (Menüpunkt 'Datei öffnen mit Zeichensatz...')\nund dann erst die WordStar-Formatierungen entfernen.\n\n
-jkcemu/text/TextEditFrm.java:3372	buf.append	 (schreibeschützt
+jkcemu/text/TextEditFrm.java:1874	-	Möchten Sie die WordStar-Formatierungen entfernen\nund so aus der Datei eine reine Textdatei machen?
+jkcemu/text/TextEditFrm.java:1877	-	Beim Öffnen der Datei konnten nicht alle Bytes in Zeichen gemappt werden.\nDadurch können Zeichen fehlen oder der Text anderweitig zerstört sein.\nAus diesem Grund sollten Sie die Datei zuerst mit dem Zeichensatz\nISO-8859-1 (Latin 1) öffnen (Menüpunkt 'Datei öffnen mit Zeichensatz...')\nund dann erst die WordStar-Formatierungen entfernen.\n\n
 jkcemu/text/TextPropDlg.java:139	-	Ja, Leerzeichen am Zeilenende entfernen
 jkcemu/text/TextPropDlg.java:150	-	Nicht vorhanden
 jkcemu/text/TextUtil.java:379	getMethod	viewToModel2D
 jkcemu/text/TextUtil.java:390	getMethod	viewToModel
 jkcemu/tools/FileChecksumFrm.java:587	new Thread	JKCEMU Checksum Calculator
 jkcemu/tools/ReassFrm.java:849	ReplyTextDlg.showDlg	Prefix für Marken:
-jkcemu/tools/calculator/CalculatorFld.java:36	-	Geben Sie bitte ein Zeichen oder einen numerischen Ausdruck ein!
-jkcemu/tools/calculator/CalculatorFld.java:254	appendResultRow	Unicode des Zeichen
-jkcemu/tools/calculator/CalculatorFld.java:260	appendResultRow	Ergebnis des Ausdrucks
 jkcemu/tools/calculator/ExprParser.java:52	-	Arithmetischer Fehler
 jkcemu/tools/calculator/ExprParser.java:108	String.format	Unerwartetes Zeichen '%c'
 jkcemu/tools/calculator/ExprParser.java:402	-	Ungültige Dezimalzahl
@@ -1028,22 +856,13 @@ jkcemu/tools/calculator/ExprParser.java:416	-	Ungültige Fließkommazahl
 jkcemu/tools/calculator/ExprParser.java:635	fireError	': Unbekannter Bezeichner
 jkcemu/tools/debugger/AbstractBreakpoint.java:28	-	stop_enabled
 jkcemu/tools/debugger/AbstractBreakpoint.java:71	new InvalidParamException	: Ungültige Bedingung
-jkcemu/tools/debugger/AbstractBreakpointDlg.java:52	?	Halte-/Log-Punkt auf 
-jkcemu/tools/debugger/AbstractBreakpointDlg.java:53	?	Neuer Halte-/Log-Punkt auf 
-jkcemu/tools/debugger/AbstractBreakpointDlg.java:80	showConfirmDlg	Ein Halte-Log-Punkt mit dem Namen existiert bereits.\nDieser wird aktualisiert.
-jkcemu/tools/debugger/AbstractBreakpointDlg.java:133	String.format	Es ist i.d.R. nicht sinnvoll, wenn im Vergleichswert (rechtes Eingabefeld) Bits gesetzt sind,\ndie mit der Maske (linkes Eingabefeld) vom zu testenden Wert ausgeblendet werden.\nEin zur Maske passender Vergleichswert wäre z.B. hexadezimal %02X.\nSollen trotzdem die von Ihnen angegeben Werte verwendet werden?
-jkcemu/tools/debugger/AbstractBreakpointDlg.java:144	showYesNoWarningDlg	Bestätigung
-jkcemu/tools/debugger/DebugFrm.java:452	LangUtil.mnemonic	Programmausführung
-jkcemu/tools/debugger/DebugFrm.java:2697	BaseDlg.showSuppressableYesNoCancelDlg	Sollen vor dem Laden die bereits vorhandenen Halte-/Log-Punkte\nund Variablen entfernt werden?
-jkcemu/tools/debugger/DebugFrm.java:2840	BaseDlg.showSuppressableYesNoDlg	Möchten Sie alle importierten Halte-/Log-Punkte entfernen?
-jkcemu/tools/debugger/DebugFrm.java:3021	new ReplyIntDlg	Max. Anzahl Log-Meldungen:
-jkcemu/tools/debugger/DebugFrm.java:3988	-	Programmausführung angehalten
-jkcemu/tools/debugger/DebugFrm.java:4201	setDebuggerDisabled	Prozessorsystem nicht aktiv
-jkcemu/tools/debugger/DebugFrm.java:4218	buf.append	Keine sonstigen Daten verf&uuml;gbar
+jkcemu/tools/debugger/AbstractBreakpointDlg.java:137	String.format	Es ist i.d.R. nicht sinnvoll, wenn im Vergleichswert (rechtes Eingabefeld) Bits gesetzt sind,\ndie mit der Maske (linkes Eingabefeld) vom zu testenden Wert ausgeblendet werden.\nEin zur Maske passender Vergleichswert wäre z.B. hexadezimal %02X.\nSollen trotzdem die von Ihnen angegeben Werte verwendet werden?
+jkcemu/tools/debugger/DebugFrm.java:453	LangUtil.mnemonic	Programmausführung
+jkcemu/tools/debugger/DebugFrm.java:3056	new ReplyIntDlg	Max. Anzahl Log-Meldungen:
+jkcemu/tools/debugger/DebugFrm.java:4237	setDebuggerDisabled	Prozessorsystem nicht aktiv
+jkcemu/tools/debugger/DebugFrm.java:4254	buf.append	Keine sonstigen Daten verf&uuml;gbar
 jkcemu/tools/debugger/ImportableBreakpoint.java:48	new InvalidParamException	: Ungültiger Name
-jkcemu/tools/debugger/InterruptBreakpointDlg.java:33	super	Interrupt-Quelle
 jkcemu/tools/debugger/InterruptBreakpointDlg.java:91	-	--- Keine Interrupt-Quelle vorhanden---
-jkcemu/tools/debugger/LabelImportDlg.java:106	super	Halte-/Log-Punkte importieren
 jkcemu/tools/debugger/LabelImportDlg.java:283	-	Datei nicht lesbar
 jkcemu/tools/debugger/LabelImportDlg.java:286	-	Datei nicht gefunden
 jkcemu/tools/debugger/PCBreakpoint.java:29	-	flag_mask
@@ -1052,11 +871,8 @@ jkcemu/tools/debugger/PCBreakpoint.java:335	new InvalidParamException	: Ungülti
 jkcemu/tools/debugger/VarData.java:226	-	Float (Basic Compiler)
 jkcemu/tools/debugger/VarData.java:230	-	Decimal (Basic Compiler)
 jkcemu/tools/debugger/VarData.java:443	-	ungültig
-jkcemu/tools/debugger/VarDataDlg.java:155	super	Variable bearbeiten
-jkcemu/tools/debugger/VarDataDlg.java:155	super	Variable anlegen
-jkcemu/tools/debugger/VarDataDlg.java:421	-	Eine Variable mit dem Namen existiert bereits.
-jkcemu/tools/debugger/VarDataDlg.java:427	BaseDlg.showConfirmDlg	\nDiese wird aktualisiert.
-jkcemu/tools/filebrowser/FileBrowserFrm.java:149	-	 Datei-Browser
+jkcemu/tools/debugger/VarDataDlg.java:424	-	Eine Variable mit dem Namen existiert bereits.
+jkcemu/tools/debugger/VarDataDlg.java:430	BaseDlg.showConfirmDlg	\nDiese wird aktualisiert.
 jkcemu/tools/filebrowser/FileBrowserFrm.java:156	-	Dateien/Verzeichnisse ausschneiden
 jkcemu/tools/filebrowser/FileBrowserFrm.java:158	-	Dateien/Verzeichnisse einfügen
 jkcemu/tools/filebrowser/FileBrowserFrm.java:159	-	Verzeichnis erstellen...
@@ -1073,40 +889,23 @@ jkcemu/tools/filebrowser/FilePreviewFld.java:333	addPlainDiskInfo	Einfache Abbil
 jkcemu/tools/filebrowser/FilePreviewFld.java:420	new Thread	JKCEMU File Browser Details Viewer
 jkcemu/tools/filebrowser/FilePreviewFld.java:463	infoItems.put	Komprimierte Sound-Datei
 jkcemu/tools/fileconverter/AC1AudioFileTarget.java:114	buf.append	Sound-Datei im AC1-
-jkcemu/tools/fileconverter/AbstractConvertTarget.java:63	new IOException	Die Ausgabedatei muss die Endung '
-jkcemu/tools/fileconverter/AbstractConvertTarget.java:68	buf.append	Die Ausgabedatei muss eine der folgenden Endungen haben:
-jkcemu/tools/fileconverter/AnaDiskFileTarget.java:27	super	AnaDisk-Datei (*.dump)
-jkcemu/tools/fileconverter/AudioFileTarget.java:32	super	Sound-Datei (
-jkcemu/tools/fileconverter/AudioFileTarget.java:45	super	Sound-Datei (
-jkcemu/tools/fileconverter/BinFileTarget.java:38	super	Einfache Speicherabbilddatei (*.bin)
+jkcemu/tools/fileconverter/AbstractConvertTarget.java:64	new IOException	Die Ausgabedatei muss die Endung '
+jkcemu/tools/fileconverter/AbstractConvertTarget.java:69	buf.append	Die Ausgabedatei muss eine der folgenden Endungen haben:
 jkcemu/tools/fileconverter/FileConvertFrm.java:242	new IOException	: Nicht gefunden oder nicht lesbar
 jkcemu/tools/fileconverter/FileConvertFrm.java:312	infoBuf.append	Sound-Datei
 jkcemu/tools/fileconverter/FileConvertFrm.java:328	infoBuf.append	Einfache Speicherabbilddatei
 jkcemu/tools/fileconverter/FileConvertFrm.java:468	-	Die Quelldatei ist eine Mutli-KC-TAP-Datei. Außer bei\n'
 jkcemu/tools/fileconverter/FileConvertFrm.java:471	-	'\nwird bei allen anderen Ausgangsformaten nur die erste Teildatei verarbeitet.
 jkcemu/tools/fileconverter/FileConvertFrm.java:719	infoBuf.append	 (nicht konvertierbar)
-jkcemu/tools/fileconverter/HeadersaveFileTarget.java:34	super	Headersave-Datei (*.z80)
-jkcemu/tools/fileconverter/ImageDiskFileTarget.java:27	super	ImageDisk-Datei (*.imd)
-jkcemu/tools/fileconverter/IntelHexFileTarget.java:33	super	Intel-HEX-Datei (*.hex; *.ihx)
 jkcemu/tools/fileconverter/KCAudioFileTarget.java:253	-	Sound-Datei im KC-Format
 jkcemu/tools/fileconverter/KCAudioFileTarget.java:257	-	Sound-Datei im KC-Systemformat für KC85/1, KC87 und Z9001
 jkcemu/tools/fileconverter/KCAudioFileTarget.java:261	-	Sound-Datei im KC-Systemformat für HC900 und KC85/2..5
 jkcemu/tools/fileconverter/KCAudioFileTarget.java:265	-	Sound-Datei im KC-BASIC-Format
-jkcemu/tools/fileconverter/KCAudioMultiFileTarget.java:22	-	Sound-Datei im KC-Format, 1:1 aus TAP- oder Multi-TAP-Datei konvertiert
-jkcemu/tools/fileconverter/KCBasicSystemFileTarget.java:104	super	KC-Systemdatei mit KC-BASIC-Programm (*.kcb)
-jkcemu/tools/fileconverter/KCTapSystemFileTarget.java:41	super	KC-TAP-Systemdatei für KC85/1, KC87 und Z9001 (*.tap)
-jkcemu/tools/fileconverter/KCTapSystemFileTarget.java:42	super	KC-TAP-Systemdatei für HC900 und KC85/2..5 (*.tap)
-jkcemu/tools/fileconverter/PlainDiskFileTarget.java:29	super	Einfache Diskettenabbilddatei (*.dd; *.img; *.image; *.raw)
-jkcemu/tools/fileconverter/RMCFileTarget.java:33	super	RBASIC-Maschinencode-Datei (*.rmc)
 jkcemu/tools/fileconverter/SCCHAudioFileTarget.java:133	-	Sound-Datei im AC1/LLC2-TurboSave-Format (
 jkcemu/tools/fileconverter/Z1013AudioFileTarget.java:175	buf.append	Sound-Datei im Z1013-
-jkcemu/tools/findfiles/FindFilesFrm.java:189	-	Zeilen als Text kopieren
 jkcemu/tools/findfiles/FindFilesFrm.java:1580	new Thread	JKCEMU file search
-jkcemu/tools/findfiles/FindFilesFrm.java:1703	buf.append	1 Datei/Verzeichnis
-jkcemu/tools/findfiles/FindFilesFrm.java:1706	String.format	%d Dateien/Verzeichnisse
-jkcemu/tools/findfiles/FindFilesFrm.java:1731	FindFilesCellRenderer.EmphasizedEntry	Suche abgebrochen aufgrund zu vieler Einträge im Suchergebnis
-jkcemu/tools/findfiles/FindFilesFrm.java:1791	-	\" kann nicht gelesen werden
-jkcemu/tools/findfiles/FindFilesFrm.java:2229	listModel.addElement	Keine Datei gefunden
+jkcemu/tools/findfiles/FindFilesFrm.java:1732	FindFilesCellRenderer.EmphasizedEntry	Suche abgebrochen aufgrund zu vieler Einträge im Suchergebnis
+jkcemu/tools/findfiles/FindFilesFrm.java:1792	-	\" kann nicht gelesen werden
 jkcemu/tools/hexdiff/HexDiffFrm.java:131	BaseDlg.showOptionDlg	: Datei ist leer.
 jkcemu/tools/hexdiff/HexDiffFrm.java:354	createMenuBar	Hilfe zum Hex-Dateivergleicher...
 jkcemu/tools/hexdiff/HexDiffFrm.java:456	FileUtil.showMultiFileOpenDlg	Dateien öffnen
@@ -1120,9 +919,6 @@ jkcemu/tools/hexedit/HexEditFrm.java:639	String.format	Möchten Sie die %d ausge
 jkcemu/tools/hexedit/HexEditFrm.java:646	String.format	Möchten Sie das ausgewählte Byte mit dem Wert %02Xh spiegeln?\ngespiegelter Wert: %02Xh
 jkcemu/tools/hexedit/HexEditFrm.java:1096	createCaretPosFld	Cursor-Position
 jkcemu/tools/hexedit/HexEditFrm.java:1164	new SizeLimitExceededException	Die max. zulässige Dateigröße wurde erreicht.
-jkcemu/tools/hexedit/HexEditFrm.java:1430	buf.append	 (schreibgeschützt)
-jkcemu/tools/hexedit/MemEditFrm.java:450	BaseDlg.showWarningDlg	Die von Ihnen eingegebenen Bytes gehen über die Adresse FFFF hinaus.\nEs werden nur die Bytes bis FFFF geändert.
-jkcemu/tools/hexedit/MemEditFrm.java:458	String.format	Die Speicherzelle mit der Adresse %04X\nkonnte nicht geändert werden.
 jkcemu/usb/VDIP.java:164	-	Vinculum VDIP Modul
 jkcemu/usb/VDIP.java:358	out.printf	VDIP reset: power_on=%b\n
 jkcemu/usb/VDIP.java:532	out.println	VDIP soft reset

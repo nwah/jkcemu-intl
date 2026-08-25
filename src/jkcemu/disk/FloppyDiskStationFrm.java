@@ -813,7 +813,7 @@ public class FloppyDiskStationFrm
       textArea.setBorder( BorderFactory.createLoweredBevelBorder() );
       textArea.setFont( font );
       textArea.setEditable( false );
-      textArea.setText( DRIVE_EMPTY_TEXT );
+      textArea.setText( LangUtil.tr( DRIVE_EMPTY_TEXT ) );
       (new DropTarget( textArea, this )).setActive( true );
       this.textAreas[ i ] = textArea;
       this.drives[ i ]    = new FloppyDiskDrive( this );
@@ -994,17 +994,19 @@ public class FloppyDiskStationFrm
   private boolean confirmNewFileNotFormatted()
   {
     boolean  rv      = false;
-    String[] options = { "Weiter", EmuUtil.TEXT_CANCEL };
+    String[] options = LangUtil.tr(
+			new String[] { "Weiter", EmuUtil.TEXT_CANCEL } );
     JOptionPane pane = new JOptionPane(
-	"Es wird jetzt eine Datei ohne Inhalt angelegt.\n"
-		+ "Vergessen Sie bitte nicht, die emulierte Diskette\n"
-		+ "vom emulierten System aus zu formatieren,\n"
-		+ "damit die neue Datei einen Inhalt bekommt\n"
-		+ "und somit genutzt werden kann.",
+	LangUtil.tr(
+		"Es wird jetzt eine Datei ohne Inhalt angelegt.\n"
+			+ "Vergessen Sie bitte nicht, die emulierte Diskette\n"
+			+ "vom emulierten System aus zu formatieren,\n"
+			+ "damit die neue Datei einen Inhalt bekommt\n"
+			+ "und somit genutzt werden kann." ),
 	JOptionPane.INFORMATION_MESSAGE );
     pane.setOptions( options );
     pane.setWantsInput( false );
-    pane.createDialog( this, "Hinweis" ).setVisible( true );
+    pane.createDialog( this, LangUtil.tr( "Hinweis" ) ).setVisible( true );
     Object value = pane.getValue();
     if( value != null ) {
       if( value.equals( options[ 0 ] ) ) {
@@ -1288,6 +1290,7 @@ public class FloppyDiskStationFrm
       if( !readOnly ) {
 	if( JOptionPane.showConfirmDialog(
 		this,
+		LangUtil.tr(
 		"Sie \u00F6ffnen das Verzeichnis ohne Schreibschutz.\n"
 			+ "Schreibzugriffe auf die emulierte Diskette wirken"
 			+ " sich somit direkt auf die Dateien in dem"
@@ -1307,8 +1310,8 @@ public class FloppyDiskStationFrm
 			+ " nochmals gesichert sind\n"
 			+ "und lesen Sie in der Hilfe den Abschnitt"
 			+ " \u00FCber die Emulation einer Diskette"
-			+ " auf Basis eines Verzeichnisses!",
-		"Warnung",
+			+ " auf Basis eines Verzeichnisses!" ),
+		LangUtil.tr( "Warnung" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) != JOptionPane.OK_OPTION )
 	{
@@ -1757,7 +1760,7 @@ public class FloppyDiskStationFrm
 		if( JOptionPane.showConfirmDialog(
 			this,
 			buf.toString(),
-			"Dateiformat",
+			LangUtil.tr( "Dateiformat" ),
 			JOptionPane.OK_CANCEL_OPTION,
 			JOptionPane.WARNING_MESSAGE )
 					== JOptionPane.OK_OPTION )
@@ -1921,7 +1924,7 @@ public class FloppyDiskStationFrm
       disk.setOwner( null );
       this.drives[ idx ].removeDisk();
     }
-    this.textAreas[ idx ].setText( DRIVE_EMPTY_TEXT );
+    this.textAreas[ idx ].setText( LangUtil.tr( DRIVE_EMPTY_TEXT ) );
     updRefreshBtn();
   }
 

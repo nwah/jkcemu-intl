@@ -28,6 +28,7 @@ import javax.swing.text.Document;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.SettingsFrm;
 
@@ -292,7 +293,8 @@ public class KCNetSettingsFld
     buf.append( "<html>\n"
 	+ "<table border=\"1\">\n"
 	+ "<tr>\n"
-	+ "<td align=\"left\">Hardwareadresse:</td><td align=\"left\">" );
+	+ "<td align=\"left\">" + LangUtil.tr( "Hardwareadresse:" )
+	+ "</td><td align=\"left\">" );
     byte[] addr = netConfig.getHardwareAddr();
     if( addr != null ) {
       boolean isFirst = true;
@@ -306,13 +308,16 @@ public class KCNetSettingsFld
       }
     }
     buf.append( "</td></tr>\n"
-	+ "<tr><td align=\"left\">IP-Adresse:</td><td align=\"left\">" );
+	+ "<tr><td align=\"left\">" + LangUtil.tr( "IP-Adresse:" )
+	+ "</td><td align=\"left\">" );
     appendIpAddrTo( buf, netConfig.getIpAddr() );
     buf.append( "</td></tr>\n"
-	+ "<tr><td align=\"left\">Subnetzmaske:</td><td align=\"left\">" );
+	+ "<tr><td align=\"left\">" + LangUtil.tr( "Subnetzmaske:" )
+	+ "</td><td align=\"left\">" );
     appendIpAddrTo( buf, netConfig.getSubnetMask() );
     buf.append( "</td></tr>\n"
-	+ "<tr><td align=\"left\">DNS-Server:</td><td align=\"left\">" );
+	+ "<tr><td align=\"left\">" + LangUtil.tr( "DNS-Server:" )
+	+ "</td><td align=\"left\">" );
     appendIpAddrTo( buf, netConfig.getDnsServerIpAddr() );
     buf.append( "</td></tr>\n"
 	+ "</table>\n"
@@ -323,7 +328,7 @@ public class KCNetSettingsFld
     JOptionPane.showMessageDialog(
 		this,
 		pane,
-		"IPv4-Netzwerkkonfiguration",
+		LangUtil.tr( "IPv4-Netzwerkkonfiguration" ),
 		JOptionPane.INFORMATION_MESSAGE );
   }
 }

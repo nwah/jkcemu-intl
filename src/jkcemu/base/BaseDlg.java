@@ -52,9 +52,16 @@ public class BaseDlg extends JDialog implements
   private static Map<String,Boolean> suppressedValues   = new HashMap<>();
 
 
+  /*
+   * Der Titel wird nicht an den Konstruktor der Basisklasse uebergeben,
+   * da dieser das Attribut direkt setzt und somit
+   * die ueberschriebene Methode setTitle( String ) umgeht,
+   * die fuer die Uebersetzung sorgt.
+   */
   public BaseDlg( Window owner, String title )
   {
-    super( owner, title, Dialog.ModalityType.DOCUMENT_MODAL );
+    super( owner, null, Dialog.ModalityType.DOCUMENT_MODAL );
+    setTitle( title );
     init();
   }
 
@@ -372,8 +379,8 @@ public class BaseDlg extends JDialog implements
     EmuUtil.frameToFront( owner );
     return (JOptionPane.showConfirmDialog(
 		EmuUtil.getWindow( owner ),
-		msg,
-		title,
+		LangUtil.tr( msg ),
+		LangUtil.tr( title ),
 		JOptionPane.OK_CANCEL_OPTION ) == JOptionPane.OK_OPTION);
   }
 
@@ -386,8 +393,8 @@ public class BaseDlg extends JDialog implements
     EmuUtil.frameToFront( owner );
     return (JOptionPane.showConfirmDialog(
 		EmuUtil.getWindow( owner ),
-		msg,
-		title,
+		LangUtil.tr( msg ),
+		LangUtil.tr( title ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) == JOptionPane.OK_OPTION);
   }
@@ -455,19 +462,26 @@ public class BaseDlg extends JDialog implements
   {
     int rv = -1;
     EmuUtil.frameToFront( owner );
+
+    /*
+     * Die Beschriftungen der Knoepfe werden uebersetzt.
+     * Da JOptionPane genau das uebergebene Objekt zurueckliefert,
+     * muss anschliessend gegen das uebersetzte Array verglichen werden.
+     */
+    String[] trOptions = LangUtil.tr( options );
     JOptionPane pane = new JOptionPane(
 		LangUtil.tr( msg ),
 		JOptionPane.QUESTION_MESSAGE );
-    pane.setOptions( options );
+    pane.setOptions( trOptions );
     pane.createDialog(
 		EmuUtil.getWindow( owner ),
 		LangUtil.tr( title ) ).setVisible( true );
 
     // ausgewaehlter Knopf ermitteln
     Object selOption = pane.getValue();
-    if( selOption != null ) {
-      for( int i = 0; i < options.length; i++ ) {
-	if( selOption == options[ i ] ) {
+    if( (selOption != null) && (trOptions != null) ) {
+      for( int i = 0; i < trOptions.length; i++ ) {
+	if( selOption == trOptions[ i ] ) {
 	  rv = i;
 	  break;
 	}
@@ -516,8 +530,8 @@ public class BaseDlg extends JDialog implements
 	JCheckBox cb = createSuppressDlgCheckbox();
 	rv = (JOptionPane.showConfirmDialog(
 		EmuUtil.getWindow( owner ),
-		new Object[] { msg, cb },
-		"Best\u00E4tigung",
+		new Object[] { LangUtil.tr( msg ), cb },
+		LangUtil.tr( "Best\u00E4tigung" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) == JOptionPane.OK_OPTION);
 	if( rv && cb.isSelected() ) {
@@ -614,8 +628,8 @@ public class BaseDlg extends JDialog implements
     EmuUtil.frameToFront( owner );
     JOptionPane.showMessageDialog(
 		EmuUtil.getWindow( owner ),
-		msg,
-		title,
+		LangUtil.tr( msg ),
+		LangUtil.tr( title ),
 		JOptionPane.WARNING_MESSAGE );
   }
 
@@ -761,9 +775,13 @@ public class BaseDlg extends JDialog implements
 				String    title,
 				int       msgType )
   {
-    String[] options = { OPTION_YES, OPTION_NO, OPTION_CANCEL };
+    String textYes = LangUtil.tr( OPTION_YES );
+    String textNo  = LangUtil.tr( OPTION_NO );
+
+    String[] options = { textYes, textNo, LangUtil.tr( OPTION_CANCEL ) };
 
     EmuUtil.frameToFront( owner );
+    msg = LangUtil.tr( msg );
     JOptionPane pane = null;
     if( checkBox != null ) {
       pane = new JOptionPane( new Object[] { msg, checkBox }, msgType );
@@ -773,16 +791,16 @@ public class BaseDlg extends JDialog implements
     pane.setOptions( options );
     Dialog dlg = pane.createDialog(
 				EmuUtil.getWindow( owner ),
-				title );
+				LangUtil.tr( title ) );
     Main.updIcon( dlg );
     dlg.setVisible( true );
 
     Boolean rv        = null;
     Object  selOption = pane.getValue();
     if( selOption != null ) {
-      if( selOption.equals( OPTION_YES ) ) {
+      if( selOption.equals( textYes ) ) {
 	rv = Boolean.TRUE;
-      } else if( selOption.equals( OPTION_NO ) ) {
+      } else if( selOption.equals( textNo ) ) {
 	rv = Boolean.FALSE;
       }
     }

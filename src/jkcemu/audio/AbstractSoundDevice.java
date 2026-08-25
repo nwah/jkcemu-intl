@@ -8,6 +8,8 @@
 
 package jkcemu.audio;
 
+import jkcemu.lang.LangUtil;
+
 
 public abstract class AbstractSoundDevice
 {
@@ -76,9 +78,13 @@ public abstract class AbstractSoundDevice
 
 	/* --- ueberschriebene Methoden --- */
 
+  /*
+   * Die Bezeichnung wird u.a. als Reiterbeschriftung verwendet
+   * und deshalb uebersetzt zurueckgeliefert.
+   */
   @Override
   public String toString()
   {
-    return this.text;
+    return LangUtil.tr( this.text );
   }
 }

@@ -26,6 +26,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Collection;
 import java.util.Set;
 import java.util.TreeSet;
+import jkcemu.lang.LangUtil;
 
 
 public class FileMover extends AbstractFileWorker
@@ -72,23 +73,26 @@ public class FileMover extends AbstractFileWorker
   {
     String urlText = this.curURLText;
     return urlText != null ?
-	("\'" + urlText + "\' kann nicht geladen werden.")
-	: ("\'" + fileName + "\' kann nicht verschoben werden.");
+	LangUtil.tr( "\'\'{0}\'\' kann nicht geladen werden.", urlText )
+	: LangUtil.tr(
+		"\'\'{0}\'\' kann nicht verschoben werden.",
+		fileName );
   }
 
 
   @Override
   public String getProgressDlgTitle()
   {
-    return "Verschieben";
+    return LangUtil.tr( "Verschieben" );
   }
 
 
   @Override
   public String getUncompletedWorkMsg()
   {
-    return "Es konnten nicht alle Dateien, Verzeichnisse bzw.\n"
-			+ "symbolische Links verschoben werden.";
+    return LangUtil.tr(
+		"Es konnten nicht alle Dateien, Verzeichnisse bzw.\n"
+			+ "symbolische Links verschoben werden." );
   }
 
 

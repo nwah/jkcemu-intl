@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.HexDocument;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 
 
 public class PCBreakpointDlg extends AbstractBreakpointDlg
@@ -156,7 +157,7 @@ public class PCBreakpointDlg extends AbstractBreakpointDlg
 
     this.docRegMask = new HexDocument( 4 );
     this.fldRegMask = GUIFactory.createTextField( this.docRegMask, 4 );
-    this.fldRegMask.setToolTipText( "Maske" );
+    this.fldRegMask.setToolTipText( LangUtil.tr( "Maske" ) );
     panelReg.add( this.fldRegMask );
     panelReg.add( Box.createHorizontalStrut( 5 ) );
 
@@ -167,7 +168,7 @@ public class PCBreakpointDlg extends AbstractBreakpointDlg
 
     this.docRegValue = new HexDocument( 4 );
     this.fldRegValue = GUIFactory.createTextField( this.docRegValue, 4 );
-    this.fldRegValue.setToolTipText( "Vergleichswert" );
+    this.fldRegValue.setToolTipText( LangUtil.tr( "Vergleichswert" ) );
     panelReg.add( this.fldRegValue );
     panelReg.add( Box.createHorizontalStrut( 5 ) );
 

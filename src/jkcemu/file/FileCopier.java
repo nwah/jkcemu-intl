@@ -73,8 +73,8 @@ public class FileCopier extends AbstractFileWorker
   {
     String urlText = this.curURLText;
     return urlText != null ?
-	("\'" + urlText + "\' kann nicht geladen werden.")
-	: ("\'" + fileName + "\' kann nicht kopiert werden.");
+	LangUtil.tr( "\'\'{0}\'\' kann nicht geladen werden.", urlText )
+	: LangUtil.tr( "\'\'{0}\'\' kann nicht kopiert werden.", fileName );
   }
 
 
@@ -88,8 +88,9 @@ public class FileCopier extends AbstractFileWorker
   @Override
   public String getUncompletedWorkMsg()
   {
-    return "Es konnten nicht alle Dateien, Verzeichnisse bzw.\n"
-			+ "symbolische Links kopiert werden.";
+    return LangUtil.tr(
+		"Es konnten nicht alle Dateien, Verzeichnisse bzw.\n"
+			+ "symbolische Links kopiert werden." );
   }
 
 

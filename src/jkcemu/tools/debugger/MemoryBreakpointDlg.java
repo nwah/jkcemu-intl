@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.HexDocument;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 
 
 public class MemoryBreakpointDlg extends AbstractBreakpointDlg
@@ -169,7 +170,7 @@ public class MemoryBreakpointDlg extends AbstractBreakpointDlg
 
     this.docMask = new HexDocument( 2 );
     this.fldMask = GUIFactory.createTextField( this.docMask, 2 );
-    this.fldMask.setToolTipText( "Maske" );
+    this.fldMask.setToolTipText( LangUtil.tr( "Maske" ) );
     gbcValue.fill        = GridBagConstraints.HORIZONTAL;
     gbcValue.weightx     = 0.5;
     gbcValue.insets.left = 5;
@@ -185,7 +186,7 @@ public class MemoryBreakpointDlg extends AbstractBreakpointDlg
 
     this.docValue = new HexDocument( 2 );
     this.fldValue = GUIFactory.createTextField( this.docValue, 2 );
-    this.fldValue.setToolTipText( "Vergleichswert" );
+    this.fldValue.setToolTipText( LangUtil.tr( "Vergleichswert" ) );
     gbcValue.fill    = GridBagConstraints.HORIZONTAL;
     gbcValue.weightx = 0.5;
     gbcValue.gridx++;

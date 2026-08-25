@@ -17,6 +17,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import jkcemu.Main;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileInfo;
+import jkcemu.lang.LangUtil;
 
 
 public class TZXFile
@@ -46,7 +47,9 @@ public class TZXFile
   {
     if( fileFilter == null ) {
       fileFilter = new FileNameExtensionFilter(
-			"CDT/TZX-Dateien (" + getFileExtensionText() + ")",
+			LangUtil.tr(
+				"CDT/TZX-Dateien ({0})",
+				getFileExtensionText() ),
 			fileExts );
     }
     return fileFilter;

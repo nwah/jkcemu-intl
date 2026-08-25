@@ -10,6 +10,7 @@ package jkcemu.net;
 
 import java.util.Arrays;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80InterruptSource;
 import z80emu.Z80MaxSpeedListener;
@@ -359,7 +360,7 @@ public class KCNet implements
 
   public String toString()
   {
-    return this.title != null ? this.title : "KCNet";
+    return this.title != null ? LangUtil.tr( this.title ) : "KCNet";
   }
 
 

@@ -3040,7 +3040,7 @@ public class ImageFrm extends AbstractImageFrm implements
   private void setTitleInternal( String title )
   {
     StringBuilder buf = new StringBuilder( 64 );
-    buf.append( TITLE );
+    buf.append( LangUtil.tr( TITLE ) );
     if( title != null ) {
       if( !title.isEmpty() ) {
 	buf.append( ": " );
@@ -3157,6 +3157,15 @@ public class ImageFrm extends AbstractImageFrm implements
 			File              file,
 			byte[]            videoMemBytes )
   {
+    /*
+     * Der Titel ist entweder ein Dateiname
+     * oder die Bezeichnung der zuletzt ausgefuehrten Bearbeitung.
+     * Im zweiten Fall wird er hier uebersetzt;
+     * bei einem Dateinamen bleibt er unveraendert,
+     * da er im Katalog nicht enthalten ist.
+     */
+    title = LangUtil.tr( title );
+
     ImageEntry newEntry   = null;
     boolean    autoResize = false;
     boolean    state      = false;

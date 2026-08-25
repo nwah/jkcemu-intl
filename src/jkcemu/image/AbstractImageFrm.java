@@ -27,6 +27,7 @@ import javax.swing.JViewport;
 import jkcemu.base.BaseFrm;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public abstract class AbstractImageFrm
@@ -232,9 +233,10 @@ public abstract class AbstractImageFrm
 	if( (w > 0) && (h > 0) ) {
 	  switch( JOptionPane.showConfirmDialog(
 			this,
-			"Soll das Bild gedreht gespeichert werden,\n"
-				+ "so wie Sie es gerade sehen?",
-			"Bild gedreht",
+			LangUtil.tr(
+				"Soll das Bild gedreht gespeichert werden,\n"
+					+ "so wie Sie es gerade sehen?" ),
+			LangUtil.tr( "Bild gedreht" ),
 			JOptionPane.YES_NO_CANCEL_OPTION,
 			JOptionPane.QUESTION_MESSAGE ) )
 	  {

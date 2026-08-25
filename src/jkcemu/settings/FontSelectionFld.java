@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.FontMngr;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class FontSelectionFld extends JPanel implements ActionListener
@@ -207,7 +208,7 @@ public class FontSelectionFld extends JPanel implements ActionListener
       this.fldInfo.setText( buf.toString() );
       this.btnDefault.setEnabled( true );
     } else {
-      this.fldInfo.setText( "Standard" );
+      this.fldInfo.setText( LangUtil.tr( "Standard" ) );
       this.btnDefault.setEnabled( false );
     }
   }

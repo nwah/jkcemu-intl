@@ -1244,7 +1244,7 @@ public class DiskImgViewFrm extends BaseFrm
 	  }
 	  this.disk = disk;
 	  this.file = file;
-	  setTitle( TITLE + ": " + file.getPath() );
+	  setTitle( LangUtil.tr( TITLE ) + ": " + file.getPath() );
 
 	  // Allgemeine Infos
 	  EmuUtil.setText( this.fldFileName, file.getName() );
@@ -1267,7 +1267,7 @@ public class DiskImgViewFrm extends BaseFrm
 							occurence,
 							totalCount );
 	  if( sectorSize > 0 ) {
-	    if( formatText.indexOf( "Spuren a " ) < 0 ) {
+	    if( !disk.isFormatTextWithSectorSize() ) {
 	      buf.append( formatText );
 	      if( occurence.intValue() < totalCount.intValue() ) {
 		buf.append( LangUtil.tr(

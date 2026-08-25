@@ -17,6 +17,7 @@ import jkcemu.base.AbstractScreenFrm;
 import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.emusys.Z1013;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80InterruptSource;
 import z80emu.Z80MaxSpeedListener;
@@ -250,7 +251,9 @@ public class Z1013GraphicZX
   @Override
   public String toString()
   {
-    return "ZX-Spectrum-kompatible S/W-Grafikkarte nach practic 2/88";
+    return LangUtil.tr(
+		"ZX-Spectrum-kompatible S/W-Grafikkarte"
+			+ " nach practic 2/88" );
   }
 
 

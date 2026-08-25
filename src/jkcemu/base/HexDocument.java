@@ -11,6 +11,7 @@ package jkcemu.base;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
+import jkcemu.lang.LangUtil;
 
 
 public class HexDocument extends PlainDocument
@@ -30,6 +31,7 @@ public class HexDocument extends PlainDocument
     this.maxLen     = maxLen;
     this.preErrText = "";
     if( label != null ) {
+      label = LangUtil.tr( label );
       if( label.endsWith( ":" ) ) {
 	this.preErrText = label + "\n";
       } else {

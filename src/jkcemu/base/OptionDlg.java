@@ -20,6 +20,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import jkcemu.lang.LangUtil;
 
 
 public class OptionDlg extends BaseDlg
@@ -125,6 +126,13 @@ public class OptionDlg extends BaseDlg
 						GridBagConstraints.NONE,
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
+
+    /*
+     * Der Meldungstext wird hier als Ganzes uebersetzt,
+     * da er anschliessend zeilenweise auf mehrere Labels verteilt wird
+     * und die einzelnen Zeilen im Katalog nicht enthalten sind.
+     */
+    msg = LangUtil.tr( msg );
 
     // Text
     if( msg != null ) {

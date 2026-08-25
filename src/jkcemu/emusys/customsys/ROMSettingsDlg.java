@@ -365,7 +365,9 @@ public class ROMSettingsDlg
   {
     super(
 	owner,
-	rom != null ? "ROM-Bereich bearbeiten" : "Neuer ROM-Bereich" );
+	rom != null ?
+		LangUtil.tr( "ROM-Bereich bearbeiten" )
+		: LangUtil.tr( "Neuer ROM-Bereich" ) );
     this.owner       = owner;
     this.approvedROM = null;
 

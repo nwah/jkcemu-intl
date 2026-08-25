@@ -28,6 +28,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class RAMFloppySettingsFld extends AbstractSettingsFld
@@ -69,12 +70,12 @@ public class RAMFloppySettingsFld extends AbstractSettingsFld
       gbc.gridwidth = GridBagConstraints.REMAINDER;
       add( this.cbRF, gbc );
     } else if( rfType == RAMFloppy.RFType.ADW ) {
-      this.labelRF = GUIFactory.createLabel( labelText + ":" );
+      this.labelRF = GUIFactory.createLabel( LangUtil.tr( labelText ) + ":" );
       add( this.labelRF, gbc );
 
       this.comboSize = GUIFactory.createComboBox();
       this.comboSize.setEditable( false );
-      this.comboSize.addItem( "Nicht emulieren" );
+      this.comboSize.addItem( LangUtil.tr( "Nicht emulieren" ) );
       this.comboSize.addItem( "128 KByte" );
       this.comboSize.addItem( "512 KByte" );
       this.comboSize.addItem( "2 MByte" );

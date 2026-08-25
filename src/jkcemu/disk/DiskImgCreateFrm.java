@@ -437,7 +437,7 @@ public class DiskImgCreateFrm
 	int option = JOptionPane.showConfirmDialog(
 			this,
 			panel,
-			"User-Bereich \u00E4ndern",
+			LangUtil.tr( "User-Bereich \u00E4ndern" ),
 			JOptionPane.OK_CANCEL_OPTION,
 			JOptionPane.PLAIN_MESSAGE );
 	if( option == JOptionPane.OK_OPTION ) {
@@ -535,11 +535,12 @@ public class DiskImgCreateFrm
     if( (sysTrackFile != null) && (sysTracks == 0) ) {
       if( JOptionPane.showConfirmDialog(
 		this,
-		"Sie haben ein Format ohne Systemspuren ausgew\u00E4hlt,\n"
-			+ "aber eine Datei f\u00FCr die Systemspuren"
-			+ " angegeben.\n"
-			+ "Diese Datei wird ignoriert.",
-		"Warnung",
+		LangUtil.tr(
+			"Sie haben ein Format ohne Systemspuren ausgew\u00E4hlt,\n"
+				+ "aber eine Datei f\u00FCr die Systemspuren"
+				+ " angegeben.\n"
+				+ "Diese Datei wird ignoriert." ),
+		LangUtil.tr( "Warnung" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) != JOptionPane.OK_OPTION )
       {
@@ -663,13 +664,14 @@ public class DiskImgCreateFrm
 		if( msg != null ) {
 		  msg = entry.getName() + ":\n" + msg;
 		} else {
-		  msg = entry.getName()
-				+ " kann nicht hinzugef\u00FCgt werden.";
+		  msg = LangUtil.tr(
+				"{0} kann nicht hinzugef\u00FCgt werden.",
+				entry.getName() );
 		}
 		if( JOptionPane.showConfirmDialog(
 			this,
 			msg,
-			EmuUtil.TEXT_ERROR,
+			LangUtil.tr( EmuUtil.TEXT_ERROR ),
 			JOptionPane.OK_CANCEL_OPTION,
 			JOptionPane.ERROR_MESSAGE )
 					!= JOptionPane.OK_OPTION )

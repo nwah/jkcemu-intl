@@ -1122,10 +1122,10 @@ public class HexEditFrm
     if( this.dataChanged ) {
       setState( Frame.NORMAL );
       toFront();
-      String[] options = {
+      String[] options = LangUtil.tr( new String[] {
 			EmuUtil.TEXT_SAVE,
-			LangUtil.tr( "Verwerfen" ),
-			EmuUtil.TEXT_CANCEL };
+			"Verwerfen",
+			EmuUtil.TEXT_CANCEL } );
       int selOpt = JOptionPane.showOptionDialog(
 				this,
 				LangUtil.tr(
@@ -1138,7 +1138,7 @@ public class HexEditFrm
 				JOptionPane.WARNING_MESSAGE,
 				null,
 				options,
-				EmuUtil.TEXT_SAVE );
+				options[ 0 ] );
       if( selOpt == 0 ) {
 	rv = doSave( false );
       }
@@ -1416,19 +1416,18 @@ public class HexEditFrm
 
   private void updTitle()
   {
-    StringBuilder buf = new StringBuilder( 128 );
-    buf.append( TITLE );
-    buf.append( ": " );
+    String fileText = null;
     if( this.file != null ) {
-      buf.append( this.file.getPath() );
+      fileText = this.file.getPath();
     } else if( this.fileName != null ) {
-      buf.append( this.fileName );
+      fileText = this.fileName;
     } else {
-      buf.append( "Neue Datei" );
+      fileText = LangUtil.tr( "Neue Datei" );
     }
+    String title = LangUtil.tr( TITLE ) + ": " + fileText;
     if( this.readOnly ) {
-      buf.append( " (schreibgesch\u00FCtzt)" );
+      title = LangUtil.tr( "{0} (schreibgesch\u00FCtzt)", title );
     }
-    setTitle( buf.toString() );
+    setTitle( title );
   }
 }

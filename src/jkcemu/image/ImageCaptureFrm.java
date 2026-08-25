@@ -38,6 +38,7 @@ import jkcemu.base.BaseFrm;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.ScreenFrm;
+import jkcemu.lang.LangUtil;
 
 
 public class ImageCaptureFrm extends BaseFrm
@@ -363,17 +364,18 @@ public class ImageCaptureFrm extends BaseFrm
   private void updStatusText()
   {
     boolean timerEnabled = false;
-    String  text         = DEFAULT_STATUS_TEXT;
+    String  text         = LangUtil.tr( DEFAULT_STATUS_TEXT );
     if( this.waitForWindowMillis > 0 ) {
       this.waitForWindowMillis -= 500;
       if( this.waitForWindowMillis > 0 ) {
 	int seconds = this.waitForWindowMillis / 1000;
 	if( seconds == 1 ) {
-	  text = "Aufzunehmendes Fenster aktivieren! Noch 1 Sekunde...";
+	  text = LangUtil.tr(
+		"Aufzunehmendes Fenster aktivieren! Noch 1 Sekunde..." );
 	} else if( seconds > 1 ) {
-	  text = String.format(
+	  text = LangUtil.tr(
 			"Aufzunehmendes Fenster aktivieren!"
-				+ " Noch %d Sekunden...",
+				+ " Noch {0} Sekunden...",
 			seconds );
 	}
 	timerEnabled = true;
@@ -392,7 +394,7 @@ public class ImageCaptureFrm extends BaseFrm
 	  fireTakePhoto( captureWindow );
 	} else {
 	  BaseDlg.showErrorDlg( this, "Kein JKCEMU-Fenster aktiv" );
-	  text = DEFAULT_STATUS_TEXT;
+	  text = LangUtil.tr( DEFAULT_STATUS_TEXT );
 	}
 	this.btnTakePhoto.setEnabled( true );
 	updFieldsEnabled();

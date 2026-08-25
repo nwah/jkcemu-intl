@@ -11,6 +11,7 @@ package jkcemu.tools.fileconverter;
 import java.io.File;
 import java.io.IOException;
 import jkcemu.audio.BitSampleBuffer;
+import jkcemu.lang.LangUtil;
 import jkcemu.audio.CSWFile;
 import jkcemu.audio.PCMDataSource;
 
@@ -26,7 +27,9 @@ public class CSWFileTarget extends AbstractConvertTarget
 		BitSampleBuffer samples )
   {
     super( fileConvertFrm,
-	"CSW-Datei (" + CSWFile.getFileExtensionText() + ")" );
+	LangUtil.tr(
+			"CSW-Datei ({0})",
+			CSWFile.getFileExtensionText() ) );
     this.samples     = samples;
     this.fileFilters = null;
   }

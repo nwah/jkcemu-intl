@@ -35,6 +35,7 @@ import jkcemu.base.HelpFrm;
 import jkcemu.base.HexDocument;
 import jkcemu.base.ReplyBytesDlg;
 import jkcemu.base.ScreenFrm;
+import jkcemu.lang.LangUtil;
 import jkcemu.print.PrintOptionsDlg;
 import jkcemu.print.PrintUtil;
 import jkcemu.text.TextFinder;
@@ -454,22 +455,24 @@ public class MemEditFrm extends AbstractHexCharFrm
 		break;
 	      } else {
 		if( !this.memory.setMemByte( addr, a[ src ] ) ) {
-		  String msg = String.format(
-			"Die Speicherzelle mit der Adresse %04X\n"
+		  String msg = LangUtil.tr(
+			"Die Speicherzelle mit der Adresse {0}\n"
 				+  "konnte nicht ge\u00E4ndert werden.",
-			addr );
+			String.format( "%04X", addr ) );
 		  if( src == (a.length - 1) ) {
 		    BaseDlg.showErrorDlg( this, msg );
 		  } else {
 		    boolean     cancel  = true;
-		    String[]    options = { "Weiter", EmuUtil.TEXT_CANCEL };
+		    String[]    options = LangUtil.tr( new String[] {
+						"Weiter",
+						EmuUtil.TEXT_CANCEL } );
 		    JOptionPane pane    = new JOptionPane(
 						msg,
 						JOptionPane.ERROR_MESSAGE );
 		    pane.setOptions( options );
 		    pane.createDialog(
 				this,
-				EmuUtil.TEXT_ERROR ).setVisible( true );
+				LangUtil.tr( EmuUtil.TEXT_ERROR ) ).setVisible( true );
 		    Object value = pane.getValue();
 		    if( value != null ) {
 		      if( value.equals( options[ 0 ] ) ) {

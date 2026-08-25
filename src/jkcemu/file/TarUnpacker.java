@@ -27,6 +27,7 @@ import java.util.Set;
 import java.util.zip.GZIPInputStream;
 import jkcemu.base.AbstractThreadFrm;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class TarUnpacker extends AbstractThreadFrm
@@ -237,7 +238,7 @@ public class TarUnpacker extends AbstractThreadFrm
   {
     super(
 	"JKCEMU tar unpacker",
-	"Entpacken von " + srcFile.getName() + "...",
+	LangUtil.tr( "Entpacken von {0}...", srcFile.getName() ),
 	true,
 	true,
 	true );

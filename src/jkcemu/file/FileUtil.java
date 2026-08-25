@@ -1661,7 +1661,7 @@ public class FileUtil
 	}
 	rv = fmt2FileFilter.get( text );
 	if( rv == null ) {
-	  rv = new FileNameExtensionFilter( text, formats );
+	  rv = new FileNameExtensionFilter( LangUtil.tr( text ), formats );
 	  fmt2FileFilter.put( text, rv );
 	}
       }
@@ -1699,6 +1699,8 @@ public class FileUtil
       }
       owner = owner.getOwner();
     }
+    title = LangUtil.tr( title );
+
     FileDialog dlg = null;
     if( ownerDlg != null ) {
       dlg = new FileDialog(
@@ -1791,7 +1793,7 @@ public class FileUtil
 	}
       }
     }
-    fileChooser.setDialogTitle( title );
+    fileChooser.setDialogTitle( LangUtil.tr( title ) );
     /*
      * Bei Save CUSTOM_DIALOG nehmen,
      * damit JFileChooser selbst keine Warnung wegen Ueberschreiben

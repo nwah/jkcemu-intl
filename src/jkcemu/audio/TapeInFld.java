@@ -43,6 +43,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class TapeInFld
@@ -199,7 +200,8 @@ public class TapeInFld
 
     this.comboMonitorMixer = GUIFactory.createComboBox();
     this.comboMonitorMixer.setEditable( false );
-    this.comboMonitorMixer.addItem( "--- nicht mith\u00F6ren ---" );
+    this.comboMonitorMixer.addItem(
+			LangUtil.tr( "--- nicht mith\u00F6ren ---" ) );
     AudioUtil.appendMixerItemsTo( this.comboMonitorMixer, false );
     gbcOpt.insets.bottom = 5;
     gbcOpt.gridwidth     = GridBagConstraints.REMAINDER;

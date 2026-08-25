@@ -11,6 +11,7 @@ package jkcemu.emusys.kccompact;
 import java.util.Collections;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
+import jkcemu.lang.LangUtil;
 
 
 public class ExtROMTableModel extends AbstractTableModel
@@ -101,10 +102,10 @@ public class ExtROMTableModel extends AbstractTableModel
     String rv = "";
     switch( col ) {
       case 0:
-	rv = "ROM-Nr.";
+	rv = LangUtil.tr( "ROM-Nr." );
 	break;
       case 1:
-	rv = "ROM-Datei";
+	rv = LangUtil.tr( "ROM-Datei" );
 	break;
     }
     return rv;

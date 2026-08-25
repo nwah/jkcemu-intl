@@ -35,6 +35,7 @@ import jkcemu.base.HelpFrm;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.TabTitleFld;
 import jkcemu.text.TextUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class CalculatorFrm extends BaseFrm implements
@@ -324,7 +325,7 @@ public class CalculatorFrm extends BaseFrm implements
   {
     TabTitleFld.addTabTo(
 		this.tabbedPane,
-		String.format( "Rechner %d", this.nextCalcNum++ ),
+		LangUtil.tr( "Rechner {0}", this.nextCalcNum++ ),
 		calcFld,
 		this );
     this.tabbedPane.setSelectedComponent( calcFld );

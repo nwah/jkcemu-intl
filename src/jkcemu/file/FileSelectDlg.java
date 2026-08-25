@@ -67,6 +67,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.PopupMenuOwner;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -304,14 +305,15 @@ public class FileSelectDlg
 
     this.comboFileType = GUIFactory.createComboBox();
     this.comboFileType.setEditable( false );
-    this.comboFileType.addItem( "Alle Dateien" );
+    this.comboFileType.addItem( LangUtil.tr( "Alle Dateien" ) );
 
     if( fileFilters != null ) {
       if( fileFilters.length > 0 ) {
 	this.fileFilters = new ArrayList<>( fileFilters.length );
 	for( int i = 0; i < fileFilters.length; i++ ) {
 	  if( fileFilters[ i ] != null ) {
-	    this.comboFileType.addItem( fileFilters[ i ].getDescription() );
+	    this.comboFileType.addItem(
+			LangUtil.tr( fileFilters[ i ].getDescription() ) );
 	    this.fileFilters.add( fileFilters[ i ] );
 	  }
 	}
@@ -690,7 +692,7 @@ public class FileSelectDlg
 
       String statusText = filesSelected( files );
       this.labelStatus.setText(
-		statusText != null ? statusText : defaultStatusText );
+		statusText != null ? statusText : LangUtil.tr( defaultStatusText ) );
     }
   }
 
@@ -1502,7 +1504,7 @@ public class FileSelectDlg
 	vp.setCursor( this.defaultCursor );
       }
     }
-    this.labelStatus.setText( defaultStatusText );
+    this.labelStatus.setText( LangUtil.tr( defaultStatusText ) );
   }
 
 
@@ -1513,10 +1515,10 @@ public class FileSelectDlg
       boolean stateStart           = false;
       boolean stateLoadWithOptions = false;
       if( dirSelected ) {
-	this.btnApprove.setText( EmuUtil.TEXT_OPEN );
+	this.btnApprove.setText( LangUtil.tr( EmuUtil.TEXT_OPEN ) );
 	stateApprove = true;
       } else {
-	this.btnApprove.setText( this.approveBtnText );
+	this.btnApprove.setText( LangUtil.tr( this.approveBtnText ) );
 	boolean stateInput = false;
 	if( this.docFileName != null ) {
 	  String fileName = this.fldFileName.getText();
@@ -1581,7 +1583,7 @@ public class FileSelectDlg
 	  vp.setCursor( this.waitCursor );
 	}
       }
-      this.labelStatus.setText( "Lese Verzeichnis..." );
+      this.labelStatus.setText( LangUtil.tr( "Lese Verzeichnis..." ) );
       Thread t = new Thread(
 			Main.getThreadGroup(),
 			"JKCEMU directory reader of file select dialog" )

@@ -16,6 +16,7 @@ import jkcemu.audio.PCMDataSource;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.UserInputException;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public abstract class AbstractConvertTarget
@@ -235,9 +236,13 @@ public abstract class AbstractConvertTarget
 	/* --- ueberschriebene Methoden --- */
 
   @Override
+  /*
+   * Die Bezeichnung wird in der Auswahlliste der Zielformate angezeigt
+   * und deshalb uebersetzt zurueckgeliefert.
+   */
   public String toString()
   {
-    return this.infoText;
+    return LangUtil.tr( this.infoText );
   }
 
 

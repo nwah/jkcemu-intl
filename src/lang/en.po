@@ -113,7 +113,6 @@ msgctxt "mnemonic"
 msgid "ASCII-Zeichenkette"
 msgstr "A"
 
-
 #: jkcemu/Main.java:608
 #: jkcemu/disk/ChangeFileAttrsDlg.java:256
 #: jkcemu/image/ColorPaletteDlg.java:772
@@ -9904,26 +9903,6 @@ msgstr "Invalid date"
 msgid "Ungültige Uhrzeit"
 msgstr "Invalid time"
 
-#: jkcemu/tools/findfiles/FindFilesFrm.java:2313
-msgid "Suche läuft"
-msgstr "Search running"
-
-#: jkcemu/tools/findfiles/FindFilesFrm.java:2315
-msgid " seit "
-msgstr " for "
-
-#: jkcemu/tools/findfiles/FindFilesFrm.java:2325
-msgid "Letzte Suche: "
-msgstr "Last search: "
-
-#: jkcemu/tools/findfiles/FindFilesFrm.java:2328
-msgid "nach "
-msgstr "cancelled, "
-
-#: jkcemu/tools/findfiles/FindFilesFrm.java:2330
-msgid " abgebrochen"
-msgstr " elapsed"
-
 #: jkcemu/tools/hexdiff/FileData.java:30
 msgid ""
 "{0}:\n"
@@ -10424,3 +10403,1792 @@ msgstr "{0} of the selected range: {1}"
 
 msgid "{0}: Unbekannter bzw. nicht unterstützter Algorithmus"
 msgstr "{0}: Unknown or unsupported algorithm"
+
+#: jkcemu/audio/AbstractAudioIOFld.java:70
+msgid "Mit Öffnen des Audiokanals ist sowohl eingangs- als auch ausgangseitig\nein Audiokanal geöffnet, der durch den emulierten Mikroprozessor bedient wird.\nFalls Sie Daten über das Audiosystem einlesen möchten, sollte gleichzeitig\nkein ausgangsseitiger Audiokanal geöffnet sein, da dieser stören könnte."
+msgstr "Opening the audio channel opens an audio channel for both input and output,\nwhich is then serviced by the emulated microprocessor.\nIf you want to read data in via the audio system, no output-side\naudio channel should be open at the same time, as it could interfere."
+
+#: jkcemu/audio/AbstractAudioOutFld.java:53
+msgid "Die Aufnahme wurden noch nicht gespeichert!\nMöchten Sie die Aufnahme verwerfen?"
+msgstr "The recording has not been saved yet!\nDo you want to discard the recording?"
+
+#: jkcemu/audio/AbstractAudioOutFld.java:55
+#: jkcemu/base/BaseDlg.java:619
+#: jkcemu/disk/DiskImgCreateFrm.java:543
+#: jkcemu/disk/DiskImgUnpackFrm.java:358
+#: jkcemu/disk/DiskUtil.java:81
+#: jkcemu/disk/FloppyDiskStationFrm.java:1314
+#: jkcemu/file/FileUtil.java:298
+#: jkcemu/file/SaveDlg.java:736
+#: jkcemu/image/VideoCaptureFrm.java:814
+#: jkcemu/settings/EtcSettingsFld.java:491
+msgid "Warnung"
+msgstr "Warning"
+
+#: jkcemu/audio/AudioFile.java:116
+msgid "Sound-Dateien ({0})"
+msgstr "Sound Files ({0})"
+
+#: jkcemu/audio/AudioRecorderFrm.java:114
+msgid "JKCEMU Audiorecorder"
+msgstr "JKCEMU Audio Recorder"
+
+#: jkcemu/audio/AudioRecorderFrm.java:664
+msgid "Die Aufnahme wurde noch nicht gespeichert\nund wird somit verworfen."
+msgstr "The recording has not been saved yet\nand will therefore be discarded."
+
+#: jkcemu/audio/CSWFile.java:66
+msgid "CSW-Dateien ({0})"
+msgstr "CSW Files ({0})"
+
+#: jkcemu/audio/TZXFile.java:51
+msgid "CDT/TZX-Dateien ({0})"
+msgstr "CDT/TZX Files ({0})"
+
+#: jkcemu/audio/TapeInFld.java:204
+msgid "--- nicht mithören ---"
+msgstr "--- do not monitor ---"
+
+#: jkcemu/base/AbstractScreenFrm.java:289
+msgid "Umlaute"
+msgstr "Umlauts"
+
+#: jkcemu/base/AbstractScreenFrm.java:293
+msgid "Der Text enthält Zeichencodes, die nach ASCII die Zeichen [ \\ ] { | } ~\nund nach ISO646-DE deutsche Umlaute darstellen.\nDa sie eine externe Zeichensatzdatei eingebunden haben,\nkann JKCEMU nicht wissen, ob ASCII-Zeichen\noder deutsche Umlaute angezeigt werden.\nWie sind diese Zeichencodes zu interpretieren?"
+msgstr "The text contains character codes that represent the characters [ \\ ] { | } ~ in ASCII\nand German umlauts in ISO646-DE.\nSince you have included an external character set file,\nJKCEMU cannot know whether ASCII characters\nor German umlauts are displayed.\nHow should these character codes be interpreted?"
+
+#: jkcemu/base/AutoInputWorker.java:72
+msgid "JKCEMU auto input"
+msgstr "JKCEMU auto input"
+
+#: jkcemu/base/AutoLoader.java:145
+msgid "JKCEMU auto loader"
+msgstr "JKCEMU auto loader"
+
+#: jkcemu/base/EmuThread.java:96
+msgid "JKCEMU CPU"
+msgstr "JKCEMU CPU"
+
+#: jkcemu/base/ProcessExecuter.java:31
+msgid "JKCEMU ProcessExecuter.ByteCatcher"
+msgstr "JKCEMU ProcessExecuter.ByteCatcher"
+
+#: jkcemu/base/RAMFloppy.java:198
+msgid "{0} konnte nicht geladen werden."
+msgstr "{0} could not be loaded."
+
+#: jkcemu/base/ReplyIntDlg.java:27
+msgid "Eingabe Ganzzahl"
+msgstr "Enter Integer"
+
+#: jkcemu/base/ScreenFrm.java:2149
+msgid "Zweitsystem"
+msgstr "Secondary system"
+
+#: jkcemu/base/ScreenFrm.java:2153
+msgid "Auf welches Prozessorsystem möchten Sie zugreifen?"
+msgstr "Which processor system do you want to access?"
+
+#: jkcemu/base/ScreenFrm.java:2160
+msgid "Auswahl Prozessorsystem"
+msgstr "Select Processor System"
+
+#: jkcemu/disk/AbstractFloppyDisk.java:500
+msgid "{0}/{1} KByte, {2} Spuren a {3} * {4} Bytes"
+msgstr "{0}/{1} KByte, {2} tracks of {3} * {4} bytes"
+
+#: jkcemu/disk/AbstractFloppyDisk.java:510
+#: jkcemu/disk/FloppyDiskFormat.java:166
+msgid "{0} KByte, {1} Spuren a {2} * {3} Bytes"
+msgstr "{0} KByte, {1} tracks of {2} * {3} bytes"
+
+#: jkcemu/disk/AbstractFloppyDisk.java:520
+msgid "{0} KByte, {1} Spuren"
+msgstr "{0} KByte, {1} tracks"
+
+#: jkcemu/disk/AbstractFloppyDisk.java:527
+#: jkcemu/disk/FloppyDiskFormat.java:174
+msgid "einseitig"
+msgstr "single-sided"
+
+#: jkcemu/disk/AbstractFloppyDisk.java:531
+#: jkcemu/disk/FloppyDiskFormat.java:178
+msgid "doppelseitig"
+msgstr "double-sided"
+
+#: jkcemu/disk/AbstractFloppyDisk.java:535
+msgid "unformatiert"
+msgstr "unformatted"
+
+#: jkcemu/disk/ChangeFileAttrsDlg.java:46
+msgid "Dateiattribute ändern"
+msgstr "Change File Attributes"
+
+#: jkcemu/disk/CopyQMDisk.java:642
+msgid "Die CopyQM-Datei scheint defekt zu sein (CRC-Fehler)!"
+msgstr "The CopyQM file appears to be corrupt (CRC error)!"
+
+#: jkcemu/disk/DiskImgCreateFrm.java:86
+msgid "JKCEMU CP/M-kompatible Diskettenabbilddatei erstellen"
+msgstr "JKCEMU Create CP/M-Compatible Disk Image"
+
+#: jkcemu/disk/DiskImgCreateFrm.java:440
+msgid "User-Bereich ändern"
+msgstr "Change User Area"
+
+#: jkcemu/disk/DiskImgCreateFrm.java:539
+msgid "Sie haben ein Format ohne Systemspuren ausgewählt,\naber eine Datei für die Systemspuren angegeben.\nDiese Datei wird ignoriert."
+msgstr "You have selected a format without system tracks,\nbut specified a file for the system tracks.\nThis file will be ignored."
+
+#: jkcemu/disk/DiskImgCreateFrm.java:668
+msgid "{0} kann nicht hinzugefügt werden."
+msgstr "{0} cannot be added."
+
+#: jkcemu/disk/DiskImgProcessDlg.java:163
+msgid "JKCEMU kann nur einfache Abbilddateien auf einen Datenträger schreiben.\nLaut Dateiendung scheint die Datei jedoch keine einfache Abbilddatei zu sein.\nMöchten Sie trotzdem fortsetzen?"
+msgstr "JKCEMU can only write simple image files to a volume.\nHowever, according to the file extension, the file does not appear to be a simple image file.\nDo you want to continue anyway?"
+
+#: jkcemu/disk/DiskImgProcessDlg.java:168
+msgid "Dateityp"
+msgstr "File Type"
+
+#: jkcemu/disk/DiskImgProcessDlg.java:391
+msgid "Abbilddatei"
+msgstr "Image File"
+
+#: jkcemu/disk/DiskImgUnpackFrm.java:78
+msgid "JKCEMU CP/M-kompatible Diskettenabbilddatei entpacken"
+msgstr "JKCEMU Unpack CP/M-Compatible Disk Image"
+
+#: jkcemu/disk/DiskImgUnpackFrm.java:354
+msgid "Das Ausgabeverzeichnis existiert bereits und ist nicht leer.\nGleichnamige Dateien in dem Verzeichnis werden überschrieben!"
+msgstr "The output directory already exists and is not empty.\nFiles with the same name in the directory will be overwritten!"
+
+#: jkcemu/disk/DiskImgUnpackFrm.java:1512
+msgid "Blockgröße nicht erkannt"
+msgstr "Block size not detected"
+
+#: jkcemu/disk/DiskImgUnpackFrm.java:1517
+msgid "{0} kByte"
+msgstr "{0} kByte"
+
+#: jkcemu/disk/DiskImgUnpackFrm.java:1520
+msgid "{0} Byte"
+msgstr "{0} bytes"
+
+#: jkcemu/disk/DiskImgUnpackFrm.java:1524
+msgid "{0} erkannt"
+msgstr "{0} detected"
+
+#: jkcemu/disk/DiskImgUnpackFrm.java:1527
+msgid "wahrscheinlich {0} (nicht eindeutig erkannt)"
+msgstr "probably {0} (not uniquely detected)"
+
+#: jkcemu/disk/DiskImgViewFrm.java:80
+msgid "JKCEMUDiskettenabbilddatei-Inspektor"
+msgstr "JKCEMU Disk Image Inspector"
+
+#: jkcemu/disk/DiskUtil.java:112
+msgid "Die Dateiendung entspricht nicht der für diesen Dateityp üblichen Endung.\nWenn Sie die Datei später einmal öffnen möchten,\nwird JKCEMU den Dateityp nicht richtig erkennen können.\n\nMöchten Sie trotzdem fortsetzen?"
+msgstr "The file extension does not match the extension usually used for this file type.\nIf you want to open the file again later,\nJKCEMU will not be able to correctly detect the file type.\n\nDo you want to continue anyway?"
+
+#: jkcemu/disk/DriveSelectDlg.java:47
+msgid "Auswahl Laufwerk"
+msgstr "Select Drive"
+
+#: jkcemu/disk/FloppyDiskFormatDlg.java:56
+#: jkcemu/file/LoadDlg.java:334
+msgid "Datei laden"
+msgstr "Load File"
+
+#: jkcemu/disk/FloppyDiskStationFrm.java:123
+msgid "--- leer ---"
+msgstr "--- empty ---"
+
+#: jkcemu/disk/FloppyDiskStationFrm.java:1001
+msgid "Es wird jetzt eine Datei ohne Inhalt angelegt.\nVergessen Sie bitte nicht, die emulierte Diskette\nvom emulierten System aus zu formatieren,\ndamit die neue Datei einen Inhalt bekommt\nund somit genutzt werden kann."
+msgstr "An empty file (without content) will now be created.\nPlease do not forget to format the emulated floppy disk\nfrom within the emulated system,\nso that the new file gets content\nand can thus be used."
+
+#: jkcemu/disk/FloppyDiskStationFrm.java:1294
+msgid "Sie öffnen das Verzeichnis ohne Schreibschutz.\nSchreibzugriffe auf die emulierte Diskette wirken sich somit direkt auf die Dateien in dem Verzeichnis aus.\n\nWenn die falsche Directory-Größe eingestellt ist\noder die emulierte Diskette zu einem ungünstigen Zeitpunkt aktualisiert wird\noder nach dem Aktualisieren im Emulator das erneute Einlesen des Directorys nicht veranlasst wird,\nkann es zum ungewollten Löschen oder Überschreiben der in dem Verzeichnis liegenden Dateien kommen!\n\nStellen Sie bitte sicher, dass die Dateien in dem Verzeichnis an einer anderen Stelle nochmals gesichert sind\nund lesen Sie in der Hilfe den Abschnitt über die Emulation einer Diskette auf Basis eines Verzeichnisses!"
+msgstr "You are opening the directory without write protection.\nWrite accesses to the emulated floppy disk therefore directly affect the files in the directory.\n\nIf the wrong directory size is set,\nor the emulated floppy disk is updated at an unfavorable time,\nor JKCEMU is not made to reread the directory after updating in the emulator,\nfiles located in the directory may be unintentionally deleted or overwritten!\n\nPlease make sure that the files in the directory are backed up again in another location\nand read the section in the help about emulating a floppy disk based on a directory!"
+
+#: jkcemu/disk/HardDiskDetailsDlg.java:97
+msgid "JKCEMU Festplattendetails"
+msgstr "JKCEMU Hard Disk Details"
+
+#: jkcemu/disk/HardDiskListDlg.java:262
+msgid "JKCEMU Festplattenverzeichnis"
+msgstr "JKCEMU Hard Disk Directory"
+
+#: jkcemu/disk/TeleDisk.java:956
+msgid "JKCEMU hat Sektoren repariert, die beim Erzeugen der\nTeledisk-Datei nicht korrekt gelesen werden konnten."
+msgstr "JKCEMU has repaired sectors that could not be read correctly\nwhen the TeleDisk file was created."
+
+#: jkcemu/emusys/A5105.java:93
+msgid "BIC A5105 RBASIC Diskette mit Bildern"
+msgstr "BIC A5105 RBASIC disk with images"
+
+#: jkcemu/emusys/A5105.java:99
+msgid "BIC A5105 RBASIC Programmdiskette"
+msgstr "BIC A5105 RBASIC program disk"
+
+#: jkcemu/emusys/A5105.java:105
+msgid "BIC A5105 RBASIC Systemdiskette"
+msgstr "BIC A5105 RBASIC system disk"
+
+#: jkcemu/emusys/A5105.java:114
+msgid "BIC A5105 SCPX Systemdiskette"
+msgstr "BIC A5105 SCPX system disk"
+
+#: jkcemu/emusys/A5105.java:262
+#: jkcemu/emusys/KCcompact.java:256
+#: jkcemu/emusys/ZXSpectrum.java:187
+msgid "Sound-Generator"
+msgstr "sound generator"
+
+#: jkcemu/emusys/A5105.java:283
+#: jkcemu/emusys/HueblerGraphicsMC.java:114
+#: jkcemu/emusys/Z1013.java:357
+#: jkcemu/emusys/Z9001.java:434
+#: jkcemu/emusys/ac1_llc2/AbstractSCCHSys.java:237
+msgid "Netzwerk-PIO (E/A-Adressen C0h-C3h)"
+msgstr "network PIO (I/O addresses C0h-C3h)"
+
+#: jkcemu/emusys/AC1.java:545
+msgid "RAM-Floppy E/A-Adressen E0h-E7h"
+msgstr "RAM floppy at I/O addresses E0h-E7h"
+
+#: jkcemu/emusys/KC85.java:189
+msgid "KC85 CAOS Systemdiskette"
+msgstr "KC85 CAOS system disk"
+
+#: jkcemu/emusys/KC85.java:193
+msgid "KC85 MicroDOS Systemdiskette"
+msgstr "KC85 MicroDOS system disk"
+
+#: jkcemu/emusys/KC85.java:448
+msgid "Tongeneratoren im Grundgerät"
+msgstr "sound generators in the base unit"
+
+#: jkcemu/emusys/KCcompact.java:94
+msgid "KC compact MicroDOS Systemdiskette"
+msgstr "KC compact MicroDOS system disk"
+
+#: jkcemu/emusys/LLC2.java:116
+msgid "RAM-Floppy an E/A-Adressen D0h-D7h"
+msgstr "RAM floppy at I/O addresses D0h-D7h"
+
+#: jkcemu/emusys/LLC2.java:124
+msgid "RAM-Floppy an E/A-Adressen B0h-B7h"
+msgstr "RAM floppy at I/O addresses B0h-B7h"
+
+#: jkcemu/emusys/NANOS.java:87
+msgid "EPOS 2.1 Boot-Diskette (64x32 Zeichen)"
+msgstr "EPOS 2.1 boot disk (64x32 characters)"
+
+#: jkcemu/emusys/NANOS.java:93
+msgid "EPOS 2.1 Boot-Diskette (80x24 Zeichen)"
+msgstr "EPOS 2.1 boot disk (80x24 characters)"
+
+#: jkcemu/emusys/NANOS.java:99
+msgid "NANOS 2.2 Boot-Diskette"
+msgstr "NANOS 2.2 boot disk"
+
+#: jkcemu/emusys/NANOS.java:168
+msgid "Netzwerk-PIO (E/A-Adressen 80h-83h)"
+msgstr "network PIO (I/O addresses 80h-83h)"
+
+#: jkcemu/emusys/PCM.java:60
+msgid "PC/M Boot-Diskette (64x16 Zeichen)"
+msgstr "PC/M boot disk (64x16 characters)"
+
+#: jkcemu/emusys/PCM.java:65
+msgid "PC/M Boot-Diskette (80x24 Zeichen)"
+msgstr "PC/M boot disk (80x24 characters)"
+
+#: jkcemu/emusys/PCM.java:125
+#: jkcemu/emusys/Poly880.java:101
+#: jkcemu/emusys/SC2.java:67
+#: jkcemu/emusys/SLC1.java:66
+#: jkcemu/emusys/Z9001.java:410
+#: jkcemu/emusys/ac1_llc2/AbstractSCCHSys.java:229
+msgid "Lautsprecher"
+msgstr "loudspeaker"
+
+#: jkcemu/emusys/Z1013.java:161
+msgid "Z1013 CP/M Boot-Diskette (64x16 Zeichen)"
+msgstr "Z1013 CP/M boot disk (64x16 characters)"
+
+#: jkcemu/emusys/Z1013.java:167
+msgid "Z1013 CP/M Boot-Diskette (80x25 Zeichen)"
+msgstr "Z1013 CP/M boot disk (80x25 characters)"
+
+#: jkcemu/emusys/Z1013.java:298
+msgid "RAM-Floppy an E/A-Adressen 98h-9Fh"
+msgstr "RAM floppy at I/O addresses 98h-9Fh"
+
+#: jkcemu/emusys/Z1013.java:306
+msgid "RAM-Floppy an E/A-Adressen 58h-5Fh"
+msgstr "RAM floppy at I/O addresses 58h-5Fh"
+
+#: jkcemu/emusys/Z9001.java:278
+msgid "Z9001 CP/A Systemdiskette"
+msgstr "Z9001 CP/A system disk"
+
+#: jkcemu/emusys/ZXSpectrum.java:196
+msgid "Ausgang EAR"
+msgstr "EAR output"
+
+#: jkcemu/emusys/kc85/FujiNet.java:147
+msgid "Verbindung beendet"
+msgstr "Connection closed"
+
+#: jkcemu/emusys/kc85/M025.java:18
+msgid "M025"
+msgstr "M025"
+
+#: jkcemu/emusys/kc85/M028.java:18
+msgid "M028"
+msgstr "M028"
+
+#: jkcemu/emusys/kc85/M045.java:18
+msgid "M045"
+msgstr "M045"
+
+#: jkcemu/emusys/kc85/M046.java:18
+msgid "M046"
+msgstr "M046"
+
+#: jkcemu/emusys/kc85/M047.java:18
+msgid "M047"
+msgstr "M047"
+
+#: jkcemu/emusys/kc85/M048.java:18
+msgid "M048"
+msgstr "M048"
+
+#: jkcemu/emusys/kc85/M049.java:18
+msgid "M049"
+msgstr "M049"
+
+#: jkcemu/emusys/kc85/M052.java:58
+msgid "Netzwerk-PIO"
+msgstr "network PIO"
+
+#: jkcemu/emusys/kccompact/ExtROMSettingsDlg.java:153
+msgid "ROM-Erweiterung"
+msgstr "ROM Expansion"
+
+#: jkcemu/etc/PSG8910.java:96
+msgid "JKCEMU PSG"
+msgstr "JKCEMU PSG"
+
+#: jkcemu/file/AbstractFileWorker.java:231
+msgid "Das Fenster wird erst geschlossen, wenn die laufenden\nDatei-Operationen fertig sind oder abgebrochen wurden."
+msgstr "The window will not be closed until the running\nfile operations have finished or been canceled."
+
+#: jkcemu/file/DirSelectDlg.java:167
+msgid "Verzeichnisauswahl"
+msgstr "Select Directory"
+
+#: jkcemu/file/Downloader.java:230
+msgid "JKCEMU Downloader"
+msgstr "JKCEMU Downloader"
+
+#: jkcemu/file/FileCopier.java:76
+#: jkcemu/file/FileMover.java:76
+msgid "''{0}'' kann nicht geladen werden."
+msgstr "''{0}'' cannot be loaded."
+
+#: jkcemu/file/FileCopier.java:77
+msgid "''{0}'' kann nicht kopiert werden."
+msgstr "''{0}'' cannot be copied."
+
+#: jkcemu/file/FileCopier.java:92
+msgid "Es konnten nicht alle Dateien, Verzeichnisse bzw.\nsymbolische Links kopiert werden."
+msgstr "Not all files, directories, or\nsymbolic links could be copied."
+
+#: jkcemu/file/FileFormat.java:17
+msgid "BIN-Datei (Speicherabbild ohne Kopfdaten)"
+msgstr "BIN file (memory image without header data)"
+
+#: jkcemu/file/FileFormat.java:20
+msgid "COM-Datei (CP/M-Programmdatei)"
+msgstr "COM file (CP/M program file)"
+
+#: jkcemu/file/FileFormat.java:23
+msgid "BASIC-Programmdatei"
+msgstr "BASIC program file"
+
+#: jkcemu/file/FileFormat.java:26
+msgid "CPC-Tape-Datei"
+msgstr "CPC tape file"
+
+#: jkcemu/file/FileFormat.java:29
+msgid "CSW-Datei"
+msgstr "CSW file"
+
+#: jkcemu/file/FileFormat.java:32
+msgid "Headersave-Datei"
+msgstr "Headersave file"
+
+#: jkcemu/file/FileFormat.java:35
+msgid "Intel-HEX-Datei"
+msgstr "Intel HEX file"
+
+#: jkcemu/file/FileFormat.java:38
+msgid "KCB-Datei (BASIC-Programm)"
+msgstr "KCB file (BASIC program)"
+
+#: jkcemu/file/FileFormat.java:41
+msgid "KCB-Datei (BASIC-Programm, Dateityp B)"
+msgstr "KCB file (BASIC program, file type B)"
+
+#: jkcemu/file/FileFormat.java:44
+msgid "KCB-Datei (BASIC-Programm, Dateityp B+P)"
+msgstr "KCB file (BASIC program, file type B+P)"
+
+#: jkcemu/file/FileFormat.java:47
+msgid "KCC/JTC-Datei"
+msgstr "KCC/JTC file"
+
+#: jkcemu/file/FileFormat.java:50
+msgid "KCC/JTC-Datei (Typ B)"
+msgstr "KCC/JTC file (type B)"
+
+#: jkcemu/file/FileFormat.java:53
+msgid "KCC/JTC-Datei (Typ B+P)"
+msgstr "KCC/JTC file (type B+P)"
+
+#: jkcemu/file/FileFormat.java:56
+msgid "KC-TAP-Datei"
+msgstr "KC-TAP file"
+
+#: jkcemu/file/FileFormat.java:59
+msgid "KC-TAP-Datei (KC85)"
+msgstr "KC-TAP file (KC85)"
+
+#: jkcemu/file/FileFormat.java:62
+msgid "KC-TAP-Datei (Z9001)"
+msgstr "KC-TAP file (Z9001)"
+
+#: jkcemu/file/FileFormat.java:65
+msgid "KC-TAP-BASIC-Programmdatei"
+msgstr "KC-TAP BASIC program file"
+
+#: jkcemu/file/FileFormat.java:68
+msgid "KC-TAP-BASIC-Datenfeld"
+msgstr "KC-TAP BASIC data field"
+
+#: jkcemu/file/FileFormat.java:71
+msgid "KC-TAP-BASIC-ASCII-Listing"
+msgstr "KC-TAP BASIC ASCII listing"
+
+#: jkcemu/file/FileFormat.java:74
+msgid "KC-BASIC-Programmdatei (Dateityp K)"
+msgstr "KC-BASIC program file (file type K)"
+
+#: jkcemu/file/FileFormat.java:77
+msgid "KC-BASIC-Programmdatei (Dateityp K+B)"
+msgstr "KC-BASIC program file (file type K+B)"
+
+#: jkcemu/file/FileFormat.java:80
+msgid "KC-BASIC-Programmdatei (Dateityp K+B+P)"
+msgstr "KC-BASIC program file (file type K+B+P)"
+
+#: jkcemu/file/FileFormat.java:83
+msgid "KC-BASIC-Datenfeld (Dateityp K)"
+msgstr "KC-BASIC data field (file type K)"
+
+#: jkcemu/file/FileFormat.java:86
+msgid "KC-BASIC-Datenfeld (Dateityp K+B)"
+msgstr "KC-BASIC data field (file type K+B)"
+
+#: jkcemu/file/FileFormat.java:89
+msgid "KC-BASIC-Datenfeld (Dateityp K+B+P)"
+msgstr "KC-BASIC data field (file type K+B+P)"
+
+#: jkcemu/file/FileFormat.java:92
+msgid "KC-BASIC-ASCII-Listing (Dateityp K"
+msgstr "KC-BASIC ASCII listing (file type K)"
+
+#: jkcemu/file/FileFormat.java:95
+msgid "KC-BASIC-ASCII-Listing (Dateityp K+B)"
+msgstr "KC-BASIC ASCII listing (file type K+B)"
+
+#: jkcemu/file/FileFormat.java:98
+msgid "KC-BASIC-ASCII-Listing (Dateityp K+B+P)"
+msgstr "KC-BASIC ASCII listing (file type K+B+P)"
+
+#: jkcemu/file/FileFormat.java:101
+msgid "KC-BASIC-Programmdatei"
+msgstr "KC-BASIC program file"
+
+#: jkcemu/file/FileFormat.java:104
+msgid "RBASIC-Programmdatei"
+msgstr "RBASIC program file"
+
+#: jkcemu/file/FileFormat.java:107
+msgid "RBASIC-Maschinencodedatei"
+msgstr "RBASIC machine code file"
+
+#: jkcemu/file/FileFormat.java:110
+msgid "ZX-Spectrum-Tape-Datei"
+msgstr "ZX Spectrum tape file"
+
+#: jkcemu/file/FileFormat.java:113
+msgid "ZX-TAP-Datei"
+msgstr "ZX-TAP file"
+
+#: jkcemu/file/FileMover.java:78
+msgid "''{0}'' kann nicht verschoben werden."
+msgstr "''{0}'' cannot be moved."
+
+#: jkcemu/file/FileMover.java:86
+msgid "Verschieben"
+msgstr "Move"
+
+#: jkcemu/file/FileMover.java:94
+msgid "Es konnten nicht alle Dateien, Verzeichnisse bzw.\nsymbolische Links verschoben werden."
+msgstr "Not all files, directories, or\nsymbolic links could be moved."
+
+#: jkcemu/file/FileRemover.java:156
+msgid "''{0}'' kann nicht gelöscht werden."
+msgstr "''{0}'' cannot be deleted."
+
+#: jkcemu/file/FileRemover.java:172
+msgid "Es konnten nicht alle Dateien, Verzeichnisse bzw.\nsymbolische Links gelöscht werden."
+msgstr "Not all files, directories, or\nsymbolic links could be deleted."
+
+#: jkcemu/file/FileSelectDlg.java:308
+msgid "Alle Dateien"
+msgstr "All files"
+
+#: jkcemu/file/FileUtil.java:294
+msgid "Sie haben in den Kopfdaten keine Bezeichnung angegeben.\nDas kann beim Einlesen der Datei zu Problemen führen.\n\nMöchten Sie trotzdem fortsetzen?"
+msgstr "You have not specified a name in the header data.\nThis can cause problems when reading in the file.\n\nDo you want to continue anyway?"
+
+#: jkcemu/file/FileUtil.java:754
+msgid "AC1-BASIC6-Dateien (*.abc)"
+msgstr "AC1 BASIC6 files (*.abc)"
+
+#: jkcemu/file/FileUtil.java:760
+msgid "AnaDisk-Dateien (*.dump)"
+msgstr "AnaDisk files (*.dump)"
+
+#: jkcemu/file/FileUtil.java:766
+msgid "BASIC-Dateien (*.bas)"
+msgstr "BASIC files (*.bas)"
+
+#: jkcemu/file/FileUtil.java:772
+msgid "BASIC-/RBASIC-Dateien (*.bas)"
+msgstr "BASIC/RBASIC files (*.bas)"
+
+#: jkcemu/file/FileUtil.java:778
+msgid "Einfache Speicherabbilddateien (*.bin)"
+msgstr "Simple memory image files (*.bin)"
+
+#: jkcemu/file/FileUtil.java:784
+msgid "CPC-Tape-Dateien (*.cdt)"
+msgstr "CPC tape files (*.cdt)"
+
+#: jkcemu/file/FileUtil.java:790
+msgid "CP/M-kompatible Programmdateien (*.com)"
+msgstr "CP/M compatible program files (*.com)"
+
+#: jkcemu/file/FileUtil.java:796
+msgid "CSW-Dateien (*.csw)"
+msgstr "CSW files (*.csw)"
+
+#: jkcemu/file/FileUtil.java:802
+msgid "CP/M-Programmdateien (*.com)"
+msgstr "CP/M program files (*.com)"
+
+#: jkcemu/file/FileUtil.java:808
+msgid "CopyQM-Dateien (*.cqm; *.qm)"
+msgstr "CopyQM files (*.cqm; *.qm)"
+
+#: jkcemu/file/FileUtil.java:814
+msgid "CPC-Disk-Dateien (*.dsk)"
+msgstr "CPC disk files (*.dsk)"
+
+#: jkcemu/file/FileUtil.java:820
+msgid "GIF-Dateien (*.gif)"
+msgstr "GIF files (*.gif)"
+
+#: jkcemu/file/FileUtil.java:826
+msgid "Headersave-Dateien (*.z80)"
+msgstr "Headersave files (*.z80)"
+
+#: jkcemu/file/FileUtil.java:832
+msgid "HEX-Dateien (*.hex; *.ihx)"
+msgstr "HEX files (*.hex; *.ihx)"
+
+#: jkcemu/file/FileUtil.java:838
+msgid "ImageDisk-Dateien (*.imd)"
+msgstr "ImageDisk files (*.imd)"
+
+#: jkcemu/file/FileUtil.java:844
+msgid "CD-/DVD-Abbilddateien (*.iso)"
+msgstr "CD/DVD image files (*.iso)"
+
+#: jkcemu/file/FileUtil.java:850
+msgid "KC-BASIC-Dateien (*.sss)"
+msgstr "KC-BASIC files (*.sss)"
+
+#: jkcemu/file/FileUtil.java:856
+msgid "KC-BASIC-Systemdateien (*.kcb)"
+msgstr "KC-BASIC system files (*.kcb)"
+
+#: jkcemu/file/FileUtil.java:862
+msgid "KC-Systemdateien (*.kcc)"
+msgstr "KC system files (*.kcc)"
+
+#: jkcemu/file/FileUtil.java:868
+msgid "KC-TAP-Dateien (*.tap)"
+msgstr "KC-TAP files (*.tap)"
+
+#: jkcemu/file/FileUtil.java:875
+msgid "Einfache Abbilddateien (*.dd; *.img; *.image, *.raw)"
+msgstr "Simple image files (*.dd; *.img; *.image, *.raw)"
+
+#: jkcemu/file/FileUtil.java:882
+msgid "Projekdateien (*.prj)"
+msgstr "Project files (*.prj)"
+
+#: jkcemu/file/FileUtil.java:888
+msgid "RBASIC-Maschinencodedateien (*.rmc)"
+msgstr "RBASIC machine code files (*.rmc)"
+
+#: jkcemu/file/FileUtil.java:894
+msgid "ROM-Dateien (*.bin; *.rom)"
+msgstr "ROM files (*.bin; *.rom)"
+
+#: jkcemu/file/FileUtil.java:901
+msgid "Tape-Dateien (*.cdt; *.csw; *.tap; *.tzx)"
+msgstr "Tape files (*.cdt; *.csw; *.tap; *.tzx)"
+
+#: jkcemu/file/FileUtil.java:908
+msgid "TeleDisk-Dateien (*.td0)"
+msgstr "TeleDisk files (*.td0)"
+
+#: jkcemu/file/FileUtil.java:915
+msgid "Textdateien (*.asc; *.log; *.txt)"
+msgstr "Text files (*.asc; *.log; *.txt)"
+
+#: jkcemu/file/FileUtil.java:922
+msgid "ZX-Tape-Dateien (*.tzx)"
+msgstr "ZX tape files (*.tzx)"
+
+#: jkcemu/file/FileUtil.java:928
+msgid "XML-Dateien (*.xml)"
+msgstr "XML files (*.xml)"
+
+#: jkcemu/file/GZipPacker.java:89
+msgid "JKCEMU gzip packer"
+msgstr "JKCEMU gzip packer"
+
+#: jkcemu/file/GZipPacker.java:90
+msgid "Packen von {0}..."
+msgstr "Packing {0}..."
+
+#: jkcemu/file/GZipUnpacker.java:90
+msgid "JKCEMU gzip unpacker"
+msgstr "JKCEMU gzip unpacker"
+
+#: jkcemu/file/GZipUnpacker.java:91
+#: jkcemu/file/TarUnpacker.java:241
+#: jkcemu/file/ZipUnpacker.java:184
+msgid "Entpacken von {0}..."
+msgstr "Unpacking {0}..."
+
+#: jkcemu/file/LastModifiedDlg.java:235
+msgid "Änderungszeitpunkt"
+msgstr "Modification Time"
+
+#: jkcemu/file/LoadDlg.java:152
+msgid "Die Datei kann nur über eine Audiofunktion geladen werden.\nDazu müssen Sie im emulierten System das Laden von Kassette\nund im Fenster Audio/Kassette das Abspielden der Datei starten."
+msgstr "The file can only be loaded via an audio function.\nTo do this, you must start loading from tape in the emulated system\nand start playback of the file in the Audio/Tape window."
+
+#: jkcemu/file/LoadDlg.java:484
+#: jkcemu/tools/ReassFrm.java:289
+#: jkcemu/tools/hexedit/MemEditFrm.java:195
+msgid "Anfangsadresse"
+msgstr "Start address"
+
+#: jkcemu/file/LoadDlg.java:507
+#: jkcemu/tools/ReassFrm.java:301
+#: jkcemu/tools/hexedit/MemEditFrm.java:208
+msgid "Endadresse"
+msgstr "End address"
+
+#: jkcemu/file/LoadDlg.java:633
+msgid "Die Datei ist eine Multi-TAP-Datei, d.h., sie enthält mehrere Teildateien.\nEs wurde aber nur die erste Teildatei in den Arbeitsspeicher geladen.\n\nHäufig versucht das in der ersten Teildatei enthaltene Programm,\ndie restlichen Teildateien von Kassette nachzuladen.\nSie können jetzt die Emulation des Kassettenrecorderanschlusses\nmit den restlichen Teildateien aktivieren,\nsodass das Nachladen auch im Emulator funktioniert.\n\nMöchten Sie das jetzt tun?"
+msgstr "The file is a multi-TAP file, i.e. it contains several part files.\nHowever, only the first part file was loaded into main memory.\n\nOften, the program contained in the first part file tries\nto reload the remaining part files from tape.\nYou can now enable emulation of the tape recorder port\nwith the remaining part files,\nso that reloading also works in the emulator.\n\nDo you want to do this now?"
+
+#: jkcemu/file/LoadDlg.java:647
+msgid "Multi-TAP-Datei"
+msgstr "Multi-TAP File"
+
+#: jkcemu/file/RecentFilesMngr.java:181
+msgid "Möchte Sie die Liste der zuletzt verwendeten Dateien löschen?"
+msgstr "Do you want to clear the list of recently used files?"
+
+#: jkcemu/file/SaveDlg.java:160
+msgid "Anfangsadresse des Speicherbereichs"
+msgstr "Start address of the memory range"
+
+#: jkcemu/file/SaveDlg.java:178
+msgid "Endadresse des Speicherbereichs"
+msgstr "End address of the memory range"
+
+#: jkcemu/file/SaveDlg.java:359
+msgid "Anfangsadresse in den Kopfdaten"
+msgstr "Start address in the header data"
+
+#: jkcemu/file/SaveDlg.java:380
+msgid "Startadresse in den Kopfdaten"
+msgstr "Execution address in the header data"
+
+#: jkcemu/file/TarPacker.java:303
+msgid "JKCEMU tar packer"
+msgstr "JKCEMU tar packer"
+
+#: jkcemu/file/TarUnpacker.java:240
+msgid "JKCEMU tar unpacker"
+msgstr "JKCEMU tar unpacker"
+
+#: jkcemu/file/ZipPacker.java:237
+msgid "JKCEMU zip packer"
+msgstr "JKCEMU zip packer"
+
+#: jkcemu/file/ZipUnpacker.java:183
+msgid "JKCEMU zip unpacker"
+msgstr "JKCEMU zip unpacker"
+
+#: jkcemu/image/AbstractImageFrm.java:237
+msgid "Soll das Bild gedreht gespeichert werden,\nso wie Sie es gerade sehen?"
+msgstr "Do you want to save the image rotated,\nas you currently see it?"
+
+#: jkcemu/image/AbstractImageFrm.java:239
+msgid "Bild gedreht"
+msgstr "Image Rotated"
+
+#: jkcemu/image/ExifData.java:202
+msgid "sRGB"
+msgstr "sRGB"
+
+#: jkcemu/image/ExifData.java:203
+msgid "Adobe RGB"
+msgstr "Adobe RGB"
+
+#: jkcemu/image/ExifData.java:293
+#: jkcemu/image/ExifData.java:621
+#: jkcemu/image/ExifData.java:700
+msgid "normal"
+msgstr "normal"
+
+#: jkcemu/image/ExifData.java:364
+msgid "automatische Belichtung"
+msgstr "auto exposure"
+
+#: jkcemu/image/ExifData.java:365
+msgid "manuelle Belichtung"
+msgstr "manual exposure"
+
+#: jkcemu/image/ExifData.java:366
+msgid "automatische Belichtungsreihe"
+msgstr "auto exposure bracket"
+
+#: jkcemu/image/ExifData.java:377
+#: jkcemu/image/ExifData.java:774
+msgid "manuell"
+msgstr "manual"
+
+#: jkcemu/image/ExifData.java:378
+msgid "Programmautomatik"
+msgstr "program auto mode"
+
+#: jkcemu/image/ExifData.java:379
+msgid "Blendenvorwahl"
+msgstr "aperture priority"
+
+#: jkcemu/image/ExifData.java:380
+msgid "Zeitvorwahl"
+msgstr "shutter priority"
+
+#: jkcemu/image/ExifData.java:381
+msgid "Programmautomatik für langsame Motive"
+msgstr "program auto mode for slow subjects"
+
+#: jkcemu/image/ExifData.java:382
+msgid "Programmautomatik für schnelle Motive"
+msgstr "program auto mode for fast subjects"
+
+#: jkcemu/image/ExifData.java:383
+msgid "Portraitautomatik"
+msgstr "portrait auto mode"
+
+#: jkcemu/image/ExifData.java:384
+msgid "Landschaftsautomatik"
+msgstr "landscape auto mode"
+
+#: jkcemu/image/ExifData.java:578
+msgid "Integral"
+msgstr "average"
+
+#: jkcemu/image/ExifData.java:579
+msgid "Mittenbetont"
+msgstr "center-weighted"
+
+#: jkcemu/image/ExifData.java:580
+msgid "Einpunkt"
+msgstr "spot"
+
+#: jkcemu/image/ExifData.java:581
+msgid "Mehrpunkt"
+msgstr "Multi-spot"
+
+#: jkcemu/image/ExifData.java:582
+msgid "Mehrfeld"
+msgstr "Pattern"
+
+#: jkcemu/image/ExifData.java:583
+msgid "Teilbereich"
+msgstr "Partial"
+
+#: jkcemu/image/ExifData.java:596
+msgid "dpi"
+msgstr "dpi"
+
+#: jkcemu/image/ExifData.java:597
+msgid "Pixel/cm"
+msgstr "pixels/cm"
+
+#: jkcemu/image/ExifData.java:622
+msgid "niedrig"
+msgstr "low"
+
+#: jkcemu/image/ExifData.java:623
+msgid "hoch"
+msgstr "high"
+
+#: jkcemu/image/ExifData.java:634
+msgid "Landschaft"
+msgstr "Landscape"
+
+#: jkcemu/image/ExifData.java:635
+msgid "Portrait"
+msgstr "Portrait"
+
+#: jkcemu/image/ExifData.java:636
+msgid "Nacht"
+msgstr "Night"
+
+#: jkcemu/image/ExifData.java:720
+msgid "Makro"
+msgstr "Macro"
+
+#: jkcemu/image/ExifData.java:721
+msgid "Nahaufnahme"
+msgstr "Close view"
+
+#: jkcemu/image/ExifData.java:722
+msgid "Fernaufnahme"
+msgstr "Distant view"
+
+#: jkcemu/image/ExifData.java:773
+msgid "automatisch"
+msgstr "automatic"
+
+#: jkcemu/image/ExifEditDlg.java:131
+msgid "Zusatzinformationen bearbeiten"
+msgstr "Edit Additional Information"
+
+#: jkcemu/image/IFFFile.java:86
+msgid "IFF/ILBM-Datei"
+msgstr "IFF/ILBM file"
+
+#: jkcemu/image/IFFFile.java:97
+msgid "IFF/ILBM-Farbpalettendatei"
+msgstr "IFF/ILBM color palette file"
+
+#: jkcemu/image/ImageAdjustDlg.java:308
+msgid "Helligkeit, Kontrast, Farben"
+msgstr "Brightness, Contrast, Colors"
+
+#: jkcemu/image/ImageCaptureFrm.java:374
+msgid "Aufzunehmendes Fenster aktivieren! Noch 1 Sekunde..."
+msgstr "Activate the window to be captured! 1 second remaining..."
+
+#: jkcemu/image/ImageCaptureFrm.java:377
+msgid "Aufzunehmendes Fenster aktivieren! Noch {0} Sekunden..."
+msgstr "Activate the window to be captured! {0} seconds remaining..."
+
+#: jkcemu/image/ImageFrm.java:87
+msgid "JKCEMU Bildbetrachter"
+msgstr "JKCEMU Image Viewer"
+
+#: jkcemu/image/ImageFrm.java:1043
+msgid "Helligkeit,  Kontrast, Farben eingestellt"
+msgstr "Brightness, contrast, colors adjusted"
+
+#: jkcemu/image/ImageFrm.java:1063
+msgid "Farbpalette geändert"
+msgstr "Color palette changed"
+
+#: jkcemu/image/ImageFrm.java:1134
+msgid "Zusatzinformationen geändert"
+msgstr "Additional information changed"
+
+#: jkcemu/image/ImageFrm.java:1154
+msgid "Zusatzinformationen entfernt"
+msgstr "Additional information removed"
+
+#: jkcemu/image/ImageFrm.java:1461
+msgid "Horizontal gespiegelt"
+msgstr "Flipped horizontally"
+
+#: jkcemu/image/ImageFrm.java:1485
+msgid "Vertikal gespiegelt"
+msgstr "Flipped vertically"
+
+#: jkcemu/image/ImageFrm.java:1766
+msgid "Ecken abgerundet"
+msgstr "Corners rounded"
+
+#: jkcemu/image/ImageFrm.java:1803
+msgid "Statt zu schärfen wird der letzte Beabeitungsschritt 'Weichzeichnen' zurückgenommen."
+msgstr ""
+"Instead of sharpening, the last editing step 'Blur' will be undone."
+
+#: jkcemu/image/ImageFrm.java:1817
+msgid "Geschärft"
+msgstr "Sharpened"
+
+#: jkcemu/image/ImageFrm.java:1833
+msgid "Statt weichzuzeichnen wird der letzte Beabeitungsschritt 'Schärfen' zurückgenommen."
+msgstr ""
+"Instead of blurring, the last editing step 'Sharpen' will be undone."
+
+#: jkcemu/image/ImageFrm.java:1896
+#: jkcemu/image/ImageFrm.java:1918
+msgid "Monochrom"
+msgstr "Monochrome"
+
+#: jkcemu/image/ImageFrm.java:1972
+msgid "Invertiert"
+msgstr "Inverted"
+
+#: jkcemu/image/ImageFrm.java:2007
+msgid "Transparenz entfernt"
+msgstr "Transparency removed"
+
+#: jkcemu/image/ImageLoader.java:87
+msgid "Unterstützte Bilddateien"
+msgstr "Supported image files"
+
+#: jkcemu/image/ImagePropsDlg.java:151
+msgid "Bildeigenschaften"
+msgstr "Image Properties"
+
+#: jkcemu/image/ImageUtil.java:109
+msgid "Unterstützte Farbpaletten- und Bilddateien"
+msgstr "Supported color palette and image files"
+
+#: jkcemu/image/ImageUtil.java:340
+msgid "A5105-Bilddateien"
+msgstr "A5105 image files"
+
+#: jkcemu/image/ImageUtil.java:348
+msgid "KC85/2,3-Bilddateien"
+msgstr "KC85/2,3 image files"
+
+#: jkcemu/image/ImageUtil.java:356
+msgid "KC85/4,5-HIRES-Bilddateien"
+msgstr "KC85/4,5 HIRES image files"
+
+#: jkcemu/image/ImageUtil.java:364
+msgid "KC85/4,5-LOWRES-Bilddateien"
+msgstr "KC85/4,5 LOWRES image files"
+
+#: jkcemu/image/ImageUtil.java:372
+msgid "LLC2-HIRES-Bilddateien"
+msgstr "LLC2 HIRES image files"
+
+#: jkcemu/image/IndexColorsDlg.java:143
+msgid "Farben reduzieren und indexieren"
+msgstr "Reduce and Index Colors"
+
+#: jkcemu/image/JASCPaletteFile.java:41
+msgid "Paintshop Pro Farbpalettendatei"
+msgstr "Paintshop Pro color palette file"
+
+#: jkcemu/image/JPEGSaveParamDlg.java:112
+msgid "JPEG-Parameter beim Speichern"
+msgstr "JPEG Parameters When Saving"
+
+#: jkcemu/image/RemoveTransparencyDlg.java:85
+msgid "Transparenz entfernen"
+msgstr "Remove Transparency"
+
+#: jkcemu/image/RotateDlg.java:135
+msgid "Drehen"
+msgstr "Rotate"
+
+#: jkcemu/image/RoundCornersDlg.java:43
+msgid "Ecken abrunden"
+msgstr "Round Corners"
+
+#: jkcemu/image/SharpenDlg.java:123
+msgid "Schärfen"
+msgstr "Sharpen"
+
+#: jkcemu/image/ThresholdDlg.java:134
+msgid "Schwellwert"
+msgstr "Threshold"
+
+#: jkcemu/image/VideoCaptureFrm.java:812
+msgid "Sie überschreiben die Datei\n{0} !"
+msgstr ""
+"You are overwriting the file\n"
+"{0} !"
+
+#: jkcemu/net/KCNetSettingsFld.java:296
+msgid "Hardwareadresse:"
+msgstr "Hardware address:"
+
+#: jkcemu/net/KCNetSettingsFld.java:311
+msgid "IP-Adresse:"
+msgstr "IP address:"
+
+#: jkcemu/net/KCNetSettingsFld.java:315
+msgid "Subnetzmaske:"
+msgstr "Subnet mask:"
+
+#: jkcemu/net/KCNetSettingsFld.java:319
+msgid "DNS-Server:"
+msgstr "DNS server:"
+
+#: jkcemu/net/KCNetSettingsFld.java:331
+msgid "IPv4-Netzwerkkonfiguration"
+msgstr "IPv4 Network Configuration"
+
+#: jkcemu/print/PrintOptionsDlg.java:102
+msgid "Druckoptionen"
+msgstr "Print Options"
+
+#: jkcemu/programming/assembler/AsmOptionsDlg.java:62
+msgid "Assembler-Optionen"
+msgstr "Assembler Options"
+
+#: jkcemu/programming/assembler/AsmThread.java:35
+msgid "JKCEMU assembler"
+msgstr "JKCEMU assembler"
+
+#: jkcemu/programming/basic/BasicCompilerThread.java:36
+msgid "JKCEMU basic compiler"
+msgstr "JKCEMU basic compiler"
+
+#: jkcemu/programming/basic/BasicOptionsDlg.java:131
+msgid "BASIC-Compiler-Optionen"
+msgstr "BASIC Compiler Options"
+
+#: jkcemu/settings/AbstractSettingsFld.java:91
+msgid "Konflikt"
+msgstr "Conflict"
+
+#: jkcemu/settings/AutoLoadEntryDlg.java:247
+msgid "Das automatiche Laden wird nicht funktionieren,\nda Sie keine Ladeadresse angegeben haben\nund in der Datei keine enthalten ist.\n\nMöchten Sie trotzdem fortsetzen?"
+msgstr ""
+"Automatic loading will not work,\n"
+"because you have not specified a load address\n"
+"and the file does not contain one either.\n"
+"\n"
+"Do you want to continue anyway?"
+
+#: jkcemu/settings/EtcSettingsFld.java:485
+msgid "Das JKCEMU-Datenverzeichnis enthält Dateien und/oder Unterverzeichnisse,\ndie offensichtlich nicht von JKCEMU stammen.\nSoll das Verzeichnis trotzdem gelöscht werden?"
+msgstr ""
+"The JKCEMU data directory contains files and/or subdirectories\n"
+"that obviously do not originate from JKCEMU.\n"
+"Do you want to delete the directory anyway?"
+
+#: jkcemu/settings/EtcSettingsFld.java:533
+msgid "Wenn Sie sichergehen wollen,\ndass keine alten Einstellungen übernommen werden,\nsollten Sie jetzt den Emulator beenden.\n\nMöchten Sie den Emulator jetzt beenden?"
+msgstr ""
+"If you want to make sure\n"
+"that no old settings are applied,\n"
+"you should quit the emulator now.\n"
+"\n"
+"Do you want to quit the emulator now?"
+
+#: jkcemu/settings/FontSelectDlg.java:47
+msgid "ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n0123 4567 89 +-*/=()_:;#~?"
+msgstr ""
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ\n"
+"abcdefghijklmnopqrstuvwxyz\n"
+"0123 4567 89 +-*/=()_:;#~?"
+
+#: jkcemu/settings/FontSelectDlg.java:176
+msgid "Auswahl Schrift"
+msgstr "Font Selection"
+
+#: jkcemu/text/EditText.java:1650
+msgid "Das KC-BASIC-Programm enthält Tokens, die auf den einzelnen\nSystemen unterschiedliche Anweisungen repräsentieren.\nAuf welchem System wurde das BASIC-Programm erstellt?"
+msgstr ""
+"The KC-BASIC program contains tokens that represent different\n"
+"statements on the individual systems.\n"
+"On which system was the BASIC program created?"
+
+#: jkcemu/text/EditText.java:1661
+msgid "BASIC-Version"
+msgstr "BASIC Version"
+
+#: jkcemu/text/EncodingSelectDlg.java:48
+msgid "Zeichensatz auswählen"
+msgstr "Select Character Set"
+
+#: jkcemu/text/ReplyShiftWidthDlg.java:95
+msgid "Einrücktiefe ändern"
+msgstr "Change Indentation Depth"
+
+#: jkcemu/text/ReplyTabSizeDlg.java:100
+msgid "Tabulatorbreite ändern"
+msgstr "Change Tab Width"
+
+#: jkcemu/text/SaveTextDlg.java:54
+msgid "Textdatei speichern: {0}"
+msgstr "Save text file: {0}"
+
+#: jkcemu/text/TextEditFrm.java:114
+msgid "JKCEMU Editor"
+msgstr "JKCEMU Editor"
+
+#: jkcemu/text/TextEditFrm.java:292
+msgid "Quelltextdateien (*.asm; *.bas)"
+msgstr "Source code files (*.asm; *.bas)"
+
+#: jkcemu/text/TextEditFrm.java:1325
+msgid "{0} wurde geändert und nicht gespeichert.\nMöchten Sie jetzt speichern?"
+msgstr ""
+"{0} was changed and not saved.\n"
+"Do you want to save now?"
+
+#: jkcemu/text/TextEditFrm.java:1328
+msgid "Das Projekt"
+msgstr "The project"
+
+#: jkcemu/text/TextEditFrm.java:1329
+msgid "Der Text"
+msgstr "The text"
+
+#: jkcemu/text/TextEditFrm.java:1461
+msgid "Möchten Sie an der aktuellen Cursor-Position ein Seitenumbruchzeichen einfügen?\nDieses Zeichen hat nur beim Drucken eine Wirkung.\nIm Editor wird es abhängig von der aktuellen Schrift entweder gar nicht\noder mit einem speziellen Zeichen dargestellt."
+msgstr ""
+"Do you want to insert a page break character at the current cursor "
+"position?\n"
+"This character only has an effect when printing.\n"
+"In the editor, depending on the current font, it is displayed either not "
+"at all\n"
+"or with a special character."
+
+#: jkcemu/tools/calculator/CalculatorFld.java:37
+msgid "Geben Sie bitte ein Zeichen oder einen numerischen Ausdruck ein!"
+msgstr "Please enter a character or a numeric expression!"
+
+#: jkcemu/tools/calculator/CalculatorFld.java:255
+msgid "Unicode des Zeichen"
+msgstr "Unicode of the character"
+
+#: jkcemu/tools/calculator/CalculatorFld.java:261
+msgid "Ergebnis des Ausdrucks"
+msgstr "Result of the expression"
+
+#: jkcemu/tools/calculator/CalculatorFrm.java:44
+msgid "JKCEMU Rechner"
+msgstr "JKCEMU Calculator"
+
+#: jkcemu/tools/debugger/AbstractBreakpointDlg.java:53
+msgid "Halte-/Log-Punkt auf {0} bearbeiten"
+msgstr "Edit Breakpoint/Logpoint on {0}"
+
+#: jkcemu/tools/debugger/AbstractBreakpointDlg.java:56
+msgid "Neuer Halte-/Log-Punkt auf {0}"
+msgstr "New Breakpoint/Logpoint on {0}"
+
+#: jkcemu/tools/debugger/AbstractBreakpointDlg.java:84
+msgid "Ein Halte-Log-Punkt mit dem Namen existiert bereits.\nDieser wird aktualisiert."
+msgstr ""
+"A breakpoint/logpoint with this name already exists.\n"
+"It will be updated."
+
+#: jkcemu/tools/debugger/DebugFrm.java:2697
+msgid "Sollen vor dem Laden die bereits vorhandenen Halte-/Log-Punkte\nund Variablen entfernt werden?"
+msgstr ""
+"Should the existing breakpoints/logpoints\n"
+"and variables be removed before loading?"
+
+#: jkcemu/tools/debugger/DebugFrm.java:2840
+msgid "Möchten Sie alle importierten Halte-/Log-Punkte entfernen?"
+msgstr "Do you want to remove all imported breakpoints/logpoints?"
+
+#: jkcemu/tools/debugger/LabelImportDlg.java:106
+msgid "Halte-/Log-Punkte importieren"
+msgstr "Import Breakpoints/Logpoints"
+
+#: jkcemu/tools/debugger/MemoryBreakpointDlg.java:56
+msgid "Speicherbereich"
+msgstr "Memory Range"
+
+#: jkcemu/tools/filebrowser/FileBrowserFrm.java:149
+msgid "JKCEMU Datei-Browser"
+msgstr "JKCEMU File Browser"
+
+#: jkcemu/tools/fileconverter/AnaDiskFileTarget.java:27
+msgid "AnaDisk-Datei (*.dump)"
+msgstr "AnaDisk file (*.dump)"
+
+#: jkcemu/tools/fileconverter/AudioFileTarget.java:34
+#: jkcemu/tools/fileconverter/AudioFileTarget.java:49
+msgid "Sound-Datei ({0})"
+msgstr "Sound file ({0})"
+
+#: jkcemu/tools/fileconverter/BinFileTarget.java:38
+msgid "Einfache Speicherabbilddatei (*.bin)"
+msgstr "Simple memory image file (*.bin)"
+
+#: jkcemu/tools/fileconverter/CPCDiskFileTarget.java:27
+msgid "CPC-Disk-Datei (*.dsk)"
+msgstr "CPC disk file (*.dsk)"
+
+#: jkcemu/tools/fileconverter/CSWFileTarget.java:31
+msgid "CSW-Datei ({0})"
+msgstr "CSW file ({0})"
+
+#: jkcemu/tools/fileconverter/CopyQMFileTarget.java:27
+msgid "CopyQM-Datei (*.cqm)"
+msgstr "CopyQM file (*.cqm)"
+
+#: jkcemu/tools/fileconverter/FileConvertFrm.java:83
+msgid "JKCEMU Dateikonverter"
+msgstr "JKCEMU File Converter"
+
+#: jkcemu/tools/fileconverter/ImageDiskFileTarget.java:27
+msgid "ImageDisk-Datei (*.imd)"
+msgstr "ImageDisk file (*.imd)"
+
+#: jkcemu/tools/fileconverter/KCAudioMultiFileTarget.java:22
+msgid "Sound-Datei im KC-Format, 1:1 aus TAP- oder Multi-TAP-Datei konvertiert"
+msgstr "Sound file in KC format, converted 1:1 from a TAP or multi-TAP file"
+
+#: jkcemu/tools/fileconverter/KCBasicSystemFileTarget.java:104
+msgid "KC-Systemdatei mit KC-BASIC-Programm (*.kcb)"
+msgstr "KC system file with KC-BASIC program (*.kcb)"
+
+#: jkcemu/tools/fileconverter/KCTapBasicFileTarget.java:34
+msgid "KC-TAP-BASIC-Datei"
+msgstr "KC-TAP-BASIC file"
+
+#: jkcemu/tools/fileconverter/PlainDiskFileTarget.java:29
+msgid "Einfache Diskettenabbilddatei (*.dd; *.img; *.image; *.raw)"
+msgstr "Simple disk image file (*.dd; *.img; *.image; *.raw)"
+
+#: jkcemu/tools/fileconverter/RMCFileTarget.java:33
+msgid "RBASIC-Maschinencode-Datei (*.rmc)"
+msgstr "RBASIC machine code file (*.rmc)"
+
+#: jkcemu/tools/fileconverter/TZXFileTarget.java:31
+msgid "CDT/TZX-Datei ({0})"
+msgstr "CDT/TZX file ({0})"
+
+#: jkcemu/tools/fileconverter/TeleDiskFileTarget.java:27
+msgid "TeleDisk-Datei (*.td0)"
+msgstr "TeleDisk file (*.td0)"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:185
+msgid "JKCEMU Dateisuche"
+msgstr "JKCEMU File Search"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:189
+msgid "Zeilen als Text kopieren"
+msgstr "Copy Lines as Text"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:1668
+msgid "{0} Stunde"
+msgstr "{0} hour"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:1670
+msgid "{0} Stunden"
+msgstr "{0} hours"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:1678
+msgid "{0} Minute"
+msgstr "{0} minute"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:1680
+msgid "{0} Minuten"
+msgstr "{0} minutes"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:1684
+msgid "1 Sekunde"
+msgstr "1 second"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:1686
+msgid "{0} Sekunden"
+msgstr "{0} seconds"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:1705
+msgid "1 Datei/Verzeichnis gefunden"
+msgstr "1 file/directory found"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:1708
+msgid "{0} Dateien/Verzeichnisse gefunden"
+msgstr "{0} files/directories found"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:2230
+msgid "Keine Datei gefunden"
+msgstr "No file found"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:2323
+msgid "Suche läuft seit {0}: {1}"
+msgstr "Search running for {0}: {1}"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:2328
+msgid "Suche läuft seit {0}..."
+msgstr "Search running for {0}..."
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:2334
+msgid "Suche läuft: {0}"
+msgstr "Search running: {0}"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:2337
+msgid "Suche läuft..."
+msgstr "Search running..."
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:2344
+msgid "Letzte Suche: nach {0} abgebrochen, {1}"
+msgstr "Last search: aborted after {0}, {1}"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:2349
+msgid "Letzte Suche: {0}, {1}"
+msgstr "Last search: {0}, {1}"
+
+#: jkcemu/tools/findfiles/FindFilesFrm.java:2355
+msgid "Letzte Suche: {0}"
+msgstr "Last search: {0}"
+
+#: jkcemu/tools/hexdiff/HexDiffFrm.java:62
+msgid "JKCEMU Hex-Dateivergleicher"
+msgstr "JKCEMU Hex File Comparator"
+
+#: jkcemu/tools/hexedit/HexEditFrm.java:60
+msgid "JKCEMU Hex-Editor"
+msgstr "JKCEMU Hex Editor"
+
+#: jkcemu/tools/hexedit/MemEditFrm.java:451
+msgid "Die von Ihnen eingegebenen Bytes gehen über die Adresse FFFF hinaus.\nEs werden nur die Bytes bis FFFF geändert."
+msgstr ""
+"The bytes you entered go beyond address FFFF.\n"
+"Only the bytes up to FFFF will be changed."
+
+#: jkcemu/tools/hexedit/MemEditFrm.java:459
+msgid "Die Speicherzelle mit der Adresse {0}\nkonnte nicht geändert werden."
+msgstr ""
+"The memory cell at address {0}\n"
+"could not be changed."
+
+#: jkcemu/tools/hexedit/ReplyCksAlgorithmDlg.java:103
+msgid "Prüfsummen-/Hash-Algorithmus"
+msgstr "Checksum/Hash Algorithm"
+
+#: jkcemu/disk/AbstractFloppyDisk.java:348
+msgid "Formatieren einer bereits formatierten Diskettenabbilddatei mit einem\nanderen Format als das bereits vorhandene ist nicht möglich."
+msgstr ""
+"Formatting an already formatted disk image file with a format\n"
+"other than the existing one is not possible."
+
+#: jkcemu/disk/AnaDisk.java:315
+#: jkcemu/disk/PlainDisk.java:463
+msgid "Anhängen von Sektoren fehlgeschlagen"
+msgstr "Appending sectors failed"
+
+#: jkcemu/disk/CPCDisk.java:726
+msgid "Formatieren fehlgeschlagen"
+msgstr "Formatting failed"
+
+#: jkcemu/disk/DirectoryFloppyDisk.java:181
+msgid "Formatieren einer emulierten Diskette,\ndie auf ein Verzeichnis im Dateisystem abgebildet ist,\nwird nicht unterstützt."
+msgstr ""
+"Formatting an emulated floppy disk\n"
+"that is mapped to a directory in the file system\n"
+"is not supported."
+
+#: jkcemu/disk/DirectoryFloppyDisk.java:475
+msgid "E/A-Fehler"
+msgstr "I/O error"
+
+#: jkcemu/disk/FloppyDiskFormat.java:20
+msgid "400K (LLC2 CP/L)"
+msgstr "400K (LLC2 CP/L)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:26
+msgid "640K/624K (PC/M)"
+msgstr "640K/624K (PC/M)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:32
+msgid "720K/702K mit Interleave 3:1 und DateStamper (ML-DOS)"
+msgstr "720K/702K with interleave 3:1 and DateStamper (ML-DOS)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:38
+msgid "720K/711K (KC compact BASDOS)"
+msgstr "720K/711K (KC compact BASDOS)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:44
+msgid "720K (A5105 RBASIC/SCPX)"
+msgstr "720K (A5105 RBASIC/SCPX)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:50
+msgid "800K/780K (CAOS, NANOS, Z1013 CP/M)"
+msgstr "800K/780K (CAOS, NANOS, Z1013 CP/M)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:56
+msgid "800K/780K mit Interleave 2:1 (A5105 RBASIC/SCPX)"
+msgstr "800K/780K with interleave 2:1 (A5105 RBASIC/SCPX)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:62
+msgid "800K/780K mit Interleave 3:1 (MicroDOS)"
+msgstr "800K/780K with interleave 3:1 (MicroDOS)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:68
+msgid "800K/780K mit Interleave 3:1 und DateStamper (ML-DOS)"
+msgstr "800K/780K with interleave 3:1 and DateStamper (ML-DOS)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:74
+msgid "800K mit Interleave 4:1 (Z9001 CP/A)"
+msgstr "800K with interleave 4:1 (Z9001 CP/A)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:80
+msgid "1200K (5.25 Zoll MS-DOS)"
+msgstr "1200K (5.25 inch MS-DOS)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:86
+msgid "1440K (3.5 Zoll MS-DOS)"
+msgstr "1440K (3.5 inch MS-DOS)"
+
+#: jkcemu/disk/FloppyDiskFormat.java:92
+msgid "1760K/1738K mit Interleave 3:1 und DateStamper (KC85/D008 ML-DOS)"
+msgstr "1760K/1738K with interleave 3:1 and DateStamper (KC85/D008 ML-DOS)"
+
+#: jkcemu/emusys/A5105.java:276
+msgid "CTC (E/A-Adressen 50h-53h)"
+msgstr "CTC (I/O addresses 50h-53h)"
+
+#: jkcemu/emusys/A5105.java:278
+#: jkcemu/emusys/PCM.java:157
+msgid "CTC (E/A-Adressen 80h-83h)"
+msgstr "CTC (I/O addresses 80h-83h)"
+
+#: jkcemu/emusys/A5105.java:279
+msgid "PIO (E/A-Adressen 90h-93h)"
+msgstr "PIO (I/O addresses 90h-93h)"
+
+#: jkcemu/emusys/A5105.java:291
+#: jkcemu/emusys/HueblerGraphicsMC.java:121
+#: jkcemu/emusys/Z1013.java:366
+msgid "USB-PIO (E/A-Adressen FCh-FFh)"
+msgstr "USB-PIO (I/O addresses FCh-FFh)"
+
+#: jkcemu/emusys/AC1.java:559
+msgid "CTC (E/A-Adressen 00h-03h)"
+msgstr "CTC (I/O addresses 00h-03h)"
+
+#: jkcemu/emusys/AC1.java:560
+msgid "PIO (E/A-Adressen 04h-07h)"
+msgstr "PIO (I/O addresses 04h-07h)"
+
+#: jkcemu/emusys/AC1.java:564
+msgid "V24-PIO (E/A-Adressen 08h-0Bh)"
+msgstr "V24 PIO (I/O addresses 08h-0Bh)"
+
+#: jkcemu/emusys/C80.java:75
+#: jkcemu/emusys/LLC1.java:106
+msgid "PIO 1"
+msgstr "PIO 1"
+
+#: jkcemu/emusys/C80.java:76
+#: jkcemu/emusys/LLC1.java:107
+msgid "PIO 2"
+msgstr "PIO 2"
+
+#: jkcemu/emusys/HueblerEvertMC.java:62
+msgid "PIO (E/A-Adressen 10h-13h)"
+msgstr "PIO (I/O addresses 10h-13h)"
+
+#: jkcemu/emusys/KC85.java:438
+#: jkcemu/emusys/NANOS.java:192
+msgid "CTC (E/A-Adressen 8Ch-8Fh)"
+msgstr "CTC (I/O addresses 8Ch-8Fh)"
+
+#: jkcemu/emusys/KC85.java:439
+#: jkcemu/emusys/NANOS.java:190
+msgid "PIO (E/A-Adressen 88h-8Bh)"
+msgstr "PIO (I/O addresses 88h-8Bh)"
+
+#: jkcemu/emusys/KramerMC.java:137
+msgid "PIO (E/A-Adressen FC-FF)"
+msgstr "PIO (I/O addresses FC-FF)"
+
+#: jkcemu/emusys/LC80.java:166
+msgid "System-PIO"
+msgstr "System PIO"
+
+#: jkcemu/emusys/LC80.java:167
+msgid "User-PIO"
+msgstr "User PIO"
+
+#: jkcemu/emusys/LC80.java:174
+msgid "SIO"
+msgstr "SIO"
+
+#: jkcemu/emusys/LC80.java:178
+#: jkcemu/emusys/kc85/M052.java:60
+msgid "USB-PIO"
+msgstr "USB-PIO"
+
+#: jkcemu/emusys/LLC2.java:137
+msgid "CTC (E/A-Adressen F8h-FBh)"
+msgstr "CTC (I/O addresses F8h-FBh)"
+
+#: jkcemu/emusys/LLC2.java:138
+msgid "PIO (E/A-Adressen E8h-EBh)"
+msgstr "PIO (I/O addresses E8h-EBh)"
+
+#: jkcemu/emusys/LLC2.java:139
+msgid "V24-PIO (E/A-Adressen E4h-E7h)"
+msgstr "V24 PIO (I/O addresses E4h-E7h)"
+
+#: jkcemu/emusys/NANOS.java:176
+msgid "USB-PIO (E/A-Adressen 88h-8Bh)"
+msgstr "USB-PIO (I/O addresses 88h-8Bh)"
+
+#: jkcemu/emusys/NANOS.java:182
+msgid "ZRE-PIO (E/A-Adressen 00h-03h)"
+msgstr "ZRE PIO (I/O addresses 00h-03h)"
+
+#: jkcemu/emusys/NANOS.java:185
+#: jkcemu/emusys/Poly880.java:104
+msgid "PIO (E/A-Adressen 80h-83h)"
+msgstr "PIO (I/O addresses 80h-83h)"
+
+#: jkcemu/emusys/NANOS.java:187
+msgid "SIO (E/A-Adressen 84h-87h)"
+msgstr "SIO (I/O addresses 84h-87h)"
+
+#: jkcemu/emusys/PCM.java:137
+msgid "USB-PIO (E/A-Adressen DCh-DFh und FCh-FFh)"
+msgstr "USB-PIO (I/O addresses DCh-DFh and FCh-FFh)"
+
+#: jkcemu/emusys/PCM.java:158
+#: jkcemu/emusys/Poly880.java:105
+msgid "PIO (E/A-Adressen 84h-87h)"
+msgstr "PIO (I/O addresses 84h-87h)"
+
+#: jkcemu/emusys/PCM.java:159
+msgid "SIO (E/A-Adressen 88h-8Bh)"
+msgstr "SIO (I/O addresses 88h-8Bh)"
+
+#: jkcemu/emusys/Poly880.java:106
+msgid "CTC (E/A-Adressen 88h-8Bh)"
+msgstr "CTC (I/O addresses 88h-8Bh)"
+
+#: jkcemu/emusys/SC2.java:70
+#: jkcemu/emusys/VCS80.java:69
+msgid "PIO"
+msgstr "PIO"
+
+#: jkcemu/emusys/Z1013.java:311
+msgid "PIO (E/A-Adressen 00h-03h)"
+msgstr "PIO (I/O addresses 00h-03h)"
+
+#: jkcemu/emusys/Z9001.java:442
+msgid "USB-PIO (E/A-Adressen DCh-DFh)"
+msgstr "USB-PIO (I/O addresses DCh-DFh)"
+
+#: jkcemu/emusys/Z9001.java:499
+msgid "Tastatur-PIO (E/A-Adressen 90h-93h)"
+msgstr "Keyboard PIO (I/O addresses 90h-93h)"
+
+#: jkcemu/emusys/Z9001.java:500
+msgid "System-PIO (E/A-Adressen 88h-8Bh)"
+msgstr "System PIO (I/O addresses 88h-8Bh)"
+
+#: jkcemu/emusys/Z9001.java:501
+msgid "System-CTC (E/A-Adressen 80h-83h)"
+msgstr "System CTC (I/O addresses 80h-83h)"
+
+#: jkcemu/emusys/Z9001.java:506
+msgid "Druckermodul-CTC (E/A-Adressen A8h-ABh)"
+msgstr "Printer Module CTC (I/O addresses A8h-ABh)"
+
+#: jkcemu/emusys/Z9001.java:507
+msgid "Druckermodul-SIO (E/A-Adressen B0h-B3h)"
+msgstr "Printer Module SIO (I/O addresses B0h-B3h)"
+
+#: jkcemu/emusys/ac1_llc2/AbstractSCCHSys.java:243
+msgid "USB-PIO (E/A-Adressen DCh-DFh, FCh-FFh)"
+msgstr "USB-PIO (I/O addresses DCh-DFh, FCh-FFh)"
+
+#: jkcemu/emusys/customsys/ROMSettingsDlg.java:369
+msgid "ROM-Bereich bearbeiten"
+msgstr "Edit ROM Range"
+
+#: jkcemu/emusys/customsys/ROMSettingsDlg.java:370
+msgid "Neuer ROM-Bereich"
+msgstr "New ROM Range"
+
+#: jkcemu/emusys/huebler/AbstractHueblerMC.java:68
+msgid "CTC (E/A-Adressen 14h-17h)"
+msgstr "CTC (I/O addresses 14h-17h)"
+
+#: jkcemu/emusys/huebler/AbstractHueblerMC.java:69
+msgid "PIO (E/A-Adressen 0Ch-0Fh)"
+msgstr "PIO (I/O addresses 0Ch-0Fh)"
+
+#: jkcemu/emusys/kc85/D004ProcSys.java:88
+msgid "CTC (FCh-FFh)"
+msgstr "CTC (FCh-FFh)"
+
+#: jkcemu/emusys/kc85/KC85JoystickModule.java:29
+msgid "PIO (Joystick)"
+msgstr "PIO (Joystick)"
+
+#: jkcemu/emusys/kc85/M001.java:40
+msgid "CTC (M001)"
+msgstr "CTC (M001)"
+
+#: jkcemu/emusys/kc85/M001.java:42
+msgid "PIO (M001)"
+msgstr "PIO (M001)"
+
+#: jkcemu/emusys/kc85/M003.java:39
+msgid "CTC (M003)"
+msgstr "CTC (M003)"
+
+#: jkcemu/emusys/kc85/M003.java:40
+msgid "SIO (M003)"
+msgstr "SIO (M003)"
+
+#: jkcemu/emusys/kc85/M066.java:44
+msgid "CTC (M066)"
+msgstr "CTC (M066)"
+
+#: jkcemu/file/FileActionMngr.java:1585
+#: jkcemu/file/FileActionMngr.java:1601
+msgid "Archiv-Datei entpacken"
+msgstr "Unpack Archive File"
+
+#: jkcemu/tools/debugger/DebugFrm.java:1445
+msgid "--- Interrupt: {0} ---"
+msgstr "--- Interrupt: {0} ---"
+
+#: jkcemu/tools/debugger/DebugFrm.java:4024
+msgid "Programmausführung angehalten"
+msgstr "Program execution stopped"
+
+#: jkcemu/tools/debugger/VarDataDlg.java:157
+msgid "Variable bearbeiten"
+msgstr "Edit Variable"
+
+#: jkcemu/tools/debugger/VarDataDlg.java:158
+msgid "Variable anlegen"
+msgstr "Create Variable"
+
+#: jkcemu/tools/fileconverter/KCTapSystemFileTarget.java:43
+msgid "KC-TAP-Systemdatei für KC85/1, KC87 und Z9001 (*.tap)"
+msgstr "KC-TAP system file for KC85/1, KC87 and Z9001 (*.tap)"
+
+#: jkcemu/tools/fileconverter/KCTapSystemFileTarget.java:45
+msgid "KC-TAP-Systemdatei für HC900 und KC85/2..5 (*.tap)"
+msgstr "KC-TAP system file for HC900 and KC85/2..5 (*.tap)"
+
+#: jkcemu/Main.java:1367
+msgid "JKCEMU Profile"
+msgstr "JKCEMU Profiles"
+
+#: jkcemu/base/ScreenFrm.java:1991
+msgid "Profil anwenden"
+msgstr "Apply Profile"
+
+#: jkcemu/emusys/KCcompact.java:1482
+msgid "Zentrale Zustandssteuerung"
+msgstr "central state controller"
+
+#: jkcemu/emusys/ZXSpectrum.java:993
+msgid "ULA (Bildschirmsteuerung)"
+msgstr "ULA (display controller)"
+
+#: jkcemu/emusys/kccompact/ExtROMTableModel.java:105
+msgid "ROM-Nr."
+msgstr "ROM No."
+
+#: jkcemu/emusys/kccompact/ExtROMTableModel.java:108
+msgid "ROM-Datei"
+msgstr "ROM File"
+
+#: jkcemu/emusys/z1013/Z1013GraphicZX.java:255
+msgid "ZX-Spectrum-kompatible S/W-Grafikkarte nach practic 2/88"
+msgstr "ZX Spectrum compatible B/W graphics card from practic 2/88"
+
+#: jkcemu/file/FileTableModel.java:229
+msgid "Name"
+msgstr "Name"
+
+#: jkcemu/file/FileTableModel.java:233
+msgid "Typ/Größe"
+msgstr "Type/Size"
+
+#: jkcemu/file/FileTableModel.java:241
+msgid "Zuletzt geändert"
+msgstr "Last Modified"
+
+#: jkcemu/file/FileTableModel.java:249
+msgid "User"
+msgstr "User"
+
+#: jkcemu/file/FileTableModel.java:257
+msgid "Schreibgeschützt"
+msgstr "Write-Protected"
+
+#: jkcemu/file/FileTableModel.java:261
+msgid "System-Datei"
+msgstr "System File"
+
+#: jkcemu/file/FileTableModel.java:265
+msgid "Archiv"
+msgstr "Archive"
+
+#: jkcemu/settings/RAMFloppySettingsFld.java:78
+msgid "Nicht emulieren"
+msgstr "Do not emulate"
+
+#: jkcemu/settings/SettingsFrm.java:297
+msgid "Profil laden"
+msgstr "Load Profile"
+
+#: jkcemu/settings/SettingsFrm.java:321
+msgid "Profil speichern"
+msgstr "Save Profile"
+
+#: jkcemu/text/TextEditFrm.java:3383
+msgid "{0} (schreibeschützt"
+msgstr "{0} (write-protected)"
+
+#: jkcemu/tools/calculator/CalculatorFrm.java:328
+msgid "Rechner {0}"
+msgstr "Calculator {0}"
+
+#: jkcemu/tools/hexedit/HexEditFrm.java:1429
+msgid "{0} (schreibgeschützt)"
+msgstr "{0} (write-protected)"

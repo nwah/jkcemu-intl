@@ -32,6 +32,7 @@ import jkcemu.base.DeviceIO;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileEntry;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -77,7 +78,7 @@ public class DiskUtil
 	if( JOptionPane.showConfirmDialog(
 		EmuUtil.getWindow( owner ),
 		msg,
-		"Warnung",
+		LangUtil.tr( "Warnung" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) != JOptionPane.OK_OPTION )
 	{

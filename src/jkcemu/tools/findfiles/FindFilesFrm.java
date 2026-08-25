@@ -1653,35 +1653,37 @@ public class FindFilesFrm
       long seconds = (System.currentTimeMillis() - this.millisStart) / 1000;
       long minutes = seconds / 60;
       long hours   = minutes / 60;
+      /*
+       * Die Uhrzeitangabe wird mit String.format zusammengesetzt,
+       * da MessageFormat keine fuehrenden Nullen erzeugen kann.
+       * Uebersetzt wird nur die Zeiteinheit dahinter.
+       */
       if( hours > 0 ) {
-	if( hours == 1 ) {
-	  buf.append( String.format(
-			"1:%02d:%02d Stunde",
-			minutes % 60,
-			seconds % 60 ) );
-	} else {
-	  buf.append( String.format(
-			"%d:%02d:%02d Stunden",
+	String clock = String.format(
+			"%d:%02d:%02d",
 			hours,
 			minutes % 60,
-			seconds % 60 ) );
+			seconds % 60 );
+	if( hours == 1 ) {
+	  buf.append( LangUtil.tr( "{0} Stunde", clock ) );
+	} else {
+	  buf.append( LangUtil.tr( "{0} Stunden", clock ) );
 	}
       } else if( minutes > 0 ) {
-	if( minutes == 1 ) {
-	  buf.append( String.format(
-			"1:%02d Minute",
-			seconds % 60 ) );
-	} else {
-	  buf.append( String.format(
-			"%d:%02d Minuten",
+	String clock = String.format(
+			"%d:%02d",
 			minutes,
-			seconds % 60 ) );
+			seconds % 60 );
+	if( minutes == 1 ) {
+	  buf.append( LangUtil.tr( "{0} Minute", clock ) );
+	} else {
+	  buf.append( LangUtil.tr( "{0} Minuten", clock ) );
 	}
       } else {
 	if( seconds == 1 ) {
-	  buf.append( "1 Sekunde" );
+	  buf.append( LangUtil.tr( "1 Sekunde" ) );
 	} else {
-	  buf.append( String.format( "%d Sekunden", seconds ) );
+	  buf.append( LangUtil.tr( "{0} Sekunden", seconds ) );
 	}
       }
     }
@@ -1700,13 +1702,12 @@ public class FindFilesFrm
   private void appendFoundFilesTo( StringBuilder buf )
   {
     if( this.nFilesFound == 1 ) {
-      buf.append( "1 Datei/Verzeichnis" );
+      buf.append( LangUtil.tr( "1 Datei/Verzeichnis gefunden" ) );
     } else {
-      buf.append( String.format(
-			"%d Dateien/Verzeichnisse",
+      buf.append( LangUtil.tr(
+			"{0} Dateien/Verzeichnisse gefunden",
 			this.nFilesFound > 0 ? this.nFilesFound : 0 ) );
     }
-    buf.append( " gefunden" );
   }
 
 
@@ -2221,12 +2222,12 @@ public class FindFilesFrm
   public void searchFinished()
   {
     this.timerDuration.stop();
-    this.btnStartStop.setText( "Suche starten" );
+    this.btnStartStop.setText( LangUtil.tr( "Suche starten" ) );
     this.fldCurDir.setText( "" );
     if( (this.fileVisitResult == FileVisitResult.CONTINUE)
 	&& this.listModel.isEmpty() )
     {
-      this.listModel.addElement( "Keine Datei gefunden" );
+      this.listModel.addElement( LangUtil.tr( "Keine Datei gefunden" ) );
     }
     updFieldsEnabled();
     updStatusBar();
@@ -2303,38 +2304,57 @@ public class FindFilesFrm
 
   private void updStatusBar()
   {
-    String text = DEFAULT_STATUS_TEXT;
+    String text = LangUtil.tr( DEFAULT_STATUS_TEXT );
     if( (this.thread != null)
 	|| (this.millisStart > 0)
 	|| (this.nFilesFound > 0) )
     {
-      StringBuilder buf = new StringBuilder( 64 );
+      StringBuilder buf      = new StringBuilder( 64 );
+      StringBuilder durBuf   = new StringBuilder();
+      StringBuilder foundBuf = new StringBuilder();
+      appendDurationTo( durBuf );
+      appendFoundFilesTo( foundBuf );
+      String durTxt   = durBuf.toString();
+      String foundTxt = foundBuf.toString();
       if( this.thread != null ) {
-	buf.append( LangUtil.tr( "Suche l\u00E4uft" ) );
 	if( this.millisStart > 0 ) {
-	  buf.append( LangUtil.tr( " seit " ) );
-	  appendDurationTo( buf );
-	}
-	if( this.nFilesFound > 0 ) {
-	  buf.append( ": " );
-	  appendFoundFilesTo( buf );
+	  if( this.nFilesFound > 0 ) {
+	    buf.append( LangUtil.tr(
+			"Suche l\u00E4uft seit {0}: {1}",
+			durTxt,
+			foundTxt ) );
+	  } else {
+	    buf.append( LangUtil.tr(
+			"Suche l\u00E4uft seit {0}...",
+			durTxt ) );
+	  }
 	} else {
-	  buf.append( "..." );
+	  if( this.nFilesFound > 0 ) {
+	    buf.append( LangUtil.tr(
+			"Suche l\u00E4uft: {0}",
+			foundTxt ) );
+	  } else {
+	    buf.append( LangUtil.tr( "Suche l\u00E4uft..." ) );
+	  }
 	}
       } else {
-	buf.append( LangUtil.tr( "Letzte Suche: " ) );
 	if( this.millisStart > 0 ) {
 	  if( this.findCancelled ) {
-	    buf.append( LangUtil.tr( "nach " ) );
-	    appendDurationTo( buf );
-	    buf.append( LangUtil.tr( " abgebrochen" ) );
-
+	    buf.append( LangUtil.tr(
+			"Letzte Suche: nach {0} abgebrochen, {1}",
+			durTxt,
+			foundTxt ) );
 	  } else {
-	    appendDurationTo( buf );
+	    buf.append( LangUtil.tr(
+			"Letzte Suche: {0}, {1}",
+			durTxt,
+			foundTxt ) );
 	  }
-	  buf.append( ", " );
+	} else {
+	  buf.append( LangUtil.tr(
+			"Letzte Suche: {0}",
+			foundTxt ) );
 	}
-	appendFoundFilesTo( buf );
       }
       text = buf.toString();
     }

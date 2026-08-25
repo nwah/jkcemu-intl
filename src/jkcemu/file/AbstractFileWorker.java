@@ -225,15 +225,17 @@ public abstract class AbstractFileWorker
 			JOptionPane.WARNING_MESSAGE,
 			JOptionPane.YES_NO_OPTION );
 	} else {
-	  title = "Hinweis";
+	  title = LangUtil.tr( "Hinweis" );
 	  pane  = new JOptionPane(
-			"Das Fenster wird erst geschlossen,"
-				+ " wenn die laufenden\n"
-				+ "Datei-Operationen fertig sind"
-				+ " oder abgebrochen wurden.",
+			LangUtil.tr(
+				"Das Fenster wird erst geschlossen,"
+					+ " wenn die laufenden\n"
+					+ "Datei-Operationen fertig sind"
+					+ " oder abgebrochen wurden." ),
 			JOptionPane.WARNING_MESSAGE,
 			JOptionPane.OK_OPTION );
-	  pane.setOptions( new String[] { "Fenster nicht schlie\u00DFen" } );
+	  pane.setOptions( LangUtil.tr(
+			new String[] { "Fenster nicht schlie\u00DFen" } ) );
 	}
 	final JDialog dlg = pane.createDialog( owner, title );
 
@@ -419,8 +421,22 @@ public abstract class AbstractFileWorker
 			final String   title,
 			final Object[] options )
   {
-    final JOptionPane pane = new JOptionPane( msg, msgType );
-    pane.setOptions( options );
+    /*
+     * Die Beschriftungen der Knoepfe werden uebersetzt angezeigt,
+     * zurueckgeliefert wird aber der urspruengliche deutsche Text,
+     * da die Aufrufer ihn in einer switch-Anweisung
+     * mit ihren Konstanten vergleichen.
+     */
+    final Object[] trOptions = new Object[
+			options != null ? options.length : 0 ];
+    for( int i = 0; i < trOptions.length; i++ ) {
+      Object option = options[ i ];
+      trOptions[ i ] = (option instanceof String ?
+				LangUtil.tr( (String) option )
+				: option);
+    }
+    final JOptionPane pane = new JOptionPane( LangUtil.tr( msg ), msgType );
+    pane.setOptions( trOptions );
     synchronized( this.syncMonitor ) {
       EventQueue.invokeLater(
 		new Runnable()
@@ -428,7 +444,9 @@ public abstract class AbstractFileWorker
 		  @Override
 		  public void run()
 		  {
-		    pane.createDialog( owner, title ).setVisible( true );
+		    pane.createDialog(
+				owner,
+				LangUtil.tr( title ) ).setVisible( true );
 		    synchronized( syncMonitor ) {
 		      try {
 			syncMonitor.notifyAll();
@@ -445,8 +463,18 @@ public abstract class AbstractFileWorker
 	this.cancelled = true;
       }
     }
+    String rv     = null;
     Object option = pane.getValue();
-    return option != null ? option.toString() : null;
+    if( option != null ) {
+      rv = option.toString();
+      for( int i = 0; i < trOptions.length; i++ ) {
+	if( option == trOptions[ i ] ) {
+	  rv = options[ i ].toString();
+	  break;
+	}
+      }
+    }
+    return rv;
   }
 
 

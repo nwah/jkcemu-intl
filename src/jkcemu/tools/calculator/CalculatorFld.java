@@ -27,6 +27,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class CalculatorFld extends JPanel implements
@@ -132,7 +133,7 @@ public class CalculatorFld extends JPanel implements
 
     this.fldOutput = GUIFactory.createEditorPane();
     this.fldOutput.setContentType( "text/html" );
-    EmuUtil.setText( this.fldOutput, DEFAULT_TEXT );
+    EmuUtil.setText( this.fldOutput, LangUtil.tr( DEFAULT_TEXT ) );
     this.fldOutput.setBorder( BorderFactory.createLoweredBevelBorder() );
     this.fldOutput.setEditable( false );
     panelOutput.add(
@@ -144,7 +145,7 @@ public class CalculatorFld extends JPanel implements
   public void clear()
   {
     this.fldInput.setText( "" );
-    EmuUtil.setText( this.fldOutput, DEFAULT_TEXT );
+    EmuUtil.setText( this.fldOutput, LangUtil.tr( DEFAULT_TEXT ) );
   }
 
 
@@ -238,7 +239,7 @@ public class CalculatorFld extends JPanel implements
 
   private void updOutput()
   {
-    String result = DEFAULT_TEXT;
+    String result = LangUtil.tr( DEFAULT_TEXT );
     String text   = this.fldInput.getText();
     if( text != null ) {
       int len = text.length();
@@ -251,13 +252,13 @@ public class CalculatorFld extends JPanel implements
 	    if( Character.isDefined( ch ) ) {
 	      appendResultRow(
 			buf,
-			"Unicode des Zeichen",
+			LangUtil.tr( "Unicode des Zeichen" ),
 			(int) ch );
 	    }
 	  }
 	  appendResultRow(
 			buf,
-			"Ergebnis des Ausdrucks",
+			LangUtil.tr( "Ergebnis des Ausdrucks" ),
 			parser.parseExpr( text ) );
 	  appendResultEnd( buf );
 	}

@@ -8,6 +8,8 @@
 
 package jkcemu.file;
 
+import jkcemu.lang.LangUtil;
+
 
 public class FileFormat
 {
@@ -130,9 +132,15 @@ public class FileFormat
 	/* --- ueberschriebene Methoden --- */
 
   @Override
+  /*
+   * Die Bezeichnung wird in Auswahlfeldern angezeigt
+   * und deshalb uebersetzt zurueckgeliefert.
+   * Die Objekte selbst werden ueber die Identitaet verglichen,
+   * so dass die Uebersetzung keine Auswertung beeinflusst.
+   */
   public String toString()
   {
-    return this.text != null ? this.text : "";
+    return this.text != null ? LangUtil.tr( this.text ) : "";
   }
 
 

@@ -1508,20 +1508,25 @@ public class DiskImgUnpackFrm
 		blockSize.set( 0 );
 	      }
 	      Color  color = COLOR_EMPHASIZED;
-	      String text  = "Blockgr\u00F6\u00Dfe nicht erkannt";
+	      String text  = LangUtil.tr(
+				"Blockgr\u00F6\u00DFe nicht erkannt" );
 	      if( blockSize.get() > 0 ) {
+		String sizeText = null;
 		if( (blockSize.get() % 1024) == 0 ) {
-		  text = String.format( "%d kByte", blockSize.get() / 1024 );
+		  sizeText = LangUtil.tr(
+				"{0} kByte",
+				blockSize.get() / 1024 );
 		} else {
-		  text = String.format( "%d Byte", blockSize.get() );
+		  sizeText = LangUtil.tr( "{0} Byte", blockSize.get() );
 		}
 		if( blockSizeUnique.get() ) {
 		  color = COLOR_RECOGNIZED;
-		  text += " erkannt";
+		  text  = LangUtil.tr( "{0} erkannt", sizeText );
 		} else {
-		  text = "wahrscheinlich "
-					+ text
-					+ " (nicht eindeutig erkannt)";
+		  text = LangUtil.tr(
+				"wahrscheinlich {0}"
+					+ " (nicht eindeutig erkannt)",
+				sizeText );
 		}
 		this.comboBlockSize.setSelectedItem(
 					blockSize.get() / 1024 );
@@ -1532,15 +1537,15 @@ public class DiskImgUnpackFrm
 	      if( blockNumSize.get() == 8 ) {
 		this.rbBlockNum8Bit.setSelected( true );
 		this.infoBlockNumSize.setForeground( COLOR_RECOGNIZED );
-		this.infoBlockNumSize.setText( "8 Bit erkannt" );
+		this.infoBlockNumSize.setText( LangUtil.tr( "8 Bit erkannt" ) );
 	      } else if( blockNumSize.get() == 16 ) {
 		this.rbBlockNum16Bit.setSelected( true );
 		this.infoBlockNumSize.setForeground( COLOR_RECOGNIZED );
-		this.infoBlockNumSize.setText( "16 Bit erkannt" );
+		this.infoBlockNumSize.setText( LangUtil.tr( "16 Bit erkannt" ) );
 	      } else {
 		this.rbBlockNum16Bit.setSelected( true );
 		this.infoBlockNumSize.setForeground( COLOR_EMPHASIZED );
-		this.infoBlockNumSize.setText( "Nicht erkannt" );
+		this.infoBlockNumSize.setText( LangUtil.tr( "Nicht erkannt" ) );
 	      }
 
 	      // Ausgabeverzeichnis vorbelegen

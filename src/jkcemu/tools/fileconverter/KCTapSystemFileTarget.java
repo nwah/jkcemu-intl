@@ -18,6 +18,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.file.FileInfo;
 import jkcemu.file.FileSaver;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class KCTapSystemFileTarget extends AbstractConvertTarget
@@ -38,8 +39,10 @@ public class KCTapSystemFileTarget extends AbstractConvertTarget
     super(
 	fileConvertFrm,
 	z9001 ?
-	    "KC-TAP-Systemdatei f\u00FCr KC85/1, KC87 und Z9001 (*.tap)"
-	    : "KC-TAP-Systemdatei f\u00FCr HC900 und KC85/2..5 (*.tap)" );
+	    LangUtil.tr(
+		"KC-TAP-Systemdatei f\u00FCr KC85/1, KC87 und Z9001 (*.tap)" )
+	    : LangUtil.tr(
+		"KC-TAP-Systemdatei f\u00FCr HC900 und KC85/2..5 (*.tap)" ) );
     this.dataBytes = dataBytes;
     this.offs      = offs;
     this.len       = len;

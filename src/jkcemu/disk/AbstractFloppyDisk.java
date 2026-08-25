@@ -20,6 +20,7 @@ import java.util.TreeSet;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public abstract class AbstractFloppyDisk
@@ -43,6 +44,7 @@ public abstract class AbstractFloppyDisk
   private volatile int       diskSize;
   private volatile Density   checkedDiskDensity;
   private volatile String    fmtText;
+  private volatile boolean   fmtTextWithSectorSize;
   private String             mediaText;
   private String             warningText;
   private boolean            repaired;
@@ -474,7 +476,8 @@ public abstract class AbstractFloppyDisk
   public String getFormatText()
   {
     if( this.fmtText == null ) {
-      StringBuilder buf = new StringBuilder( 128 );
+      StringBuilder buf            = new StringBuilder( 128 );
+      boolean       withSectorSize = false;
       if( (this.cyls > 0) && (this.sides > 0) ) {
 	SortedSet<Integer> sectorsPerTracks = new TreeSet<>();
 	SortedSet<Integer> sectorSizes      = new TreeSet<>();
@@ -492,41 +495,56 @@ public abstract class AbstractFloppyDisk
 	  int sectorSize      = sectorSizes.first();
 	  int sysTracks = getSysTracks();
 	  if( (sysTracks > 0) && (sysTracks < this.cyls) ) {
-	    buf.append( (this.cyls - sysTracks) * this.sides
-			* sectorsPerTrack * sectorSize / 1024 );
-	    buf.append( '/' );
-	    buf.append( kBytes );
-	    buf.append( " KByte, " );
+	    buf.append(
+		LangUtil.tr(
+			"{0}/{1} KByte, {2} Spuren a {3} * {4} Bytes",
+			(this.cyls - sysTracks) * this.sides
+				* sectorsPerTrack * sectorSize / 1024,
+			kBytes,
+			this.cyls,
+			sectorsPerTrack,
+			sectorSize ) );
 	  } else {
-	    buf.append( kBytes );
-	    buf.append( " KByte, " );
+	    buf.append(
+		LangUtil.tr(
+			"{0} KByte, {1} Spuren a {2} * {3} Bytes",
+			kBytes,
+			this.cyls,
+			sectorsPerTrack,
+			sectorSize ) );
 	  }
-	  buf.append( this.cyls );
-	  buf.append( " Spuren a " );
-	  buf.append( sectorsPerTrack );
-	  buf.append( " * " );
-	  buf.append( sectorSize );
-	  buf.append( " Bytes" );
+	  withSectorSize = true;
 	} else {
-	  buf.append( kBytes );
-	  buf.append( " KByte, " );
-	  buf.append( this.cyls );
-	  buf.append( " Spuren" );
+	  buf.append(
+		LangUtil.tr(
+			"{0} KByte, {1} Spuren",
+			kBytes,
+			this.cyls ) );
 	}
 	switch( sides ) {
 	  case 1:
-	    buf.append( ", einseitig" );
+	    buf.append( ", " );
+	    buf.append( LangUtil.tr( "einseitig" ) );
 	    break;
 	  case 2:
-	    buf.append( ", doppelseitig" );
+	    buf.append( ", " );
+	    buf.append( LangUtil.tr( "doppelseitig" ) );
 	    break;
 	}
       } else {
-	buf.append( "unformatiert" );
+	buf.append( LangUtil.tr( "unformatiert" ) );
       }
+      this.fmtTextWithSectorSize = withSectorSize;
       this.fmtText = buf.toString();
     }
     return this.fmtText;
+  }
+
+
+  public boolean isFormatTextWithSectorSize()
+  {
+    getFormatText();
+    return this.fmtTextWithSectorSize;
   }
 
 
@@ -715,7 +733,7 @@ public abstract class AbstractFloppyDisk
 
   public String getWarningText()
   {
-    return this.warningText;
+    return LangUtil.tr( this.warningText );
   }
 
 

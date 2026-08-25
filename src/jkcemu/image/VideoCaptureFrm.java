@@ -808,8 +808,10 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 	if( this.fileCheckEnabled && file.exists() ) {
 	  if( JOptionPane.showConfirmDialog(
 		this,
-		"Sie \u00FCberschreiben die Datei\n" + file.getPath() + " !",
-		"Warnung",
+		LangUtil.tr(
+			"Sie \u00FCberschreiben die Datei\n{0} !",
+			file.getPath() ),
+		LangUtil.tr( "Warnung" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) != JOptionPane.OK_OPTION )
 	  {

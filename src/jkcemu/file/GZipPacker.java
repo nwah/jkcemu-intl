@@ -18,6 +18,7 @@ import java.io.InterruptedIOException;
 import java.util.zip.GZIPOutputStream;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.AbstractThreadFrm;
+import jkcemu.lang.LangUtil;
 
 
 public class GZipPacker extends AbstractThreadFrm
@@ -86,7 +87,7 @@ public class GZipPacker extends AbstractThreadFrm
   {
     super(
 	"JKCEMU gzip packer",
-	"Packen von " + srcFile.getName() + "...",
+	LangUtil.tr( "Packen von {0}...", srcFile.getName() ),
 	false,
 	true,
 	true );

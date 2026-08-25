@@ -76,6 +76,23 @@ public class POExtractor
 	{ "FileUtil",   "showFileOpenDlg",                    "1" },
 	{ "FileUtil",   "showFileSaveDlg",                    "1" },
 	{ null,         "askForOutputFile",                   "1" },
+	{ null,         "askForOutputDir",                    ARG_ALL },
+	{ null,         "fireShowError",                      ARG_ALL },
+	{ null,         "getFileFilter",                      "0" },
+	{ null,         "createFileFilter",                   "0" },
+	{ "RAMFloppy",  "prepare",                            "3" },
+	{ null,         "getChoice",                          ARG_ALL },
+	{ null,         "setWarningText",                     "0" },
+	{ null,         "showSameBoundsImage",                "4" },
+
+	/*
+	 * Viele Dialoge uebergeben ihren Titel an den Konstruktor
+	 * der Basisklasse. Dabei werden auch einige Texte erfasst,
+	 * die keine Anzeigetexte sind (z.B. Thread-Namen);
+	 * diese schaden nicht, da sie zur Laufzeit
+	 * nicht nachgeschlagen werden.
+	 */
+	{ null,         "super",                              ARG_ALL },
 	{ null,         "addTab",                             ARG_ALL },
 	{ null,         "setTitle",                           ARG_ALL },
 	{ null,         "setText",                            ARG_ALL },
@@ -85,6 +102,13 @@ public class POExtractor
 	{ null,         "showYesNoDlg",                       ARG_ALL },
 	{ null,         "showSuppressableInfoDlg",             ARG_ALL },
 	{ null,         "showOptionDlg",                      ARG_ALL },
+	{ null,         "showConfirmDlg",                     ARG_ALL },
+	{ null,         "showConfirmWarningDlg",              ARG_ALL },
+	{ null,         "showWarningDlg",                     ARG_ALL },
+	{ null,         "showYesNoWarningDlg",                ARG_ALL },
+	{ null,         "showSuppressableConfirmDlg",         ARG_ALL },
+	{ null,         "showSuppressableYesNoDlg",           ARG_ALL },
+	{ null,         "showSuppressableYesNoCancelDlg",     ARG_ALL },
 	{ null,         "addJMenuItem",                       "0" },
 	{ null,         "addJMenuItemWithControlShortcut",    "0" },
 	{ null,         "appendToLog",                        ARG_ALL },
@@ -111,7 +135,21 @@ public class POExtractor
 	{ "RAMFloppySettingsFld",   "2" },
 	{ "RAMFloppiesSettingsFld", "2,4" },
 	{ "ReplyBytesDlg",          "1" },
-	{ "SaveDlg",                "3" } };
+	{ "SaveDlg",                "3" },
+	{ "FileSelectDlg",          "4" },
+	{ "FloppyDiskInfo",         "1" },
+	{ "CPUSynchronSoundDevice", "0" },
+	{ "PSGSoundDevice",         "0" },
+	{ "FileNameExtensionFilter", "0" },
+	{ "FileFormat",             "0" },
+	{ "HexDocument",            "1" },
+	{ "KCNet",                  "0" },
+	{ "FloppyDiskFormat",       "10" },
+	{ "Z80CTC",                 "0" },
+	{ "Z80PIO",                 "0" },
+	{ "Z80SIO",                 "0" },
+	{ "VDIP",                   "2" },
+	{ "ProfileDlg",             "1" } };
 
   private static final String DEFAULT_OUTPUT     = "src/lang/jkcemu.pot";
   private static final String CANDIDATES_FILE    = "candidates.txt";
@@ -134,7 +172,26 @@ public class POExtractor
    */
   private static final String[] TEXT_FIELDS = {
 					"SYSTEXT",
-					"DEFAULT_TITLE" };
+					"DEFAULT_TITLE",
+					"TITLE",
+					"COPY_TEXT",
+					"DEFAULT_STATUS_TEXT",
+					"DEFAULT_TEXT",
+					"DRIVE_EMPTY_TEXT",
+					"EXAMPLE_TEXT",
+					"INFO_TEXT" };
+
+  /*
+   * Zeichenkettenkonstanten mit festem Wert,
+   * die in Verkettungen mit anzuzeigendem Text vorkommen,
+   * z.B. "public static final String TITLE
+   *		= Main.APPNAME + " Bildbetrachter";".
+   * Damit daraus der vollstaendige msgid entsteht,
+   * werden sie beim Zusammensetzen durch ihren Wert ersetzt.
+   */
+  private static final String[][] CONST_VALUES = {
+					{ "Main.APPNAME", "JKCEMU" },
+					{ "APPNAME",      "JKCEMU" } };
 
   /*
    * Namen von String-Array-Feldern, deren Elemente uebersetzbare
@@ -613,24 +670,113 @@ public class POExtractor
 		List<Token> tokens,
 		int         start )
   {
-    int n = tokens.size();
-    if( (start >= n) || (tokens.get( start ).type != TokType.STRING) ) {
-      return null;
+    int           n         = tokens.size();
+    StringBuilder buf       = new StringBuilder();
+    int           line      = -1;
+    int           idx       = start;
+    int           nStrings  = 0;
+    boolean       first     = true;
+    while( idx < n ) {
+      if( !first ) {
+	if( tokens.get( idx ).type != TokType.PLUS ) {
+	  break;
+	}
+	idx++;
+	if( idx >= n ) {
+	  return null;
+	}
+      }
+      int opLen = parseOperand( tokens, idx, buf );
+      if( opLen < 1 ) {
+	if( first ) {
+	  return null;
+	}
+
+	/*
+	 * Nach einem '+' folgt kein weiterer fester Textbestandteil,
+	 * d.h. die Verkettung endet vor dem '+'.
+	 */
+	idx--;
+	break;
+      }
+      if( tokens.get( idx ).type == TokType.STRING ) {
+	nStrings++;
+	if( line < 0 ) {
+	  line = tokens.get( idx ).line;
+	}
+      }
+      idx  += opLen;
+      first = false;
     }
-    StringBuilder buf  = new StringBuilder( tokens.get( start ).text );
-    int           line = tokens.get( start ).line;
-    int           idx  = start + 1;
-    while( ((idx + 1) < n)
-	   && (tokens.get( idx ).type == TokType.PLUS)
-	   && (tokens.get( idx + 1 ).type == TokType.STRING) )
-    {
-      buf.append( tokens.get( idx + 1 ).text );
-      idx += 2;
+
+    /*
+     * Eine Verkettung ausschliesslich aus Konstanten
+     * ist kein anzuzeigender Text.
+     */
+    if( nStrings < 1 ) {
+      return null;
     }
     ParsedLiteral rv = new ParsedLiteral();
     rv.value  = buf.toString();
     rv.line   = line;
     rv.length = idx - start;
+    return rv;
+  }
+
+
+  /*
+   * Haengt den Wert des Operanden an der angegebenen Position an buf an
+   * und liefert die Anzahl der dabei verbrauchten Tokens.
+   * Ein Operand ist entweder ein Zeichenkettenliteral
+   * oder eine Konstante aus CONST_VALUES.
+   * Liefert 0, wenn an der Position kein solcher Operand steht.
+   */
+  private static int parseOperand(
+		List<Token>   tokens,
+		int           idx,
+		StringBuilder buf )
+  {
+    int   rv = 0;
+    Token t  = tokens.get( idx );
+    if( t.type == TokType.STRING ) {
+      buf.append( t.text );
+      rv = 1;
+    } else if( t.type == TokType.IDENT ) {
+      int n = tokens.size();
+
+      // qualifizierter Name, z.B. "Main.APPNAME"
+      if( ((idx + 2) < n)
+	  && (tokens.get( idx + 1 ).type == TokType.DOT)
+	  && (tokens.get( idx + 2 ).type == TokType.IDENT) )
+      {
+	String value = constValue(
+			t.text + "." + tokens.get( idx + 2 ).text );
+	if( value != null ) {
+	  buf.append( value );
+	  rv = 3;
+	}
+      }
+      if( rv == 0 ) {
+	String value = constValue( t.text );
+	if( value != null ) {
+	  buf.append( value );
+	  rv = 1;
+	}
+      }
+    }
+    return rv;
+  }
+
+
+  private static String constValue( String name )
+  {
+    String rv = null;
+    for( int i = 0; i < CONST_VALUES.length; i++ ) {
+      if( CONST_VALUES[ i ][ 0 ].equals( name ) ) {
+	rv = CONST_VALUES[ i ][ 1 ];
+	break;
+      }
+    }
     return rv;
   }
 

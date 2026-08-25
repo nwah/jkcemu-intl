@@ -284,23 +284,26 @@ public abstract class AbstractScreenFrm
 	      iso646de = emuThread.getISO646DE();
 	    }
 	    if( iso646de == null ) {
-	      String[] options = {
+	      String[] options = LangUtil.tr( new String[] {
 				"ASCII",
 				"Umlaute",
-				EmuUtil.TEXT_CANCEL };
+				EmuUtil.TEXT_CANCEL } );
 	      JOptionPane pane = new JOptionPane(
-		"Der Text enth\u00E4lt Zeichencodes, die nach ASCII"
-			+ " die Zeichen [ \\ ] { | } ~\n"
-			+ "und nach ISO646-DE deutsche Umlaute darstellen.\n"
-			+ "Da sie eine externe Zeichensatzdatei"
-			+ " eingebunden haben,\n"
-			+ "kann JKCEMU nicht wissen, ob ASCII-Zeichen\n"
-			+ "oder deutsche Umlaute angezeigt werden.\n"
-			+ "Wie sind diese Zeichencodes zu interpretieren?",
+		LangUtil.tr(
+			"Der Text enth\u00E4lt Zeichencodes, die nach ASCII"
+				+ " die Zeichen [ \\ ] { | } ~\n"
+				+ "und nach ISO646-DE deutsche Umlaute darstellen.\n"
+				+ "Da sie eine externe Zeichensatzdatei"
+				+ " eingebunden haben,\n"
+				+ "kann JKCEMU nicht wissen, ob ASCII-Zeichen\n"
+				+ "oder deutsche Umlaute angezeigt werden.\n"
+				+ "Wie sind diese Zeichencodes zu interpretieren?" ),
 		JOptionPane.QUESTION_MESSAGE );
 	      pane.setOptions( options );
 	      pane.setWantsInput( false );
-	      pane.createDialog( this, "Zeichensatz" ).setVisible( true );
+	      pane.createDialog(
+			this,
+			LangUtil.tr( "Zeichensatz" ) ).setVisible( true );
 	      Object value = pane.getValue();
 	      if( value != null ) {
 		if( value.equals( options[ 0 ] ) ) {

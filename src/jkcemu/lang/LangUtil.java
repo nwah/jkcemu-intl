@@ -19,6 +19,7 @@ import java.io.PrintWriter;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 import jkcemu.Main;
@@ -134,6 +135,26 @@ public class LangUtil
       langCode = code;
       poFile   = loadPOFile( code );
     }
+
+    /*
+     * Die von Swing selbst mitgebrachten Texte,
+     * z.B. die Beschriftungen der Knoepfe in JOptionPane
+     * und die Texte im JFileChooser,
+     * werden ueber die Kategorie DISPLAY der Standard-Landeseinstellung
+     * ausgewaehlt.
+     * Diese wird deshalb mitgefuehrt, damit nicht in einem
+     * englischsprachigen Dialog ein Knopf "Abbrechen" erscheint.
+     * Die Kategorie FORMAT bleibt unveraendert,
+     * damit z.B. Datums- und Zahlenformate
+     * weiterhin denen des Betriebssystems entsprechen.
+     */
+    try {
+      Locale.setDefault(
+		Locale.Category.DISPLAY,
+		Locale.forLanguageTag(
+			code != null ? code : LANG_CODE_DE ) );
+    }
+    catch( Exception ex ) {}
   }
 
 
@@ -173,11 +194,29 @@ public class LangUtil
   }
 
 
+  /*
+   * Uebersetzung eines Textes mit Platzhaltern
+   *
+   * Zahlenargumente werden vorher in Zeichenketten umgewandelt,
+   * damit MessageFormat sie nicht entsprechend der Landeseinstellung
+   * formatiert.
+   * Anderenfalls wuerde z.B. aus 1024 die Ausgabe "1.024" werden,
+   * was bei den hier auszugebenden technischen Werten
+   * (Adressen, Anzahlen, Byte- und Sektorgroessen) falsch waere.
+   */
   public static String tr( String text, Object... args )
   {
     String rv = tr( text );
     if( (rv != null) && (args != null) && (args.length > 0) ) {
-      rv = MessageFormat.format( rv, args );
+      Object[] fmtArgs = new Object[ args.length ];
+      for( int i = 0; i < args.length; i++ ) {
+	Object arg = args[ i ];
+	if( arg instanceof Number ) {
+	  arg = arg.toString();
+	}
+	fmtArgs[ i ] = arg;
+      }
+      rv = MessageFormat.format( rv, fmtArgs );
     }
     return rv;
   }

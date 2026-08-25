@@ -86,9 +86,10 @@ public class TextFinder
     TextFinder textFinder = oldTextFinder;
     String     searchText = getPresetSearchText( textArea, oldTextFinder );
 
-    String[]    options = { EmuUtil.TEXT_FIND, EmuUtil.TEXT_CANCEL };
+    String[]    options = LangUtil.tr(
+			new String[] { EmuUtil.TEXT_FIND, EmuUtil.TEXT_CANCEL } );
     JOptionPane pane    = new JOptionPane(
-				EmuUtil.LABEL_SEARCH_FOR,
+				LangUtil.tr( EmuUtil.LABEL_SEARCH_FOR ),
 				JOptionPane.PLAIN_MESSAGE );
     pane.setOptions( options );
     pane.setWantsInput( true );
@@ -96,7 +97,9 @@ public class TextFinder
       pane.setInitialSelectionValue( searchText );
     }
     pane.setInitialValue( options[ 0 ] );
-    JDialog dlg = pane.createDialog( textArea, EmuUtil.TEXT_FIND );
+    JDialog dlg = pane.createDialog(
+				textArea,
+				LangUtil.tr( EmuUtil.TEXT_FIND ) );
     BaseDlg.setParentCentered( dlg );
     dlg.setVisible( true );
     Object value = pane.getValue();

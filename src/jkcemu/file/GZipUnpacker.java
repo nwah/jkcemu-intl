@@ -19,6 +19,7 @@ import java.io.OutputStream;
 import java.util.zip.GZIPInputStream;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.AbstractThreadFrm;
+import jkcemu.lang.LangUtil;
 
 
 public class GZipUnpacker extends AbstractThreadFrm
@@ -87,7 +88,7 @@ public class GZipUnpacker extends AbstractThreadFrm
   {
     super(
 	"JKCEMU gzip unpacker",
-	"Entpacken von " + srcFile.getName() + "...",
+	LangUtil.tr( "Entpacken von {0}...", srcFile.getName() ),
 	false,
 	true,
 	true );

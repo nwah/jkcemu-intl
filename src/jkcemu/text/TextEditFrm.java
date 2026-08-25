@@ -289,7 +289,7 @@ public class TextEditFrm extends BaseFrm implements
     if( textFileFilters == null ) {
       textFileFilters      = new javax.swing.filechooser.FileFilter[ 2 ];
       textFileFilters[ 0 ] = new FileNameExtensionFilter(
-				"Quelltextdateien (*.asm; *.bas)",
+				LangUtil.tr( "Quelltextdateien (*.asm; *.bas)" ),
 				"asm", "bas" );
       textFileFilters[ 1 ] = FileUtil.getTextFileFilter();
     }
@@ -400,7 +400,7 @@ public class TextEditFrm extends BaseFrm implements
       toFront();
       String[] options = { LangUtil.tr( "Projekt" ),
 			   LangUtil.tr( "Inhalt" ),
-			   EmuUtil.TEXT_CANCEL };
+			   LangUtil.tr( EmuUtil.TEXT_CANCEL ) };
       int      selOpt  = JOptionPane.showOptionDialog(
 				this,
 				LangUtil.tr(
@@ -1316,22 +1316,26 @@ public class TextEditFrm extends BaseFrm implements
 	if( (tabIdx >= 0) && (tabIdx < this.tabbedPane.getTabCount()) ) {
 	  this.tabbedPane.setSelectedIndex( tabIdx );
 	}
-	String[] options = {
+	String[] options = LangUtil.tr( new String[] {
 			EmuUtil.TEXT_SAVE,
 			"Verwerfen",
-			EmuUtil.TEXT_CANCEL };
+			EmuUtil.TEXT_CANCEL } );
 	JOptionPane pane = new JOptionPane(
-		String.format(
-			"%s wurde ge\u00E4ndert und nicht gespeichert.\n"
+		LangUtil.tr(
+			"{0} wurde ge\u00E4ndert und nicht gespeichert.\n"
 				+ "M\u00F6chten Sie jetzt speichern?",
-			prjChanged ? "Das Projekt" : "Der Text" ),
+			prjChanged ?
+				LangUtil.tr( "Das Projekt" )
+				: LangUtil.tr( "Der Text" ) ),
 		JOptionPane.WARNING_MESSAGE );
 	pane.setWantsInput( false );
 	pane.setOptions( options );
 	pane.setInitialValue( options[ 0 ] );
 	setState( Frame.NORMAL );
 	toFront();
-	pane.createDialog( this, "Daten ge\u00E4ndert" ).setVisible( true );
+	pane.createDialog(
+		this,
+		LangUtil.tr( "Daten ge\u00E4ndert" ) ).setVisible( true );
 	Object value = pane.getValue();
 	if( value != null ) {
 	  if( value.equals( options[ 0 ] ) ) {
@@ -3357,7 +3361,7 @@ public class TextEditFrm extends BaseFrm implements
 
   private void updTitle( EditText editText )
   {
-    String title = TITLE;
+    String title = LangUtil.tr( TITLE );
     if( editText != null ) {
       StringBuilder buf = new StringBuilder( 256 );
       buf.append( title );
@@ -3368,10 +3372,16 @@ public class TextEditFrm extends BaseFrm implements
       } else {
 	buf.append( editText.getName() );
       }
-      if( editText.isReadOnly() ) {
-	buf.append( " (schreibesch\u00FCtzt" );
-      }
       title = buf.toString();
+      if( editText.isReadOnly() ) {
+
+	/*
+	 * Der fehlende Buchstabe und die fehlende Klammer
+	 * sind im deutschen Originaltext so enthalten
+	 * und werden hier nicht veraendert.
+	 */
+	title = LangUtil.tr( "{0} (schreibesch\u00FCtzt", title );
+      }
     }
     setTitle( title );
   }

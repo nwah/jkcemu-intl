@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.zip.GZIPInputStream;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class FloppyDiskInfo implements Comparable<FloppyDiskInfo>
@@ -93,15 +94,15 @@ public class FloppyDiskInfo implements Comparable<FloppyDiskInfo>
 
 	/* --- Comparable --- */
 
+  /*
+   * Sortiert wird nach der angezeigten, d.h. uebersetzten Bezeichnung,
+   * damit die Auswahlliste in der eingestellten Sprache
+   * alphabetisch sortiert ist.
+   */
   @Override
   public int compareTo( FloppyDiskInfo info )
   {
-    String s1 = this.infoText;
-    String s2 = info.infoText;
-    if( s1 == null ) {
-      s1 = "";
-    }
-    return s1.compareTo( s2 != null ? s2 : "" );
+    return toString().compareTo( info.toString() );
   }
 
 
@@ -110,6 +111,6 @@ public class FloppyDiskInfo implements Comparable<FloppyDiskInfo>
   @Override
   public String toString()
   {
-    return this.infoText != null ? this.infoText : "";
+    return this.infoText != null ? LangUtil.tr( this.infoText ) : "";
   }
 }

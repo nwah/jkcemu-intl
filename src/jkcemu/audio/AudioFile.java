@@ -19,6 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import jkcemu.Main;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class AudioFile
@@ -111,7 +112,9 @@ public class AudioFile
   {
     if( fileFilter == null ) {
       fileFilter = new FileNameExtensionFilter(
-			"Sound-Dateien (" + getFileExtensionText() + ")",
+			LangUtil.tr(
+				"Sound-Dateien ({0})",
+				getFileExtensionText() ),
 			fileExts );
     }
     return fileFilter;
