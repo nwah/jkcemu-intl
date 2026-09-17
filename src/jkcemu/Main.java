@@ -68,8 +68,8 @@ import jkcemu.tools.hexedit.HexEditFrm;
 
 public class Main
 {
-  public static final String APPNAME   = "JKCEMU";
-  public static final String VERSION   = "0.9.11";
+  public static final String APPNAME   = "JKCEMU Multilingual";
+  public static final String VERSION   = "0.9.9.2"; // 4th digit is our version relative to main brain
   public static final String APPINFO   = APPNAME + " Version " + VERSION;
   public static final String COPYRIGHT = "(c) 2008-2026 Jens M\u00FCller";
 

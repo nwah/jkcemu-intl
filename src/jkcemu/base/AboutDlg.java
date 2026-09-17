@@ -154,7 +154,7 @@ public class AboutDlg extends BaseDlg
     gbcGeneral.gridy++;
     panelGeneral.add(
 	GUIFactory.createLabel(
-		LangUtil.getText( "base.label.small_computer_emulator" ) ),
+		LangUtil.getText( "base.label.kleincomputer_emulator" ) ),
 	gbcGeneral );
 
     gbcGeneral.insets.top = 12;
