@@ -26,6 +26,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.KramerMC;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -61,7 +62,8 @@ public class KramerMCSettingsFld extends AbstractSettingsFld
 		propPrefix,
 		KramerMC.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 		true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -71,11 +73,13 @@ public class KramerMCSettingsFld extends AbstractSettingsFld
 		AutoInputCharSet.getStdCharSet(),
 		KramerMC.DEFAULT_SWAP_KEY_CHAR_CASE,
 		KramerMC.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -87,7 +91,7 @@ public class KramerMCSettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.cbCatchPrintCalls = GUIFactory.createCheckBox(
-		"Betriebssystemaufrufe f\u00FCr Druckerausgaben abfangen" );
+		LangUtil.getText( "emusys.option.intercept_operating" ) );
     this.cbCatchPrintCalls.addActionListener( this );
     this.tabEtc.add( this.cbCatchPrintCalls, gbcEtc );
 
@@ -101,7 +105,7 @@ public class KramerMCSettingsFld extends AbstractSettingsFld
     this.fldAltRom0000 = new ROMFileSettingsFld(
 			this.settingsFrm,
 			this.propPrefix + KramerMC.PROP_ROM0_PREFIX,
-			"Alternativer ROM-Inhalt f\u00FCr 0000h-0BFFh:" );
+			LangUtil.getText( "emusys_etc.text.alternative_rom_content_0000h" ) );
     gbcEtc.gridwidth     = 1;
     gbcEtc.insets.top    = 5;
     gbcEtc.insets.bottom = 5;
@@ -111,7 +115,7 @@ public class KramerMCSettingsFld extends AbstractSettingsFld
     this.fldAltRom8000 = new ROMFileSettingsFld(
 			this.settingsFrm,
 			this.propPrefix + KramerMC.PROP_ROM8_PREFIX,
-			"Alternativer ROM-Inhalt f\u00FCr 8000h-AFFFh:" );
+			LangUtil.getText( "emusys_etc.text.alternative_rom_content_8000h" ) );
     gbcEtc.gridwidth     = 1;
     gbcEtc.insets.top    = 5;
     gbcEtc.insets.bottom = 5;
@@ -121,7 +125,7 @@ public class KramerMCSettingsFld extends AbstractSettingsFld
     this.fldAltRomC000 = new ROMFileSettingsFld(
 			this.settingsFrm,
 			this.propPrefix + KramerMC.PROP_ROMC_PREFIX,
-			"Alternativer ROM-Inhalt f\u00FCr C000h-DFFFh:" );
+			LangUtil.getText( "emusys_etc.text.alternative_rom_content_c000h" ) );
     gbcEtc.gridwidth     = 1;
     gbcEtc.insets.top    = 5;
     gbcEtc.insets.bottom = 5;
@@ -131,7 +135,8 @@ public class KramerMCSettingsFld extends AbstractSettingsFld
     this.fldAltFont = new ROMFileSettingsFld(
 			this.settingsFrm,
 			this.propPrefix + KramerMC.PROP_FONT_PREFIX,
-			"Alternativer Zeichensatz:" );
+			LangUtil.getText(
+				"emusys.text.alternative_character" ) );
     gbcEtc.gridwidth     = 1;
     gbcEtc.insets.top    = 5;
     gbcEtc.insets.bottom = 5;

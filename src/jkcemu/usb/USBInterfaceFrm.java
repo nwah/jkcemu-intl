@@ -24,6 +24,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.HelpFrm;
 import jkcemu.base.ScreenFrm;
+import jkcemu.lang.LangUtil;
 
 
 public class USBInterfaceFrm extends BaseFrm
@@ -115,7 +116,7 @@ public class USBInterfaceFrm extends BaseFrm
   private USBInterfaceFrm( ScreenFrm screenFrm )
   {
     this.screenFrm = screenFrm;
-    setTitle( "JKCEMU USB-Anschluss" );
+    setTitle( LangUtil.getText( "usb.title.jkcemu_usb_port" ) );
 
 
     // Menu Datei
@@ -126,7 +127,8 @@ public class USBInterfaceFrm extends BaseFrm
     // Menu Hilfe
     JMenu mnuHelp = createMenuHelp();
     mnuHelp.add(
-	createMenuItem( "Hilfe zum USB-Anschluss...", ACTION_HELP ) );
+	createMenuItem( LangUtil.getText( "usb.action.help_usb_port" ),
+		ACTION_HELP ) );
 
 
     // Menu

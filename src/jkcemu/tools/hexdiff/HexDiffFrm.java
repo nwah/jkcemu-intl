@@ -59,7 +59,7 @@ public class HexDiffFrm extends HTMLViewFrm implements
 						ListSelectionListener,
 						PopupMenuOwner
 {
-  public static final String TITLE = Main.APPNAME + " Hex-Dateivergleicher";
+  public static final String TITLE = "hexdiff.title.jkcemu_hex_file";
 
   private static final String PROP_MAX_DIFFS
 				= "jkcemu.hexdiff.differences.max";
@@ -114,7 +114,7 @@ public class HexDiffFrm extends HTMLViewFrm implements
 		if( files.size() == 1 ) {
 		  BaseDlg.showInfoDlg(
 			this,
-			"Die Datei wurde bereits hinzugef\u00FCgt." );
+			LangUtil.getText( "hexdiff.msg.file_already_added" ) );
 		}
 	      } else {
 		FileData fileData = new FileData( curFile );
@@ -129,9 +129,9 @@ public class HexDiffFrm extends HTMLViewFrm implements
 		  if( BaseDlg.showOptionDlg(
 			this,
 			fName + ": Datei ist leer.",
-			"Datei leer",
-			"Weiter",
-			EmuUtil.TEXT_CANCEL ) != 0 )
+			LangUtil.getText( "hexdiff.msg.file_empty" ),
+			LangUtil.getText( "hexdiff.msg.continue" ),
+			LangUtil.getText( EmuUtil.TEXT_CANCEL ) ) != 0 )
 		  {
 		    break;
 		  }
@@ -321,7 +321,7 @@ public class HexDiffFrm extends HTMLViewFrm implements
 
   private HexDiffFrm()
   {
-    setTitle( TITLE );
+    setTitle( LangUtil.getText( TITLE ) );
     this.files     = new Vector<>();
     this.lastDiffs = 0;
 
@@ -329,26 +329,30 @@ public class HexDiffFrm extends HTMLViewFrm implements
     // Menu
     JMenu mnuFile = createMenuFile();
 
-    this.mnuFileAdd = createMenuItem( EmuUtil.TEXT_ADD_FILE );
+    this.mnuFileAdd = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_ADD_FILE ) );
     mnuFile.add( this.mnuFileAdd );
 
-    this.mnuFileRemove = createMenuItem( "Datei entfernen" );
+    this.mnuFileRemove = createMenuItem(
+		LangUtil.getText( "hexdiff.action.remove_file" ) );
     this.mnuFileRemove.setEnabled( false );
     mnuFile.add( this.mnuFileRemove );
     mnuFile.addSeparator();
 
-    this.mnuFileRemoveAll = createMenuItem( "Alle Dateien entfernen" );
+    this.mnuFileRemoveAll = createMenuItem(
+		LangUtil.getText( "hexdiff.action.remove_all_files" ) );
     this.mnuFileRemoveAll.setEnabled( false );
     mnuFile.add( this.mnuFileRemoveAll );
     mnuFile.addSeparator();
 
     JMenu mnuSettings = createMenuSettings();
-    this.mnuMaxDiffs  = createMenuItem( "Max. Dateiunterschiede..." );
+    this.mnuMaxDiffs  = createMenuItem( LangUtil.getText(
+			"hexdiff.action.max_file_differences" ) );
     mnuSettings.add( this.mnuMaxDiffs );
 
     createMenuBar(
 		mnuFile,
-		EmuUtil.TEXT_OPEN_FIND,
+		LangUtil.getText( EmuUtil.TEXT_OPEN_FIND ),
 		null,
 		mnuSettings,
 		"Hilfe zum Hex-Dateivergleicher...",
@@ -358,15 +362,18 @@ public class HexDiffFrm extends HTMLViewFrm implements
     // Kontextmenue fuer Dateibereich
     this.popupMnu = GUIFactory.createPopupMenu();
 
-    this.popupFileAdd = createMenuItem( "Datei hinzuf\u00FCgen..." );
+    this.popupFileAdd = createMenuItem(
+		LangUtil.getText( "hexdiff.action.add_file" ) );
     this.popupMnu.add( this.popupFileAdd );
 
-    this.popupFileRemove = createMenuItem( "Datei entfernen" );
+    this.popupFileRemove = createMenuItem(
+		LangUtil.getText( "hexdiff.action.remove_file" ) );
     this.popupFileRemove.setEnabled( false );
     this.popupMnu.add( this.popupFileRemove );
     this.popupMnu.addSeparator();
 
-    this.popupFileRemoveAll = createMenuItem( "Alle Dateien entfernen" );
+    this.popupFileRemoveAll = createMenuItem(
+		LangUtil.getText( "hexdiff.action.remove_all_files" ) );
     this.popupFileRemoveAll.setEnabled( false );
     this.popupMnu.add( this.popupFileRemoveAll );
 
@@ -384,7 +391,8 @@ public class HexDiffFrm extends HTMLViewFrm implements
 						0, 0 );
 
     // Dateiliste
-    add( GUIFactory.createLabel( "Dateien:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "hexdiff.label.files" ) ), gbc );
 
     this.listFiles = GUIFactory.createList();
     this.listFiles.setSelectionMode(
@@ -398,7 +406,8 @@ public class HexDiffFrm extends HTMLViewFrm implements
     this.btnFileAdd = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_ADD_FILE );
+					LangUtil.getText(
+						EmuUtil.TEXT_ADD_FILE ) );
     this.btnFileAdd.addActionListener( this );
     gbc.fill       = GridBagConstraints.NONE;
     gbc.weightx    = 0.0;
@@ -409,7 +418,7 @@ public class HexDiffFrm extends HTMLViewFrm implements
     this.btnFileRemove = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/delete.png",
-					"Datei entfernen" );
+					LangUtil.getText( "hexdiff.action.remove_file" ) );
     this.btnFileRemove.setEnabled( false );
     this.btnFileRemove.addActionListener( this );
     gbc.gridy++;
@@ -504,7 +513,7 @@ public class HexDiffFrm extends HTMLViewFrm implements
 			vOld,
 			0,
 			null );
-    dlg.setTitle( EmuUtil.TEXT_SETTINGS );
+    dlg.setTitle( LangUtil.getText( EmuUtil.TEXT_SETTINGS ) );
     dlg.setVisible( true );
     Integer v = dlg.getReply();
     if( v != null ) {
@@ -624,21 +633,20 @@ public class HexDiffFrm extends HTMLViewFrm implements
 	    if( (maxDiffs > 0) && (nDiffs >= maxDiffs) ) {
 	      buf.append( "<br>\n" );
 	      if( maxDiffs == 1 ) {
-		buf.append( LangUtil.tr(
-			"Es wird nur der erste Unterschied"
-				+ " angezeigt.\n" ) );
+		buf.append( LangUtil.getText(
+			"hexdiff.text.only_first_difference" ) );
 	      } else {
-		buf.append( LangUtil.tr(
-			"Es werden nur die ersten {0}"
-				+ " Unterschiede angezeigt.\n",
+		buf.append( LangUtil.getText(
+			"hexdiff.text.only_first_differences",
 			maxDiffs ) );
 	      }
 	    } else {
 	      if( nDiffs == 1 ) {
-		buf.append( LangUtil.tr( "1 unterschiedliches Byte\n" ) );
+		buf.append( LangUtil.getText(
+				"hexdiff.text.1_differing_byte" ) );
 	      } else {
-		buf.append( LangUtil.tr(
-			"{0} unterschiedliche Bytes\n",
+		buf.append( LangUtil.getText(
+			"hexdiff.text.differing_bytes",
 			nDiffs ) );
 	      }
 	    }

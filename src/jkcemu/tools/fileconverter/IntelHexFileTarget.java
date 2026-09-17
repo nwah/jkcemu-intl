@@ -15,6 +15,7 @@ import java.io.Writer;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.UserInputException;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class IntelHexFileTarget extends AbstractConvertTarget
@@ -30,7 +31,9 @@ public class IntelHexFileTarget extends AbstractConvertTarget
 		int            offs,
 		int            len )
   {
-    super( fileConvertFrm, "Intel-HEX-Datei (*.hex; *.ihx)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "common.option.intel_hex_file" ) );
     this.dataBytes = dataBytes;
     this.offs      = offs;
     this.len       = len;

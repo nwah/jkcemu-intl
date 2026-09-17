@@ -162,64 +162,64 @@ public class DebugFrm extends BaseFrm implements
   private static final String PROP_MAX_LOG_COUNT = "max_log_count";
 
   private static final String TEXT_STOP
-			= "Programmausf\u00FChrung anhalten";
+			= "debugger.text.halt_program_execution";
   private static final String TEXT_RUN
-			= "Programm bis Haltepunkt ausf\u00FChren";
+			= "debugger.text.run_program_breakpoint";
   private static final String TEXT_WALK
-			= "Programm bis Haltepunkt langsam ausf\u00FChren";
+			= "debugger.text.run_program_slowly";
   private static final String TEXT_STEP_OVER
-			= "Einzelschritt \u00FCber Aufruf hinweg";
+			= "debugger.text.single_step_over";
   private static final String TEXT_STEP_INTO
-			= "Einzelschritt in Aufruf hinein";
+			= "debugger.text.single_step_call";
   private static final String TEXT_STEP_TO_RET
-			= "Bis RET ausf\u00FChren";
+			= "debugger.text.run_ret";
 
   private static final String TEXT_BP_EDIT
-			= "Halte-/Log-Punkt bearbeiten...";
+			= "debugger.text.edit_breakpoint_logpoint_bearbeiten";
   private static final String TEXT_BP_REMOVE
-			= "Ausgew\u00E4hlte Halte-/Log-Punkte entfernen";
+			= "debugger.text.remove_selected_breakpoints";
   private static final String TEXT_BP_REMOVE_ALL
-			= "Alle Halte-/Log-Punkte entfernen";
+			= "debugger.text.remove_all_breakpoints";
 
   private static final String TEXT_BP_ENABLE_STOP
-	= "In ausgew\u00E4hlten Halte-/Log-Punkten Anhalten aktivieren";
+	= "debugger.text.enable_halting_selected";
   private static final String TEXT_BP_DISABLE_STOP
-	= "In ausgew\u00E4hlten Halte-/Log-Punkten Anhalten deaktivieren";
+	= "debugger.text.disable_halting_selected";
 
   private static final String TEXT_BP_ENABLE_STOP_ALL
-		= "In allen Halte-/Log-Punkten Anhalten aktivieren";
+		= "debugger.text.enable_halting_all";
   private static final String TEXT_BP_DISABLE_STOP_ALL
-		= "In allen Halte-/Log-Punkten Anhalten deaktivieren";
+		= "debugger.text.disable_halting_all";
 
   private static final String TEXT_BP_ENABLE_LOG
-	= "In ausgew\u00E4hlten Halte-/Log-Punkten Loggen aktivieren";
+	= "debugger.text.enable_logging_selected";
   private static final String TEXT_BP_DISABLE_LOG
-	= "In ausgew\u00E4hlten Halte-/Log-Punkten Loggen deaktivieren";
+	= "debugger.text.disable_logging_selected";
 
   private static final String TEXT_BP_ENABLE_LOG_ALL
-		= "In allen Halte-/Log-Punkten Loggen aktivieren";
+		= "debugger.text.enable_logging_all";
   private static final String TEXT_BP_DISABLE_LOG_ALL
-		= "In allen Halte-/Log-Punkten Loggen deaktivieren";
+		= "debugger.text.disable_logging_all";
 
   private static final String TEXT_VAR_ADD
-			= "Variable hinzuf\u00FCgen...";
+			= "debugger.text.add_variable";
   private static final String TEXT_VAR_EDIT
-			= "Variable bearbeiten...";
+			= "debugger.text.edit_variable_dots";
   private static final String TEXT_VAR_BP_ADD
-			= "Halte-/Log-Punkt auf Variable hinzuf\u00FCgen...";
+			= "debugger.text.add_breakpoint_logpoint";
   private static final String TEXT_VAR_REMOVE
-			= "Ausgew\u00E4hlte Variablen entfernen";
+			= "debugger.text.remove_selected_variables";
   private static final String TEXT_VAR_REMOVE_ALL
-			= "Alle Variablen entfernen";
+			= "debugger.text.remove_all_variables";
 
   private static final String TEXT_LOG_COPY
-			= "Ausgew\u00E4hlte Log-Meldungen kopieren";
+			= "debugger.text.copy_selected_log";
   private static final String TEXT_LOG_SELECT_ALL
-			= "Alle Log-Meldungen ausw\u00E4hlen";
+			= "debugger.text.select_all_log";
   private static final String TEXT_LOG_REMOVE
-			= "Ausgew\u00E4hlte Log-Meldungen entfernen";
+			= "debugger.text.remove_selected_log";
   private static final String TEXT_LOG_REMOVE_ALL
-			= "Alle Log-Meldungen entfernen";
+			= "debugger.text.remove_all_log";
 
   private static final int DEFAULT_MAX_LOG_CNT = 500;
 
@@ -412,33 +412,35 @@ public class DebugFrm extends BaseFrm implements
 	this.interruptSources = null;
       }
     }
-    setTitle( "JKCEMU Debugger" );
+    setTitle( LangUtil.getText( "common.text.jkcemu_debugger" ) );
 
 
     // Menu Datei
     JMenu mnuFile = createMenuFile();
 
     this.mnuFileBpsVarsLoad = createMenuItem(
-		"Halte-/Log-Punkte und Variablen laden..." );
+		LangUtil.getText( "debugger.action.load_breakpoints" ) );
     mnuFile.add( this.mnuFileBpsVarsLoad );
 
     this.mnuFileBpsVarsSave = createMenuItem(
-		"Halte-/Log-Punkte und Variablen speichern..." );
+		LangUtil.getText( "debugger.action.save_breakpoints" ) );
     mnuFile.add( this.mnuFileBpsVarsSave );
     mnuFile.addSeparator();
 
-    this.mnuFileBpsImport = createMenuItem(
-		"Halte-/Log-Punkte importieren..." );
+    this.mnuFileBpsImport = createMenuItem( LangUtil.getText(
+			"debugger.action.import_breakpoints_logpoints" ) );
     mnuFile.add( this.mnuFileBpsImport );
 
     this.mnuFileBpsReImport = createMenuItemWithDirectAccelerator(
-			"Halte-/Log-Punkte erneut importieren",
+			LangUtil.getText(
+				"debugger.action.import_breakpoints_logpoints_again" ),
 			KeyEvent.VK_F3 );
     this.mnuFileBpsReImport.setEnabled( false );
     mnuFile.add( this.mnuFileBpsReImport );
 
     this.mnuFileBpsRemoveImported = createMenuItem(
-				"Importierte Halte-/Log-Punkte entfernen" );
+				LangUtil.getText(
+					"debugger.action.remove_imported" ) );
     this.mnuFileBpsRemoveImported.setEnabled( false );
     mnuFile.add( this.mnuFileBpsRemoveImported );
     mnuFile.addSeparator();
@@ -448,53 +450,62 @@ public class DebugFrm extends BaseFrm implements
 
 
     // Menu Programmausfuehrung
-    JMenu mnuExec = GUIFactory.createMenu( "Programmausf\u00FChrung" );
+    JMenu mnuExec = GUIFactory.createMenu(
+		LangUtil.getText( "debugger.menu.program_execution" ) );
     mnuExec.setMnemonic(
-		LangUtil.mnemonic( "Programmausf\u00FChrung", KeyEvent.VK_A ) );
+		LangUtil.mnemonic(
+			"debugger.menu.program_execution", KeyEvent.VK_A ) );
 
     this.mnuExecStop = createMenuItemWithDirectAccelerator(
-						TEXT_STOP,
+						LangUtil.getText( TEXT_STOP ),
 						KeyEvent.VK_F4 );
     mnuExec.add( this.mnuExecStop );
 
     this.mnuExecRun = createMenuItemWithDirectAccelerator(
-						TEXT_RUN,
+						LangUtil.getText( TEXT_RUN ),
 						KeyEvent.VK_F5 );
     mnuExec.add( this.mnuExecRun );
 
-    JMenu mnuExecWalk = GUIFactory.createMenu( TEXT_WALK );
+    JMenu mnuExecWalk = GUIFactory.createMenu( LangUtil.getText( TEXT_WALK ) );
     mnuExec.add( mnuExecWalk );
 
-    this.mnuExecWalk500 = createMenuItem( "sehr langsam" );
+    this.mnuExecWalk500 = createMenuItem(
+		LangUtil.getText( "debugger.action.slow_sehr" ) );
     mnuExecWalk.add( this.mnuExecWalk500 );
 
-    this.mnuExecWalk300 = createMenuItem( "langsam" );
+    this.mnuExecWalk300 = createMenuItem(
+		LangUtil.getText( "debugger.action.slow_langsam" ) );
     mnuExecWalk.add( this.mnuExecWalk300 );
 
-    this.mnuExecWalk100 = createMenuItem( "etwas schneller" );
+    this.mnuExecWalk100 = createMenuItem(
+		LangUtil.getText( "debugger.action.somewhat_faster" ) );
     mnuExecWalk.add( this.mnuExecWalk100 );
 
-    this.mnuExecWalk30 = createMenuItem( "schneller" );
+    this.mnuExecWalk30 = createMenuItem(
+		LangUtil.getText( "debugger.action.faster" ) );
     mnuExecWalk.add( this.mnuExecWalk30 );
 
     this.mnuExecStepOver = createMenuItemWithDirectAccelerator(
-						TEXT_STEP_OVER,
+						LangUtil.getText(
+							TEXT_STEP_OVER ),
 						KeyEvent.VK_F6 );
     mnuExec.add( this.mnuExecStepOver );
 
     this.mnuExecStepInto = createMenuItemWithDirectAccelerator(
-						TEXT_STEP_INTO,
+						LangUtil.getText(
+							TEXT_STEP_INTO ),
 						KeyEvent.VK_F7 );
     mnuExec.add( this.mnuExecStepInto );
 
     this.mnuExecStepToRET = createMenuItemWithDirectAccelerator(
-						TEXT_STEP_TO_RET,
+						LangUtil.getText(
+							TEXT_STEP_TO_RET ),
 						KeyEvent.VK_F8 );
     mnuExec.add( this.mnuExecStepToRET );
     mnuExec.addSeparator();
 
     this.mnuExecTracer = GUIFactory.createCheckBoxMenuItem(
-						"Befehle aufzeichnen",
+						LangUtil.getText( "debugger.action.record_instructions" ),
 						false );
     this.mnuExecTracer.setSelected( false );
     this.mnuExecTracer.addActionListener( this );
@@ -502,125 +513,149 @@ public class DebugFrm extends BaseFrm implements
 
 
     // Menu Halte-/Log-Punkte
-    JMenu mnuBp = GUIFactory.createMenu( "Halte-/Log-Punkte" );
+    JMenu mnuBp = GUIFactory.createMenu( LangUtil.getText(
+			"debugger.menu.breakpoints_logpoints" ) );
     mnuBp.setMnemonic(
-		LangUtil.mnemonic( "Halte-/Log-Punkte", KeyEvent.VK_P ) );
+		LangUtil.mnemonic( "debugger.menu.breakpoints_logpoints", KeyEvent.VK_P ) );
 
-    this.mnuBpPCAdd = createMenuItemWithStandardAccelerator(
-		"Halte-/Log-Punkt auf Programmadresse hinzuf\u00FCgen...",
+    this.mnuBpPCAdd = createMenuItemWithStandardAccelerator( LangUtil.getText(
+			"debugger.action.add_breakpoint_logpoint_program" ),
 		KeyEvent.VK_A );
     mnuBp.add( this.mnuBpPCAdd );
 
     this.mnuBpMemoryAdd = createMenuItemWithStandardAccelerator(
-		"Halte-/Log-Punkt auf Speicherbereich hinzuf\u00FCgen...",
+		LangUtil.getText(
+			"debugger.action.add_breakpoint_logpoint_memory" ),
 		KeyEvent.VK_M );
     mnuBp.add( this.mnuBpMemoryAdd );
 
     this.mnuBpInputAdd = createMenuItemWithStandardAccelerator(
-		"Halte-/Log-Punkt auf Eingabetor hinzuf\u00FCgen...",
+		LangUtil.getText(
+			"debugger.action.add_breakpoint_logpoint_input" ),
 		KeyEvent.VK_I );
     mnuBp.add( this.mnuBpInputAdd );
 
     this.mnuBpOutputAdd = createMenuItemWithStandardAccelerator(
-		"Halte-/Log-Punkt auf Ausgabetor hinzuf\u00FCgen...",
+		LangUtil.getText(
+			"debugger.action.add_breakpoint_logpoint_output" ),
 		KeyEvent.VK_O );
     mnuBp.add( this.mnuBpOutputAdd );
 
     this.mnuBpInterruptAdd = createMenuItemWithStandardAccelerator(
-		"Halte-/Log-Punkt auf Interrupt-Quelle hinzuf\u00FCgen...",
+		LangUtil.getText(
+			"debugger.action.add_breakpoint_logpoint_interrupt" ),
 		KeyEvent.VK_Q );
     mnuBp.add( this.mnuBpInterruptAdd );
 
     this.mnuBpEdit = createMenuItemWithStandardAccelerator(
-						TEXT_BP_EDIT,
+						LangUtil.getText(
+							TEXT_BP_EDIT ),
 						KeyEvent.VK_E );
     mnuBp.add( this.mnuBpEdit );
     mnuBp.addSeparator();
 
-    this.mnuBpRemove = createMenuItem( TEXT_BP_REMOVE );
+    this.mnuBpRemove = createMenuItem( LangUtil.getText( TEXT_BP_REMOVE ) );
     mnuBp.add( this.mnuBpRemove );
 
-    this.mnuBpRemoveAll = createMenuItem( TEXT_BP_REMOVE_ALL );
+    this.mnuBpRemoveAll = createMenuItem(
+		LangUtil.getText( TEXT_BP_REMOVE_ALL ) );
     mnuBp.add( this.mnuBpRemoveAll );
     mnuBp.addSeparator();
 
-    this.mnuBpEnableStop = createMenuItem( TEXT_BP_ENABLE_STOP );
+    this.mnuBpEnableStop = createMenuItem(
+		LangUtil.getText( TEXT_BP_ENABLE_STOP ) );
     mnuBp.add( this.mnuBpEnableStop );
 
-    this.mnuBpDisableStop = createMenuItem( TEXT_BP_DISABLE_STOP );
+    this.mnuBpDisableStop = createMenuItem(
+		LangUtil.getText( TEXT_BP_DISABLE_STOP ) );
     mnuBp.add( this.mnuBpDisableStop );
     mnuBp.addSeparator();
 
-    this.mnuBpEnableStopAll = createMenuItem( TEXT_BP_ENABLE_STOP_ALL );
+    this.mnuBpEnableStopAll = createMenuItem(
+		LangUtil.getText( TEXT_BP_ENABLE_STOP_ALL ) );
     mnuBp.add( this.mnuBpEnableStopAll );
 
-    this.mnuBpDisableStopAll = createMenuItem( TEXT_BP_DISABLE_STOP_ALL );
+    this.mnuBpDisableStopAll = createMenuItem(
+		LangUtil.getText( TEXT_BP_DISABLE_STOP_ALL ) );
     mnuBp.add( this.mnuBpDisableStopAll );
     mnuBp.addSeparator();
 
-    this.mnuBpEnableLog = createMenuItem( TEXT_BP_ENABLE_LOG );
+    this.mnuBpEnableLog = createMenuItem(
+		LangUtil.getText( TEXT_BP_ENABLE_LOG ) );
     mnuBp.add( this.mnuBpEnableLog );
 
-    this.mnuBpDisableLog = createMenuItem( TEXT_BP_DISABLE_LOG );
+    this.mnuBpDisableLog = createMenuItem(
+		LangUtil.getText( TEXT_BP_DISABLE_LOG ) );
     mnuBp.add( this.mnuBpDisableLog );
     mnuBp.addSeparator();
 
-    this.mnuBpEnableLogAll = createMenuItem( TEXT_BP_ENABLE_LOG_ALL );
+    this.mnuBpEnableLogAll = createMenuItem(
+		LangUtil.getText( TEXT_BP_ENABLE_LOG_ALL ) );
     mnuBp.add( this.mnuBpEnableLogAll );
 
-    this.mnuBpDisableLogAll = createMenuItem( TEXT_BP_DISABLE_LOG_ALL );
+    this.mnuBpDisableLogAll = createMenuItem(
+		LangUtil.getText( TEXT_BP_DISABLE_LOG_ALL ) );
     mnuBp.add( this.mnuBpDisableLogAll );
     mnuBp.addSeparator();
 
 
     // Menu Log-Meldungen
-    JMenu mnuLog = GUIFactory.createMenu( "Log-Meldungen" );
-    mnuLog.setMnemonic( LangUtil.mnemonic( "Log-Meldungen", KeyEvent.VK_L ) );
+    JMenu mnuLog = GUIFactory.createMenu(
+		LangUtil.getText( "debugger.menu.log_messages" ) );
+    mnuLog.setMnemonic( LangUtil.mnemonic(
+			"debugger.menu.log_messages", KeyEvent.VK_L ) );
 
-    this.mnuLogCopy = createMenuItem( TEXT_LOG_COPY );
+    this.mnuLogCopy = createMenuItem( LangUtil.getText( TEXT_LOG_COPY ) );
     mnuLog.add( this.mnuLogCopy );
 
-    this.mnuLogSelectAll = createMenuItem( TEXT_LOG_SELECT_ALL );
+    this.mnuLogSelectAll = createMenuItem(
+		LangUtil.getText( TEXT_LOG_SELECT_ALL ) );
     mnuLog.add( this.mnuLogSelectAll );
     mnuLog.addSeparator();
 
-    this.mnuLogRemove = createMenuItem( TEXT_LOG_REMOVE );
+    this.mnuLogRemove = createMenuItem( LangUtil.getText( TEXT_LOG_REMOVE ) );
     mnuLog.add( this.mnuLogRemove );
 
-    this.mnuLogRemoveAll = createMenuItem( TEXT_LOG_REMOVE_ALL );
+    this.mnuLogRemoveAll = createMenuItem(
+		LangUtil.getText( TEXT_LOG_REMOVE_ALL ) );
     mnuLog.add( this.mnuLogRemoveAll );
     mnuLog.addSeparator();
 
-    this.mnuLogMaxLogCnt = createMenuItem( "Max. Anzahl Log-Meldungen..." );
+    this.mnuLogMaxLogCnt = createMenuItem( LangUtil.getText(
+			"debugger.action.max_number_log" ) );
     mnuLog.add( this.mnuLogMaxLogCnt );
 
 
     // Menu Variablen
-    JMenu mnuVar = GUIFactory.createMenu( "Variablen" );
-    mnuVar.setMnemonic( LangUtil.mnemonic( "Variablen", KeyEvent.VK_V ) );
+    JMenu mnuVar = GUIFactory.createMenu(
+		LangUtil.getText( "debugger.menu.variables" ) );
+    mnuVar.setMnemonic( LangUtil.mnemonic(
+			"debugger.menu.variables", KeyEvent.VK_V ) );
 
-    this.mnuVarAdd = createMenuItem( TEXT_VAR_ADD );
+    this.mnuVarAdd = createMenuItem( LangUtil.getText( TEXT_VAR_ADD ) );
     mnuVar.add( this.mnuVarAdd );
 
-    this.mnuVarEdit = createMenuItem( TEXT_VAR_EDIT );
+    this.mnuVarEdit = createMenuItem( LangUtil.getText( TEXT_VAR_EDIT ) );
     mnuVar.add( this.mnuVarEdit );
     mnuVar.addSeparator();
 
-    this.mnuVarBpAdd = createMenuItem( TEXT_VAR_BP_ADD );
+    this.mnuVarBpAdd = createMenuItem( LangUtil.getText( TEXT_VAR_BP_ADD ) );
     mnuVar.add( this.mnuVarBpAdd );
     mnuVar.addSeparator();
 
-    this.mnuVarRemove = createMenuItem( TEXT_VAR_REMOVE );
+    this.mnuVarRemove = createMenuItem( LangUtil.getText( TEXT_VAR_REMOVE ) );
     mnuVar.add( this.mnuVarRemove );
 
-    this.mnuVarRemoveAll = createMenuItem( TEXT_VAR_REMOVE_ALL );
+    this.mnuVarRemoveAll = createMenuItem(
+		LangUtil.getText( TEXT_VAR_REMOVE_ALL ) );
     mnuVar.add( this.mnuVarRemoveAll );
 
 
     // Menu Hilfe
     JMenu mnuHelp = createMenuHelp();
 
-    this.mnuHelpContent = createMenuItem( "Hilfe zum Debugger..." );
+    this.mnuHelpContent = createMenuItem( LangUtil.getText(
+			"debugger.action.help_debugger" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -638,83 +673,97 @@ public class DebugFrm extends BaseFrm implements
     this.popupBp = GUIFactory.createPopupMenu();
 
     this.popupBpAdd = createMenuItem(
-				"Halte-/Log-Punkt hinzuf\u00FCgen..." );
+				LangUtil.getText( "debugger.action.add_breakpoint_logpoint" ) );
     this.popupBp.add( this.popupBpAdd );
 
-    this.popupBpEdit = createMenuItem( TEXT_BP_EDIT );
+    this.popupBpEdit = createMenuItem( LangUtil.getText( TEXT_BP_EDIT ) );
     this.popupBp.add( this.popupBpEdit );
     this.popupBp.addSeparator();
 
-    this.popupBpEnableStop = createMenuItem( TEXT_BP_ENABLE_STOP );
+    this.popupBpEnableStop = createMenuItem(
+		LangUtil.getText( TEXT_BP_ENABLE_STOP ) );
     this.popupBp.add( this.popupBpEnableStop );
 
-    this.popupBpDisableStop = createMenuItem( TEXT_BP_DISABLE_STOP );
+    this.popupBpDisableStop = createMenuItem(
+		LangUtil.getText( TEXT_BP_DISABLE_STOP ) );
     this.popupBp.add( this.popupBpDisableStop );
     this.popupBp.addSeparator();
 
-    this.popupBpEnableLog = createMenuItem( TEXT_BP_ENABLE_LOG );
+    this.popupBpEnableLog = createMenuItem(
+		LangUtil.getText( TEXT_BP_ENABLE_LOG ) );
     this.popupBp.add( this.popupBpEnableLog );
 
-    this.popupBpDisableLog = createMenuItem( TEXT_BP_DISABLE_LOG );
+    this.popupBpDisableLog = createMenuItem(
+		LangUtil.getText( TEXT_BP_DISABLE_LOG ) );
     this.popupBp.add( this.popupBpDisableLog );
     this.popupBp.addSeparator();
 
-    this.popupBpEnableStopAll = createMenuItem( TEXT_BP_ENABLE_STOP_ALL );
+    this.popupBpEnableStopAll = createMenuItem(
+		LangUtil.getText( TEXT_BP_ENABLE_STOP_ALL ) );
     this.popupBp.add( this.popupBpEnableStopAll );
 
-    this.popupBpDisableStopAll = createMenuItem( TEXT_BP_DISABLE_STOP_ALL );
+    this.popupBpDisableStopAll = createMenuItem(
+		LangUtil.getText( TEXT_BP_DISABLE_STOP_ALL ) );
     this.popupBp.add( this.popupBpDisableStopAll );
     this.popupBp.addSeparator();
 
-    this.popupBpEnableLogAll = createMenuItem( TEXT_BP_ENABLE_LOG_ALL );
+    this.popupBpEnableLogAll = createMenuItem(
+		LangUtil.getText( TEXT_BP_ENABLE_LOG_ALL ) );
     this.popupBp.add( this.popupBpEnableLogAll );
 
-    this.popupBpDisableLogAll = createMenuItem( TEXT_BP_DISABLE_LOG_ALL );
+    this.popupBpDisableLogAll = createMenuItem(
+		LangUtil.getText( TEXT_BP_DISABLE_LOG_ALL ) );
     this.popupBp.add( this.popupBpDisableLogAll );
     this.popupBp.addSeparator();
 
-    this.popupBpRemove = createMenuItem( TEXT_BP_REMOVE );
+    this.popupBpRemove = createMenuItem( LangUtil.getText( TEXT_BP_REMOVE ) );
     this.popupBp.add( this.popupBpRemove );
 
-    this.popupBpRemoveAll = createMenuItem( TEXT_BP_REMOVE_ALL );
+    this.popupBpRemoveAll = createMenuItem(
+		LangUtil.getText( TEXT_BP_REMOVE_ALL ) );
     this.popupBp.add( this.popupBpRemoveAll );
 
 
     // Popup-Menu fuer Log-Meldungen
     this.popupLog = GUIFactory.createPopupMenu();
 
-    this.popupLogCopy = createMenuItem( TEXT_LOG_COPY );
+    this.popupLogCopy = createMenuItem( LangUtil.getText( TEXT_LOG_COPY ) );
     this.popupLog.add( this.popupLogCopy );
 
-    this.popupLogSelectAll = createMenuItem( TEXT_LOG_SELECT_ALL );
+    this.popupLogSelectAll = createMenuItem(
+		LangUtil.getText( TEXT_LOG_SELECT_ALL ) );
     this.popupLog.add( this.popupLogSelectAll );
     this.popupLog.addSeparator();
 
-    this.popupLogRemove = createMenuItem( TEXT_LOG_REMOVE );
+    this.popupLogRemove = createMenuItem(
+		LangUtil.getText( TEXT_LOG_REMOVE ) );
     this.popupLog.add( this.popupLogRemove );
 
-    this.popupLogRemoveAll = createMenuItem( TEXT_LOG_REMOVE_ALL );
+    this.popupLogRemoveAll = createMenuItem(
+		LangUtil.getText( TEXT_LOG_REMOVE_ALL ) );
     this.popupLog.add( this.popupLogRemoveAll );
 
 
     // Popup-Menu fuer Variablen
     this.popupVar = GUIFactory.createPopupMenu();
 
-    this.popupVarAdd = createMenuItem( TEXT_VAR_ADD );
+    this.popupVarAdd = createMenuItem( LangUtil.getText( TEXT_VAR_ADD ) );
     this.popupVar.add( this.popupVarAdd );
 
-    this.popupVarEdit = createMenuItem( TEXT_VAR_EDIT );
+    this.popupVarEdit = createMenuItem( LangUtil.getText( TEXT_VAR_EDIT ) );
     this.popupVar.add( this.popupVarEdit );
     this.popupVar.addSeparator();
 
-    this.popupVarBpAdd = createMenuItem( TEXT_VAR_BP_ADD );
+    this.popupVarBpAdd = createMenuItem( LangUtil.getText( TEXT_VAR_BP_ADD ) );
     this.popupVar.add( this.popupVarBpAdd );
     this.popupVar.addSeparator();
 
-    this.popupVarRemove = createMenuItem( TEXT_VAR_REMOVE );
+    this.popupVarRemove = createMenuItem(
+		LangUtil.getText( TEXT_VAR_REMOVE ) );
     this.popupVar.add( this.popupVarRemove );
 
-    this.popupVarRemoveAll = createMenuItem( TEXT_VAR_REMOVE_ALL );
+    this.popupVarRemoveAll = createMenuItem(
+		LangUtil.getText( TEXT_VAR_REMOVE_ALL ) );
     this.popupVar.add( this.popupVarRemoveAll );
 
 
@@ -722,30 +771,32 @@ public class DebugFrm extends BaseFrm implements
     this.popupWalk = GUIFactory.createPopupMenu();
 
     this.popupWalk500 = createMenuItem(
-				"Programm sehr langsam ausf\u00FChren" );
+				LangUtil.getText( "debugger.action.run_program_slowly_programm_sehr" ) );
     this.popupWalk.add( this.popupWalk500 );
 
-    this.popupWalk300 = createMenuItem( "Programm langsam ausf\u00FChren" );
+    this.popupWalk300 = createMenuItem( LangUtil.getText(
+			"debugger.action.run_program_slowly_programm_langsam" ) );
     this.popupWalk.add( this.popupWalk300 );
 
     this.popupWalk100 = createMenuItem(
-				"Programm etwas schneller ausf\u00FChren" );
+				LangUtil.getText( "debugger.action.run_program_somewhat" ) );
     this.popupWalk.add( this.popupWalk100 );
 
     this.popupWalk30 = createMenuItem(
-				"Programm schneller ausf\u00FChren" );
+				LangUtil.getText( "debugger.action.run_program_faster" ) );
     this.popupWalk.add( this.popupWalk30 );
 
 
     // Popup-Menu in der Reassembler-Anzeige des PC-Bereichs
     this.popupMemPC = GUIFactory.createPopupMenu();
 
-    this.popupMemPCCopy = createMenuItem( EmuUtil.TEXT_COPY );
+    this.popupMemPCCopy = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_COPY ) );
     this.popupMemPC.add( this.popupMemPCCopy );
     this.popupMemPC.addSeparator();
 
     this.popupMemPCBreak = createMenuItem(
-				"Halte-/Log-Punkt hinzuf\u00FCgen..." );
+				LangUtil.getText( "debugger.action.add_breakpoint_logpoint" ) );
     this.popupMemPC.add( this.popupMemPCBreak );
 
 
@@ -764,42 +815,42 @@ public class DebugFrm extends BaseFrm implements
     this.btnStop = GUIFactory.createRelImageResourceButton(
 					this,
 					"debug/stop.png",
-					TEXT_STOP );
+					LangUtil.getText( TEXT_STOP ) );
     this.btnStop.addActionListener( this );
     toolBar.add( this.btnStop );
 
     this.btnRun = GUIFactory.createRelImageResourceButton(
 					this,
 					"debug/run.png",
-					TEXT_RUN );
+					LangUtil.getText( TEXT_RUN ) );
     this.btnRun.addActionListener( this );
     toolBar.add( this.btnRun );
 
     this.btnWalk = GUIFactory.createRelImageResourceButton(
 					this,
 					"debug/walk.png",
-					TEXT_WALK );
+					LangUtil.getText( TEXT_WALK ) );
     this.btnWalk.addActionListener( this );
     toolBar.add( this.btnWalk );
 
     this.btnStepOver = GUIFactory.createRelImageResourceButton(
 					this,
 					"debug/step_over.png",
-					TEXT_STEP_OVER );
+					LangUtil.getText( TEXT_STEP_OVER ) );
     this.btnStepOver.addActionListener( this );
     toolBar.add( this.btnStepOver );
 
     this.btnStepInto = GUIFactory.createRelImageResourceButton(
 					this,
 					"debug/step_into.png",
-					TEXT_STEP_INTO );
+					LangUtil.getText( TEXT_STEP_INTO ) );
     this.btnStepInto.addActionListener( this );
     toolBar.add( this.btnStepInto );
 
     this.btnStepToRET = GUIFactory.createRelImageResourceButton(
 					this,
 					"debug/step_up.png",
-					TEXT_STEP_TO_RET );
+					LangUtil.getText( TEXT_STEP_TO_RET ) );
     this.btnStepToRET.addActionListener( this );
     toolBar.add( this.btnStepToRET );
 
@@ -811,7 +862,8 @@ public class DebugFrm extends BaseFrm implements
 
     // Tab CPU
     this.panelCPU = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "CPU", this.panelCPU );
+    this.tabbedPane.addTab( LangUtil.getText( "debugger.section.cpu" ),
+		this.panelCPU );
 
     GridBagConstraints gbcCPU = new GridBagConstraints(
 						0, 0,
@@ -825,7 +877,8 @@ public class DebugFrm extends BaseFrm implements
 
     // Bereich Flags
     JPanel panelFlag = GUIFactory.createPanel( new GridBagLayout() );
-    panelFlag.setBorder( GUIFactory.createTitledBorder( "Flags" ) );
+    panelFlag.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "debugger.section.flags" ) ) );
     this.panelCPU.add( panelFlag, gbcCPU );
 
     GridBagConstraints gbcFlag = new GridBagConstraints(
@@ -863,7 +916,8 @@ public class DebugFrm extends BaseFrm implements
 
     // Bereich Interrupt
     JPanel panelInt = GUIFactory.createPanel( new GridBagLayout() );
-    panelInt.setBorder( GUIFactory.createTitledBorder( "Interrupt" ) );
+    panelInt.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "debugger.section.interrupt" ) ) );
     gbcCPU.gridx++;
     this.panelCPU.add( panelInt, gbcCPU );
 
@@ -875,7 +929,8 @@ public class DebugFrm extends BaseFrm implements
 						GridBagConstraints.NONE,
 						new Insets( 2, 2, 2, 2 ),
 						0, 0 );
-    this.labelIntMode = GUIFactory.createLabel( "IM:" );
+    this.labelIntMode = GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.im" ) );
     panelInt.add( this.labelIntMode, gbcInt );
 
     this.spinnerIntMode = GUIFactory.createSpinner(
@@ -884,7 +939,8 @@ public class DebugFrm extends BaseFrm implements
     gbcInt.gridx++;
     panelInt.add( this.spinnerIntMode, gbcInt );
 
-    this.labelRegI     = GUIFactory.createLabel( "IR:" );
+    this.labelRegI     = GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.ir" ) );
     gbcInt.insets.left = 5;
     gbcInt.gridx++;
     panelInt.add( this.labelRegI, gbcInt );
@@ -909,7 +965,8 @@ public class DebugFrm extends BaseFrm implements
 
     // Bereich Register
     JPanel panelReg = GUIFactory.createPanel( new GridBagLayout() );
-    panelReg.setBorder( GUIFactory.createTitledBorder( "Register" ) );
+    panelReg.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "debugger.section.registers" ) ) );
     gbcCPU.fill      = GridBagConstraints.BOTH;
     gbcCPU.weighty   = 1.0;
     gbcCPU.gridwidth = 2;
@@ -927,24 +984,29 @@ public class DebugFrm extends BaseFrm implements
 						0, 0 );
 
     // Ueberschriften
-    panelReg.add( GUIFactory.createLabel( "Hex" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.hex" ) ), gbcReg );
     gbcReg.gridwidth = 2;
     gbcReg.gridx++;
-    panelReg.add( GUIFactory.createLabel( "ASCII" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.ascii" ) ), gbcReg );
     gbcReg.gridwidth = 1;
     gbcReg.gridx += 2;
     panelReg.add(
-		GUIFactory.createLabel( "Zeigt im Speicher auf" ),
+		GUIFactory.createLabel( LangUtil.getText(
+				"debugger.label.points_memory" ) ),
 		gbcReg );
     gbcReg.gridx += 2;
-    panelReg.add( GUIFactory.createLabel( "Hex" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.hex" ) ), gbcReg );
 
 
     // Register AF
     gbcReg.anchor = GridBagConstraints.WEST;
     gbcReg.gridx  = 0;
     gbcReg.gridy++;
-    panelReg.add( GUIFactory.createLabel( "AF:" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.af" ) ), gbcReg );
 
     this.fldRegAF = createHexField();
     gbcReg.gridx++;
@@ -958,7 +1020,8 @@ public class DebugFrm extends BaseFrm implements
 
     // Register AF2
     gbcReg.gridx += 3;
-    panelReg.add( GUIFactory.createLabel( "AF\':" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.af_alt" ) ), gbcReg );
 
     this.fldRegAF2 = createHexField();
     gbcReg.gridx++;
@@ -968,7 +1031,8 @@ public class DebugFrm extends BaseFrm implements
     // Register BC
     gbcReg.gridx  = 0;
     gbcReg.gridy++;
-    panelReg.add( GUIFactory.createLabel( "BC:" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.bc" ) ), gbcReg );
 
     this.fldRegBC = createHexField();
     gbcReg.gridx++;
@@ -996,7 +1060,8 @@ public class DebugFrm extends BaseFrm implements
     gbcReg.fill    = GridBagConstraints.NONE;
     gbcReg.weightx = 0.0;
     gbcReg.gridx++;
-    panelReg.add( GUIFactory.createLabel( "BC\':" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.bc_alt" ) ), gbcReg );
 
     this.fldRegBC2 = createHexField();
     gbcReg.gridx++;
@@ -1006,7 +1071,8 @@ public class DebugFrm extends BaseFrm implements
     // Register DE
     gbcReg.gridx = 0;
     gbcReg.gridy++;
-    panelReg.add( GUIFactory.createLabel( "DE:" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.de" ) ), gbcReg );
 
     this.fldRegDE = createHexField();
     gbcReg.gridx++;
@@ -1034,7 +1100,8 @@ public class DebugFrm extends BaseFrm implements
     gbcReg.fill    = GridBagConstraints.NONE;
     gbcReg.weightx = 0.0;
     gbcReg.gridx++;
-    panelReg.add( GUIFactory.createLabel( "DE\':" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.de_alt" ) ), gbcReg );
 
     this.fldRegDE2 = createHexField();
     gbcReg.gridx++;
@@ -1044,7 +1111,8 @@ public class DebugFrm extends BaseFrm implements
     // Register HL
     gbcReg.gridx = 0;
     gbcReg.gridy++;
-    panelReg.add( GUIFactory.createLabel( "HL:" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.hl" ) ), gbcReg );
 
     this.fldRegHL = createHexField();
     gbcReg.gridx++;
@@ -1072,7 +1140,8 @@ public class DebugFrm extends BaseFrm implements
     gbcReg.fill    = GridBagConstraints.NONE;
     gbcReg.weightx = 0.0;
     gbcReg.gridx++;
-    panelReg.add( GUIFactory.createLabel( "HL\':" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.hl_alt" ) ), gbcReg );
 
     this.fldRegHL2 = createHexField();
     gbcReg.gridx++;
@@ -1082,7 +1151,8 @@ public class DebugFrm extends BaseFrm implements
     // Register IX
     gbcReg.gridx = 0;
     gbcReg.gridy++;
-    panelReg.add( GUIFactory.createLabel( "IX:" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.ix" ) ), gbcReg );
 
     this.fldRegIX = createHexField();
     gbcReg.gridx++;
@@ -1113,7 +1183,8 @@ public class DebugFrm extends BaseFrm implements
     gbcReg.gridwidth = 1;
     gbcReg.gridx     = 0;
     gbcReg.gridy++;
-    panelReg.add( GUIFactory.createLabel( "IY:" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.iy" ) ), gbcReg );
 
     this.fldRegIY = createHexField();
     gbcReg.gridx++;
@@ -1144,7 +1215,8 @@ public class DebugFrm extends BaseFrm implements
     gbcReg.gridwidth = 1;
     gbcReg.gridx     = 0;
     gbcReg.gridy++;
-    panelReg.add( GUIFactory.createLabel( "SP:" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.sp" ) ), gbcReg );
 
     this.fldRegSP = createHexField();
     gbcReg.gridx++;
@@ -1165,7 +1237,8 @@ public class DebugFrm extends BaseFrm implements
     gbcReg.gridwidth = 1;
     gbcReg.gridx     = 0;
     gbcReg.gridy++;
-    panelReg.add( GUIFactory.createLabel( "PC:" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.pc" ) ), gbcReg );
 
     this.fldRegPC = createHexField();
     gbcReg.gridx++;
@@ -1175,7 +1248,8 @@ public class DebugFrm extends BaseFrm implements
     // Register R
     gbcReg.anchor = GridBagConstraints.EAST;
     gbcReg.gridx++;
-    panelReg.add( GUIFactory.createLabel( "R:" ), gbcReg );
+    panelReg.add( GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.r" ) ), gbcReg );
 
     this.fldRegR = GUIFactory.createTextField( 2 );
     this.fldRegR.addActionListener( this );
@@ -1204,7 +1278,8 @@ public class DebugFrm extends BaseFrm implements
 						new Insets( 0, 0, 0, 0 ),
 						0, 0 );
 
-    panelTStates.add( GUIFactory.createLabel( "Taktzyklen:" ), gbcTStates );
+    panelTStates.add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.clock_cycles" ) ), gbcTStates );
 
     this.fldTStates = GUIFactory.createTextField();
     this.fldTStates.setEditable( false );
@@ -1240,20 +1315,26 @@ public class DebugFrm extends BaseFrm implements
 
     // Halte-/Log-Punkte
     JComponent cBreakPC = createBreakpointFields( BP_PC_IDX );
-    cBreakPC.setBorder( GUIFactory.createTitledBorder( "Programmadresse" ) );
+    cBreakPC.setBorder( GUIFactory.createTitledBorder( LangUtil.getText(
+			"debugger.section.program_address" ) ) );
 
     JComponent cBreakMem = createBreakpointFields( BP_MEMORY_IDX );
-    cBreakMem.setBorder( GUIFactory.createTitledBorder( "Speicher" ) );
+    cBreakMem.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "debugger.section.memory" ) ) );
 
     JComponent cBreakIn = createBreakpointFields( BP_INPUT_IDX );
-    cBreakIn.setBorder( GUIFactory.createTitledBorder( "Eingabetor" ) );
+    cBreakIn.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "debugger.section.input_port" ) ) );
 
     JComponent cBreakOut = createBreakpointFields( BP_OUTPUT_IDX );
-    cBreakOut.setBorder( GUIFactory.createTitledBorder( "Ausgabetor" ) );
+    cBreakOut.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "debugger.section.output_port" ) ) );
 
     JComponent cBreakInt = createBreakpointFields( BP_INTERRUPT_IDX );
     cBreakInt.setBorder(
-		GUIFactory.createTitledBorder( "Interrupt-Quelle" ) );
+		GUIFactory.createTitledBorder(
+			LangUtil.getText(
+				"debugger.section.interrupt_source" ) ) );
 
     JSplitPane splitBpIO = GUIFactory.createSplitPane(
 					JSplitPane.VERTICAL_SPLIT,
@@ -1283,7 +1364,8 @@ public class DebugFrm extends BaseFrm implements
 					cBreakInt );
     this.splitBpDown.setResizeWeight( 0.8 );
     this.splitBpDown.setBorder(
-	GUIFactory.createTitledBorder( "Halte-/Log-Punkte auf..." ) );
+	GUIFactory.createTitledBorder( LangUtil.getText(
+			"debugger.section.breakpoints_logpoints" ) ) );
     gbcCPU.fill       = GridBagConstraints.BOTH;
     gbcCPU.weightx    = 1.0;
     gbcCPU.gridheight = 2;
@@ -1307,7 +1389,8 @@ public class DebugFrm extends BaseFrm implements
     JScrollPane spLog = GUIFactory.createScrollPane( this.listLog );
     spLog.addMouseListener( this );
 
-    this.tabbedPane.addTab( "Log-Meldungen", spLog );
+    this.tabbedPane.addTab( LangUtil.getText( "debugger.menu.log_messages" ),
+		spLog );
 
 
     // Tab Variablen
@@ -1330,14 +1413,15 @@ public class DebugFrm extends BaseFrm implements
     EmuUtil.setTableColWidths( this.tableVar, 120, 90, 90, 200, 200 );
     this.tableVar.addKeyListener( this );
     this.tableVar.addMouseListener( this );
-    this.tabbedPane.addTab(
-		"Variablen",
+    this.tabbedPane.addTab( LangUtil.getText( "debugger.menu.variables" ),
 		GUIFactory.createScrollPane( this.tableVar ) );
 
 
     // Tab Interrupt-Quellen
     JPanel panelIntSrc = GUIFactory.createPanel( new BorderLayout( 5, 5 ) );
-    this.tabbedPane.addTab( "Interrupt-Quellen", panelIntSrc );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "debugger.section.interrupt_sources" ),
+		panelIntSrc );
 
     this.listIntSrc = GUIFactory.createList();
 
@@ -1362,7 +1446,7 @@ public class DebugFrm extends BaseFrm implements
 		    return super.getListCellRendererComponent(
 				list,
 				value != null ?
-					LangUtil.tr( value.toString() )
+					LangUtil.getText( value.toString() )
 					: null,
 				idx,
 				selected,
@@ -1400,8 +1484,7 @@ public class DebugFrm extends BaseFrm implements
 		};
     GUIFactory.initFont( this.fldEtc );
     this.fldEtc.setEditable( false );
-    this.tabbedPane.addTab(
-		"Sonstiges",
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
 		GUIFactory.createScrollPane( this.fldEtc ) );
 
 
@@ -1410,7 +1493,8 @@ public class DebugFrm extends BaseFrm implements
 				new FlowLayout( FlowLayout.LEFT, 5, 5 ) );
     add( panelStatus, BorderLayout.SOUTH );
 
-    this.labelStatus = GUIFactory.createLabel( "Bereit" );
+    this.labelStatus = GUIFactory.createLabel(
+		LangUtil.getText( "common.text.ready" ) );
     panelStatus.add( this.labelStatus );
 
 
@@ -1440,10 +1524,9 @@ public class DebugFrm extends BaseFrm implements
   public void appendLogEntry( Z80InterruptSource iSource )
   {
     if( iSource != null ) {
-      fireAppendLogEntry(
-		LangUtil.tr(
-			"--- Interrupt: {0} ---",
-			LangUtil.tr( iSource.toString() ) ) );
+      fireAppendLogEntry( LangUtil.getText(
+			"debugger.text.interrupt",
+			LangUtil.getText( iSource.toString() ) ) );
     }
     StringWriter stringWriter = new StringWriter( 128 );
     PrintWriter  printWriter  = new PrintWriter( stringWriter );
@@ -1568,7 +1651,8 @@ public class DebugFrm extends BaseFrm implements
 	case FILE:
 	  File file = options.getFile();
 	  if( file == null ) {
-	    throw new IOException( "Datei nicht angegeben" );
+	    throw new IOException( LangUtil.getText(
+				"debugger.error.file_not_specified" ) );
 	  }
 	  reader     = new FileReader( file );
 	  sourceText = " der Datei";
@@ -1594,10 +1678,7 @@ public class DebugFrm extends BaseFrm implements
 	if( reader != null ) {
 	  BaseDlg.showErrorDlg(
 		this,
-		LangUtil.tr(
-			"Der Inhalt{0} konnte nicht als Liste\n"
-				+ "mit Halte-/Log-Punkten interpretiert"
-				+ " werden.",
+		LangUtil.getText( "debugger.text.content_not_interpreted",
 			sourceText ) );
 	}
       }
@@ -2502,7 +2583,7 @@ public class DebugFrm extends BaseFrm implements
     } else {
       BaseDlg.showErrorDlg(
 		this,
-		"Das emulierte System hat keine Interrupt-Quellen." );
+		LangUtil.getText( "debugger.error.emulated_system_no_interrupt" ) );
     }
   }
 
@@ -2575,7 +2656,7 @@ public class DebugFrm extends BaseFrm implements
   {
     if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie alle Halte-/Log-Punkte entfernen?" ) )
+		LangUtil.getText( "debugger.msg.want_remove_all_breakpoints_logpoints" ) ) )
     {
       removeAllBreakpoints();
     }
@@ -2587,8 +2668,7 @@ public class DebugFrm extends BaseFrm implements
     if( (bpGroupIdx >= 0) && (bpGroupIdx < BP_GROUP_CNT) ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie alle Halte-/Log-Punkte"
-			+ " dieser Gruppe entfernen?" ) )
+		LangUtil.getText( "debugger.msg.want_remove_all_breakpoints_logpoints_group" ) ) )
       {
 	this.bpModels[ bpGroupIdx ].clear();
 	updBreakpointsInCPU();
@@ -2716,7 +2796,7 @@ public class DebugFrm extends BaseFrm implements
   {
     File file = FileUtil.showFileOpenDlg(
 			this,
-			"Halte-/Log-Punkte und Variablen laden",
+			LangUtil.getText( "debugger.title.load_breakpoints" ),
 			this.lastBreakpointFile != null ?
 				this.lastBreakpointFile
 				: RecentDirsMngr.getRecentDir(
@@ -2727,9 +2807,8 @@ public class DebugFrm extends BaseFrm implements
       if( hasBreakpoints() || (this.tableModelVar.getRowCount() > 0) ) {
 	state = BaseDlg.showSuppressableYesNoCancelDlg(
 			this,
-			"Sollen vor dem Laden die bereits vorhandenen"
-				+ " Halte-/Log-Punkte\n"
-				+ "und Variablen entfernt werden?" );
+			LangUtil.getText(
+				"debugger.msg.existing_breakpoints" ) );
       }
       if( state != null ) {
 	if( state.booleanValue() ) {
@@ -2753,8 +2832,8 @@ public class DebugFrm extends BaseFrm implements
 	  if( !loader.getLoaded() ) {
 	    BaseDlg.showErrorDlg(
 			this,
-			"Datei enth\u00E4lt weder Halte-/Log-Punke"
-				+ " noch Variablen." );
+			LangUtil.getText(
+				"debugger.error.file_contains_neither" ) );
 	  }
 	}
 	catch( IOException ex1 ) {
@@ -2763,7 +2842,7 @@ public class DebugFrm extends BaseFrm implements
 	catch( SAXException ex2 ) {
 	  BaseDlg.showErrorDlg(
 			this,
-			"Datei kann nicht verarbeitet werden.",
+			LangUtil.getText( "debugger.error.file_cannot_processed" ),
 			ex2 );
 	}
 	catch( ParserConfigurationException ex ) {
@@ -2781,7 +2860,7 @@ public class DebugFrm extends BaseFrm implements
     if( stateBPs || stateVars ) {
       File file = FileUtil.showFileSaveDlg(
 			this,
-			"Halte-/Log-Punkte und Variablen speichern",
+			LangUtil.getText( "debugger.title.save_breakpoints" ),
 			this.lastBreakpointFile != null ?
 				this.lastBreakpointFile
 				: RecentDirsMngr.getRecentDir(
@@ -2847,8 +2926,7 @@ public class DebugFrm extends BaseFrm implements
     } else {
       BaseDlg.showErrorDlg(
 		this,
-		"Es sind keine Halte-/Log-Punkte und Variablen vorhanden,\n"
-			+ "die gespeichert werden k\u00F6nnten." );
+		LangUtil.getText( "debugger.error.no_breakpoints_logpoints" ) );
     }
   }
 
@@ -2870,8 +2948,7 @@ public class DebugFrm extends BaseFrm implements
   {
     if( BaseDlg.showSuppressableYesNoDlg(
 		this,
-		"M\u00F6chten Sie alle importierten Halte-/Log-Punkte"
-			+ " entfernen?" ) )
+		LangUtil.getText( "debugger.msg.want_remove_all_imported_breakpoints_logpoints" ) ) )
     {
       boolean changed = false;
       for( int bpGroupIdx : new int[] { BP_PC_IDX, BP_MEMORY_IDX } ) {
@@ -2909,8 +2986,8 @@ public class DebugFrm extends BaseFrm implements
   private void doExecWalk( int millis )
   {
     this.walkMillis = millis;
-    this.labelStatus.setText(
-		LangUtil.tr( "Programm wird langsam ausgef\u00FChrt..." ) );
+    this.labelStatus.setText( LangUtil.getText(
+			"debugger.text.program_being_executed" ) );
     this.cpu.fireAction( Z80CPU.Action.DEBUG_WALK );
   }
 
@@ -2921,8 +2998,8 @@ public class DebugFrm extends BaseFrm implements
       this.walkMillis = 0;
       fireUpdDebugger( null, null );
     }
-    this.labelStatus.setText(
-		LangUtil.tr( "Programmausf\u00FChrung wird angehalten..." ) );
+    this.labelStatus.setText( LangUtil.getText(
+			"debugger.text.program_execution_being" ) );
     this.cpu.fireAction( Z80CPU.Action.DEBUG_STOP );
   }
 
@@ -2966,17 +3043,14 @@ public class DebugFrm extends BaseFrm implements
       // an alte Datei anhaengen oder neue Datei anlegen?
       if( this.lastTraceFile != null ) {
 	String[] options = {
-			LangUtil.tr( "Anh\u00E4ngen" ),
-			LangUtil.tr( "Neue Datei" ),
-			EmuUtil.TEXT_CANCEL };
+			LangUtil.getText( "debugger.text.append" ),
+			LangUtil.getText( "tools.text.new_file" ),
+			LangUtil.getText( EmuUtil.TEXT_CANCEL ) };
 	action = BaseDlg.showOptionDlg(
 		this,
-		LangUtil.tr(
-			"Soll die Befehlsaufzeichnung an die alte Datei\n"
-				+ "{0}\nangeh\u00E4ngt werden oder m\u00F6chten"
-				+ " Sie\neine neue Datei anlegen?",
+		LangUtil.getText( "debugger.text.instruction_recording_appended",
 			this.lastTraceFile.getPath() ),
-		LangUtil.tr( "Entscheidung" ),
+		LangUtil.getText( "debugger.text.decision" ),
 		options );
 	if( action == 0 ) {
 	  file   = this.lastTraceFile;
@@ -2988,7 +3062,7 @@ public class DebugFrm extends BaseFrm implements
       if( ((action == 0) && (file == null)) || (action == 1) ) {
 	file = FileUtil.showFileSaveDlg(
 			this,
-			"Befehlsaufzeichnung speichern",
+			LangUtil.getText( "debugger.title.save_instruction" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_DEBUG_TRACE ),
 			FileUtil.getTextFileFilter() );
@@ -3014,9 +3088,7 @@ public class DebugFrm extends BaseFrm implements
 	  this.traceWriter = null;
 	  BaseDlg.showErrorDlg(
 		this,
-		LangUtil.tr(
-			"Die Befehlsaufzeichnungsdatei kann nicht\n"
-				+ "zum Schreiben ge\u00F6ffnet werden." )
+		LangUtil.getText( "debugger.text.instruction_recording_file" )
 			+ "\n\n" + ex.getMessage() );
 	}
       }
@@ -3081,7 +3153,7 @@ public class DebugFrm extends BaseFrm implements
     if( !this.listModelLog.isEmpty() ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie alle Log-Meldungen entfernen?" ) )
+		LangUtil.getText( "debugger.msg.want_remove_all_log_messages" ) ) )
       {
 	this.listModelLog.clear();
 	fireUpdLogActionsEnabled();
@@ -3180,7 +3252,7 @@ public class DebugFrm extends BaseFrm implements
     if( !this.tableModelVar.isEmpty() ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie alle Variablen entfernen?" ) )
+		LangUtil.getText( "debugger.msg.want_remove_all_variables" ) ) )
       {
 	removeAllVars();
       }
@@ -3300,8 +3372,7 @@ public class DebugFrm extends BaseFrm implements
       if( isErr ) {
 	BaseDlg.showErrorDlg(
 		this,
-		"Die Befehlsaufzeichnungsdatei konnte nicht"
-			+ " gespeichert werden." );
+		LangUtil.getText( "debugger.error.instruction_recording" ) );
       }
     }
   }
@@ -3946,8 +4017,8 @@ public class DebugFrm extends BaseFrm implements
     this.btnStepToRET.setEnabled( false );
     this.btnResetTStates.setEnabled( false );
     this.tableModelVar.setValuesEnabled( false );
-    this.labelStatus.setText(
-		LangUtil.tr( "Programm wird gerade ausgef\u00FChrt..." ) );
+    this.labelStatus.setText( LangUtil.getText(
+			"debugger.text.program_currently_being" ) );
   }
 
 
@@ -4021,12 +4092,11 @@ public class DebugFrm extends BaseFrm implements
       this.walkTimer.restart();
     } else {
       setDebuggerEditable( true );
-      String text = LangUtil.tr( "Programmausf\u00FChrung angehalten" );
+      String text = LangUtil.getText( "debugger.text.program_execution" );
       if( iSource != null ) {
-	text = LangUtil.tr(
-		"{0}, Interrupt von {1} angenommen",
+	text = LangUtil.getText( "debugger.text.interrupt_accepted",
 		text,
-		LangUtil.tr( iSource.toString() ) );
+		LangUtil.getText( iSource.toString() ) );
       }
       this.labelStatus.setText( text );
     }
@@ -4069,8 +4139,7 @@ public class DebugFrm extends BaseFrm implements
   {
     BaseDlg.showErrorDlg(
 		this,
-		"Die Java-Laufzeitumgebung unterst\u00FCtzt"
-			+ " keine XML-Verarbeitung.",
+		LangUtil.getText( "debugger.error.java_runtime_environment" ),
 		ex );
   }
 
@@ -4692,7 +4761,8 @@ public class DebugFrm extends BaseFrm implements
 	  if( lm.getSize() > 0 ) {
 	    this.fldIntSrc.setContentType( "text/plain" );
 	    this.fldIntSrc.setText(
-			"Bitte Interrupt-Quelle ausw\u00E4hlen!" );
+			LangUtil.getText(
+				"debugger.text.please_select_interrupt" ) );
 	  }
 	}
       }

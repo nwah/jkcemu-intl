@@ -154,8 +154,8 @@ public class VarDataDlg extends BaseDlg
     super(
 	debugFrm,
 	varData != null ?
-		LangUtil.tr( "Variable bearbeiten" )
-		: LangUtil.tr( "Variable anlegen" ) );
+		LangUtil.getText( "debugger.text.edit_variable" )
+		: LangUtil.getText( "debugger.text.create_variable" ) );
 
     this.debugFrm       = debugFrm;
     this.oldVarData     = varData;
@@ -174,14 +174,18 @@ public class VarDataDlg extends BaseDlg
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Adresse (hex):" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.address_hex" ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Name (optional):" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.name_optional" ) ), gbc );
     gbc.anchor = GridBagConstraints.NORTHEAST;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Typ:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.type" ) ), gbc );
 
-    this.docAddr = new HexDocument( 4, "Adresse" );
+    this.docAddr = new HexDocument(
+		4, LangUtil.getText( "debugger.column.address" ) );
     this.fldAddr = GUIFactory.createTextField( this.docAddr, 0 );
     gbc.anchor   = GridBagConstraints.WEST;
     gbc.weightx  = 1.0;
@@ -212,41 +216,49 @@ public class VarDataDlg extends BaseDlg
 
     ButtonGroup grpType = new ButtonGroup();
 
-    this.rbInt1 = GUIFactory.createRadioButton( "1 Byte Integer" );
+    this.rbInt1 = GUIFactory.createRadioButton(
+		LangUtil.getText( "debugger.option.1_byte_integer" ) );
     grpType.add( this.rbInt1 );
     panelType.add( this.rbInt1, gbcType );
 
-    this.rbInt2 = GUIFactory.createRadioButton( "2 Byte Integer" );
+    this.rbInt2 = GUIFactory.createRadioButton(
+		LangUtil.getText( "debugger.option.2_byte_integer" ) );
     grpType.add( this.rbInt2 );
     gbcType.gridy++;
     panelType.add( this.rbInt2, gbcType );
 
-    this.rbInt3 = GUIFactory.createRadioButton( "3 Byte Integer" );
+    this.rbInt3 = GUIFactory.createRadioButton(
+		LangUtil.getText( "debugger.option.3_byte_integer" ) );
     grpType.add( this.rbInt3 );
     gbcType.gridy++;
     panelType.add( this.rbInt3, gbcType );
 
-    this.rbInt4 = GUIFactory.createRadioButton( "4 Byte Integer" );
+    this.rbInt4 = GUIFactory.createRadioButton(
+		LangUtil.getText( "debugger.option.4_byte_integer" ) );
     grpType.add( this.rbInt4 );
     gbcType.gridy++;
     panelType.add( this.rbInt4, gbcType );
 
-    this.rbBCFloat4 = GUIFactory.createRadioButton( "4 Byte Float" );
+    this.rbBCFloat4 = GUIFactory.createRadioButton(
+		LangUtil.getText( "debugger.option.4_byte_float" ) );
     grpType.add( this.rbBCFloat4 );
     gbcType.gridy++;
     panelType.add( this.rbBCFloat4, gbcType );
 
-    this.rbBCDec6 = GUIFactory.createRadioButton( "Decimal (6 Byte BCD)" );
+    this.rbBCDec6 = GUIFactory.createRadioButton( LangUtil.getText(
+			"debugger.option.decimal_6_byte" ) );
     grpType.add( this.rbBCDec6 );
     gbcType.gridy++;
     panelType.add( this.rbBCDec6, gbcType );
 
-    this.rbByteArray = GUIFactory.createRadioButton( "Bytes / Text" );
+    this.rbByteArray = GUIFactory.createRadioButton(
+		LangUtil.getText( "debugger.option.bytes_text" ) );
     grpType.add( this.rbByteArray );
     gbcType.gridy++;
     panelType.add( this.rbByteArray, gbcType );
 
-    this.labelSize      = GUIFactory.createLabel( "Anzahl Bytes:" );
+    this.labelSize      = GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.number_bytes" ) );
     gbcType.insets.left = 50;
     gbcType.gridwidth   = 1;
     gbcType.gridy++;
@@ -260,7 +272,7 @@ public class VarDataDlg extends BaseDlg
     panelType.add( this.spinnerSize, gbcType );
 
     this.rbPointer = GUIFactory.createRadioButton(
-					"Zeiger auf Bytes / Text" );
+					LangUtil.getText( "debugger.option.pointer_bytes_text" ) );
     grpType.add( this.rbPointer );
     gbcType.gridx = 0;
     gbcType.gridy++;
@@ -274,20 +286,22 @@ public class VarDataDlg extends BaseDlg
     gbcType.gridy++;
     panelType.add( panelByteOrder, gbcType );
     
-    this.labelByteOrder = GUIFactory.createLabel( "Byte Order:" );
+    this.labelByteOrder = GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.byte_order" ) );
     panelByteOrder.add( this.labelByteOrder );
     panelByteOrder.add( Box.createRigidArea( new Dimension( 5, 0 ) ) );
 
     ButtonGroup grpByteOrder = new ButtonGroup();
 
     this.rbLE = GUIFactory.createRadioButton(
-			"Little Endian (LE, Intel-Format)",
+			LangUtil.getText( "debugger.option.little_endian_le" ),
 			true );
     grpByteOrder.add( this.rbLE );
     panelByteOrder.add( this.rbLE, gbcType );
     panelByteOrder.add( Box.createRigidArea( new Dimension( 5, 0 ) ) );
 
-    this.rbBE = GUIFactory.createRadioButton( "Big Endian (BE)" );
+    this.rbBE = GUIFactory.createRadioButton(
+		LangUtil.getText( "debugger.option.big_endian" ) );
     grpByteOrder.add( this.rbBE );
     panelByteOrder.add( this.rbBE, gbcType );
 
@@ -472,7 +486,8 @@ public class VarDataDlg extends BaseDlg
 	}
 	if( size < 1 ) {
 	  throw new UserInputException(
-		    "Ung\u00FCltige Variablengr\u00F6\u00DFe (Anzahl Bytes)" );
+		    LangUtil.getText(
+				"debugger.error.invalid_variable_size" ) );
 	}
 	VarData varData = this.oldVarData;
 	if( varData != null ) {
@@ -498,7 +513,10 @@ public class VarDataDlg extends BaseDlg
       }
     }
     catch( NumberFormatException ex ) {
-      showErrorDlg( this, "Ung\u00FCltige Variablenadresse" );
+      showErrorDlg(
+		this,
+		LangUtil.getText(
+			"debugger.error.invalid_variable_address" ) );
     }
     catch( UserInputException ex ) {
       showErrorDlg( this, ex );

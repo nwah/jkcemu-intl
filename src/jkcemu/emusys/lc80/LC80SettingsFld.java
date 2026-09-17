@@ -26,6 +26,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.LC80;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -60,7 +61,8 @@ public class LC80SettingsFld extends AbstractSettingsFld
 
     // Tab Modell
     this.tabModel = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Modell", this.tabModel );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "common.section.model" ), this.tabModel );
 
     GridBagConstraints gbcModel = new GridBagConstraints(
 						0, 0,
@@ -74,13 +76,13 @@ public class LC80SettingsFld extends AbstractSettingsFld
     ButtonGroup grpModel = new ButtonGroup();
 
     this.rbLC80_U505 = GUIFactory.createRadioButton(
-		"LC-80, 2 KByte ROM (2xU505), 1 KByte RAM" );
+		LangUtil.getText( "lc80.option.lc_80_2_kbyte_rom_2xu505" ) );
     this.rbLC80_U505.addActionListener( this );
     grpModel.add( this.rbLC80_U505 );
     this.tabModel.add( this.rbLC80_U505, gbcModel );
 
     this.rbLC80_2716 = GUIFactory.createRadioButton(
-		"LC-80, 2 KByte ROM (2716), 4 KByte RAM",
+		LangUtil.getText( "lc80.option.lc_80_2_kbyte_rom_2716" ),
 		true );
     this.rbLC80_2716.addActionListener( this );
     grpModel.add( this.rbLC80_2716 );
@@ -89,21 +91,21 @@ public class LC80SettingsFld extends AbstractSettingsFld
     this.tabModel.add( this.rbLC80_2716, gbcModel );
 
     this.rbLC80_2 = GUIFactory.createRadioButton(
-	"LC-80.2, 4 KByte ROM mit Buschendorf-Monitor, 4 KByte RAM" );
+	LangUtil.getText( "lc80.option.lc_80_2_4_kbyte_rom" ) );
     this.rbLC80_2.addActionListener( this );
     grpModel.add( this.rbLC80_2 );
     gbcModel.gridy++;
     this.tabModel.add( this.rbLC80_2, gbcModel );
 
     this.rbLC80e = GUIFactory.createRadioButton(
-	"LC-80e, 12 KByte ROM mit Schachprogramm SC-80, 4 KByte RAM" );
+	LangUtil.getText( "lc80.option.lc_80e_12" ) );
     this.rbLC80e.addActionListener( this );
     grpModel.add( this.rbLC80e );
     gbcModel.gridy++;
     this.tabModel.add( this.rbLC80e, gbcModel );
 
     this.rbLC80ex = GUIFactory.createRadioButton(
-		"LC-80ex, 20 KByte ROM, 32 KByte RAM, TV-Terminal 1.2" );
+		LangUtil.getText( "lc80.option.lc_80ex_20" ) );
     this.rbLC80ex.addActionListener( this );
     grpModel.add( this.rbLC80ex );
     gbcModel.insets.bottom = 5;
@@ -113,7 +115,8 @@ public class LC80SettingsFld extends AbstractSettingsFld
 
     // Tab ROM
     this.tabRom = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "ROM", this.tabRom );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.rom" ), this.tabRom );
 
     GridBagConstraints gbcRom = new GridBagConstraints(
 					0, 0,
@@ -127,21 +130,21 @@ public class LC80SettingsFld extends AbstractSettingsFld
     this.fldAltOS = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + LC80.PROP_OS_PREFIX,
-		"Alternatives Monitorprogramm (0000h-1FFFh):" );
+		LangUtil.getText( "lc80.text.alternative_monitor" ) );
     gbcRom.gridy++;
     this.tabRom.add( this.fldAltOS, gbcRom );
 
     this.fldAltA000 = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + LC80.PROP_ROM_A000_PREFIX,
-		"Alternativer ROM-Inhalt A000h-BFFFh (nur LC80ex):" );
+		LangUtil.getText( "lc80.text.alternative_rom_content_a000h" ) );
     gbcRom.gridy++;
     this.tabRom.add( this.fldAltA000, gbcRom );
 
     this.fldAltC000 = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + LC80.PROP_ROM_C000_PREFIX,
-		"Alternativer ROM-Inhalt C000h-FFFFh (nur LC80e/LC80ex):" );
+		LangUtil.getText( "lc80.text.alternative_rom_content_c000h" ) );
     gbcRom.gridy++;
     this.tabRom.add( this.fldAltC000, gbcRom );
 
@@ -152,7 +155,8 @@ public class LC80SettingsFld extends AbstractSettingsFld
 		propPrefix,
 		LC80.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 		true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -162,7 +166,8 @@ public class LC80SettingsFld extends AbstractSettingsFld
 		LC80.getAutoInputCharSet(),
 		LC80.DEFAULT_SWAP_KEY_CHAR_CASE,
 		LC80.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     updFldAltC000Enabled();

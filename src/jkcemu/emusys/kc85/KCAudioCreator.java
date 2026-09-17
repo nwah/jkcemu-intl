@@ -24,6 +24,7 @@ import jkcemu.audio.AudioOut;
 import jkcemu.audio.BitSampleBuffer;
 import jkcemu.base.ByteIterator;
 import jkcemu.file.FileInfo;
+import jkcemu.lang.LangUtil;
 
 
 public class KCAudioCreator extends BitSampleBuffer
@@ -46,7 +47,8 @@ public class KCAudioCreator extends BitSampleBuffer
 
     ByteIterator iter = new ByteIterator( dataBytes, offs, len );
     if( tapFmt && !skipString( iter, FileInfo.KCTAP_MAGIC ) ) {
-      throw new IOException( "KC-TAP-Kopf erwartet" );
+      throw new IOException( LangUtil.getText(
+			"kc85.error.kc_tap_header" ) );
     }
 
     boolean firstBlk = true;

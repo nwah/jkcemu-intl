@@ -32,6 +32,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class KC85UserPROMSettingsDlg
@@ -105,7 +106,8 @@ public class KC85UserPROMSettingsDlg
     this.typeByteBtns = null;
     if( this.moduleTableRow != null ) {
       if( this.moduleTableRow.length > 2 ) {
-	add( GUIFactory.createLabel( "Strukturbyte:" ), gbc );
+	add( GUIFactory.createLabel( LangUtil.getText(
+			"kc85.label.structure_byte" ) ), gbc );
 
 	ButtonGroup grpTypeByte = new ButtonGroup();
 	boolean     selected    = false;
@@ -144,7 +146,8 @@ public class KC85UserPROMSettingsDlg
     gbc.insets.top  = 10;
     gbc.insets.left = 5;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "ROM-Datei:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "emusys.label.rom_file" ) ), gbc );
 
     this.fileNameFld = new FileNameFld();
     if( fileName != null ) {
@@ -160,7 +163,7 @@ public class KC85UserPROMSettingsDlg
     this.btnSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ) );
     gbc.fill        = GridBagConstraints.NONE;
     gbc.weightx     = 0.0;
     gbc.insets.left = 0;
@@ -365,7 +368,7 @@ public class KC85UserPROMSettingsDlg
     } else {
       showErrorDlg(
 		this,
-		"Sie m\u00Fcssen eine ROM-Datei ausw\u00E4hlen" );
+		LangUtil.getText( "emusys.error.select_rom_file" ) );
     }
   }
 
@@ -378,7 +381,7 @@ public class KC85UserPROMSettingsDlg
     }
     file = FileUtil.showFileOpenDlg(
 			this.owner,
-			EmuUtil.TEXT_SELECT_ROM_FILE,
+			LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ),
 			file,
 			FileUtil.getROMFileFilter() );
     if( file != null ) {

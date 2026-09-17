@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.io.Reader;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class ProcessExecuter
@@ -28,7 +29,7 @@ public class ProcessExecuter
     {
       super(
 	Main.getThreadGroup(),
-	"JKCEMU ProcessExecuter.ByteCatcher" );
+	LangUtil.getText( "base.title.jkcemu_processexecuter" ) );
       this.buf = buf;
       this.in  = new InputStreamReader( new BufferedInputStream( in ) );
     }

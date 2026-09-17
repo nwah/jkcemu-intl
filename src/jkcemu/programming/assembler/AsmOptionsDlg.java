@@ -59,7 +59,11 @@ public class AsmOptionsDlg extends AbstractOptionsDlg
 		EmuThread  emuThread,
 		PrgOptions options )
   {
-    super( owner, emuThread, options, "Assembler-Optionen" );
+    super(
+		owner,
+		emuThread,
+		options,
+		LangUtil.getText( "assembler.title.assembler_options" ) );
     this.notified = false;
 
 
@@ -80,7 +84,9 @@ public class AsmOptionsDlg extends AbstractOptionsDlg
 
     // Bereich Mnemonik/Syntax
     JPanel panelSyntax = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Mnemonik/Syntax", panelSyntax );
+    this.tabbedPane.addTab( LangUtil.getText(
+			"assembler.section.mnemonics_syntax" ),
+		panelSyntax );
 
     GridBagConstraints gbcSyntax = new GridBagConstraints(
 					0, 0,
@@ -94,26 +100,26 @@ public class AsmOptionsDlg extends AbstractOptionsDlg
     ButtonGroup grpSyntax = new ButtonGroup();
 
     this.rbSyntaxBoth = GUIFactory.createRadioButton(
-				"Zilog- und Robotron-Mnemonik/-Syntax" );
+				LangUtil.getText( "assembler.option.zilog_robotron_mnemonics" ) );
     grpSyntax.add( this.rbSyntaxBoth );
     panelSyntax.add( this.rbSyntaxBoth, gbcSyntax );
 
     this.rbSyntaxZilog = GUIFactory.createRadioButton(
-				"Nur Zilog-Mnemonik/-Syntax erlauben" );
+				LangUtil.getText( "assembler.option.allow_only_zilog" ) );
     grpSyntax.add( this.rbSyntaxZilog );
     gbcSyntax.insets.top = 0;
     gbcSyntax.gridy++;
     panelSyntax.add( this.rbSyntaxZilog, gbcSyntax );
 
     this.rbSyntaxRobotron = GUIFactory.createRadioButton(
-				"Nur Robotron-Mnemonik/-Syntax erlauben" );
+				LangUtil.getText( "assembler.option.allow_only_robotron" ) );
     grpSyntax.add( this.rbSyntaxRobotron );
     gbcSyntax.insets.bottom = 5;
     gbcSyntax.gridy++;
     panelSyntax.add( this.rbSyntaxRobotron, gbcSyntax );
 
     this.cbAllowUndocInst = GUIFactory.createCheckBox(
-				"Undokumentierte Befehle erlauben" );
+				LangUtil.getText( "assembler.option.allow_undocumented" ) );
     gbcSyntax.insets.top = 0;
     gbcSyntax.gridy++;
     panelSyntax.add( this.cbAllowUndocInst, gbcSyntax );
@@ -121,7 +127,8 @@ public class AsmOptionsDlg extends AbstractOptionsDlg
 
     // Bereich Marken
     JPanel panelLabel = GUIFactory.createPanel( new GridBagLayout( ));
-    this.tabbedPane.addTab( "Marken", panelLabel );
+    this.tabbedPane.addTab( LangUtil.getText( "assembler.section.labels" ),
+		panelLabel );
 
     GridBagConstraints gbcLabel = new GridBagConstraints(
 					0, 0,
@@ -133,17 +140,18 @@ public class AsmOptionsDlg extends AbstractOptionsDlg
 					0, 0 );
 
     this.cbLabelsCaseSensitive = GUIFactory.createCheckBox(
-			"Gro\u00DF-/Kleinschreibung bei Marken beachten" );
+			LangUtil.getText(
+				"assembler.option.labels_case_sensitive" ) );
     panelLabel.add( this.cbLabelsCaseSensitive, gbcLabel );
 
     this.cbPrintLabels = GUIFactory.createCheckBox(
-					"Markentabelle ausgeben" );
+					LangUtil.getText( "assembler.option.output_label_table" ) );
     gbcLabel.insets.top = 0;
     gbcLabel.gridy++;
     panelLabel.add( this.cbPrintLabels, gbcLabel );
 
     this.cbLabelsToDebugger = GUIFactory.createCheckBox(
-					"Marken im Debugger verwenden" );
+					LangUtil.getText( "assembler.option.use_labels_debugger" ) );
     this.cbLabelsToDebugger.setEnabled( false );
     gbcLabel.gridy++;
     panelLabel.add( this.cbLabelsToDebugger, gbcLabel );
@@ -151,22 +159,21 @@ public class AsmOptionsDlg extends AbstractOptionsDlg
     ButtonGroup grpLabelInDebugger = new ButtonGroup();
 
     this.rbLabelsCreateOrUpdateBPs = GUIFactory.createRadioButton(
-		"Halte-/Log-Punkte und Variablen auf Marken anlegen"
-				+ " bzw. aktualisieren" );
+		LangUtil.getText(
+			"assembler.option.create_update" ) );
     grpLabelInDebugger.add( this.rbLabelsCreateOrUpdateBPs );
     gbcLabel.insets.left = 50;
     gbcLabel.gridy++;
     panelLabel.add( this.rbLabelsCreateOrUpdateBPs, gbcLabel );
 
     this.rbLabelsUpdateBPsOnly = GUIFactory.createRadioButton(
-		"Nur vorhandene benamte Halte-/Log-Punkte und Variablen"
-				+ " aktualisieren" );
+		LangUtil.getText( "assembler.option.only_update_existing" ) );
     grpLabelInDebugger.add( this.rbLabelsUpdateBPsOnly );
     gbcLabel.gridy++;
     panelLabel.add( this.rbLabelsUpdateBPsOnly, gbcLabel );
 
     this.cbLabelsToReass = GUIFactory.createCheckBox(
-				"Marken im Reassembler verwenden" );
+				LangUtil.getText( "assembler.option.use_labels_disassembler" ) );
     this.cbLabelsToReass.setEnabled( false );
     gbcLabel.insets.left   = 5;
     gbcLabel.insets.bottom = 5;
@@ -176,12 +183,15 @@ public class AsmOptionsDlg extends AbstractOptionsDlg
 
     // Bereich Erzeugter Programmcode
     JPanel panelCodeDest = createCodeDestOptions( true );
-    this.tabbedPane.addTab( "Erzeugter Programmcode", panelCodeDest );
+    this.tabbedPane.addTab( LangUtil.getText(
+			"programming.section.generated_program_code" ),
+		panelCodeDest );
 
 
     // Bereich Sonstiges
     JPanel panelEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", panelEtc );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "common.section.miscellaneous" ), panelEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -194,28 +204,28 @@ public class AsmOptionsDlg extends AbstractOptionsDlg
 
 
     this.cbWarnNonAsciiChars = GUIFactory.createCheckBox(
-					"Bei Nicht-ASCII-Zeichen warnen" );
+					LangUtil.getText( "assembler.option.warn_about_non" ) );
     panelEtc.add( this.cbWarnNonAsciiChars, gbcEtc );
 
     this.cbReplaceTooLongRelJumps = GUIFactory.createCheckBox(
-		"Zu gro\u00DFe relative Spr\u00FCnge als absolute"
-			+ " \u00FCbersetzen (nicht bei DJNZ)" );
+		LangUtil.getText(
+			"assembler.option.translate_relative_jumps" ) );
     gbcEtc.insets.top = 0;
     gbcEtc.gridy++;
     panelEtc.add( this.cbReplaceTooLongRelJumps, gbcEtc );
 
     this.cbFormatSource = GUIFactory.createCheckBox(
-					"Quelltext formatieren" );
+					LangUtil.getText( "assembler.option.format_source_code" ) );
     gbcEtc.gridy++;
     panelEtc.add( this.cbFormatSource, gbcEtc );
 
     this.cbAsmListing = GUIFactory.createCheckBox(
-					"Assembler-Listing erzeugen" );
+					LangUtil.getText( "assembler.option.generate_assembler" ) );
     gbcEtc.gridy++;
     panelEtc.add( this.cbAsmListing, gbcEtc );
 
     this.labelAsmListPageLen = GUIFactory.createLabel(
-	"Zeilen pro Seite (0: keine automatischen Seitenumbr\u00FCche):" );
+	LangUtil.getText( "assembler.label.lines_per_page" ) );
     gbcEtc.insets.left   = 50;
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridwidth     = 1;
@@ -384,7 +394,7 @@ public class AsmOptionsDlg extends AbstractOptionsDlg
       catch( UserInputException ex ) {
 	showErrorDlg(
 		this,
-		LangUtil.tr( "Erzeugter Programmcode:" )
+		LangUtil.getText( "programming.text.generated_program_code" )
 			+ "\n" + ex.getMessage() );
       }
     }

@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+import jkcemu.lang.LangUtil;
 
 
 public class TabTitleFld extends JPanel implements ActionListener
@@ -169,7 +170,7 @@ public class TabTitleFld extends JPanel implements ActionListener
     add( this.label, gbc );
     this.closeBtn = new RolloverCloseBtn();
     this.closeBtn.setOpaque( false );
-    this.closeBtn.setToolTipText( EmuUtil.TEXT_CLOSE );
+    this.closeBtn.setToolTipText( LangUtil.getText( EmuUtil.TEXT_CLOSE ) );
     gbc.anchor      = GridBagConstraints.EAST;
     gbc.fill        = GridBagConstraints.NONE;
     gbc.weightx     = 0.0;

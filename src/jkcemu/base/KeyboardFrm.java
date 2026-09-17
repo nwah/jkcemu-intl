@@ -46,7 +46,7 @@ public class KeyboardFrm extends BaseFrm
     JMenu mnuFile = createMenuFile();
 
     this.mnuHoldShiftBtn = GUIFactory.createCheckBoxMenuItem(
-			"Shift- und Control-Tasten gedr\u00FCckt halten",
+			LangUtil.getText( "base.action.hold_down_shift" ),
 			this.keyboardFld.getHoldShift() );
     this.mnuHoldShiftBtn.addActionListener( this );
     mnuFile.add( this.mnuHoldShiftBtn );
@@ -61,7 +61,8 @@ public class KeyboardFrm extends BaseFrm
     // Menu Hilfe
     JMenu mnuHelp = createMenuHelp();
 
-    this.mnuHelpContent = createMenuItem( "Hilfe zur Tastatur..." );
+    this.mnuHelpContent = createMenuItem(
+		LangUtil.getText( "base.action.help_keyboard" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -254,10 +255,10 @@ public class KeyboardFrm extends BaseFrm
   {
     String kbName = this.keyboardFld.getKeyboardName();
     if( kbName != null ) {
-      setTitle( LangUtil.tr( "JKCEMU" ) + ": " + kbName );
+      setTitle( LangUtil.getText( "base.text.jkcemu" ) + ": " + kbName );
     } else {
-      setTitle( LangUtil.tr(
-			"JKCEMU: {0} Tastatur", emuSys.getTitle() ) );
+      setTitle( LangUtil.getText(
+			"base.text.jkcemu_keyboard", emuSys.getTitle() ) );
     }
     boolean state = this.keyboardFld.hasShiftKeys();
     this.mnuHoldShiftBtn.setVisible( state );

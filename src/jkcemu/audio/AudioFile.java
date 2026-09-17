@@ -112,8 +112,7 @@ public class AudioFile
   {
     if( fileFilter == null ) {
       fileFilter = new FileNameExtensionFilter(
-			LangUtil.tr(
-				"Sound-Dateien ({0})",
+			LangUtil.getText( "audio.text.sound_files",
 				getFileExtensionText() ),
 			fileExts );
     }
@@ -564,18 +563,14 @@ public class AudioFile
   private static void throwUnsupportedEncoding() throws IOException
   {
     throw new IOException(
-		"Die in der Datei verwendete Kodierung der Audiodaten"
-			+ " wird nicht unterst\u00FCtzt." );
+		LangUtil.getText( "audio.error.encoding_audio_data" ) );
   }
 
 
   private static void throwUnsupportedFileSuffix() throws IOException
   {
-    throw new IOException( "Dateiformat nicht unterst\u00FCtzt!"
-		+ "\n\nUnterst\u00FCtzte Dateiendungen sind:"
-		+ "\n  *.aif; *.aiff; *.au; *.wav"
-		+ "\n\nSowie die gleichen mit GZip komprimiert:"
-		+ "\n  *.aif.gz; *.aiff.gz; *.au.gz; *.wav.gz" );
+    throw new IOException(
+		LangUtil.getText( "audio.error.file_format_not_supported_extensions_aif" ) );
   }
 
 

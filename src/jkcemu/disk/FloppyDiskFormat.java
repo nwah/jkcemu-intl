@@ -17,80 +17,79 @@ public class FloppyDiskFormat
 	= new FloppyDiskFormat(
 		80, 1, 5, 1024, 1,
 		0, 2, 2048, true, false,
-		"400K (LLC2 CP/L)" );
+		"disk.text.400k_llc2_cp" );
 
   public static final FloppyDiskFormat FMT_624K
 	= new FloppyDiskFormat(
 		80, 2, 16, 256, 1,
 		2, 2, 2048, true, false,
-		"640K/624K (PC/M)" );
+		"disk.text.640k_624k_pc" );
 
   public static final FloppyDiskFormat FMT_702K_I3_DS
 	= new FloppyDiskFormat(
 		80, 2, 9, 512, 3,
 		2, 2, 2048, true, true,
-		"720K/702K mit Interleave 3:1 und DateStamper (ML-DOS)" );
+		"disk.text.720k_702k_interleave" );
 
   public static final FloppyDiskFormat FMT_711K_I5_BASDOS
 	= new FloppyDiskFormat(
 		80, 2, 9, 512, 5,
 		1, 1, 4096, false, false,
-		"720K/711K (KC compact BASDOS)" );
+		"disk.text.720k_711k_kc" );
 
   public static final FloppyDiskFormat FMT_720K
 	= new FloppyDiskFormat(
 		80, 2, 9, 512, 1,
 		0, 2, 2048, true, false,
-		"720K (A5105 RBASIC/SCPX)" );
+		"disk.text.720k_a5105_rbasic" );
 
   public static final FloppyDiskFormat FMT_780K
 	= new FloppyDiskFormat(
 		80, 2, 5, 1024, 1,
 		2, 2, 2048, true, false,
-		"800K/780K (CAOS, NANOS, Z1013 CP/M)" );
+		"disk.text.800k_780k_caos" );
 
   public static final FloppyDiskFormat FMT_780K_I2
 	= new FloppyDiskFormat(
 		80, 2, 5, 1024, 2,
 		2, 2, 2048, true, false,
-		"800K/780K mit Interleave 2:1 (A5105 RBASIC/SCPX)" );
+		"disk.text.800k_780k_interleave_2_1_a5105" );
 
   public static final FloppyDiskFormat FMT_780K_I3
 	= new FloppyDiskFormat(
 		80, 2, 5, 1024, 3,
 		2, 2, 2048, true, false,
-		"800K/780K mit Interleave 3:1 (MicroDOS)" );
+		"disk.text.800k_780k_interleave_3_1_microdos" );
 
   public static final FloppyDiskFormat FMT_780K_I3_DS
 	= new FloppyDiskFormat(
 		80, 2, 5, 1024, 3,
 		2, 2, 2048, true, true,
-		"800K/780K mit Interleave 3:1 und DateStamper (ML-DOS)" );
+		"disk.text.800k_780k_interleave_3_1_datestamper" );
 
   public static final FloppyDiskFormat FMT_800K_I4
 	= new FloppyDiskFormat(
 		80, 2, 5, 1024, 4,
 		0, 3, 2048, true, false,
-		"800K mit Interleave 4:1 (Z9001 CP/A)" );
+		"disk.text.800k_interleave_4" );
 
   public static final FloppyDiskFormat FMT_1200K
 	= new FloppyDiskFormat(
 		80, 2, 15, 512, 1,
 		0, 2, 4096, true, false,
-		"1200K (5.25 Zoll MS-DOS)" );
+		"disk.text.1200k_5_25" );
 
   public static final FloppyDiskFormat FMT_1440K
 	= new FloppyDiskFormat(
 		80, 2, 18, 512, 1,
 		0, 2, 4096, true, false,
-		"1440K (3.5 Zoll MS-DOS)" );
+		"disk.text.1440k_3_5" );
 
   public static final FloppyDiskFormat FMT_1738K_I3_DS
 	= new FloppyDiskFormat(
 		80, 2, 11, 1024, 3,
 		1, 2, 4096, true, true,
-		"1760K/1738K mit Interleave 3:1 und DateStamper"
-					+ " (KC85/D008 ML-DOS)" );
+		"disk.text.1760k_1738k_interleave" );
 
   private static final FloppyDiskFormat[] formats = {
 			new FloppyDiskFormat( 80, 2,  9,  512 ),
@@ -161,9 +160,8 @@ public class FloppyDiskFormat
       this.infoText = infoText;
     } else {
       StringBuilder buf = new StringBuilder( 128 );
-      buf.append(
-		LangUtil.tr(
-			"{0} KByte, {1} Spuren a {2} * {3} Bytes",
+      buf.append( LangUtil.getText(
+			"disk.text.kbyte_tracks_bytes",
 			diskSize / 1024,
 			cyls,
 			sectorsPerTrack,
@@ -171,11 +169,11 @@ public class FloppyDiskFormat
       switch( sides ) {
 	case 1:
 	  buf.append( ", " );
-	  buf.append( LangUtil.tr( "einseitig" ) );
+	  buf.append( LangUtil.getText( "disk.text.single_sided" ) );
 	  break;
 	case 2:
 	  buf.append( ", " );
-	  buf.append( LangUtil.tr( "doppelseitig" ) );
+	  buf.append( LangUtil.getText( "disk.text.double_sided" ) );
 	  break;
       }
       this.infoText = buf.toString();
@@ -347,6 +345,6 @@ public class FloppyDiskFormat
    */
   public String toString()
   {
-    return this.infoText != null ? LangUtil.tr( this.infoText ) : "";
+    return this.infoText != null ? LangUtil.getText( this.infoText ) : "";
   }
 }

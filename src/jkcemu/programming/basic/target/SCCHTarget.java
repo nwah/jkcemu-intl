@@ -15,6 +15,7 @@ package jkcemu.programming.basic.target;
 import jkcemu.base.EmuSys;
 import jkcemu.emusys.AC1;
 import jkcemu.emusys.LLC2;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.basic.AbstractTarget;
 import jkcemu.programming.basic.AsmCodeBuf;
 import jkcemu.programming.basic.BasicCompiler;
@@ -154,10 +155,9 @@ public class SCCHTarget extends AbstractTarget
 	  }
 	}
 	if( !done && !appName.equals( BasicOptions.DEFAULT_APP_NAME ) ) {
-	  compiler.putWarning( "Warnung: Applikationsname ignoriert"
-		+ " (nur ein Buchstabe oder eine Ziffer erlaubt)\n"
-		+ "Aufruf des Programms auf dem Zielsystem nur \u00FCber"
-		+ " die Startadresse m\u00F6glich" );
+	  compiler.putWarning(
+			LangUtil.getText(
+				"basic.msg.warning_application_name" ) );
 	}
       }
     }

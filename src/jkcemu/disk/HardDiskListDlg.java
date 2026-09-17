@@ -84,10 +84,7 @@ public class HardDiskListDlg extends BaseDlg implements ListSelectionListener
       this.dataChangedInfoShown = true;
       BaseDlg.showInfoDlg(
 		this,
-		"Sie m\u00FCssen das Festplattenverzeichnis"
-			+ " erst speichern,\n"
-			+ "bevor Sie wieder eine Festplatte"
-			+ " ausw\u00E4hlen k\u00F6nnen." );
+		LangUtil.getText( "disk.msg.save_hard_disk" ) );
     }
   }
 
@@ -141,12 +138,8 @@ public class HardDiskListDlg extends BaseDlg implements ListSelectionListener
     if( this.btnSave.isEnabled() ) {
       switch( JOptionPane.showConfirmDialog(
 		this,
-		LangUtil.tr(
-			"Das Festplattenverzeichnis wurde ge\u00E4ndert,"
-				+ " aber nicht gespeichert.\n"
-				+ "M\u00F6chten Sie es speichern,"
-				+ " bevor das Fenster geschlossen wird?" ),
-		LangUtil.tr( "Daten ge\u00E4ndert" ),
+		LangUtil.getText( "disk.text.hard_disk_directory" ),
+		LangUtil.getText( "common.text.data_changed" ),
 		JOptionPane.YES_NO_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) )
       {
@@ -259,7 +252,7 @@ public class HardDiskListDlg extends BaseDlg implements ListSelectionListener
 
   private HardDiskListDlg( Window owner )
   {
-    super( owner, "JKCEMU Festplattenverzeichnis" );
+    super( owner, LangUtil.getText( "disk.title.jkcemu_hard_disk_directory" ) );
     this.dataChangedInfoShown = false;
     this.selectedRow          = null;
 
@@ -321,7 +314,8 @@ public class HardDiskListDlg extends BaseDlg implements ListSelectionListener
     gbc.gridy++;
     add( panelBtn, gbc );
 
-    this.btnSelect = GUIFactory.createButton( "Ausw\u00E4hlen" );
+    this.btnSelect = GUIFactory.createButton(
+		LangUtil.getText( "common.action.select" ) );
     panelBtn.add( this.btnSelect );
 
     this.btnAdd = GUIFactory.createButtonAdd();
@@ -489,9 +483,7 @@ public class HardDiskListDlg extends BaseDlg implements ListSelectionListener
     } else {
       BaseDlg.showErrorDlg(
 		this,
-		"Speichern nicht m\u00F6glich, da das\n"
-			+ "JKCEMU-Konfigurationsverzeichnis"
-			+ " nicht bekannt ist." );
+		LangUtil.getText( "disk.error.saving_not_possible" ) );
     }
     return rv;
   }

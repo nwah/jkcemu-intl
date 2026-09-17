@@ -42,6 +42,7 @@ import javax.swing.text.Document;
 import jkcemu.Main;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -96,7 +97,8 @@ public class ProfileDlg extends BaseDlg implements
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    add( GUIFactory.createLabel( "Profile:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "base.label.profiles" ) ), gbc );
 
     this.listModel = new DefaultListModel<>();
     this.list      = GUIFactory.createList( this.listModel );
@@ -140,15 +142,18 @@ public class ProfileDlg extends BaseDlg implements
     this.btnExport = null;
     this.btnImport = null;
     if( !forSave ) {
-      this.btnExport = GUIFactory.createButton( "Exportieren..." );
+      this.btnExport = GUIFactory.createButton(
+		LangUtil.getText( "common.action.export_dots" ) );
       this.btnExport.setEnabled( false );
       panelBtn.add( this.btnExport );
 
-      this.btnImport = GUIFactory.createButton( "Importieren..." );
+      this.btnImport = GUIFactory.createButton(
+		LangUtil.getText( "common.action.import" ) );
       panelBtn.add( this.btnImport );
     }
 
-    this.btnDelete = GUIFactory.createButton( EmuUtil.TEXT_DELETE );
+    this.btnDelete = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_DELETE ) );
     this.btnDelete.setEnabled( false );
     panelBtn.add( this.btnDelete );
 
@@ -170,7 +175,7 @@ public class ProfileDlg extends BaseDlg implements
     this.cbUseDefaults = null;
     if( !forSave ) {
       this.cbUseDefaults = GUIFactory.createCheckBox(
-		"Kein Profil laden und Standardeinstellungen verwenden" );
+		LangUtil.getText( "base.option.not_load_profile" ) );
       gbc.anchor        = GridBagConstraints.WEST;
       gbc.fill          = GridBagConstraints.NONE;
       gbc.insets.bottom = 10;
@@ -445,14 +450,14 @@ public class ProfileDlg extends BaseDlg implements
     if( file != null ) {
       if( showYesNoDlg(
 		this,
-		"M\u00F6chten Sie das Profil l\u00F6schen?" ) )
+		LangUtil.getText( "base.msg.want_delete_profile" ) ) )
       {
 	if( file.delete() ) {
 	  loadProfiles( null );
 	} else {
 	  showErrorDlg(
 		this,
-		"Das Profil kann nicht gel\u00F6scht werden." );
+		LangUtil.getText( "base.error.profile_cannot_deleted" ) );
 	}
       }
     }
@@ -478,7 +483,8 @@ public class ProfileDlg extends BaseDlg implements
       }
       File dstFile = FileUtil.showFileSaveDlg(
 				this,
-				"Profil exportieren",
+				LangUtil.getText(
+					"base.title.export_profile" ),
 				initialFile,
 				FileUtil.getXMLFileFilter() );
       if( dstFile != null ) {
@@ -492,7 +498,8 @@ public class ProfileDlg extends BaseDlg implements
 				RecentDirsMngr.FILE_CAT_PROFILE );
 	}
 	catch( InvalidPathException ex ) {
-	  throw new IOException( "Exportieren nicht m\u00FCglich" );
+	  throw new IOException(
+			LangUtil.getText( "base.error.export_not_possible" ) );
 	}
       }
     }
@@ -503,7 +510,7 @@ public class ProfileDlg extends BaseDlg implements
   {
     File srcFile = FileUtil.showFileOpenDlg(
 			this,
-			"Profil importieren",
+			LangUtil.getText( "base.title.import_profile" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_PROFILE ),
 			FileUtil.getXMLFileFilter() );
@@ -542,8 +549,8 @@ public class ProfileDlg extends BaseDlg implements
 	    if( dstFile.exists() ) {
 	      state = showYesNoDlg(
 			this,
-			"Das Profil gibt es bereits.\n"
-				+ "M\u00F6chten Sie es \u00FCberschreiben?" );
+			LangUtil.getText(
+				"base.msg.profile_already_exists" ) );
 	    }
 	    if( state ) {
 	      Files.copy(
@@ -581,7 +588,7 @@ public class ProfileDlg extends BaseDlg implements
     int len = text.length();
     if( len < 1 ) {
       throw new UserInputException(
-			"Sie m\u00FCssen einen Namen eingeben!" );
+			LangUtil.getText( "base.error.enter_name" ) );
     }
 
     boolean status = false;
@@ -606,13 +613,7 @@ public class ProfileDlg extends BaseDlg implements
     }
     if( !status ) {
       throw new UserInputException(
-		"Der Name enth\u00E4lt ung\u00FCltige"
-			+ "Zeichen.\n"
-			+ "Das erste Zeichen muss ein Buchstabe"
-			+ " oder Unterstrich sein.\n"
-			+ "Ab dem zweiten Zeichen sind zus\u00E4tzlich"
-			+ " Ziffern, Punkt\n"
-			+ "Plus, Minus und Leerzeichen erlaubt." );
+		LangUtil.getText( "base.error.name_contains_invalid" ) );
     }
     return text;
   }

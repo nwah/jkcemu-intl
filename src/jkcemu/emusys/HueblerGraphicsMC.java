@@ -22,6 +22,7 @@ import jkcemu.emusys.huebler.AbstractHueblerMC;
 import jkcemu.file.FileFormat;
 import jkcemu.file.FileUtil;
 import jkcemu.file.SaveDlg;
+import jkcemu.lang.LangUtil;
 import jkcemu.net.KCNet;
 import jkcemu.usb.VDIP;
 import z80emu.Z80CPU;
@@ -35,7 +36,7 @@ public class HueblerGraphicsMC
 			implements Z80MaxSpeedListener
 {
   public static final String SYSNAME     = "HueblerGraphicsMC";
-  public static final String SYSTEXT     = "H\u00FCbler-Grafik-MC";
+  public static final String SYSTEXT     = "emusys.text.huebler_grafik_mc";
   public static final String PROP_PREFIX = "jkcemu.hgmc.";
   public static final String PROP_BASIC  = "basic";
 
@@ -111,14 +112,15 @@ public class HueblerGraphicsMC
 
     this.kcNet = null;
     if( emulatesKCNet( props ) ) {
-      this.kcNet = new KCNet( "Netzwerk-PIO (E/A-Adressen C0h-C3h)" );
+      this.kcNet = new KCNet( LangUtil.getText(
+			"emusys.text.network_pio_i_o_addresses_c0h" ) );
     }
     this.vdip = null;
     if( emulatesVDIP( props ) ) {
       this.vdip = new VDIP(
 			0,
 			this.emuThread.getZ80CPU(),
-			"USB-PIO (E/A-Adressen FCh-FFh)" );
+			LangUtil.getText( "emusys.text.usb_pio_i_o_addresses_fch_ffh" ) );
     }
     Z80CPU cpu = emuThread.getZ80CPU();
     if( (this.kcNet != null) || (this.vdip != null) ) {
@@ -453,7 +455,7 @@ public class HueblerGraphicsMC
   @Override
   public String getTitle()
   {
-    return SYSTEXT;
+    return LangUtil.getText( SYSTEXT );
   }
 
 
@@ -577,7 +579,7 @@ public class HueblerGraphicsMC
 		this.screenFrm,
 		0x3770,
 		endAddr,
-		"BASIC-Programm speichern",
+		LangUtil.getText( "emusys.text.save_basic_program" ),
 		SaveDlg.BasicType.MS_DERIVED_BASIC,
 		FileUtil.getBasicFileFilter() )).setVisible( true );
     } else {

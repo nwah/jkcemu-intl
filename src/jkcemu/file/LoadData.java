@@ -13,6 +13,7 @@ import java.io.IOException;
 import jkcemu.base.EmuMemView;
 import jkcemu.base.EmuThread;
 import jkcemu.base.EmuSys;
+import jkcemu.lang.LangUtil;
 
 
 public class LoadData implements EmuMemView
@@ -161,8 +162,8 @@ public class LoadData implements EmuMemView
 	    }
 	  }
 	  if( (nextAddr > 0) && (nextAddr <= curAddr) ) {
-	    throw new IOException( "Das KC-BASIC-Programm kann nicht auf die"
-			  + " gew\u00FCnschte Adresse reloziert werden." );
+	    throw new IOException( LangUtil.getText(
+				"file.error.kc_basic_program" ) );
 	  }
 	  curAddr = nextAddr;
 	} while( curAddr > 0 );
@@ -239,6 +240,6 @@ public class LoadData implements EmuMemView
 
   private static void throwLoadError() throws IOException
   {
-    throw new IOException( "Datei kann nicht geladen werden." );
+    throw new IOException( LangUtil.getText( "file.error.file_cannot_loaded" ) );
   }
 }

@@ -161,31 +161,21 @@ public class W5100
 	}
 	StringBuilder buf = new StringBuilder( 512 );
 	if( ipAddrText != null ) {
-	  buf.append( LangUtil.tr(
-		"Es wurden Daten von der IP-Adresse {0} empfangen,\n"
-			+ "deren Format von KCNet nicht"
-			+ " unterst\u00FCtzt wird.\n",
+	  buf.append( LangUtil.getText(
+		"net.text.data_received_ip_address_der",
 		ipAddrText ) );
 	} else {
-	  buf.append( LangUtil.tr(
-		"Es wurden Daten von einer IP-Adresse empfangen,\n"
-			+ "deren Format von KCNet nicht"
-			+ " unterst\u00FCtzt wird.\n" ) );
+	  buf.append( LangUtil.getText(
+		"net.text.data_received_ip_address_einer" ) );
 	}
 	if( inetAddr != null ) {
 	  if( inetAddr instanceof Inet6Address ) {
-	    buf.append( LangUtil.tr(
-		"Die Gegenstelle benutzt IPv6,"
-			+ " KCNet beherrscht aber nur IPv4.\n" ) );
+	    buf.append( LangUtil.getText(
+		"net.text.remote_station_uses" ) );
 	  }
 	}
-	buf.append( LangUtil.tr(
-		"Aus diesem Grund kann JKCEMU die IP-Adresse nicht\n"
-			+ "in das emulierte KCNet eintragen,\n"
-			+ "wodurch das im Emulator laufende"
-			+ " Netzwerkprogramm\n"
-			+ "eine Gegenstelle ohne g\u00FCltige"
-			+ " IP-Adresse sieht." ) );
+	buf.append( LangUtil.getText(
+		"net.text.reason_jkcemu_cannot_enter" ) );
 	EmuUtil.fireShowInfoDlg( Main.getScreenFrm(), buf.toString() );
 	this.nonIPv4MsgShown = true;
       }

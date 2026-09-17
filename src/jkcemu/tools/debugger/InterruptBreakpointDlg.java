@@ -17,6 +17,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JSeparator;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80InterruptSource;
 
 
@@ -30,7 +31,10 @@ public class InterruptBreakpointDlg extends AbstractBreakpointDlg
 			AbstractBreakpoint   breakpoint,
 			Z80InterruptSource[] iSources )
   {
-    super( debugFrm, "Interrupt-Quelle", breakpoint );
+    super(
+		debugFrm,
+		LangUtil.getText( "debugger.section.interrupt_source" ),
+		breakpoint );
 
     // Fensterinhalt
     setLayout( new GridBagLayout() );

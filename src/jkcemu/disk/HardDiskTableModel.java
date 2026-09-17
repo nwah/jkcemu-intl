@@ -20,12 +20,12 @@ import jkcemu.lang.LangUtil;
 public class HardDiskTableModel extends AbstractTableModel
 {
   private static final String[] colNames = {
-					"Hersteller",
-					"Modell",
-					"Zylinder",
-					"K\u00F6pfe",
-					"Sektoren pro Spur",
-					"Gr\u00F6\u00DFe" };
+					"disk.column.manufacturer",
+					"common.section.model",
+					"disk.column.cylinders",
+					"disk.column.heads",
+					"disk.column.sectors_per_track",
+					"common.column.size" };
 
   private HardDiskListDlg              owner;
   private java.util.List<HardDiskInfo> rows;
@@ -95,7 +95,7 @@ public class HardDiskTableModel extends AbstractTableModel
   public String getColumnName( int col )
   {
     return (col >= 0) && (col < colNames.length) ? 
-		LangUtil.tr( colNames[ col ] ) : "";
+		LangUtil.getText( colNames[ col ] ) : "";
   }
 
 

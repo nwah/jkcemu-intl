@@ -47,8 +47,7 @@ public class TZXFile
   {
     if( fileFilter == null ) {
       fileFilter = new FileNameExtensionFilter(
-			LangUtil.tr(
-				"CDT/TZX-Dateien ({0})",
+			LangUtil.getText( "audio.text.cdt_tzx_files",
 				getFileExtensionText() ),
 			fileExts );
     }
@@ -66,20 +65,17 @@ public class TZXFile
     }
     fName        = fName.toLowerCase();
     if( !fName.endsWith( ".cdt" ) && !fName.endsWith( ".tzx" ) ) {
-      throw new IOException( "Dateiformat nicht unterst\u00FCtzt!"
-		+ "\n\nUnterst\u00FCtzte Dateiendungen sind"
-		+ " *.cdt und *.tzx" );
+      throw new IOException( LangUtil.getText(
+			"audio.error.file_format_not_supported_extensions_cdt" ) );
     }
     if( (pcm.getSampleSizeInBits() > 1) || (pcm.getChannels() > 1) ) {
-      throw new IOException( "In einer CDT/TZX-Datei k\u00F6nnen nur"
-			+ " 1-Bit-Mono-Audiodaten gespeichert werden." );
+      throw new IOException( LangUtil.getText( "audio.error.only_1_bit_mono_audio_data_stored_cdt" ) );
     }
     long frameCount = pcm.getFrameCount();
     long nBytes     = (frameCount + 7) / 8;
     if( nBytes > 0x7FFFFF ) {
-      throw new IOException( "Die Datei kann nicht gespeichert werden,\n"
-		+ "da die L\u00E4nge der Audiodaten gr\u00F6\u00DFer ist,\n"
-		+ "als das CDT/TZX-Dateiformat erm\u00F6glicht." );
+      throw new IOException(
+		LangUtil.getText( "audio.error.file_cannot_saved" ) );
     }
     byte[] frameBuf = new byte[ 1 ];
     if( pcm.read( frameBuf, 0, 1 ) != frameBuf.length ) {

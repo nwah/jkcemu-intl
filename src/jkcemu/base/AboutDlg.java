@@ -99,7 +99,7 @@ public class AboutDlg extends BaseDlg
   private AboutDlg( Window owner )
   {
     super( owner, Dialog.ModalityType.MODELESS );
-    setTitle( "\u00DCber JKCEMU..." );
+    setTitle( LangUtil.getText( "base.action.about_jkcemu" ) );
 
 
     // Fensterinhalt
@@ -120,7 +120,8 @@ public class AboutDlg extends BaseDlg
 
     // Tab Allgemein
     JPanel panelGeneral = GUIFactory.createPanel( new GridBagLayout() );
-    tabbedPane.addTab( "Allgemein", panelGeneral );
+    tabbedPane.addTab(
+		LangUtil.getText( "common.section.general" ), panelGeneral );
 
     GridBagConstraints gbcGeneral = new GridBagConstraints(
 					0, 0,
@@ -153,7 +154,7 @@ public class AboutDlg extends BaseDlg
     gbcGeneral.gridy++;
     panelGeneral.add(
 	GUIFactory.createLabel(
-		"...ein in Java geschriebener Kleincomputer-Emulator" ),
+		LangUtil.getText( "base.label.small_computer_emulator" ) ),
 	gbcGeneral );
 
     gbcGeneral.insets.top = 12;
@@ -165,40 +166,40 @@ public class AboutDlg extends BaseDlg
     gbcGeneral.gridy++;
     panelGeneral.add(
 	GUIFactory.createLabel(
-		"Lizenz: GNU General Public License Version 3" ),
+		LangUtil.getText( "base.label.license_gnu_general" ) ),
 	gbcGeneral );
 
     gbcGeneral.gridy++;
     panelGeneral.add(
 	GUIFactory.createLabel(
-		"Im JKCEMU sind ROM- und Disketteninhalte enthaltenen," ),
+		LangUtil.getText( "base.label.jkcemu_contains_rom" ) ),
 	gbcGeneral );
 
     gbcGeneral.insets.top = 0;
     gbcGeneral.gridy++;
     panelGeneral.add(
 	GUIFactory.createLabel(
-		"die nicht der GNU General Public License unterliegen." ),
+		LangUtil.getText( "base.label.not_subject_gnu" ) ),
 	gbcGeneral );
 
     gbcGeneral.gridy++;
     panelGeneral.add(
-	GUIFactory.createLabel( "Lesen Sie dazu bitte die Hinweise zu den"
-			+ " Urheberschaften!" ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "base.label.please_read_notes" ) ),
 	gbcGeneral );
     gbcGeneral.insets.top = 12;
     gbcGeneral.gridy++;
     panelGeneral.add(
-	GUIFactory.createLabel( "Die Anwendung dieser Software erfolgt"
-			+ " ausschlie\u00DFlich auf eigenes Risiko." ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "base.label.use_software_entirely" ) ),
 	gbcGeneral );
 
     gbcGeneral.insets.top    = 0;
     gbcGeneral.insets.bottom = 10;
     gbcGeneral.gridy++;
     panelGeneral.add(
-	GUIFactory.createLabel( "Jegliche Gew\u00E4hrleistung und Haftung"
-			+ " ist ausgeschlossen!" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"base.label.any_warranty_liability" ) ),
 	gbcGeneral );
 
 
@@ -210,7 +211,8 @@ public class AboutDlg extends BaseDlg
 	panel.add(
 		GUIFactory.createScrollPane( createJEditorPane( url ) ),
 		BorderLayout.CENTER );
-	tabbedPane.addTab( "Urheberschaften", panel );
+	tabbedPane.addTab(
+		LangUtil.getText( "base.section.copyrights" ), panel );
       }
       catch( IOException ex ) {}
     }
@@ -224,7 +226,8 @@ public class AboutDlg extends BaseDlg
 	panel.add(
 		GUIFactory.createScrollPane( createJEditorPane( url ) ),
 		BorderLayout.CENTER );
-	tabbedPane.addTab( "Danksagung", panel );
+	tabbedPane.addTab(
+		LangUtil.getText( "base.section.acknowledgements" ), panel );
       }
       catch( IOException ex ) {}
     }
@@ -299,29 +302,29 @@ public class AboutDlg extends BaseDlg
 		+ "<tr><td align=\"left\">Status:</td><td align=\"left\">" );
 	switch( libInfo.getStatus() ) {
 	  case NOT_USED:
-	    buf.append( LangUtil.tr(
-		"Bibliothek nicht geladen, da noch nicht ben\u00F6tigt" ) );
+	    buf.append( LangUtil.getText(
+		"base.text.library_not_loaded_not" ) );
 	    break;
 	  case LOADED:
 	    if( (recognizedVersion >= 0) && (requiredVersion >= 0) ) {
 	      if( recognizedVersion >= requiredVersion ) {
-		buf.append( LangUtil.tr(
-			"Bibliothek geladen und in Verwendnung" ) );
+		buf.append( LangUtil.getText(
+			"base.text.library_loaded_use" ) );
 	      } else {
-		buf.append( LangUtil.tr(
-			"Bibliothek geladen, aber nicht in Verwendnung" ) );
+		buf.append( LangUtil.getText(
+			"base.text.library_loaded_not_use" ) );
 	      }
 	    } else {
-	      buf.append( LangUtil.tr( "Bibliothek geladen" ) );
+	      buf.append( LangUtil.getText( "base.text.library_loaded" ) );
 	    }
 	    break;
 	  case LOAD_ERROR:
-	    buf.append( LangUtil.tr(
-		"Bibliothek konnte nicht geladen werden." ) );
+	    buf.append( LangUtil.getText(
+		"base.text.library_not_loaded" ) );
 	    break;
 	  case INSTALL_ERROR:
-	    buf.append( LangUtil.tr(
-		"Bibliothek konnte nicht installiert werden." ) );
+	    buf.append( LangUtil.getText(
+		"base.text.library_not_installed" ) );
 	    break;
 	}
 	buf.append( "</td></tr>\n" );
@@ -369,7 +372,7 @@ public class AboutDlg extends BaseDlg
 	panel.add(
 		GUIFactory.createScrollPane( editorPane ),
 		BorderLayout.CENTER );
-	tabbedPane.addTab( "Java", panel );
+	tabbedPane.addTab( LangUtil.getText( "base.section.java" ), panel );
       }
     }
     catch( IOException ex ) {}

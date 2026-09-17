@@ -22,6 +22,7 @@ import javax.swing.JScrollPane;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.FontMngr;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class FontSymSettingsFld extends AbstractSettingsFld
@@ -56,7 +57,8 @@ public class FontSymSettingsFld extends AbstractSettingsFld
 
     // Bereich Schriftarten
     JPanel panelFont = GUIFactory.createPanel( new GridBagLayout() );
-    panelFont.setBorder( GUIFactory.createTitledBorder( "Schriftarten" ) );
+    panelFont.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "settings.section.fonts" ) ) );
     panelAll.add( panelFont, gbc );
 
     GridBagConstraints gbcFont = new GridBagConstraints(
@@ -70,7 +72,8 @@ public class FontSymSettingsFld extends AbstractSettingsFld
 
     this.fontSelectionGeneral = new FontSelectionFld(
 			this.settingsFrm,
-			"Schrift f\u00FCr allgemeine Beschriftungen:",
+			LangUtil.getText(
+				"settings.text.font_general_labels" ),
 			FontMngr.FontUsage.GENERAL );
     panelFont.add( this.fontSelectionGeneral, gbcFont );
 
@@ -78,27 +81,28 @@ public class FontSymSettingsFld extends AbstractSettingsFld
     gbcFont.gridy++;
     this.fontSelectionMenu = new FontSelectionFld(
 					this.settingsFrm,
-					"Schrift f\u00FCr Men\u00FCs:",
+					LangUtil.getText(
+						"settings.text.font_menus" ),
 					FontMngr.FontUsage.MENU );
     panelFont.add( this.fontSelectionMenu, gbcFont );
 
     this.fontSelectionInput = new FontSelectionFld(
 					this.settingsFrm,
-					"Schrift f\u00FCr Eingabefelder:",
+					LangUtil.getText( "settings.text.font_input_fields" ),
 					FontMngr.FontUsage.INPUT );
     gbcFont.gridy++;
     panelFont.add( this.fontSelectionInput, gbcFont );
 
     this.fontSelectionCode = new FontSelectionFld(
 					this.settingsFrm,
-					"Schrift f\u00FCr Code-Bereiche:",
+					LangUtil.getText( "settings.text.font_code_areas" ),
 					FontMngr.FontUsage.CODE );
     gbcFont.gridy++;
     panelFont.add( this.fontSelectionCode, gbcFont );
 
     this.fontSelectionHtml = new FontSelectionFld(
 					this.settingsFrm,
-					"Schrift f\u00FCr HTML-Ausgaben:",
+					LangUtil.getText( "settings.text.font_html_output" ),
 					FontMngr.FontUsage.HTML );
     gbcFont.gridy++;
     panelFont.add( this.fontSelectionHtml, gbcFont );
@@ -107,18 +111,21 @@ public class FontSymSettingsFld extends AbstractSettingsFld
     // Bereich Symbols
     JPanel panelSym = GUIFactory.createPanel(
 				new FlowLayout( FlowLayout.LEFT, 5, 5 ) );
-    panelSym.setBorder( GUIFactory.createTitledBorder( "Symbole" ) );
+    panelSym.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "settings.section.icons" ) ) );
     gbc.insets.top = 10;
     gbc.gridy++;
     panelAll.add( panelSym, gbc );
 
     ButtonGroup grpSym = new ButtonGroup();
 
-    this.rbSymSmall = GUIFactory.createRadioButton( "Kleine Symbole", true );
+    this.rbSymSmall = GUIFactory.createRadioButton(
+		LangUtil.getText( "settings.option.small_icons" ), true );
     grpSym.add( this.rbSymSmall );
     panelSym.add( this.rbSymSmall );
 
-    this.rbSymLarge = GUIFactory.createRadioButton( "Gro\u00DFe Symbole" );
+    this.rbSymLarge = GUIFactory.createRadioButton(
+		LangUtil.getText( "settings.option.large_icons" ) );
     grpSym.add( this.rbSymLarge );
     panelSym.add( this.rbSymLarge );
 

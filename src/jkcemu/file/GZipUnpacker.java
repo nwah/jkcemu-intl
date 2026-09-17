@@ -32,7 +32,7 @@ public class GZipUnpacker extends AbstractThreadFrm
   public static void unpackFile( Window owner, File srcFile, File outFile )
   {
     Frame frm = new GZipUnpacker( owner, srcFile, outFile );
-    frm.setTitle( "GZIP-Datei entpacken" );
+    frm.setTitle( LangUtil.getText( "file.title.unpack_gzip_file" ) );
     frm.setVisible( true );
   }
 
@@ -87,8 +87,8 @@ public class GZipUnpacker extends AbstractThreadFrm
   private GZipUnpacker( Window owner, File srcFile, File outFile )
   {
     super(
-	"JKCEMU gzip unpacker",
-	LangUtil.tr( "Entpacken von {0}...", srcFile.getName() ),
+	LangUtil.getText( "file.title.jkcemu_gzip_unpacker" ),
+	LangUtil.getText( "file.text.unpacking", srcFile.getName() ),
 	false,
 	true,
 	true );

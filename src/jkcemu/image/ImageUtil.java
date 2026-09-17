@@ -103,10 +103,10 @@ public class ImageUtil
     // Dialog anzeigen
     return FileUtil.showFileOpenDlg(
 	owner,
-	"Farbpalette importieren",
+	LangUtil.getText( "image.option.import_color_palette" ),
 	initialFile,
 	createFileFilter(
-		"Unterst\u00FCtzte Farbpaletten- und Bilddateien",
+		LangUtil.getText( "image.filetype.supported_color_palette" ),
 		usedSuffixes.toArray( new String[ usedSuffixes.size() ] ),
 		IFFFile.getFileSuffixes(),
 		JASCPaletteFile.getFileSuffixes() ) );
@@ -200,7 +200,7 @@ public class ImageUtil
 						String      text,
 						String[]... suffixes )
   {
-    text = LangUtil.tr( text );
+    text = LangUtil.getText( text );
     SortedSet<String> sortedSuffixes = new TreeSet<>();
     if( suffixes != null ) {
       for( String[] a : suffixes ) {
@@ -244,15 +244,14 @@ public class ImageUtil
 						String[]... suffixes )
   {
     StringBuilder buf = new StringBuilder( 512 );
-    buf.append( LangUtil.tr(
-	"Das durch die Dateiendung angegebene Format"
-		+ " wird nicht unterst\u00FCtzt." ) );
+    buf.append( LangUtil.getText(
+	"image.text.format_specified_file" ) );
 
     String suffixesText = createFileSuffixesText( suffixes );
     if( !suffixesText.isEmpty() ) {
       buf.append( '\n' );
-      buf.append( LangUtil.tr(
-		"Folgende Dateiendungen sind m\u00F6glich:" ) );
+      buf.append( LangUtil.getText(
+		"image.text.following_file" ) );
       buf.append( '\n' );
       buf.append( suffixesText );
     }
@@ -337,7 +336,8 @@ public class ImageUtil
   public static FileNameExtensionFilter createA5105ImageFileFilter()
   {
     return new FileNameExtensionFilter(
-				LangUtil.tr( "A5105-Bilddateien" ),
+				LangUtil.getText(
+					"image.text.a5105_image_files" ),
 				"scr" );
   }
 
@@ -345,7 +345,7 @@ public class ImageUtil
   public static FileNameExtensionFilter createKC852ImageFileFilter()
   {
     return new FileNameExtensionFilter(
-				LangUtil.tr( "KC85/2,3-Bilddateien" ),
+				LangUtil.getText( "image.text.kc85_2_3" ),
 				"pic" );
   }
 
@@ -353,7 +353,7 @@ public class ImageUtil
   public static FileNameExtensionFilter createKC854HiresImageFileFilter()
   {
     return new FileNameExtensionFilter(
-				LangUtil.tr( "KC85/4,5-HIRES-Bilddateien" ),
+				LangUtil.getText( "image.text.kc85_4_5_hires_image" ),
 				"hip" );
   }
 
@@ -361,7 +361,7 @@ public class ImageUtil
   public static FileNameExtensionFilter createKC854LowresImageFileFilter()
   {
     return new FileNameExtensionFilter(
-				LangUtil.tr( "KC85/4,5-LOWRES-Bilddateien" ),
+				LangUtil.getText( "image.text.kc85_4_5_lowres_image" ),
 				"pip" );
   }
 
@@ -369,7 +369,8 @@ public class ImageUtil
   public static FileNameExtensionFilter createLLC2HiresImageFileFilter()
   {
     return new FileNameExtensionFilter(
-				LangUtil.tr( "LLC2-HIRES-Bilddateien" ),
+				LangUtil.getText(
+					"image.text.llc2_hires_image" ),
 				"pix" );
   }
 
@@ -870,19 +871,22 @@ public class ImageUtil
 
   public static void throwNoColorTabInFile() throws IOException
   {
-    throw new IOException( "Die Datei enth\u00E4lt keine Farbpalette." );
+    throw new IOException(
+		LangUtil.getText( "image.error.file_contains_no_color" ) );
   }
 
 
   public static void throwNoFileConent() throws IOException
   {
-    throw new IOException( "Datei ohne Inhalt" );
+    throw new IOException(
+		LangUtil.getText( "image.error.file_without_content" ) );
   }
 
 
   public static void throwUnsupportedFormat() throws IOException
   {
-    throw new IOException( "Dateiformat nicht unterst\u00FCtzt" );
+    throw new IOException(
+		LangUtil.getText( "image.error.file_format_not_supported" ) );
   }
 
 
@@ -984,7 +988,7 @@ public class ImageUtil
   {
     if( data == null ) {
       throw new IOException(
-		"Das Bild kann nicht in dem Format exportiert werden." );
+		LangUtil.getText( "image.error.image_cannot_exported" ) );
     }
     OutputStream out = null;
     try {

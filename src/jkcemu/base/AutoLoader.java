@@ -16,13 +16,14 @@ import jkcemu.audio.AudioUtil;
 import jkcemu.file.FileInfo;
 import jkcemu.file.FileUtil;
 import jkcemu.file.LoadData;
+import jkcemu.lang.LangUtil;
 
 
 public class AutoLoader extends Thread
 {
   public static final String PROP_AUTOLOAD_PREFIX = "autoload.";
 
-  private static final String TEXT_CANNOT_LOAD = "Kann nicht geladen werden";
+  private static final String TEXT_CANNOT_LOAD = "base.text.cannot_loaded";
 
   private EmuThread                     emuThread;
   private java.util.List<AutoLoadEntry> entries;
@@ -60,20 +61,21 @@ public class AutoLoader extends Thread
 
 	      // Dateityp ermitteln
 	      if( AudioUtil.isAudioFile( file ) ) {
-		throw new IOException(
-			"Sound-Datei bei AutoLoad nicht unterst\u00FCtzt" );
+		throw new IOException( LangUtil.getText(
+				"base.error.sound_file_not_supported" ) );
 	      }
 	      byte[] fileBuf  = FileUtil.readFile( file, true, 0x10000 );
 	      if( fileBuf == null ) {
-		throw new IOException( TEXT_CANNOT_LOAD );
+		throw new IOException( LangUtil.getText( TEXT_CANNOT_LOAD ) );
 	      }
 	      FileInfo fileInfo = FileInfo.analyzeFile( fileBuf, file );
 	      if( fileInfo == null ) {
-		throw new IOException( "Dateiformat unbekannt" );
+		throw new IOException(
+			LangUtil.getText( "base.error.file_format_unknown" ) );
 	      }
 	      if( fileInfo.isTapeFile() ) {
 		throw new IOException(
-			"Tape-Datei bei AutoLoad nicht unterst\u00FCtzt" );
+			LangUtil.getText( "base.error.tape_file_not_supported" ) );
 	      }
 
 	      // Ladeadresse ermitteln
@@ -91,12 +93,12 @@ public class AutoLoader extends Thread
 		}
 	      }
 	      if( loadAddr == null ) {
-		throw new IOException( "Ladeadresse nicht angegeben"
-				+ " und in der Datei auch nicht enthalten" );
+		throw new IOException( LangUtil.getText(
+				"base.error.load_address_not_specified" ) );
 	      }
 	      LoadData loadData = fileInfo.createLoadData( fileBuf );
 	      if( loadData == null ) {
-		throw new IOException( TEXT_CANNOT_LOAD );
+		throw new IOException( LangUtil.getText( TEXT_CANNOT_LOAD ) );
 	      }
 	      String msg = loadData.getInfoMsg();
 	      if( msg != null ) {
@@ -124,9 +126,12 @@ public class AutoLoader extends Thread
 		}
 	      }
 	      if( msg == null ) {
-		msg = TEXT_CANNOT_LOAD;
+		msg = LangUtil.getText( TEXT_CANNOT_LOAD );
 	      }
-	      addMsg( fileName, msg != null ? msg : TEXT_CANNOT_LOAD );
+	      addMsg(
+			fileName,
+			msg != null ? msg : LangUtil.getText(
+				TEXT_CANNOT_LOAD ) );
 	    }
 	  }
 	}
@@ -142,7 +147,9 @@ public class AutoLoader extends Thread
 		EmuThread                     emuThread,
 		java.util.List<AutoLoadEntry> entries )
   {
-    super( Main.getThreadGroup(), "JKCEMU auto loader" );
+    super(
+		Main.getThreadGroup(),
+		LangUtil.getText( "base.title.jkcemu_auto_loader" ) );
     this.emuThread = emuThread;
     this.entries   = entries;
   }

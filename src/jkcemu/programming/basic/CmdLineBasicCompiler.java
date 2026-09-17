@@ -133,7 +133,8 @@ public class CmdLineBasicCompiler
 		  {
 		    if( backIter != null ) {
 		      throw new IOException(
-			"Option -f in der Datei nicht erlaubt" );
+			LangUtil.getText(
+				"programming.error.option_f_not_allowed" ) );
 		    }
 		    String fileName = null;
 		    if( pos < len ) {
@@ -189,7 +190,8 @@ public class CmdLineBasicCompiler
 		    }
 		  } else {
 		    throw new IOException(
-				"Option \'B\' hat falsches Format" );
+				LangUtil.getText(
+					"basic.error.option_b_wrong" ) );
 		  }
 		  break;
 		case 'O':
@@ -263,7 +265,8 @@ public class CmdLineBasicCompiler
 
 	// Quelltextdatei
 	if( srcFileName == null ) {
-	  throw new IOException( "Quelltextdatei nicht angegeben" );
+	  throw new IOException( LangUtil.getText(
+				"programming.error.source_code_file" ) );
 	}
 	File srcFile = new File( srcFileName );
 
@@ -273,7 +276,8 @@ public class CmdLineBasicCompiler
 	// Zielsystem
 	String sysName = optToArg.get( "t" );
 	if( sysName == null ) {
-	  throw new IOException( "Option \'t\' nicht angegeben" );
+	  throw new IOException(
+			LangUtil.getText( "basic.error.option_t_not_specified" ) );
 	}
 	AbstractTarget target   = null;
 	boolean        forZ9001 = false;
@@ -418,10 +422,12 @@ public class CmdLineBasicCompiler
 	int heapSize = getIntArg( optToArg, "T" );
 	if( heapSize >= 0 ) {
 	  if( heapSize < BasicOptions.MIN_HEAP_SIZE ) {
-	    throw new IOException( "Option \'T\': Wert zu klein" );
+	    throw new IOException( LangUtil.getText(
+				"basic.error.option_t_value_small" ) );
 	  }
 	  if( heapSize > BasicCompiler.MAX_INT_VALUE ) {
-	    throw new IOException( "Option \'T\': Wert zu gro\u00DF" );
+	    throw new IOException( LangUtil.getText(
+				"basic.error.option_t_value_large" ) );
 	  }
 	  options.setHeapSize( heapSize );
 	} else {
@@ -438,7 +444,8 @@ public class CmdLineBasicCompiler
 			+ Integer.toString( BasicOptions.MIN_STACK_SIZE ) );
 	  }
 	  if( heapSize > BasicCompiler.MAX_INT_VALUE ) {
-	    throw new IOException( "Option \'T\': Wert zu gro\u00DF" );
+	    throw new IOException( LangUtil.getText(
+				"basic.error.option_t_value_large" ) );
 	  }
 	  options.setStackSize( stackSize );
 	} else {
@@ -489,9 +496,8 @@ public class CmdLineBasicCompiler
 	  } else if( warnText.equalsIgnoreCase( "UNUSED" ) ) {
 	    options.setWarnUnusedItems( true );
 	  } else if( !warnText.equalsIgnoreCase( "NONE" ) ) {
-	    throw new IOException( LangUtil.tr(
-			"Option ''W'': Schl\u00FCsselwort {0}"
-				+ " nicht unterst\u00FCtzt",
+	    throw new IOException( LangUtil.getText(
+			"basic.text.option_w_keyword",
 			warnText ) );
 	  }
 	} else {
@@ -579,7 +585,8 @@ public class CmdLineBasicCompiler
 	}
       }
       if( outFile.equals( srcFile ) ) {
-	throw new IOException( "Quelltext- und Ausgabedatei sind identisch" );
+	throw new IOException( LangUtil.getText(
+			"programming.error.source_code_output" ) );
       }
       if( suppressAssembler ) {
 	options.setCodeToFile( false, null );
@@ -705,6 +712,7 @@ public class CmdLineBasicCompiler
 
   private static void throwWrongCmdLine() throws IOException
   {
-    throw new IOException( "Kommandozeile fehlerhaft" );
+    throw new IOException( LangUtil.getText(
+			"programming.error.command_line_faulty" ) );
   }
 }

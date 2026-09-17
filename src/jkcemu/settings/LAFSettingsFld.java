@@ -77,16 +77,16 @@ public class LAFSettingsFld extends AbstractSettingsFld
     if( this.lafs != null ) {
       panel.add(
 	GUIFactory.createLabel(
-			"Das Aussehen von JKCEMU k\u00F6nnen Sie durch"
-				+ " Auswahl eines Erscheinungsbildes" ),
+			LangUtil.getText(
+				"settings.label.adapt_appearance_jkcemu" ) ),
 	gbc );
 
       gbc.insets.top    = 0;
       gbc.insets.bottom = 5;
       gbc.gridy++;
       panel.add(
-	GUIFactory.createLabel( "an Ihren pers\u00F6nlichen"
-				+ " Geschmack anpassen:" ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.selecting_look_feel" ) ),
 	gbc );
 
       gbc.insets.left   = 50;
@@ -113,7 +113,7 @@ public class LAFSettingsFld extends AbstractSettingsFld
     }
     if( Main.isMacOS() ) {
       this.cbScreenMenuBar = GUIFactory.createCheckBox(
-		"Men\u00FCleiste am oberen Bildschirmrand fixieren" );
+		LangUtil.getText( "settings.option.fix_menu_bar" ) );
       this.cbScreenMenuBar.addActionListener( this );
       gbc.insets.bottom = 5;
       panel.add( this.cbScreenMenuBar, gbc );
@@ -129,12 +129,7 @@ public class LAFSettingsFld extends AbstractSettingsFld
       {
 	BaseDlg.showInfoDlg(
 		this,
-		LangUtil.tr(
-			"Die \u00C4nderung an der Option \'\'{0}\'\'"
-				+ " ist nur wirksam,\n"
-				+ "wenn Sie die Einstellungen als Profil"
-				+ " speichern und anschlie\u00DFend {1}"
-				+ " mit diesem Profil neu starten.",
+		LangUtil.getText( "settings.text.change_option_only",
 			this.cbScreenMenuBar.getText(),
 			Main.APPNAME ) );
       }
@@ -198,7 +193,7 @@ public class LAFSettingsFld extends AbstractSettingsFld
 	    }
 	    catch( Exception ex ) {
 	      throw new UserInputException(
-		"Das Erscheinungsbild kann nicht eingestellt werden." );
+		LangUtil.getText( "settings.error.look_feel_cannot_set" ) );
 	    }
 	  }
 	  props.setProperty( Main.PROP_LAF_CLASSNAME, lafClassName );

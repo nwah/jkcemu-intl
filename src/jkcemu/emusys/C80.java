@@ -17,6 +17,7 @@ import jkcemu.base.EmuSys;
 import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.emusys.etc.C80KeyboardFld;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80InterruptSource;
 import z80emu.Z80MaxSpeedListener;
@@ -29,7 +30,7 @@ public class C80 extends EmuSys implements
 					Z80PIOPortListener
 {
   public static final String SYSNAME     = "C80";
-  public static final String SYSTEXT     = "C-80";
+  public static final String SYSTEXT     = "emusys.text.c_80";
   public static final String PROP_PREFIX = "jkcemu.c80.";
 
   private static final int[][] keyMatrix = {
@@ -72,8 +73,8 @@ public class C80 extends EmuSys implements
     this.keyboardFld         = null;
 
     Z80CPU cpu = emuThread.getZ80CPU();
-    this.pio1  = new Z80PIO( "PIO 1" );
-    this.pio2  = new Z80PIO( "PIO 2" );
+    this.pio1  = new Z80PIO( LangUtil.getText( "emusys.text.pio_1" ) );
+    this.pio2  = new Z80PIO( LangUtil.getText( "emusys.text.pio_2" ) );
     cpu.setInterruptSources( this.pio1, this.pio2 );
     cpu.addMaxSpeedListener( this );
     cpu.addTStatesListener( this );
@@ -304,7 +305,7 @@ public class C80 extends EmuSys implements
   @Override
   public String getTitle()
   {
-    return SYSTEXT;
+    return LangUtil.getText( SYSTEXT );
   }
 
 

@@ -307,7 +307,8 @@ public class AudioPlayFrm
 
   private AudioPlayFrm( PCMDataSource pcm, String title )
   {
-    setTitle( Main.APPNAME + " " + LangUtil.tr( "Audioplayer" ) );
+    setTitle( Main.APPNAME + " " + LangUtil.getText(
+			"audio.text.audio_player" ) );
     this.pcm         = pcm;
     this.frameCount  = pcm.getFrameCount();
     this.dFrameCount = (double) frameCount;
@@ -334,7 +335,8 @@ public class AudioPlayFrm
     add( panelMixer, gbc );
 
     panelMixer.setLayout( new BoxLayout( panelMixer, BoxLayout.X_AXIS ) );
-    panelMixer.add( GUIFactory.createLabel( "Ausgabeger\u00E4t:" ) );
+    panelMixer.add( GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.output_device" ) ) );
     panelMixer.add( Box.createHorizontalStrut( 5 ) );
 
     this.comboMixer = AudioUtil.createMixerComboBox( false );
@@ -366,7 +368,8 @@ public class AudioPlayFrm
       this.btnReplay = GUIFactory.createRelImageResourceButton(
 					this,
 					"audio/replay.png",
-					"Wiederholen" );
+					LangUtil.getText(
+						"audio.action.repeat" ) );
     } else {
       this.progressBar = GUIFactory.createProgressBar(
 					SwingConstants.HORIZONTAL,
@@ -387,18 +390,21 @@ public class AudioPlayFrm
     this.btnPause = GUIFactory.createRelImageResourceButton(
 					this,
 					"audio/pause.png",
-					"Pause" );
+					LangUtil.getText(
+						"common.action.pause" ) );
     add( this.btnPause, gbc );
 
     this.btnPlay = GUIFactory.createRelImageResourceButton(
 					this,
 					"audio/play.png",
-					"Wiedergeben" );
+					LangUtil.getText(
+						"common.action.play" ) );
     this.btnPlay.setEnabled( false );
     gbc.gridx++;
     add( this.btnPlay, gbc );
 
-    this.btnCancel  = GUIFactory.createButton( EmuUtil.TEXT_CANCEL );
+    this.btnCancel  = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_CANCEL ) );
     gbc.anchor      = GridBagConstraints.EAST;
     gbc.weightx     = 1.0;
     gbc.insets.left = 20;

@@ -26,6 +26,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.BCS3;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -64,7 +65,8 @@ public class BCS3SettingsFld extends AbstractSettingsFld
 
     // Tab Modell
     this.tabModel = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Modell", this.tabModel );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "common.section.model" ), this.tabModel );
 
     GridBagConstraints gbcModel = new GridBagConstraints(
 						0, 0,
@@ -78,14 +80,14 @@ public class BCS3SettingsFld extends AbstractSettingsFld
     ButtonGroup grpOS = new ButtonGroup();
 
     this.rbSE24_27 = GUIFactory.createRadioButton(
-		"2 KByte BASIC-SE 2.4, 2,5 MHz, 27 Zeichen pro Zeile",
+		LangUtil.getText( "bcs3.option.2_kbyte_basic" ),
 		true );
     this.rbSE24_27.addActionListener( this );
     grpOS.add( this.rbSE24_27 );
     this.tabModel.add( this.rbSE24_27, gbcModel );
 
     this.rbSE31_29 = GUIFactory.createRadioButton(
-		"4 KByte BASIC-SE 3.1, 2,5 MHz, 29 Zeichen pro Zeile" );
+		LangUtil.getText( "bcs3.option.4_kbyte_basic_se_3_1_2" ) );
     this.rbSE31_29.addActionListener( this );
     grpOS.add( this.rbSE31_29 );
     gbcModel.insets.top = 0;
@@ -93,7 +95,7 @@ public class BCS3SettingsFld extends AbstractSettingsFld
     this.tabModel.add( this.rbSE31_29, gbcModel );
 
     this.rbSE31_40 = GUIFactory.createRadioButton(
-		"4 KByte BASIC-SE 3.1, 3,5 MHz, 40 Zeichen pro Zeile" );
+		LangUtil.getText( "bcs3.option.4_kbyte_basic_se_3_1_3" ) );
     this.rbSE31_40.addActionListener( this );
     grpOS.add( this.rbSE31_40 );
     gbcModel.insets.top = 0;
@@ -101,7 +103,7 @@ public class BCS3SettingsFld extends AbstractSettingsFld
     this.tabModel.add( this.rbSE31_40, gbcModel );
 
     this.rbSP33_29 = GUIFactory.createRadioButton(
-		"4 KByte S/P-BASIC V3.3, 2,5 MHz, 29 Zeichen pro Zeile" );
+		LangUtil.getText( "bcs3.option.4_kbyte_s" ) );
     this.rbSP33_29.addActionListener( this );
     grpOS.add( this.rbSP33_29 );
     gbcModel.gridy++;
@@ -110,7 +112,8 @@ public class BCS3SettingsFld extends AbstractSettingsFld
 
     // Tab RAM
     this.tabRam = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "RAM", this.tabRam );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "bcs3.section.ram" ), this.tabRam );
 
     GridBagConstraints gbcRam = new GridBagConstraints(
 						0, 0,
@@ -123,7 +126,8 @@ public class BCS3SettingsFld extends AbstractSettingsFld
 
     ButtonGroup grpRam = new ButtonGroup();
 
-    this.rbRam1k = GUIFactory.createRadioButton( "1 KByte RAM", true );
+    this.rbRam1k = GUIFactory.createRadioButton(
+		LangUtil.getText( "bcs3.option.1_kbyte_ram" ), true );
     this.rbRam1k.addActionListener( this );
     grpRam.add( this.rbRam1k );
     gbcRam.insets.top = 10;
@@ -131,7 +135,8 @@ public class BCS3SettingsFld extends AbstractSettingsFld
     this.tabRam.add( this.rbRam1k, gbcRam );
 
     this.rbRam17k = GUIFactory.createRadioButton(
-				"17 KByte RAM (16 KByte RAM-Erweiterung)" );
+				LangUtil.getText(
+					"bcs3.option.17_kbyte_ram" ) );
     this.rbRam17k.addActionListener( this );
     grpRam.add( this.rbRam17k );
     gbcRam.insets.top    = 0;
@@ -142,7 +147,8 @@ public class BCS3SettingsFld extends AbstractSettingsFld
 
     // Tab ROM
     this.tabRom = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "ROM", this.tabRom );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.rom" ), this.tabRom );
 
     GridBagConstraints gbcRom = new GridBagConstraints(
 						0, 0,
@@ -156,21 +162,22 @@ public class BCS3SettingsFld extends AbstractSettingsFld
     this.fldAltOS = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + BCS3.PROP_OS_PREFIX,
-		"Alternativer ROM-Inhalt (0000h-0FFFh):" );
+		LangUtil.getText( "bcs3.text.alternative_rom_content" ) );
     gbcRom.gridy++;
     this.tabRom.add( this.fldAltOS, gbcRom );
 
     this.fldAltFont = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + BCS3.PROP_FONT_PREFIX,
-		"Alternativer Zeichensatz:" );
+		LangUtil.getText( "emusys.text.alternative_character" ) );
     gbcRom.gridy++;
     this.tabRom.add( this.fldAltFont, gbcRom );
 
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 						0, 0,
@@ -182,7 +189,8 @@ public class BCS3SettingsFld extends AbstractSettingsFld
 						0, 0 );
 
     this.cbRemoveHSyncFromAudio = GUIFactory.createCheckBox(
-			"HSync-Signale aus Audioausgabe entfernen" );
+			LangUtil.getText(
+				"bcs3.option.remove_hsync_signals" ) );
     this.cbRemoveHSyncFromAudio.addActionListener( this );
     this.tabEtc.add( this.cbRemoveHSyncFromAudio, gbcEtc );
 
@@ -193,7 +201,8 @@ public class BCS3SettingsFld extends AbstractSettingsFld
 				propPrefix,
 				BCS3.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 				true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -203,7 +212,8 @@ public class BCS3SettingsFld extends AbstractSettingsFld
 				BCS3.getAutoInputCharSet(),
 				BCS3.DEFAULT_SWAP_KEY_CHAR_CASE,
 				BCS3.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
   }
 
 

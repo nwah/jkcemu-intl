@@ -32,11 +32,12 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class ImagePropsDlg extends BaseDlg implements Runnable
 {
-  private static final String TEXT_IS_DETERMINING = "wird ermittelt...";
+  private static final String TEXT_IS_DETERMINING = "image.text.being_determined";
 
   private static Rectangle lastBounds      = null;
   private static Rectangle lastOwnerBounds = null;
@@ -148,7 +149,7 @@ public class ImagePropsDlg extends BaseDlg implements Runnable
 
   private ImagePropsDlg( Window owner, ImageEntry entry )
   {
-    super( owner, "Bildeigenschaften" );
+    super( owner, LangUtil.getText( "image.title.image_properties" ) );
     this.file               = entry.getFile();
     this.image              = entry.getImage();
     this.wImg               = this.image.getWidth( this );
@@ -188,8 +189,7 @@ public class ImagePropsDlg extends BaseDlg implements Runnable
     this.generalPane.setMargin( new Insets( 5, 5, 5, 5 ) );
     this.generalPane.setEditable( false );
     fillGeneralPane( -1, -1 );
-    tabbedPane.addTab(
-		"Allgemein",
+    tabbedPane.addTab( LangUtil.getText( "common.section.general" ),
 		GUIFactory.createScrollPane( this.generalPane ) );
 
 
@@ -198,7 +198,7 @@ public class ImagePropsDlg extends BaseDlg implements Runnable
     detailsPane.setMargin( new Insets( 5, 5, 5, 5 ) );
     detailsPane.setEditable( false );
     tabbedPane.addTab(
-		"Zusatzinformationen",
+		LangUtil.getText( "image.section.additional_information" ),
 		GUIFactory.createScrollPane( detailsPane ) );
 
 
@@ -628,7 +628,7 @@ public class ImagePropsDlg extends BaseDlg implements Runnable
 		buf,
 		nTotalColors > 0 ?
 			EmuUtil.formatInt( nTotalColors )
-			: TEXT_IS_DETERMINING );
+			: LangUtil.getText( TEXT_IS_DETERMINING ) );
     buf.append( "</td></tr>\n"
 		+ "<tr><td valign=\"top\">Farbpalette:</td>"
 		+ "<td valign=\"top\">" );
@@ -688,7 +688,7 @@ public class ImagePropsDlg extends BaseDlg implements Runnable
 	    buf.append( " volltransparent" );
 	  }
 	} else {
-	  buf.append( TEXT_IS_DETERMINING );
+	  buf.append( LangUtil.getText( TEXT_IS_DETERMINING ) );
 	}
       }
     }

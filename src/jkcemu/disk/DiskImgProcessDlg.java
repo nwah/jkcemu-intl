@@ -93,7 +93,8 @@ public class DiskImgProcessDlg extends BaseDlg implements Runnable
       if( drvFileName != null ) {
 	File imgFile = FileUtil.showFileSaveDlg(
 				owner,
-				"Einfache Abbilddatei speichern",
+				LangUtil.getText(
+					"disk.title.save_plain_image" ),
 				RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_DISK ),
 				fileFilters );
@@ -131,14 +132,15 @@ public class DiskImgProcessDlg extends BaseDlg implements Runnable
   {
     File imgFile = FileUtil.showFileOpenDlg(
 				owner,
-				"Einfache Abbilddatei \u00F6ffnen",
+				LangUtil.getText(
+					"disk.title.open_plain_image" ),
 				RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_DISK ),
 				FileUtil.getPlainDiskFileFilter(),
 				FileUtil.getISOFileFilter() );
     if( imgFile != null ) {
       if( imgFile.exists() && (imgFile.length() == 0) ) {
-	showErrorDlg( owner, "Die Datei ist leer." );
+	showErrorDlg( owner, LangUtil.getText( "disk.error.file_empty" ) );
       } else {
 	boolean state    = false;
 	String  fileName = imgFile.getName();
@@ -160,12 +162,8 @@ public class DiskImgProcessDlg extends BaseDlg implements Runnable
 	if( !state ) {
 	  state = showYesNoWarningDlg(
 			owner,
-			"JKCEMU kann nur einfache Abbilddateien"
-				+ " auf einen Datentr\u00E4ger schreiben.\n"
-				+ "Laut Dateiendung scheint die Datei jedoch"
-				+ " keine einfache Abbilddatei zu sein.\n"
-				+ "M\u00F6chten Sie trotzdem fortsetzen?",
-			"Dateityp" );
+			LangUtil.getText( "disk.msg.jkcemu_only_write" ),
+			LangUtil.getText( "disk.msg.file_type" ) );
 	}
 	if( state ) {
 	  Object drive = DriveSelectDlg.selectDrive(
@@ -184,29 +182,17 @@ public class DiskImgProcessDlg extends BaseDlg implements Runnable
 	      StringBuilder buf = new StringBuilder( 0x100 );
 	      String displayDriveName = getDisplayDriveName( drvFileName );
 	      if( displayDriveName != null ) {
-		buf.append( LangUtil.tr(
-			"Die Abbilddatei wird nun auf den Datentr\u00E4ger"
-				+ " im Laufwerk {0} geschrieben.\n"
-				+ "Dabei werden alle bisherigen Daten"
-				+ " auf dem Datentr\u00E4ger gel\u00F6scht!"
-				+ "\n\nIst der Datentr\u00E4ger im"
-				+ " Dateisystem eingeh\u00E4ngt,"
-				+ " wird er nun ausgeh\u00E4ngt.",
+		buf.append( LangUtil.getText(
+			"disk.text.image_file_now_written_volume_drive",
 			displayDriveName ) );
 	      } else {
-		buf.append( LangUtil.tr(
-			"Die Abbilddatei wird nun auf den Datentr\u00E4ger"
-				+ " geschrieben.\n"
-				+ "Dabei werden alle bisherigen Daten"
-				+ " auf dem Datentr\u00E4ger gel\u00F6scht!"
-				+ "\n\nIst der Datentr\u00E4ger im"
-				+ " Dateisystem eingeh\u00E4ngt,"
-				+ " wird er nun ausgeh\u00E4ngt." ) );
+		buf.append( LangUtil.getText(
+			"disk.text.image_file_now_written_volume_all" ) );
 	      }
 	      if( JOptionPane.showConfirmDialog(
 			owner,
 			buf.toString(),
-			LangUtil.tr( "Achtung" ),
+			LangUtil.getText( "common.text.warning" ),
 			JOptionPane.OK_CANCEL_OPTION,
 			JOptionPane.WARNING_MESSAGE )
 					== JOptionPane.OK_OPTION )
@@ -363,7 +349,7 @@ public class DiskImgProcessDlg extends BaseDlg implements Runnable
     if( this.thread != null ) {
       if( showYesNoDlg(
 		this,
-		"M\u00F6chten Sie den Vorgang abbrechen?" ) )
+		LangUtil.getText( "disk.msg.want_cancel_operation" ) ) )
       {
 	doCancel();
       }
@@ -388,7 +374,7 @@ public class DiskImgProcessDlg extends BaseDlg implements Runnable
 			String    drvFileName,
 			File      imgFile )
   {
-    super( owner, "Abbilddatei" );
+    super( owner, LangUtil.getText( "disk.title.image_file" ) );
     this.direction          = direction;
     this.drvFileName        = drvFileName;
     this.imgFile            = imgFile;
@@ -415,7 +401,8 @@ public class DiskImgProcessDlg extends BaseDlg implements Runnable
     gbc.insets.top    = 0;
     gbc.insets.bottom = 5;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Bitte warten!" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.please_wait" ) ), gbc );
 
     this.labelStatus = GUIFactory.createLabel();
     gbc.insets.top   = 10;
@@ -465,7 +452,7 @@ public class DiskImgProcessDlg extends BaseDlg implements Runnable
   private void doCancel()
   {
     this.thread = null;
-    this.labelMsg.setText( "Vorgang wird abgebrochen..." );
+    this.labelMsg.setText( LangUtil.getText( "disk.text.operation_being" ) );
     this.btnCancel.setEnabled( false );
   }
 

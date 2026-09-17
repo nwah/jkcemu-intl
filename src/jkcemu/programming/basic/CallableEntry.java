@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 import jkcemu.programming.PrgSource;
 
@@ -87,8 +88,8 @@ public abstract class CallableEntry extends BasicSourcePos
     this.varTypes.add( varType );
     this.totalVarSize += BasicUtil.getDataTypeSize( varType );
     if( this.totalVarSize > 128 ) {
-      throw new PrgException( "Maximale Gesamtgr\u00F6\u00DFe der"
-		+ " lokalen Variablen \u00FCberschritten" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.maximum_total_size_local" ) );
     }
     this.name2Type = null;
   }
@@ -263,8 +264,8 @@ public abstract class CallableEntry extends BasicSourcePos
 	this.totalArgSize += BasicUtil.getDataTypeSize( t );
       }
       if( this.totalArgSize > 124 ) {
-	throw new PrgException( "Maximale Gesamtgr\u00F6\u00DFe der"
-		+ " Argumente \u00FCberschritten" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.maximum_total_size_arguments" ) );
       }
       this.name2Type = null;
     }

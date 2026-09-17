@@ -57,7 +57,7 @@ public class HexEditFrm
 			DropTargetListener,
 			RecentFilesMngr.Listener
 {
-  public static final String TITLE = Main.APPNAME + " Hex-Editor";
+  public static final String TITLE = "hexedit.title.jkcemu_hex_editor";
 
   private static final String HELP_PAGE  = "/help/tools/hexeditor.htm";
   private static final int    BUF_EXTEND = 0x2000;
@@ -427,7 +427,8 @@ public class HexEditFrm
   {
     ReplyBytesDlg dlg = new ReplyBytesDlg(
 					this,
-					"Bytes anh\u00E4ngen",
+					LangUtil.getText(
+						"hexedit.text.append_bytes" ),
 					this.recentInputFmt,
 					this.recentBigEndian,
 					null );
@@ -458,7 +459,8 @@ public class HexEditFrm
     if( (caretPos >= 0) && (caretPos < this.dataLen) ) {
       ReplyBytesDlg dlg = new ReplyBytesDlg(
 					this,
-					"Bytes einf\u00FCgen",
+					LangUtil.getText(
+						"hexedit.text.insert_bytes" ),
 					this.recentInputFmt,
 					this.recentBigEndian,
 					null );
@@ -537,7 +539,7 @@ public class HexEditFrm
     if( (caretPos >= 0) && (caretPos < this.dataLen) ) {
       ReplyBytesDlg dlg = new ReplyBytesDlg(
 					this,
-					"Bytes \u00FCberschreiben",
+					LangUtil.getText( "hexedit.text.overwrite_bytes" ),
 					this.recentInputFmt,
 					this.recentBigEndian,
 					null );
@@ -686,7 +688,7 @@ public class HexEditFrm
       if( len > 0 ) {
 	File file = FileUtil.showFileSaveDlg(
 			this,
-			"Datei speichern",
+			LangUtil.getText( "hexedit.title.save_file" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_HEXEDIT ) );
 	if( file != null ) {
@@ -703,7 +705,7 @@ public class HexEditFrm
   {
     File file = FileUtil.showFileOpenDlg(
 			this,
-			"Datei anh\u00E4ngen",
+			LangUtil.getText( "hexedit.title.append_file" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_HEXEDIT ) );
     if( file != null ) {
@@ -744,7 +746,7 @@ public class HexEditFrm
     if( (caretPos >= 0) && (caretPos < this.dataLen) ) {
       File file = FileUtil.showFileOpenDlg(
 			this,
-			"Datei einf\u00FCgen",
+			LangUtil.getText( "hexedit.title.insert_file" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_HEXEDIT ) );
       if( file != null ) {
@@ -793,7 +795,7 @@ public class HexEditFrm
     if( confirmDataSaved() ) {
       File file = FileUtil.showFileOpenDlg(
 			this,
-			"Datei \u00F6ffnen",
+			LangUtil.getText( "hexedit.title.open_file" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_HEXEDIT ) );
       if( file != null ) {
@@ -819,7 +821,7 @@ public class HexEditFrm
       }
       file = FileUtil.showFileSaveDlg(
 				this,
-				"Datei speichern",
+				LangUtil.getText( "hexedit.title.save_file" ),
 				preSelection );
     }
     if( file != null ) {
@@ -875,15 +877,17 @@ public class HexEditFrm
     // Menu Datei
     JMenu mnuFile = createMenuFile();
 
-    this.mnuNew = createMenuItem( "Neu" );
+    this.mnuNew = createMenuItem( LangUtil.getText( "common.action.new" ) );
     mnuFile.add( this.mnuNew );
 
-    this.mnuOpen = createMenuItem( EmuUtil.TEXT_OPEN_OPEN );
+    this.mnuOpen = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_OPEN_OPEN ) );
     mnuFile.add( this.mnuOpen );
     mnuFile.addSeparator();
 
     this.mnuSave = createMenuItemWithStandardAccelerator(
-						EmuUtil.TEXT_SAVE,
+						LangUtil.getText(
+							EmuUtil.TEXT_SAVE ),
 						KeyEvent.VK_S );
     this.mnuSave.setEnabled( false );
     mnuFile.add( this.mnuSave );
@@ -912,80 +916,84 @@ public class HexEditFrm
     JMenu mnuEdit = createMenuEdit();
 
     this.mnuBytesCopyHex = createMenuItem(
-		"Ausgw\u00E4hlte Bytes als Hexadezimalzahlen kopieren" );
+		LangUtil.getText( "common.action.copy_selected_bytes_hexadecimal" ) );
     this.mnuBytesCopyHex.setEnabled( false );
     mnuEdit.add( this.mnuBytesCopyHex );
 
     this.mnuBytesCopyAscii = createMenuItem(
-		"Ausgw\u00E4hlte Bytes als ASCII-Text kopieren" );
+		LangUtil.getText( "common.action.copy_selected_bytes_ascii" ) );
     this.mnuBytesCopyAscii.setEnabled( false );
     mnuEdit.add( this.mnuBytesCopyAscii );
 
     this.mnuBytesCopyDump = createMenuItem(
-		"Ausgw\u00E4hlte Bytes als Hex-ASCII-Dump kopieren" );
+		LangUtil.getText( "common.action.copy_selected_bytes_hex" ) );
     this.mnuBytesCopyDump.setEnabled( false );
     mnuEdit.add( this.mnuBytesCopyDump );
     mnuEdit.addSeparator();
 
     this.mnuBytesInsert = createMenuItemWithStandardAccelerator(
-					"Bytes einf\u00FCgen...",
+					LangUtil.getText( "hexedit.action.insert_bytes" ),
 					KeyEvent.VK_I );
     this.mnuBytesInsert.setEnabled( false );
     mnuEdit.add( this.mnuBytesInsert );
 
     this.mnuBytesOverwrite = createMenuItemWithStandardAccelerator(
-					"Bytes \u00FCberschreiben...",
+					LangUtil.getText( "hexedit.action.overwrite_bytes" ),
 					KeyEvent.VK_O );
     this.mnuBytesOverwrite.setEnabled( false );
     mnuEdit.add( this.mnuBytesOverwrite );
 
     this.mnuBytesAppend = createMenuItemWithStandardAccelerator(
-					"Bytes am Ende anh\u00E4ngen...",
+					LangUtil.getText( "hexedit.action.append_bytes_end" ),
 					KeyEvent.VK_E );
     mnuEdit.add( this.mnuBytesAppend );
     mnuEdit.addSeparator();
 
     this.mnuBytesSave = createMenuItem(
-				"Ausgew\u00E4hlte Bytes speichern..." );
+				LangUtil.getText( "hexedit.action.save_selected_bytes" ) );
     this.mnuBytesSave.setEnabled( false );
     mnuEdit.add( this.mnuBytesSave );
 
     this.mnuBytesInvert = createMenuItem(
-				"Ausgew\u00E4hlte Bytes invertieren" );
+				LangUtil.getText( "hexedit.action.invert_selected_bytes" ) );
     this.mnuBytesInvert.setEnabled( false );
     mnuEdit.add( this.mnuBytesInvert );
 
     this.mnuBytesReverse = createMenuItem(
-				"Ausgew\u00E4hlte Bytes spiegeln" );
+				LangUtil.getText( "hexedit.action.mirror_selected_bytes" ) );
     this.mnuBytesReverse.setEnabled( false );
     mnuEdit.add( this.mnuBytesReverse );
 
     this.mnuBytesRemove = createMenuItemWithDirectAccelerator(
-				"Ausgew\u00E4hlte Bytes entfernen",
+				LangUtil.getText( "hexedit.action.remove_selected_bytes" ),
 				KeyEvent.VK_DELETE );
     this.mnuBytesRemove.setEnabled( false );
     mnuEdit.add( this.mnuBytesRemove );
     mnuEdit.addSeparator();
 
-    this.mnuFileInsert = createMenuItem( "Datei einf\u00FCgen..." );
+    this.mnuFileInsert = createMenuItem(
+		LangUtil.getText( "hexedit.action.insert_file" ) );
     this.mnuFileInsert.setEnabled( false );
     mnuEdit.add( this.mnuFileInsert );
 
-    this.mnuFileAppend = createMenuItem( "Datei am Ende anh\u00E4ngen..." );
+    this.mnuFileAppend = createMenuItem( LangUtil.getText(
+			"hexedit.action.append_file_end" ) );
     mnuEdit.add( this.mnuFileAppend );
     mnuEdit.addSeparator();
 
-    this.mnuSavePos = createMenuItem( "Position merken" );
+    this.mnuSavePos = createMenuItem(
+		LangUtil.getText( "hexedit.action.remember_position" ) );
     this.mnuSavePos.setEnabled( false );
     mnuEdit.add( this.mnuSavePos );
 
     this.mnuGotoSavedPos = createMenuItem(
-				"Zur gemerkten Position springen" );
+				LangUtil.getText( "hexedit.action.jump_remembered_position" ) );
     this.mnuGotoSavedPos.setEnabled( false );
     mnuEdit.add( this.mnuGotoSavedPos );
 
     this.mnuSelectToSavedPos = createMenuItem(
-			"Bis zur gemerkten Position ausw\u00E4hlen" );
+			LangUtil.getText(
+				"hexedit.action.select_up_remembered_position" ) );
     this.mnuSelectToSavedPos.setEnabled( false );
     mnuEdit.add( this.mnuSelectToSavedPos );
 
@@ -994,7 +1002,8 @@ public class HexEditFrm
     mnuEdit.add( this.mnuSelectAll );
     mnuEdit.addSeparator();
 
-    this.mnuChecksum = createMenuItem( "Pr\u00FCfsumme/Hashwert..." );
+    this.mnuChecksum = createMenuItem( LangUtil.getText(
+			"hexedit.action.checksum_hash_value" ) );
     this.mnuChecksum.setEnabled( false );
     mnuEdit.add( this.mnuChecksum );
     mnuEdit.addSeparator();
@@ -1015,7 +1024,8 @@ public class HexEditFrm
 
     // Menu Hilfe
     JMenu mnuHelp       = createMenuHelp();
-    this.mnuHelpContent = createMenuItem( "Hilfe zum Hex-Editor..." );
+    this.mnuHelpContent = createMenuItem( LangUtil.getText(
+			"hexedit.action.help_hex_editor" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -1058,14 +1068,16 @@ public class HexEditFrm
     this.btnOpen = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_OPEN );
+					LangUtil.getText(
+						EmuUtil.TEXT_OPEN ) );
     this.btnOpen.addActionListener( this );
     toolBar.add( this.btnOpen );
 
     this.btnSave = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/save.png",
-					EmuUtil.TEXT_SAVE );
+					LangUtil.getText(
+						EmuUtil.TEXT_SAVE ) );
     this.btnSave.setEnabled( false );
     this.btnSave.addActionListener( this );
     toolBar.add( this.btnSave );
@@ -1074,7 +1086,8 @@ public class HexEditFrm
     this.btnFind = GUIFactory.createRelImageResourceButton(
 					this,
 					"edit/find.png",
-					EmuUtil.TEXT_FIND );
+					LangUtil.getText(
+						EmuUtil.TEXT_FIND ) );
     this.btnFind.setEnabled( false );
     this.btnFind.addActionListener( this );
     toolBar.add( this.btnFind );
@@ -1122,18 +1135,15 @@ public class HexEditFrm
     if( this.dataChanged ) {
       setState( Frame.NORMAL );
       toFront();
-      String[] options = LangUtil.tr( new String[] {
-			EmuUtil.TEXT_SAVE,
-			"Verwerfen",
-			EmuUtil.TEXT_CANCEL } );
+      String[] options = LangUtil.getTexts( new String[] {
+			LangUtil.getText( EmuUtil.TEXT_SAVE ),
+			LangUtil.getText( "common.text.discard" ),
+			LangUtil.getText( EmuUtil.TEXT_CANCEL ) } );
       int selOpt = JOptionPane.showOptionDialog(
 				this,
-				LangUtil.tr(
-					"Die Datei wurde ge\u00E4ndert und"
-						+ " nicht gespeichert.\n"
-						+ "M\u00F6chten Sie jetzt"
-						+ " speichern?" ),
-				LangUtil.tr( "Daten ge\u00E4ndert" ),
+				LangUtil.getText(
+					"hexedit.text.file_changed_not_saved" ),
+				LangUtil.getText( "common.text.data_changed" ),
 				JOptionPane.YES_NO_CANCEL_OPTION,
 				JOptionPane.WARNING_MESSAGE,
 				null,
@@ -1397,7 +1407,7 @@ public class HexEditFrm
 
   private static void throwFileTooBig() throws IOException
   {
-    throw new IOException( "Datei ist zu gro\u00DF!" );
+    throw new IOException( LangUtil.getText( "common.error.file_large" ) );
   }
 
 
@@ -1422,11 +1432,11 @@ public class HexEditFrm
     } else if( this.fileName != null ) {
       fileText = this.fileName;
     } else {
-      fileText = LangUtil.tr( "Neue Datei" );
+      fileText = LangUtil.getText( "tools.text.new_file" );
     }
-    String title = LangUtil.tr( TITLE ) + ": " + fileText;
+    String title = LangUtil.getText( TITLE ) + ": " + fileText;
     if( this.readOnly ) {
-      title = LangUtil.tr( "{0} (schreibgesch\u00FCtzt)", title );
+      title = LangUtil.getText( "hexedit.text.write_protected", title );
     }
     setTitle( title );
   }

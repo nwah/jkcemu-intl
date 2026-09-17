@@ -34,7 +34,7 @@ public class ZipUnpacker extends AbstractThreadFrm
   public static void unpackFile( Window owner, File srcFile, File outDir )
   {
     Frame frm = new ZipUnpacker( owner, srcFile, outDir );
-    frm.setTitle( "ZIP-Datei entpacken" );
+    frm.setTitle( LangUtil.getText( "file.title.unpack_zip_file" ) );
     frm.setVisible( true );
   }
 
@@ -92,7 +92,8 @@ public class ZipUnpacker extends AbstractThreadFrm
 	      outFile.mkdirs();
 	      if( !outFile.exists() ) {
 		throw new IOException(
-				"Verzeichnis kann nicht angelegt werden" );
+				LangUtil.getText(
+					"file.error.directory_cannot_created" ) );
 	      }
 	    } else {
 	      File parent = outFile.getParentFile();
@@ -180,8 +181,8 @@ public class ZipUnpacker extends AbstractThreadFrm
   private ZipUnpacker( Window owner, File srcFile, File outDir )
   {
     super(
-	"JKCEMU zip unpacker",
-	LangUtil.tr( "Entpacken von {0}...", srcFile.getName() ),
+	LangUtil.getText( "file.title.jkcemu_zip_unpacker" ),
+	LangUtil.getText( "file.text.unpacking", srcFile.getName() ),
 	true,
 	true,
 	true );

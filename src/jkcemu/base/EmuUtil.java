@@ -78,52 +78,52 @@ public class EmuUtil
   };
 
 
-  public static final String LABEL_BEG_ADDR  = "Anfangsadresse:";
-  public static final String LABEL_END_ADDR  = "Endadresse:";
-  public static final String LABEL_FILE      = "Datei:";
-  public static final String TEXT_APPLY      = "\u00DCbernehmen";
-  public static final String TEXT_CANCEL     = "Abbrechen";
-  public static final String TEXT_CLOSE      = "Schlie\u00DFen";
-  public static final String TEXT_CONFIRM    = "Best\u00E4tigung";
-  public static final String TEXT_DEFAULT    = "Standard";
-  public static final String TEXT_DELETE     = "L\u00F6schen";
-  public static final String TEXT_ERROR      = "Fehler";
-  public static final String TEXT_OPEN       = "\u00D6ffnen";
-  public static final String TEXT_LOAD       = "Laden";
-  public static final String TEXT_SAVE       = "Speichern";
-  public static final String TEXT_SAVE_AS    = "Speichern unter...";
-  public static final String TEXT_PLAY       = "Wiedergabe";
-  public static final String TEXT_CUT        = "Ausschneiden";
-  public static final String TEXT_COPY       = "Kopieren";
-  public static final String TEXT_PASTE      = "Einf\u00FCgen";
-  public static final String TEXT_RECORD     = "Aufnehmen";
-  public static final String TEXT_SELECT     = "Ausw\u00E4hlen";
-  public static final String TEXT_SELECT_ALL = "Alles ausw\u00E4hlen";
-  public static final String TEXT_HELP       = "Hilfe";
-  public static final String TEXT_SETTINGS   = "Einstellungen";
-  public static final String TEXT_ON         = "ein";
-  public static final String TEXT_OFF        = "aus";
-  public static final String TEXT_OPEN_LOAD  = "Laden...";
-  public static final String TEXT_OPEN_SAVE  = "Speichern...";
-  public static final String TEXT_OPEN_OPEN  = "\u00D6ffnen...";
-  public static final String TEXT_OPEN_PRINT = "Drucken...";
+  public static final String LABEL_BEG_ADDR  = "common.label.start_address";
+  public static final String LABEL_END_ADDR  = "common.label.end_address";
+  public static final String LABEL_FILE      = "common.label.file";
+  public static final String TEXT_APPLY      = "base.text.apply";
+  public static final String TEXT_CANCEL     = "base.action.cancel";
+  public static final String TEXT_CLOSE      = "common.action.close";
+  public static final String TEXT_CONFIRM    = "common.msg.confirmation";
+  public static final String TEXT_DEFAULT    = "common.text.default";
+  public static final String TEXT_DELETE     = "base.text.delete";
+  public static final String TEXT_ERROR      = "base.text.error";
+  public static final String TEXT_OPEN       = "base.text.open";
+  public static final String TEXT_LOAD       = "common.text.load";
+  public static final String TEXT_SAVE       = "base.text.save";
+  public static final String TEXT_SAVE_AS    = "common.action.save";
+  public static final String TEXT_PLAY       = "common.action.playback";
+  public static final String TEXT_CUT        = "base.text.cut";
+  public static final String TEXT_COPY       = "base.text.copy";
+  public static final String TEXT_PASTE      = "base.text.paste";
+  public static final String TEXT_RECORD     = "base.text.record";
+  public static final String TEXT_SELECT     = "common.action.select";
+  public static final String TEXT_SELECT_ALL = "base.text.select_all";
+  public static final String TEXT_HELP       = "common.menu.help";
+  public static final String TEXT_SETTINGS   = "base.menu.settings";
+  public static final String TEXT_ON         = "base.text.on";
+  public static final String TEXT_OFF        = "base.text.off";
+  public static final String TEXT_OPEN_LOAD  = "base.text.load";
+  public static final String TEXT_OPEN_SAVE  = "base.text.save_dots";
+  public static final String TEXT_OPEN_OPEN  = "base.text.open_dots";
+  public static final String TEXT_OPEN_PRINT = "base.text.print";
 
-  public static final String LABEL_SEARCH_FOR      = "Suchen nach:";
-  public static final String TEXT_FIND             = "Suchen";
-  public static final String TEXT_FIND_AND_REPLACE = "Suchen und ersetzen";
-  public static final String TEXT_FIND_NEXT = "Weitersuchen";
-  public static final String TEXT_FIND_PREV = "R\u00FCckw\u00E4rts suchen";
-  public static final String TEXT_REPLACE   = "Ersetzen";
-  public static final String TEXT_OPEN_FIND = "Suchen...";
+  public static final String LABEL_SEARCH_FOR      = "base.label.search";
+  public static final String TEXT_FIND             = "base.text.find";
+  public static final String TEXT_FIND_AND_REPLACE = "base.text.find_replace";
+  public static final String TEXT_FIND_NEXT = "base.text.find_next";
+  public static final String TEXT_FIND_PREV = "base.text.find_previous";
+  public static final String TEXT_REPLACE   = "base.text.replace";
+  public static final String TEXT_OPEN_FIND = "base.text.find_dots";
   public static final String TEXT_OPEN_FIND_AND_REPLACE
-					= "Suchen und ersetzen...";
-  public static final String TEXT_ADD_FILE    = "Datei hinzuf\u00FCgen";
-  public static final String TEXT_SELECT_DIR  = "Verzeichnis ausw\u00E4hlen";
-  public static final String TEXT_SELECT_FILE = "Datei ausw\u00E4hlen";
+					= "base.text.find_replace_dots";
+  public static final String TEXT_ADD_FILE    = "base.text.add_file";
+  public static final String TEXT_SELECT_DIR  = "base.text.select_directory";
+  public static final String TEXT_SELECT_FILE = "base.text.select_file";
   public static final String TEXT_SELECT_ROM_FILE
-					= "ROM-Datei ausw\u00E4hlen";
+					= "base.text.select_rom_file";
   public static final String TEXT_REMOVE_ROM_FILE
-					= "ROM-Datei entfernen";
+					= "base.text.remove_rom_file";
 
   public static final String VALUE_FALSE = Boolean.FALSE.toString();
   public static final String VALUE_TRUE  = Boolean.TRUE.toString();
@@ -198,7 +198,8 @@ public class EmuUtil
 
   public static void appendOnOffText( StringBuilder buf, boolean state )
   {
-    buf.append( state ? TEXT_ON : TEXT_OFF );
+    buf.append( state ? LangUtil.getText(
+			TEXT_ON ) : LangUtil.getText( TEXT_OFF ) );
   }
 
 
@@ -672,7 +673,7 @@ public class EmuUtil
     catch( Exception ex ) {}
     if( clipboard == null ) {
       throw new IOException(
-		"Auf die Zwischenablage kann nicht zugegriffen werden." );
+		LangUtil.getText( "base.error.clipboard_cannot_accessed" ) );
     }
     return clipboard;
   }
@@ -1154,29 +1155,17 @@ public class EmuUtil
 
     // Fehlerausschrift
     if( errFile != null ) {
-      errBuf.append( LangUtil.tr(
-		"\nEin Protokoll des Fehlers wurde in die Textdatei\n"
-			+ "''{0}'' geschrieben.\n"
-			+ "Bitte senden Sie diese Textdatei"
-			+ " einschlie\u00DFlich einer\n"
-			+ "kurzen Beschreibung Ihrer letzten Aktionen"
-			+ " per E-Mail an:\n"
-			+ "info@jens-mueller.org\n\n"
-			+ "Vielen Dank!",
+      errBuf.append( LangUtil.getText(
+		"base.text.log_error_written",
 		errFile.getPath() ) );
     } else {
-      errBuf.append( LangUtil.tr(
-		"\nBitte melden Sie diesen Fehler"
-			+ " einschlie\u00DFlich einer\n"
-			+ "kurzen Beschreibung Ihrer letzten Aktionen"
-			+ " per E-Mail an:\n"
-			+ "info@jens-mueller.org\n\n"
-			+ "Vielen Dank!" ) );
+      errBuf.append( LangUtil.getText(
+		"base.text.please_report_error" ) );
     }
     BaseDlg.showErrorDlg(
 		owner != null ? owner : new Frame(),
 		errBuf.toString(),
-		LangUtil.tr( "Applikationsfehler" ) );
+		LangUtil.getText( "base.text.application_error" ) );
   }
 
 
@@ -1452,7 +1441,8 @@ public class EmuUtil
 
   public static void throwMysteriousData() throws IOException
   {
-    throw new IOException( "Datei enth\u00E4lt mysteri\u00F6se Daten." );
+    throw new IOException( LangUtil.getText(
+			"base.error.file_contains_mysterious" ) );
   }
 
 
@@ -1550,8 +1540,8 @@ public class EmuUtil
 
   public static void throwNotSupportedByJRE() throws IOException
   {
-    throw new IOException( "Diese Funktion wird von der verwendeten"
-		+ " Java-Laufzeitumgebung nicht unterst\u00FCtzt." );
+    throw new IOException( LangUtil.getText(
+			"base.error.function_not_supported" ) );
   }
 
 

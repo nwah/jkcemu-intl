@@ -31,12 +31,13 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.HexDocument;
 import jkcemu.file.FileInfo;
 import jkcemu.file.FileNameFld;
+import jkcemu.lang.LangUtil;
 
 
 public class AutoLoadEntryDlg extends BaseDlg
 {
-  private static final String LABEL_LOAD_ADDR  = "Ladeadresse (optional):";
-  private static final String LABEL_WAIT_TIME  = "Wartezeit vor dem Laden:";
+  private static final String LABEL_LOAD_ADDR  = "settings.label.load_address_optional";
+  private static final String LABEL_WAIT_TIME  = "settings.label.wait_time_before_loading";
 
   private static int[] waitMillis = {
 				0, 200, 500, 1000, 1500,
@@ -141,7 +142,8 @@ public class AutoLoadEntryDlg extends BaseDlg
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Datei:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.file" ) ), gbc );
 
     this.fldFile  = new FileNameFld();
     gbc.weightx   = 1.0;
@@ -155,7 +157,7 @@ public class AutoLoadEntryDlg extends BaseDlg
     gbc.gridwidth = 1;
     gbc.gridx     = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( LABEL_WAIT_TIME ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText( LABEL_WAIT_TIME ) ), gbc );
 
     this.comboWaitSeconds = GUIFactory.createComboBox();
     for( int millis : waitMillis ) {
@@ -173,13 +175,15 @@ public class AutoLoadEntryDlg extends BaseDlg
 
     gbc.fill = GridBagConstraints.NONE;
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Sekunden" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.seconds" ) ), gbc );
 
     gbc.gridx = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( LABEL_LOAD_ADDR ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText( LABEL_LOAD_ADDR ) ), gbc );
 
-    this.docLoadAddr = new HexDocument( 4, LABEL_LOAD_ADDR );
+    this.docLoadAddr = new HexDocument(
+		4, LangUtil.getText( LABEL_LOAD_ADDR ) );
     this.fldLoadAddr = GUIFactory.createTextField( this.docLoadAddr, 5 );
     gbc.fill         = GridBagConstraints.HORIZONTAL;
     gbc.gridx++;
@@ -187,7 +191,8 @@ public class AutoLoadEntryDlg extends BaseDlg
 
     gbc.fill = GridBagConstraints.NONE;
     gbc.gridx++;
-    add( GUIFactory.createLabel( "hex" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.hex" ) ), gbc );
 
     JPanel panelBtn   = GUIFactory.createPanel(
 					new GridLayout( 1, 2, 5, 5 ) );
@@ -244,15 +249,8 @@ public class AutoLoadEntryDlg extends BaseDlg
 	      if( fileInfo.getBegAddr() < 0 ) {
 		state = showYesNoWarningDlg(
 				this,
-				"Das automatiche Laden wird nicht"
-					+ " funktionieren,\n"
-					+ "da Sie keine Ladeadresse"
-					+ " angegeben haben\n"
-					+ "und in der Datei keine"
-					+ " enthalten ist.\n"
-					+ "\nM\u00F6chten Sie trotzdem"
-					+ " fortsetzen?",
-				 "Ladeadresse" );
+				LangUtil.getText( "settings.msg.automatic_loading_not_work" ),
+				 LangUtil.getText( "settings.column.load_address" ) );
 	      }
 	    }
 	  }
@@ -266,7 +264,7 @@ public class AutoLoadEntryDlg extends BaseDlg
 	}
 	catch( ParseException ex ) {
 	  throw new NumberFormatException(
-			LABEL_WAIT_TIME + ": Ung\u00FCltiges Format" );
+			LangUtil.getText( LABEL_WAIT_TIME ) + ": Ung\u00FCltiges Format" );
 	}
       }
     }

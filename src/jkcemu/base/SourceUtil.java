@@ -13,6 +13,7 @@ import jkcemu.Main;
 import jkcemu.file.FileFormat;
 import jkcemu.file.FileUtil;
 import jkcemu.file.SaveDlg;
+import jkcemu.lang.LangUtil;
 
 
 public class SourceUtil
@@ -265,8 +266,7 @@ public class SourceUtil
       if( (owner != null) && (begAddr != 0x0401) && (begAddr != 0x2C01) ) {
 	BaseDlg.showInfoDlg(
 		owner,
-		"Das BASIC-Programm befindet sich au\u00DFerhalb\n"
-			+ "des standardm\u00E4\u00DFigen Adressbereichs." );
+		LangUtil.getText( "base.msg.basic_program_located" ) );
       }
     } else {
       showNoBasic( screenFrm );
@@ -297,17 +297,13 @@ public class SourceUtil
 		screenFrm,
 		begAddr,
 		endAddr,
-		"KC-BASIC-Programm speichern",
+		LangUtil.getText( "base.text.save_kc_basic" ),
 		SaveDlg.BasicType.KCBASIC,
 		FileUtil.getKCBasicFileFilter() )).setVisible( true );
       } else {
 	BaseDlg.showErrorDlg(
 		screenFrm,
-		"Es ist zwar ein BASIC-Programm vorhanden, jedoch befindet\n"
-			+ "es sich au\u00DFerhalb des"
-			+ " standardm\u00E4\u00DFigen Adressbereichs.\n"
-			+ "Es kann deshalb nicht auf diese Art und Weise"
-			+ " gespeichert werden." );
+		LangUtil.getText( "base.error.basic_program_located" ) );
       }
     } else {
       showNoBasic( screenFrm );
@@ -375,7 +371,6 @@ public class SourceUtil
   {
     BaseDlg.showErrorDlg(
 	owner,
-	"Es ist kein BASIC-Programm im entsprechenden\n"
-		+ "Adressbereich des Arbeitsspeichers vorhanden." );
+	LangUtil.getText( "base.error.no_basic_program" ) );
   }
 }

@@ -31,6 +31,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class ExtROMSettingsDlg
@@ -150,7 +151,7 @@ public class ExtROMSettingsDlg
 
   private ExtROMSettingsDlg( Window owner, ExtROM extROM )
   {
-    super( owner, "ROM-Erweiterung" );
+    super( owner, LangUtil.getText( "kccompact.title.rom_expansion" ) );
     this.owner          = owner;
     this.approvedExtROM = null;
 
@@ -167,7 +168,8 @@ public class ExtROMSettingsDlg
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "ROM-Nummer:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"kccompact.label.rom_number" ) ), gbc );
 
     this.comboRomNum = GUIFactory.createComboBox();
     this.comboRomNum.setEditable( false );
@@ -185,7 +187,8 @@ public class ExtROMSettingsDlg
     gbc.gridwidth  = GridBagConstraints.REMAINDER;
     gbc.gridx      = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "ROM-Datei:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "emusys.label.rom_file" ) ), gbc );
 
     this.fileNameFld = new FileNameFld();
     this.fileNameFld.setColumns( 40 );
@@ -199,7 +202,7 @@ public class ExtROMSettingsDlg
     this.btnSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ) );
     gbc.fill        = GridBagConstraints.NONE;
     gbc.weightx     = 0.0;
     gbc.insets.left = 0;
@@ -273,7 +276,7 @@ public class ExtROMSettingsDlg
     } else {
       showErrorDlg(
 		this,
-		"Sie m\u00Fcssen eine ROM-Datei ausw\u00E4hlen" );
+		LangUtil.getText( "emusys.error.select_rom_file" ) );
     }
   }
 
@@ -286,7 +289,7 @@ public class ExtROMSettingsDlg
     }
     file = FileUtil.showFileOpenDlg(
 			this.owner,
-			EmuUtil.TEXT_SELECT_ROM_FILE,
+			LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ),
 			file,
 			FileUtil.getROMFileFilter() );
     if( file != null ) {

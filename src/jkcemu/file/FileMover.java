@@ -73,9 +73,8 @@ public class FileMover extends AbstractFileWorker
   {
     String urlText = this.curURLText;
     return urlText != null ?
-	LangUtil.tr( "\'\'{0}\'\' kann nicht geladen werden.", urlText )
-	: LangUtil.tr(
-		"\'\'{0}\'\' kann nicht verschoben werden.",
+	LangUtil.getText( "file.text.loaded", urlText )
+	: LangUtil.getText( "file.text.cannot_moved",
 		fileName );
   }
 
@@ -83,16 +82,14 @@ public class FileMover extends AbstractFileWorker
   @Override
   public String getProgressDlgTitle()
   {
-    return LangUtil.tr( "Verschieben" );
+    return LangUtil.getText( "file.text.move" );
   }
 
 
   @Override
   public String getUncompletedWorkMsg()
   {
-    return LangUtil.tr(
-		"Es konnten nicht alle Dateien, Verzeichnisse bzw.\n"
-			+ "symbolische Links verschoben werden." );
+    return LangUtil.getText( "file.text.not_all_files_directories_symbolic_links_moved" );
   }
 
 

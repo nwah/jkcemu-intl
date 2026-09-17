@@ -140,7 +140,7 @@ public class SaveDlg extends BaseDlg implements DocumentListener
     // Bereich Speicheradressen
     JPanel panelMem = GUIFactory.createPanel( new GridBagLayout() );
     panelMem.setBorder( GUIFactory.createTitledBorder(
-					"Zu speichernder Bereich" ) );
+					LangUtil.getText( "file.section.range_save" ) ) );
     add( panelMem, gbc );
 
     GridBagConstraints gbcMem = new GridBagConstraints(
@@ -153,11 +153,13 @@ public class SaveDlg extends BaseDlg implements DocumentListener
 						0, 0 );
 
     // Anfangsadresse
-    panelMem.add( GUIFactory.createLabel( EmuUtil.LABEL_BEG_ADDR ), gbcMem );
+    panelMem.add( GUIFactory.createLabel(
+		LangUtil.getText( EmuUtil.LABEL_BEG_ADDR ) ), gbcMem );
 
     this.docMemBegAddr = new HexDocument(
 				4,
-				"Anfangsadresse des Speicherbereichs"  );
+				LangUtil.getText(
+					"file.text.start_address_memory" )  );
     this.fldMemBegAddr = GUIFactory.createTextField( this.docMemBegAddr, 5 );
     if( begAddr >= 0 ) {
       this.docMemBegAddr.setValue( begAddr, 4 );
@@ -171,11 +173,13 @@ public class SaveDlg extends BaseDlg implements DocumentListener
     gbcMem.fill    = GridBagConstraints.NONE;
     gbcMem.weightx = 0.0;
     gbcMem.gridx++;
-    panelMem.add( GUIFactory.createLabel( EmuUtil.LABEL_END_ADDR ), gbcMem );
+    panelMem.add( GUIFactory.createLabel(
+		LangUtil.getText( EmuUtil.LABEL_END_ADDR ) ), gbcMem );
 
     this.docMemEndAddr = new HexDocument(
 				4,
-				"Endadresse des Speicherbereichs"  );
+				LangUtil.getText(
+					"file.text.end_address_memory" )  );
     this.fldMemEndAddr = GUIFactory.createTextField( this.docMemEndAddr, 5 );
     if( (begAddr >= 0) && (endAddr >= 0) ) {
       this.fldMemEndAddr.setText( String.format( "%04X", endAddr ) );
@@ -189,7 +193,7 @@ public class SaveDlg extends BaseDlg implements DocumentListener
     // Bereich Dateiformat
     JPanel panelFileFmt = GUIFactory.createPanel( new GridBagLayout() );
     panelFileFmt.setBorder( GUIFactory.createTitledBorder(
-							"Dateiformat" ) );
+							LangUtil.getText( "common.section.file_format" ) ) );
     gbc.gridy++;
     add( panelFileFmt, gbc );
 
@@ -205,19 +209,20 @@ public class SaveDlg extends BaseDlg implements DocumentListener
     ButtonGroup grpFileFmt = new ButtonGroup();
 
     this.rbFileFmtBIN = GUIFactory.createRadioButton(
-			"Speicherabbilddatei ohne Kopfdaten (*.bin)" );
+			LangUtil.getText( "file.option.memory_image_file" ) );
     grpFileFmt.add( this.rbFileFmtBIN );
     panelFileFmt.add( this.rbFileFmtBIN, gbcFileFmt );
 
     this.rbFileFmtKCC = GUIFactory.createRadioButton(
-					"KC-Systemdatei (*.kcc)" );
+					LangUtil.getText( "common.option.kc_system_file" ) );
     grpFileFmt.add( this.rbFileFmtKCC );
     gbcFileFmt.insets.top = 0;
     gbcFileFmt.gridy++;
     panelFileFmt.add( this.rbFileFmtKCC, gbcFileFmt );
 
     this.rbFileFmtTAP = GUIFactory.createRadioButton(
-					"KC-TAP-Datei (*.tap)" );
+					LangUtil.getText(
+						"file.option.kc_tap_file" ) );
     grpFileFmt.add( this.rbFileFmtTAP );
     gbcFileFmt.gridy++;
     panelFileFmt.add( this.rbFileFmtTAP, gbcFileFmt );
@@ -225,14 +230,14 @@ public class SaveDlg extends BaseDlg implements DocumentListener
     ButtonGroup grpBegBlkNum = new ButtonGroup();
 
     this.rbBegBlkNum0 = GUIFactory.createRadioButton(
-		"Erster Block hat Nr. 0 (KC85/1, KC87, Z9001)" );
+		LangUtil.getText( "file.option.first_block_no_0" ) );
     grpBegBlkNum.add( this.rbBegBlkNum0 );
     gbcFileFmt.insets.left = 50;
     gbcFileFmt.gridy++;
     panelFileFmt.add( this.rbBegBlkNum0, gbcFileFmt );
 
     this.rbBegBlkNum1 = GUIFactory.createRadioButton(
-		"Erster Block hat Nr. 1 (HC900, KC85/2-5, KC-BASIC)" );
+		LangUtil.getText( "file.option.first_block_no_1" ) );
     grpBegBlkNum.add( this.rbBegBlkNum1 );
     gbcFileFmt.gridy++;
     panelFileFmt.add( this.rbBegBlkNum1, gbcFileFmt );
@@ -240,37 +245,40 @@ public class SaveDlg extends BaseDlg implements DocumentListener
     gbcFileFmt.insets.left = 5;
 
     this.rbFileFmtSSS = GUIFactory.createRadioButton(
-				"KC-BASIC-Programmdatei (*.sss)" );
+				LangUtil.getText(
+					"common.option.kc_basic_program" ) );
     grpFileFmt.add( this.rbFileFmtSSS );
     gbcFileFmt.gridy++;
     panelFileFmt.add( this.rbFileFmtSSS, gbcFileFmt );
 
     this.rbFileFmtBAS = GUIFactory.createRadioButton(
-	"BASIC-/RBASIC-Programmdatei (*.bas; *.abc)" );
+	LangUtil.getText( "file.option.basic_rbasic_program" ) );
     grpFileFmt.add( this.rbFileFmtBAS );
     gbcFileFmt.gridy++;
     panelFileFmt.add( this.rbFileFmtBAS, gbcFileFmt );
 
     this.rbFileFmtRMC = GUIFactory.createRadioButton(
-				"RBASIC-Maschinencodedatei (*.rmc)" );
+				LangUtil.getText(
+					"file.option.rbasic_machine_code" ) );
     grpFileFmt.add( this.rbFileFmtRMC );
     gbcFileFmt.gridy++;
     panelFileFmt.add( this.rbFileFmtRMC, gbcFileFmt );
 
     this.rbFileFmtHS = GUIFactory.createRadioButton(
-				"Headersave-Datei (*.z80)" );
+				LangUtil.getText( "common.option.headersave_file_z80" ) );
     grpFileFmt.add( this.rbFileFmtHS );
     gbcFileFmt.gridy++;
     panelFileFmt.add( this.rbFileFmtHS, gbcFileFmt );
 
     this.rbFileFmtHEX = GUIFactory.createRadioButton(
-				"Intel-HEX-Datei (*.hex; *.ihx)" );
+				LangUtil.getText(
+					"common.option.intel_hex_file" ) );
     grpFileFmt.add( this.rbFileFmtHEX );
     gbcFileFmt.gridy++;
     panelFileFmt.add( this.rbFileFmtHEX, gbcFileFmt );
 
     this.rbFileFmtCOM = GUIFactory.createRadioButton(
-			"CP/M-kompatible Programmdatei (*.com)" );
+			LangUtil.getText( "file.option.cp_m_compatible" ) );
     grpFileFmt.add( this.rbFileFmtCOM );
     gbcFileFmt.insets.bottom = 5;
     gbcFileFmt.gridy++;
@@ -279,7 +287,8 @@ public class SaveDlg extends BaseDlg implements DocumentListener
 
     // Bereich Kopfdaten
     JPanel panelFileHead = GUIFactory.createPanel( new GridBagLayout() );
-    panelFileHead.setBorder( GUIFactory.createTitledBorder( "Kopfdaten" ) );
+    panelFileHead.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "file.section.header_data" ) ) );
     gbc.gridy++;
     add( panelFileHead, gbc );
 
@@ -293,7 +302,8 @@ public class SaveDlg extends BaseDlg implements DocumentListener
 					0, 0 );
 
     // Dateibezeichnung
-    this.labelHeadFileDesc = GUIFactory.createLabel( "Bezeichnung:" );
+    this.labelHeadFileDesc = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.name" ) );
     panelFileHead.add( this.labelHeadFileDesc, gbcFileHead );
 
     this.docHeadFileDesc = new LimitedDocument(
@@ -310,7 +320,8 @@ public class SaveDlg extends BaseDlg implements DocumentListener
     panelFileHead.add( this.fldHeadFileDesc, gbcFileHead );
 
     // Dateityp
-    this.labelHeadFileType = GUIFactory.createLabel( "Typ:" );
+    this.labelHeadFileType = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.type" ) );
     gbcFileHead.fill       = GridBagConstraints.NONE;
     gbcFileHead.weightx    = 0.0;
     gbcFileHead.insets.top = 5;
@@ -345,7 +356,8 @@ public class SaveDlg extends BaseDlg implements DocumentListener
     }
 
     // Anfangsadresse
-    this.labelHeadBegAddr = GUIFactory.createLabel( EmuUtil.LABEL_BEG_ADDR );
+    this.labelHeadBegAddr = GUIFactory.createLabel(
+		LangUtil.getText( EmuUtil.LABEL_BEG_ADDR ) );
     gbcFileHead.insets.bottom = 5;
     gbcFileHead.fill          = GridBagConstraints.NONE;
     gbcFileHead.weightx       = 0.0;
@@ -356,7 +368,8 @@ public class SaveDlg extends BaseDlg implements DocumentListener
 
     this.docHeadBegAddr = new HexDocument(
 				4,
-				"Anfangsadresse in den Kopfdaten" );
+				LangUtil.getText(
+					"file.text.start_address_header" ) );
     this.fldHeadBegAddr = GUIFactory.createTextField(
 						this.docHeadBegAddr,
 						5 );
@@ -369,7 +382,8 @@ public class SaveDlg extends BaseDlg implements DocumentListener
     panelFileHead.add( this.fldHeadBegAddr, gbcFileHead );
 
     // Startadresse
-    this.labelHeadStartAddr = GUIFactory.createLabel( "Startadresse:" );
+    this.labelHeadStartAddr = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.execution_address" ) );
     gbcFileHead.fill        = GridBagConstraints.NONE;
     gbcFileHead.weightx     = 0.0;
     gbcFileHead.gridx++;
@@ -377,7 +391,7 @@ public class SaveDlg extends BaseDlg implements DocumentListener
 
     this.docHeadStartAddr = new HexDocument(
 				4,
-				"Startadresse in den Kopfdaten" );
+				LangUtil.getText( "file.text.execution_address_header" ) );
     this.fldHeadStartAddr = GUIFactory.createTextField(
 						this.docHeadStartAddr,
 						5 );
@@ -626,7 +640,8 @@ public class SaveDlg extends BaseDlg implements DocumentListener
       String     title   = "Datei speichern";
       FileFormat fileFmt = getSelectedFileFmt();
       if( fileFmt == null ) {
-	throw new UserInputException( "Dateiformat nicht ausgew\u00E4hlt" );
+	throw new UserInputException(
+		LangUtil.getText( "file.error.file_format_not_selected" ) );
       }
 
       // Adressbereich pruefen
@@ -733,7 +748,7 @@ public class SaveDlg extends BaseDlg implements DocumentListener
 				+ "\n\nM\u00F6chten Sie trotzdem in dem"
 				+ " von Ihnen gew\u00E4hlten Dateiformat"
 				+ " speichern?",
-			"Warnung" );
+			LangUtil.getText( "common.msg.warning" ) );
 	}
       }
 
@@ -791,7 +806,7 @@ public class SaveDlg extends BaseDlg implements DocumentListener
 	  catch( IOException ex ) {
 	    showErrorDlg(
 		  this,
-		  LangUtil.tr( "Datei kann nicht gespeichert werden." )
+		  LangUtil.getText( "file.text.file_cannot_saved" )
 			  + "\n\n" + ex.getMessage() );
 	  }
 	  catch( Exception ex ) {

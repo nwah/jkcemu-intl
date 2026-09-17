@@ -10,6 +10,7 @@ package jkcemu.emusys.kc85;
 
 import jkcemu.base.EmuThread;
 import jkcemu.joystick.JoystickThread;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80InterruptSource;
 import z80emu.Z80PIO;
 
@@ -26,7 +27,7 @@ public abstract class KC85JoystickModule
   {
     super( slot, false );
     this.lastBI = false;
-    this.pio    = new Z80PIO( "PIO (Joystick)" );
+    this.pio    = new Z80PIO( LangUtil.getText( "kc85.text.pio_joystick" ) );
     this.pio.putInValuePortA( 0xFF, false );
   }
 

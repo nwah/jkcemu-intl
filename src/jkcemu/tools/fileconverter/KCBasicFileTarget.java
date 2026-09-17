@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class KCBasicFileTarget extends AbstractConvertTarget
@@ -29,7 +30,9 @@ public class KCBasicFileTarget extends AbstractConvertTarget
 		int            offs,
 		int            len )
   {
-    super( fileConvertFrm, "KC-BASIC-Programmdatei (*.sss)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "common.option.kc_basic_program" ) );
     this.dataBytes = dataBytes;
     this.offs      = offs;
     this.len       = len;

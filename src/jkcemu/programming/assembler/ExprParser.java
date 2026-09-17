@@ -119,7 +119,8 @@ public class ExprParser
     if( enclosedHex || simpleHex || (ch == 'H') || (ch == 'h') ) {
       if( enclosedHex && (ch != '\'') ) {
 	throw new PrgException(
-		"\' als Ende der Hexadezimalzahl erwartet" );
+		LangUtil.getText(
+			"assembler.error.expected_end_hexadecimal" ) );
       }
       if( !simpleHex ) {
 	ch = iter.next();
@@ -128,8 +129,8 @@ public class ExprParser
 	value = Integer.parseInt( buf.toString(), 16 );
       }
       catch( NumberFormatException ex ) {
-	throw new PrgException( LangUtil.tr(
-			"{0}: Ung\u00FCltige Hexadezimalzahl", buf.toString() ) );
+	throw new PrgException( LangUtil.getText(
+			"assembler.text.invalid_hexadecimal", buf.toString() ) );
       }
     }
     else if( (ch == 'O') || (ch == 'o') || (ch == 'Q') || (ch == 'q') ) {
@@ -138,8 +139,8 @@ public class ExprParser
 	value = Integer.parseInt( buf.toString(), 8 );
       }
       catch( NumberFormatException ex ) {
-	throw new PrgException( LangUtil.tr(
-			"{0}: Ung\u00FCltige Oktalzahl", buf.toString() ) );
+	throw new PrgException( LangUtil.getText(
+			"assembler.text.invalid_octal_number", buf.toString() ) );
       }
     } else {
       boolean done = false;
@@ -153,8 +154,8 @@ public class ExprParser
 	    value = Integer.parseInt( buf.toString(), 2 );
 	  }
 	  catch( NumberFormatException ex ) {
-	    throw new PrgException( LangUtil.tr(
-			"{0}: Ung\u00FCltige Bin\u00E4rzahl", buf.toString() ) );
+	    throw new PrgException( LangUtil.getText(
+			"assembler.text.invalid_binary_number", buf.toString() ) );
 	  }
 	}
       }
@@ -163,8 +164,8 @@ public class ExprParser
 	  value = Integer.parseInt( buf.toString() );
 	}
 	catch( NumberFormatException ex ) {
-	  throw new PrgException( LangUtil.tr(
-			"{0}: Ung\u00FCltige Zahl", buf.toString() ) );
+	  throw new PrgException( LangUtil.getText(
+			"assembler.text.invalid_number", buf.toString() ) );
 	}
       }
     }
@@ -214,8 +215,8 @@ public class ExprParser
     Integer value = parseExpr();
     char    ch    = skipSpaces();
     if( ch != CharacterIterator.DONE ) {
-      throw new PrgException( LangUtil.tr(
-			"''{0}'': Unerwartetes Zeichen hinter Ausdruck",
+      throw new PrgException( LangUtil.getText(
+			"assembler.text.unexpected_character_after_expression",
 			String.valueOf( ch ) ) );
     }
     return value;
@@ -418,7 +419,8 @@ public class ExprParser
 	Integer v2 = parseUnaryExpr();
 	if( (value != null) && (v2 != null) ) {
 	  if( v2.intValue() == 0 ) {
-	    throw new PrgException( "Division durch 0" );
+	    throw new PrgException(
+			LangUtil.getText( "common.error.division_0" ) );
 	  }
 	  value = (value.intValue() / v2.intValue());
 	} else {
@@ -429,7 +431,8 @@ public class ExprParser
 	Integer v2 = parseUnaryExpr();
 	if( (value != null) && (v2 != null) ) {
 	  if( v2.intValue() == 0 ) {
-	    throw new PrgException( "Modulo 0" );
+	    throw new PrgException( LangUtil.getText(
+				"assembler.error.modulo_0" ) );
 	  }
 	  value = (value.intValue() % v2.intValue());
 	} else {
@@ -494,13 +497,15 @@ public class ExprParser
     } else if( checkAndParseToken( "\'" ) ) {
       char ch = this.iter.current();
       if( ch == CharacterIterator.DONE ) {
-	throw new PrgException( "Unerwartetes Ende des Zeichenliterals" );
+	throw new PrgException(
+		LangUtil.getText(
+			"assembler.error.unexpected_end_character" ) );
       }
       value = Integer.valueOf( ch );
       ch    = this.iter.next();
       if( ch != '\'' ) {
 	throw new PrgException(
-		"\' als Ende des Zeichenliterals erwartet" );
+		LangUtil.getText( "assembler.error.expected_end_character" ) );
       }
       this.iter.next();
     } else {
@@ -516,8 +521,8 @@ public class ExprParser
       else if( AsmLabel.isIdentifierStart( ch ) ) {
 	value = parseLabel();
       } else {
-	throw new PrgException( LangUtil.tr(
-		"''{0}'': Ung\u00FCltiges Zeichen im Argument",
+	throw new PrgException( LangUtil.getText(
+		"assembler.text.invalid_character",
 		String.valueOf( ch ) ) );
       }
     }
@@ -550,12 +555,12 @@ public class ExprParser
 	upperText = labelText.toUpperCase();
       }
       if( AsmArg.isFlagCondition( upperText ) ) {
-	throw new PrgException( LangUtil.tr(
-			"{0}: Unerwartete Flag-Bedingung", labelText ) );
+	throw new PrgException( LangUtil.getText(
+			"assembler.text.unexpected_flag", labelText ) );
       }
       if( AsmArg.isRegister( upperText ) ) {
-	throw new PrgException( LangUtil.tr(
-			"{0}: Unerwartete Register-Angabe", labelText ) );
+	throw new PrgException( LangUtil.getText(
+			"assembler.text.unexpected_register", labelText ) );
       }
       AsmLabel label = this.labels.get( labelText );
       if( label != null ) {
@@ -567,8 +572,8 @@ public class ExprParser
 	}
       } else {
 	if( this.checkLabels ) {
-	  throw new PrgException( LangUtil.tr(
-			"Marke ''{0}'' nicht definiert", buf.toString() ) );
+	  throw new PrgException( LangUtil.getText(
+			"assembler.text.label_not_defined", buf.toString() ) );
 	}
       }
     }
@@ -579,8 +584,8 @@ public class ExprParser
   private void parseToken( char token ) throws PrgException
   {
     if( skipSpaces() != token ) {
-      throw new PrgException( LangUtil.tr(
-			"''{0}'' erwartet", String.valueOf( token ) ) );
+      throw new PrgException( LangUtil.getText(
+			"assembler.text.expected", String.valueOf( token ) ) );
     }
     iter.next();
   }

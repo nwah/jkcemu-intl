@@ -29,6 +29,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class ReplyTabSizeDlg extends BaseDlg
@@ -97,7 +98,7 @@ public class ReplyTabSizeDlg extends BaseDlg
 		Frame     owner,
 		JTextArea textArea )
   {
-    super( owner, "Tabulatorbreite \u00E4ndern" );
+    super( owner, LangUtil.getText( "text.title.change_tab_width" ) );
     this.textArea = textArea;
 
 
@@ -116,7 +117,8 @@ public class ReplyTabSizeDlg extends BaseDlg
     JPanel panelTabSize = GUIFactory.createPanel(
 				new FlowLayout( FlowLayout.CENTER ) );
     add( panelTabSize, gbc );
-    panelTabSize.add( GUIFactory.createLabel( "Tabulatorbreite:" ) );
+    panelTabSize.add( GUIFactory.createLabel(
+		LangUtil.getText( "text.label.tab_width" ) ) );
 
     int tabSize = this.textArea.getTabSize();
     if( tabSize < 1 ) {
@@ -127,7 +129,7 @@ public class ReplyTabSizeDlg extends BaseDlg
     panelTabSize.add( this.spinnerTabSize );
 
     this.cbAsDefault = GUIFactory.createCheckBox(
-					"Als Standardwert setzen" );
+					LangUtil.getText( "text.option.set_default_value" ) );
     gbc.insets.top    = 0;
     gbc.insets.bottom = 5;
     gbc.gridwidth     = GridBagConstraints.REMAINDER;
@@ -140,7 +142,8 @@ public class ReplyTabSizeDlg extends BaseDlg
     JPanel panelBtn = GUIFactory.createPanel();
     panelBtn.setLayout( new GridLayout( 1, 2, 5, 5 ) );
 
-    this.btnApply = GUIFactory.createButton( EmuUtil.TEXT_APPLY );
+    this.btnApply = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_APPLY ) );
     panelBtn.add( this.btnApply );
 
     this.btnClose = GUIFactory.createButtonClose();

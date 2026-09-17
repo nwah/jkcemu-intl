@@ -29,6 +29,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.SettingsFrm;
 
@@ -72,7 +73,7 @@ public class ROMFileSettingsFld extends AbstractSettingsFld
     this.btnSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ) );
     this.btnSelect.addActionListener( this );
     gbc.fill        = GridBagConstraints.NONE;
     gbc.weightx     = 0.0;
@@ -83,7 +84,7 @@ public class ROMFileSettingsFld extends AbstractSettingsFld
     this.btnRemove = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/delete.png",
-					EmuUtil.TEXT_REMOVE_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_REMOVE_ROM_FILE ) );
     this.btnRemove.setEnabled( false );
     this.btnRemove.addActionListener( this );
     gbc.gridx++;
@@ -167,7 +168,7 @@ public class ROMFileSettingsFld extends AbstractSettingsFld
     Object  src = e.getSource();
     if( src == this.btnSelect ) {
       File file = selectFile(
-			EmuUtil.TEXT_SELECT_ROM_FILE,
+			LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ),
 			RecentDirsMngr.FILE_CAT_ROM,
 			this.fileNameFld.getFile(),
 			FileUtil.getROMFileFilter() );

@@ -107,7 +107,7 @@ public class FileUtil
 		"Die Datei ist durch ein anderes Programm gesperrt\n"
 			+ "und kann deshalb nicht gespeichert werden.";
 
-  public static final String LABEL_SEARCH_IN = "Suchen in:";
+  public static final String LABEL_SEARCH_IN = "file.label.search";
 
   public static final String PROP_FILEDIALOG         = "jkcemu.filedialog";
   public static final String VALUE_FILEDIALOG_NATIVE = "native";
@@ -204,19 +204,12 @@ public class FileUtil
 		notEmpty = (tmpEntries.length > 0);
 	      }
 	      if( notEmpty ) {
-		buf.append( LangUtil.tr(
-			"{0}\nexistiert bereits und enth\u00E4lt"
-				+ " Dateien,\n"
-				+ "die m\u00F6glicherweise"
-				+ " \u00FCberschrieben werden.\n"
-				+ "M\u00F6chten Sie das Verzeichnis"
-				+ " verwenden?",
+		buf.append( LangUtil.getText(
+			"file.text.already_exists_contains",
 			dirFile.getPath() ) );
 	      } else {
-		buf.append( LangUtil.tr(
-			"{0}\nexistiert bereits.\n"
-				+ "M\u00F6chten Sie das Verzeichnis"
-				+ " verwenden?",
+		buf.append( LangUtil.getText(
+			"file.text.already_exists_want",
 			dirFile.getPath() ) );
 	      }
 	      if( !BaseDlg.showYesNoDlg( owner, buf.toString() ) ) {
@@ -225,10 +218,7 @@ public class FileUtil
 	    } else {
 	      BaseDlg.showErrorDlg(
 			owner,
-			LangUtil.tr(
-				"{0} existiert bereits\n"
-					+ "und kann nicht als Verzeichnis"
-					+ " angelegt werden.",
+			LangUtil.getText( "file.text.already_exists_cannot_created_directory",
 				dirFile.getPath() ) );
 	      dirFile = null;
 	    }
@@ -285,17 +275,13 @@ public class FileUtil
 			maxLen ) );
       } else {
 	throw new UserInputException(
-		"Das Dateiformat unterst\u00FCtzt die Angabe\n"
-			+ "einer Bezeichnung in den Kopfdaten nicht." );
+		LangUtil.getText( "file.error.file_format_not_support" ) );
       }
     } else if( (curLen < 1) && (maxLen > 0) ) {
       rv = BaseDlg.showYesNoWarningDlg(
 		owner,
-		"Sie haben in den Kopfdaten keine Bezeichnung angegeben.\n"
-			+ "Das kann beim Einlesen der Datei"
-			+ " zu Problemen f\u00FChren.\n\n"
-			+ "M\u00F6chten Sie trotzdem fortsetzen?",
-		"Warnung" );
+		LangUtil.getText( "file.msg.not_specified_name" ),
+		LangUtil.getText( "common.msg.warning" ) );
     }
     return rv;
   }
@@ -316,13 +302,9 @@ public class FileUtil
 	{
 	  state = BaseDlg.showYesNoWarningDlg(
 		owner,
-		LangUtil.tr(
-			"{0}:\nDie Datei wurde in der Zwischenzeit"
-				+ " ge\u00E4ndert.\n"
-				+ "M\u00F6chten Sie trotzdem speichern und"
-				+ " die \u00C4nderungen \u00FCberschreiben?",
+		LangUtil.getText( "file.text.file_changed_meantime",
 			fileToSave.getPath() ),
-		LangUtil.tr( "Konflikt beim Speichern" ) );
+		LangUtil.getText( "file.text.conflict_when_saving" ) );
 	}
       }
     }
@@ -460,12 +442,9 @@ public class FileUtil
       if( file.exists() ) {
 	rv = BaseDlg.showYesNoWarningDlg(
 		owner,
-		LangUtil.tr(
-			"Die Datei ''{0}'' existiert bereits.\n"
-				+ "M\u00F6chten Sie die Datei"
-				+ " \u00FCberschreiben?",
+		LangUtil.getText( "file.text.file_already_exists",
 			file.getName() ),
-		LangUtil.tr( "Best\u00E4tigung" ) );
+		LangUtil.getText( "common.msg.confirmation" ) );
       } else {
 	rv = true;
       }
@@ -495,7 +474,7 @@ public class FileUtil
 	  } else {
 	    BaseDlg.showErrorDlg(
 			owner,
-			"Verzeichnis konnte nicht erstellt werden." );
+			LangUtil.getText( "file.error.directory_not_created" ) );
 	  }
 	}
       }
@@ -751,181 +730,217 @@ public class FileUtil
 
   public static FileFilter getAC1Basic6FileFilter()
   {
-    return getFileFilter( "AC1-BASIC6-Dateien (*.abc)", "abc" );
+    return getFileFilter( LangUtil.getText( "file.filetype.ac1_basic6_files" ),
+		"abc" );
   }
 
 
   public static FileFilter getAnaDiskFileFilter()
   {
-    return getFileFilter( "AnaDisk-Dateien (*.dump)", "dump" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.anadisk_files_dump" ),
+		"dump" );
   }
 
 
   public static FileFilter getBasicFileFilter()
   {
-    return getFileFilter( "BASIC-Dateien (*.bas)", "bas" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.basic_files_bas" ), "bas" );
   }
 
 
   public static FileFilter getBasicOrRBasicFileFilter()
   {
-    return getFileFilter( "BASIC-/RBASIC-Dateien (*.bas)", "bas" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.basic_rbasic_files" ),
+		"bas" );
   }
 
 
   public static FileFilter getBinaryFileFilter()
   {
-    return getFileFilter( "Einfache Speicherabbilddateien (*.bin)", "bin" );
+    return getFileFilter( LangUtil.getText(
+			"file.filetype.simple_memory_image" ),
+		"bin" );
   }
 
 
   public static FileFilter getCdtFileFilter()
   {
-    return getFileFilter( "CPC-Tape-Dateien (*.cdt)", "cdt" );
+    return getFileFilter( LangUtil.getText( "file.filetype.cpc_tape_files" ),
+		"cdt" );
   }
 
 
   public static FileFilter getCommandFileFilter()
   {
-    return getFileFilter( "CP/M-kompatible Programmdateien (*.com)", "com" );
+    return getFileFilter( LangUtil.getText(
+			"file.filetype.cp_m_compatible" ),
+		"com" );
   }
 
 
   public static FileFilter getCswFileFilter()
   {
-    return getFileFilter( "CSW-Dateien (*.csw)", "csw" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.csw_files_csw" ), "csw" );
   }
 
 
   public static FileFilter getComFileFilter()
   {
-    return getFileFilter( "CP/M-Programmdateien (*.com)", "com" );
+    return getFileFilter( LangUtil.getText( "file.filetype.cp_m_program" ),
+		"com" );
   }
 
 
   public static FileFilter getCopyQMFileFilter()
   {
-    return getFileFilter( "CopyQM-Dateien (*.cqm; *.qm)", "cqm", "qm" );
+    return getFileFilter( LangUtil.getText( "file.filetype.copyqm_files_cqm" ),
+		"cqm",
+		"qm" );
   }
 
 
   public static FileFilter getDskFileFilter()
   {
-    return getFileFilter( "CPC-Disk-Dateien (*.dsk)", "dsk" );
+    return getFileFilter( LangUtil.getText( "file.filetype.cpc_disk_files" ),
+		"dsk" );
   }
 
 
   public static FileFilter getGIFFileFilter()
   {
-    return getFileFilter( "GIF-Dateien (*.gif)", "gif" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.gif_files_gif" ), "gif" );
   }
 
 
   public static FileFilter getHeadersaveFileFilter()
   {
-    return getFileFilter( "Headersave-Dateien (*.z80)", "z80" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.headersave_files_z80" ),
+		"z80" );
   }
 
 
   public static FileFilter getHexFileFilter()
   {
-    return getFileFilter( "HEX-Dateien (*.hex; *.ihx)", "hex" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.hex_files_hex" ), "hex" );
   }
 
 
   public static FileFilter getImageDiskFileFilter()
   {
-    return getFileFilter( "ImageDisk-Dateien (*.imd)", "imd" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.imagedisk_files_imd" ),
+		"imd" );
   }
 
 
   public static FileFilter getISOFileFilter()
   {
-    return getFileFilter( "CD-/DVD-Abbilddateien (*.iso)", "iso" );
+    return getFileFilter( LangUtil.getText( "file.filetype.cd_dvd_image" ),
+		"iso" );
   }
 
 
   public static FileFilter getKCBasicFileFilter()
   {
-    return getFileFilter( "KC-BASIC-Dateien (*.sss)", "sss" );
+    return getFileFilter( LangUtil.getText( "file.filetype.kc_basic_files" ),
+		"sss" );
   }
 
 
   public static FileFilter getKCBasicSystemFileFilter()
   {
-    return getFileFilter( "KC-BASIC-Systemdateien (*.kcb)", "kcb" );
+    return getFileFilter( LangUtil.getText( "file.filetype.kc_basic_system" ),
+		"kcb" );
   }
 
 
   public static FileFilter getKCSystemFileFilter()
   {
-    return getFileFilter( "KC-Systemdateien (*.kcc)", "kcc" );
+    return getFileFilter( LangUtil.getText( "file.filetype.kc_system_files" ),
+		"kcc" );
   }
 
 
   public static FileFilter getKCTapFileFilter()
   {
-    return getFileFilter( "KC-TAP-Dateien (*.tap)", "tap" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.kc_tap_files" ), "tap" );
   }
 
 
   public static FileFilter getPlainDiskFileFilter()
   {
     return getFileFilter(
-		"Einfache Abbilddateien (*.dd; *.img; *.image, *.raw)",
+		LangUtil.getText( "file.filetype.simple_image_files" ),
 		"dd", "img", "image", "raw" );
   }
 
 
   public static FileFilter getProjectFileFilter()
   {
-    return getFileFilter( "Projekdateien (*.prj)", "prj" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.project_files_prj" ), "prj" );
   }
 
 
   public static FileFilter getRMCFileFilter()
   {
-    return getFileFilter( "RBASIC-Maschinencodedateien (*.rmc)", "rmc" );
+    return getFileFilter( LangUtil.getText(
+			"file.filetype.rbasic_machine_code_files" ),
+		"rmc" );
   }
 
 
   public static FileFilter getROMFileFilter()
   {
-    return getFileFilter( "ROM-Dateien (*.bin; *.rom)", "rom", "bin" );
+    return getFileFilter( LangUtil.getText( "file.filetype.rom_files_bin" ),
+		"rom",
+		"bin" );
   }
 
 
   public static FileFilter getTapeFileFilter()
   {
     return getFileFilter(
-			"Tape-Dateien (*.cdt; *.csw; *.tap; *.tzx)",
+			LangUtil.getText( "file.filetype.tape_files_cdt" ),
 			"cdt", "csw", "tap", "tzx" );
   }
 
 
   public static FileFilter getTeleDiskFileFilter()
   {
-    return getFileFilter( "TeleDisk-Dateien (*.td0)", "td0" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.teledisk_files_td0" ),
+		"td0" );
   }
 
 
   public static FileFilter getTextFileFilter()
   {
     return getFileFilter(
-			"Textdateien (*.asc; *.log; *.txt)",
+			LangUtil.getText( "file.filetype.text_files_asc" ),
 			"asc", "log", "txt" );
   }
 
 
   public static FileFilter getTzxFileFilter()
   {
-    return getFileFilter( "ZX-Tape-Dateien (*.tzx)", "tzx" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.zx_tape_files" ), "tzx" );
   }
 
 
   public static FileFilter getXMLFileFilter()
   {
-    return getFileFilter( "XML-Dateien (*.xml)", "xml" );
+    return getFileFilter(
+		LangUtil.getText( "file.filetype.xml_files_xml" ), "xml" );
   }
 
 
@@ -1112,16 +1127,13 @@ public class FileUtil
     }
     catch( OverlappingFileLockException ex ) {}
     catch( IOException ex ) {
-      throw new IOException( LangUtil.tr(
-		"{0}:\nDatei kann nicht gesperrt werden.",
+      throw new IOException( LangUtil.getText(
+		"file.text.file_cannot_locked",
 		file.getPath() ) );
     }
     if( fileLock == null ) {
-      throw new IOException( LangUtil.tr(
-		"{0}:\nDatei ist gesperrt.\n"
-			+ "Bitte schlie\u00DFen Sie die Datei in dem"
-			+ " Programm,\n"
-			+ "in dem sie ge\u00F6ffnet ist.",
+      throw new IOException( LangUtil.getText(
+		"file.text.file_locked_please",
 		file.getPath() ) );
     }
     return fileLock;
@@ -1289,12 +1301,10 @@ public class FileUtil
 	  BaseDlg.showErrorDlg(
 			owner,
 			msg != null ?
-				LangUtil.tr(
-					"{0} kann nicht geladen werden:\n{1}",
+				LangUtil.getText( "file.text.loaded_3",
 					objName,
 					msg )
-				: LangUtil.tr(
-					"{0} kann nicht geladen werden.",
+				: LangUtil.getText( "file.text.loaded_2",
 					objName ) );
 	  rv = null;
 	}
@@ -1330,10 +1340,12 @@ public class FileUtil
 	  }
 	}
 	catch( IllegalArgumentException ex1 ) {
-	  throw new IOException( "URL hat keine absolute Form" );
+	  throw new IOException( LangUtil.getText(
+				"file.error.url_not_absolute" ) );
 	}
 	catch( URISyntaxException ex2 ) {
-	  throw new IOException( "Ung\u00FCltige URL" );
+	  throw new IOException(
+			LangUtil.getText( "file.error.invalid_url" ) );
 	}
 	finally {
 	  EmuUtil.closeSilently( in );
@@ -1371,7 +1383,7 @@ public class FileUtil
       catch( UnsupportedOperationException ex ) {
 	BaseDlg.showErrorDlg(
 		owner,
-		"Umbenennen der Datei wird nicht unterst\u00FCtzt." );
+		LangUtil.getText( "file.error.renaming_file_not_supported" ) );
       }
     }
     return newFile;
@@ -1626,8 +1638,8 @@ public class FileUtil
 
   public static void throwUnsupportedFileFormat() throws IOException
   {
-    throw new IOException( "Das Dateiformat wird nicht unterst\u00FCtzt\n"
-			+ "oder die Datei ist besch\u00E4digt." );
+    throw new IOException(
+		LangUtil.getText( "file.error.file_format_not_supported" ) );
   }
 
 
@@ -1661,7 +1673,8 @@ public class FileUtil
 	}
 	rv = fmt2FileFilter.get( text );
 	if( rv == null ) {
-	  rv = new FileNameExtensionFilter( LangUtil.tr( text ), formats );
+	  rv = new FileNameExtensionFilter(
+			LangUtil.getText( text ), formats );
 	  fmt2FileFilter.put( text, rv );
 	}
       }
@@ -1699,7 +1712,7 @@ public class FileUtil
       }
       owner = owner.getOwner();
     }
-    title = LangUtil.tr( title );
+    title = LangUtil.getText( title );
 
     FileDialog dlg = null;
     if( ownerDlg != null ) {
@@ -1793,7 +1806,7 @@ public class FileUtil
 	}
       }
     }
-    fileChooser.setDialogTitle( LangUtil.tr( title ) );
+    fileChooser.setDialogTitle( LangUtil.getText( title ) );
     /*
      * Bei Save CUSTOM_DIALOG nehmen,
      * damit JFileChooser selbst keine Warnung wegen Ueberschreiben
@@ -1840,7 +1853,7 @@ public class FileUtil
       showAgain = false;
       if( fileChooser.showDialog(
 			owner,
-			forSave ? EmuUtil.TEXT_SAVE : EmuUtil.TEXT_OPEN )
+			forSave ? LangUtil.getText( EmuUtil.TEXT_SAVE ) : LangUtil.getText( EmuUtil.TEXT_OPEN ) )
 		== JFileChooser.APPROVE_OPTION )
       {
 	if( multiMode ) {

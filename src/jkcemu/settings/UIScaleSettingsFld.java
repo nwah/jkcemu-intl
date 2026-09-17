@@ -21,6 +21,7 @@ import jkcemu.Main;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 
 
 public class UIScaleSettingsFld extends AbstractSettingsFld
@@ -53,29 +54,29 @@ public class UIScaleSettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     add(
-	GUIFactory.createLabel( "Ab Java 9 k\u00F6nnen die JKCEMU-Fenster"
-		+ " und Fensterinhalte skaliert werden:" ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.java_9_jkcemu" ) ),
 	gbc );
 
     ButtonGroup grpScale = new ButtonGroup();
 
-    this.rbScaleNone = GUIFactory.createRadioButton( "Keine Skalierung" );
+    this.rbScaleNone = GUIFactory.createRadioButton(
+		LangUtil.getText( "settings.option.no_scaling" ) );
     grpScale.add( this.rbScaleNone );
     gbc.insets.left = 50;
     gbc.gridy++;
     add( this.rbScaleNone, gbc );
 
     this.rbScaleDefault = GUIFactory.createRadioButton(
-		"Skalierung entsprechend Java-Standard"
-			+ " (automatische Skalierung bei"
-			+ " hochaufl\u00F6senden Bildschirmen)" );
+		LangUtil.getText( "settings.option.scaling_according_java" ) );
     grpScale.add( this.rbScaleDefault );
     gbc.insets.top = 0;
     gbc.gridy++;
     add( this.rbScaleDefault, gbc );
 
     this.rbScaleFix = GUIFactory.createRadioButton(
-				"Fest eingestellte Skalierung:" );
+				LangUtil.getText(
+					"settings.option.fixed_scaling" ) );
     grpScale.add( this.rbScaleFix );
     gbc.gridwidth = 1;
     gbc.gridy++;
@@ -97,31 +98,27 @@ public class UIScaleSettingsFld extends AbstractSettingsFld
     if( Main.getOS() != Main.OS.WINDOWS ) {
       gbc.gridy++;
       add(
-	GUIFactory.createLabel( "Achtung! Auf diesem Betriebssystem hier"
-		+ " funktionieren m\u00F6glicherweise nur Skalierungen"
-		+ " in 100%-Schritten." ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.attention_operating" ) ),
 	gbc );
     }
     gbc.gridy++;
     add(
-	GUIFactory.createLabel( "Achtung! Die Einstellungen auf dieser"
-		+ " Unterseite werden nur wirksam, wenn Sie sie in einem"
-		+ " Profil speichern und" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"settings.label.attention_settings_sub" ) ),
 	gbc );
     gbc.insets.top = 0;
     gbc.gridy++;
     add(
-	GUIFactory.createLabel( "anschlie\u00DFend JKCEMU mit diesem Profil"
-		+ " neu starten und dabei Java 9 oder eine h\u00F6here"
-		+ " Java-Version verwenden." ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"settings.label.restart_jkcemu_profile" ) ),
 	gbc );
 
     gbc.insets.top = 20;
     gbc.gridy++;
     add(
-	GUIFactory.createLabel( "Achtung! Bei einer Skalierung funktioniert"
-		+ " m\u00F6glicherweise der Vollbildmodus"
-		+ " nicht mehr korrekt." ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.attention_scaling" ) ),
 	gbc );
 
 
@@ -165,7 +162,7 @@ public class UIScaleSettingsFld extends AbstractSettingsFld
       value = parseComboScale();
       if( value == null ) {
 	throw new UserInputException(
-		"Skalierungsfaktor in Prozent: Ung\u00FCltiger Wert" );
+		LangUtil.getText( "settings.error.scaling_factor_percent" ) );
       }
     }
     EmuUtil.setProperty( props, Main.PROP_UI_SCALE, value );

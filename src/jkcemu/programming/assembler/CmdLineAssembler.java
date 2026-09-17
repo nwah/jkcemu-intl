@@ -96,7 +96,8 @@ public class CmdLineAssembler
 		  {
 		    if( backIter != null ) {
 		      throw new IOException(
-			"Option -f in der Datei nicht erlaubt" );
+			LangUtil.getText(
+				"programming.error.option_f_not_allowed" ) );
 		    }
 		    String fileName = nextArg( arg, pos, iter );
 		    try {
@@ -165,8 +166,8 @@ public class CmdLineAssembler
 		  labelTableFlag = true;
 		  break;
 		default:
-		  throw new IOException( LangUtil.tr(
-			"Unbekannte Option ''{0}''",
+		  throw new IOException( LangUtil.getText(
+			"assembler.text.unknown_option",
 			String.valueOf( ch ) ) );
 	      }
 	    }
@@ -195,11 +196,12 @@ public class CmdLineAssembler
 
 	// Quelltextdatei
 	if( robotronFlag && zilogFlag ) {
-	  throw new IOException( "Optionen \'R\' und \'Z\'"
-			+ " schlie\u00DFen sich gegenseitig aus" );
+	  throw new IOException( LangUtil.getText(
+				"assembler.error.options_r_z" ) );
 	}
 	if( srcFileName == null ) {
-	  throw new IOException( "Quelltextdatei nicht angegeben" );
+	  throw new IOException( LangUtil.getText(
+				"programming.error.source_code_file" ) );
 	}
 	File srcFile = new File( srcFileName );
 
@@ -269,7 +271,8 @@ public class CmdLineAssembler
 	outFile = getFileWithOtherExt( srcFile, ".bin" );
       }
       if( outFile.equals( srcFile ) ) {
-	throw new IOException( "Quelltext- und Ausgabedatei sind identisch" );
+	throw new IOException( LangUtil.getText(
+			"programming.error.source_code_output" ) );
       }
       options.setCodeToFile( true, outFile );
       File listFile = null;
@@ -277,11 +280,13 @@ public class CmdLineAssembler
 	listFile = getFileWithOtherExt( srcFile, ".lst" );
 	if( listFile.equals( srcFile ) ) {
 	  throw new IOException(
-			"Quelltext- und Listing-Datei sind identisch" );
+			LangUtil.getText(
+				"assembler.error.source_code_listing" ) );
 	}
 	if( listFile.equals( outFile ) ) {
 	  throw new IOException(
-			"Ausgabe- und Listing-Datei sind identisch" );
+			LangUtil.getText(
+				"assembler.error.output_listing_file" ) );
 	}
       }
       Z80Assembler asm = new Z80Assembler(
@@ -295,8 +300,8 @@ public class CmdLineAssembler
 	String  s = label.getKey();
 	Integer v = label.getValue();
 	if( !asm.addLabel( s, v != null ? v.intValue() : -1, false ) ) {
-	  throw new IOException( LangUtil.tr(
-			"Marke {0} bereits vorhanden", s ) );
+	  throw new IOException( LangUtil.getText(
+			"assembler.text.label_already_exists", s ) );
 	}
       }
       status = asm.assemble( forZ9001 );
@@ -403,26 +408,26 @@ public class CmdLineAssembler
       }
     }
     if( !status ) {
-      throw new IOException( LangUtil.tr(
-	"{0}: Marke enth\u00E4lht ung\u00FCltige Zeichen", labelName ) );
+      throw new IOException( LangUtil.getText(
+	"assembler.text.label_contains_invalid", labelName ) );
     }
     int labelValue = -1;
     if( valueText != null ) {
       CharacterIterator iter = new StringCharacterIterator( valueText );
       if( iter.first() == CharacterIterator.DONE ) {
-	throw new IOException( LangUtil.tr(
-		"Marke {0}: Wert fehlt", labelName ) );
+	throw new IOException( LangUtil.getText(
+		"assembler.text.label_value_missing", labelName ) );
       }
       try {
 	labelValue = ExprParser.parseNumber( iter );
       }
       catch( PrgException ex ) {
-	throw new IOException( LangUtil.tr(
-		"Marke {0}: {1}", labelName, ex.getMessage() ) );
+	throw new IOException( LangUtil.getText(
+		"assembler.text.label", labelName, ex.getMessage() ) );
       }
       if( ExprParser.skipSpaces( iter ) != CharacterIterator.DONE ) {
-	throw new IOException( LangUtil.tr(
-		"Ung\u00FCltige Zahl bei Marke {0}", labelName ) );
+	throw new IOException( LangUtil.getText(
+		"assembler.text.invalid_number_label", labelName ) );
       }
     }
     labels.add( new AbstractMap.SimpleImmutableEntry<>(
@@ -433,12 +438,14 @@ public class CmdLineAssembler
 
   private static void throwWrongCmdLine() throws IOException
   {
-    throw new IOException( "Kommandozeile fehlerhaft" );
+    throw new IOException( LangUtil.getText(
+			"programming.error.command_line_faulty" ) );
   }
 
 
   private static void throwWrongListPageLen() throws IOException
   {
-    throw new IOException( "Ung\u00FCltige Anzahl Zeilen pro Seite" );
+    throw new IOException( LangUtil.getText(
+			"assembler.error.invalid_number_lines" ) );
   }
 }

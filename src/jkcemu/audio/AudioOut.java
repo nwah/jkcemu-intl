@@ -22,6 +22,7 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.Mixer;
 import javax.sound.sampled.SourceDataLine;
 import jkcemu.etc.ReadableByteArrayOutputStream;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 
 
@@ -147,7 +148,8 @@ public class AudioOut extends AudioIO
       {
 	recBuf.finish();
 	this.recBufOut = null;
-	throw new IOException( "Keine Aufnahme vorhanden" );
+	throw new IOException(
+		LangUtil.getText( "audio.error.no_recording_available" ) );
       }
 
       if( !this.recCompleted ) {

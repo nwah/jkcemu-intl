@@ -343,14 +343,8 @@ public class DiskImgCreator
       if( (this.begTimeFile >= 0)
 	  && entryName.equals( DateStamper.FILENAME ) )
       {
-	throw new IOException( LangUtil.tr(
-		"Bei einem Diskettenformat mit"
-			+ " DateStamper-Unterst\u00FCtzung\n"
-			+ "werden die Zeitstempel in der Datei {0}"
-			+ " gespeichert.\n"
-			+ "Diese Datei wird automatisch angelegt und"
-			+ " kann deshalb\n"
-			+ "nicht vom Anwender hinzugef\u00FCgt werden.",
+	throw new IOException( LangUtil.getText(
+		"disk.text.disk_format_supports",
 		DateStamper.FILENAME ) );
       }
       InputStream in = null;
@@ -412,7 +406,7 @@ public class DiskImgCreator
 	while( b >= 0 ) {
 	  if( p >= this.begDirArea ) {
 	    throw new IOException(
-			"Datei f\u00FCr Systemspuren ist zu gro\u00DF!" );
+			LangUtil.getText( "disk.error.file_system_tracks" ) );
 	  }
 	  this.diskBuf[ p++ ] = (byte) b;
 	  b = in.read();
@@ -437,7 +431,7 @@ public class DiskImgCreator
 			int           extentNum ) throws IOException
   {
     if( this.dstDirPos >= this.begFileArea ) {
-      throw new IOException( "Directory voll" );
+      throw new IOException( LangUtil.getText( "disk.error.directory_full" ) );
     }
 
     int entryBegPos                  = this.dstDirPos;
@@ -530,8 +524,7 @@ public class DiskImgCreator
 	  while( (remainBlockBytes > 0) && (b >= 0) ) {
 	    if( this.dstFilePos >= this.diskBuf.length ) {
 	      throw new IOException(
-		"Das ausgew\u00E4hlten Diskettenformat bietet nicht"
-				+ " gen\u00FCgend Platz." );
+		LangUtil.getText( "disk.error.selected_disk_format" ) );
 	    }
 	    this.diskBuf[ this.dstFilePos++ ] = (byte) b;
 	    --remainBlockBytes;

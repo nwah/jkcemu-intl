@@ -9,6 +9,7 @@
 package jkcemu.programming.basic;
 
 import java.text.CharacterIterator;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 
 
@@ -58,7 +59,8 @@ public class NumericValue
 	  }
 	  rv = fromUnsignedInt( iter, value, prefDataType );
 	} else {
-	  throw new PrgException( "0 oder 1 erwartet" );
+	  throw new PrgException( LangUtil.getText(
+				"basic.error.0_1_expected" ) );
 	}
       } else if( (ch == 'H') || (ch == 'h') ) {
 	iter.next();
@@ -68,7 +70,8 @@ public class NumericValue
 	}
 	rv = fromUnsignedInt( iter, value.longValue(), prefDataType );
       } else {
-	throw new PrgException( "B oder H erwartet" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.b_h_expected" ) );
       }
     }
     else if( ch == '\'' ) {
@@ -368,7 +371,9 @@ public class NumericValue
       if( (ch == 'D') || (ch == 'd') ) {
 	ch = iter.next();
 	if( !d6Valid ) {
-	  throw new PrgException( "Ung\u00FCltige Decimal-Zahl" );
+	  throw new PrgException(
+			LangUtil.getText(
+				"basic.error.invalid_decimal_number" ) );
 	}
 	if( d6Overflow ) {
 	  BasicUtil.throwNumberTooBig();
@@ -380,7 +385,9 @@ public class NumericValue
       } else if( (ch == 'F') || (ch == 'f') ) {
 	ch = iter.next();
 	if( f4Value == null ) {
-	  throw new PrgException( "Ung\u00FCltige Single-Zahl" );
+	  throw new PrgException(
+			LangUtil.getText(
+				"basic.error.invalid_single_number" ) );
 	}
 	if( f4Value.isInfinite() || f4Value.isNaN() ) {
 	  BasicUtil.throwNumberTooBig();
@@ -392,7 +399,9 @@ public class NumericValue
       } else if( i4Valid && ((ch == 'L') || (ch == 'l')) ) {
 	ch = iter.next();
 	if( !i4Valid ) {
-	  throw new PrgException( "Ung\u00FCltige Long-Zahl" );
+	  throw new PrgException(
+			LangUtil.getText(
+				"basic.error.invalid_long_number" ) );
 	}
 	if( i4Overflow ) {
 	  BasicUtil.throwNumberTooBig();
@@ -475,7 +484,8 @@ public class NumericValue
       BasicUtil.throwNumberTooBig();
     }
     if( (rv == null) && hasDigits ) {
-      throw new PrgException( "Ung\u00FCltige Zahl" );
+      throw new PrgException(
+		LangUtil.getText( "basic.error.invalid_number" ) );
     }
     if( compiler.getBasicOptions().getWarnTooManyDigits()
 	&& (rv != null) )

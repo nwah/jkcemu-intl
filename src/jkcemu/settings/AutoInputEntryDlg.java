@@ -33,11 +33,12 @@ import jkcemu.base.AutoInputEntry;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.PopupMenuOwner;
+import jkcemu.lang.LangUtil;
 
 
 public class AutoInputEntryDlg extends BaseDlg implements PopupMenuOwner
 {
-  private static final String LABEL_WAIT_TIME = "Wartezeit vor Eingabe:";
+  private static final String LABEL_WAIT_TIME = "settings.label.wait_time_before_input";
   private static final String CMD_CHAR_PREFIX = "char:";
 
   private static int[] waitMillis = {
@@ -184,7 +185,7 @@ public class AutoInputEntryDlg extends BaseDlg implements PopupMenuOwner
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( LABEL_WAIT_TIME ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText( LABEL_WAIT_TIME ) ), gbc );
 
     this.comboWaitSeconds = GUIFactory.createComboBox();
     for( int millis : waitMillis ) {
@@ -198,11 +199,13 @@ public class AutoInputEntryDlg extends BaseDlg implements PopupMenuOwner
 
     gbc.fill = GridBagConstraints.NONE;
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Sekunden" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.seconds" ) ), gbc );
 
     gbc.gridx = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Eingabetext:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.input_text" ) ), gbc );
 
     final AutoInputDocument docInputText = new AutoInputDocument(
 							charSet,
@@ -241,7 +244,7 @@ public class AutoInputEntryDlg extends BaseDlg implements PopupMenuOwner
     }
 
     this.btnSpecialChars = GUIFactory.createButton(
-		"Bet\u00E4tigung einer Steuertaste eingeben" );
+		LangUtil.getText( "settings.action.enter_press_control" ) );
     gbc.weightx = 0.0;
     gbc.fill    = GridBagConstraints.NONE;
     gbc.gridy++;
@@ -250,7 +253,8 @@ public class AutoInputEntryDlg extends BaseDlg implements PopupMenuOwner
     gbc.gridwidth = 1;
     gbc.gridx     = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Bemerkung:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.remark" ) ), gbc );
 
     this.fldRemark = GUIFactory.createTextField();
     gbc.weightx    = 1.0;
@@ -291,7 +295,8 @@ public class AutoInputEntryDlg extends BaseDlg implements PopupMenuOwner
       }
     }
     if( charSet.containsCtrlCodes() ) {
-      JMenu mnuCtrl = GUIFactory.createMenu( "CTRL-Steuerzeichen" );
+      JMenu mnuCtrl = GUIFactory.createMenu(
+		LangUtil.getText( "settings.menu.ctrl_control_characters" ) );
       for( int i = 1; i < 27; i++ ) {
 	String text = String.format( "^%c", (char) (i + 0x40) );
 	String desc = charSet.getCtrlCodeDesc( i );
@@ -356,13 +361,12 @@ public class AutoInputEntryDlg extends BaseDlg implements PopupMenuOwner
 	  }
 	  catch( ParseException ex ) {
 	    throw new NumberFormatException(
-			LABEL_WAIT_TIME + ": Ung\u00FCltiges Format" );
+			LangUtil.getText( LABEL_WAIT_TIME ) + ": Ung\u00FCltiges Format" );
 	  }
 	} else {
 	  showErrorDlg(
 		this,
-		"Eingabetext: Sie m\u00FCssen mindestens"
-				+ " ein Zeichen eingeben!" );
+		LangUtil.getText( "settings.error.input_text_enter" ) );
 	}
       }
     }

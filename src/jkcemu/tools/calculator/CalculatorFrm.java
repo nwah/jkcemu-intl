@@ -42,7 +42,7 @@ public class CalculatorFrm extends BaseFrm implements
 						FocusListener,
 						MenuListener
 {
-  public static final String TITLE = Main.APPNAME + " Rechner";
+  public static final String TITLE = "calculator.title.jkcemu_calculator";
 
   private static final String HELP_PAGE = "/help/tools/calculator.htm";
 
@@ -235,20 +235,22 @@ public class CalculatorFrm extends BaseFrm implements
     this.clipboard      = null;
     this.focusedTextFld = null;
     this.nextCalcNum    = 1;
-    setTitle( TITLE );
+    setTitle( LangUtil.getText( TITLE ) );
 
 
     // Menu Datei
     JMenu mnuFile = createMenuFile();
 
-    this.mnuNewTab = createMenuItem( "Neues Rechner-Unterfenster");
+    this.mnuNewTab = createMenuItem( LangUtil.getText(
+			"calculator.action.new_calculator_subwindow" ));
     this.mnuNewTab.setAccelerator(
 		KeyStroke.getKeyStroke(
 				KeyEvent.VK_N,
 				InputEvent.CTRL_DOWN_MASK ) );
     mnuFile.add( this.mnuNewTab );
 
-    this.mnuCloseTab = createMenuItem( "Unterfenster schlie\u00Dfen");
+    this.mnuCloseTab = createMenuItem(
+		LangUtil.getText( "common.action.close_subwindow" ));
     this.mnuCloseTab.setAccelerator(
 		KeyStroke.getKeyStroke(
 				KeyEvent.VK_W,
@@ -280,7 +282,8 @@ public class CalculatorFrm extends BaseFrm implements
     // Menu Hilfe
     JMenu mnuHelp = createMenuHelp();
 
-    this.mnuHelpContent = createMenuItem( "Hilfe zum Rechner..." );
+    this.mnuHelpContent = createMenuItem( LangUtil.getText(
+			"calculator.action.help_calculator" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -325,7 +328,8 @@ public class CalculatorFrm extends BaseFrm implements
   {
     TabTitleFld.addTabTo(
 		this.tabbedPane,
-		LangUtil.tr( "Rechner {0}", this.nextCalcNum++ ),
+		LangUtil.getText(
+			"calculator.text.calculator", this.nextCalcNum++ ),
 		calcFld,
 		this );
     this.tabbedPane.setSelectedComponent( calcFld );

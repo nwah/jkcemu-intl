@@ -10,6 +10,7 @@ package jkcemu.programming.basic;
 
 import java.text.CharacterIterator;
 import java.util.concurrent.atomic.AtomicBoolean;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 
 
@@ -1246,7 +1247,8 @@ public class BasicFuncParser
 	    }
 	    if( (userRoundMode != null) && (libRoundMode == null) ) {
 	      compiler.putWarning(
-			"Rundungsmodus hat ung\u00FCltigen Wert" );
+			LangUtil.getText(
+				"basic.msg.rounding_mode_invalid" ) );
 	    }
 	    if( BasicUtil.checkComma( iter ) ) {
 	      int pos2 = asmOut.length();
@@ -1557,7 +1559,9 @@ public class BasicFuncParser
 	    }
 	    break;
 	  default:
-	    throw new PrgException( "Zahlenbasis nicht unterst\u00FCtzt" );
+	    throw new PrgException(
+			LangUtil.getText(
+				"basic.error.number_base_not_supported" ) );
 	}
       } else {
 	String oldCode = asmOut.cut( pos );

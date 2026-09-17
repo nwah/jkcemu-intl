@@ -13,6 +13,7 @@ import java.io.IOException;
 import jkcemu.disk.AbstractFloppyDisk;
 import jkcemu.disk.CPCDisk;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class CPCDiskFileTarget extends AbstractConvertTarget
@@ -24,7 +25,9 @@ public class CPCDiskFileTarget extends AbstractConvertTarget
 			FileConvertFrm     fileConvertFrm,
 			AbstractFloppyDisk disk )
   {
-    super( fileConvertFrm, "CPC-Disk-Datei (*.dsk)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "fileconv.title.cpc_disk_file" ) );
     this.disk = disk;
   }
 

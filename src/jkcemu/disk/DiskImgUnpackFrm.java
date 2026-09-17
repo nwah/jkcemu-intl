@@ -74,8 +74,7 @@ public class DiskImgUnpackFrm
 			extends BaseFrm
 			implements DropTargetListener
 {
-  public static final String TITLE = Main.APPNAME
-			+ " CP/M-kompatible Diskettenabbilddatei entpacken";
+  public static final String TITLE = "disk.title.jkcemu_unpack_cp";
 
   private static final String HELP_PAGE = "/help/disk/unpackdiskimg.htm";
 
@@ -290,7 +289,7 @@ public class DiskImgUnpackFrm
   {
     File file = FileUtil.showFileOpenDlg(
 			this,
-			"Diskettenabbilddatei \u00F6ffnen",
+			LangUtil.getText( "disk.title.open_disk_image" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_DU_IN ),
 			FileUtil.getPlainDiskFileFilter(),
@@ -334,7 +333,8 @@ public class DiskImgUnpackFrm
 	}
 	if( outDirText == null ) {
 	  throw new UserInputException(
-				"Ausgabeverzeichnis nicht angegeben" );
+				LangUtil.getText(
+					"disk.error.output_directory_not_specified" ) );
 	}
 	this.outDir = new File( outDirText );
 	if( this.outDir.exists() ) {
@@ -351,11 +351,9 @@ public class DiskImgUnpackFrm
 	  if( !outDirEmpty ) {
 	    if( !BaseDlg.showConfirmWarningDlg(
 			this,
-			"Das Ausgabeverzeichnis existiert bereits"
-				+ " und ist nicht leer.\n"
-				+ "Gleichnamige Dateien in dem Verzeichnis"
-				+ " werden \u00FCberschrieben!",
-			"Warnung" ) )
+			LangUtil.getText(
+				"disk.msg.output_directory_already" ),
+			LangUtil.getText( "common.msg.warning" ) ) )
 	    {
 	      throw new UserCancelException();
 	    }
@@ -372,7 +370,7 @@ public class DiskImgUnpackFrm
 	this.blockSize = getSelectedBlockSize();
 	if( this.blockSize <= 0 ) {
 	  throw new UserInputException(
-		"Sie m\u00FCssen die Blockgr\u00F6\u00DFe ausw\u00E4hlen!" );
+		LangUtil.getText( "disk.error.select_block_size" ) );
 	}
 	this.sectorSize = this.dataSectors.get( 0 ).getDataLength();
 	if( this.sectorSize < 0x80 ) {
@@ -457,8 +455,8 @@ public class DiskImgUnpackFrm
 	    if( this.fileErr && !this.sysBytesCRCErr ) {
 	      fileName = SYS_TRACKS_FILENAME + FILE_ERROR_SUFFIX;
 	      if( file.renameTo( new File( this.outDir, fileName ) ) ) {
-		appendToLog( LangUtil.tr(
-				"  Datei in {0} umbenannt\n\n",
+		appendToLog( LangUtil.getText(
+				"disk.text.file_renamed_blank_line",
 				fileName ) );
 	      }
 	    }
@@ -470,44 +468,26 @@ public class DiskImgUnpackFrm
 
 	// Fertigmeldung
 	if( this.unpackErr ) {
-	  String errMsg = LangUtil.tr(
-				"Beim Entpacken traten Fehler auf!" );
+	  String errMsg = LangUtil.getText(
+				"disk.text.errors_occurred_during" );
 	  if( this.blockSizeTooBig || this.blockSizeTooSmall ) {
 	    String sizeHint = null;
 	    if( this.blockSizeTooBig && !this.blockSizeTooSmall ) {
-	      sizeHint = LangUtil.tr(
-		"\n\nWahrscheinlich ist die ausgew\u00E4hlte"
-			+ " Blockgr\u00F6\u00DFe zu gro\u00DF\n"
-			+ "oder das Blocknummernformat (8/16 Bit)"
-			+ " falsch eingestellt.\n"
-			+ "Wenn dem so ist,"
-			+ " dann k\u00F6nnen auch die ohne Fehlermeldung\n"
-			+ "entpackten Dateien falsche Daten enthalten!" );
+	      sizeHint = LangUtil.getText(
+		"disk.text.selected_block_size_probably_large" );
 	    } else if( !this.blockSizeTooBig && this.blockSizeTooSmall ) {
-	      sizeHint = LangUtil.tr(
-		"\n\nWahrscheinlich ist die ausgew\u00E4hlte"
-			+ " Blockgr\u00F6\u00DFe zu klein\n"
-			+ "oder das Blocknummernformat (8/16 Bit)"
-			+ " falsch eingestellt.\n"
-			+ "Wenn dem so ist,"
-			+ " dann k\u00F6nnen auch die ohne Fehlermeldung\n"
-			+ "entpackten Dateien falsche Daten enthalten!" );
+	      sizeHint = LangUtil.getText(
+		"disk.text.selected_block_size_probably_small" );
 	    } else {
-	      sizeHint = LangUtil.tr(
-		"\n\nWahrscheinlich ist die ausgew\u00E4hlte"
-			+ " Blockgr\u00F6\u00DFe falsch\n"
-			+ "oder das Blocknummernformat (8/16 Bit)"
-			+ " falsch eingestellt.\n"
-			+ "Wenn dem so ist,"
-			+ " dann k\u00F6nnen auch die ohne Fehlermeldung\n"
-			+ "entpackten Dateien falsche Daten enthalten!" );
+	      sizeHint = LangUtil.getText(
+		"disk.text.selected_block_size_probably_wrong" );
 	    }
 	    errMsg = errMsg + sizeHint;
 	  }
 	  appendToLog( "\n" + errMsg + "\n" );
 	  throw new IOException( errMsg );
 	} else {
-	  appendToLog( "\nFertig!\n" );
+	  appendToLog( LangUtil.getText( "disk.msg.done" ) );
 	}
 	this.btnOutDirOpen.setEnabled( true );
       }
@@ -551,7 +531,7 @@ public class DiskImgUnpackFrm
 
   private DiskImgUnpackFrm()
   {
-    setTitle( TITLE );
+    setTitle( LangUtil.getText( TITLE ) );
     this.dataAreaTruncated = false;
     this.dataSectors       = new ArrayList<>();
     this.dirBytes          = null;
@@ -592,7 +572,8 @@ public class DiskImgUnpackFrm
     // Diskettenabbilddatei
     JPanel panelDiskFile = GUIFactory.createPanel( new GridBagLayout() );
     panelDiskFile.setBorder(
-		GUIFactory.createTitledBorder( "Diskettenabbilddatei" ) );
+		GUIFactory.createTitledBorder(
+			LangUtil.getText( "disk.section.disk_image_file" ) ) );
     add( panelDiskFile, gbc );
 
     GridBagConstraints gbcDiskFile = new GridBagConstraints(
@@ -605,7 +586,8 @@ public class DiskImgUnpackFrm
 					0, 0 );
 
     panelDiskFile.add(
-		GUIFactory.createLabel( EmuUtil.LABEL_FILE ),
+		GUIFactory.createLabel(
+			LangUtil.getText( EmuUtil.LABEL_FILE ) ),
 		gbcDiskFile );
 
     this.fldDiskFile          = new FileNameFld();
@@ -619,7 +601,8 @@ public class DiskImgUnpackFrm
     this.btnDiskFileOpen = GUIFactory.createRelImageResourceButton(
 				this,
 				"file/open.png",
-				"Diskettenabbilddatei ausw\u00E4hlen" );
+				LangUtil.getText(
+					"disk.action.select_disk_image" ) );
     gbcDiskFile.fill    = GridBagConstraints.NONE;
     gbcDiskFile.weightx = 0.0;
     gbcDiskFile.gridx++;
@@ -628,7 +611,8 @@ public class DiskImgUnpackFrm
     this.btnDiskFileRemove = GUIFactory.createRelImageResourceButton(
 				this,
 				"file/delete.png",
-				"Diskettenabbilddatei entfernen" );
+				LangUtil.getText(
+					"disk.action.remove_disk_image" ) );
     this.btnDiskFileRemove.setEnabled( false );
     gbcDiskFile.gridx++;
     panelDiskFile.add( this.btnDiskFileRemove, gbcDiskFile );
@@ -638,7 +622,8 @@ public class DiskImgUnpackFrm
     gbcDiskFile.gridx         = 0;
     gbcDiskFile.gridy++;
     panelDiskFile.add(
-		GUIFactory.createLabel( "Kommentar:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText( "common.label.comment" ) ),
 		gbcDiskFile );
 
     this.fldRemark = GUIFactory.createTextField();
@@ -653,7 +638,8 @@ public class DiskImgUnpackFrm
 
     // Entpacken
     JPanel panelUnpack = GUIFactory.createPanel( new GridBagLayout() );
-    panelUnpack.setBorder( GUIFactory.createTitledBorder( "Entpacken" ) );
+    panelUnpack.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "disk.action.unpack" ) ) );
     gbc.gridy++;
     add( panelUnpack, gbc );
 
@@ -672,7 +658,8 @@ public class DiskImgUnpackFrm
     panelOutDir.setLayout( new BoxLayout( panelOutDir, BoxLayout.X_AXIS ) );
     panelUnpack.add( panelOutDir, gbcUnpack );
 
-    this.labelOutDir = GUIFactory.createLabel( "Entpacken nach:" );
+    this.labelOutDir = GUIFactory.createLabel(
+		LangUtil.getText( "common.title.unpack" ) );
     panelOutDir.add( this.labelOutDir );
     panelOutDir.add( Box.createHorizontalStrut( 5 ) );
 
@@ -689,20 +676,21 @@ public class DiskImgUnpackFrm
     this.btnOutDirSelect = GUIFactory.createRelImageResourceButton(
 				this,
 				"file/open.png",
-				"Zielverzeichnis ausw\u00E4hlen" );
+				LangUtil.getText( "disk.action.select_target_directory" ) );
     panelOutDir.add( this.btnOutDirSelect );
 
 
     // Blockgroesse, Blocknummerngroesse und Optionen
     this.labelBlockSize = GUIFactory.createLabel(
-					"Blockgr\u00F6\u00DFe [kByte]:" );
+					LangUtil.getText( "disk.label.block_size_kbyte" ) );
     gbcUnpack.fill      = GridBagConstraints.NONE;
     gbcUnpack.weightx   = 0.0;
     gbcUnpack.gridwidth = 1;
     gbcUnpack.gridy++;
     panelUnpack.add( this.labelBlockSize, gbcUnpack );
 
-    this.labelBlockNumSize = GUIFactory.createLabel( "Blocknummern:" );
+    this.labelBlockNumSize = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.block_numbers" ) );
     gbcUnpack.gridy++;
     panelUnpack.add( this.labelBlockNumSize, gbcUnpack );
 
@@ -721,13 +709,15 @@ public class DiskImgUnpackFrm
 
     ButtonGroup grpBlockNumSize = new ButtonGroup();
 
-    this.rbBlockNum8Bit = GUIFactory.createRadioButton( "8 Bit" );
+    this.rbBlockNum8Bit = GUIFactory.createRadioButton(
+		LangUtil.getText( "common.option.8_bit" ) );
     grpBlockNumSize.add( this.rbBlockNum8Bit );
     gbcUnpack.gridwidth = 1;
     gbcUnpack.gridy++;
     panelUnpack.add( this.rbBlockNum8Bit, gbcUnpack );
 
-    this.rbBlockNum16Bit = GUIFactory.createRadioButton( "16 Bit", true );
+    this.rbBlockNum16Bit = GUIFactory.createRadioButton(
+		LangUtil.getText( "common.option.16_bit" ), true );
     grpBlockNumSize.add( this.rbBlockNum16Bit );
     gbcUnpack.gridx++;
     panelUnpack.add( this.rbBlockNum16Bit, gbcUnpack );
@@ -742,8 +732,7 @@ public class DiskImgUnpackFrm
     panelUnpack.add( this.infoBlockNumSize, gbcUnpack );
 
     this.cbUnpackDeleted = GUIFactory.createCheckBox(
-	"Gel\u00F6schte Dateien entpacken,"
-		+ " sofern sie noch nicht \u00FCberschrieben wurden",
+	LangUtil.getText( "disk.option.unpack_deleted_files" ),
 	Main.getBooleanProperty(
 			PROP_UNPACK_DELETED,
 			DEFAULT_UNPACK_DELETED ) );
@@ -753,7 +742,8 @@ public class DiskImgUnpackFrm
     panelUnpack.add( this.cbUnpackDeleted, gbcUnpack );
 
     this.cbForceLowerCase = GUIFactory.createCheckBox(
-				"Dateinamen klein schreiben",
+				LangUtil.getText(
+					"common.option.write_file_names" ),
 				Main.getBooleanProperty(
 						PROP_FORCE_LOWERCASE,
 						DEFAULT_FORCE_LOWERCASE ) );
@@ -762,7 +752,8 @@ public class DiskImgUnpackFrm
     panelUnpack.add( this.cbForceLowerCase, gbcUnpack );
 
     this.cbApplyReadOnly = GUIFactory.createCheckBox(
-				"Schreibschutzattribut anwenden",
+				LangUtil.getText(
+					"disk.option.apply_read_only" ),
 				Main.getBooleanProperty(
 						PROP_APPLY_READONLY,
 						DEFAULT_APPLY_READONLY ) );
@@ -773,7 +764,8 @@ public class DiskImgUnpackFrm
 
     // Protokoll
     JPanel panelLog = GUIFactory.createPanel( new BorderLayout() );
-    panelLog.setBorder( GUIFactory.createTitledBorder( "Protokoll" ) );
+    panelLog.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "disk.section.log" ) ) );
     gbc.fill    = GridBagConstraints.BOTH;
     gbc.weighty = 1.0;
     gbc.gridy++;
@@ -796,22 +788,26 @@ public class DiskImgUnpackFrm
     gbc.gridy++;
     add( panelBtn, gbc );
 
-    this.btnDiskFileUnpack = GUIFactory.createButton( "Entpacken" );
+    this.btnDiskFileUnpack = GUIFactory.createButton(
+		LangUtil.getText( "disk.action.unpack" ) );
     panelBtn.add( this.btnDiskFileUnpack );
 
     this.btnOutDirOpen = GUIFactory.createButton(
-					"Verzeichnis \u00F6ffnen" );
+					LangUtil.getText( "disk.action.open_directory" ) );
     this.btnOutDirOpen.setEnabled( false );
     panelBtn.add( this.btnOutDirOpen );
 
-    this.btnCopyLog = GUIFactory.createButton( "Protokoll kopieren" );
+    this.btnCopyLog = GUIFactory.createButton(
+		LangUtil.getText( "disk.action.copy_log" ) );
     this.btnCopyLog.setEnabled( false );
     panelBtn.add( this.btnCopyLog );
 
-    this.btnHelp = GUIFactory.createButton( "Hilfe" );
+    this.btnHelp = GUIFactory.createButton(
+		LangUtil.getText( "common.menu.help" ) );
     panelBtn.add( this.btnHelp );
 
-    this.btnClose = GUIFactory.createButton( "Schlie\u00DFen" );
+    this.btnClose = GUIFactory.createButton(
+		LangUtil.getText( "common.action.close" ) );
     panelBtn.add( this.btnClose );
 
 
@@ -985,7 +981,7 @@ public class DiskImgUnpackFrm
     if( preExtentNum >= 0 ) {
       additionalExtents = extentNum - preExtentNum - 1;
       if( additionalExtents < 0 ) {
-	appendToLog( "  Reihenfolge der physischen Extents fehlerhaft" );
+	appendToLog( LangUtil.getText( "disk.msg.order_physical_extents" ) );
 	this.fileTruncated = true;
 	this.fileErr       = true;
 	this.unpackErr     = true;
@@ -1014,17 +1010,13 @@ public class DiskImgUnpackFrm
 	  if( sectorIdx >= this.dataSectors.size() ) {
 	    StringBuilder buf = new StringBuilder();
 	    if( this.dataAreaTruncated ) {
-	      buf.append( LangUtil.tr(
-			"  Block {0} liegt au\u00DFerhalb des"
-				+ " Datenbereichs\n"
-				+ "  oder in einem Bereich mit"
-				+ " unregelm\u00E4\u00DFigem Sektor-Layout.\n",
+	      buf.append( LangUtil.getText(
+			"disk.text.block_lies_outside_data_area_area",
 			blockNum ) );
 	    } else {
 	      this.blockSizeTooBig = true;
-	      buf.append( LangUtil.tr(
-			"  Block {0} liegt au\u00DFerhalb des"
-				+ " Datenbereichs.\n",
+	      buf.append( LangUtil.getText(
+			"disk.text.block_lies_outside_data_area",
 			blockNum ) );
 	    }
 	    appendToLog( buf.toString() );
@@ -1036,7 +1028,7 @@ public class DiskImgUnpackFrm
 	  }
 	  SectorData sector = this.dataSectors.get( sectorIdx++ );
 	  if( !this.fileCRCErr && sector.checkError() ) {
-	    appendToLog( "Sektoren wurden mit CRC-Fehler gelesen.\n" );
+	    appendToLog( LangUtil.getText( "disk.msg.sectors_read_crc" ) );
 	    this.fileCRCErr = true;
 	    this.fileErr    = true;
 	  }
@@ -1079,9 +1071,7 @@ public class DiskImgUnpackFrm
     int     preExtentNum = -1;
     while( processing && ((extentPos + 31) < this.dirBytes.length) ) {
       if( deleted && !checkUniqueBlockNums( extentPos ) ) {
-	appendToLog( "  Datei kann nicht vollst\u00E4ndig entpackt"
-		+ " werden,\n  da der Datenbereich bereits"
-		+ " teilweise von anderen Dateien verwendet wird.\n" );
+	appendToLog( LangUtil.getText( "disk.msg.file_cannot_unpacked" ) );
 	this.fileTruncated = true;
 	processing         = false;
       } else {
@@ -1257,8 +1247,8 @@ public class DiskImgUnpackFrm
 					new File( dirFile, fName2 )
 					: new File( fName2 ));
 		  if( file.renameTo( newFile ) ) {
-		    appendToLog( LangUtil.tr(
-				"  Datei in {0} umbenannt\n",
+		    appendToLog( LangUtil.getText(
+				"disk.text.file_renamed",
 				fName2 ) );
 		  }
 		}
@@ -1321,7 +1311,8 @@ public class DiskImgUnpackFrm
 
 	  // Datei lesen
 	  if( file.length() > Integer.MAX_VALUE ) {
-	    throw new IOException( "Datei ist zu gro\u00DF!" );
+	    throw new IOException(
+			LangUtil.getText( "common.error.file_large" ) );
 	  }
 	  String fName = file.getName();
 	  if( fName != null ) {
@@ -1455,9 +1446,8 @@ public class DiskImgUnpackFrm
 	  if( dirBytes != null ) {
 	    StringBuilder buf = new StringBuilder();
 	    if( this.sysBytesOffs > 0 ) {
-	      buf.append( LangUtil.tr(
-			"Festplattenabbilddatei mit {0}"
-				+ " Byte gro\u00DFem Kopfblock erkannt\n\n",
+	      buf.append( LangUtil.getText(
+			"disk.text.hard_disk_image_file_byte",
 			this.sysBytesOffs ) );
 	    }
 	    if( dirBytes.length > 0 ) {
@@ -1466,14 +1456,8 @@ public class DiskImgUnpackFrm
 								true );
 	      if( !entries.isEmpty() ) {
 		if( dataTruncReason != null ) {
-		  buf.append( LangUtil.tr(
-			"Unregelm\u00E4\u00DFigkeit bei den"
-				+ " Sektoren im Datenbereich gefunden:\n"
-				+ "{0}\n\n"
-				+ "Es k\u00F6nnen nur die Dateien"
-				+ " vollst\u00E4ndig entpackt werden,\n"
-				+ "deren Daten vor der"
-				+ " Unregelm\u00E4\u00DFigkeit liegen.\n\n",
+		  buf.append( LangUtil.getText(
+			"disk.text.irregularity_found",
 			dataTruncReason ) );
 		}
 		buf.append( "Directory:\n" );
@@ -1508,24 +1492,22 @@ public class DiskImgUnpackFrm
 		blockSize.set( 0 );
 	      }
 	      Color  color = COLOR_EMPHASIZED;
-	      String text  = LangUtil.tr(
-				"Blockgr\u00F6\u00DFe nicht erkannt" );
+	      String text  = LangUtil.getText(
+				"disk.text.block_size_not_detected" );
 	      if( blockSize.get() > 0 ) {
 		String sizeText = null;
 		if( (blockSize.get() % 1024) == 0 ) {
-		  sizeText = LangUtil.tr(
-				"{0} kByte",
+		  sizeText = LangUtil.getText( "disk.text.kbyte",
 				blockSize.get() / 1024 );
 		} else {
-		  sizeText = LangUtil.tr( "{0} Byte", blockSize.get() );
+		  sizeText = LangUtil.getText(
+				"disk.text.bytes", blockSize.get() );
 		}
 		if( blockSizeUnique.get() ) {
 		  color = COLOR_RECOGNIZED;
-		  text  = LangUtil.tr( "{0} erkannt", sizeText );
+		  text  = LangUtil.getText( "disk.text.detected", sizeText );
 		} else {
-		  text = LangUtil.tr(
-				"wahrscheinlich {0}"
-					+ " (nicht eindeutig erkannt)",
+		  text = LangUtil.getText( "disk.text.probably_not_uniquely",
 				sizeText );
 		}
 		this.comboBlockSize.setSelectedItem(
@@ -1537,15 +1519,18 @@ public class DiskImgUnpackFrm
 	      if( blockNumSize.get() == 8 ) {
 		this.rbBlockNum8Bit.setSelected( true );
 		this.infoBlockNumSize.setForeground( COLOR_RECOGNIZED );
-		this.infoBlockNumSize.setText( LangUtil.tr( "8 Bit erkannt" ) );
+		this.infoBlockNumSize.setText(
+			LangUtil.getText( "disk.text.8_bit_detected" ) );
 	      } else if( blockNumSize.get() == 16 ) {
 		this.rbBlockNum16Bit.setSelected( true );
 		this.infoBlockNumSize.setForeground( COLOR_RECOGNIZED );
-		this.infoBlockNumSize.setText( LangUtil.tr( "16 Bit erkannt" ) );
+		this.infoBlockNumSize.setText(
+			LangUtil.getText( "disk.text.16_bit_detected" ) );
 	      } else {
 		this.rbBlockNum16Bit.setSelected( true );
 		this.infoBlockNumSize.setForeground( COLOR_EMPHASIZED );
-		this.infoBlockNumSize.setText( LangUtil.tr( "Nicht erkannt" ) );
+		this.infoBlockNumSize.setText(
+			LangUtil.getText( "disk.text.not_detected" ) );
 	      }
 
 	      // Ausgabeverzeichnis vorbelegen

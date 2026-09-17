@@ -128,7 +128,7 @@ public class ExifEditDlg extends BaseDlg
 
   private ExifEditDlg( Window owner, ExifData exifData )
   {
-    super( owner, "Zusatzinformationen bearbeiten" );
+    super( owner, LangUtil.getText( "image.title.edit_additional" ) );
     this.oldExifData      = exifData;
     this.approvedExifData = null;
 
@@ -145,18 +145,22 @@ public class ExifEditDlg extends BaseDlg
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.labelName = GUIFactory.createLabel( "Name / Titel:" );
+    this.labelName = GUIFactory.createLabel(
+		LangUtil.getText( "image.label.name_title" ) );
     add( this.labelName, gbc );
 
-    this.labelDesc = GUIFactory.createLabel( "Beschreibung / Bemerkung:" );
+    this.labelDesc = GUIFactory.createLabel(
+		LangUtil.getText( "image.label.description_comment" ) );
     gbc.gridy++;
     add( this.labelDesc, gbc );
 
-    this.labelAuthor = GUIFactory.createLabel( "Autor / Fotograf:" );
+    this.labelAuthor = GUIFactory.createLabel(
+		LangUtil.getText( "image.label.author_photographer" ) );
     gbc.gridy++;
     add( this.labelAuthor, gbc );
 
-    this.labelCopyright = GUIFactory.createLabel( "Copyright:" );
+    this.labelCopyright = GUIFactory.createLabel(
+		LangUtil.getText( "image.label.copyright" ) );
     gbc.gridy++;
     add( this.labelCopyright, gbc );
 
@@ -165,7 +169,8 @@ public class ExifEditDlg extends BaseDlg
      * d.h., deas Label wird nicht fuer eine Fehlemeldung benoetigt.
      */
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Kommentar:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.comment" ) ), gbc );
 
     this.fldName = createLatin1TextField();
     gbc.anchor   = GridBagConstraints.WEST;
@@ -273,10 +278,8 @@ public class ExifEditDlg extends BaseDlg
     catch( UnsupportedEncodingException ex ) {
       showErrorDlg(
 		this,
-		label.getText() + LangUtil.tr(
-			"Der Text enth\u00E4lt Zeichen"
-				+ " aus einem Zeichensatz,\n"
-				+ "der hier nicht unterst\u00FCtzt wird." ) );
+		label.getText() + LangUtil.getText(
+			"image.text.text_contains_characters" ) );
     }
   }
 

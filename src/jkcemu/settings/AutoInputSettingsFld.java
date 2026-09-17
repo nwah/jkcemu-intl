@@ -35,6 +35,7 @@ import jkcemu.base.AutoInputWorker;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 
 
 public class AutoInputSettingsFld
@@ -82,14 +83,15 @@ public class AutoInputSettingsFld
 					0, 0 );
 
     add(
-	GUIFactory.createLabel( "Tastatureingaben, die nach"
-			+ " dem Einschalten bzw. nach RESET" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"settings.label.keyboard_input_performed" ) ),
 	gbc );
     gbc.insets.top    = 0;
     gbc.insets.bottom = 5;
     gbc.gridy++;
     add(
-	GUIFactory.createLabel( "automatisch get\u00E4tigt werden sollen:" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"settings.label.after_switching_after_reset_getaetigt" ) ),
 	gbc );
 
     this.tableModel = new AutoInputTableModel( charSet );
@@ -124,13 +126,14 @@ public class AutoInputSettingsFld
     this.btnUp = GUIFactory.createRelImageResourceButton(
 						this,
 						"nav/up.png",
-						"Auf" );
+						LangUtil.getText(
+							"common.action.up" ) );
     panelBtnRight.add( this.btnUp );
 
     this.btnDown = GUIFactory.createRelImageResourceButton(
 						this,
 						"nav/down.png",
-						"Ab" );
+						LangUtil.getText( "common.action.down" ) );
     panelBtnRight.add( this.btnDown );
 
     JPanel panelBtnBottom = GUIFactory.createPanel(

@@ -25,6 +25,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.disk.GIDESettingsFld;
 import jkcemu.emusys.CustomSys;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -33,8 +34,8 @@ import jkcemu.settings.SettingsFrm;
 
 public class CustomSysSettingsFld extends AbstractSettingsFld
 {
-  protected static final String TEXT_INVALID_VALUE = " Ung\u00FCltiger Wert";
-  protected static final String TEXT_INVALID_ADDR = " Ung\u00FCltige Adresse";
+  protected static final String TEXT_INVALID_VALUE = "customsys.text.invalid_value";
+  protected static final String TEXT_INVALID_ADDR = "customsys.text.invalid_address";
 
   private Map<Integer,String>  ioAddrMap;
   private JTabbedPane          tabbedPane;
@@ -60,22 +61,28 @@ public class CustomSysSettingsFld extends AbstractSettingsFld
     add( this.tabbedPane, BorderLayout.CENTER );
 
     this.tabGeneral = new GeneralSettingslFld( settingsFrm, propPrefix );
-    this.tabbedPane.addTab( "Allgemein", this.tabGeneral );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.general" ),
+		this.tabGeneral );
 
     this.tabROM = new ROMSettingsFld( settingsFrm, propPrefix );
-    this.tabbedPane.addTab( "ROM", this.tabROM );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.rom" ), this.tabROM );
 
     this.tabScreen = new ScreenSettingsFld( settingsFrm, propPrefix );
-    this.tabbedPane.addTab( "Bildschirmausgabe", this.tabScreen );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.screen_output" ),
+		this.tabScreen );
 
     this.tabKeyboard = new KeyboardSettingsFld( this, propPrefix );
-    this.tabbedPane.addTab( "Tastatur", this.tabKeyboard );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.keyboard" ),
+		this.tabKeyboard );
 
     this.tabIO = new IOSettingsFld( this, propPrefix );
-    this.tabbedPane.addTab( "E/A-Bausteine", this.tabIO );
+    this.tabbedPane.addTab( LangUtil.getText( "customsys.section.i_o_chips" ),
+		this.tabIO );
 
     this.tabFDC = new FDCSettingsFld( this, propPrefix );
-    this.tabbedPane.addTab( "FDC", this.tabFDC );
+    this.tabbedPane.addTab( LangUtil.getText( "customsys.section.fdc" ),
+		this.tabFDC );
 
     this.tabGIDE = new GIDESettingsFld(
 				settingsFrm,
@@ -85,14 +92,16 @@ public class CustomSysSettingsFld extends AbstractSettingsFld
 				0x40, 0x50, 0x60, 0x70,
 				0x80, 0x90, 0xA0, 0xB0,
 				0xC0, 0xD0, 0xE0, 0xF0 );
-    this.tabbedPane.addTab( "GIDE", this.tabGIDE );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.gide" ), this.tabGIDE );
 
     this.tabAutoLoad = new AutoLoadSettingsFld(
 			settingsFrm,
 			propPrefix,
 			CustomSys.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 			true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
     this.tabAutoInput = new AutoInputSettingsFld(
 			settingsFrm,
@@ -100,7 +109,8 @@ public class CustomSysSettingsFld extends AbstractSettingsFld
 			AutoInputCharSet.getStdCharSet(),
 			CustomSys.DEFAULT_SWAP_KEY_CHAR_CASE,
 			CustomSys.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
   }
 
 
@@ -148,14 +158,16 @@ public class CustomSysSettingsFld extends AbstractSettingsFld
       ioAddr = docIOAddr.intValue();
       if( selected ) {
 	if( ioAddr > 0xFF ) {
-	  throw new UserInputException( labelText + TEXT_INVALID_ADDR );
+	  throw new UserInputException(
+			labelText + LangUtil.getText( TEXT_INVALID_ADDR ) );
 	}
 	rv = ioAddr;
       }
     }
     catch( NumberFormatException ex ) {
       if( selected ) {
-	throw new UserInputException( labelText + TEXT_INVALID_ADDR );
+	throw new UserInputException(
+		labelText + LangUtil.getText( TEXT_INVALID_ADDR ) );
       }
     }
     if( ioAddr >= 0 ) {
@@ -241,17 +253,13 @@ public class CustomSysSettingsFld extends AbstractSettingsFld
 	    && !this.tabIO.isPIOEnabled() )
 	{
 	  throw new UserInputException(
-		"Wenn die Tastatur an einer PIO angeschlossen ist,\n"
-			+ "m\u00FCssen Sie auch die Emulation der PIO"
-			+ " aktivieren." );
+		LangUtil.getText( "customsys.error.keyboard_connected_pio" ) );
 	}
 	if( this.tabKeyboard.isKeyboardConnectedToSIO()
 	    && !this.tabIO.isSIOEnabled() )
 	{
 	  throw new UserInputException(
-		"Wenn die Tastatur an einer SIO angeschlossen ist,\n"
-			+ "m\u00FCssen Sie auch die Emulation der SIO"
-			+ " aktivieren." );
+		LangUtil.getText( "customsys.error.keyboard_connected_sio" ) );
 	}
 	tab = this.tabGIDE;
 	int gideIOBaseAddr = this.tabGIDE.getAppliedIOBaseAddr();

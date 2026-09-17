@@ -220,7 +220,8 @@ public class FileSelectDlg
 
 
     // Verzeichnisauswahl
-    add( GUIFactory.createLabel( FileUtil.LABEL_SEARCH_IN ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( FileUtil.LABEL_SEARCH_IN ) ), gbc );
     this.modelDir = new DefaultComboBoxModel<>();
     this.comboDir = GUIFactory.createComboBox( this.modelDir );
     this.comboDir.setEditable( false );
@@ -244,13 +245,14 @@ public class FileSelectDlg
     this.btnGoUp = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/folder_up.png",
-					"Eine Ebene h\u00F6her" );
+					LangUtil.getText(
+						"file.action.one_level_up" ) );
     toolBar.add( this.btnGoUp, gbc );
 
     this.btnCreateDir = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/createdir.png",
-					"Neues Verzeichnis erstellen" );
+					LangUtil.getText( "file.action.create_new_directory" ) );
     toolBar.add( this.btnCreateDir, gbc );
 
 
@@ -282,7 +284,8 @@ public class FileSelectDlg
     gbc.weighty   = 0.0;
     gbc.gridwidth = 1;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Dateiname:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.file_name" ) ), gbc );
 
     this.fldFileName = GUIFactory.createTextField();
     gbc.fill         = GridBagConstraints.HORIZONTAL;
@@ -301,19 +304,20 @@ public class FileSelectDlg
     gbc.gridwidth   = 1;
     gbc.gridx       = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Dateityp:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "file.label.file_type" ) ), gbc );
 
     this.comboFileType = GUIFactory.createComboBox();
     this.comboFileType.setEditable( false );
-    this.comboFileType.addItem( LangUtil.tr( "Alle Dateien" ) );
+    this.comboFileType.addItem( LangUtil.getText( "file.text.all_files" ) );
 
     if( fileFilters != null ) {
       if( fileFilters.length > 0 ) {
 	this.fileFilters = new ArrayList<>( fileFilters.length );
 	for( int i = 0; i < fileFilters.length; i++ ) {
 	  if( fileFilters[ i ] != null ) {
-	    this.comboFileType.addItem(
-			LangUtil.tr( fileFilters[ i ].getDescription() ) );
+	    this.comboFileType.addItem( LangUtil.getText(
+				fileFilters[ i ].getDescription() ) );
 	    this.fileFilters.add( fileFilters[ i ] );
 	  }
 	}
@@ -371,12 +375,12 @@ public class FileSelectDlg
     gbc.gridx       = 4;
     add( panelBtn, gbc );
 
-    this.approveBtnText = EmuUtil.TEXT_OPEN;
+    this.approveBtnText = LangUtil.getText( EmuUtil.TEXT_OPEN );
     if( isForSave() ) {
-      this.approveBtnText = EmuUtil.TEXT_SAVE;
+      this.approveBtnText = LangUtil.getText( EmuUtil.TEXT_SAVE );
     } else {
       if( loadWithOptionsEnabled ) {
-	this.approveBtnText = EmuUtil.TEXT_LOAD;
+	this.approveBtnText = LangUtil.getText( EmuUtil.TEXT_LOAD );
       }
     }
     this.btnApprove = GUIFactory.createButton( this.approveBtnText );
@@ -384,13 +388,15 @@ public class FileSelectDlg
 
     this.btnStart = null;
     if( startEnabled ) {
-      this.btnStart = GUIFactory.createButton( "Starten" );
+      this.btnStart = GUIFactory.createButton(
+		LangUtil.getText( "file.action.start" ) );
       panelBtn.add( this.btnStart );
     }
 
     this.btnLoadWithOptions = null;
     if( loadWithOptionsEnabled ) {
-      this.btnLoadWithOptions = GUIFactory.createButton( "Laden mit..." );
+      this.btnLoadWithOptions = GUIFactory.createButton(
+		LangUtil.getText( "file.action.load" ) );
       panelBtn.add( this.btnLoadWithOptions );
     }
 
@@ -401,24 +407,28 @@ public class FileSelectDlg
     // Popup-Menu
     this.popupMnu = GUIFactory.createPopupMenu();
 
-    this.popupGoUp = GUIFactory.createMenuItem( "Eine Ebene h\u00F6her" );
+    this.popupGoUp = GUIFactory.createMenuItem(
+		LangUtil.getText( "file.action.one_level_up" ) );
     this.popupMnu.add( this.popupGoUp );
 
     this.popupCreateDir = GUIFactory.createMenuItem(
-					"Verzeichnis erstellen..." );
+					LangUtil.getText( "file.action.create_directory" ) );
     this.popupMnu.add( this.popupCreateDir );
     this.popupMnu.addSeparator();
 
-    this.popupRename = GUIFactory.createMenuItem( "Umbenennen..." );
+    this.popupRename = GUIFactory.createMenuItem(
+		LangUtil.getText( "file.action.rename" ) );
     this.popupRename.setEnabled( false );
     this.popupMnu.add( this.popupRename );
 
-    this.popupDelete = GUIFactory.createMenuItem( EmuUtil.TEXT_DELETE );
+    this.popupDelete = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_DELETE ) );
     this.popupDelete.setEnabled( false );
     this.popupMnu.add( this.popupDelete );
     this.popupMnu.addSeparator();
 
-    this.popupRefresh = GUIFactory.createMenuItem( "Aktualisieren" );
+    this.popupRefresh = GUIFactory.createMenuItem(
+		LangUtil.getText( "common.action.refresh" ) );
     this.popupMnu.add( this.popupRefresh );
 
 
@@ -692,7 +702,8 @@ public class FileSelectDlg
 
       String statusText = filesSelected( files );
       this.labelStatus.setText(
-		statusText != null ? statusText : LangUtil.tr( defaultStatusText ) );
+		statusText != null ? statusText : LangUtil.getText(
+			defaultStatusText ) );
     }
   }
 
@@ -1504,7 +1515,7 @@ public class FileSelectDlg
 	vp.setCursor( this.defaultCursor );
       }
     }
-    this.labelStatus.setText( LangUtil.tr( defaultStatusText ) );
+    this.labelStatus.setText( LangUtil.getText( defaultStatusText ) );
   }
 
 
@@ -1515,10 +1526,10 @@ public class FileSelectDlg
       boolean stateStart           = false;
       boolean stateLoadWithOptions = false;
       if( dirSelected ) {
-	this.btnApprove.setText( LangUtil.tr( EmuUtil.TEXT_OPEN ) );
+	this.btnApprove.setText( LangUtil.getText( EmuUtil.TEXT_OPEN ) );
 	stateApprove = true;
       } else {
-	this.btnApprove.setText( LangUtil.tr( this.approveBtnText ) );
+	this.btnApprove.setText( LangUtil.getText( this.approveBtnText ) );
 	boolean stateInput = false;
 	if( this.docFileName != null ) {
 	  String fileName = this.fldFileName.getText();
@@ -1583,7 +1594,8 @@ public class FileSelectDlg
 	  vp.setCursor( this.waitCursor );
 	}
       }
-      this.labelStatus.setText( LangUtil.tr( "Lese Verzeichnis..." ) );
+      this.labelStatus.setText(
+		LangUtil.getText( "file.text.reading_directory" ) );
       Thread t = new Thread(
 			Main.getThreadGroup(),
 			"JKCEMU directory reader of file select dialog" )

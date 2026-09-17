@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import jkcemu.file.DirSelectDlg;
+import jkcemu.lang.LangUtil;
 
 
 public class ReplyDirDlg extends BaseDlg
@@ -131,7 +132,8 @@ public class ReplyDirDlg extends BaseDlg
     this.btnSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT );
+					LangUtil.getText(
+						EmuUtil.TEXT_SELECT ) );
     gbc.fill    = GridBagConstraints.NONE;
     gbc.weightx = 0.0;
     gbc.gridx++;

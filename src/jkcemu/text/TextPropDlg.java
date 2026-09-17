@@ -19,6 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class TextPropDlg extends BaseDlg
@@ -66,7 +67,7 @@ public class TextPropDlg extends BaseDlg
 
   private TextPropDlg( Frame owner, EditText editText )
   {
-    super( owner, "Eigenschaften" );
+    super( owner, LangUtil.getText( "common.title.properties" ) );
 
 
     // Fensterinhalt
@@ -81,19 +82,25 @@ public class TextPropDlg extends BaseDlg
 					new Insets( 5, 5, 2, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Dateiname:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.file_name" ) ), gbc );
     gbc.insets.top = 2;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Zeichensatz:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "text.label.character_set" ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Tabulatorbreite:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "text.label.tab_width" ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Zeilenende:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "text.label.line_ending" ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Zeilen trimmen:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "text.label.trim_lines" ) ), gbc );
     gbc.insets.bottom = 5;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Dateiendezeichen:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"text.label.end_file_character" ) ), gbc );
 
     gbc.insets.top    = 5;
     gbc.insets.bottom = 2;
@@ -107,7 +114,7 @@ public class TextPropDlg extends BaseDlg
     String displayText = editText.getEncodingDescription();
     if( displayText != null ) {
       if( editText.hasByteOrderMark() ) {
-	displayText += EditText.TEXT_WITH_BOM;
+	displayText += LangUtil.getText( EditText.TEXT_WITH_BOM );
       }
     } else {
       displayText = "System";

@@ -190,10 +190,10 @@ public class GUIFactory
 			int       index )
     {
       super.insertTab(
-			LangUtil.tr( title ),
+			LangUtil.getText( title ),
 			icon,
 			component,
-			LangUtil.tr( tip ),
+			LangUtil.getText( tip ),
 			index );
     }
   };
@@ -215,79 +215,79 @@ public class GUIFactory
 
   public static JButton createButton( String text )
   {
-    return initFont( new JButton( LangUtil.tr( text ) ) );
+    return initFont( new JButton( LangUtil.getText( text ) ) );
   }
 
 
   public static JButton createButtonAdd()
   {
-    return createButton( "Hinzuf\u00FCgen" );
+    return createButton( LangUtil.getText( "base.action.add" ) );
   }
 
 
   public static JButton createButtonApply()
   {
-    return createButton( "Anwenden" );
+    return createButton( LangUtil.getText( "base.action.apply" ) );
   }
 
 
   public static JButton createButtonCancel()
   {
-    return createButton( "Abbrechen" );
+    return createButton( LangUtil.getText( "base.action.cancel" ) );
   }
 
 
   public static JButton createButtonClose()
   {
-    return createButton( EmuUtil.TEXT_CLOSE );
+    return createButton( LangUtil.getText( EmuUtil.TEXT_CLOSE ) );
   }
 
 
   public static JButton createButtonEdit()
   {
-    return createButton( "Bearbeiten" );
+    return createButton( LangUtil.getText( "base.menu.edit" ) );
   }
 
 
   public static JButton createButtonHelp()
   {
-    return createButton( EmuUtil.TEXT_HELP );
+    return createButton( LangUtil.getText( EmuUtil.TEXT_HELP ) );
   }
 
 
   public static JButton createButtonOK()
   {
-    return createButton( "OK" );
+    return createButton( LangUtil.getText( "base.action.ok" ) );
   }
 
 
   public static JButton createButtonRemove()
   {
-    return createButton( "Entfernen" );
+    return createButton( LangUtil.getText( "common.action.remove" ) );
   }
 
 
   public static JButton createButtonReset()
   {
-    return createButton( "Zur\u00FCcksetzen" );
+    return createButton( LangUtil.getText( "base.action.reset" ) );
   }
 
 
   public static JButton createButtonSave()
   {
-    return createButton( EmuUtil.TEXT_SAVE );
+    return createButton( LangUtil.getText( EmuUtil.TEXT_SAVE ) );
   }
 
 
   public static JCheckBox createCheckBox( String text )
   {
-    return initFont( new JCheckBox( LangUtil.tr( text ) ) );
+    return initFont( new JCheckBox( LangUtil.getText( text ) ) );
   }
 
 
   public static JCheckBox createCheckBox( String text, boolean selected )
   {
-    return initFont( new JCheckBox( LangUtil.tr( text ), selected ) );
+    return initFont( new JCheckBox( LangUtil.getText( text ), selected ) );
   }
 
 
@@ -296,7 +296,7 @@ public class GUIFactory
 							boolean selected )
   {
     return initFont(
-		new JCheckBoxMenuItem( LangUtil.tr( text ), selected ) );
+		new JCheckBoxMenuItem( LangUtil.getText( text ), selected ) );
   }
 
 
@@ -355,7 +355,7 @@ public class GUIFactory
     Image   img = Main.getLoadedImage( owner, imgName );
     if( img != null ) {
       btn = createButton( new ImageIcon( img ) );
-      btn.setToolTipText( LangUtil.tr( text ) );
+      btn.setToolTipText( LangUtil.getText( text ) );
     } else {
       btn = createButton( text );
     }
@@ -377,7 +377,7 @@ public class GUIFactory
 
   public static JLabel createLabel( String text )
   {
-    return initFont( new JLabel( LangUtil.tr( text ) ) );
+    return initFont( new JLabel( LangUtil.getText( text ) ) );
   }
 
 
@@ -388,8 +388,7 @@ public class GUIFactory
 				float  relFontSize )
   {
     return initFont(
-		new StyledLabel(
-			LangUtil.tr( text ),
+		new StyledLabel( LangUtil.getText( text ),
 			fontName,
 			fontStyle,
 			relFontSize ) );
@@ -410,7 +409,7 @@ public class GUIFactory
 
   public static JMenu createMenu( String text )
   {
-    return initFont( new JMenu( LangUtil.tr( text ) ) );
+    return initFont( new JMenu( LangUtil.getText( text ) ) );
   }
 
 
@@ -428,7 +427,7 @@ public class GUIFactory
 
   public static JMenuItem createMenuItem( String text )
   {
-    return initFont( new JMenuItem( LangUtil.tr( text ) ) );
+    return initFont( new JMenuItem( LangUtil.getText( text ) ) );
   }
 
 
@@ -473,7 +472,7 @@ public class GUIFactory
 
   public static JRadioButton createRadioButton( String text )
   {
-    return initFont( new JRadioButton( LangUtil.tr( text ) ) );
+    return initFont( new JRadioButton( LangUtil.getText( text ) ) );
   }
 
 
@@ -481,13 +480,13 @@ public class GUIFactory
 					String  text,
 					boolean selected )
   {
-    return initFont( new JRadioButton( LangUtil.tr( text ), selected ) );
+    return initFont( new JRadioButton( LangUtil.getText( text ), selected ) );
   }
 
 
   public static JRadioButtonMenuItem createRadioButtonMenuItem( String text )
   {
-    return initFont( new JRadioButtonMenuItem( LangUtil.tr( text ) ) );
+    return initFont( new JRadioButtonMenuItem( LangUtil.getText( text ) ) );
   }
 
 
@@ -496,7 +495,8 @@ public class GUIFactory
 							boolean selected )
   {
     return initFont(
-		new JRadioButtonMenuItem( LangUtil.tr( text ), selected ) );
+		new JRadioButtonMenuItem(
+			LangUtil.getText( text ), selected ) );
   }
 
 
@@ -507,7 +507,7 @@ public class GUIFactory
   {
     JButton btn = null;
     Image   img = getRelResourceImage( owner, relResource );
-    text        = LangUtil.tr( text );
+    text        = LangUtil.getText( text );
     if( img != null ) {
       btn = new RelImgResourceButton(
 				relResource,
@@ -656,7 +656,7 @@ public class GUIFactory
   public static TitledBorder createTitledBorder( String title )
   {
     TitledBorder border = BorderFactory.createTitledBorder(
-						LangUtil.tr( title ) );
+						LangUtil.getText( title ) );
     Font font = FontMngr.getFont( FontMngr.FontUsage.GENERAL, false );
     if( font != null ) {
       border.setTitleFont( font );

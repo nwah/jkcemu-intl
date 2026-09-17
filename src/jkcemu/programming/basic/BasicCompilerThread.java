@@ -11,6 +11,7 @@ package jkcemu.programming.basic;
 import java.io.IOException;
 import jkcemu.base.EmuSys;
 import jkcemu.base.EmuThread;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgLogger;
 import jkcemu.programming.PrgThread;
 import jkcemu.programming.assembler.Z80Assembler;
@@ -33,7 +34,12 @@ public class BasicCompilerThread extends PrgThread
 			BasicOptions options,
 			Appendable   logOut )
   {
-    super( "JKCEMU basic compiler", emuThread, editText, options, logOut );
+    super( LangUtil.getText(
+			"basic.title.jkcemu_basic_compiler" ),
+		emuThread,
+		editText,
+		options,
+		logOut );
 
     EmuSys emuSys = (emuThread != null ? emuThread.getEmuSys() : null);
     if( emuSys != null ) {
@@ -57,19 +63,19 @@ public class BasicCompilerThread extends PrgThread
   public boolean execute() throws IOException
   {
     boolean status = false;
-    appendToLog( "Compiliere...\n" );
+    appendToLog( LangUtil.getText( "basic.msg.compiling" ) );
 
     AbstractTarget target = this.basicOptions.getTarget();
     if( target != null ) {
       String text = target.toString();
       if( text != null ) {
-	appendToLog( "Zielsystem: " );
+	appendToLog( LangUtil.getText( "basic.msg.target_system" ) );
 	appendToLog( text );
 	appendToLog( "\n" );
       }
       final String asmText = this.compiler.compile();
       if( asmText != null ) {
-	appendToLog( "Assembliere...\n" );
+	appendToLog( LangUtil.getText( "programming.msg.assembling" ) );
 	Z80Assembler assembler = new Z80Assembler(
 						asmText,
 						"Assembler-Quelltext",
@@ -83,21 +89,19 @@ public class BasicCompilerThread extends PrgThread
 	if( (this.basicOptions.getBssBegAddr() >= 0)
 	    && assembler.getOrgOverlapped() )
 	{
-	  appendToLog( "\nProgrammcode und Bereich f\u00FCr"
-		+ " Variablen/Speicherzellen \u00FCberschneiden sich.\n"
-		+ "Bitte w\u00E4hlen Sie eine andere Anfangsadresse f\u00FCr"
-		+ " Variablen/Speicherzellen!" );
+	  appendToLog( LangUtil.getText(
+				"basic.msg.program_code_range" ) );
 	}
 	if( assembler.getRelJumpsTooLong() ) {
-	  appendToLog( "\nCompilieren Sie bitte mit ausgeschalteter Option"
-				+ " \'Relative Spr\u00FCnge bevorzugen\'!" );
+	  appendToLog( LangUtil.getText( "basic.msg.please_compile_option" ) );
 	}
 	if( status ) {
 	  byte[] code = assembler.getCreatedCode();
 	  if( code != null ) {
 	    if( code.length > 0 ) {
 	      int codeBegAddr = this.basicOptions.getCodeBegAddr();
-	      appendToLog( "Speicherbelegung:\n" );
+	      appendToLog( LangUtil.getText(
+				"basic.msg.memory_usage" ) );
 	      appendToLog( String.format(
 				"  %04X-%04X: Programmcode\n",
 				codeBegAddr,
@@ -137,7 +141,9 @@ public class BasicCompilerThread extends PrgThread
 					this.basicOptions.getCodeBegAddr() );
 		    if( startCmd != null ) {
 		      if( !startCmd.isEmpty() ) {
-			appendToLog( "Kommando zum Starten des Programms: " );
+			appendToLog(
+				LangUtil.getText(
+					"basic.msg.command_start_program" ) );
 			appendToLog( startCmd );
 			appendToLog( "\n" );
 		      }
@@ -157,11 +163,13 @@ public class BasicCompilerThread extends PrgThread
       }
     } else {
       if( this.sysTitle != null ) {
-	appendToLog( "Fehler: Zielsystem \'" );
+	appendToLog( LangUtil.getText(
+			"basic.msg.error_target_system" ) );
 	appendToLog( this.sysTitle );
-	appendToLog( "\' nicht unterst\u00FCtzt.\n" );
+	appendToLog( LangUtil.getText( "basic.msg.not_supported" ) );
       } else {
-	appendToLog( "Fehler: Zielsystem unbekannt" );
+	appendToLog( LangUtil.getText(
+			"basic.msg.error_target_system_unknown" ) );
       }
     }
     return status;

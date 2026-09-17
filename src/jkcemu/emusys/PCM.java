@@ -24,6 +24,7 @@ import jkcemu.disk.FloppyDiskFormat;
 import jkcemu.disk.FloppyDiskInfo;
 import jkcemu.etc.CPUSynchronSoundDevice;
 import jkcemu.etc.K1520Sound;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import jkcemu.usb.VDIP;
 import z80emu.Z80CPU;
@@ -45,7 +46,7 @@ public class PCM extends EmuSys implements
 					Z80SIOChannelListener
 {
   public static final String SYSNAME     = "PCM";
-  public static final String SYSTEXT     = "PC/M";
+  public static final String SYSTEXT     = "emusys.text.pc_m";
   public static final String PROP_PREFIX = "jkcemu.pcm.";
 
   public static final String PROP_AUTO_LOAD_BDOS = "auto_load_bdos";
@@ -57,12 +58,12 @@ public class PCM extends EmuSys implements
 
   private static FloppyDiskInfo disk64x16 = new FloppyDiskInfo(
 			"/disks/pcm/pcmsys330_64x16.dump.gz",
-			"PC/M Boot-Diskette (64x16 Zeichen)",
+			"emusys.text.pc_m_boot_disk_64x16",
 			2, 2048, true );
 
   private static FloppyDiskInfo disk80x24 = new FloppyDiskInfo(
 			"/disks/pcm/pcmsys330_80x24.dump.gz",
-			"PC/M Boot-Diskette (80x24 Zeichen)",
+			"emusys.text.pc_m_boot_disk_80x24",
 			2, 2048, true );
 
   private static final FloppyDiskInfo[] availableFloppyDisks = {
@@ -122,7 +123,8 @@ public class PCM extends EmuSys implements
       this.fdc      = null;
       this.fdDrives = null;
     }
-    this.loudspeaker = new CPUSynchronSoundDevice( "Lautsprecher" );
+    this.loudspeaker = new CPUSynchronSoundDevice(
+		LangUtil.getText( "emusys.text.loudspeaker" ) );
 
     if( emulatesK1520Sound( props ) ) {
       this.k1520Sound = new K1520Sound( this, 0x38 );
@@ -134,7 +136,7 @@ public class PCM extends EmuSys implements
       this.vdip = new VDIP(
 			0,
 			this.emuThread.getZ80CPU(),
-			"USB-PIO (E/A-Adressen DCh-DFh und FCh-FFh)" );
+			LangUtil.getText( "emusys.text.usb_pio_i_o_addresses_dch_dfh_fch" ) );
     } else {
       this.vdip = null;
     }
@@ -154,9 +156,9 @@ public class PCM extends EmuSys implements
     }
 
     Z80CPU cpu = emuThread.getZ80CPU();
-    this.ctc   = new Z80CTC( "CTC (E/A-Adressen 80h-83h)" );
-    this.pio   = new Z80PIO( "PIO (E/A-Adressen 84h-87h)" );
-    this.sio   = new Z80SIO( "SIO (E/A-Adressen 88h-8Bh)" );
+    this.ctc   = new Z80CTC( LangUtil.getText( "emusys.text.ctc_i_o_addresses_80h" ) );
+    this.pio   = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_84h" ) );
+    this.sio   = new Z80SIO( LangUtil.getText( "emusys.text.sio_i_o_addresses_88h" ) );
     cpu.addMaxSpeedListener( this );
     cpu.addTStatesListener( this );
     this.ctc.addCTCListener( this );
@@ -666,7 +668,7 @@ public class PCM extends EmuSys implements
   @Override
   public String getTitle()
   {
-    return SYSTEXT;
+    return LangUtil.getText( SYSTEXT );
   }
 
 

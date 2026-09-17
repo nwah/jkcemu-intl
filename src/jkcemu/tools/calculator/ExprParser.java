@@ -14,6 +14,7 @@ import java.math.RoundingMode;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.text.ParseException;
+import jkcemu.lang.LangUtil;
 
 
 public class ExprParser
@@ -59,9 +60,8 @@ public class ExprParser
       fireError( msg );
     }
     catch( NumberFormatException ex ) {
-      fireError( "Ergebnis kann nicht berechnet werden.\n"
-		+ "M\u00F6glicherweise ist das Ergebnis"
-		+ " oder ein Zwischenergebnis unendlich." );
+      fireError( LangUtil.getText(
+			"calculator.error.result_cannot_calculated" ) );
     }
     return value;
   }
@@ -72,7 +72,8 @@ public class ExprParser
   private void checkInteger( BigDecimal value ) throws ParseException
   {
     if( value.scale() > 0 )
-      fireError( "Operation mit Flie\u00DFkommazahlen nicht m\u00F6glich" );
+      fireError( LangUtil.getText(
+			"calculator.error.operation_floating_point" ) );
   }
 
 
@@ -87,7 +88,7 @@ public class ExprParser
 
   private void fireDivisionByZero() throws ParseException
   {
-    fireError( "Division durch 0" );
+    fireError( LangUtil.getText( "common.error.division_0" ) );
   }
 
 
@@ -99,7 +100,8 @@ public class ExprParser
 
   private void fireHexOverflow() throws ParseException
   {
-    fireError( "Hexadezimalzahl zu gro\u00DF" );
+    fireError( LangUtil.getText(
+			"calculator.error.hexadecimal_number_large" ) );
   }
 
 
@@ -265,7 +267,7 @@ public class ExprParser
       if( ch != CharacterIterator.DONE ) {
 	fireUnexpectedChar( ch );
       } else {
-	fireError( "Unerwartetes Ende" );
+	fireError( LangUtil.getText( "calculator.error.unexpected_end" ) );
       }
     }
     return value;
@@ -294,11 +296,14 @@ public class ExprParser
 	  ch = this.iter.next();
 	} while( (ch == '0') || (ch == '1') );
 	if( digits > MAX_BINARY_DIGITS ) {
-	  fireError( "Bin\u00E4rzahl zu gro\u00DF" );
+	  fireError(
+			LangUtil.getText(
+				"calculator.error.binary_number_large" ) );
 	}
 	return new BigDecimal( binValue );
       } else {
-	fireError( "Bin\u00E4rzahl hinter \'$\' erwartet" );
+	fireError( LangUtil.getText(
+			"calculator.error.binary_number_expected" ) );
       }
     }
 
@@ -329,7 +334,9 @@ public class ExprParser
 	  }
 	  return new BigDecimal( hexValue );
 	} else {
-	  fireError( "Hexadezimalziffern hinter \'0x\' erwartet" );
+	  fireError(
+			LangUtil.getText(
+				"calculator.error.hexadecimal_digits" ) );
 	}
       }
     }
@@ -375,11 +382,14 @@ public class ExprParser
       this.iter.next();
       if( isOctal ) {
 	if( digits > MAX_OCTAL_DIGITS ) {
-	  fireError( "Oktalzahl zu gro\u00DF" );
+	  fireError(
+			LangUtil.getText(
+				"calculator.error.octal_number_large" ) );
 	}
 	return new BigDecimal( octalValue );
       } else {
-	fireError( "Ung\u00FCltige Oktalzahl" );
+	fireError( LangUtil.getText(
+			"calculator.error.invalid_octal_number" ) );
       }
     } else if( isHex && ((ch == 'H') || (ch == 'h')) ) {
       if( digits > MAX_HEX_DIGITS ) {
@@ -407,7 +417,7 @@ public class ExprParser
       if( (ch != '0') || (digits > 0) ) {
 	digits++;
 	if( digits > MAX_DECIMAL_DIGITS ) {
-	  fireError( "Zahl zu gro\u00DF" );
+	  fireError( LangUtil.getText( "common.error.number_large" ) );
 	}
       }
       ch = this.iter.next();
@@ -423,7 +433,9 @@ public class ExprParser
       while( (ch >= '0') && (ch <= '9') ) {
 	digits++;
 	if( digits > MAX_DECIMAL_DIGITS ) {
-	  fireError( "Zu viele Nachkommastellen" );
+	  fireError(
+			LangUtil.getText(
+				"calculator.error.many_decimal_places" ) );
 	}
 	ch = this.iter.next();
       }
@@ -441,7 +453,8 @@ public class ExprParser
 	if( (ch != '0') || (digits > 0) ) {
 	  digits++;
 	  if( digits > MAX_DECIMAL_EXP_DIGITS ) {
-	    fireError( "Exponent zu gro\u00DF" );
+	    fireError( LangUtil.getText(
+				"calculator.error.exponent_large" ) );
 	  }
 	}
 	ch = this.iter.next();

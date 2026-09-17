@@ -27,6 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class IFFFile
@@ -83,7 +84,7 @@ public class IFFFile
   {
     if( imageFileFilter == null ) {
       imageFileFilter = ImageUtil.createFileFilter(
-					"IFF/ILBM-Datei",
+					LangUtil.getText( "image.filetype.iff_ilbm_file" ),
 					fileSuffixes );
     }
     return imageFileFilter;
@@ -94,7 +95,7 @@ public class IFFFile
   {
     if( paletteFileFilter == null ) {
       paletteFileFilter = ImageUtil.createFileFilter(
-					"IFF/ILBM-Farbpalettendatei",
+					LangUtil.getText( "image.filetype.iff_ilbm_color" ),
 					fileSuffixes );
     }
     return paletteFileFilter;
@@ -107,7 +108,8 @@ public class IFFFile
   {
     IFFFile iffFile = readFile( file, fileBytes, false );
     if( iffFile.image == null ) {
-      throw new IOException( "Die Datei enth\u00E4lt keine Bilddaten." );
+      throw new IOException(
+		LangUtil.getText( "image.error.file_contains_no_image" ) );
     }
     return iffFile;
   }
@@ -186,9 +188,7 @@ public class IFFFile
 	&& (transpColor == 0) )
     {
       throw new IOException(
-	"Das Bild enth\u00E4lt transparente Pixel,\n"
-		+ "die nicht im IFF/ILBM-Format gespeichert"
-		+ " werden k\u00F6nnen." );
+	LangUtil.getText( "image.error.image_contains_transparent_pixels_saved_iff" ) );
     }
 
     // Body-Chunk erzeugen

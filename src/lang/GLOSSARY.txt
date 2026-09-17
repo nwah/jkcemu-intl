@@ -39,8 +39,8 @@ you can recognise it.
 
   Anweisung           -> statement        in the BASIC compiler
                       -> instruction      in the assembler
-                         Check the source reference shown by Poedit:
-                         programming/basic/... or programming/assembler/...
+                         Check the prefix of the key:
+                         programming.basic.* or programming.assembler.*
 
   Löschen             -> Delete           for files, entries, images
                       -> Clear            for a log window or an input field

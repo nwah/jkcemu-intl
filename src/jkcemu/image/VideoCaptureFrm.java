@@ -54,7 +54,7 @@ import jkcemu.lang.LangUtil;
 public class VideoCaptureFrm extends BaseFrm implements Runnable
 {
   private static final String DEFAULT_FILE        = "jkcemu.gif";
-  private static final String DEFAULT_STATUS_TEXT = "Bereit";
+  private static final String DEFAULT_STATUS_TEXT = "common.text.ready";
   private static final String HELP_PAGE = "/help/videocapture.htm";
 
   private static VideoCaptureFrm instance = null;
@@ -311,7 +311,7 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
     this.robotMsg             = null;
     this.thread               = null;
     this.videoPlayFrm         = null;
-    setTitle( "JKCEMU Bildschirmvideo" );
+    setTitle( LangUtil.getText( "image.title.jkcemu_screen_video" ) );
 
     this.statusTimer = new javax.swing.Timer(
 			500,
@@ -356,7 +356,8 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 
     JPanel panelCaptureArea = GUIFactory.createPanel( new GridBagLayout() );
     panelCaptureArea.setBorder(
-		GUIFactory.createTitledBorder( "Aufzunehmender Bereich" ) );
+		GUIFactory.createTitledBorder(
+			LangUtil.getText( "image.section.area_record" ) ) );
     add( panelCaptureArea, gbc );
     gbc.gridy++;
 
@@ -372,20 +373,20 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
     ButtonGroup grpCaptureArea = new ButtonGroup();
 
     this.rbCaptureEmuSysScreen = GUIFactory.createRadioButton(
-		"Bildschirmausgabe des emulierten Systems ohne Fenster",
+		LangUtil.getText( "image.option.screen_output_emulated_system_without" ),
 		true );
     grpCaptureArea.add( this.rbCaptureEmuSysScreen );
     panelCaptureArea.add( this.rbCaptureEmuSysScreen, gbcCaptureArea );
 
     this.rbCaptureScreenFrm = GUIFactory.createRadioButton(
-		"Bildschirmausgabe des emulierten Systems mit Fenster" );
+		LangUtil.getText( "image.option.screen_output_emulated_system_window" ) );
     grpCaptureArea.add( this.rbCaptureScreenFrm );
     gbcCaptureArea.insets.top = 0;
     gbcCaptureArea.gridy++;
     panelCaptureArea.add( this.rbCaptureScreenFrm, gbcCaptureArea );
 
     this.rbCaptureOtherWindow = GUIFactory.createRadioButton(
-					"Beliebiges JKCEMU-Fenster" );
+					LangUtil.getText( "image.option.any_jkcemu_window" ) );
     grpCaptureArea.add( this.rbCaptureOtherWindow );
     gbcCaptureArea.insets.bottom = 5;
     gbcCaptureArea.gridy++;
@@ -394,7 +395,8 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 
     // Optionen
     JPanel panelOpt = GUIFactory.createPanel( new GridBagLayout() );
-    panelOpt.setBorder( GUIFactory.createTitledBorder( "Optionen" ) );
+    panelOpt.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.section.options" ) ) );
     add( panelOpt, gbc );
 
     GridBagConstraints gbcOpt = new GridBagConstraints(
@@ -407,7 +409,7 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 					0, 0 );
 
     this.labelWinSelectTime = GUIFactory.createLabel(
-					"Zeit f\u00FCr Fensterauswahl:" );
+					LangUtil.getText( "image.label.time_window_selection" ) );
     panelOpt.add( this.labelWinSelectTime, gbcOpt );
 
     this.spinnerWinSelectSec = GUIFactory.createSpinner(
@@ -416,11 +418,13 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
     gbcOpt.gridx++;
     panelOpt.add( this.spinnerWinSelectSec, gbcOpt );
 
-    this.labelWinSelectUnit = GUIFactory.createLabel( "Sekunden" );
+    this.labelWinSelectUnit = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.seconds" ) );
     gbcOpt.gridx++;
     panelOpt.add( this.labelWinSelectUnit, gbcOpt );
 
-    this.labelFramesPerSec = GUIFactory.createLabel( "Bilder pro Sekunde:" );
+    this.labelFramesPerSec = GUIFactory.createLabel(
+		LangUtil.getText( "image.label.frames_per_second" ) );
     gbcOpt.fill            = GridBagConstraints.NONE;
     gbcOpt.gridx           = 0;
     gbcOpt.gridy++;
@@ -443,7 +447,7 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
     panelOpt.add( this.comboFramesPerSec, gbcOpt );
 
     this.cbStartAfterReset = GUIFactory.createCheckBox(
-				"Aufnahme erst nach RESET starten" );
+				LangUtil.getText( "image.option.start_recording_only" ) );
     gbcOpt.insets.top = 10;
     gbcOpt.gridwidth  = GridBagConstraints.REMAINDER;
     gbcOpt.gridx      = 0;
@@ -451,21 +455,20 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
     panelOpt.add( this.cbStartAfterReset, gbcOpt );
 
     this.cbFocusedWindowOnly = GUIFactory.createCheckBox(
-		"Automatische Pause bei inaktivem Fenster" );
+		LangUtil.getText( "image.option.automatic_pause_when" ) );
     gbcOpt.insets.top = 0;
     gbcOpt.gridy++;
     panelOpt.add( this.cbFocusedWindowOnly, gbcOpt );
 
     this.cbForce256Colors = GUIFactory.createCheckBox(
-		"Ausgabedatei immer mit 256 Farben erzeugen" );
+		LangUtil.getText( "image.option.always_create_output" ) );
     this.cbForce256Colors.setToolTipText(
-		"Diese Option ist sinnvoll, wenn sich w\u00E4hrend"
-			+ " der Aufnahme die Anzahl der Farben"
-			+ " \u00E4ndert." );
+		LangUtil.getText( "image.tooltip.option_useful_number" ) );
     gbcOpt.gridy++;
     panelOpt.add( this.cbForce256Colors, gbcOpt );
 
-    this.labelColorReduction = GUIFactory.createLabel( "Farbanpassung:" );
+    this.labelColorReduction = GUIFactory.createLabel(
+		LangUtil.getText( "image.label.color_adjustment" ) );
     gbcOpt.insets.top        = 5;
     gbcOpt.fill              = GridBagConstraints.NONE;
     gbcOpt.gridwidth         = 1;
@@ -475,19 +478,21 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 
     ButtonGroup grpColorReduction = new ButtonGroup();
 
-    this.rbColorReductionSmooth = GUIFactory.createRadioButton( "weich" );
+    this.rbColorReductionSmooth = GUIFactory.createRadioButton(
+		LangUtil.getText( "image.text.soft" ) );
     grpColorReduction.add( this.rbColorReductionSmooth );
     gbcOpt.gridx++;
     panelOpt.add( this.rbColorReductionSmooth, gbcOpt );
 
     this.rbColorReductionHard = GUIFactory.createRadioButton(
-							"hart",
+							LangUtil.getText( "image.text.hard" ),
 							true );
     grpColorReduction.add( this.rbColorReductionHard );
     gbcOpt.gridx++;
     panelOpt.add( this.rbColorReductionHard, gbcOpt );
 
-    this.labelPlayCnt    = GUIFactory.createLabel( "Wiedergabe:" );
+    this.labelPlayCnt    = GUIFactory.createLabel(
+		LangUtil.getText( "image.label.playback" ) );
     gbcOpt.insets.top    = 0;
     gbcOpt.insets.bottom = 5;
     gbcOpt.gridx         = 0;
@@ -496,13 +501,14 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 
     ButtonGroup grpPlayCnt = new ButtonGroup();
 
-    this.rbPlayOnce = GUIFactory.createRadioButton( "einmal" );
+    this.rbPlayOnce = GUIFactory.createRadioButton(
+		LangUtil.getText( "image.option.once" ) );
     grpPlayCnt.add( this.rbPlayOnce );
     gbcOpt.gridx++;
     panelOpt.add( this.rbPlayOnce, gbcOpt );
 
     this.rbPlayInfinite = GUIFactory.createRadioButton(
-					"st\u00E4ndig wiederholen",
+					LangUtil.getText( "image.option.repeat_continuously" ),
 					true );
     grpPlayCnt.add( this.rbPlayInfinite );
     gbcOpt.gridx++;
@@ -512,7 +518,8 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
     // Ausgabedatei
     JPanel panelFile = GUIFactory.createPanel( new GridBagLayout() );
     panelFile.setBorder(
-		GUIFactory.createTitledBorder( "Ausgabedatei" ) );
+		GUIFactory.createTitledBorder(
+			LangUtil.getText( "common.section.output_file" ) ) );
     gbc.gridy++;
     add( panelFile, gbc );
 
@@ -526,13 +533,14 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 					0, 0 );
 
     this.fldFile = new FileNameFld();
-    this.fldFile.setText( "--- Bitte ausw\u00E4hlen ---" );
+    this.fldFile.setText( LangUtil.getText( "image.text.please_select" ) );
     panelFile.add( this.fldFile, gbcFile );
 
     this.btnFileSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT );
+					LangUtil.getText(
+						EmuUtil.TEXT_SELECT ) );
     gbcFile.fill    = GridBagConstraints.NONE;
     gbcFile.weightx = 0.0;
     gbcFile.gridx++;
@@ -546,7 +554,8 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
     gbc.gridy++;
     add( GUIFactory.createSeparator(), gbc );
 
-    this.labelStatus = GUIFactory.createLabel( DEFAULT_STATUS_TEXT );
+    this.labelStatus = GUIFactory.createLabel(
+		LangUtil.getText( DEFAULT_STATUS_TEXT ) );
     gbc.anchor       = GridBagConstraints.WEST;
     gbc.fill         = GridBagConstraints.NONE;
     gbc.weightx      = 0.0;
@@ -567,23 +576,28 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
     gbc.gridx++;
     add( panelBtn, gbc );
 
-    this.btnRecord = GUIFactory.createButton( EmuUtil.TEXT_RECORD );
+    this.btnRecord = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_RECORD ) );
     this.btnRecord.setEnabled( false );
     panelBtn.add( btnRecord );
 
-    this.btnPause = GUIFactory.createButton( "Pause" );
+    this.btnPause = GUIFactory.createButton(
+		LangUtil.getText( "common.action.pause" ) );
     this.btnPause.setEnabled( false );
     panelBtn.add( btnPause );
 
-    this.btnStop = GUIFactory.createButton( "Stopp" );
+    this.btnStop = GUIFactory.createButton(
+		LangUtil.getText( "image.action.stop" ) );
     this.btnStop.setEnabled( false );
     panelBtn.add( btnStop );
 
-    this.btnPlay = GUIFactory.createButton( "Wiedergabe" );
+    this.btnPlay = GUIFactory.createButton(
+		LangUtil.getText( "common.action.playback" ) );
     this.btnPlay.setEnabled( false );
     panelBtn.add( btnPlay );
 
-    this.btnDelete = GUIFactory.createButton( EmuUtil.TEXT_DELETE );
+    this.btnDelete = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_DELETE ) );
     this.btnDelete.setEnabled( false );
     panelBtn.add( btnDelete );
 
@@ -662,7 +676,8 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
       if( !file.exists() ) {
 	this.btnPlay.setEnabled( false );
 	this.btnDelete.setEnabled( false );
-	throw new IOException( "Die Ausgabedatei existiert nicht mehr." );
+	throw new IOException(
+		LangUtil.getText( "image.error.output_file_no_longer" ) );
       }
     }
   }
@@ -708,12 +723,11 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
       closePlayer();
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie die Ausgabedatei mit dem"
-			+ " aufgenommenen Video l\u00F6schen?" ) )
+		LangUtil.getText( "image.msg.want_delete_output" ) ) )
       {
 	if( !file.delete() ) {
 	  throw new IOException(
-		"Ausgabedatei konnte nicht gel\u00F6scht werden." );
+		LangUtil.getText( "image.error.output_file_not_deleted" ) );
 	}
 	deleted = true;
       }
@@ -732,7 +746,7 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
     if( this.thread == null ) {
       File file = FileUtil.showFileSaveDlg(
 			this,
-			"GIF-Datei speichern",
+			LangUtil.getText( "image.title.save_gif_file" ),
 			this.fldFile.getFile(),
 			FileUtil.getGIFFileFilter() );
       if( file != null ) {
@@ -746,16 +760,14 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 	    } else {
 	      BaseDlg.showErrorDlg(
 			this,
-			"Das aufgenommene Bildschirmvideo kann nur in eine\n"
-				+ "animierte GIF-Datei geschrieben werden.\n"
-				+ "Der Dateiname muss deshalb mit \'.gif\'"
-				+ " enden." );
+			LangUtil.getText(
+				"image.error.recorded_screen_video" ) );
 	    }
 	  }
 	} else {
 	  BaseDlg.showErrorDlg(
 		this,
-		"Datei kann nicht angelegt bzw. geschrieben werden" );
+		LangUtil.getText( "image.error.file_cannot_created" ) );
 	}
       }
     }
@@ -779,7 +791,8 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
       checkFileExists( file );
       if( !file.canRead() ) {
 	this.btnPlay.setEnabled( false );
-	throw new IOException( "Die Ausgabedatei ist nicht lesbar." );
+	throw new IOException(
+		LangUtil.getText( "image.error.output_file_not_readable" ) );
       }
       if( this.videoPlayFrm == null ) {
 	this.videoPlayFrm = new VideoPlayFrm();
@@ -808,10 +821,9 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 	if( this.fileCheckEnabled && file.exists() ) {
 	  if( JOptionPane.showConfirmDialog(
 		this,
-		LangUtil.tr(
-			"Sie \u00FCberschreiben die Datei\n{0} !",
+		LangUtil.getText( "image.text.overwriting_file",
 			file.getPath() ),
-		LangUtil.tr( "Warnung" ),
+		LangUtil.getText( "common.msg.warning" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) != JOptionPane.OK_OPTION )
 	  {
@@ -972,7 +984,7 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
     this.btnPause.setEnabled( false );
     this.btnStop.setEnabled( false );
     updOptionFieldsEnabled();
-    this.labelStatus.setText( DEFAULT_STATUS_TEXT );
+    this.labelStatus.setText( LangUtil.getText( DEFAULT_STATUS_TEXT ) );
   }
 
 
@@ -1024,7 +1036,7 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 
   private void updStatusText()
   {
-    String text = DEFAULT_STATUS_TEXT;
+    String text = LangUtil.getText( DEFAULT_STATUS_TEXT );
     if( this.thread != null ) {
       if( this.waitForReset ) {
 	text = "Warte auf RESET...";
@@ -1037,10 +1049,10 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 	StringBuilder buf = new StringBuilder( 64 );
 	appendRecordedTimeText( buf );
 	if( this.focusedWindowOnly && !this.capturing ) {
-	  buf.append( LangUtil.tr(
-		", automatische Pause (Fenster inaktiv)" ) );
+	  buf.append( LangUtil.getText(
+		"image.text.automatic_pause_window" ) );
 	} else {
-	  buf.append( LangUtil.tr( ", Aufnahme l\u00E4uft..." ) );
+	  buf.append( LangUtil.getText( "image.text.recording_progress" ) );
 	}
 	text = buf.toString();
       }
@@ -1075,8 +1087,11 @@ public class VideoCaptureFrm extends BaseFrm implements Runnable
 	    this.thread.start();
 	  } else {
 	    setIdle();
-	    BaseDlg.showErrorDlg( this, "Kein JKCEMU-Fenster aktiv" );
-	    text = DEFAULT_STATUS_TEXT;
+	    BaseDlg.showErrorDlg(
+			this,
+			LangUtil.getText(
+				"image.error.no_jkcemu_window" ) );
+	    text = LangUtil.getText( DEFAULT_STATUS_TEXT );
 	  }
 	}
       }

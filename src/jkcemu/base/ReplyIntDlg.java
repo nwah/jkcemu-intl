@@ -9,6 +9,7 @@
 package jkcemu.base;
 
 import java.awt.Frame;
+import jkcemu.lang.LangUtil;
 
 
 public class ReplyIntDlg extends AbstractReplyDlg
@@ -24,7 +25,7 @@ public class ReplyIntDlg extends AbstractReplyDlg
 		Integer minValue,
 		Integer maxValue )
   {
-    super( owner, msg, "Eingabe Ganzzahl", null );
+    super( owner, msg, LangUtil.getText( "base.title.enter_integer" ), null );
     this.reply  = null;
     this.docInt = new IntegerDocument(
 				this.replyTextField,

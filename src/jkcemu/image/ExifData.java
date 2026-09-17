@@ -199,8 +199,8 @@ public class ExifData
 		this.subIfdMap,
 		0xA001,
 		null,
-		"sRGB",
-		"Adobe RGB" );
+		LangUtil.getText( "image.text.srgb" ),
+		LangUtil.getText( "image.text.adobe_rgb" ) );
   }
 
 
@@ -290,9 +290,9 @@ public class ExifData
     return getChoice( 
 		this.subIfdMap,
 		ENTRY_TYPE_CONTRAST,
-		"normal",
-		"weich",
-		"hart" );
+		LangUtil.getText( "image.text.normal" ),
+		LangUtil.getText( "image.text.soft" ),
+		LangUtil.getText( "image.text.hard" ) );
   }
 
 
@@ -361,9 +361,9 @@ public class ExifData
     return getChoice(
 		this.subIfdMap,
 		0xA406,
-		"automatische Belichtung",
-		"manuelle Belichtung",
-		"automatische Belichtungsreihe" );
+		LangUtil.getText( "image.text.auto_exposure" ),
+		LangUtil.getText( "image.text.manual_exposure" ),
+		LangUtil.getText( "image.text.auto_exposure_bracket" ) );
   }
 
 
@@ -374,14 +374,14 @@ public class ExifData
 		this.subIfdMap,
 		0x8822,
 		null,
-		"manuell",
-		"Programmautomatik",
-		"Blendenvorwahl",
-		"Zeitvorwahl",
-		"Programmautomatik f\u00FCr langsame Motive",
-		"Programmautomatik f\u00FCr schnelle Motive",
-		"Portraitautomatik",
-		"Landschaftsautomatik" );
+		LangUtil.getText( "image.text.manual" ),
+		LangUtil.getText( "image.text.program_auto_mode" ),
+		LangUtil.getText( "image.text.aperture_priority" ),
+		LangUtil.getText( "image.text.shutter_priority" ),
+		LangUtil.getText( "image.text.program_auto_mode_slow" ),
+		LangUtil.getText( "image.text.program_auto_mode_fast" ),
+		LangUtil.getText( "image.text.portrait_auto_mode" ),
+		LangUtil.getText( "image.text.landscape_auto_mode" ) );
   }
 
 
@@ -575,12 +575,12 @@ public class ExifData
 		this.subIfdMap,
 		0x9207,
 		null,
-		"Integral",
-		"Mittenbetont",
-		"Einpunkt",
-		"Mehrpunkt",
-		"Mehrfeld",
-		"Teilbereich" );
+		LangUtil.getText( "image.text.average" ),
+		LangUtil.getText( "image.text.center_weighted" ),
+		LangUtil.getText( "image.text.spot" ),
+		LangUtil.getText( "image.text.multi_spot" ),
+		LangUtil.getText( "image.text.pattern" ),
+		LangUtil.getText( "image.text.partial" ) );
   }
 
 
@@ -593,8 +593,8 @@ public class ExifData
 			ENTRY_TYPE_RESOLUTION_UNIT,
 			null,
 			"",
-			"dpi",
-			"Pixel/cm" );
+			LangUtil.getText( "image.text.dpi" ),
+			LangUtil.getText( "image.text.pixels_cm" ) );
     if( resUnit != null ) {
       String resX = getRoundedNumberText(
 				this.ifd0Map,
@@ -618,9 +618,9 @@ public class ExifData
     return getChoice(
 		this.subIfdMap,
 		ENTRY_TYPE_SATURATION,
-		"normal",
-		"niedrig",
-		"hoch" );
+		LangUtil.getText( "image.text.normal" ),
+		LangUtil.getText( "image.text.low" ),
+		LangUtil.getText( "image.text.high" ) );
   }
 
 
@@ -630,10 +630,10 @@ public class ExifData
     return getChoice(
 		this.subIfdMap,
 		0xA406,
-		"Standard",
-		"Landschaft",
-		"Portrait",
-		"Nacht" );
+		LangUtil.getText( "common.text.default" ),
+		LangUtil.getText( "image.text.landscape" ),
+		LangUtil.getText( "image.text.portrait" ),
+		LangUtil.getText( "image.text.night" ) );
   }
 
 
@@ -697,9 +697,9 @@ public class ExifData
     return getChoice(
 		this.subIfdMap,
 		ENTRY_TYPE_SHARPNESS,
-		"normal",
-		"weich",
-		"hart" );
+		LangUtil.getText( "image.text.normal" ),
+		LangUtil.getText( "image.text.soft" ),
+		LangUtil.getText( "image.text.hard" ) );
   }
 
 
@@ -716,10 +716,10 @@ public class ExifData
     return getChoice(
 		this.subIfdMap,
 		0xA40C,
-		"Standard",
-		"Makro",
-		"Nahaufnahme",
-		"Fernaufnahme" );
+		LangUtil.getText( "common.text.default" ),
+		LangUtil.getText( "image.text.macro" ),
+		LangUtil.getText( "image.text.close_view" ),
+		LangUtil.getText( "image.text.distant_view" ) );
   }
 
 
@@ -770,8 +770,8 @@ public class ExifData
     return getChoice(
 		this.subIfdMap,
 		0xA403,
-		"automatisch",
-		"manuell" );
+		LangUtil.getText( "image.text.automatic" ),
+		LangUtil.getText( "image.text.manual" ) );
   }
 
 
@@ -1245,7 +1245,7 @@ public class ExifData
 	if( value != null ) {
 	  int idx = value.intValue();
 	  if( (idx >= 0) && (idx < items.length) ) {
-	    rv = LangUtil.tr( items[ idx ] );
+	    rv = LangUtil.getText( items[ idx ] );
 	  }
 	}
       }

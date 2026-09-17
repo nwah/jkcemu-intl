@@ -15,6 +15,7 @@ import java.io.OutputStream;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.UserInputException;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class RMCFileTarget extends AbstractConvertTarget
@@ -30,7 +31,9 @@ public class RMCFileTarget extends AbstractConvertTarget
 		int            offs,
 		int            len )
   {
-    super( fileConvertFrm, "RBASIC-Maschinencode-Datei (*.rmc)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "fileconv.title.rbasic_machine_code" ) );
     this.dataBytes = dataBytes;
     this.offs      = offs;
     this.len       = len;

@@ -31,6 +31,7 @@ import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.etc.CPUSynchronSoundDevice;
+import jkcemu.lang.LangUtil;
 
 
 public class SoundFld extends AbstractAudioOutFld
@@ -76,7 +77,8 @@ public class SoundFld extends AbstractAudioOutFld
 
     // Bereich Optionen
     JPanel panelOpt = GUIFactory.createPanel( new GridBagLayout() );
-    panelOpt.setBorder( GUIFactory.createTitledBorder( "Optionen" ) );
+    panelOpt.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.section.options" ) ) );
     add( panelOpt, gbc );
 
     GridBagConstraints gbcOpt = new GridBagConstraints(
@@ -88,16 +90,19 @@ public class SoundFld extends AbstractAudioOutFld
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    this.labelMixer = GUIFactory.createLabel( "Ausgabeger\u00E4t:" );
+    this.labelMixer = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.output_device" ) );
     panelOpt.add( this.labelMixer, gbcOpt );
 
-    this.labelFrameRate  = GUIFactory.createLabel( "Abtastrate (Hz):" );
+    this.labelFrameRate  = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.sample_rate_hz" ) );
     gbcOpt.insets.bottom = 5;
     gbcOpt.gridy++;
     panelOpt.add( this.labelFrameRate, gbcOpt );
 
     if( soundDevice.supportsStereo() ) {
-      this.labelChannels = GUIFactory.createLabel( "Ausgang:" );
+      this.labelChannels = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.output" ) );
       gbcOpt.gridy++;
       panelOpt.add( this.labelChannels, gbcOpt );
     } else {
@@ -120,14 +125,16 @@ public class SoundFld extends AbstractAudioOutFld
     if( soundDevice.supportsStereo() ) {
       ButtonGroup grpChannels = new ButtonGroup();
 
-      this.rbMono = GUIFactory.createRadioButton( "Mono", true );
+      this.rbMono = GUIFactory.createRadioButton(
+		LangUtil.getText( "audio.option.mono" ), true );
       grpChannels.add( this.rbMono );
       gbcOpt.insets.bottom = 5;
       gbcOpt.gridwidth     = 1;
       gbcOpt.gridy++;
       panelOpt.add( this.rbMono, gbcOpt );
 
-      this.rbStereo = GUIFactory.createRadioButton( "Stereo" );
+      this.rbStereo = GUIFactory.createRadioButton(
+		LangUtil.getText( "audio.option.stereo" ) );
       grpChannels.add( this.rbStereo );
       gbcOpt.gridx++;
       panelOpt.add( this.rbStereo, gbcOpt );
@@ -139,7 +146,8 @@ public class SoundFld extends AbstractAudioOutFld
 
     // Bereich Status
     JPanel panelStatus = GUIFactory.createPanel( new GridBagLayout() );
-    panelStatus.setBorder( GUIFactory.createTitledBorder( "Status" ) );
+    panelStatus.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.section.status" ) ) );
     gbc.gridy++;
     add( panelStatus, gbc );
 
@@ -152,7 +160,8 @@ public class SoundFld extends AbstractAudioOutFld
 						new Insets( 5, 5, 5, 5 ),
 						0, 0 );
 
-    this.labelFormat = GUIFactory.createLabel( "Format:" );
+    this.labelFormat = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.format" ) );
     panelStatus.add( this.labelFormat, gbcStatus );
 
     this.fldFormat = GUIFactory.createTextField();
@@ -165,7 +174,8 @@ public class SoundFld extends AbstractAudioOutFld
 
     // Bereich Recorder
     JPanel panelRec = GUIFactory.createPanel( new GridBagLayout() );
-    panelRec.setBorder( GUIFactory.createTitledBorder( "Recorder" ) );
+    panelRec.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "audio.section.recorder" ) ) );
     gbc.gridy++;
     add( panelRec, gbc );
 
@@ -178,7 +188,8 @@ public class SoundFld extends AbstractAudioOutFld
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    this.labelDuration = GUIFactory.createLabel( "Aufnahmedauer:" );
+    this.labelDuration = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.recording_duration" ) );
     gbcRec.gridy++;
     panelRec.add( this.labelDuration, gbcRec );
 
@@ -201,31 +212,36 @@ public class SoundFld extends AbstractAudioOutFld
     this.btnRecord = GUIFactory.createRelImageResourceButton(
 					this,
 					"audio/record.png",
-					EmuUtil.TEXT_RECORD );
+					LangUtil.getText(
+						EmuUtil.TEXT_RECORD ) );
     panelRecBtn.add( this.btnRecord );
 
     this.btnPause = GUIFactory.createRelImageResourceButton(
 					this,
 					"audio/pause.png",
-					"Pause" );
+					LangUtil.getText(
+						"common.action.pause" ) );
     panelRecBtn.add( this.btnPause );
 
     this.btnPlay = GUIFactory.createRelImageResourceButton(
 					this,
 					"audio/play.png",
-					"Wiedergeben" );
+					LangUtil.getText(
+						"common.action.play" ) );
     panelRecBtn.add( this.btnPlay );
 
     this.btnSave = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/save_as.png",
-					EmuUtil.TEXT_OPEN_SAVE );
+					LangUtil.getText(
+						EmuUtil.TEXT_OPEN_SAVE ) );
     panelRecBtn.add( this.btnSave );
 
     this.btnDelete = GUIFactory.createRelImageResourceButton(
 					this,
 					"audio/delete.png",
-					EmuUtil.TEXT_DELETE );
+					LangUtil.getText(
+						EmuUtil.TEXT_DELETE ) );
     panelRecBtn.add( this.btnDelete );
 
 
@@ -250,16 +266,19 @@ public class SoundFld extends AbstractAudioOutFld
 					new GridLayout( 2, 1, 5, 5 ) );
     panelEast.add( panelBtn, gbcEast );
 
-    this.btnEnable = GUIFactory.createButton( "Aktivieren" );
+    this.btnEnable = GUIFactory.createButton(
+		LangUtil.getText( "audio.action.enable" ) );
     panelBtn.add( this.btnEnable );
 
-    this.btnDisable = GUIFactory.createButton( "Deaktivieren" );
+    this.btnDisable = GUIFactory.createButton(
+		LangUtil.getText( "audio.action.disable" ) );
     panelBtn.add( this.btnDisable );
 
 
     // Pegelanzeige
     this.volumeBar = new VolumeBar( SwingConstants.VERTICAL );
-    this.volumeBar.setBorder( GUIFactory.createTitledBorder( "Pegel" ) );
+    this.volumeBar.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "audio.section.level" ) ) );
     this.volumeBar.setPreferredSize( new Dimension( 1, 1 ) );
     gbcEast.insets.top = 20;
     gbcEast.fill       = GridBagConstraints.BOTH;
@@ -484,7 +503,8 @@ public class SoundFld extends AbstractAudioOutFld
   private void doDelete()
   {
     if( this.recordedData != null ) {
-      if( BaseDlg.showYesNoDlg( this, "Aufnahme verwerfen?" ) ) {
+      if( BaseDlg.showYesNoDlg(
+		this, LangUtil.getText( "audio.msg.discard_recording" ) ) ) {
 	this.recordedData = null;
 	if( this.audioOut == null ) {
 	  this.fldFormat.setText( "" );

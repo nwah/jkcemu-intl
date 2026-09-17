@@ -52,7 +52,7 @@ public class KCcompact extends EmuSys implements
 					Z80MaxSpeedListener
 {
   public static final String SYSNAME             = "KCcompact";
-  public static final String SYSTEXT             = "KC compact";
+  public static final String SYSTEXT             = "emusys.text.kc_compact";
   public static final String PROP_PREFIX         = "jkcemu.kccompact.";
   public static final String PROP_FDC_ROM_PREFIX = "fdc.rom.";
   public static final String PROP_EXT_RAM_512K   = "ext_ram_512k";
@@ -92,7 +92,7 @@ public class KCcompact extends EmuSys implements
   private static final FloppyDiskInfo[] availableFloppyDisks = {
 		new FloppyDiskInfo(
 			"/disks/kccompact/kccmicrodos.dump.gz",
-			"KC compact MicroDOS Systemdiskette",
+			"emusys.text.kc_compact_microdos",
 			2, 2048, true ) };
 
   /*
@@ -254,7 +254,7 @@ public class KCcompact extends EmuSys implements
     this.ppi            = new PPI8255( this );
     this.psg            = new PSG8910( 1000000, this );
     this.psgSoundDevice = new PSGSoundDevice(
-					"Sound-Generator",
+					LangUtil.getText( "emusys.text.sound_generator" ),
 					true,
 					this.psg );
 
@@ -305,19 +305,19 @@ public class KCcompact extends EmuSys implements
       autoInputCharSet.addSpecialChar(
 			242,
 			AutoInputCharSet.VIEW_LEFT,
-			AutoInputCharSet.TEXT_LEFT );
+			LangUtil.getText( AutoInputCharSet.TEXT_LEFT ) );
       autoInputCharSet.addSpecialChar(
 			243,
 			AutoInputCharSet.VIEW_RIGHT,
-			AutoInputCharSet.TEXT_RIGHT );
+			LangUtil.getText( AutoInputCharSet.TEXT_RIGHT ) );
       autoInputCharSet.addSpecialChar(
 			241,
 			AutoInputCharSet.VIEW_DOWN,
-			AutoInputCharSet.TEXT_DOWN );
+			LangUtil.getText( AutoInputCharSet.TEXT_DOWN ) );
       autoInputCharSet.addSpecialChar(
 			240,
 			AutoInputCharSet.VIEW_UP,
-			AutoInputCharSet.TEXT_UP );
+			LangUtil.getText( AutoInputCharSet.TEXT_UP ) );
     }
     return autoInputCharSet;
   }
@@ -1056,7 +1056,7 @@ public class KCcompact extends EmuSys implements
   @Override
   public String getTitle()
   {
-    return SYSTEXT;
+    return LangUtil.getText( SYSTEXT );
   }
 
 
@@ -1479,7 +1479,7 @@ public class KCcompact extends EmuSys implements
   @Override
   public String toString()
   {
-    return LangUtil.tr( "Zentrale Zustandssteuerung" );
+    return LangUtil.getText( "emusys.text.central_state_controller" );
   }
 
 

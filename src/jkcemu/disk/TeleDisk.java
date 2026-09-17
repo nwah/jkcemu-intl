@@ -36,6 +36,7 @@ import java.util.zip.GZIPInputStream;
 import jkcemu.base.EmuUtil;
 import jkcemu.etc.CRC16;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.CharConverter;
 
 
@@ -128,7 +129,8 @@ public class TeleDisk extends AbstractFloppyDisk
       int nCyls  = disk.getCylinders();
       int nSides = disk.getSides();
       if( (nCyls < 1) || (nSides < 1) ) {
-	throw new IOException( "Kein Inhalt vorhanden" );
+	throw new IOException(
+		LangUtil.getText( "disk.error.no_content_available" ) );
       }
 
       // Datei oeffnen
@@ -458,7 +460,8 @@ public class TeleDisk extends AbstractFloppyDisk
 		"Advanced Compression nicht unterst\u00FCtzt" );
       }
       if( (head0 != 'T') || (head1 != 'D') || (head2 != 0) ) {
-	throw new IOException( "Datei ist keine TeleDisk-Datei." );
+	throw new IOException(
+		LangUtil.getText( "disk.error.file_not_teledisk" ) );
       }
       readMandatoryByte( in );				// Check Sequence
       int fmtVersion = readMandatoryByte( in );		// Version
@@ -953,10 +956,8 @@ public class TeleDisk extends AbstractFloppyDisk
       // ggf. Warnung
       if( autoRepaired ) {
 	rv.setRepaired( true );
-	rv.setWarningText( "JKCEMU hat Sektoren repariert,"
-			+ " die beim Erzeugen der\n"
-			+ "Teledisk-Datei nicht korrekt gelesen"
-			+ " werden konnten." );
+	rv.setWarningText( LangUtil.getText(
+			"disk.msg.jkcemu_repaired_sectors" ) );
       }
     }
     finally {
@@ -1134,8 +1135,8 @@ public class TeleDisk extends AbstractFloppyDisk
 
   private static void throwLengthMismatch() throws IOException
   {
-    throw new IOException( "In der Datei passen einzelne L\u00E4ngenangaben"
-				+ " nicht zusammen." );
+    throw new IOException( LangUtil.getText(
+			"disk.error.individual_length_values" ) );
   }
 
 

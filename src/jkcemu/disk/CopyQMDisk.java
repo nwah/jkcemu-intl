@@ -26,6 +26,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.GZIPInputStream;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.CharConverter;
 
 
@@ -639,7 +640,7 @@ public class CopyQMDisk extends RegularFormatFloppyDisk
       }
       if( orgCRC != newCRC ) {
 	rv.setWarningText( 
-		"Die CopyQM-Datei scheint defekt zu sein (CRC-Fehler)!" );
+		LangUtil.getText( "disk.msg.copyqm_file_appears" ) );
       }
     }
     finally {
@@ -850,6 +851,6 @@ public class CopyQMDisk extends RegularFormatFloppyDisk
 
   private static void throwNoCopyQMFile() throws IOException
   {
-    throw new IOException( "Datei ist keine CopyQM-Datei." );
+    throw new IOException( LangUtil.getText( "disk.error.file_not_copyqm" ) );
   }
 }

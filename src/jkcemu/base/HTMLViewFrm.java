@@ -162,7 +162,7 @@ public class HTMLViewFrm extends BaseFrm implements
     // Kontext-Menu
     this.popupMnu = GUIFactory.createPopupMenu();
 
-    this.popupCopy = createMenuItem( EmuUtil.TEXT_COPY );
+    this.popupCopy = createMenuItem( LangUtil.getText( EmuUtil.TEXT_COPY ) );
     this.popupCopy.setEnabled( false );
     this.popupMnu.add( this.popupCopy );
     this.popupMnu.addSeparator();
@@ -231,7 +231,7 @@ public class HTMLViewFrm extends BaseFrm implements
 	title = title.substring( 0, title.length() - 3 );
       }
     } else {
-      title = EmuUtil.TEXT_FIND;
+      title = LangUtil.getText( EmuUtil.TEXT_FIND );
     }
     doFind( showFindDlg( title, initialText ), true );
   }
@@ -270,10 +270,10 @@ public class HTMLViewFrm extends BaseFrm implements
   {
     String reply = null;
 
-    final String[] options = LangUtil.tr(
-			new String[] { EmuUtil.TEXT_FIND, EmuUtil.TEXT_CANCEL } );
+    final String[] options = LangUtil.getTexts(
+			new String[] { LangUtil.getText( EmuUtil.TEXT_FIND ), LangUtil.getText( EmuUtil.TEXT_CANCEL ) } );
     JOptionPane pane = new JOptionPane(
-				LangUtil.tr( EmuUtil.LABEL_SEARCH_FOR ),
+				LangUtil.getText( EmuUtil.LABEL_SEARCH_FOR ),
 				JOptionPane.PLAIN_MESSAGE );
     pane.setOptions( options );
     pane.setInitialValue( options[ 0 ] );
@@ -281,7 +281,7 @@ public class HTMLViewFrm extends BaseFrm implements
     if( initialText != null ) {
       pane.setInitialSelectionValue( initialText );
     }
-    pane.createDialog( this, LangUtil.tr( title ) ).setVisible( true );
+    pane.createDialog( this, LangUtil.getText( title ) ).setVisible( true );
     if( pane.getValue() == options[ 0 ] ) {
       Object o = pane.getInputValue();
       if( o != null ) {

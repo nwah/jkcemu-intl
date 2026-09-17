@@ -29,6 +29,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgOptions;
 
 
@@ -39,10 +40,10 @@ public abstract class AbstractOptionsDlg extends BaseDlg
   protected EmuThread  emuThread;
 
   private static final String TEXT_LOAD_INTO_EMU_WITH
-				= "Programmmcode in Emulator laden:";
+				= "programming.text.load_program_code_colon";
 
   private static final String TEXT_LOAD_INTO_EMU
-				= "Programmmcode in Emulator laden";
+				= "programming.text.load_program_code";
 
   private Frame   owner;
   private boolean notified;
@@ -150,16 +151,18 @@ public abstract class AbstractOptionsDlg extends BaseDlg
 					0, 0 );
 
     if( this.emuThread != null ) {
-      this.cbCodeToEmu = GUIFactory.createCheckBox( TEXT_LOAD_INTO_EMU );
+      this.cbCodeToEmu = GUIFactory.createCheckBox(
+		LangUtil.getText( TEXT_LOAD_INTO_EMU ) );
       panel.add( this.cbCodeToEmu, gbc );
 
       if( enableSecondSysBtns ) {
-	this.cbCodeToEmu.setText( TEXT_LOAD_INTO_EMU_WITH );
+	this.cbCodeToEmu.setText(
+		LangUtil.getText( TEXT_LOAD_INTO_EMU_WITH ) );
 
 	ButtonGroup grpCodeToEmu = new ButtonGroup();
 
 	this.rbCodeToPrimarySys = GUIFactory.createRadioButton(
-						"Grundger\u00E4t",
+						LangUtil.getText( "common.option.base_unit" ),
 						true );
 	grpCodeToEmu.add( this.rbCodeToPrimarySys );
 	gbc.insets.left = 20;
@@ -180,7 +183,7 @@ public abstract class AbstractOptionsDlg extends BaseDlg
     }
 
     this.cbCodeToFile = GUIFactory.createCheckBox(
-					"Programmcode in Datei speichern" );
+					LangUtil.getText( "programming.option.save_program_code" ) );
     gbc.insets.left = 5;
     gbc.gridwidth   = GridBagConstraints.REMAINDER;
     gbc.gridx       = 0;
@@ -204,7 +207,8 @@ public abstract class AbstractOptionsDlg extends BaseDlg
 					new Insets( 2, 2, 2, 2 ),
 					0, 0 );
 
-    this.labelFileName = GUIFactory.createLabel( "Dateiname:" );
+    this.labelFileName = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.file_name" ) );
     panelFile.add( this.labelFileName, gbcFile );
 
     this.fldFileName = new FileNameFld();
@@ -217,7 +221,8 @@ public abstract class AbstractOptionsDlg extends BaseDlg
     this.btnFileSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_OPEN_OPEN );
+					LangUtil.getText(
+						EmuUtil.TEXT_OPEN_OPEN ) );
     gbcFile.fill    = GridBagConstraints.NONE;
     gbcFile.weightx = 0.0;
     gbcFile.gridx++;
@@ -350,7 +355,7 @@ public abstract class AbstractOptionsDlg extends BaseDlg
   {
     File file = FileUtil.showFileSaveDlg(
 				this.owner,
-				"Programmcode speichern",
+				LangUtil.getText( "programming.title.save_program_code" ),
 				this.fldFileName.getFile(),
 				FileUtil.getKCSystemFileFilter(),
 				FileUtil.getKCTapFileFilter(),
@@ -378,12 +383,13 @@ public abstract class AbstractOptionsDlg extends BaseDlg
 	}
       }
       if( secondarySysName != null ) {
-	this.cbCodeToEmu.setText( TEXT_LOAD_INTO_EMU_WITH );
+	this.cbCodeToEmu.setText(
+		LangUtil.getText( TEXT_LOAD_INTO_EMU_WITH ) );
 	this.rbCodeToSecondSys.setText( secondarySysName );
 	this.rbCodeToSecondSys.setVisible( true );
 	this.rbCodeToPrimarySys.setVisible( true );
       } else {
-	this.cbCodeToEmu.setText( TEXT_LOAD_INTO_EMU );
+	this.cbCodeToEmu.setText( LangUtil.getText( TEXT_LOAD_INTO_EMU ) );
 	this.rbCodeToSecondSys.setVisible( false );
 	this.rbCodeToPrimarySys.setVisible( false );
       }

@@ -66,23 +66,26 @@ public class KCNetSettingsFld
 
     panel.add(
 	GUIFactory.createLabel(
-		"Beim \"Einschalten\" KCNet konfigurieren (optional):" ),
+		LangUtil.getText( "net.label.configure_kcnet_when" ) ),
 	gbc );
 
     gbc.insets.left = 50;
     gbc.gridwidth   = 1;
     gbc.gridy++;
-    panel.add( GUIFactory.createLabel( "IP-Adresse (d.d.d.d):" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "net.label.ip_address_d" ) ), gbc );
     gbc.gridy++;
-    panel.add( GUIFactory.createLabel( "Subnetzmaske (d.d.d.d):" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "net.label.subnet_mask_d" ) ), gbc );
     gbc.gridy++;
-    panel.add( GUIFactory.createLabel( "Gateway (d.d.d.d):" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "net.label.gateway_d_d" ) ), gbc );
     gbc.gridy++;
-    panel.add( GUIFactory.createLabel( "DNS-Server (d.d.d.d):" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "net.label.dns_server_d" ) ), gbc );
 
     this.cbAutoConfig = GUIFactory.createCheckBox(
-		"IP-Adressen der leer gelassenen Felder"
-			+ " automatisch ermitteln",
+		LangUtil.getText( "net.option.automatically_determine" ),
 		true );
     this.cbAutoConfig.addActionListener( this );
     gbc.gridwidth = GridBagConstraints.REMAINDER;
@@ -90,8 +93,7 @@ public class KCNetSettingsFld
     panel.add( this.cbAutoConfig, gbc );
 
     this.btnShowNetConfig = GUIFactory.createButton(
-		"Netzwerkkonfiguration des zugrundeliegenden"
-			+ " Betriebssystems anzeigem" );
+		LangUtil.getText( "net.action.show_network" ) );
     this.btnShowNetConfig.addActionListener( this );
     gbc.insets.top  = 20;
     gbc.insets.left = 5;
@@ -293,7 +295,8 @@ public class KCNetSettingsFld
     buf.append( "<html>\n"
 	+ "<table border=\"1\">\n"
 	+ "<tr>\n"
-	+ "<td align=\"left\">" + LangUtil.tr( "Hardwareadresse:" )
+	+ "<td align=\"left\">" + LangUtil.getText(
+		"net.text.hardware_address" )
 	+ "</td><td align=\"left\">" );
     byte[] addr = netConfig.getHardwareAddr();
     if( addr != null ) {
@@ -308,15 +311,16 @@ public class KCNetSettingsFld
       }
     }
     buf.append( "</td></tr>\n"
-	+ "<tr><td align=\"left\">" + LangUtil.tr( "IP-Adresse:" )
+	+ "<tr><td align=\"left\">" + LangUtil.getText( "net.text.ip_address" )
 	+ "</td><td align=\"left\">" );
     appendIpAddrTo( buf, netConfig.getIpAddr() );
     buf.append( "</td></tr>\n"
-	+ "<tr><td align=\"left\">" + LangUtil.tr( "Subnetzmaske:" )
+	+ "<tr><td align=\"left\">" + LangUtil.getText(
+		"net.text.subnet_mask" )
 	+ "</td><td align=\"left\">" );
     appendIpAddrTo( buf, netConfig.getSubnetMask() );
     buf.append( "</td></tr>\n"
-	+ "<tr><td align=\"left\">" + LangUtil.tr( "DNS-Server:" )
+	+ "<tr><td align=\"left\">" + LangUtil.getText( "net.text.dns_server" )
 	+ "</td><td align=\"left\">" );
     appendIpAddrTo( buf, netConfig.getDnsServerIpAddr() );
     buf.append( "</td></tr>\n"
@@ -328,7 +332,7 @@ public class KCNetSettingsFld
     JOptionPane.showMessageDialog(
 		this,
 		pane,
-		LangUtil.tr( "IPv4-Netzwerkkonfiguration" ),
+		LangUtil.getText( "net.text.ipv4_network" ),
 		JOptionPane.INFORMATION_MESSAGE );
   }
 }

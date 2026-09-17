@@ -9,6 +9,7 @@
 
 package jkcemu.programming.basic;
 
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 
 
@@ -272,7 +273,7 @@ public class SimpleVarInfo
 
   private static void throwNonStaticVarNotAllowd() throws PrgException
   {
-    throw new PrgException( "Feldvariable mit variablen Indexangaben"
-					+ " an der Stelle nicht erlaubt" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.array_variable_variable" ) );
   }
 }

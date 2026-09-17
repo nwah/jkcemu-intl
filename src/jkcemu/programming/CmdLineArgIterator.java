@@ -11,6 +11,7 @@ package jkcemu.programming;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.Reader;
+import jkcemu.lang.LangUtil;
 
 
 public class CmdLineArgIterator implements Closeable
@@ -60,7 +61,7 @@ public class CmdLineArgIterator implements Closeable
 	  }
 	  if( ch != '\"' ) {
 	    throw new IOException(
-		"In \'\"\' eingeschlossenes Argument nicht abgeschlossen" );
+		LangUtil.getText( "programming.error.argument_enclosed_not_terminated" ) );
 	  }
 	} else {
 	  buf.append( (char) ch );

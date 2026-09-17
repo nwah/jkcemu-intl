@@ -30,6 +30,7 @@ import javax.swing.event.ChangeListener;
 import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class ThresholdDlg extends BaseDlg implements ChangeListener
@@ -131,7 +132,7 @@ public class ThresholdDlg extends BaseDlg implements ChangeListener
 
   private ThresholdDlg( ImageFrm imageFrm )
   {
-    super( imageFrm, "Schwellwert" );
+    super( imageFrm, LangUtil.getText( "image.title.threshold" ) );
     this.imgFld     = imageFrm.getImageFld();
     this.palette    = new byte[ 256 ];
     this.appliedImg = null;
@@ -174,7 +175,8 @@ public class ThresholdDlg extends BaseDlg implements ChangeListener
     this.btnFastLeft = GUIFactory.createRelImageResourceButton(
 					this,
 					"nav/left2.png",
-					"Schnell nach links" );
+					LangUtil.getText(
+						"image.action.fast_left" ) );
     this.btnFastLeft.setMargin( new Insets( 0, 0, 0, 0 ) );
     panelSlider.add( this.btnFastLeft );
     panelSlider.add( Box.createHorizontalStrut( 5 ) );
@@ -182,7 +184,8 @@ public class ThresholdDlg extends BaseDlg implements ChangeListener
     this.btnLeft = GUIFactory.createRelImageResourceButton(
 					this,
 					"nav/left1.png",
-					"Nach links" );
+					LangUtil.getText(
+						"image.action.left" ) );
     this.btnLeft.setMargin( new Insets( 0, 0, 0, 0 ) );
     panelSlider.add( this.btnLeft );
     panelSlider.add( Box.createHorizontalStrut( 5 ) );
@@ -203,7 +206,8 @@ public class ThresholdDlg extends BaseDlg implements ChangeListener
     this.btnRight = GUIFactory.createRelImageResourceButton(
 					this,
 					"nav/right1.png",
-					"Nach rechts" );
+					LangUtil.getText(
+						"image.action.right" ) );
     this.btnRight.setMargin( new Insets( 0, 0, 0, 0 ) );
     panelSlider.add( this.btnRight );
     panelSlider.add( Box.createHorizontalStrut( 5 ) );
@@ -211,7 +215,8 @@ public class ThresholdDlg extends BaseDlg implements ChangeListener
     this.btnFastRight = GUIFactory.createRelImageResourceButton(
 					this,
 					"nav/right2.png",
-					"Schnell nach rechts" );
+					LangUtil.getText(
+						"image.action.fast_right" ) );
     this.btnFastRight.setMargin( new Insets( 0, 0, 0, 0 ) );
     panelSlider.add( this.btnFastRight );
 

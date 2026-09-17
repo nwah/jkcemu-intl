@@ -76,7 +76,7 @@ public abstract class AbstractConvertTarget
 	}
       }
       throw new IOException(
-		  "Die Ausgabedatei hat die falsche Endung." );
+		  LangUtil.getText( "fileconv.error.output_file_wrong" ) );
     }
   }
 
@@ -242,7 +242,7 @@ public abstract class AbstractConvertTarget
    */
   public String toString()
   {
-    return LangUtil.tr( this.infoText );
+    return LangUtil.getText( this.infoText );
   }
 
 

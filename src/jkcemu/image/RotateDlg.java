@@ -132,7 +132,7 @@ public class RotateDlg extends BaseDlg implements ChangeListener
 
   private RotateDlg( ImageFrm imageFrm )
   {
-    super( imageFrm, "Drehen" );
+    super( imageFrm, LangUtil.getText( "image.title.rotate" ) );
     this.imageFrm   = imageFrm;
     this.imageFld   = imageFrm.getImageFld();
     this.appliedImg = null;
@@ -158,7 +158,8 @@ public class RotateDlg extends BaseDlg implements ChangeListener
     panelSpinner.setLayout( new BoxLayout( panelSpinner, BoxLayout.X_AXIS ) );
     add( panelSpinner, gbc );
 
-    panelSpinner.add( GUIFactory.createLabel( "Winkel:" ) );
+    panelSpinner.add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.angle" ) ) );
     panelSpinner.add( Box.createHorizontalStrut( 5 ) );
 
     this.spinner = GUIFactory.createSpinner(
@@ -170,7 +171,8 @@ public class RotateDlg extends BaseDlg implements ChangeListener
     panelSpinner.add( this.spinner );
 
     panelSpinner.add( Box.createHorizontalStrut( 5 ) );
-    panelSpinner.add( GUIFactory.createLabel( "Grad" ) );
+    panelSpinner.add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.degrees" ) ) );
 
 
     // Schieberegler
@@ -201,7 +203,8 @@ public class RotateDlg extends BaseDlg implements ChangeListener
     gbc.gridy++;
     add( panelBackground, gbc );
 
-    panelBackground.add( GUIFactory.createLabel( "Hintergrund:" ) );
+    panelBackground.add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.background" ) ) );
     panelBackground.add( Box.createHorizontalStrut( 5 ) );
 
     this.comboBackground = GUIFactory.createComboBox();
@@ -385,19 +388,7 @@ public class RotateDlg extends BaseDlg implements ChangeListener
       {
 	showSuppressableInfoDlg(
 		this,
-		LangUtil.tr(
-			"Das urspr\u00FCngliche Bild hat ein indexiertes"
-				+ " Farbmodell.\n"
-				+ "Durch die Drehung ist eine"
-				+ " zus\u00E4tzliche"
-				+ " Farbe f\u00FCr den Hintergrund"
-				+ " hinzugekommen.\n"
-				+ "Dadurch hat das gedrehte Bild kein"
-				+ " indexiertes Farbmodel mehr.\n"
-				+ "Falls Sie jedoch eins ben\u00F6tigen,"
-				+ " k\u00F6nnen Sie mit dem"
-				+ " Men\u00FCpunkt\n"
-				+ "{0} wieder eins erzeugen.",
+		LangUtil.getText( "image.text.original_image_indexed",
 			this.imageFrm.getMenuPathTextReduceColors() ) );
       }
     }

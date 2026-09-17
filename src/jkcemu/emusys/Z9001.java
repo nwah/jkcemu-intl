@@ -275,7 +275,7 @@ public class Z9001 extends EmuSys implements
   private static final FloppyDiskInfo[] availableFloppyDisks = {
 		new FloppyDiskInfo(
 			"/disks/z9001/z9001cpasys.dump.gz",
-			"Z9001 CP/A Systemdiskette",
+			"emusys.text.z9001_cp_system",
 			0, 2048, true ) };
 
   private static AutoInputCharSet autoInputCharSet = null;
@@ -407,7 +407,8 @@ public class Z9001 extends EmuSys implements
 	this.kc87       = false;
 	this.propPrefix = PROP_PREFIX_Z9001;
     }
-    this.loudspeaker = new CPUSynchronSoundDevice( "Lautsprecher" );
+    this.loudspeaker = new CPUSynchronSoundDevice(
+		LangUtil.getText( "emusys.text.loudspeaker" ) );
 
     if( emulatesFloppyDisk( props ) ) {
       this.floppyDiskDrives = new FloppyDiskDrive[ 2 ];
@@ -431,7 +432,8 @@ public class Z9001 extends EmuSys implements
       this.k1520Sound = null;
     }
     if( emulatesKCNet( props ) ) {
-      this.kcNet = new KCNet( "Netzwerk-PIO (E/A-Adressen C0h-C3h)" );
+      this.kcNet = new KCNet( LangUtil.getText(
+			"emusys.text.network_pio_i_o_addresses_c0h" ) );
     } else {
       this.kcNet = null;
     }
@@ -439,7 +441,7 @@ public class Z9001 extends EmuSys implements
       this.vdip = new VDIP(
 			0,
 			this.emuThread.getZ80CPU(),
-			"USB-PIO (E/A-Adressen DCh-DFh)" );
+			LangUtil.getText( "emusys.text.usb_pio_i_o_addresses_dch_dfh" ) );
       this.vdip.applySettings( props );
     } else {
       this.vdip = null;
@@ -470,7 +472,8 @@ public class Z9001 extends EmuSys implements
 				this.emuThread.getRAMFloppy1(),
 				this.sysName,
 				RAMFloppy.RFType.ADW,
-				"RAM-Floppy an E/A-Adressen 20h/21h",
+				LangUtil.getText(
+					"emusys.text.ram_floppy_i_o_addresses_20h" ),
 				props,
 				this.propPrefix + PROP_RF1_PREFIX );
 
@@ -478,7 +481,8 @@ public class Z9001 extends EmuSys implements
 				this.emuThread.getRAMFloppy2(),
 				this.sysName,
 				RAMFloppy.RFType.ADW,
-				"RAM-Floppy an E/A-Adressen 24h/25h",
+				LangUtil.getText(
+					"emusys.text.ram_floppy_i_o_addresses_24h" ),
 				props,
 				this.propPrefix + PROP_RF2_PREFIX );
 
@@ -496,15 +500,18 @@ public class Z9001 extends EmuSys implements
 
     Z80CPU                             cpu      = emuThread.getZ80CPU();
     java.util.List<Z80InterruptSource> iSources = new ArrayList<>();
-    this.pio90 = new Z80PIO( "Tastatur-PIO (E/A-Adressen 90h-93h)" );
-    this.pio88 = new Z80PIO( "System-PIO (E/A-Adressen 88h-8Bh)" );
-    this.ctc80 = new Z80CTC( "System-CTC (E/A-Adressen 80h-83h)" );
+    this.pio90 = new Z80PIO(
+		LangUtil.getText( "emusys.text.keyboard_pio_i" ) );
+    this.pio88 = new Z80PIO( LangUtil.getText( "emusys.text.system_pio_i" ) );
+    this.ctc80 = new Z80CTC( LangUtil.getText( "emusys.text.system_ctc_i" ) );
     iSources.add( this.pio90 );
     iSources.add( this.pio88 );
     iSources.add( this.ctc80 );
     if( this.printerModule ) {
-      this.ctcA8 = new Z80CTC( "Druckermodul-CTC (E/A-Adressen A8h-ABh)" );
-      this.sioB0 = new Z80SIO( "Druckermodul-SIO (E/A-Adressen B0h-B3h)" );
+      this.ctcA8 = new Z80CTC(
+		LangUtil.getText( "emusys.text.printer_module_ctc" ) );
+      this.sioB0 = new Z80SIO(
+		LangUtil.getText( "emusys.text.printer_module_sio" ) );
       iSources.add( new ModuleInterruptSource( cpu, this.ctcA8 ) );
       iSources.add( new ModuleInterruptSource( cpu, this.sioB0 ) );
     } else {
@@ -799,27 +806,27 @@ public class Z9001 extends EmuSys implements
     buf.append( "<h1>" );
     EmuUtil.appendHTML( buf, getTitle() );
     buf.append( ' ' );
-    buf.append( LangUtil.tr( "Speicherkonfiguration" ) );
+    buf.append( LangUtil.getText( "emusys.text.memory_configuration" ) );
     buf.append( "</h1>\n"
         + "<table border=\"1\">\n"
 	+ "<tr><td>F000h-FFFFh:</td><td>" );
-    buf.append( LangUtil.tr( "Betriebssystem-ROM" ) );
+    buf.append( LangUtil.getText( "emusys.text.operating_system_rom" ) );
     buf.append( "</td></tr>\n"
 	+ "<tr><td>EC00h-EFFFh:</td><td>" );
     if( (this.ramPixel != null)
 	&& (this.graphType == GRAPHIC_KRT)
 	&& this.graphMode )
     {
-      buf.append( LangUtil.tr(
-		"KRT-Pixel-RAM, Segment {0}",
+      buf.append( LangUtil.getText(
+		"emusys.text.krt_pixel_ram",
 		this.graphBank ) );
     } else {
       if( this.c80Enabled ) {
-	buf.append( LangUtil.tr(
-		"Text-BWS Segment {0}",
+	buf.append( LangUtil.getText(
+		"emusys.text.text_video_ram_segment",
 		this.c80MemSwap ? "1" : "0" ) );
       } else {
-	buf.append( LangUtil.tr( "Text-BWS" ) );
+	buf.append( LangUtil.getText( "emusys.text.text_video_ram" ) );
       }
     }
     buf.append( "</td></tr>\n"

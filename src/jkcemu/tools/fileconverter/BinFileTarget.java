@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class BinFileTarget extends AbstractConvertTarget
@@ -35,7 +36,9 @@ public class BinFileTarget extends AbstractConvertTarget
 		int            endAddr,
 		int            startAddr )
   {
-    super( fileConvertFrm, "Einfache Speicherabbilddatei (*.bin)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "fileconv.title.simple_memory_image" ) );
     this.dataBytes = dataBytes;
     this.offs      = offs;
     this.len       = len;

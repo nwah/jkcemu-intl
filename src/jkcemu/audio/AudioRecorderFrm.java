@@ -45,6 +45,7 @@ import jkcemu.base.HelpFrm;
 import jkcemu.etc.ReadableByteArrayOutputStream;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class AudioRecorderFrm extends BaseFrm implements Runnable
@@ -111,11 +112,11 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
   };
 
 
-  public static final String TITLE = Main.APPNAME + " Audiorecorder";
+  public static final String TITLE = "audio.title.jkcemu_audio_recorder";
 
-  private static final String TEXT_START          = "Start";
-  private static final String TEXT_STOP           = "Stop";
-  private static final String DEFAULT_STATUS_TEXT = "Bereit";
+  private static final String TEXT_START          = "audio.text.start";
+  private static final String TEXT_STOP           = "audio.text.stop";
+  private static final String DEFAULT_STATUS_TEXT = "common.text.ready";
   private static final String HELP_PAGE = "/help/tools/audiorecorder.htm";
 
   private static AudioRecorderFrm instance = null;
@@ -396,7 +397,7 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
     this.begMillis        = -1;
     this.recording        = false;
     this.recEnabled       = false;
-    setTitle( TITLE );
+    setTitle( LangUtil.getText( TITLE ) );
 
 
     // Fensterinhalt
@@ -412,22 +413,27 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
 						0, 0 );
 
     // Labels
-    this.labelMixer = GUIFactory.createLabel( "Ger\u00E4t:" );
+    this.labelMixer = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.device" ) );
     add( this.labelMixer, gbc );
 
-    this.labelFrameRate = GUIFactory.createLabel( "Abtastrate (Hz):" );
+    this.labelFrameRate = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.sample_rate_hz" ) );
     gbc.gridy++;
     add( this.labelFrameRate, gbc );
 
-    this.labelSampleSize = GUIFactory.createLabel( "Aufl\u00F6sung:" );
+    this.labelSampleSize = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.resolution" ) );
     gbc.gridy++;
     add( this.labelSampleSize, gbc );
 
-    this.labelVolume = GUIFactory.createLabel( "Pegel:" );
+    this.labelVolume = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.level" ) );
     gbc.gridy += 2;
     add( this.labelVolume, gbc );
 
-    this.labelDuration = GUIFactory.createLabel( "Aufgenommene Zeit:" );
+    this.labelDuration = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.recorded_time" ) );
     this.labelDuration.setEnabled( false );
     gbc.insets.bottom = 5;
     gbc.gridy++;
@@ -453,13 +459,15 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
     // Aufloesung
     ButtonGroup grpBits = new ButtonGroup();
 
-    this.rb8Bit = GUIFactory.createRadioButton( "8 Bit" );
+    this.rb8Bit = GUIFactory.createRadioButton(
+		LangUtil.getText( "common.option.8_bit" ) );
     grpBits.add( this.rb8Bit );
     gbc.gridwidth = 1;
     gbc.gridy++;
     add( this.rb8Bit, gbc );
 
-    this.rb16Bit = GUIFactory.createRadioButton( "16 Bit", true );
+    this.rb16Bit = GUIFactory.createRadioButton(
+		LangUtil.getText( "common.option.16_bit" ), true );
     grpBits.add( this.rb16Bit );
     gbc.gridx++;
     add( this.rb16Bit, gbc );
@@ -469,12 +477,14 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
     // Mono/Stereo
     ButtonGroup grpChannels = new ButtonGroup();
 
-    this.rbMono = GUIFactory.createRadioButton( "Mono", true );
+    this.rbMono = GUIFactory.createRadioButton(
+		LangUtil.getText( "audio.option.mono" ), true );
     grpChannels.add( this.rbMono );
     gbc.gridy++;
     add( this.rbMono, gbc );
 
-    this.rbStereo = GUIFactory.createRadioButton( "Stereo" );
+    this.rbStereo = GUIFactory.createRadioButton(
+		LangUtil.getText( "audio.option.stereo" ) );
     grpChannels.add( this.rbStereo );
     gbc.gridx++;
     add( this.rbStereo, gbc );
@@ -507,14 +517,17 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
     gbc.gridx += 3;
     add( panelBtn, gbc );
 
-    this.btnStartStop = GUIFactory.createButton( TEXT_START );
+    this.btnStartStop = GUIFactory.createButton(
+		LangUtil.getText( TEXT_START ) );
     panelBtn.add( this.btnStartStop );
 
-    this.btnPlay = GUIFactory.createButton( EmuUtil.TEXT_PLAY );
+    this.btnPlay = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_PLAY ) );
     this.btnPlay.setEnabled( false );
     panelBtn.add( this.btnPlay );
 
-    this.btnSave = GUIFactory.createButton( EmuUtil.TEXT_OPEN_SAVE );
+    this.btnSave = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_OPEN_SAVE ) );
     this.btnSave.setEnabled( false );
     panelBtn.add( this.btnSave );
 
@@ -561,7 +574,7 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
   {
     if( this.recEnabled ) {
       this.recEnabled = false;
-      this.btnStartStop.setText( TEXT_START );
+      this.btnStartStop.setText( LangUtil.getText( TEXT_START ) );
     } else {
       if( this.audioThread == null ) {
 	if( confirmDataSaved() ) {
@@ -595,10 +608,10 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
 	  updFieldsEnabled();
 	  this.volumeBar.setVolumeBarState( true );
 	  this.timerDuration.start();
-	  this.btnStartStop.setText( TEXT_STOP );
+	  this.btnStartStop.setText( LangUtil.getText( TEXT_STOP ) );
 	}
       } else {
-	this.btnStartStop.setText( TEXT_STOP );
+	this.btnStartStop.setText( LangUtil.getText( TEXT_STOP ) );
       }
     }
   }
@@ -625,7 +638,7 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
     {
       File file = FileUtil.showFileSaveDlg(
 			this,
-			"Sound-Datei speichern",
+			LangUtil.getText( "audio.title.save_sound_file" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_AUDIO ),
 			AudioFile.getFileFilter() );
@@ -661,8 +674,7 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
     {
       rv = BaseDlg.showSuppressableConfirmDlg(
 		this,
-		"Die Aufnahme wurde noch nicht gespeichert\n"
-			+ "und wird somit verworfen." );
+		LangUtil.getText( "audio.msg.recording_not_saved_yet_therefore" ) );
     }
     return rv;
   }
@@ -718,7 +730,7 @@ public class AudioRecorderFrm extends BaseFrm implements Runnable
     }
     this.labelDuration.setEnabled( state );
     this.labelDurationValue.setEnabled( state );
-    this.btnStartStop.setText( TEXT_START );
+    this.btnStartStop.setText( LangUtil.getText( TEXT_START ) );
     this.btnPlay.setEnabled( state );
     this.btnSave.setEnabled( state );
   }

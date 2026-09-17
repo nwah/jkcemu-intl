@@ -15,6 +15,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.disk.FloppyDiskDrive;
 import jkcemu.emusys.KC85;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80Memory;
 
@@ -28,7 +29,7 @@ public class D004 extends AbstractKC85Module
   protected byte[]      romBytes;
   protected int         romAddr;
 
-  private static final String TEXT_D004_ROM_FILE = "D004-ROM-Datei";
+  private static final String TEXT_D004_ROM_FILE = "kc85.text.d004_rom_file";
 
   private static byte[] romD004_20   = null;
   private static byte[] romD004_35_2 = null;
@@ -176,7 +177,7 @@ public class D004 extends AbstractKC85Module
 		this.romProp.substring( KC85.VALUE_PREFIX_FILE.length() ),
 		true,
 		0x2000,
-		TEXT_D004_ROM_FILE );
+		LangUtil.getText( TEXT_D004_ROM_FILE ) );
     }
     if( romBytes == null ) {
       if( this.romProp.equals( KC85.VALUE_ROM_20 ) ) {
@@ -296,7 +297,7 @@ public class D004 extends AbstractKC85Module
 		this.romProp.substring( KC85.VALUE_PREFIX_FILE.length() ),
 		true,
 		0x2000,
-		TEXT_D004_ROM_FILE );
+		LangUtil.getText( TEXT_D004_ROM_FILE ) );
       if( romBytes != null ) {
 	this.romBytes = romBytes;
       }

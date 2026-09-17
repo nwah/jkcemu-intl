@@ -38,6 +38,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class AutoLoadSettingsFld
@@ -80,15 +81,15 @@ public class AutoLoadSettingsFld
 					0, 0 );
 
     add(
-	GUIFactory.createLabel( "Dateien, die nach dem Einschalten"
-						+ " bzw. nach RESET" ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.files_automatically" ) ),
 	gbc );
     gbc.insets.top    = 0;
     gbc.insets.bottom = 5;
     gbc.gridy++;
     add(
-	GUIFactory.createLabel( "automatisch in den Arbeitsspeicher (RAM)"
-			+ " geladen werden sollen:" ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.after_switching_after_reset_automatisch_den" ) ),
 	gbc );
 
     this.tableModel = new AutoLoadTableModel();
@@ -123,13 +124,14 @@ public class AutoLoadSettingsFld
     this.btnUp = GUIFactory.createRelImageResourceButton(
 						this,
 						"nav/up.png",
-						"Auf" );
+						LangUtil.getText(
+							"common.action.up" ) );
     panelBtnRight.add( this.btnUp );
 
     this.btnDown = GUIFactory.createRelImageResourceButton(
 						this,
 						"nav/down.png",
-						"Ab" );
+						LangUtil.getText( "common.action.down" ) );
     panelBtnRight.add( this.btnDown );
 
     JPanel panelBtnBottom = GUIFactory.createPanel(
@@ -329,7 +331,7 @@ public class AutoLoadSettingsFld
   {
     File file = FileUtil.showFileOpenDlg(
 			this.settingsFrm,
-			EmuUtil.TEXT_ADD_FILE,
+			LangUtil.getText( EmuUtil.TEXT_ADD_FILE ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_SOFTWARE ),
 			FileUtil.getBinaryFileFilter(),

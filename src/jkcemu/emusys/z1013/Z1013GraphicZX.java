@@ -251,9 +251,7 @@ public class Z1013GraphicZX
   @Override
   public String toString()
   {
-    return LangUtil.tr(
-		"ZX-Spectrum-kompatible S/W-Grafikkarte"
-			+ " nach practic 2/88" );
+    return LangUtil.getText( "z1013.text.zx_spectrum_compatible" );
   }
 
 

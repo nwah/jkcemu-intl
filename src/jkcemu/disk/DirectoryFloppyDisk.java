@@ -178,9 +178,7 @@ public class DirectoryFloppyDisk extends RegularFormatFloppyDisk
 			boolean    mfmMode )
   {
     fireShowError(
-	"Formatieren einer emulierten Diskette,\n"
-		+ "die auf ein Verzeichnis im Dateisystem abgebildet ist,\n"
-		+ "wird nicht unterst\u00FCtzt.",
+	LangUtil.getText( "disk.error.formatting_emulated" ),
 	null );
     return false;
   }
@@ -472,7 +470,7 @@ public class DirectoryFloppyDisk extends RegularFormatFloppyDisk
 	}
 	catch( IOException ex ) {
 	  this.sectors[ absSectorIdx ] = null;
-	  fireShowError( "E/A-Fehler", ex );
+	  fireShowError( LangUtil.getText( "disk.error.i_o_error" ), ex );
 	  rv = false;
 	}
 	finally {
@@ -1359,15 +1357,7 @@ public class DirectoryFloppyDisk extends RegularFormatFloppyDisk
 	     */
 	    if( entryName.charAt( i ) < '\u0020' ) {
 	      throw new IOException(
-		"Anlegen der Datei nicht m\u00F6glich, da der Dateiname"
-			+ " nicht konforme Zeichen enthalten w\u00FCrde.\n\n"
-			+ "M\u00F6glicherweise stimmt aber auch die"
-			+ " beim Diskettenformat eingestellte"
-			+ " Directory-Gr\u00F6\u00DFe"
-			+ " (Anzahl der Bl\u00F6cke)\n"
-			+ "nicht mit der \u00FCberein,"
-			+ " mit der das im Emulator laufende Programm"
-			+ " bzw. Betriebssystem arbeitet." );
+		LangUtil.getText( "disk.error.creating_file_not_possible" ) );
 	    }
 	  }
 	  String fileName = null;
@@ -1389,12 +1379,8 @@ public class DirectoryFloppyDisk extends RegularFormatFloppyDisk
 	  }
 	  int userNum = (entryName.charAt( 0 ) - '0');
 	  if( (userNum == 0) && fileName.equals( SYS_FILE_NAME ) ) {
-	    throw new IOException( LangUtil.tr(
-		"Eine Datei mit dem Namen {0}"
-			+ " kann vom emulierten System aus nicht"
-			+ " angelegt werden,\n"
-			+ "da JKCEMU diese Datei f\u00FCr die Systemspuren"
-			+ " verwendet.",
+	    throw new IOException( LangUtil.getText(
+		"disk.text.file_name_cannot_created",
 		SYS_FILE_NAME ) );
 	  }
 	  File dirFile = this.dirFile;

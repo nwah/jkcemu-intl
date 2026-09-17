@@ -545,8 +545,8 @@ public class Z80Assembler
   private void checkPrint16BitWarning( int value )
   {
     if( (value < ~0x7FFF) || (value > 0xFFFF) ) {
-      putWarning( "Numerischer Wert au\u00DFerhalb 16-Bit-Bereich:"
-					+ "Bits gehen verloren" );
+      putWarning( LangUtil.getText(
+			"assembler.msg.numeric_value_outside_16" ) );
     }
   }
 
@@ -561,7 +561,9 @@ public class Z80Assembler
      */
     if( !this.addrOverflow && (this.curAddr > 0x10000) ) {
       this.addrOverflow = true;
-      throw new PrgException( "\u00DCberlauf: Adressz\u00E4hler > 0FFFFh" );
+      throw new PrgException(
+		LangUtil.getText(
+			"assembler.error.overflow_address_counter" ) );
     }
   }
 
@@ -671,7 +673,8 @@ public class Z80Assembler
 	  buf.append( lineNum );
 	}
 	buf.append( " nicht geschlossen (ENDIF fehlt)" );
-	appendLineNumMsgToErrLog( buf.toString(), EmuUtil.TEXT_ERROR );
+	appendLineNumMsgToErrLog(
+		buf.toString(), LangUtil.getText( EmuUtil.TEXT_ERROR ) );
 	this.status = false;
 	this.errCnt++;
       }
@@ -693,7 +696,8 @@ public class Z80Assembler
       rv = value.intValue();
     } else {
       if( this.passNum == 2 ) {
-	throw new PrgException( "Wert nicht ermittelbar" );
+	throw new PrgException( LangUtil.getText(
+			"assembler.error.value_cannot_determined" ) );
       }
     }
     return rv;
@@ -722,8 +726,8 @@ public class Z80Assembler
 	  if( labelName != null ) {
 	    if( this.passNum == 1 ) {
 	      if( this.labels.containsKey( labelName ) ) {
-		throw new PrgException( LangUtil.tr(
-			"Marke {0} bereits vergeben", labelName ) );
+		throw new PrgException( LangUtil.getText(
+			"assembler.text.label_already_use", labelName ) );
 	      }
 	      this.labels.put(
 			labelName,
@@ -1327,8 +1331,8 @@ public class Z80Assembler
 		  parseCPU( asmLine, Syntax.ZILOG_ONLY, true );
 		  listCode = false;
 		} else {
-		  throw new PrgException( LangUtil.tr(
-			    "''{0}'': Unbekannte Mnemonik", instruction ) );
+		  throw new PrgException( LangUtil.getText(
+			    "assembler.text.unknown_mnemonic", instruction ) );
 		}
 	      }
 	    }
@@ -1532,8 +1536,8 @@ public class Z80Assembler
 
     int v = nextWordArg( asmLine );
     if( (v < 1) || (Integer.bitCount( v ) != 1) ) {
-      throw new PrgException( "Zweierpotenz (1, 2, 4, 8, %10, %20 usw.)"
-				      + " als Argument erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.power_two_1" ) );
     }
     if( asmLine.hasMoreArgs() ) {
       int b = getByte( asmLine.nextArg() );
@@ -1665,8 +1669,8 @@ public class Z80Assembler
       }
     }
     if( !done ) {
-      throw new PrgException( "\'Z80\', \'Z80UNDOC\',"
-			+ " \'U880\' oder \'U880UNDOC\' erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.z80_z80undoc_u880" ) );
     }
   }
 
@@ -1678,8 +1682,8 @@ public class Z80Assembler
   {
     if( passNum == 1 ) {
       if( this.cpuDone ) {
-	throw new PrgException(
-		"Mehrfaches Festlegen des CPU-Modells nicht erlaubt" );
+	throw new PrgException( LangUtil.getText(
+			"assembler.error.specifying_cpu_model" ) );
       }
       this.cpuDone = true;
       this.options = new PrgOptions( this.options );
@@ -1712,11 +1716,13 @@ public class Z80Assembler
 		putChar( ch );
 	      }
 	      if( ch != ch0 ) {
-		throw new PrgException( "Zeichenkette nicht geschlossen" );
+		throw new PrgException(
+			LangUtil.getText(
+				"assembler.error.character_string_not_closed" ) );
 	      }
 	      if( pos < len ) {
-		throw new PrgException( LangUtil.tr(
-			  "''{0}'': Unerwartetes Zeichen hinter Zeichenkette",
+		throw new PrgException( LangUtil.getText(
+			  "assembler.text.unexpected_character_after_character",
 			  String.valueOf( text.charAt( pos ) ) ) );
 	      }
 	    }
@@ -1745,8 +1751,8 @@ public class Z80Assembler
 	  putCode( v );
 	}
 	catch( NumberFormatException ex ) {
-	  throw new PrgException( LangUtil.tr(
-			"''{0}'': Ung\u00FCltige Hexadezimalzahl", text ) );
+	  throw new PrgException( LangUtil.getText(
+			"assembler.text.invalid_hexadecimal_quoted", text ) );
 	}
       }
     } while( asmLine.hasMoreArgs() );
@@ -1784,7 +1790,8 @@ public class Z80Assembler
   private void parseELSE( AsmLine asmLine ) throws PrgException
   {
     if( this.stack.isEmpty() ) {
-      throw new PrgException( "ELSE ohne zugeh\u00F6riges IF..." );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.else_without" ) );
     }
     try {
       this.stack.peek().processELSE();
@@ -1806,7 +1813,8 @@ public class Z80Assembler
   private void parseENDIF( AsmLine asmLine ) throws PrgException
   {
     if( this.stack.isEmpty() ) {
-      throw new PrgException( "ENDIF ohne zugeh\u00F6riges IF..." );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.endif_without" ) );
     }
     try {
       this.stack.pop();
@@ -1820,8 +1828,8 @@ public class Z80Assembler
   {
     if( this.passNum == 1 ) {
       if( this.entryAddr != null ) {
-	throw new PrgException(
-		"Mehrfache ENT- bzw. ENTRY-Anweisungen nicht erlaubt" );
+	throw new PrgException( LangUtil.getText(
+			"assembler.error.multiple_ent_entry" ) );
       }
       this.entryAddr = this.curAddr;
     }
@@ -1879,7 +1887,8 @@ public class Z80Assembler
       }
       asmLine.checkEOL();
     } else {
-      throw new PrgException( "EQU ohne Marke" );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.equ_without_label" ) );
     }
   }
 
@@ -1890,7 +1899,8 @@ public class Z80Assembler
 				asmLine.nextArg().toString(),
 				"Meldungstext" );
     if( msg == null ) {
-      throw new PrgException( "Meldungstext erwartet" );
+      throw new PrgException(
+		LangUtil.getText( "assembler.error.message_text_expected" ) );
     }
     asmLine.checkEOL();
     throw new PrgException( msg );
@@ -2201,8 +2211,8 @@ public class Z80Assembler
   {
     File file = getIncludeFile( asmLine );
     if( this.curSource != this.mainSource ) {
-      throw new PrgException(
-		"In sich geschachtelte INCLUDE-Befehle nicht erlaubt" );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.nested_include" ) );
     }
     asmLine.checkEOL();
     PrgSource source = this.file2Source.get( file );
@@ -2739,8 +2749,8 @@ public class Z80Assembler
     asmLine.checkEOL();
     if( a < this.curAddr ) {
       this.orgOverlapped = true;
-      throw new PrgException( "Zur\u00FCcksetzen des"
-			+ " Adressz\u00E4hlers nicht erlaubt" );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.resetting_address" ) );
     }
     if( (this.curAddr > 0) && (a > this.curAddr) ) {
       skipCode( a - this.curAddr );
@@ -2755,12 +2765,14 @@ public class Z80Assembler
 				asmLine.nextArg().toString(),
 				"Name/Titel" );
     if( appName == null ) {
-      throw new PrgException( "Programmname bzw. Titel erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.program_name_title" ) );
     }
     if( this.passNum == 1 ) {
       if( this.appName != null ) {
-	throw new PrgException( "Mehrfaches Festlegen"
-			+ " des Programmnames bzw. Titels nicht erlaubt" );
+	throw new PrgException(
+		LangUtil.getText(
+			"assembler.error.specifying_program_name" ) );
       }
       this.appName = appName;
     }
@@ -3149,7 +3161,7 @@ public class Z80Assembler
     if( msg == null ) {
       msg = "Unbekannter Fehler";
     }
-    appendLineNumMsgToErrLog( msg, EmuUtil.TEXT_ERROR );
+    appendLineNumMsgToErrLog( msg, LangUtil.getText( EmuUtil.TEXT_ERROR ) );
     this.status = false;
     this.errCnt++;
     if( this.errCnt >= 100 ) {
@@ -3212,8 +3224,7 @@ public class Z80Assembler
 		    }
 		  }
 		  if( this.curSource.replaceCurLine( buf.toString() ) ) {
-		    putWarning( "Relativer Sprung wird als absoluter"
-			+ " \u00FCbersetzt, da Sprungdistanz zu gro\u00DF" );
+		    putWarning( LangUtil.getText( "assembler.msg.relative_jump_translated" ) );
 		    this.restartAsm = true;
 		    done            = true;
 		  }
@@ -3224,7 +3235,9 @@ public class Z80Assembler
 	}
 	if( !done ) {
 	  this.relJumpsTooLong = true;
-	  throw new PrgException( "Relative Sprungdistanz zu gro\u00DF" );
+	  throw new PrgException(
+			LangUtil.getText(
+				"assembler.error.relative_jump_distance" ) );
 	}
       }
     }
@@ -3240,7 +3253,8 @@ public class Z80Assembler
       fileName = stripEnclosedText( text, "Dateiname" );
     }
     if( fileName == null ) {
-      throw new PrgException( "Dateiname erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.file_name_expected" ) );
     }
     return PrgSource.getIncludeFile( this.curSource, fileName );
   }
@@ -3254,11 +3268,12 @@ public class Z80Assembler
       if( !text.isEmpty() ) {
 	v = parseExpr( text );
 	if( (v < ~0x7F) || (v > 0xFF) ) {
-	  throw new PrgException( "Distanzangabe zu gro\u00DF" );
+	  throw new PrgException(
+			LangUtil.getText(
+				"assembler.error.displacement_large" ) );
 	}
 	if( text.startsWith( "+" ) && (v > 0x7F) ) {
-	  putWarning( "Distanz ist negativ (r\u00FCchw\u00E4rts)"
-					+ " obwohl positiv angegeben" );
+	  putWarning( LangUtil.getText( "assembler.msg.distance_negative" ) );
 	}
       }
     }
@@ -3383,7 +3398,8 @@ public class Z80Assembler
   private void robotronMnemonic()
   {
     if( this.options.getAsmSyntax() == Syntax.ZILOG_ONLY )
-      putWarning( "Robotron-Mnemonik" );
+      putWarning( LangUtil.getText(
+			"assembler.msg.robotron_mnemonics" ) );
   }
 
 
@@ -3395,7 +3411,8 @@ public class Z80Assembler
   private void robotronSyntax()
   {
     if( this.options.getAsmSyntax() == Syntax.ZILOG_ONLY )
-      putWarning( "Robotron-Syntax" );
+      putWarning( LangUtil.getText(
+			"assembler.msg.robotron_syntax" ) );
   }
 
 
@@ -3407,7 +3424,7 @@ public class Z80Assembler
   private void zilogSyntax()
   {
     if( this.options.getAsmSyntax() == Syntax.ROBOTRON_ONLY )
-      putWarning( "Zilog-Syntax" );
+      putWarning( LangUtil.getText( "assembler.msg.zilog_syntax" ) );
   }
 
 
@@ -3419,7 +3436,8 @@ public class Z80Assembler
   private void zilogMnemonic()
   {
     if( this.options.getAsmSyntax() == Syntax.ROBOTRON_ONLY )
-      putWarning( "Zilog-Mnemonik" );
+      putWarning( LangUtil.getText(
+			"assembler.msg.zilog_mnemonics" ) );
   }
 
 
@@ -3433,8 +3451,8 @@ public class Z80Assembler
 	char ch = text.charAt( 0 );
 	if( (ch == '\'') || (ch == '\"') ) {
 	  if( (len < 2) || (text.charAt( len - 1 ) != ch) ) {
-	    throw new PrgException( LangUtil.tr(
-			  "{0} nicht mit {1} abgeschlossen",
+	    throw new PrgException( LangUtil.getText(
+			  "assembler.text.not_terminated",
 			  itemDesc, String.valueOf( ch ) ) );
 	  }
 	  if( len > 2 ) {
@@ -3450,21 +3468,23 @@ public class Z80Assembler
   private void undocInst()
   {
     if( !this.options.getAllowUndocInst() )
-      putWarning( "Undokumentierter Befehl" );
+      putWarning(
+		LangUtil.getText( "assembler.msg.undocumented_instruction" ) );
   }
 
 
   private void undocSyntax()
   {
     if( !this.options.getAllowUndocInst() )
-      putWarning( "Undokumentierte Syntax" );
+      putWarning( LangUtil.getText(
+			"assembler.msg.undocumented_syntax" ) );
   }
 
 
   private void throwNoSuchInstArgs() throws PrgException
   {
-    throw new PrgException( "Die Anweisung existiert nicht"
-		+ " f\u00FCr die angegebenen Argumente." );
+    throw new PrgException( LangUtil.getText(
+			"assembler.error.instruction_not_exist" ) );
   }
 
 
@@ -3504,10 +3524,11 @@ public class Z80Assembler
       }
     }
     if( firstLabel ) {
-      buf.append( LangUtil.tr( "Markentabelle ist leer." ) );
+      buf.append( LangUtil.getText(
+			"assembler.text.label_table_empty" ) );
     } else if( missingValue ) {
-      buf.append( LangUtil.tr(
-	"\n    k.W.: Numerischer Wert konnte nicht berechnet werden." ) );
+      buf.append( LangUtil.getText(
+	"assembler.text.k_w_numeric" ) );
     }
     buf.append( '\n' );
     if( this.listOut == null ) {
@@ -3528,8 +3549,7 @@ public class Z80Assembler
 
   private void putWarningOutOf8Bits()
   {
-    putWarning( "Numerischer Wert au\u00DFerhalb 8-Bit-Bereich:"
-					+ " Bits gehen verloren" );
+    putWarning( LangUtil.getText( "assembler.msg.numeric_value_outside_8" ) );
   }
 
 
@@ -3642,14 +3662,12 @@ public class Z80Assembler
 	  appendToErrLog( buf.toString() );
 	}
       } else {
-	appendToErrLog( LangUtil.tr(
-		"Programmcode kann nicht gespeichert werden,\n"
-			+ "da kein Dateiname ausgew\u00E4hlt wurde.\n" ) );
+	appendToErrLog( LangUtil.getText(
+		"assembler.text.program_code_cannot_saved_because_no" ) );
       }
     } else {
-      appendToErrLog( LangUtil.tr(
-		"Programmcode kann nicht gespeichert werden,\n"
-			+ "da kein einziges Byte erzeugt wurde.\n" ) );
+      appendToErrLog( LangUtil.getText(
+		"assembler.text.program_code_cannot_saved_because_not" ) );
     }
     return status;
   }

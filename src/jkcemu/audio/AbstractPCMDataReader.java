@@ -10,6 +10,7 @@
 package jkcemu.audio;
 
 import java.io.IOException;
+import jkcemu.lang.LangUtil;
 
 
 public abstract class AbstractPCMDataReader implements PCMDataSource
@@ -61,7 +62,8 @@ public abstract class AbstractPCMDataReader implements PCMDataSource
 
   protected static void throwNoAudioData() throws IOException
   {
-    throw new IOException( "Keine Audiodaten vorhanden" );
+    throw new IOException(
+		LangUtil.getText( "audio.error.no_audio_data" ) );
   }
 
 
@@ -120,7 +122,7 @@ public abstract class AbstractPCMDataReader implements PCMDataSource
   public synchronized void setFramePos( long framePos ) throws IOException
   {
     throw new IOException(
-		"Setzen der Abspielposition nicht m\u00F6glich" );
+		LangUtil.getText( "audio.error.setting_playback" ) );
   }
 
 

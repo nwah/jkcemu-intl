@@ -178,8 +178,7 @@ public class RecentFilesMngr implements ActionListener, MenuListener
       if( this.menu.isVisible() ) {
 	if( BaseDlg.showSuppressableYesNoDlg(
 		this.menu,
-		"M\u00F6chte Sie die Liste der zuletzt verwendeten"
-			+ " Dateien l\u00F6schen?" ) )
+		LangUtil.getText( "file.msg.want_clear_list" ) ) )
 	{
 	  if( this.listFile.delete() ) {
 	    this.menu.setVisible( false );
@@ -188,8 +187,8 @@ public class RecentFilesMngr implements ActionListener, MenuListener
 	    BaseDlg.showErrorDlg(
 		this.menu,
 		this.listFile.getPath() + ":\n"
-			+ LangUtil.tr( "Datei, die die Liste enth\u00E4lt,"
-				+ " konnte nicht gel\u00F6scht werden.\n" ) );
+			+ LangUtil.getText(
+				"file.text.file_containing_list" ) );
 	  }
 	}
       }
@@ -327,7 +326,8 @@ public class RecentFilesMngr implements ActionListener, MenuListener
     this.listFile        = listFile;
     this.listFileMillis  = -1L;
     this.recentFileNames = new ArrayList<>( MAX_RECENT_FILES );
-    this.menu            = GUIFactory.createMenu( "Zuletzt verwendet" );
+    this.menu            = GUIFactory.createMenu(
+		LangUtil.getText( "file.menu.recently_used" ) );
     this.menuItems = new JMenuItem[ MAX_RECENT_FILES ];
     for( int i = 0; i < this.menuItems.length; i++ ) {
       JMenuItem item = GUIFactory.createMenuItem( "" );
@@ -337,7 +337,8 @@ public class RecentFilesMngr implements ActionListener, MenuListener
     }
     this.menuSep = GUIFactory.createSeparator();
     this.menu.add( this.menuSep );
-    this.menuClear = GUIFactory.createMenuItem( "Liste l\u00F6schen" );
+    this.menuClear = GUIFactory.createMenuItem(
+		LangUtil.getText( "file.action.clear_list" ) );
     this.menuClear.addActionListener( this );
     this.menu.add( this.menuClear );
     updRecentFileList();

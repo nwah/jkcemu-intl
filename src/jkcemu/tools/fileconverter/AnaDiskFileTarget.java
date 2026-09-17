@@ -13,6 +13,7 @@ import java.io.IOException;
 import jkcemu.disk.AbstractFloppyDisk;
 import jkcemu.disk.AnaDisk;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class AnaDiskFileTarget extends AbstractConvertTarget
@@ -24,7 +25,9 @@ public class AnaDiskFileTarget extends AbstractConvertTarget
 			FileConvertFrm     fileConvertFrm,
 			AbstractFloppyDisk disk )
   {
-    super( fileConvertFrm, "AnaDisk-Datei (*.dump)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "fileconv.title.anadisk_file_dump" ) );
     this.disk = disk;
   }
 

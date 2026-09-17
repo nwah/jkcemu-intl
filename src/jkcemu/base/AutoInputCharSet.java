@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import jkcemu.lang.LangUtil;
 
 
 public class AutoInputCharSet
@@ -27,13 +28,13 @@ public class AutoInputCharSet
   public static final String VIEW_END   = "\u21E5";
   public static final String VIEW_TAB   = "\u21C6";
 
-  public static final String TEXT_BACK_SPACE = "Back Space";
-  public static final String TEXT_LEFT       = "Cursor links";
-  public static final String TEXT_RIGHT      = "Cursor rechts";
-  public static final String TEXT_DOWN       = "Cursor runter";
-  public static final String TEXT_UP         = "Cursor hoch";
-  public static final String TEXT_HOME       = "Cursor links oben";
-  public static final String TEXT_ENTER      = "ENTER";
+  public static final String TEXT_BACK_SPACE = "base.text.back_space";
+  public static final String TEXT_LEFT       = "base.text.cursor_left";
+  public static final String TEXT_RIGHT      = "base.text.cursor_right";
+  public static final String TEXT_DOWN       = "base.text.cursor_down";
+  public static final String TEXT_UP         = "base.text.cursor_up";
+  public static final String TEXT_HOME       = "base.text.cursor_top_left";
+  public static final String TEXT_ENTER      = "base.text.enter";
 
 
   private static class Range
@@ -84,7 +85,7 @@ public class AutoInputCharSet
     addSpecialChar(
 		8,
 		VIEW_LEFT,
-		TEXT_LEFT + " / " + TEXT_BACK_SPACE );
+		LangUtil.getText( TEXT_LEFT ) + " / " + LangUtil.getText( TEXT_BACK_SPACE ) );
   }
 
 
@@ -104,17 +105,17 @@ public class AutoInputCharSet
   {
     if( this.ctrlCode2Desc == null ) {
       this.ctrlCode2Desc = new HashMap<>();
-      setCtrlCodeDesc( 13, TEXT_ENTER );
+      setCtrlCodeDesc( 13, LangUtil.getText( TEXT_ENTER ) );
     }
   }
 
 
   public void addCursorChars()
   {
-    addSpecialChar( 8,  VIEW_LEFT,  TEXT_LEFT );
-    addSpecialChar( 9,  VIEW_RIGHT, TEXT_RIGHT );
-    addSpecialChar( 10, VIEW_DOWN,  TEXT_DOWN );
-    addSpecialChar( 11, VIEW_UP,    TEXT_UP );
+    addSpecialChar( 8,  VIEW_LEFT,  LangUtil.getText( TEXT_LEFT ) );
+    addSpecialChar( 9,  VIEW_RIGHT, LangUtil.getText( TEXT_RIGHT ) );
+    addSpecialChar( 10, VIEW_DOWN,  LangUtil.getText( TEXT_DOWN ) );
+    addSpecialChar( 11, VIEW_UP,    LangUtil.getText( TEXT_UP ) );
   }
 
 
@@ -126,7 +127,7 @@ public class AutoInputCharSet
 
   public void addEnterChar()
   {
-    addSpecialChar( 13, VIEW_ENTER, TEXT_ENTER );
+    addSpecialChar( 13, VIEW_ENTER, LangUtil.getText( TEXT_ENTER ) );
   }
 
 
@@ -210,10 +211,12 @@ public class AutoInputCharSet
       cpmCharSet = new AutoInputCharSet();
       cpmCharSet.addAsciiChars();
       cpmCharSet.addEnterChar();
-      cpmCharSet.addSpecialChar(  8, VIEW_LEFT, TEXT_LEFT );
-      cpmCharSet.addSpecialChar(  4, VIEW_RIGHT, TEXT_RIGHT );
-      cpmCharSet.addSpecialChar( 24, VIEW_DOWN, TEXT_DOWN );
-      cpmCharSet.addSpecialChar(  5, VIEW_UP, TEXT_UP );
+      cpmCharSet.addSpecialChar( 8, VIEW_LEFT, LangUtil.getText( TEXT_LEFT ) );
+      cpmCharSet.addSpecialChar(
+		4, VIEW_RIGHT, LangUtil.getText( TEXT_RIGHT ) );
+      cpmCharSet.addSpecialChar(
+		24, VIEW_DOWN, LangUtil.getText( TEXT_DOWN ) );
+      cpmCharSet.addSpecialChar(  5, VIEW_UP, LangUtil.getText( TEXT_UP ) );
       cpmCharSet.addDelChar();
       cpmCharSet.addEscChar();
       cpmCharSet.addCtrlCodes();

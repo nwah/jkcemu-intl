@@ -16,6 +16,7 @@ import javax.swing.JComboBox;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.UserInputException;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class HeadersaveFileTarget extends AbstractConvertTarget
@@ -31,7 +32,9 @@ public class HeadersaveFileTarget extends AbstractConvertTarget
 		int            offs,
 		int            len )
   {
-    super( fileConvertFrm, "Headersave-Datei (*.z80)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "common.option.headersave_file_z80" ) );
     this.dataBytes = dataBytes;
     this.offs      = offs;
     this.len       = len;

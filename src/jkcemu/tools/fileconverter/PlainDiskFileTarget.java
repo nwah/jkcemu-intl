@@ -13,6 +13,7 @@ import java.io.IOException;
 import jkcemu.disk.AbstractFloppyDisk;
 import jkcemu.disk.PlainDisk;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class PlainDiskFileTarget extends AbstractConvertTarget
@@ -26,7 +27,7 @@ public class PlainDiskFileTarget extends AbstractConvertTarget
   {
     super(
 	fileConvertFrm,
-	"Einfache Diskettenabbilddatei (*.dd; *.img; *.image; *.raw)" );
+	LangUtil.getText( "fileconv.title.simple_disk_image" ) );
     this.disk = disk;
   }
 

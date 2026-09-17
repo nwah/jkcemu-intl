@@ -81,13 +81,14 @@ public class MemEditFrm extends AbstractHexCharFrm
     this.savedAddr = -1;
     this.lastFile  = null;
     this.textFind  = null;
-    setTitle( "JKCEMU Speichereditor" );
+    setTitle( LangUtil.getText( "common.text.jkcemu_memory_editor" ) );
 
 
     // Menu Datei
     JMenu mnuFile = createMenuFile();
 
-    this.mnuRefresh = createMenuItem( "Aktualisieren" );
+    this.mnuRefresh = createMenuItem(
+		LangUtil.getText( "common.action.refresh" ) );
     mnuFile.add( this.mnuRefresh );
     mnuFile.addSeparator();
 
@@ -107,44 +108,47 @@ public class MemEditFrm extends AbstractHexCharFrm
     JMenu mnuEdit = createMenuEdit();
 
     this.mnuBytesCopyHex = createMenuItem(
-		"Ausgw\u00E4hlte Bytes als Hexadezimalzahlen kopieren" );
+		LangUtil.getText( "common.action.copy_selected_bytes_hexadecimal" ) );
     this.mnuBytesCopyHex.setEnabled( false );
     mnuEdit.add( this.mnuBytesCopyHex );
 
     this.mnuBytesCopyAscii = createMenuItem(
-		"Ausgw\u00E4hlte Bytes als ASCII-Text kopieren" );
+		LangUtil.getText( "common.action.copy_selected_bytes_ascii" ) );
     this.mnuBytesCopyAscii.setEnabled( false );
     mnuEdit.add( this.mnuBytesCopyAscii );
 
     this.mnuBytesCopyDump = createMenuItem(
-		"Ausgw\u00E4hlte Bytes als Hex-ASCII-Dump kopieren" );
+		LangUtil.getText( "common.action.copy_selected_bytes_hex" ) );
     this.mnuBytesCopyDump.setEnabled( false );
     mnuEdit.add( this.mnuBytesCopyDump );
     mnuEdit.addSeparator();
 
     this.mnuOverwrite = createMenuItemWithStandardAccelerator(
-				"Bytes \u00FCberschreiben...",
+				LangUtil.getText(
+					"hexedit.action.overwrite_bytes" ),
 				KeyEvent.VK_O );
     this.mnuOverwrite.setEnabled( false );
     mnuEdit.add( this.mnuOverwrite );
     mnuEdit.addSeparator();
 
-    this.mnuSaveAddr = createMenuItem( "Adresse merken" );
+    this.mnuSaveAddr = createMenuItem(
+		LangUtil.getText( "hexedit.action.remember_address" ) );
     this.mnuSaveAddr.setEnabled( false );
     mnuEdit.add( this.mnuSaveAddr );
 
     this.mnuGotoSavedAddr = createMenuItem(
-                                "Zur gemerkten Adresse springen" );
+                                LangUtil.getText( "hexedit.action.jump_remembered_address" ) );
     this.mnuGotoSavedAddr.setEnabled( false );
     mnuEdit.add( this.mnuGotoSavedAddr );
 
     this.mnuSelectToSavedAddr = createMenuItem(
-                                "Bis zur gemerkten Adresse ausw\u00E4hlen" );
+                                LangUtil.getText( "hexedit.action.select_up_remembered_address" ) );
     this.mnuSelectToSavedAddr.setEnabled( false );
     mnuEdit.add( this.mnuSelectToSavedAddr );
     mnuEdit.addSeparator();
 
-    this.mnuChecksum = createMenuItem( "Pr\u00FCfsumme/Hashwert..." );
+    this.mnuChecksum = createMenuItem( LangUtil.getText(
+			"hexedit.action.checksum_hash_value" ) );
     this.mnuChecksum.setEnabled( false );
     mnuEdit.add( this.mnuChecksum );
     mnuEdit.addSeparator();
@@ -165,7 +169,8 @@ public class MemEditFrm extends AbstractHexCharFrm
 
     // Menu Hilfe
     JMenu mnuHelp       = createMenuHelp();
-    this.mnuHelpContent = createMenuItem( "Hilfe zum Speichereditor..." );
+    this.mnuHelpContent = createMenuItem( LangUtil.getText(
+			"hexedit.action.help_memory_editor" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -190,9 +195,11 @@ public class MemEditFrm extends AbstractHexCharFrm
 					0, 0 );
 
     // Adresseingabe
-    add( GUIFactory.createLabel( "Anfangsadresse:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.start_address" ) ), gbc );
 
-    this.docBegAddr = new HexDocument( 4, "Anfangsadresse" );
+    this.docBegAddr = new HexDocument(
+		4, LangUtil.getText( "common.text.start_address" ) );
     this.fldBegAddr = GUIFactory.createTextField( this.docBegAddr, 4 );
     this.fldBegAddr.addActionListener( this );
     gbc.fill    = GridBagConstraints.HORIZONTAL;
@@ -203,9 +210,11 @@ public class MemEditFrm extends AbstractHexCharFrm
     gbc.fill    = GridBagConstraints.NONE;
     gbc.weightx = 0.0;
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Endadresse:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.end_address" ) ), gbc );
 
-    this.docEndAddr = new HexDocument( 4, "Endadresse" );
+    this.docEndAddr = new HexDocument(
+		4, LangUtil.getText( "common.text.end_address" ) );
     this.fldEndAddr = GUIFactory.createTextField( this.docEndAddr, 4 );
     this.fldEndAddr.addActionListener( this );
     gbc.fill    = GridBagConstraints.HORIZONTAL;
@@ -430,7 +439,7 @@ public class MemEditFrm extends AbstractHexCharFrm
       if( (caretPos >= 0) && (this.begAddr + caretPos <= this.endAddr) ) {
 	ReplyBytesDlg dlg = new ReplyBytesDlg(
 					this,
-					"Bytes \u00FCberschreiben",
+					LangUtil.getText( "hexedit.text.overwrite_bytes" ),
 					this.recentInputFmt,
 					this.recentBigEndian,
 					null );
@@ -448,31 +457,27 @@ public class MemEditFrm extends AbstractHexCharFrm
 	      if( addr > 0xFFFF ) {
 		BaseDlg.showWarningDlg(
 			this,
-			"Die von Ihnen eingegebenen Bytes gehen \u00FCber"
-				+ " die Adresse FFFF hinaus.\n"
-				+ "Es werden nur die Bytes bis FFFF"
-				+ " ge\u00E4ndert." );
+			LangUtil.getText( "hexedit.msg.bytes_entered_go" ) );
 		break;
 	      } else {
 		if( !this.memory.setMemByte( addr, a[ src ] ) ) {
-		  String msg = LangUtil.tr(
-			"Die Speicherzelle mit der Adresse {0}\n"
-				+  "konnte nicht ge\u00E4ndert werden.",
+		  String msg = LangUtil.getText(
+			"hexedit.text.memory_cell_address",
 			String.format( "%04X", addr ) );
 		  if( src == (a.length - 1) ) {
 		    BaseDlg.showErrorDlg( this, msg );
 		  } else {
 		    boolean     cancel  = true;
-		    String[]    options = LangUtil.tr( new String[] {
+		    String[]    options = LangUtil.getTexts( new String[] {
 						"Weiter",
-						EmuUtil.TEXT_CANCEL } );
+						LangUtil.getText( EmuUtil.TEXT_CANCEL ) } );
 		    JOptionPane pane    = new JOptionPane(
 						msg,
 						JOptionPane.ERROR_MESSAGE );
 		    pane.setOptions( options );
 		    pane.createDialog(
 				this,
-				LangUtil.tr( EmuUtil.TEXT_ERROR ) ).setVisible( true );
+				LangUtil.getText( EmuUtil.TEXT_ERROR ) ).setVisible( true );
 		    Object value = pane.getValue();
 		    if( value != null ) {
 		      if( value.equals( options[ 0 ] ) ) {
@@ -524,7 +529,10 @@ public class MemEditFrm extends AbstractHexCharFrm
       updView();
     }
     catch( NumberFormatException ex ) {
-      BaseDlg.showErrorDlg( this, ex.getMessage(), "Eingabefehler" );
+      BaseDlg.showErrorDlg(
+		this,
+		ex.getMessage(),
+		LangUtil.getText( "tools.error.input_error" ) );
     }
   }
 

@@ -51,7 +51,7 @@ public class SaveTextDlg extends BaseDlg
   {
     super(
 	editText.getTextEditFrm(),
-	LangUtil.tr( "Textdatei speichern: {0}", file.getName() ) );
+	LangUtil.getText( "text.text.save_text_file", file.getName() ) );
 
     this.file               = file;
     this.editText           = editText;
@@ -95,7 +95,8 @@ public class SaveTextDlg extends BaseDlg
     String fileName = file.getName();
     JPanel panelFileName = GUIFactory.createPanel(
 		new FlowLayout( FlowLayout.LEFT, 5, 5 ) );
-    panelFileName.setBorder( GUIFactory.createTitledBorder( "Dateiname" ) );
+    panelFileName.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.column.file_name" ) ) );
     panelFileName.add( GUIFactory.createLabel(
 					fileName != null ? fileName : "" ) );
     add( panelFileName, gbc );
@@ -103,7 +104,8 @@ public class SaveTextDlg extends BaseDlg
 
     // Bereich Eigenschaften
     JPanel panelProp = GUIFactory.createPanel( new GridBagLayout() );
-    panelProp.setBorder( GUIFactory.createTitledBorder( "Eigenschaften" ) );
+    panelProp.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.title.properties" ) ) );
     gbc.gridy++;
     add( panelProp, gbc );
 
@@ -116,7 +118,8 @@ public class SaveTextDlg extends BaseDlg
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    panelProp.add( GUIFactory.createLabel( "Zeichensatz:" ), gbcProp );
+    panelProp.add( GUIFactory.createLabel(
+		LangUtil.getText( "text.label.character_set" ) ), gbcProp );
 
     this.comboEncoding = GUIFactory.createComboBox();
     if( (this.nativeEncodingName != null)
@@ -138,9 +141,12 @@ public class SaveTextDlg extends BaseDlg
 		CharConverter.Encoding.LATIN1 ) );
     int presetIdx = this.comboEncoding.getItemCount();	// UTF-8
     this.comboEncoding.addItem( "UTF-8" );
-    this.comboEncoding.addItem( "UTF-8" + EditText.TEXT_WITH_BOM );
-    this.comboEncoding.addItem( "UTF-16BE" + EditText.TEXT_WITH_BOM );
-    this.comboEncoding.addItem( "UTF-16LE" + EditText.TEXT_WITH_BOM );
+    this.comboEncoding.addItem(
+		"UTF-8" + LangUtil.getText( EditText.TEXT_WITH_BOM ) );
+    this.comboEncoding.addItem(
+		"UTF-16BE" + LangUtil.getText( EditText.TEXT_WITH_BOM ) );
+    this.comboEncoding.addItem(
+		"UTF-16LE" + LangUtil.getText( EditText.TEXT_WITH_BOM ) );
     this.comboEncoding.setEditable( false );
     gbcProp.anchor = GridBagConstraints.WEST;
     gbcProp.gridx++;
@@ -151,7 +157,7 @@ public class SaveTextDlg extends BaseDlg
     if( encodingName != null ) {
       String itemText = encodingName.toUpperCase();
       if( editText.hasByteOrderMark() ) {
-	itemText += EditText.TEXT_WITH_BOM;
+	itemText += LangUtil.getText( EditText.TEXT_WITH_BOM );
       }
       for( int i = 0; i < nItems; i++ ) {
 	Object item = this.comboEncoding.getItemAt( i );
@@ -190,7 +196,8 @@ public class SaveTextDlg extends BaseDlg
     gbcProp.anchor = GridBagConstraints.EAST;
     gbcProp.gridx  = 0;
     gbcProp.gridy++;
-    panelProp.add( GUIFactory.createLabel( "Zeilenende:" ), gbcProp );
+    panelProp.add( GUIFactory.createLabel(
+		LangUtil.getText( "text.label.line_ending" ) ), gbcProp );
 
     this.comboLineEnd = GUIFactory.createComboBox();
     this.comboLineEnd.addItem( new TextLineSeparator( "\r\n" ) );
@@ -202,12 +209,12 @@ public class SaveTextDlg extends BaseDlg
     panelProp.add( this.comboLineEnd, gbcProp );
 
     this.cbTrimLines = GUIFactory.createCheckBox(
-		"Unsichtbare Zeichen am Zeilenende entfernen" );
+		LangUtil.getText( "text.option.remove_invisible" ) );
     gbcProp.gridy++;
     panelProp.add( this.cbTrimLines, gbcProp );
 
     this.cbTrailing1A = GUIFactory.createCheckBox(
-		"Datei mit Byte 1Ah abschlie\u00DFen" );
+		LangUtil.getText( "text.option.terminate_file_byte" ) );
     gbcProp.insets.top    = 0;
     gbcProp.insets.bottom = 5;
     gbcProp.gridy++;
@@ -217,7 +224,8 @@ public class SaveTextDlg extends BaseDlg
     // Bereich Knoepfe
     JPanel panelBtn = GUIFactory.createPanel( new GridLayout( 2, 1, 5, 5 ) );
 
-    this.btnSave = GUIFactory.createButton( EmuUtil.TEXT_SAVE );
+    this.btnSave = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_SAVE ) );
     panelBtn.add( this.btnSave );
 
     this.btnCancel = GUIFactory.createButtonCancel();
@@ -297,7 +305,8 @@ public class SaveTextDlg extends BaseDlg
       }
       file = FileUtil.showFileSaveDlg(
 				editText.getTextEditFrm(),
-				"Textdatei speichern",
+				LangUtil.getText(
+					"common.title.save_text_file" ),
 				preSelection,
 				TextEditFrm.getTextFileFilters() );
       if( file != null ) {
@@ -311,9 +320,8 @@ public class SaveTextDlg extends BaseDlg
 	    if( (tmpTxt != editText) && tmpTxt.isSameFile( file ) ) {
 	      showInfoDlg(
 		editText.getTextEditFrm(),
-		"Diese Datei ist bereits ge\u00F6ffnet.\n"
-			+ "Bitte w\u00E4hlen Sie einen anderen Dateinamen.",
-		"Hinweis" );
+		LangUtil.getText( "text.msg.file_already_open_please" ),
+		LangUtil.getText( "common.msg.note" ) );
 	      return false;
 	    }
 	  }
@@ -412,7 +420,8 @@ public class SaveTextDlg extends BaseDlg
 				encodingDesc.substring( 0, posSpace )
 				: encodingDesc);
 	    }
-	    if( encodingDesc.indexOf( EditText.TEXT_WITH_BOM ) >= 0 ) {
+	    if( encodingDesc.indexOf(
+			LangUtil.getText( EditText.TEXT_WITH_BOM ) ) >= 0 ) {
 	      byteOrderMark = true;
 	    }
 	  }
@@ -451,8 +460,7 @@ public class SaveTextDlg extends BaseDlg
     catch( IOException ex ) {
       showErrorDlg(
 	this,
-	LangUtil.tr(
-		"Datei \'\'{0}\'\'\nkann nicht gespeichert werden.",
+	LangUtil.getText( "text.text.file_cannot_saved_datei",
 		this.file.getPath() )
 		+ "\n\n" + ex.getMessage() );
     }

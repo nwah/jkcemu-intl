@@ -167,7 +167,7 @@ public class TrackExportDlg
 		AbstractFloppyDisk disk,
 		String             exportPrefix )
   {
-    super( owner, "Spuren exportieren" );
+    super( owner, LangUtil.getText( "disk.title.export_tracks" ) );
     this.disk         = disk;
     this.exportPrefix = (exportPrefix != null ? exportPrefix : "");
 
@@ -184,7 +184,8 @@ public class TrackExportDlg
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Von Spur:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.track_von" ) ), gbc );
 
     int cylTo = disk.getCylinders();
     if( cylTo > 0 ) {
@@ -196,7 +197,8 @@ public class TrackExportDlg
     add( this.spinnerCylFrom, gbc );
 
     gbc.gridx++;
-    add( GUIFactory.createLabel( "bis  Spur:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.track_bis" ) ), gbc );
 
     this.spinnerCylTo = GUIFactory.createSpinner(
 		new SpinnerNumberModel( cylTo, 0, cylTo, 1 ) );
@@ -205,7 +207,8 @@ public class TrackExportDlg
 
     gbc.gridx = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Seiten:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.sides" ) ), gbc );
 
     JPanel panelSides = GUIFactory.createPanel();
     panelSides.setLayout( new BoxLayout( panelSides, BoxLayout.X_AXIS ) );
@@ -215,7 +218,8 @@ public class TrackExportDlg
 
     ButtonGroup grpSides = new ButtonGroup();
 
-    this.rbSidesAll = GUIFactory.createRadioButton( "Alle", true );
+    this.rbSidesAll = GUIFactory.createRadioButton(
+		LangUtil.getText( "disk.option.all" ), true );
     grpSides.add( this.rbSidesAll );
     panelSides.add( this.rbSidesAll );
     panelSides.add( Box.createHorizontalStrut( 5 ) );
@@ -232,7 +236,8 @@ public class TrackExportDlg
     gbc.insets.bottom = 0;
     gbc.gridx         = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Ergebnis:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.result" ) ), gbc );
 
     this.fldLog = GUIFactory.createTextArea( 8, 0 );
     this.fldLog.setEditable( false );
@@ -254,7 +259,8 @@ public class TrackExportDlg
     gbc.gridy++;
     add( panelBtn, gbc );
 
-    this.btnExport = GUIFactory.createButton( "Exportieren" );
+    this.btnExport = GUIFactory.createButton(
+		LangUtil.getText( "common.action.export" ) );
     panelBtn.add( this.btnExport );
 
     this.btnClose = GUIFactory.createButtonClose();
@@ -300,7 +306,7 @@ public class TrackExportDlg
 					RecentDirsMngr.FILE_CAT_SECTOR );
       File file    = FileUtil.showFileSaveDlg(
 				this,
-				"Spuren exportieren",
+				LangUtil.getText( "disk.title.export_tracks" ),
 				dirFile != null ? 
 					new File( dirFile, fileName )
 					: new File( fileName ),
@@ -393,42 +399,31 @@ public class TrackExportDlg
 	      || legendDel || legendErr || legendBogusID )
 	  {
 	    this.fldLog.append( "\n" );
-	    this.fldLog.append( LangUtil.tr( "Legende:" ) );
+	    this.fldLog.append( LangUtil.getText( "disk.text.legend_legende" ) );
 	    this.fldLog.append( "\n" );
 	    if( legendCyl ) {
-	      this.fldLog.append( LangUtil.tr(
-			"  c?:  Spur-Nr. in der Sektor-ID stimmt"
-				+ " nicht mit der physischen Spur"
-				+ " \u00FCberein\n" ) );
+	      this.fldLog.append( LangUtil.getText(
+			"disk.text.c_track_no_sector" ) );
 	    }
 	    if( legendHead ) {
-	      this.fldLog.append( LangUtil.tr(
-			"  h?:  Kopf-Nr. in der Sektor-ID stimmt"
-				+ " nicht mit der physischen Seite"
-				+ " \u00FCberein\n" ) );
+	      this.fldLog.append( LangUtil.getText(
+			"disk.text.h_head_no_sector" ) );
 	    }
 	    if( legendBogusID ) {
-	      this.fldLog.append( LangUtil.tr(
-			"  r?:  Sektor-ID konnte nicht gelesen"
-				+ " werden und wurde deshalb generiert"
-				+ " (erfunden)\n" ) );
+	      this.fldLog.append( LangUtil.getText(
+			"disk.text.r_sector_id" ) );
 	    }
 	    if( legendSize ) {
-	      this.fldLog.append( LangUtil.tr(
-			"  n?:  Gr\u00F6\u00DFe in der Sektor-ID"
-				+ " stimmt nicht mit der realen"
-				+ " Sektorgr\u00F6\u00DFe"
-				+ " (Anzahl Bytes) \u00FCberein\n" ) );
+	      this.fldLog.append( LangUtil.getText(
+			"disk.text.n_size_sector" ) );
 	    }
 	    if( legendDel ) {
-	      this.fldLog.append( LangUtil.tr(
-			"  del: Sektor hat L\u00F6schmarkierung"
-				+ " (Deleted Data Address Mark)\n" ) );
+	      this.fldLog.append( LangUtil.getText(
+			"disk.text.del_sector_deletion" ) );
 	    }
 	    if( legendErr ) {
-	      this.fldLog.append( LangUtil.tr(
-			"  err: Sektor wurde mit CRC-Fehler"
-				+ " gelesen\n" ) );
+	      this.fldLog.append( LangUtil.getText(
+			"disk.text.err_sector_read" ) );
 	    }
 	  }
 	  success        = true;

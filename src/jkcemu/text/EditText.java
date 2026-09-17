@@ -80,7 +80,7 @@ public class EditText implements
 				DocumentListener,
 				UndoableEditListener
 {
-  public static final String TEXT_WITH_BOM = " mit Byte-Order-Markierung";
+  public static final String TEXT_WITH_BOM = "text.text.byte_order_mark";
 
   public static final String PROP_PROPERTIES_TYPE
 				= "jkcemu.properties.type";
@@ -113,7 +113,7 @@ public class EditText implements
     }
   };
 
-  private static final String TEXT_NEW_TEXT = "Neuer Text";
+  private static final String TEXT_NEW_TEXT = "text.action.new_text";
 
   private boolean       used;
   private boolean       charsLostOnOpen;
@@ -308,7 +308,7 @@ public class EditText implements
   public String getName()
   {
     if( this.textName == null ) {
-      this.textName = TEXT_NEW_TEXT;
+      this.textName = LangUtil.getText( TEXT_NEW_TEXT );
       if( this.textNum > 1 ) {
 	this.textName += String.format( "<%d>", this.textNum );
       }
@@ -740,11 +740,8 @@ public class EditText implements
 		  }
 		  buf.append( '\n' );
 		}
-		buf.append( LangUtil.tr(
-			"Die Datei hat eine {0}"
-				+ " Byte-Order-Markierung.\n"
-				+ "Sie wird aber entsprechend der Vorgabe"
-				+ " als {1} ge\u00F6ffnet.",
+		buf.append( LangUtil.getText(
+			"text.text.file_byte_order",
 			bomEnc,
 			encodingName ) );
 		BaseDlg.showInfoDlg( this.textEditFrm, buf.toString() );
@@ -808,7 +805,7 @@ public class EditText implements
       if( filtered ) {
 	this.file     = null;
 	this.fileName = null;
-	this.textName = TEXT_NEW_TEXT;
+	this.textName = LangUtil.getText( TEXT_NEW_TEXT );
 	if( file != null ) {
 	  this.textName += (" (Quelle: " + file.getName() + ")");
 	}
@@ -851,29 +848,11 @@ public class EditText implements
       if( textProps.charsLost ) {
 	StringBuilder buf = new StringBuilder( 512 );
 	if( (charConverter == null) && (encodingName == null) ) {
-	  buf.append( LangUtil.tr(
-		"Die Datei enth\u00E4lt Bytes bzw. Bytefolgen,"
-			+ " die sich nicht\n"
-			+ "als Zeichen im Systemzeichensatz abbilden"
-			+ " lassen.\n"
-			+ "Diese Bytes wurden ignoriert."
-			+ " Sie sollten evtl. versuchen,\n"
-			+ "die Datei mit einem anderen Zeichensatz"
-			+ " zu \u00F6ffnen\n"
-			+ "(siehe Men\u00FCpunkt"
-			+ " '\u00D6ffnen mit Zeichensatz...')." ) );
+	  buf.append( LangUtil.getText(
+		"text.text.file_contains_bytes_byte_sequences_cannot_system" ) );
 	} else {
-	  buf.append( LangUtil.tr(
-		"Die Datei enth\u00E4lt Bytes bzw. Bytefolgen,"
-			+ " die sich nicht\n"
-			+ "als Zeichen im dem ausgew\u00E4hlten"
-			+ " Zeichensatz abbilden lassen.\n"
-			+ "Diese Bytes wurden ignoriert."
-			+ " Sie sollten evtl. versuchen,\n"
-			+ "die Datei mit einem anderen Zeichensatz"
-			+ " zu \u00F6ffnen\n"
-			+ "(siehe Men\u00FCpunkt"
-			+ " '\u00D6ffnen mit Zeichensatz...')." ) );
+	  buf.append( LangUtil.getText(
+		"text.text.file_contains_bytes_byte_sequences_cannot_selected" ) );
 	}
 	BaseDlg.fireShowWarningDlg( this.textEditFrm, buf.toString() );
       }
@@ -1146,28 +1125,16 @@ public class EditText implements
 
       if( firstLostCharPos >= 0 ) {
 	StringBuilder buf = new StringBuilder( 2048 );
-	buf.append( LangUtil.tr(
-		"Der Text enth\u00E4lt Zeichen,"
-			+ " die in dem Zeichensatz,\n"
-			+ "mit dem die Datei gespeichert werden soll,"
-			+ " nicht existieren.\n"
-			+ "Diese Zeichen fehlen in der gespeicherten"
-			+ " Datei." ) );
+	buf.append( LangUtil.getText(
+		"text.text.text_contains_characters" ) );
 	if( !utf8 ) {
-	  buf.append( LangUtil.tr(
-		"\n\nMit dem Men\u00FCeintrag ''{0}''"
-			+ " kann die Datei\n"
-			+ "auch in einem Zeichensatz (z.B. UTF-8)"
-			+ " gespeichert werden,\n"
-			+ "bei dem keine Zeichen verloren gehen.",
-		EmuUtil.TEXT_SAVE_AS ) );
+	  buf.append( LangUtil.getText(
+		"text.text.menu_entry_file",
+		LangUtil.getText( EmuUtil.TEXT_SAVE_AS ) ) );
 	}
 	if( this.textArea != null ) {
-	  buf.append( LangUtil.tr(
-		"\n\nNachdem Sie diese Meldung weggeklickt"
-			+ " haben,\n"
-			+ "steht der Cursor vor dem ersten Zeichen,\n"
-			+ "welches nicht gespeichert werden konnte." ) );
+	  buf.append( LangUtil.getText(
+		"text.text.after_clicked_message" ) );
 	}
 	BaseDlg.showWarningDlg( owner, buf.toString() );
 	if( this.textArea != null ) {
@@ -1219,7 +1186,7 @@ public class EditText implements
 	}
 	prjFile = FileUtil.showFileSaveDlg(
 				frame,
-				"Projekt speichern",
+				LangUtil.getText( "text.action.save_project_projekt_speichern" ),
 				preSelection,
 				FileUtil.getProjectFileFilter() );
       }
@@ -1642,23 +1609,17 @@ public class EditText implements
 	}
 	else if( n > 1 ) {
 	  try {
-	    optionTexts.add( LangUtil.tr( EmuUtil.TEXT_CANCEL ) );
+	    optionTexts.add( LangUtil.getText( EmuUtil.TEXT_CANCEL ) );
 	    String[] options = optionTexts.toArray( new String[ n + 1 ] );
 	    if( options != null ) {
 	      JOptionPane pane = new JOptionPane(
-		LangUtil.tr(
-			"Das KC-BASIC-Programm enth\u00E4lt Tokens,"
-				+ " die auf den einzelnen\n"
-				+ "Systemen unterschiedliche Anweisungen"
-				+ " repr\u00E4sentieren.\n"
-				+ "Auf welchem System wurde das BASIC-Programm"
-				+ " erstellt?" ),
+		LangUtil.getText( "text.text.kc_basic_program" ),
 		JOptionPane.QUESTION_MESSAGE );
 	      pane.setOptions( options );
 	      pane.setWantsInput( false );
 	      pane.createDialog(
 			this.textEditFrm,
-			LangUtil.tr( "BASIC-Version" ) ).setVisible( true );
+			LangUtil.getText( "text.text.basic_version" ) ).setVisible( true );
 	      Object value = pane.getValue();
 	      if( value != null ) {
 		rv = basicTexts.get( value );

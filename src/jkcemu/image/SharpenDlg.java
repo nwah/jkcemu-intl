@@ -29,6 +29,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class SharpenDlg extends BaseDlg implements ListSelectionListener
@@ -120,7 +121,7 @@ public class SharpenDlg extends BaseDlg implements ListSelectionListener
 
   private SharpenDlg( ImageFrm imageFrm )
   {
-    super( imageFrm, "Sch\u00E4rfen" );
+    super( imageFrm, LangUtil.getText( "image.title.sharpen" ) );
     this.imgFld     = imageFrm.getImageFld();
     this.orgImg     = this.imgFld.getImage();
     this.curImg     = null;
@@ -217,7 +218,8 @@ public class SharpenDlg extends BaseDlg implements ListSelectionListener
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Sch\u00E4rfegrad:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.sharpening_level" ) ), gbc );
 
     DefaultListModel<String> listModel = new DefaultListModel<>();
     listModel.addElement( "0 - nicht gesch\u00E4rft" );

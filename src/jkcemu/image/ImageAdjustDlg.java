@@ -32,6 +32,7 @@ import jkcemu.base.BaseDlg;
 import jkcemu.base.CancelableProgressDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class ImageAdjustDlg
@@ -305,7 +306,7 @@ public class ImageAdjustDlg
 		BufferedImage srcImg,
 		ImageFld      imageFld )
   {
-    super( imageFrm, "Helligkeit, Kontrast, Farben" );
+    super( imageFrm, LangUtil.getText( "image.title.brightness_contrast" ) );
     this.imageFld          = imageFld;
     this.progressDlg       = null;
     this.progressValue     = 0;
@@ -417,24 +418,30 @@ public class ImageAdjustDlg
     gbc.fill    = GridBagConstraints.NONE;
     gbc.gridx   = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Helligkeit" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.brightness" ) ), gbc );
 
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Kontrast" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.contrast" ) ), gbc );
 
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Farbs\u00E4ttigung" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.color_saturation" ) ), gbc );
 
     gbc.insets.left = 20;
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Rot" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.red" ) ), gbc );
 
     gbc.insets.left = 5;
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Gr\u00FCn" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.green" ) ), gbc );
 
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Blau" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.blue" ) ), gbc );
 
 
     // Knoepfe

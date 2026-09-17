@@ -29,6 +29,7 @@ import jkcemu.base.AbstractScreenDevice;
 import jkcemu.base.EmuThread;
 import jkcemu.emusys.KC85;
 import jkcemu.image.ImageUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class KC85FrontFld extends AbstractScreenDevice
@@ -57,13 +58,13 @@ public class KC85FrontFld extends AbstractScreenDevice
   private static final int MODULE_Y2         = 46;
   private static final int RGB_BACKGROUND    = 0xFFC0C0C0;
 
-  private static final String TEXT_BASIS_DEVICE = "BASIS DEVICE";
-  private static final String TEXT_KEYBOARD     = "KEYBOARD";
-  private static final String TEXT_MHZ          = "MHz";
-  private static final String TEXT_POWER        = "POWER";
-  private static final String TEXT_RESET        = "RESET";
-  private static final String TEXT_SYSTEM       = "SYSTEM";
-  private static final String TEXT_TAPE         = "TAPE";
+  private static final String TEXT_BASIS_DEVICE = "kc85.text.basis_device";
+  private static final String TEXT_KEYBOARD     = "kc85.text.keyboard";
+  private static final String TEXT_MHZ          = "common.label.mhz";
+  private static final String TEXT_POWER        = "kc85.text.power";
+  private static final String TEXT_RESET        = "kc85.text.reset";
+  private static final String TEXT_SYSTEM       = "kc85.text.system";
+  private static final String TEXT_TAPE         = "kc85.text.tape";
 
   private static BufferedImage loadedImgD001Dark  = null;
   private static BufferedImage loadedImgD001Light = null;
@@ -303,7 +304,7 @@ public class KC85FrontFld extends AbstractScreenDevice
 	imgD001,
 	observer,
 	this.kc85.getTitle(),
-	TEXT_BASIS_DEVICE );
+	LangUtil.getText( TEXT_BASIS_DEVICE ) );
 
     // Anschluesse
     g.fillArc( 66, y + 53, 18, 18, 0, 360 );
@@ -311,12 +312,14 @@ public class KC85FrontFld extends AbstractScreenDevice
 
     // Beschriftungen
     g.setFont( this.fontLabelM );
-    drawDeviceLightLabel( g, 80, y + 69, 9, TEXT_TAPE );
-    drawDeviceLightLabel( g, 141, y + 69, 9, TEXT_KEYBOARD );
-    drawDeviceLightLabel( g, 231, y + 66, 12, TEXT_SYSTEM );
+    drawDeviceLightLabel( g, 80, y + 69, 9, LangUtil.getText( TEXT_TAPE ) );
+    drawDeviceLightLabel(
+		g, 141, y + 69, 9, LangUtil.getText( TEXT_KEYBOARD ) );
+    drawDeviceLightLabel(
+		g, 231, y + 66, 12, LangUtil.getText( TEXT_SYSTEM ) );
     drawDeviceLightLabel( g, 288, y + 66, 12, "RAM8" );
-    drawDeviceLightLabel( g, 352, y + 67, 11, TEXT_RESET );
-    drawDeviceLightLabel( g, 435, y + 67, 11, TEXT_POWER );
+    drawDeviceLightLabel( g, 352, y + 67, 11, LangUtil.getText( TEXT_RESET ) );
+    drawDeviceLightLabel( g, 435, y + 67, 11, LangUtil.getText( TEXT_POWER ) );
 
     // LEDs
     drawLED(
@@ -348,7 +351,7 @@ public class KC85FrontFld extends AbstractScreenDevice
 	imgD001,
 	observer,
 	this.kc85.getTitle(),
-	TEXT_BASIS_DEVICE );
+	LangUtil.getText( TEXT_BASIS_DEVICE ) );
 
     // Anschluesse
     g.setColor( Color.BLACK );
@@ -357,11 +360,11 @@ public class KC85FrontFld extends AbstractScreenDevice
 
     // Beschriftungen
     g.setFont( this.fontLabelM );
-    g.drawString( TEXT_TAPE, 65, y + 49 );
-    g.drawString( TEXT_KEYBOARD, 134, y + 49 );
+    g.drawString( LangUtil.getText( TEXT_TAPE ), 65, y + 49 );
+    g.drawString( LangUtil.getText( TEXT_KEYBOARD ), 134, y + 49 );
     g.drawString( "MEMORY SELECTION", 225, y + 49 );
-    g.drawString( TEXT_RESET, 329, y + 49 );
-    g.drawString( TEXT_POWER, 411, y + 49 );
+    g.drawString( LangUtil.getText( TEXT_RESET ), 329, y + 49 );
+    g.drawString( LangUtil.getText( TEXT_POWER ), 411, y + 49 );
     g.setFont( this.fontLabelS );
     g.drawString( "ROM", 223, y + 77 );
     g.drawString( "RAM", 256, y + 77 );
@@ -406,7 +409,7 @@ public class KC85FrontFld extends AbstractScreenDevice
     g.setColor( Color.BLACK );
     drawDevice( g, y, imgD002, observer, "KC85", "BUSDRIVER" );
     g.setFont( this.fontLabelM );
-    drawDeviceLightLabel( g, 435, y + 67, 11, TEXT_POWER );
+    drawDeviceLightLabel( g, 435, y + 67, 11, LangUtil.getText( TEXT_POWER ) );
     drawLED( g, 390, y + 59, RGB_LED_RED, true );
     drawModule( g, y, 0, 0, slot + 0x0C, observer );
     drawModule( g, y, 1, 0, slot + 0x08, observer );
@@ -421,12 +424,12 @@ public class KC85FrontFld extends AbstractScreenDevice
     drawDevice( g, 0, imgD004, observer, "KC85", "FLOPPY DISK BASIS" );
     if( this.d004 instanceof D008 ) {
       g.setFont( this.fontLabelM );
-      g.drawString( TEXT_MHZ, 5, 31 );
+      g.drawString( LangUtil.getText( TEXT_MHZ ), 5, 31 );
 
       int x7Seg = 26;
       FontMetrics fm = g.getFontMetrics();
       if( fm != null ) {
-	int w = fm.stringWidth( TEXT_MHZ );
+	int w = fm.stringWidth( LangUtil.getText( TEXT_MHZ ) );
 	if( w > 0 ) {
 	  x7Seg = 7 + w;
 	}
@@ -504,7 +507,7 @@ public class KC85FrontFld extends AbstractScreenDevice
     g.setColor( Color.BLACK );
     g.setFont( this.fontLabelM );
     drawDeviceLightLabel( g, 230, 19, 12, "CONNECTION" );
-    drawDeviceLightLabel( g, 295, 19, 12, TEXT_SYSTEM );
+    drawDeviceLightLabel( g, 295, 19, 12, LangUtil.getText( TEXT_SYSTEM ) );
     drawLED(
 	g,
 	224,
@@ -530,7 +533,7 @@ public class KC85FrontFld extends AbstractScreenDevice
     }
 
     g.setColor( Color.BLACK );
-    drawDeviceLightLabel( g, 435, 67, 11, TEXT_POWER );
+    drawDeviceLightLabel( g, 435, 67, 11, LangUtil.getText( TEXT_POWER ) );
     drawLED( g, 390, 59, RGB_LED_RED, true );
     drawModule( g, 0, 0, 1, 0xF4, observer );
     drawModule( g, 0, 1, 1, 0xF0, observer );

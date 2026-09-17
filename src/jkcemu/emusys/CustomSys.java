@@ -51,7 +51,7 @@ public class CustomSys
 			Z80SIOChannelListener
 {
   public static final String SYSNAME     = "CUSTOMSYS";
-  public static final String SYSTEXT     = "Benutzerdefinierter Computer";
+  public static final String SYSTEXT     = "emusys.text.user_defined_computer";
   public static final String PROP_PREFIX = "jkcemu.customsys.";
   public static final String PROP_TITLE               = "title";
   public static final String PROP_BOOT                = "boot";
@@ -104,11 +104,11 @@ public class CustomSys
   public static final String VALUE_KEYBOARD_SIO_B      = "sio.b";
 
   public static final String TEXT_NO_SCREEN
-			= "Keine Bildschirmausgabe verf\u00FCgbar";
+			= "emusys.text.no_screen_output";
 
   public static final int DEFAULT_GIDE_IOBASEADDR = 0x80;
 
-  private static final String DEFAULT_TITLE = "Benutzerdefinierter Computer";
+  private static final String DEFAULT_TITLE = "emusys.text.user_defined_computer";
 
   private static final int DEFAULT_SPEED_KHZ             = 2458;
   private static final int DEFAULT_PORT_VALUE            = 0xFF;
@@ -624,7 +624,7 @@ public class CustomSys
     } else {
       s = "";
     }
-    return s.isEmpty() ? DEFAULT_TITLE : s;
+    return s.isEmpty() ? LangUtil.getText( DEFAULT_TITLE ) : s;
   }
 
 
@@ -728,11 +728,11 @@ public class CustomSys
   public void appendStatusHTMLTo( StringBuilder buf, Z80CPU cpu )
   {
     buf.append( "<h1>" );
-    buf.append( LangUtil.tr( "Benutzerdefinierter Computer" ) );
+    buf.append( LangUtil.getText( "emusys.text.user_defined_computer" ) );
     buf.append( "</h1>\n"
 	+ "<table border=\"1\">\n"
 	+ "<tr><td>" );
-    buf.append( LangUtil.tr( "Bezeichnung:" ) );
+    buf.append( LangUtil.getText( "common.label.name" ) );
     buf.append( "</td><td>" );
     EmuUtil.appendHTML( buf, this.title );
     buf.append( "</td></tr>\n" );
@@ -1232,7 +1232,8 @@ public class CustomSys
       g.setFont( new Font( Font.SANS_SERIF, Font.PLAIN, fontHeight ) );
       FontMetrics fm = g.getFontMetrics();
       if( fm != null ) {
-	x = xOffs + (getScreenWidth() - fm.stringWidth( TEXT_NO_SCREEN )) / 2;
+	x = xOffs + (getScreenWidth() - fm.stringWidth(
+		LangUtil.getText( TEXT_NO_SCREEN ) )) / 2;
 	if( x < 0 ) {
 	  x = 0;
 	}
@@ -1242,7 +1243,7 @@ public class CustomSys
 	y = fontHeight;
       }
       g.setColor( Color.GRAY );
-      g.drawString( TEXT_NO_SCREEN, x, y );
+      g.drawString( LangUtil.getText( TEXT_NO_SCREEN ), x, y );
       rv = true;
     }
     return rv;

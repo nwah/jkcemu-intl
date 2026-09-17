@@ -29,6 +29,7 @@ import jkcemu.base.ComboBoxEnterActionMngr;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.ListFocusTraversalPolicy;
+import jkcemu.lang.LangUtil;
 
 
 public class FindTextDlg
@@ -58,7 +59,7 @@ public class FindTextDlg
 		String  textReplace,
 		boolean ignoreCase )
   {
-    super( owner, EmuUtil.TEXT_FIND_AND_REPLACE );
+    super( owner, LangUtil.getText( EmuUtil.TEXT_FIND_AND_REPLACE ) );
     this.notified    = false;
     this.action      = Action.NO_ACTION;
     this.searchText  = null;
@@ -77,9 +78,11 @@ public class FindTextDlg
 					0, 0 );
 
     // Labels
-    add( GUIFactory.createLabel( EmuUtil.LABEL_SEARCH_FOR ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( EmuUtil.LABEL_SEARCH_FOR ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Ersetzen durch:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "text.label.replace" ) ), gbc );
 
     // Eingabefelder
     this.comboFind = GUIFactory.createComboBox();
@@ -121,7 +124,8 @@ public class FindTextDlg
     gbc.weightx = 0.0;
     gbc.gridy++;
     this.cbNoticeCase = GUIFactory.createCheckBox(
-				" Gro\u00DF-/Kleinschreibung beachten",
+				LangUtil.getText(
+					"text.option.case_sensitive" ),
 				!ignoreCase );
     add( this.cbNoticeCase, gbc );
 
@@ -129,10 +133,12 @@ public class FindTextDlg
     JPanel panelBtn = GUIFactory.createPanel();
     panelBtn.setLayout( new GridLayout( 3, 1, 5, 5 ) );
 
-    this.btnFind = GUIFactory.createButton( EmuUtil.TEXT_FIND );
+    this.btnFind = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_FIND ) );
     panelBtn.add( this.btnFind );
 
-    this.btnReplaceAll = GUIFactory.createButton( "Alle ersetzen" );
+    this.btnReplaceAll = GUIFactory.createButton(
+		LangUtil.getText( "text.action.replace_all" ) );
     panelBtn.add( this.btnReplaceAll );
 
     this.btnCancel = GUIFactory.createButtonCancel();

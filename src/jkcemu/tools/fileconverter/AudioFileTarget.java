@@ -30,8 +30,8 @@ public class AudioFileTarget extends AbstractConvertTarget
   {
     super(
 	fileConvertFrm,
-	LangUtil.tr(
-			"Sound-Datei ({0})",
+	LangUtil.getText(
+			"fileconv.text.sound_file",
 			AudioFile.getFileExtensionText() ) );
     this.file        = file;
     this.fileFilters = null;
@@ -45,8 +45,8 @@ public class AudioFileTarget extends AbstractConvertTarget
   {
     super(
 	fileConvertFrm,
-	LangUtil.tr(
-			"Sound-Datei ({0})",
+	LangUtil.getText(
+			"fileconv.text.sound_file",
 			AudioFile.getFileExtensionText() ) );
     this.file        = null;
     this.fileFilters = null;

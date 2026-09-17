@@ -202,9 +202,10 @@ public class FileChecksumFrm extends BaseFrm
 	  catch( IOException ex ) {
 	    String msg = ex.getMessage();
 	    if( msg != null ) {
-	      entry.setValue( EmuUtil.TEXT_ERROR + ": " + msg );
+	      entry.setValue(
+			LangUtil.getText( EmuUtil.TEXT_ERROR ) + ": " + msg );
 	    } else {
-	      entry.setValue( EmuUtil.TEXT_ERROR );
+	      entry.setValue( LangUtil.getText( EmuUtil.TEXT_ERROR ) );
 	    }
 	  }
 	  finally {
@@ -333,7 +334,7 @@ public class FileChecksumFrm extends BaseFrm
     this.cks          = null;
     this.cancelled    = false;
     this.filesChanged = false;
-    setTitle( "JKCEMU Pr\u00FCfsumme-/Hashwert berechnen" );
+    setTitle( LangUtil.getText( "tools.title.jkcemu_compute_checksum" ) );
 
 
     // Menu
@@ -344,20 +345,23 @@ public class FileChecksumFrm extends BaseFrm
     JMenu mnuEdit = createMenuEdit();
 
     this.mnuCopyUpper = createMenuItem(
-				"Wert in Gro\u00DFschreibweise kopieren" );
+				LangUtil.getText(
+					"tools.action.copy_value_upper" ) );
     mnuEdit.add( this.mnuCopyUpper );
 
     this.mnuCopyLower = createMenuItem(
-				"Wert in Kleinschreibweise kopieren" );
+				LangUtil.getText(
+					"tools.action.copy_value_lower" ) );
     mnuEdit.add( this.mnuCopyLower );
     mnuEdit.addSeparator();
 
-    this.mnuCompare = createMenuItem( "Wert mit Zwischenablage vergleichen" );
+    this.mnuCompare = createMenuItem( LangUtil.getText(
+			"tools.action.compare_value_clipboard" ) );
     mnuEdit.add( this.mnuCompare );
 
     JMenu mnuHelp       = createMenuHelp();
     this.mnuHelpContent = createMenuItem(
-		"Hilfe zur Pr\u00FCsummen/Hashwertberechnung..." );
+		LangUtil.getText( "tools.action.help_checksum_hash" ) );
     mnuHelp.add( this.mnuHelpContent );
 
     setJMenuBar( GUIFactory.createMenuBar( mnuFile, mnuEdit, mnuHelp ) );
@@ -367,16 +371,18 @@ public class FileChecksumFrm extends BaseFrm
     this.popupMnu = GUIFactory.createPopupMenu();
 
     this.popupCopyUpper = createMenuItem(
-				"Wert in Gro\u00DFschreibweise kopieren" );
+				LangUtil.getText(
+					"tools.action.copy_value_upper" ) );
     this.popupMnu.add( this.popupCopyUpper );
 
     this.popupCopyLower = createMenuItem(
-				"Wert in Kleinschreibweise kopieren" );
+				LangUtil.getText(
+					"tools.action.copy_value_lower" ) );
     this.popupMnu.add( this.popupCopyLower );
     this.popupMnu.addSeparator();
 
     this.popupCompare = createMenuItem(
-				"Wert mit Zwischenablage vergleichen" );
+				LangUtil.getText( "tools.action.compare_value_clipboard" ) );
     this.popupMnu.add( this.popupCompare );
 
 
@@ -392,7 +398,8 @@ public class FileChecksumFrm extends BaseFrm
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    this.labelAlgorithm = GUIFactory.createLabel( "Algorithmus:" );
+    this.labelAlgorithm = GUIFactory.createLabel(
+		LangUtil.getText( "tools.label.algorithm" ) );
     this.labelAlgorithm.setEnabled( false );
     add( this.labelAlgorithm, gbc );
 
@@ -535,30 +542,21 @@ public class FileChecksumFrm extends BaseFrm
 	  if( value.equalsIgnoreCase( text ) ) {
 	    JOptionPane.showMessageDialog(
 			this,
-			LangUtil.tr(
-				"Der ausgew\u00E4hlte Wert stimmt mit dem\n"
-					+ "in der Zwischenablage stehenden"
-					+ " Text \u00FCberein." ),
-			LangUtil.tr( "\u00DCbereinstimmung" ),
+			LangUtil.getText(
+				"tools.text.selected_value_matches" ),
+			LangUtil.getText( "tools.text.match" ),
 			JOptionPane.INFORMATION_MESSAGE );
 	  } else {
 	    JOptionPane.showMessageDialog(
 			this,
-			LangUtil.tr(
-				"Der ausgew\u00E4hlte Wert stimmt mit dem\n"
-					+ "in der Zwischenablage stehenden"
-					+ " Text\n"
-					+ "nicht \u00FCberein." ),
-			LangUtil.tr( "Abweichung" ),
+			LangUtil.getText( "tools.text.selected_value_not_match" ),
+			LangUtil.getText( "tools.text.difference" ),
 			JOptionPane.WARNING_MESSAGE );
 	  }
 	} else {
 	  BaseDlg.showErrorDlg(
 		this,
-		"Die Zwischenablage enth\u00E4lt keinen Text.\n"
-			+ "Kopieren Sie bitte den zu pr\u00FCfenden Wert\n"
-			+ "in die Zwischenablage und\n"
-			+ "rufen die Funktion noch einmal auf." );
+		LangUtil.getText( "tools.error.clipboard_contains_no_text" ) );
 	}
       }
     }
@@ -591,7 +589,8 @@ public class FileChecksumFrm extends BaseFrm
 	    catch( NoSuchAlgorithmException ex ) {
 	      BaseDlg.showErrorDlg(
 			this,
-			"Der Algorithmus wird nicht unterst&uuml;tzt." );
+			LangUtil.getText(
+				"tools.error.algorithm_not_supported" ) );
 	    }
 	  }
 	}
@@ -659,7 +658,7 @@ public class FileChecksumFrm extends BaseFrm
     if( this.thread != null ) {
       this.labelAlgorithm.setEnabled( false );
       this.comboAlgorithm.setEnabled( false );
-      this.btnAction.setText( EmuUtil.TEXT_CANCEL );
+      this.btnAction.setText( LangUtil.getText( EmuUtil.TEXT_CANCEL ) );
     } else {
       boolean state = (this.tableModel.getRowCount() > 0);
       this.labelAlgorithm.setEnabled( state );

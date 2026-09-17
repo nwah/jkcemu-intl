@@ -28,6 +28,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class JPEGSaveParamDlg extends BaseDlg
@@ -109,7 +110,7 @@ public class JPEGSaveParamDlg extends BaseDlg
 
   private JPEGSaveParamDlg( Window owner )
   {
-    super( owner, "JPEG-Parameter beim Speichern" );
+    super( owner, LangUtil.getText( "image.title.jpeg_parameters_when" ) );
 
 
     // Fensterinhalt
@@ -124,18 +125,21 @@ public class JPEGSaveParamDlg extends BaseDlg
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Qualit\u00E4t:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.quality" ) ), gbc );
 
     ButtonGroup grpQuality = new ButtonGroup();
 
-    this.rbQualityDefault = GUIFactory.createRadioButton( "Standard" );
+    this.rbQualityDefault = GUIFactory.createRadioButton(
+		LangUtil.getText( "common.text.default" ) );
     grpQuality.add( this.rbQualityDefault );
     gbc.insets.top  = 0;
     gbc.insets.left = 50;
     gbc.gridy++;
     add( this.rbQualityDefault, gbc );
 
-    this.rbQualityExplicit = GUIFactory.createRadioButton( "Festlegen auf:" );
+    this.rbQualityExplicit = GUIFactory.createRadioButton(
+		LangUtil.getText( "image.option.set" ) );
     grpQuality.add( this.rbQualityExplicit );
     gbc.gridwidth = 1;
     gbc.gridy++;
@@ -156,7 +160,8 @@ public class JPEGSaveParamDlg extends BaseDlg
     add( this.labelQualityUnit, gbc );
 
     this.cbProgressiveMode = GUIFactory.createCheckBox(
-			"Progressiver Modus forcieren",
+			LangUtil.getText(
+				"image.option.force_progressive_mode" ),
 			Main.getBooleanProperty(
 				ImageSaver.PROP_JPEG_PROGRESSIVE_MODE,
 				false ) );
@@ -167,7 +172,7 @@ public class JPEGSaveParamDlg extends BaseDlg
     add( this.cbProgressiveMode, gbc );
 
     this.cbOptimHuffmTables = GUIFactory.createCheckBox(
-			"Optimierte Huffman-Tabellen erzeugen",
+			LangUtil.getText( "image.option.generate_optimized" ),
 			Main.getBooleanProperty(
 				ImageSaver.PROP_JPEG_OPTIMIZE_HUFFMAN_TABLES,
 				false ) );
@@ -240,7 +245,7 @@ public class JPEGSaveParamDlg extends BaseDlg
     try {
       this.spinnerQuality.commitEdit();
       boolean state = false;
-      String  text = EmuUtil.TEXT_DEFAULT;
+      String  text = LangUtil.getText( EmuUtil.TEXT_DEFAULT );
       Object  obj  = this.spinnerQuality.getValue();
       if( obj != null ) {
 	text  = obj.toString();
@@ -260,7 +265,7 @@ public class JPEGSaveParamDlg extends BaseDlg
       doClose();
     }
     catch( ParseException ex ) {
-      showErrorDlg( this, "Ung\u00FCltige Eingabe" );
+      showErrorDlg( this, LangUtil.getText( "common.error.invalid_input" ) );
     }
   }
 

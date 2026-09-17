@@ -239,14 +239,14 @@ public abstract class AbstractScreenFrm
     this.popupMnu = GUIFactory.createPopupMenu();
     if( copy ) {
       this.popupCopy = createMenuItem(
-				EmuUtil.TEXT_COPY,
+				LangUtil.getText( EmuUtil.TEXT_COPY ),
 				ACTION_COPY );
       this.popupCopy.setEnabled( false );
       this.popupMnu.add( this.popupCopy );
     }
     if( paste ) {
       this.popupPaste = createMenuItem(
-				EmuUtil.TEXT_PASTE,
+				LangUtil.getText( EmuUtil.TEXT_PASTE ),
 				ACTION_PASTE );
       this.popupPaste.setEnabled( false );
       this.popupMnu.add( this.popupPaste );
@@ -284,26 +284,18 @@ public abstract class AbstractScreenFrm
 	      iso646de = emuThread.getISO646DE();
 	    }
 	    if( iso646de == null ) {
-	      String[] options = LangUtil.tr( new String[] {
+	      String[] options = LangUtil.getTexts( new String[] {
 				"ASCII",
-				"Umlaute",
-				EmuUtil.TEXT_CANCEL } );
+				LangUtil.getText( "base.text.umlauts" ),
+				LangUtil.getText( EmuUtil.TEXT_CANCEL ) } );
 	      JOptionPane pane = new JOptionPane(
-		LangUtil.tr(
-			"Der Text enth\u00E4lt Zeichencodes, die nach ASCII"
-				+ " die Zeichen [ \\ ] { | } ~\n"
-				+ "und nach ISO646-DE deutsche Umlaute darstellen.\n"
-				+ "Da sie eine externe Zeichensatzdatei"
-				+ " eingebunden haben,\n"
-				+ "kann JKCEMU nicht wissen, ob ASCII-Zeichen\n"
-				+ "oder deutsche Umlaute angezeigt werden.\n"
-				+ "Wie sind diese Zeichencodes zu interpretieren?" ),
+		LangUtil.getText( "base.text.text_contains_character" ),
 		JOptionPane.QUESTION_MESSAGE );
 	      pane.setOptions( options );
 	      pane.setWantsInput( false );
 	      pane.createDialog(
 			this,
-			LangUtil.tr( "Zeichensatz" ) ).setVisible( true );
+			LangUtil.getText( "common.menu.character_set" ) ).setVisible( true );
 	      Object value = pane.getValue();
 	      if( value != null ) {
 		if( value.equals( options[ 0 ] ) ) {
@@ -372,7 +364,8 @@ public abstract class AbstractScreenFrm
       mnuEdit = createMenuEdit();
 
       if( createCopyItem ) {
-	this.mnuCopy = createMenuItem( EmuUtil.TEXT_COPY, ACTION_COPY );
+	this.mnuCopy = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_COPY ), ACTION_COPY );
 	this.mnuCopy.setAccelerator(
 		KeyStroke.getKeyStroke(
 				KeyEvent.VK_C,
@@ -382,7 +375,8 @@ public abstract class AbstractScreenFrm
       }
 
       if( createPasteItems ) {
-	this.mnuPaste = createMenuItem( EmuUtil.TEXT_PASTE, ACTION_PASTE );
+	this.mnuPaste = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_PASTE ), ACTION_PASTE );
 	this.mnuPaste.setAccelerator(
 		KeyStroke.getKeyStroke(
 				KeyEvent.VK_V,
@@ -391,14 +385,14 @@ public abstract class AbstractScreenFrm
 	mnuEdit.add( this.mnuPaste );
 
 	this.mnuPasteWith = createMenuItem(
-				"Einf\u00FCgen mit...",
+				LangUtil.getText( "base.action.paste" ),
 				ACTION_PASTE_WITH );
 	this.mnuPasteWith.setEnabled( false );
 	mnuEdit.add( this.mnuPasteWith );
 	mnuEdit.addSeparator();
 
 	this.mnuPasteCancel = createMenuItem(
-				"Einf\u00FCgen abbrechen",
+				LangUtil.getText( "base.action.cancel_paste" ),
 				ACTION_PASTE_CANCEL );
 	this.mnuPasteCancel.setEnabled( false );
 	mnuEdit.add( this.mnuPasteCancel );
@@ -410,7 +404,8 @@ public abstract class AbstractScreenFrm
 
   protected JMenu createScaleMenu()
   {
-    JMenu       mnuScale = GUIFactory.createMenu( "Ansicht" );
+    JMenu       mnuScale = GUIFactory.createMenu(
+		LangUtil.getText( "common.menu.view" ) );
     ButtonGroup grpScale = new ButtonGroup();
 
     this.mnuScaleItems = new JRadioButtonMenuItem[
@@ -439,31 +434,36 @@ public abstract class AbstractScreenFrm
 
   protected JMenu createScreenMenu( boolean createTextItems )
   {
-    JMenu mnuScreen = GUIFactory.createMenu( "Grafische Ausgabe" );
+    JMenu mnuScreen = GUIFactory.createMenu(
+		LangUtil.getText( "base.menu.graphical_output" ) );
     mnuScreen.add( createMenuItem(
-				"im Bildbetrachter anzeigen...",
+				LangUtil.getText(
+					"base.action.show_image_viewer" ),
 				ACTION_SCREENIMAGE_SHOW ) );
     mnuScreen.add( createMenuItem(
-				"als Bild kopieren",
+				LangUtil.getText( "base.action.copy_image" ),
 				ACTION_SCREENIMAGE_COPY ) );
     mnuScreen.add( createMenuItem(
-				"als Bilddatei speichern...",
+				LangUtil.getText(
+					"base.action.save_image_file" ),
 				ACTION_SCREENIMAGE_SAVE ) );
     if( createTextItems ) {
       mnuScreen.addSeparator();
 
       this.mnuScreenTextShow = createMenuItem(
-				"im Texteditor anzeigen",
+				LangUtil.getText(
+					"base.action.show_text_editor" ),
 				ACTION_SCREENTEXT_SHOW );
       mnuScreen.add( this.mnuScreenTextShow );
 
       this.mnuScreenTextCopy = createMenuItem(
-				"als Text kopieren",
+				LangUtil.getText( "base.action.copy_text" ),
 				ACTION_SCREENTEXT_COPY );
       mnuScreen.add( this.mnuScreenTextCopy );
 
       this.mnuScreenTextSave = createMenuItem(
-				"als Textdatei speichern...",
+				LangUtil.getText(
+					"base.action.save_text_file" ),
 				ACTION_SCREENTEXT_SAVE );
       mnuScreen.add( this.mnuScreenTextSave );
     }
@@ -498,7 +498,7 @@ public abstract class AbstractScreenFrm
       if( screenText != null ) {
 	File file = FileUtil.showFileSaveDlg(
 			this,
-			"Textdatei speichern",
+			LangUtil.getText( "common.title.save_text_file" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_SCREEN ),
 			FileUtil.getTextFileFilter() );
@@ -527,7 +527,7 @@ public abstract class AbstractScreenFrm
 	      BaseDlg.showErrorDlg(
 		this,
 		fileName + ":\n"
-			+ LangUtil.tr( "Speichern der Datei fehlgeschlagen" )
+			+ LangUtil.getText( "base.text.saving_file_failed" )
 			+ "\n\n" + ex.getMessage() );
 	    }
 	    finally {
@@ -1020,14 +1020,13 @@ public abstract class AbstractScreenFrm
 		if( askConversion ) {
 		  switch( OptionDlg.showOptionDlg(
 			this,
-			"Mit welcher Gro\u00DF-/Keinschreibung"
-				+ " soll der Text eingef\u00FCgt werden?",
-			"Gro\u00DF-/Keinschreibung",
+			LangUtil.getText( "base.msg.which_letter_case" ),
+			LangUtil.getText( "base.msg.letter_case" ),
 			0,
-			"Gro\u00DF-/Keinschreibung beibehalten",
-			"Alles in Gro\u00DFbuchstaben",
-			"Alles in Kleinbuchstaben",
-			"Gro\u00DF-/Keinschreibung umkehren" ) )
+			LangUtil.getText( "base.msg.keep_letter_case" ),
+			LangUtil.getText( "base.msg.all_uppercase" ),
+			LangUtil.getText( "base.msg.all_lowercase" ),
+			LangUtil.getText( "base.msg.invert_letter_case" ) ) )
 		  {
 		    case 0:
 		      // nichts aendern

@@ -131,7 +131,7 @@ public class RAMFloppy
 
   public String getInfoText()
   {
-    return LangUtil.tr( this.infoText != null ?
+    return LangUtil.getText( this.infoText != null ?
 		this.infoText
 		: "RAM-Floppy nicht emuliert" );
   }
@@ -194,9 +194,8 @@ public class RAMFloppy
 	    catch( IOException ex ) {
 	      EmuUtil.fireShowErrorDlg(
 			Main.getScreenFrm(),
-			LangUtil.tr(
-				"{0} konnte nicht geladen werden.",
-				LangUtil.tr( infoText ) ),
+			LangUtil.getText( "base.text.not_loaded",
+				LangUtil.getText( infoText ) ),
 			ex );
 	    }
 	  }

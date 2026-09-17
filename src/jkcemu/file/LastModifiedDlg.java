@@ -183,7 +183,7 @@ public class LastModifiedDlg
     boolean rv = false;
     if( this.thread != null ) {
       if( !this.cancelled ) {
-	appendToLog( "Verarbeitung wird abgebrochen..." );
+	appendToLog( LangUtil.getText( "file.msg.processing_being" ) );
 	LastModifiedSetter setter = this.lastModifiedSetter;
 	if( setter != null ) {
 	  setter.cancel();
@@ -232,7 +232,7 @@ public class LastModifiedDlg
 		Window               owner,
 		java.util.List<Path> paths )
   {
-    super( owner, "\u00C4nderungszeitpunkt" );
+    super( owner, LangUtil.getText( "file.title.modification_time" ) );
     this.paths               = paths;
     this.cb2VfsSuffix        = new HashMap<>();
     this.archiveFileSuffixes = null;
@@ -269,20 +269,22 @@ public class LastModifiedDlg
 
     // Fensterinhalt
     add(
-	GUIFactory.createLabel( "\u00C4nderungszeitpunkt setzen auf:" ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "file.label.set_modification_time" ) ),
 	gbc );
 
     ButtonGroup grpTime = new ButtonGroup();
 
     this.rbCurrentTime = GUIFactory.createRadioButton(
-						"aktuellen Zeitpunkt",
+						LangUtil.getText( "file.option.current_time" ),
 						true );
     grpTime.add( this.rbCurrentTime );
     gbc.insets.left = 50;
     gbc.gridy++;
     add( this.rbCurrentTime, gbc );
 
-    this.rbTimeInput = GUIFactory.createRadioButton( "Datum/Uhrzeit:" );
+    this.rbTimeInput = GUIFactory.createRadioButton(
+		LangUtil.getText( "file.option.date_time" ) );
     grpTime.add( this.rbTimeInput );
     gbc.insets.top = 0;
     gbc.gridwidth  = 1;
@@ -298,7 +300,7 @@ public class LastModifiedDlg
     add( this.fldTime, gbc );
 
     this.cbRecursive = GUIFactory.createCheckBox(
-			"In Verzeichnisse hinein wechseln",
+			LangUtil.getText( "file.option.descend_directories" ),
 			false );
     gbc.insets.top  = 10;
     gbc.insets.left = 5;
@@ -348,8 +350,7 @@ public class LastModifiedDlg
 	catch( ClassCastException ex ) {}
 	for( String s : a ) {
 	  JCheckBox cb = GUIFactory.createCheckBox(
-		LangUtil.tr(
-			"In {0}-Dateien hinein wechseln",
+		LangUtil.getText( "file.text.descend_files",
 			s.toUpperCase() ) );
 	  cb.setEnabled( hasDirs || foundVfsSuffixes.contains( s ) );
 	  gbc.insets.top = 0;
@@ -480,11 +481,13 @@ public class LastModifiedDlg
 	  this.thread     = new Thread( this, "JKCEMU set last modified" );
 	  this.thread.start();
 	} else {
-	  showErrorDlg( this, "Sie m\u00FCssen eine Zeit festlegen." );
+	  showErrorDlg( this, LangUtil.getText( "file.error.specify_time" ) );
 	}
       }
       catch( ParseException ex ) {
-	showErrorDlg( this, "Datum/Uhrzeit: ung\u00FCltige Eingabe" );
+	showErrorDlg(
+		this,
+		LangUtil.getText( "file.error.date_time_invalid" ) );
       }
     }
   }
@@ -512,38 +515,36 @@ public class LastModifiedDlg
   {
     StringBuilder buf = new StringBuilder( 256 );
     if( this.cancelled ) {
-      buf.append( LangUtil.tr( "Vorgang abgebrochen" ) );
+      buf.append( LangUtil.getText( "file.text.operation_cancelled" ) );
       buf.append( '\n' );
     }
     if( this.numTouched == 1 ) {
-      buf.append( LangUtil.tr(
-		"{0} Datei/Verzeichnis ge\u00E4ndert",
+      buf.append( LangUtil.getText(
+		"file.text.file_directory_changed",
 		this.numTouched ) );
     } else {
-      buf.append( LangUtil.tr(
-		"{0} Dateien/Verzeichnissen ge\u00E4ndert",
+      buf.append( LangUtil.getText(
+		"file.text.files_directories",
 		this.numTouched ) );
     }
     if( this.numFailed > 0 ) {
       buf.append( '\n' );
       if( this.numFailed == 1 ) {
-	buf.append( LangUtil.tr(
-		"{0} Datei/Verzeichnis konnte nicht"
-			+ " ge\u00E4ndert werden.",
+	buf.append( LangUtil.getText(
+		"file.text.file_directory_not_changed",
 		this.numFailed ) );
       } else {
-	buf.append( LangUtil.tr(
-		"{0} Dateien/Verzeichnisse konnten nicht"
-			+ " ge\u00E4ndert werden.",
+	buf.append( LangUtil.getText(
+		"file.text.files_directories_not_changed",
 		this.numFailed ) );
       }
     }
     if( !this.cancelled ) {
       buf.append( '\n' );
-      buf.append( LangUtil.tr( "Fertig" ) );
+      buf.append( LangUtil.getText( "file.text.done" ) );
     }
     appendToLog( buf.toString() );
-    this.btnClose.setText( EmuUtil.TEXT_CLOSE );
+    this.btnClose.setText( LangUtil.getText( EmuUtil.TEXT_CLOSE ) );
     if( this.winClosing ) {
       doClose();
     }

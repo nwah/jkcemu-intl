@@ -128,7 +128,11 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 		EmuThread  emuThread,
 		PrgOptions options )
   {
-    super( owner, emuThread, options, "BASIC-Compiler-Optionen" );
+    super(
+		owner,
+		emuThread,
+		options,
+		LangUtil.getText( "basic.title.basic_compiler_options" ) );
     this.emuThread = emuThread;
     this.emuSys    = (emuThread != null ? emuThread.getEmuSys() : null);
     this.notified  = false;
@@ -174,7 +178,8 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 
     // Bereich Allgemein
     JPanel panelGeneral = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Allgemein", panelGeneral );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "common.section.general" ), panelGeneral );
 
     GridBagConstraints gbcGeneral = new GridBagConstraints(
 					0, 0,
@@ -185,13 +190,17 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    panelGeneral.add( GUIFactory.createLabel( "Zielsystem:" ), gbcGeneral );
+    panelGeneral.add( GUIFactory.createLabel(
+		LangUtil.getText(
+			"basic.label.target_system" ) ), gbcGeneral );
     gbcGeneral.gridy++;
     panelGeneral.add(
-		GUIFactory.createLabel( "Art des Programms:" ),
+		GUIFactory.createLabel( LangUtil.getText(
+				"basic.label.type_program" ) ),
 		gbcGeneral );
     gbcGeneral.gridy++;
-    this.labelAppName = GUIFactory.createLabel( "Name des Programms:" );
+    this.labelAppName = GUIFactory.createLabel( LangUtil.getText(
+			"basic.label.name_program" ) );
     panelGeneral.add( this.labelAppName, gbcGeneral );
     gbcGeneral.gridy++;
     panelGeneral.add(
@@ -199,17 +208,21 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 		gbcGeneral );
     gbcGeneral.gridy++;
     panelGeneral.add(
-		GUIFactory.createLabel( "Variablen/Speicherzellen:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText(
+				"basic.label.variables_memory_cells" ) ),
 		gbcGeneral );
     gbcGeneral.gridy++;
     gbcGeneral.gridy++;
     panelGeneral.add( GUIFactory.createLabel( textHeapSize ), gbcGeneral );
     gbcGeneral.gridy++;
-    panelGeneral.add( GUIFactory.createLabel( "Stack:" ), gbcGeneral );
+    panelGeneral.add( GUIFactory.createLabel( LangUtil.getText(
+			"basic.label.stack" ) ), gbcGeneral );
     gbcGeneral.gridy++;
     gbcGeneral.gridy++;
     panelGeneral.add(
-		GUIFactory.createLabel( "Sprache der Ausschriften:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText( "basic.label.language_messages" ) ),
 		gbcGeneral );
 
     boolean forceCodeToEmu  = false;
@@ -264,13 +277,15 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     ButtonGroup grpAppType = new ButtonGroup();
 
     this.rbAppTypeStandalone = GUIFactory.createRadioButton(
-				"Eigenst\u00E4ndiges Programm",
+				LangUtil.getText(
+					"basic.option.standalone_program" ),
 				true );
     grpAppType.add( this.rbAppTypeStandalone );
     panelAppType.add( this.rbAppTypeStandalone );
     panelAppType.add( Box.createHorizontalStrut( 5 ) );
 
-    this.rbAppTypeSub = GUIFactory.createRadioButton( "Unterprogramm" );
+    this.rbAppTypeSub = GUIFactory.createRadioButton(
+		LangUtil.getText( "basic.option.subprogram" ) );
     grpAppType.add( this.rbAppTypeSub );
     panelAppType.add( this.rbAppTypeSub );
 
@@ -289,12 +304,13 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     panelGeneral.add( this.fldCodeBegAddr, gbcGeneral );
 
     gbcGeneral.gridx++;
-    panelGeneral.add( GUIFactory.createLabel( "hex" ), gbcGeneral );
+    panelGeneral.add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.hex" ) ), gbcGeneral );
 
     ButtonGroup grpBss = new ButtonGroup();
 
     this.rbBssTrailed = GUIFactory.createRadioButton(
-				"Direkt hinter Programmcode",
+				LangUtil.getText( "basic.option.directly_after_program" ),
 				true );
     grpBss.add( this.rbBssTrailed );
     gbcGeneral.gridwidth = GridBagConstraints.REMAINDER;
@@ -309,7 +325,8 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     gbcGeneral.gridy++;
     panelGeneral.add( panelBssBegAddr, gbcGeneral );
 
-    this.rbBssBegAddr = GUIFactory.createRadioButton( "Ab Adresse:" );
+    this.rbBssBegAddr = GUIFactory.createRadioButton(
+		LangUtil.getText( "basic.option.address" ) );
     grpBss.add( this.rbBssBegAddr );
     panelBssBegAddr.add( this.rbBssBegAddr );
     panelBssBegAddr.add( Box.createHorizontalStrut( 5 ) );
@@ -319,7 +336,8 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     panelBssBegAddr.add( this.fldBssBegAddr );
     panelBssBegAddr.add( Box.createHorizontalStrut( 5 ) );
 
-    this.labelBssBegAddrUnit = GUIFactory.createLabel( "hex" );
+    this.labelBssBegAddrUnit = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.hex" ) );
     panelBssBegAddr.add( this.labelBssBegAddrUnit );
 
     this.fldHeapSize = GUIFactory.createTextField( 5 );
@@ -333,12 +351,14 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     panelGeneral.add( this.fldHeapSize, gbcGeneral );
 
     gbcGeneral.gridx++;
-    panelGeneral.add( GUIFactory.createLabel( "Bytes" ), gbcGeneral );
+    panelGeneral.add( GUIFactory.createLabel( LangUtil.getText(
+			"basic.label.bytes" ) ), gbcGeneral );
 
     ButtonGroup grpStack = new ButtonGroup();
 
     this.rbStackSystem = GUIFactory.createRadioButton(
-				"Stack des aufrufenden Programms verwenden",
+				LangUtil.getText(
+					"basic.option.use_stack_calling" ),
 				true );
     grpStack.add( this.rbStackSystem );
     gbcGeneral.gridwidth = GridBagConstraints.REMAINDER;
@@ -353,8 +373,8 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     gbcGeneral.gridy++;
     panelGeneral.add( panelStackSeparate, gbcGeneral );
 
-    this.rbStackSeparate = GUIFactory.createRadioButton(
-		"Eigener Stack-Bereich hinter Variablen/Speicherzellen:" );
+    this.rbStackSeparate = GUIFactory.createRadioButton( LangUtil.getText(
+			"basic.option.own_stack_area" ) );
     grpStack.add( this.rbStackSeparate );
     panelStackSeparate.add( this.rbStackSeparate );
     panelStackSeparate.add( Box.createHorizontalStrut( 5 ) );
@@ -367,7 +387,8 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     panelStackSeparate.add( this.fldStackSize );
     panelStackSeparate.add( Box.createHorizontalStrut( 5 ) );
 
-    this.labelStackUnit = GUIFactory.createLabel( "Bytes" );
+    this.labelStackUnit = GUIFactory.createLabel(
+		LangUtil.getText( "basic.label.bytes" ) );
     panelStackSeparate.add( this.labelStackUnit );
 
     JPanel panelLang = GUIFactory.createPanel();
@@ -380,18 +401,22 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 
     ButtonGroup grpLang = new ButtonGroup();
 
-    this.rbLangDE = GUIFactory.createRadioButton( "Deutsch" );
+    this.rbLangDE = GUIFactory.createRadioButton(
+		LangUtil.getText( "basic.option.german" ) );
     grpLang.add( this.rbLangDE );
     panelLang.add( this.rbLangDE );
 
-    this.rbLangEN = GUIFactory.createRadioButton( "Englisch" );
+    this.rbLangEN = GUIFactory.createRadioButton(
+		LangUtil.getText( "basic.option.english" ) );
     grpLang.add( this.rbLangEN );
     panelLang.add( this.rbLangEN );
 
 
     // Bereich Laufzeiteigenschaften
     JPanel panelCheck = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Laufzeiteigenschaften", panelCheck );
+    this.tabbedPane.addTab( LangUtil.getText(
+			"basic.section.runtime_properties" ),
+		panelCheck );
 
     GridBagConstraints gbcCheck = new GridBagConstraints(
 					0, 0,
@@ -405,13 +430,14 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     ButtonGroup grpCheck = new ButtonGroup();
 
     this.rbCheckAll = GUIFactory.createRadioButton(
-				"Compilieren f\u00FCr Test und Debugging",
+				LangUtil.getText(
+					"basic.option.compile_testing" ),
 				true );
     grpCheck.add( this.rbCheckAll );
     panelCheck.add( this.rbCheckAll, gbcCheck );
 
     this.rbCheckNone = GUIFactory.createRadioButton(
-				"Compilieren f\u00FCr Produktiveinsatz",
+				LangUtil.getText( "basic.option.compile_production_use" ),
 				false );
     grpCheck.add( this.rbCheckNone );
     gbcCheck.insets.top = 0;
@@ -419,7 +445,7 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     panelCheck.add( this.rbCheckNone, gbcCheck );
 
     this.rbCheckCustom = GUIFactory.createRadioButton(
-						"Benutzerdefiniert" );
+						LangUtil.getText( "basic.option.user_defined" ) );
     grpCheck.add( this.rbCheckCustom );
     gbcCheck.insets.bottom = 5;
     gbcCheck.gridy++;
@@ -428,7 +454,8 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     ButtonGroup grpBreak = new ButtonGroup();
 
     this.rbBreakAlways = GUIFactory.createRadioButton(
-				"CTRL-C bricht Programm ab",
+				LangUtil.getText(
+					"basic.option.ctrl_c_aborts_program" ),
 				true );
     grpBreak.add( this.rbBreakAlways );
     gbcCheck.insets.top    = 5;
@@ -439,35 +466,35 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     panelCheck.add( this.rbBreakAlways, gbcCheck );
 
     this.rbBreakInput = GUIFactory.createRadioButton(
-			"CTRL-C bricht Programm nur bei Eingaben ab" );
+			LangUtil.getText( "basic.option.ctrl_c_aborts_program_only" ) );
     grpBreak.add( this.rbBreakInput );
     gbcCheck.insets.top = 0;
     gbcCheck.gridy++;
     panelCheck.add( this.rbBreakInput, gbcCheck );
 
     this.rbBreakNever = GUIFactory.createRadioButton(
-				"CTRL-C bricht Programm nicht ab" );
+				LangUtil.getText(
+					"basic.option.ctrl_c_not_abort" ) );
     grpBreak.add( this.rbBreakNever );
     gbcCheck.gridy++;
     panelCheck.add( this.rbBreakNever, gbcCheck );
 
     this.cbCheckBounds = GUIFactory.createCheckBox(
-					"Feldgrenzen pr\u00FCfen",
+					LangUtil.getText( "basic.option.check_array_bounds" ),
 					true );
     gbcCheck.insets.top = 5;
     gbcCheck.gridy++;
     panelCheck.add( this.cbCheckBounds, gbcCheck );
 
-    this.cbCheckStack = GUIFactory.createCheckBox(
-		"Stack pr\u00FCfen (nur bei eigenst\u00E4ndigem Programm"
-			+ " mit eigenem Stack-Bereich)",
+    this.cbCheckStack = GUIFactory.createCheckBox( LangUtil.getText(
+			"basic.option.check_stack_only" ),
 		true );
     gbcCheck.insets.top = 0;
     gbcCheck.gridy++;
     panelCheck.add( this.cbCheckStack, gbcCheck );
 
-    this.cbPrintLineNumOnAbort = GUIFactory.createCheckBox(
-		"Bei Abbruch aufgrund eines Fehlers Zeilennummer ausgeben",
+    this.cbPrintLineNumOnAbort = GUIFactory.createCheckBox( LangUtil.getText(
+			"basic.option.output_line_number" ),
 		true );
     gbcCheck.insets.bottom = 5;
     gbcCheck.gridy++;
@@ -476,7 +503,8 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 
     // Bereich Treiber
     JPanel panelDriver = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Treiber", panelDriver );
+    this.tabbedPane.addTab( LangUtil.getText( "basic.section.drivers" ),
+		panelDriver );
 
     GridBagConstraints gbcDriver = new GridBagConstraints(
 					0, 0,
@@ -489,36 +517,32 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 
     // Unterbereich OPEN-Anweisung
     panelDriver.add(
-	GUIFactory.createLabel( "Bei Verwendung der OPEN-Anweisung"
-			+ " folgende Treiber einbinden:" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"basic.label.include_following" ) ),
 	gbcDriver );
 
-    this.cbOpenCrtEnabled = GUIFactory.createCheckBox(
-		"CRT-Treiber (Ausgabekanal auf Bildschirm)" );
+    this.cbOpenCrtEnabled = GUIFactory.createCheckBox( LangUtil.getText(
+			"basic.option.crt_driver_output" ) );
     gbcDriver.insets.top  = 0;
     gbcDriver.insets.left = 50;
     gbcDriver.gridy++;
     panelDriver.add( this.cbOpenCrtEnabled, gbcDriver );
 
-    this.cbOpenLptEnabled = GUIFactory.createCheckBox(
-		"LPT-Treiber (Ausgabekanal auf Drucker, nur relevant"
-			+ " wenn vom Zielsystem unterst\u00FCtzt)" );
+    this.cbOpenLptEnabled = GUIFactory.createCheckBox( LangUtil.getText(
+			"basic.option.lpt_driver_output" ) );
     gbcDriver.insets.bottom = 0;
     gbcDriver.gridy++;
     panelDriver.add( this.cbOpenLptEnabled, gbcDriver );
 
-    this.cbOpenDiskEnabled = GUIFactory.createCheckBox(
-		LangUtil.tr(
-			"DISK-Treiber (Zugriff auf Laufwerke, nur relevant"
-				+ " bei Zielsystemen \'\'{0}\'\' und \'\'{1}\'\')",
+    this.cbOpenDiskEnabled = GUIFactory.createCheckBox( LangUtil.getText(
+			"basic.text.disk_driver_access",
 			CPMTarget.DISPLAY_TARGET_NAME,
 			KC85Caos48Target.DISPLAY_TARGET_NAME ) );
     gbcDriver.gridy++;
     panelDriver.add( this.cbOpenDiskEnabled, gbcDriver );
 
-    this.cbOpenVdipEnabled = GUIFactory.createCheckBox(
-		"VDIP-Treiber (Zugriff auf USB-Speicher, nur relevant"
-			+ " wenn vom Zielsystem unterst\u00FCtzt)" );
+    this.cbOpenVdipEnabled = GUIFactory.createCheckBox( LangUtil.getText(
+			"basic.option.vdip_driver_access" ) );
     gbcDriver.insets.bottom = 5;
     gbcDriver.gridy++;
     panelDriver.add( this.cbOpenVdipEnabled, gbcDriver );
@@ -526,13 +550,15 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 
     // Bereich Erzeugter Programmcode
     this.tabbedPane.addTab(
-			"Erzeugter Programmcode",
+			LangUtil.getText(
+				"programming.section.generated_program_code" ),
 			createCodeDestOptions( false ) );
 
 
     // Bereich Warnungen
     JPanel panelWarn = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Warnungen", panelWarn );
+    this.tabbedPane.addTab( LangUtil.getText( "basic.section.warnings" ),
+		panelWarn );
 
     GridBagConstraints gbcWarn = new GridBagConstraints(
 					0, 0,
@@ -543,27 +569,29 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    panelWarn.add( GUIFactory.createLabel( "Warnen bei:" ), gbcWarn );
+    panelWarn.add( GUIFactory.createLabel( LangUtil.getText(
+			"basic.label.warn_about" ) ), gbcWarn );
 
     this.cbWarnImplicitDecls = GUIFactory.createCheckBox(
-				"Impliziten Variablendeklarationen" );
+				LangUtil.getText(
+					"basic.option.implicit_variable" ) );
     gbcWarn.insets.top  = 0;
     gbcWarn.insets.left = 50;
     gbcWarn.gridy++;
     panelWarn.add( this.cbWarnImplicitDecls, gbcWarn );
 
     this.cbWarnNonAsciiChars = GUIFactory.createCheckBox(
-						"Nicht-ASCII-Zeichen" );
+						LangUtil.getText( "basic.option.non_ascii_characters" ) );
     gbcWarn.gridy++;
     panelWarn.add( this.cbWarnNonAsciiChars, gbcWarn );
 
-    this.cbWarnUnusedItems = GUIFactory.createCheckBox(
-		"Nicht verwendeten Funktionen, Prozeduren und Variablen" );
+    this.cbWarnUnusedItems = GUIFactory.createCheckBox( LangUtil.getText(
+			"basic.option.unused_functions" ) );
     gbcWarn.gridy++;
     panelWarn.add( this.cbWarnUnusedItems, gbcWarn );
 
     this.cbWarnTooManyDigits = GUIFactory.createCheckBox(
-				"Zahlen mit zu vielen Nachkommastellen" );
+				LangUtil.getText( "basic.option.numbers_many_decimal" ) );
     gbcWarn.insets.bottom = 5;
     gbcWarn.gridy++;
     panelWarn.add( this.cbWarnTooManyDigits, gbcWarn );
@@ -571,7 +599,8 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 
     // Bereich Sonstiges
     JPanel panelEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", panelEtc );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "common.section.miscellaneous" ), panelEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -583,10 +612,11 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
 					0, 0 );
 
     // Unterbereich BASIC-Eigenschaften
-    panelEtc.add( GUIFactory.createLabel( "BASIC-Eigenschaften:" ), gbcEtc );
+    panelEtc.add( GUIFactory.createLabel(
+		LangUtil.getText( "basic.label.basic_properties" ) ), gbcEtc );
 
     this.cbInitVars = GUIFactory.createCheckBox(
-				"Variablen automatisch initialisieren" );
+				LangUtil.getText( "basic.option.initialize_variables" ) );
     gbcEtc.insets.top  = 0;
     gbcEtc.insets.left = 50;
     gbcEtc.gridy++;
@@ -597,10 +627,11 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     gbcEtc.insets.top  = 15;
     gbcEtc.insets.left = 5;
     gbcEtc.gridy++;
-    panelEtc.add( GUIFactory.createLabel( "Optimierung:" ), gbcEtc );
+    panelEtc.add( GUIFactory.createLabel( LangUtil.getText(
+			"basic.label.optimization" ) ), gbcEtc );
 
     this.cbPreferRelJumps = GUIFactory.createCheckBox(
-				"Relative Spr\u00FCnge bevorzugen" );
+				LangUtil.getText( "basic.option.prefer_relative_jumps" ) );
     gbcEtc.insets.top  = 0;
     gbcEtc.insets.left = 50;
     gbcEtc.gridy++;
@@ -611,17 +642,19 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
     gbcEtc.insets.top  = 15;
     gbcEtc.insets.left = 5;
     gbcEtc.gridy++;
-    panelEtc.add( GUIFactory.createLabel( "Assembler-Code:" ), gbcEtc );
+    panelEtc.add( GUIFactory.createLabel( LangUtil.getText(
+			"basic.label.assembler_code" ) ), gbcEtc );
 
     this.cbShowAsm = GUIFactory.createCheckBox(
-				"Erzeugten Assembler-Code anzeigen" );
+				LangUtil.getText( "basic.option.show_generated_assembler" ) );
     gbcEtc.insets.top  = 0;
     gbcEtc.insets.left = 50;
     gbcEtc.gridy++;
     panelEtc.add( this.cbShowAsm, gbcEtc );
 
     this.cbInclBasicLines = GUIFactory.createCheckBox(
-			"BASIC-Zeilen als Kommentare einf\u00FCgen" );
+			LangUtil.getText(
+				"basic.option.insert_basic_lines" ) );
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridy++;
     panelEtc.add( this.cbInclBasicLines, gbcEtc );
@@ -773,7 +806,8 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
       }
       if( target == null ) {
 	throw new UserInputException(
-			"Sie m\u00FCssen ein Zielsystem ausw\u00E4hlen!" );
+			LangUtil.getText(
+				"basic.error.select_target_system" ) );
       }
 
       labelText       = textCodeBegAddr;
@@ -839,7 +873,7 @@ public class BasicOptionsDlg extends AbstractOptionsDlg
       catch( UserInputException ex ) {
 	showErrorDlg(
 		this,
-		LangUtil.tr( "Erzeugter Programmcode:" )
+		LangUtil.getText( "programming.text.generated_program_code" )
 			+ "\n" + ex.getMessage() );
       }
     }

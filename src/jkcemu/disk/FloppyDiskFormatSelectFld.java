@@ -25,6 +25,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class FloppyDiskFormatSelectFld extends JPanel
@@ -168,7 +169,8 @@ public class FloppyDiskFormatSelectFld extends JPanel
     add( this.rbFmt400K, gbc );
 
     this.rbFmtEtc = GUIFactory.createRadioButton(
-					"Sonstiges Format:",
+					LangUtil.getText(
+						"disk.option.other_format" ),
 					true );
     grpFmt.add( this.rbFmtEtc );
     gbc.insets.left = 0;
@@ -191,14 +193,16 @@ public class FloppyDiskFormatSelectFld extends JPanel
 						new Insets( 2, 2, 2, 2),
 						0, 0 );
 
-    this.labelCyls  = GUIFactory.createLabel( "Spuren:" );
+    this.labelCyls  = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.tracks" ) );
     panelFmtEtc.add( this.labelCyls, gbcFmtEtc );
 
     this.comboCyls = createJComboBox( 40, 77, 80 );
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.comboCyls, gbcFmtEtc );
 
-    this.labelSysTracks = GUIFactory.createLabel( "davon Systemspuren:" );
+    this.labelSysTracks = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.which_system_tracks" ) );
     gbcFmtEtc.anchor          = GridBagConstraints.EAST;
     gbcFmtEtc.gridx += 2;
     panelFmtEtc.add( this.labelSysTracks, gbcFmtEtc );
@@ -209,7 +213,8 @@ public class FloppyDiskFormatSelectFld extends JPanel
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.spinnerSysTracks, gbcFmtEtc );
 
-    this.labelSides = GUIFactory.createLabel( "Seiten:" );
+    this.labelSides = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.sides" ) );
     gbcFmtEtc.gridx = 0;
     gbcFmtEtc.gridy++;
     panelFmtEtc.add( this.labelSides, gbcFmtEtc );
@@ -218,7 +223,8 @@ public class FloppyDiskFormatSelectFld extends JPanel
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.comboSides, gbcFmtEtc );
 
-    this.labelSectPerTrack = GUIFactory.createLabel( "Sektoren pro Spur:" );
+    this.labelSectPerTrack = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.sectors_per_track" ) );
     gbcFmtEtc.gridx        = 0;
     gbcFmtEtc.gridy++;
     panelFmtEtc.add( this.labelSectPerTrack, gbcFmtEtc );
@@ -233,7 +239,7 @@ public class FloppyDiskFormatSelectFld extends JPanel
     this.spinnerInterleave = null;
     if( askForInterleave ) {
       this.labelInterleave = GUIFactory.createLabel(
-					"Interleave (1 = keins):" );
+					LangUtil.getText( "disk.label.interleave_1_none" ) );
       gbcFmtEtc.anchor = GridBagConstraints.EAST;
       gbcFmtEtc.gridx += 2;
       panelFmtEtc.add( this.labelInterleave, gbcFmtEtc );
@@ -247,7 +253,8 @@ public class FloppyDiskFormatSelectFld extends JPanel
     }
 
     this.labelSectorSize = GUIFactory.createLabel(
-					"Sektorgr\u00F6\u00DFe:" );
+					LangUtil.getText(
+						"disk.label.sector_size" ) );
     gbcFmtEtc.gridx = 0;
     gbcFmtEtc.gridy++;
     panelFmtEtc.add( this.labelSectorSize, gbcFmtEtc );
@@ -256,11 +263,13 @@ public class FloppyDiskFormatSelectFld extends JPanel
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.comboSectorSize, gbcFmtEtc );
 
-    this.labelSectorSizeUnit = GUIFactory.createLabel( "Byte" );
+    this.labelSectorSizeUnit = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.bytes" ) );
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.labelSectorSizeUnit, gbcFmtEtc );
 
-    this.labelBlockSize = GUIFactory.createLabel( "Blockgr\u00F6\u00DFe:" );
+    this.labelBlockSize = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.block_size" ) );
     gbcFmtEtc.gridx     = 0;
     gbcFmtEtc.gridy++;
     panelFmtEtc.add( this.labelBlockSize, gbcFmtEtc );
@@ -269,11 +278,13 @@ public class FloppyDiskFormatSelectFld extends JPanel
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.comboBlockSizeKB, gbcFmtEtc );
 
-    this.labelBlockSizeUnit = GUIFactory.createLabel( "KByte" );
+    this.labelBlockSizeUnit = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.kbytes" ) );
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.labelBlockSizeUnit, gbcFmtEtc );
 
-    this.labelBlockNumSize = GUIFactory.createLabel( "Blocknummern:" );
+    this.labelBlockNumSize = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.block_numbers" ) );
     gbcFmtEtc.anchor = GridBagConstraints.EAST;
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.labelBlockNumSize, gbcFmtEtc );
@@ -283,11 +294,13 @@ public class FloppyDiskFormatSelectFld extends JPanel
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.comboBlockNumSize, gbcFmtEtc );
 
-    this.labelBlockNumSizeUnit = GUIFactory.createLabel( "Bit" );
+    this.labelBlockNumSizeUnit = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.bit" ) );
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.labelBlockNumSizeUnit, gbcFmtEtc );
 
-    this.labelDirBlocks = GUIFactory.createLabel( "Directory:" );
+    this.labelDirBlocks = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.directory" ) );
     gbcFmtEtc.gridx     = 0;
     gbcFmtEtc.gridy++;
     panelFmtEtc.add( this.labelDirBlocks, gbcFmtEtc );
@@ -297,13 +310,14 @@ public class FloppyDiskFormatSelectFld extends JPanel
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.spinnerDirBlocks, gbcFmtEtc );
 
-    this.labelDirEntriesInfo = GUIFactory.createLabel( "Bl\u00F6cke" );
+    this.labelDirEntriesInfo = GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.blocks" ) );
     gbcFmtEtc.gridwidth      = GridBagConstraints.REMAINDER;
     gbcFmtEtc.gridx++;
     panelFmtEtc.add( this.labelDirEntriesInfo, gbcFmtEtc );
 
     this.cbDateStamper = GUIFactory.createCheckBox(
-		"Dateien mit Zeitstempel versehen (DateStamper)" );
+		LangUtil.getText( "disk.option.add_time_stamps" ) );
     gbcFmtEtc.gridx = 1;
     gbcFmtEtc.gridy++;
     panelFmtEtc.add( this.cbDateStamper, gbcFmtEtc );

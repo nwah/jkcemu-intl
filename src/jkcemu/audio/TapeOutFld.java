@@ -29,6 +29,7 @@ import jkcemu.base.EmuSys;
 import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class TapeOutFld extends AbstractAudioOutFld
@@ -61,7 +62,8 @@ public class TapeOutFld extends AbstractAudioOutFld
 
     // Bereich Funktion
     JPanel panelFct = GUIFactory.createPanel( new GridBagLayout() );
-    panelFct.setBorder( GUIFactory.createTitledBorder( "Funktion" ) );
+    panelFct.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "audio.section.function" ) ) );
     add( panelFct, gbc );
 
     GridBagConstraints gbcFct = new GridBagConstraints(
@@ -74,12 +76,12 @@ public class TapeOutFld extends AbstractAudioOutFld
 					0, 0 );
 
     this.cbToLine = GUIFactory.createCheckBox(
-		"Audiodaten \u00FCber Sound-System ausgegeben",
+		LangUtil.getText( "audio.option.audio_data_output" ),
 		true );
     panelFct.add( this.cbToLine, gbcFct );
 
     this.cbToRecorder = GUIFactory.createCheckBox(
-		"Audiodaten aufnehmen und in Datei speichern" );
+		LangUtil.getText( "audio.option.record_audio_data" ) );
     gbcFct.insets.top    = 0;
     gbcFct.insets.bottom = 5;
     gbcFct.gridy++;
@@ -88,7 +90,8 @@ public class TapeOutFld extends AbstractAudioOutFld
 
     // Bereich Optionen
     JPanel panelOpt = GUIFactory.createPanel( new GridBagLayout() );
-    panelOpt.setBorder( GUIFactory.createTitledBorder( "Optionen" ) );
+    panelOpt.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.section.options" ) ) );
     gbc.gridy++;
     add( panelOpt, gbc );
 
@@ -101,10 +104,12 @@ public class TapeOutFld extends AbstractAudioOutFld
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    this.labelMixer = GUIFactory.createLabel( "Ausgabeger\u00E4t:" );
+    this.labelMixer = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.output_device" ) );
     panelOpt.add( this.labelMixer, gbcOpt );
 
-    this.labelFrameRate  = GUIFactory.createLabel( "Abtastrate (Hz):" );
+    this.labelFrameRate  = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.sample_rate_hz" ) );
     gbcOpt.insets.bottom = 5;
     gbcOpt.gridy++;
     panelOpt.add( this.labelFrameRate, gbcOpt );
@@ -125,7 +130,8 @@ public class TapeOutFld extends AbstractAudioOutFld
 
     // Bereich Status
     JPanel panelStatus = GUIFactory.createPanel( new GridBagLayout() );
-    panelStatus.setBorder( GUIFactory.createTitledBorder( "Status" ) );
+    panelStatus.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.section.status" ) ) );
     gbc.gridy++;
     add( panelStatus, gbc );
 
@@ -138,10 +144,12 @@ public class TapeOutFld extends AbstractAudioOutFld
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    this.labelFormat = GUIFactory.createLabel( "Format:" );
+    this.labelFormat = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.format" ) );
     panelStatus.add( this.labelFormat, gbcStatus );
 
-    this.labelDuration = GUIFactory.createLabel( "Aufnahmedauer:" );
+    this.labelDuration = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.recording_duration" ) );
     gbcStatus.insets.bottom = 5;
     gbcStatus.gridy++;
     panelStatus.add( this.labelDuration, gbcStatus );
@@ -182,22 +190,27 @@ public class TapeOutFld extends AbstractAudioOutFld
     JPanel panelBtn = GUIFactory.createPanel( new GridLayout( 4, 1, 5, 5 ) );
     panelEast.add( panelBtn, gbcEast );
 
-    this.btnEnable = GUIFactory.createButton( "Aktivieren" );
+    this.btnEnable = GUIFactory.createButton(
+		LangUtil.getText( "audio.action.enable" ) );
     panelBtn.add( this.btnEnable );
 
-    this.btnDisable = GUIFactory.createButton( "Deaktivieren" );
+    this.btnDisable = GUIFactory.createButton(
+		LangUtil.getText( "audio.action.disable" ) );
     panelBtn.add( this.btnDisable );
 
-    this.btnPlay = GUIFactory.createButton( EmuUtil.TEXT_PLAY );
+    this.btnPlay = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_PLAY ) );
     panelBtn.add( this.btnPlay );
 
-    this.btnSave = GUIFactory.createButton( EmuUtil.TEXT_OPEN_SAVE );
+    this.btnSave = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_OPEN_SAVE ) );
     panelBtn.add( this.btnSave );
 
 
     // Pegelanzeige
     this.volumeBar = new VolumeBar( SwingConstants.VERTICAL );
-    this.volumeBar.setBorder( GUIFactory.createTitledBorder( "Pegel" ) );
+    this.volumeBar.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "audio.section.level" ) ) );
     this.volumeBar.setPreferredSize( new Dimension( 1, 1 ) );
     gbcEast.insets.top = 20;
     gbcEast.fill       = GridBagConstraints.BOTH;

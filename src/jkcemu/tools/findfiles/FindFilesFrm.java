@@ -182,18 +182,18 @@ public class FindFilesFrm
   };
 
 
-  public static final String TITLE = Main.APPNAME + " Dateisuche";
+  public static final String TITLE = "findfiles.title.jkcemu_file_search";
 
   private static final int    MAX_RESULT_ROWS = 2000;
   private static final int    MAX_ROW_LEN     = 1024;
-  private static final String COPY_TEXT       = "Zeilen als Text kopieren";
+  private static final String COPY_TEXT       = "findfiles.text.copy_lines_text";
   private static final String HELP_PAGE       = "/help/tools/findfiles.htm";
 
-  private static final String DEFAULT_STATUS_TEXT        = "Bereit";
-  private static final String TEXT_TODAY                 = "Heute";
-  private static final String TEXT_YESTERDAY             = "Gestern";
-  private static final String TEXT_DAY_BEFORE_YESTERDAY  = "Vorgestern";
-  private static final String TEXT_STOP_SEARCH           = "Suche beenden";
+  private static final String DEFAULT_STATUS_TEXT        = "common.text.ready";
+  private static final String TEXT_TODAY                 = "findfiles.text.today";
+  private static final String TEXT_YESTERDAY             = "findfiles.text.yesterday";
+  private static final String TEXT_DAY_BEFORE_YESTERDAY  = "findfiles.text.day_before_yesterday";
+  private static final String TEXT_STOP_SEARCH           = "findfiles.text.stop_search";
 
   private static FindFilesFrm instance      = null;
   private static DateFormat   dateFmtShort  = null;
@@ -1082,12 +1082,12 @@ public class FindFilesFrm
     this.findIgnoreCase       = false;
     this.findPrintMatchedRows = false;
     this.findSubTrees         = false;
-    setTitle( TITLE );
+    setTitle( LangUtil.getText( TITLE ) );
 
 
     // Popup-Menu
     this.popupMnu      = GUIFactory.createPopupMenu();
-    this.popupCopyText = createMenuItem( COPY_TEXT );
+    this.popupCopyText = createMenuItem( LangUtil.getText( COPY_TEXT ) );
     this.popupCopyText.setEnabled( false );
     this.popupMnu.add( this.popupCopyText );
     this.popupMnu.addSeparator();
@@ -1096,7 +1096,7 @@ public class FindFilesFrm
     // Menu Bearbeiten
     JMenu mnuEdit = createMenuEdit();
 
-    this.mnuCopyText = createMenuItem( COPY_TEXT );
+    this.mnuCopyText = createMenuItem( LangUtil.getText( COPY_TEXT ) );
     this.mnuCopyText.setEnabled( false );
     mnuEdit.add( this.mnuCopyText );
     mnuEdit.addSeparator();
@@ -1111,17 +1111,20 @@ public class FindFilesFrm
     mnuEdit.addSeparator();
 
     this.mnuRemoveSelectedFromResult = createMenuItemWithDirectAccelerator(
-			"Markierte Eintr\u00E4ge aus Suchergebnis entfernen",
+			LangUtil.getText(
+				"findfiles.action.remove_selected_entries" ),
 			KeyEvent.VK_DELETE );
     this.mnuRemoveSelectedFromResult.setEnabled( false );
     mnuEdit.add( this.mnuRemoveSelectedFromResult );
 
     this.mnuRemoveErrorsFromResult = createMenuItem(
-			"Fehlereintr\u00E4ge aus Suchergebnis entfernen" );
+			LangUtil.getText(
+				"findfiles.action.remove_error_entries" ) );
     this.mnuRemoveErrorsFromResult.setEnabled( false );
     mnuEdit.add( this.mnuRemoveErrorsFromResult );
 
-    this.mnuClearResult = createMenuItem( "Suchergebnis l\u00F6schen" );
+    this.mnuClearResult = createMenuItem( LangUtil.getText(
+			"findfiles.action.clear_search_result" ) );
     this.mnuClearResult.setEnabled( false );
     mnuEdit.add( this.mnuClearResult );
 
@@ -1129,10 +1132,11 @@ public class FindFilesFrm
     // Menu Datei
     JMenu mnuFile = createMenuFile();
 
-    this.mnuStart = createMenuItem( "Suche starten" );
+    this.mnuStart = createMenuItem(
+		LangUtil.getText( "findfiles.action.start_search" ) );
     mnuFile.add( this.mnuStart );
 
-    this.mnuStop = createMenuItem( TEXT_STOP_SEARCH );
+    this.mnuStop = createMenuItem( LangUtil.getText( TEXT_STOP_SEARCH ) );
     mnuFile.add( this.mnuStop );
     mnuFile.addSeparator();
 
@@ -1151,7 +1155,8 @@ public class FindFilesFrm
     // Menu Hilfe
     JMenu mnuHelp = createMenuHelp();
 
-    this.mnuHelpContent = createMenuItem( "Hilfe zur Dateisuche..." );
+    this.mnuHelpContent = createMenuItem( LangUtil.getText(
+			"findfiles.action.help_file_search" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -1171,7 +1176,8 @@ public class FindFilesFrm
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.labelDir = GUIFactory.createLabel( FileUtil.LABEL_SEARCH_IN );
+    this.labelDir = GUIFactory.createLabel(
+		LangUtil.getText( FileUtil.LABEL_SEARCH_IN ) );
     add( this.labelDir, gbc );
 
     JPanel panelDir = GUIFactory.createPanel( new GridBagLayout() );
@@ -1197,7 +1203,8 @@ public class FindFilesFrm
     this.btnDirSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT_DIR );
+					LangUtil.getText(
+						EmuUtil.TEXT_SELECT_DIR ) );
     gbcDir.insets  = new Insets( 0, 5, 0, 0 );
     gbcDir.fill    = GridBagConstraints.NONE;
     gbcDir.weightx = 0.0;
@@ -1205,7 +1212,7 @@ public class FindFilesFrm
     panelDir.add( this.btnDirSelect, gbcDir );
 
     this.cbSubTrees = GUIFactory.createCheckBox(
-				"Unterverzeichnisse durchsuchen",
+				LangUtil.getText( "findfiles.option.search_subdirectories" ),
 				true );
     gbc.fill       = GridBagConstraints.NONE;
     gbc.weightx    = 0.0;
@@ -1217,7 +1224,8 @@ public class FindFilesFrm
     gbc.gridwidth  = 1;
     gbc.gridx      = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Dateinamensmaske:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"findfiles.label.file_name_mask" ) ), gbc );
 
     this.comboFileNameMask = GUIFactory.createComboBox();
     this.comboFileNameMask.setEditable( true );
@@ -1232,7 +1240,8 @@ public class FindFilesFrm
     gbc.gridwidth = 1;
     gbc.gridx     = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Dateigr\u00F6\u00DFe (Bytes):" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"findfiles.label.file_size_bytes" ) ), gbc );
 
     this.comboFileSizeFrom = GUIFactory.createComboBox();
     this.comboFileSizeFrom.setEditable( true );
@@ -1244,7 +1253,8 @@ public class FindFilesFrm
     gbc.fill    = GridBagConstraints.NONE;
     gbc.weightx = 0.0;
     gbc.gridx++;
-    add( GUIFactory.createLabel( "bis:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "findfiles.label.to" ) ), gbc );
 
     this.comboFileSizeTo = GUIFactory.createComboBox();
     this.comboFileSizeTo.setEditable( true );
@@ -1257,14 +1267,16 @@ public class FindFilesFrm
     gbc.weightx = 0.0;
     gbc.gridx   = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Zuletzt ge\u00E4ndert am:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"findfiles.label.last_modified" ) ), gbc );
 
     this.comboLastModified = GUIFactory.createComboBox();
     this.comboLastModified.setEditable( true );
     this.comboLastModified.addItem( "" );
-    this.comboLastModified.addItem( TEXT_TODAY );
-    this.comboLastModified.addItem( TEXT_YESTERDAY );
-    this.comboLastModified.addItem( TEXT_DAY_BEFORE_YESTERDAY );
+    this.comboLastModified.addItem( LangUtil.getText( TEXT_TODAY ) );
+    this.comboLastModified.addItem( LangUtil.getText( TEXT_YESTERDAY ) );
+    this.comboLastModified.addItem(
+		LangUtil.getText( TEXT_DAY_BEFORE_YESTERDAY ) );
 
     gbc.fill    = GridBagConstraints.HORIZONTAL;
     gbc.weightx = 0.5;
@@ -1274,14 +1286,16 @@ public class FindFilesFrm
     gbc.fill    = GridBagConstraints.NONE;
     gbc.weightx = 0.0;
     gbc.gridx++;
-    add( GUIFactory.createLabel( "bis:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "findfiles.label.to" ) ), gbc );
 
     this.comboLastModifiedTill = GUIFactory.createComboBox();
     this.comboLastModifiedTill.setEditable( true );
     this.comboLastModifiedTill.addItem( "" );
-    this.comboLastModifiedTill.addItem( TEXT_TODAY );
-    this.comboLastModifiedTill.addItem( TEXT_YESTERDAY );
-    this.comboLastModifiedTill.addItem( TEXT_DAY_BEFORE_YESTERDAY );
+    this.comboLastModifiedTill.addItem( LangUtil.getText( TEXT_TODAY ) );
+    this.comboLastModifiedTill.addItem( LangUtil.getText( TEXT_YESTERDAY ) );
+    this.comboLastModifiedTill.addItem(
+		LangUtil.getText( TEXT_DAY_BEFORE_YESTERDAY ) );
     gbc.fill    = GridBagConstraints.HORIZONTAL;
     gbc.weightx = 0.5;
     gbc.gridx++;
@@ -1292,7 +1306,8 @@ public class FindFilesFrm
     gbc.gridwidth = 1;
     gbc.gridx     = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Enthaltener Text:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"findfiles.label.contained_text" ) ), gbc );
 
     this.comboContentPattern = GUIFactory.createComboBox();
     this.comboContentPattern.setEditable( true );
@@ -1303,24 +1318,27 @@ public class FindFilesFrm
     add( this.comboContentPattern, gbc );
 
     this.cbCaseSensitive = GUIFactory.createCheckBox(
-				"Gro\u00DF-/Kleinschreibung beachten" );
+				LangUtil.getText(
+					"findfiles.option.case_sensitive" ) );
     gbc.fill       = GridBagConstraints.NONE;
     gbc.weightx    = 0.0;
     gbc.gridy++;
     add( this.cbCaseSensitive, gbc );
 
     this.cbPrintMatchedRows = GUIFactory.createCheckBox(
-				"Gefundene Textstellen ausgeben" );
+				LangUtil.getText( "findfiles.option.output_found_text" ) );
     gbc.insets.top = 0;
     gbc.gridy++;
     add( this.cbPrintMatchedRows, gbc );
 
-    this.btnStartStop = GUIFactory.createButton( "Suche starten" );
+    this.btnStartStop = GUIFactory.createButton(
+		LangUtil.getText( "findfiles.action.start_search" ) );
     gbc.insets.top    = 10;
     gbc.gridy++;
     add( this.btnStartStop, gbc );
 
-    this.labelCurDir = GUIFactory.createLabel( "Aktuell wird gesucht in:" );
+    this.labelCurDir = GUIFactory.createLabel( LangUtil.getText(
+			"findfiles.label.currently_searching" ) );
     gbc.gridwidth    = 1;
     gbc.gridx        = 0;
     gbc.gridy++;
@@ -1338,7 +1356,8 @@ public class FindFilesFrm
     gbc.weightx = 0.0;
     gbc.gridx   = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Suchergebnis:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"findfiles.label.search_result" ) ), gbc );
 
     this.listModel = new DefaultListModel<>();
     this.list      = GUIFactory.createList( this.listModel );
@@ -1354,7 +1373,8 @@ public class FindFilesFrm
     gbc.gridy++;
     add( GUIFactory.createScrollPane( this.list ), gbc );
 
-    this.labelStatus = GUIFactory.createLabel( DEFAULT_STATUS_TEXT );
+    this.labelStatus = GUIFactory.createLabel(
+		LangUtil.getText( DEFAULT_STATUS_TEXT ) );
     gbc.fill         = GridBagConstraints.HORIZONTAL;
     gbc.weighty      = 0.0;
     gbc.gridy++;
@@ -1489,17 +1509,15 @@ public class FindFilesFrm
       try {
 	this.findDir = getSelectedDirPath();
 	if( this.findDir == null ) {
-	  throw new UserInputException( LangUtil.tr(
-		"Sie m\u00FCssen im Feld ''{0}'' ein Verzeichnis"
-			+ " ausw\u00E4hlen\n"
-			+ "welches durchsucht werden soll!",
+	  throw new UserInputException( LangUtil.getText(
+		"findfiles.text.select_directory_field",
 		this.labelDir.getText() ) );
 	}
 
 	this.findFileNamePatterns = parseFileNameMask();
 	if( this.findFileNamePatterns == null ) {
 	  throw new UserInputException(
-		"Sie m\u00FCssen eine Dateinamensmaske eingeben!" );
+		LangUtil.getText( "findfiles.error.enter_file_name" ) );
 	}
 
 	this.findFileSizeFrom = parseFileSize( this.comboFileSizeFrom );
@@ -1582,7 +1600,7 @@ public class FindFilesFrm
 	}
 	this.timerDuration.start();
 	updFieldsEnabled();
-	this.btnStartStop.setText( TEXT_STOP_SEARCH );
+	this.btnStartStop.setText( LangUtil.getText( TEXT_STOP_SEARCH ) );
 	try {
 	  RecentDirsMngr.setRecentDir(
 				this.findDir.toFile(),
@@ -1591,7 +1609,10 @@ public class FindFilesFrm
 	catch( UnsupportedOperationException ex ) {}
       }
       catch( UserInputException ex ) {
-	BaseDlg.showErrorDlg( this, ex.getMessage(), "Eingabefehler" );
+	BaseDlg.showErrorDlg(
+		this,
+		ex.getMessage(),
+		LangUtil.getText( "tools.error.input_error" ) );
       }
     }
   }
@@ -1634,7 +1655,7 @@ public class FindFilesFrm
   {
     if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie das Suchergebnis l\u00F6schen?" ) )
+		LangUtil.getText( "findfiles.msg.want_clear_search" ) ) )
     {
       this.mnuClearResult.setEnabled( false );
       synchronized( this.listModel ) {
@@ -1665,9 +1686,10 @@ public class FindFilesFrm
 			minutes % 60,
 			seconds % 60 );
 	if( hours == 1 ) {
-	  buf.append( LangUtil.tr( "{0} Stunde", clock ) );
+	  buf.append( LangUtil.getText( "findfiles.text.hour", clock ) );
 	} else {
-	  buf.append( LangUtil.tr( "{0} Stunden", clock ) );
+	  buf.append( LangUtil.getText(
+				"findfiles.text.hours", clock ) );
 	}
       } else if( minutes > 0 ) {
 	String clock = String.format(
@@ -1675,15 +1697,18 @@ public class FindFilesFrm
 			minutes,
 			seconds % 60 );
 	if( minutes == 1 ) {
-	  buf.append( LangUtil.tr( "{0} Minute", clock ) );
+	  buf.append( LangUtil.getText(
+				"findfiles.text.minute", clock ) );
 	} else {
-	  buf.append( LangUtil.tr( "{0} Minuten", clock ) );
+	  buf.append( LangUtil.getText(
+				"findfiles.text.minutes", clock ) );
 	}
       } else {
 	if( seconds == 1 ) {
-	  buf.append( LangUtil.tr( "1 Sekunde" ) );
+	  buf.append( LangUtil.getText( "findfiles.text.1_second" ) );
 	} else {
-	  buf.append( LangUtil.tr( "{0} Sekunden", seconds ) );
+	  buf.append( LangUtil.getText(
+				"findfiles.text.seconds", seconds ) );
 	}
       }
     }
@@ -1702,10 +1727,11 @@ public class FindFilesFrm
   private void appendFoundFilesTo( StringBuilder buf )
   {
     if( this.nFilesFound == 1 ) {
-      buf.append( LangUtil.tr( "1 Datei/Verzeichnis gefunden" ) );
+      buf.append( LangUtil.getText(
+			"findfiles.text.1_file_directory" ) );
     } else {
-      buf.append( LangUtil.tr(
-			"{0} Dateien/Verzeichnisse gefunden",
+      buf.append( LangUtil.getText(
+			"findfiles.text.files_directories_found",
 			this.nFilesFound > 0 ? this.nFilesFound : 0 ) );
     }
   }
@@ -1992,13 +2018,13 @@ public class FindFilesFrm
 	    long v = Long.parseLong( text );
 	    if( v < 0 ) {
 	      throw new UserInputException(
-		"Dateigr\u00F6\u00DFe kann nicht kleiner Null sein" );
+		LangUtil.getText( "findfiles.error.file_size_cannot_less" ) );
 	    }
 	    rv = v;
 	  }
 	  catch( NumberFormatException ex ) {
 	    throw new UserInputException(
-		"Ung\u00FCltige Dateigr\u00F6\u00DFe" );
+		LangUtil.getText( "findfiles.error.invalid_file_size" ) );
 	  }
 	  setComboItem( combo, rv != null ? rv.toString() : text );
 	}
@@ -2036,7 +2062,8 @@ public class FindFilesFrm
 		      timeText = item;
 		    } else {
 		      throw new UserInputException(
-			"Ung\u00FCltige Eingabe f\u00FCr Datem/Uhrzeit" );
+			LangUtil.getText(
+				"findfiles.error.invalid_input_date" ) );
 		    }
 		  }
 		}
@@ -2049,15 +2076,18 @@ public class FindFilesFrm
 
 	    // Datum parsen
 	    int lastField = Calendar.DAY_OF_MONTH;
-	    if( dateText.equalsIgnoreCase( TEXT_DAY_BEFORE_YESTERDAY ) ) {
+	    if( dateText.equalsIgnoreCase(
+			LangUtil.getText( TEXT_DAY_BEFORE_YESTERDAY ) ) ) {
 	      rv = curDayWithOffset( -2 );
 	      buf.append( dateText );
 	    }
-	    else if( dateText.equalsIgnoreCase( TEXT_YESTERDAY ) ) {
+	    else if( dateText.equalsIgnoreCase(
+			LangUtil.getText( TEXT_YESTERDAY ) ) ) {
 	      rv = curDayWithOffset( -1 );
 	      buf.append( dateText );
 	    }
-	    else if( dateText.equalsIgnoreCase( TEXT_TODAY ) ) {
+	    else if( dateText.equalsIgnoreCase(
+			LangUtil.getText( TEXT_TODAY ) ) ) {
 	      rv = curDayWithOffset( 0 );
 	      buf.append( dateText );
 	    } else {
@@ -2081,7 +2111,8 @@ public class FindFilesFrm
 		catch( ParseException ex ) {}
 	      }
 	      if( date == null ) {
-		throw new UserInputException( "Ung\u00FCltiges Datum" );
+		throw new UserInputException( LangUtil.getText(
+				"findfiles.error.invalid_date" ) );
 	      }
 	      buf.append( dateFmtMedium.format( date ) );
 	      rv = date.getTime();
@@ -2172,7 +2203,8 @@ public class FindFilesFrm
 		  rv = rv.longValue() + (second * 1000L);
 		}
 	      } else {
-		throw new UserInputException( "Ung\u00FCltige Uhrzeit" );
+		throw new UserInputException( LangUtil.getText(
+				"findfiles.error.invalid_time" ) );
 	      }
 	    }
 	    setComboItem( combo, buf.toString() );
@@ -2222,12 +2254,14 @@ public class FindFilesFrm
   public void searchFinished()
   {
     this.timerDuration.stop();
-    this.btnStartStop.setText( LangUtil.tr( "Suche starten" ) );
+    this.btnStartStop.setText(
+		LangUtil.getText( "findfiles.action.start_search" ) );
     this.fldCurDir.setText( "" );
     if( (this.fileVisitResult == FileVisitResult.CONTINUE)
 	&& this.listModel.isEmpty() )
     {
-      this.listModel.addElement( LangUtil.tr( "Keine Datei gefunden" ) );
+      this.listModel.addElement(
+		LangUtil.getText( "findfiles.text.no_file_found" ) );
     }
     updFieldsEnabled();
     updStatusBar();
@@ -2304,7 +2338,7 @@ public class FindFilesFrm
 
   private void updStatusBar()
   {
-    String text = LangUtil.tr( DEFAULT_STATUS_TEXT );
+    String text = LangUtil.getText( DEFAULT_STATUS_TEXT );
     if( (this.thread != null)
 	|| (this.millisStart > 0)
 	|| (this.nFilesFound > 0) )
@@ -2319,40 +2353,41 @@ public class FindFilesFrm
       if( this.thread != null ) {
 	if( this.millisStart > 0 ) {
 	  if( this.nFilesFound > 0 ) {
-	    buf.append( LangUtil.tr(
-			"Suche l\u00E4uft seit {0}: {1}",
+	    buf.append( LangUtil.getText(
+			"findfiles.text.search_running_duration_found",
 			durTxt,
 			foundTxt ) );
 	  } else {
-	    buf.append( LangUtil.tr(
-			"Suche l\u00E4uft seit {0}...",
+	    buf.append( LangUtil.getText(
+			"findfiles.text.search_running_duration",
 			durTxt ) );
 	  }
 	} else {
 	  if( this.nFilesFound > 0 ) {
-	    buf.append( LangUtil.tr(
-			"Suche l\u00E4uft: {0}",
+	    buf.append( LangUtil.getText(
+			"findfiles.text.search_running_found",
 			foundTxt ) );
 	  } else {
-	    buf.append( LangUtil.tr( "Suche l\u00E4uft..." ) );
+	    buf.append( LangUtil.getText(
+				"findfiles.text.search_running" ) );
 	  }
 	}
       } else {
 	if( this.millisStart > 0 ) {
 	  if( this.findCancelled ) {
-	    buf.append( LangUtil.tr(
-			"Letzte Suche: nach {0} abgebrochen, {1}",
+	    buf.append( LangUtil.getText(
+			"findfiles.text.last_search_aborted",
 			durTxt,
 			foundTxt ) );
 	  } else {
-	    buf.append( LangUtil.tr(
-			"Letzte Suche: {0}, {1}",
+	    buf.append( LangUtil.getText(
+			"findfiles.text.last_search_duration_found",
 			durTxt,
 			foundTxt ) );
 	  }
 	} else {
-	  buf.append( LangUtil.tr(
-			"Letzte Suche: {0}",
+	  buf.append( LangUtil.getText(
+			"findfiles.text.last_search_found",
 			foundTxt ) );
 	}
       }

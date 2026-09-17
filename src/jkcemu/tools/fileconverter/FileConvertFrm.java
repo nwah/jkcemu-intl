@@ -80,7 +80,7 @@ public class FileConvertFrm extends BaseFrm implements
 						DropTargetListener,
 						ListSelectionListener
 {
-  public static final String TITLE = Main.APPNAME + " Dateikonverter";
+  public static final String TITLE = "fileconv.title.jkcemu_file_converter";
 
   private static final int MAX_MEM_FILE_SIZE  = 0x40000;	// 256 KByte
   private static final int MAX_DISK_FILE_SIZE = 0x200000;	// 2 MByte
@@ -88,8 +88,8 @@ public class FileConvertFrm extends BaseFrm implements
 
   private static final String HELP_PAGE = "/help/tools/fileconverter.htm";
 
-  private static final String LABEL_BEG_ADDR   = "Anfangsadresse:";
-  private static final String LABEL_START_ADDR = "Startadresse:";
+  private static final String LABEL_BEG_ADDR   = "common.label.start_address";
+  private static final String LABEL_START_ADDR = "common.label.execution_address";
 
   private static FileConvertFrm instance = null;
 
@@ -169,7 +169,8 @@ public class FileConvertFrm extends BaseFrm implements
   {
     int rv = getAddr( this.docBegAddr );
     if( (rv < 0) && mandatory ) {
-      throw new UserInputException( "Anfangsadresse nicht angegeben" );
+      throw new UserInputException(
+		LangUtil.getText( "fileconv.error.start_address_not_specified" ) );
     }
     return rv;
   }
@@ -179,7 +180,8 @@ public class FileConvertFrm extends BaseFrm implements
   {
     int rv = getAddr( this.docStartAddr );
     if( (rv < 0) && mandatory ) {
-      throw new UserInputException( "Startadresse nicht angegeben" );
+      throw new UserInputException( LangUtil.getText(
+			"fileconv.error.execution_address_not_specified" ) );
     }
     return rv;
   }
@@ -195,7 +197,8 @@ public class FileConvertFrm extends BaseFrm implements
   {
     String s = getFileDesc();
     if( (s == null) && mandatory ) {
-      throw new UserInputException( "Bezeichnung nicht angegeben" );
+      throw new UserInputException( LangUtil.getText(
+			"fileconv.error.name_not_specified" ) );
     }
     return s;
   }
@@ -221,7 +224,8 @@ public class FileConvertFrm extends BaseFrm implements
       }
     }
     if( (rv < 0) && mandatory ) {
-      throw new UserInputException( "Typ nicht angegeben oder ung\u00FCltig" );
+      throw new UserInputException( LangUtil.getText(
+			"fileconv.error.type_not_specified" ) );
     }
     return rv;
   }
@@ -351,14 +355,17 @@ public class FileConvertFrm extends BaseFrm implements
 	  else if( TextUtil.endsWith( fName, DiskUtil.plainDiskFileExt ) ) {
 	    disk = getPlainFloppyDisk( file );
 	    if( disk != null ) {
-	      infoBuf.append( LangUtil.tr( "Einfache Diskettenabbildddtei" ) );
+	      infoBuf.append(
+			LangUtil.getText( "fileconv.text.plain_disk_image" ) );
 	    }
 	    done = true;
 	  }
 	  else if( TextUtil.endsWith( fName, DiskUtil.gzPlainDiskFileExt ) ) {
 	    disk = getPlainFloppyDisk( file );
 	    if( disk != null ) {
-	      infoBuf.append( LangUtil.tr( "Komprimierte einfache Diskettenabbildddtei" ) );
+	      infoBuf.append(
+			LangUtil.getText(
+				"fileconv.text.compressed_plain_disk" ) );
 	    }
 	    done = true;
 	  }
@@ -467,7 +474,7 @@ public class FileConvertFrm extends BaseFrm implements
 		{
 		  infoMsg = "Die Quelldatei ist eine Mutli-KC-TAP-Datei."
 			+ " Au\u00DFer bei\n\'"
-			+ KCAudioMultiFileTarget.INFO_TEXT
+			+ LangUtil.getText( KCAudioMultiFileTarget.INFO_TEXT )
 			+ "\'\nwird bei allen anderen Ausgangsformaten"
 			+ " nur die erste Teildatei verarbeitet.";
 		}
@@ -909,7 +916,8 @@ public class FileConvertFrm extends BaseFrm implements
     }
     file = FileUtil.showFileOpenDlg(
 			this,
-			"Quelldatei ausw\u00E4hlen",
+			LangUtil.getText(
+				"fileconv.action.select_source_file" ),
 			FileUtil.getDirectory( file ),
 			AudioFile.getFileFilter(),
 			FileUtil.getBinaryFileFilter(),
@@ -950,7 +958,8 @@ public class FileConvertFrm extends BaseFrm implements
       }
       outFile = FileUtil.showFileSaveDlg(
 				this,
-				"Konvertierte Datei speichern",
+				LangUtil.getText(
+					"fileconv.title.save_converted_file" ),
 				outFile,
 				target.getFileFilters() );
       if( outFile != null ) {
@@ -1004,7 +1013,7 @@ public class FileConvertFrm extends BaseFrm implements
     this.orgIsBasicPrg       = false;
     this.lastOutDirAsInDir   = false;
     this.lastSavedTargetText = null;
-    setTitle( TITLE );
+    setTitle( LangUtil.getText( TITLE ) );
 
 
     // Fensterinhalt
@@ -1024,7 +1033,8 @@ public class FileConvertFrm extends BaseFrm implements
     JPanel panelSrc = GUIFactory.createPanel( new GridBagLayout() );
     add( panelSrc, gbc );
 
-    panelSrc.setBorder( GUIFactory.createTitledBorder( "Quelldatei" ) );
+    panelSrc.setBorder( GUIFactory.createTitledBorder( LangUtil.getText(
+			"fileconv.section.source_file" ) ) );
 
     GridBagConstraints gbcSrc = new GridBagConstraints(
 					0, 0,
@@ -1035,7 +1045,8 @@ public class FileConvertFrm extends BaseFrm implements
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    panelSrc.add( GUIFactory.createLabel( EmuUtil.LABEL_FILE ), gbcSrc );
+    panelSrc.add( GUIFactory.createLabel(
+		LangUtil.getText( EmuUtil.LABEL_FILE ) ), gbcSrc );
 
     this.fldSrcFile    = new FileNameFld();
     gbcSrc.weightx     = 1.0;
@@ -1047,7 +1058,7 @@ public class FileConvertFrm extends BaseFrm implements
     this.btnSrcSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					"Quelldatei ausw\u00E4hlen" );
+					LangUtil.getText( "fileconv.action.select_source_file" ) );
     gbcSrc.weightx = 0.0;
     gbcSrc.fill    = GridBagConstraints.NONE;
     gbcSrc.gridx++;
@@ -1056,7 +1067,7 @@ public class FileConvertFrm extends BaseFrm implements
     this.btnSrcRemove = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/delete.png",
-					"Quelldatei entfernen" );
+					LangUtil.getText( "fileconv.action.remove_source_file" ) );
     this.btnSrcRemove.setEnabled( false );
     gbcSrc.gridx++;
     panelSrc.add( this.btnSrcRemove, gbcSrc );
@@ -1064,7 +1075,8 @@ public class FileConvertFrm extends BaseFrm implements
     gbcSrc.insets.left = 5;
     gbcSrc.gridx       = 0;
     gbcSrc.gridy++;
-    panelSrc.add( GUIFactory.createLabel( "Typ:" ), gbcSrc );
+    panelSrc.add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.type" ) ), gbcSrc );
 
     this.fldSrcInfo = GUIFactory.createTextField();
     this.fldSrcInfo.setEditable( false );
@@ -1084,7 +1096,8 @@ public class FileConvertFrm extends BaseFrm implements
     gbc.gridy++;
     add( panelOut, gbc );
 
-    panelOut.setBorder( GUIFactory.createTitledBorder( "Ausgabedatei" ) );
+    panelOut.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.section.output_file" ) ) );
 
     GridBagConstraints gbcOut = new GridBagConstraints(
 					0, 0,
@@ -1095,7 +1108,8 @@ public class FileConvertFrm extends BaseFrm implements
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    panelOut.add( GUIFactory.createLabel( "Dateiformat:" ), gbcOut );
+    panelOut.add( GUIFactory.createLabel( LangUtil.getText(
+			"fileconv.label.file_format" ) ), gbcOut );
 
     this.targets    = new Vector<>();
     this.listTarget = GUIFactory.createList();
@@ -1111,7 +1125,8 @@ public class FileConvertFrm extends BaseFrm implements
     gbcOut.weighty    = 0.0;
     gbcOut.insets.top = 15;
     gbcOut.gridy++;
-    panelOut.add( GUIFactory.createLabel( "Kopfdaten:" ), gbcOut );
+    panelOut.add( GUIFactory.createLabel( LangUtil.getText(
+			"fileconv.label.header_data" ) ), gbcOut );
 
     JPanel panelHead = GUIFactory.createPanel( new GridBagLayout() );
     panelHead.setBorder( BorderFactory.createEtchedBorder() );
@@ -1131,7 +1146,8 @@ public class FileConvertFrm extends BaseFrm implements
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.labelFileDesc = GUIFactory.createLabel( "Bezeichnung:" );
+    this.labelFileDesc = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.name" ) );
     panelHead.add( this.labelFileDesc, gbcHead );
 
     this.docFileDesc = new LimitedDocument();
@@ -1143,7 +1159,8 @@ public class FileConvertFrm extends BaseFrm implements
     gbcHead.gridx++;
     panelHead.add( this.fldFileDesc, gbcHead );
 
-    this.labelFileType = GUIFactory.createLabel( "Typ:" );
+    this.labelFileType = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.type" ) );
     gbcHead.fill       = GridBagConstraints.NONE;
     gbcHead.weightx    = 0.0;
     gbcHead.gridwidth  = 1;
@@ -1168,7 +1185,8 @@ public class FileConvertFrm extends BaseFrm implements
       this.comboFileType.setFont( font );
     }
 
-    this.labelBegAddr = GUIFactory.createLabel( LABEL_BEG_ADDR );
+    this.labelBegAddr = GUIFactory.createLabel(
+		LangUtil.getText( LABEL_BEG_ADDR ) );
     gbcHead.fill      = GridBagConstraints.NONE;
     gbcHead.weightx   = 0.0;
     gbcHead.gridwidth = 1;
@@ -1176,20 +1194,22 @@ public class FileConvertFrm extends BaseFrm implements
     gbcHead.gridy++;
     panelHead.add( this.labelBegAddr, gbcHead );
 
-    this.docBegAddr = new HexDocument( 4, LABEL_BEG_ADDR );
+    this.docBegAddr = new HexDocument( 4, LangUtil.getText( LABEL_BEG_ADDR ) );
     this.fldBegAddr = GUIFactory.createTextField( this.docBegAddr, 0 );
     gbcHead.fill    = GridBagConstraints.HORIZONTAL;
     gbcHead.weightx = 0.5;
     gbcHead.gridx++;
     panelHead.add( this.fldBegAddr, gbcHead );
 
-    this.labelStartAddr = GUIFactory.createLabel( LABEL_START_ADDR );
+    this.labelStartAddr = GUIFactory.createLabel(
+		LangUtil.getText( LABEL_START_ADDR ) );
     gbcHead.fill        = GridBagConstraints.NONE;
     gbcHead.weightx     = 0.0;
     gbcHead.gridx++;
     panelHead.add( this.labelStartAddr, gbcHead );
 
-    this.docStartAddr   = new HexDocument( 4, LABEL_START_ADDR );
+    this.docStartAddr   = new HexDocument(
+		4, LangUtil.getText( LABEL_START_ADDR ) );
     this.fldStartAddr   = GUIFactory.createTextField( this.docStartAddr, 0 );
     gbcHead.fill        = GridBagConstraints.HORIZONTAL;
     gbcHead.weightx     = 0.5;
@@ -1197,7 +1217,8 @@ public class FileConvertFrm extends BaseFrm implements
     gbcHead.gridx++;
     panelHead.add( this.fldStartAddr, gbcHead );
 
-    this.labelRemark      = GUIFactory.createLabel( "Kommentar:" );
+    this.labelRemark      = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.comment" ) );
     gbcHead.fill          = GridBagConstraints.NONE;
     gbcHead.weightx       = 0.0;
     gbcHead.insets.left   = 5;
@@ -1241,10 +1262,12 @@ public class FileConvertFrm extends BaseFrm implements
     gbc.gridy++;
     add( panelBtn, gbc );
 
-    this.btnConvert = GUIFactory.createButton( "Konvertieren" );
+    this.btnConvert = GUIFactory.createButton(
+		LangUtil.getText( "common.action.convert" ) );
     panelBtn.add( this.btnConvert );
 
-    this.btnPlay = GUIFactory.createButton( "Wiedergeben" );
+    this.btnPlay = GUIFactory.createButton(
+		LangUtil.getText( "common.action.play" ) );
     panelBtn.add( this.btnPlay );
 
     this.btnHelp = GUIFactory.createButtonHelp();

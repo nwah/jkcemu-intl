@@ -23,9 +23,9 @@ public class AutoInputTableModel extends AbstractTableModel
 
 
   private static String[] colNames = {
-				"Wartezeit",
-				"Eingabetext",
-				"Bermerkung" };
+				"settings.column.wait_time",
+				"settings.column.input_text",
+				"settings.column.comment" };
 
 
   private AutoInputCharSet               charSet;
@@ -126,7 +126,7 @@ public class AutoInputTableModel extends AbstractTableModel
   public String getColumnName( int col )
   {
     return (col >= 0) && (col < colNames.length) ? 
-		LangUtil.tr( colNames[ col ] ) : "";
+		LangUtil.getText( colNames[ col ] ) : "";
   }
 
 

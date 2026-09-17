@@ -30,6 +30,7 @@ import jkcemu.file.DirSelectDlg;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class USBInterfaceFld
@@ -70,7 +71,7 @@ public class USBInterfaceFld
 
     add(
 	GUIFactory.createLabel(
-		"Verzeichnis des emulierten USB-Speichersticks:" ),
+		LangUtil.getText( "usb.label.directory_emulated_usb" ) ),
 	gbc );
 
     this.dirFld   = new FileNameFld();
@@ -83,7 +84,8 @@ public class USBInterfaceFld
     this.btnDirSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT_DIR );
+					LangUtil.getText(
+						EmuUtil.TEXT_SELECT_DIR ) );
     gbc.fill        = GridBagConstraints.NONE;
     gbc.weightx     = 0.0;
     gbc.insets.left = 0;
@@ -93,12 +95,12 @@ public class USBInterfaceFld
     this.btnDirRemove = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/delete.png",
-					"Verzeichnis entfernen" );
+					LangUtil.getText( "usb.action.remove_directory" ) );
     gbc.gridx++;
     add( this.btnDirRemove, gbc );
 
     this.cbFileNameMapper = GUIFactory.createCheckBox(
-		"Lange Dateinamen auf 8.3-Format verk\u00FCrzen" );
+		LangUtil.getText( "usb.option.shorten_long_file" ) );
     gbc.insets.left = 5;
     gbc.gridwidth   = GridBagConstraints.REMAINDER;
     gbc.gridx       = 0;
@@ -106,19 +108,19 @@ public class USBInterfaceFld
     add( this.cbFileNameMapper, gbc );
 
     this.cbReadOnly = GUIFactory.createCheckBox(
-				"Schreibschutz (Nur-Lese-Modus)",
+				LangUtil.getText( "common.option.write_protection_read" ),
 				true );
     gbc.insets.top = 0;
     gbc.gridy++;
     add( this.cbReadOnly, gbc );
 
     this.cbForceLowerCase = GUIFactory.createCheckBox(
-					"Dateinamen klein schreiben" );
+					LangUtil.getText( "common.option.write_file_names" ) );
     gbc.gridy++;
     add( this.cbForceLowerCase, gbc );
 
     this.cbForceCurTimestamp = GUIFactory.createCheckBox(
-			"Immer aktueller Zeitstempel bei Schreibzugriffen" );
+			LangUtil.getText( "usb.option.always_use_current" ) );
     gbc.insets.bottom = 5;
     gbc.gridy++;
     add( this.cbForceCurTimestamp, gbc );

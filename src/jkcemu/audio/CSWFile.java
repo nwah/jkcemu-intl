@@ -62,8 +62,7 @@ public class CSWFile
   {
     if( fileFilter == null ) {
       fileFilter = new FileNameExtensionFilter(
-			LangUtil.tr(
-				"CSW-Dateien ({0})",
+			LangUtil.getText( "audio.text.csw_files",
 				getFileExtensionText() ),
 			fileExts );
     }
@@ -125,20 +124,16 @@ public class CSWFile
     fName        = fName.toLowerCase();
     boolean csw1 = fName.endsWith( ".csw1" );
     if( !csw1 && !fName.endsWith( ".csw" ) ) {
-      throw new IOException( "Dateiformat nicht unterst\u00FCtzt!"
-		+ "\n\nUnterst\u00FCtzte Dateiendungen sind"
-		+ " *.csw und *.csw1" );
+      throw new IOException(
+		LangUtil.getText( "audio.error.file_format_not_supported_extensions_csw" ) );
     }
     int frameRate = pcm.getFrameRate();
     if( csw1 && (frameRate > 0xFFFF) ) {
-      throw new IOException( "Die Abtastrate ist f\u00FCr eine"
-		+ " CSW1-Datei zu gro\u00DF.\n"
-		+ "Speichern Sie bitte die Datei mit der Endung *.csw,\n"
-		+ "damit sie im CSW2-Format erzeugt wird." );
+      throw new IOException(
+		LangUtil.getText( "audio.error.sample_rate_high" ) );
     }
     if( (pcm.getSampleSizeInBits() > 1) || (pcm.getChannels() > 1) ) {
-      throw new IOException( "In einer CSW-Datei k\u00F6nnen nur"
-			+ " 1-Bit-Mono-Audiodaten gespeichert werden." );
+      throw new IOException( LangUtil.getText( "audio.error.only_1_bit_mono_audio_data_stored_csw" ) );
     }
     byte[] frameBuf = new byte[ 1 ];
     if( pcm.read( frameBuf, 0, 1 ) != frameBuf.length ) {
@@ -247,7 +242,8 @@ public class CSWFile
       headerLen   = 0x34 + ((int) buf[ pos + 0x23 ] & 0xFF);
     }
     if( (sampleRate < 1) || (sampleRate > 192000) ) {
-      throw new IOException( "Ung\u00FCltige Abtastrate" );
+      throw new IOException(
+		LangUtil.getText( "audio.error.invalid_sample_rate" ) );
     }
     if( compression != 1 ) {
       StringBuilder strBuf = new StringBuilder( 256 );

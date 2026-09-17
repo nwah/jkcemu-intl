@@ -32,6 +32,7 @@ import java.awt.Window;
 import java.io.File;
 import java.io.IOException;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class DesktopHelper
@@ -162,16 +163,14 @@ public class DesktopHelper
 
   protected static void throwMoveToTrashNotSupported() throws IOException
   {
-    throw new IOException( "Das Verschieben von Dateien in den Papierkorb"
-		+ "wird von der verwendeten\n"
-		+ "Java-Laufzeitumgebung nicht unterst\u00FCtzt." );
+    throw new IOException(
+		LangUtil.getText( "base.error.moving_files_trash" ) );
   }
 
 
   protected static void throwOpenNotSupported() throws IOException
   {
-    throw new IOException( "Das \u00D6ffnen von Dateien in einem"
-		+ "externen Programm wird von der verwendeten\n"
-		+ "Java-Laufzeitumgebung nicht unterst\u00FCtzt." );
+    throw new IOException( LangUtil.getText(
+			"base.error.opening_files_external" ) );
   }
 }

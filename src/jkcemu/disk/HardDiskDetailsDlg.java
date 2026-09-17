@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -94,7 +95,7 @@ public class HardDiskDetailsDlg extends BaseDlg
 
   private HardDiskDetailsDlg( Window owner, Set<String> producers )
   {
-    super( owner, "JKCEMU Festplattendetails" );
+    super( owner, LangUtil.getText( "disk.title.jkcemu_hard_disk_details" ) );
     this.approvedData = null;
 
 
@@ -110,16 +111,21 @@ public class HardDiskDetailsDlg extends BaseDlg
 						0, 0 );
 
     // Eingabefelder
-    add( GUIFactory.createLabel( "Hersteller:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.manufacturer" ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Modell:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.model" ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Zylinder:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.cylinders" ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( "K\u00F6pfe:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.heads" ) ), gbc );
     gbc.insets.bottom = 5;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Sektoren pro Spur:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.sectors_per_track" ) ), gbc );
 
     gbc.fill          = GridBagConstraints.HORIZONTAL;
     gbc.weightx       = 1.0;
@@ -230,12 +236,7 @@ public class HardDiskDetailsDlg extends BaseDlg
       } else {
 	BaseDlg.showErrorDlg(
 		this,
-		"Mindestens eins der folgende Felder"
-			+ " ist nicht ausgef\u00FCllt:\n"
-			+ "  Modell\n"
-			+ "  Zylinder\n"
-			+ "  K\u00F6pfe\n"
-			+ "  Sektoren pro Spur" );
+		LangUtil.getText( "disk.error.least_one_following" ) );
       }
     }
     catch( Exception ex ) {

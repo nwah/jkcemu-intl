@@ -11,6 +11,7 @@ package jkcemu.programming.basic.target;
 
 import jkcemu.base.EmuSys;
 import jkcemu.emusys.Z9001;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.basic.AbstractTarget;
 import jkcemu.programming.basic.AsmCodeBuf;
 import jkcemu.programming.basic.BasicCompiler;
@@ -206,9 +207,8 @@ public class Z9001Target extends AbstractTarget
     buf.appendStringLiteral( appName );
     buf.append( "\tDB\t00H\n" );
     if( appName.trim().isEmpty() ) {
-      compiler.putWarning(
-		"Programm kann auf dem Zielsystem nicht aufgerufen werden,"
-				+ " da der Programmname leer ist." );
+      compiler.putWarning( LangUtil.getText(
+			"basic.msg.program_cannot_called" ) );
     }
   }
 

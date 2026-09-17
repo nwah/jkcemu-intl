@@ -33,6 +33,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.disk.GIDESettingsFld;
 import jkcemu.emusys.Z1013;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -43,8 +44,8 @@ import jkcemu.settings.SettingsFrm;
 
 public class Z1013SettingsFld extends AbstractSettingsFld
 {
-  private static final String LABEL_ALT_FONT = "Alternativer Zeichensatz:";
-  private static final String LABEL_EXT_ROM  = "Inhalt der ROM-Erweiterung:";
+  private static final String LABEL_ALT_FONT = "emusys.text.alternative_character";
+  private static final String LABEL_EXT_ROM  = "z1013.label.content_rom_expansion";
 
   private JTabbedPane            tabbedPane;
   private JRadioButton           rbZ1013_01;
@@ -111,7 +112,8 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 
     // Tab Modell
     this.tabModel = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Modell", this.tabModel );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "common.section.model" ), this.tabModel );
 
     GridBagConstraints gbcModel = new GridBagConstraints(
 						0, 0,
@@ -125,25 +127,28 @@ public class Z1013SettingsFld extends AbstractSettingsFld
     ButtonGroup grpModel = new ButtonGroup();
 
     this.rbZ1013_01 = GUIFactory.createRadioButton(
-				"Z1013.01 (1 MHz, 16 KByte RAM)" );
+				LangUtil.getText(
+					"z1013.option.z1013_01_1" ) );
     grpModel.add( this.rbZ1013_01 );
     this.tabModel.add( this.rbZ1013_01, gbcModel );
 
     this.rbZ1013_12 = GUIFactory.createRadioButton(
-				"Z1013.12 (2 MHz, 1 KByte RAM)" );
+				LangUtil.getText(
+					"z1013.option.z1013_12_2" ) );
     grpModel.add( this.rbZ1013_12 );
     gbcModel.insets.top = 0;
     gbcModel.gridy++;
     this.tabModel.add( this.rbZ1013_12, gbcModel );
 
     this.rbZ1013_16 = GUIFactory.createRadioButton(
-				"Z1013.16 (2 MHz, 16 KByte RAM)" );
+				LangUtil.getText(
+					"z1013.option.z1013_16_2" ) );
     grpModel.add( this.rbZ1013_16 );
     gbcModel.gridy++;
     this.tabModel.add( this.rbZ1013_16, gbcModel );
 
     this.rbZ1013_64 = GUIFactory.createRadioButton(
-				"Z1013.64 (2 MHz, 64 KByte RAM)",
+				LangUtil.getText( "z1013.option.z1013_64_2" ),
 				true );
     grpModel.add( this.rbZ1013_64 );
     gbcModel.gridy++;
@@ -152,7 +157,9 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 
     // Tab Monitorprogramm / Tastatur
     this.tabMon = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Monitorprogramm / Tastatur", this.tabMon );
+    this.tabbedPane.addTab( LangUtil.getText(
+			"z1013.section.monitor_program_keyboard" ),
+		this.tabMon );
 
     GridBagConstraints gbcMon = new GridBagConstraints(
 						0, 0,
@@ -166,44 +173,44 @@ public class Z1013SettingsFld extends AbstractSettingsFld
     ButtonGroup grpMon = new ButtonGroup();
 
     this.rbMon202 = GUIFactory.createRadioButton(
-		"Monitorprogramm 2.02 / Folienflachtastatur",
+		LangUtil.getText( "z1013.option.monitor_program_2_02" ),
 		true );
     grpMon.add( this.rbMon202 );
     this.tabMon.add( this.rbMon202, gbcMon );
 
-    this.rbMonA2 = GUIFactory.createRadioButton(
-		"Monitorprogramm A.2 / Alphatastatur" );
+    this.rbMonA2 = GUIFactory.createRadioButton( LangUtil.getText(
+			"z1013.option.monitor_program_2_alphanumeric" ) );
     grpMon.add( this.rbMonA2 );
     gbcMon.insets.top = 0;
     gbcMon.gridy++;
     this.tabMon.add( this.rbMonA2, gbcMon );
 
-    this.rbMonRB_K7659 = GUIFactory.createRadioButton(
-		"Brosig-Monitorprogramm 2.028 / Tastatur K7659" );
+    this.rbMonRB_K7659 = GUIFactory.createRadioButton( LangUtil.getText(
+			"z1013.option.brosig_monitor_program_2_028_keyboard_k7659" ) );
     grpMon.add( this.rbMonRB_K7659 );
     gbcMon.gridy++;
     this.tabMon.add( this.rbMonRB_K7659, gbcMon );
 
-    this.rbMonRB_S6009 = GUIFactory.createRadioButton(
-		"Brosig-Monitorprogramm 2.028 / Tastatur S6009" );
+    this.rbMonRB_S6009 = GUIFactory.createRadioButton( LangUtil.getText(
+			"z1013.option.brosig_monitor_program_2_028_keyboard_s6009" ) );
     grpMon.add( this.rbMonRB_S6009 );
     gbcMon.gridy++;
     this.tabMon.add( this.rbMonRB_S6009, gbcMon );
 
-    this.rbMonINCOM_K7669 = GUIFactory.createRadioButton(
-		"INCOM-Monitorprogramm 2.2 / Tastatur K7669" );
+    this.rbMonINCOM_K7669 = GUIFactory.createRadioButton( LangUtil.getText(
+			"z1013.option.incom_monitor_program" ) );
     grpMon.add( this.rbMonINCOM_K7669 );
     gbcMon.gridy++;
     this.tabMon.add( this.rbMonINCOM_K7669, gbcMon );
 
-    this.rbMonJM_1992 = GUIFactory.createRadioButton(
-		"M\u00FCller-Monitorprogramm 1992 / Folienflachtastatur" );
+    this.rbMonJM_1992 = GUIFactory.createRadioButton( LangUtil.getText(
+			"z1013.option.mueller_monitor_program" ) );
     grpMon.add( this.rbMonJM_1992 );
     gbcMon.gridy++;
     this.tabMon.add( this.rbMonJM_1992, gbcMon );
 
     this.rbBL4_K7659 = GUIFactory.createRadioButton(
-		"Boot Lader 4 / Tastatur K7659 (Boot-Diskette einlegen!)" );
+		LangUtil.getText( "z1013.option.boot_loader_4" ) );
     grpMon.add( this.rbBL4_K7659 );
     gbcMon.insets.bottom = 5;
     gbcMon.gridy++;
@@ -212,7 +219,8 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 
     // Tab Anwendertor
     this.tabUserPort = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Anwendertor", this.tabUserPort );
+    this.tabbedPane.addTab( LangUtil.getText( "z1013.section.user_port" ),
+		this.tabUserPort );
 
     GridBagConstraints gbcUserPort = new GridBagConstraints(
 						0, 0,
@@ -224,14 +232,14 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 						0, 0 );
 
     this.tabUserPort.add(
-	GUIFactory.createLabel(
-		"Am Anwendertor (User Port) emulierte Hardware:" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"z1013.label.hardware_emulated_user" ) ),
 	gbcUserPort );
 
     ButtonGroup grpPort = new ButtonGroup();
 
-    this.rbPortNone = GUIFactory.createRadioButton(
-		"Keine angeschlossene Hardware emulieren",
+    this.rbPortNone = GUIFactory.createRadioButton( LangUtil.getText(
+			"z1013.option.not_emulate_any" ),
 		true );
     grpPort.add( this.rbPortNone );
     gbcUserPort.insets.left   = 50;
@@ -240,33 +248,34 @@ public class Z1013SettingsFld extends AbstractSettingsFld
     gbcUserPort.gridy++;
     this.tabUserPort.add( this.rbPortNone, gbcUserPort );
 
-    this.rbPortJoyJuTe_6_87 = GUIFactory.createRadioButton(
-		"1 Spielhebel nach Ju+Te 6/1987" );
+    this.rbPortJoyJuTe_6_87 = GUIFactory.createRadioButton( LangUtil.getText(
+			"z1013.option.1_joystick_according" ) );
     grpPort.add( this.rbPortJoyJuTe_6_87 );
     gbcUserPort.gridy++;
     this.tabUserPort.add( this.rbPortJoyJuTe_6_87, gbcUserPort );
 
     this.rbPortJoyPractic_4_87 = GUIFactory.createRadioButton(
-		"2 Spielhebel nach practic 4/1987" );
+		LangUtil.getText(
+			"z1013.option.2_joysticks_according_practic_4" ) );
     grpPort.add( this.rbPortJoyPractic_4_87 );
     gbcUserPort.gridy++;
     this.tabUserPort.add( this.rbPortJoyPractic_4_87, gbcUserPort );
 
     this.rbPortJoyPractic_1_88 = GUIFactory.createRadioButton(
-		"2 Spielhebel nach practic 1/1988" );
+		LangUtil.getText(
+			"z1013.option.2_joysticks_according_practic_1" ) );
     grpPort.add( this.rbPortJoyPractic_1_88 );
     gbcUserPort.gridy++;
     this.tabUserPort.add( this.rbPortJoyPractic_1_88, gbcUserPort );
 
     this.rbPortCentr7Practic_2_89 = GUIFactory.createRadioButton(
-		"Drucker an 7-Bit-Centronics-Anschluss"
-					+ " nach practic 2/1989" );
+		LangUtil.getText( "z1013.option.printer_7_bit" ) );
     grpPort.add( this.rbPortCentr7Practic_2_89 );
     gbcUserPort.gridy++;
     this.tabUserPort.add( this.rbPortCentr7Practic_2_89, gbcUserPort );
 
     this.rbPortCentr8FA_10_90 = GUIFactory.createRadioButton(
-		"Drucker an 8-Bit-Centronics-Anschluss nach FA 10/1990" );
+		LangUtil.getText( "z1013.option.printer_8_bit" ) );
     grpPort.add( this.rbPortCentr8FA_10_90 );
     gbcUserPort.insets.bottom = 5;
     gbcUserPort.gridy++;
@@ -275,23 +284,27 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 
     // Tab GIDE
     this.tabGIDE = new GIDESettingsFld( settingsFrm, propPrefix );
-    this.tabbedPane.addTab( "GIDE", this.tabGIDE );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.gide" ), this.tabGIDE );
 
 
     // Tab RAM-Floppies
     this.tabRF = new RAMFloppiesSettingsFld(
 	settingsFrm,
 	propPrefix,
-	"RAM-Floppy nach MP 3/1988 (256 KByte) an E/A-Adressen 98h-9Fh",
+	LangUtil.getText( "z1013.text.ram_floppy_according_mp_3_1988_256_kbyte_i_o_98h" ),
 	RAMFloppy.RFType.MP_3_1988,
-	"RAM-Floppy nach MP 3/1988 (256 KByte) an E/A-Adressen 58h-5Fh",
+	LangUtil.getText( "z1013.text.ram_floppy_according_mp_3_1988_256_kbyte_i_o_58h" ),
 	RAMFloppy.RFType.MP_3_1988 );
-    this.tabbedPane.addTab( "RAM-Floppies", this.tabRF );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.ram_floppies" ),
+		this.tabRF );
 
 
     // Tab ROM-Erweiterungen
     this.tabExtRom = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "ROM-Erweiterungen", this.tabExtRom );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.rom_expansions" ),
+		this.tabExtRom );
 
     GridBagConstraints gbcExtRom = new GridBagConstraints(
 						0, 0,
@@ -303,22 +316,24 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 						0, 0 );
 
     this.cbExtRomBasic = GUIFactory.createCheckBox(
-				"KC-BASIC-Modul (C000h-EBFFh)" );
+				LangUtil.getText(
+					"z1013.option.kc_basic_module" ) );
     this.tabExtRom.add( this.cbExtRomBasic, gbcExtRom );
 
     this.cbExtRomMega = GUIFactory.createCheckBox(
-				"Mega-ROM-Modul (256 x C000h-E7FFh)" );
+				LangUtil.getText(
+					"emusys.option.mega_rom_module" ) );
     gbcExtRom.insets.top = 0;
     gbcExtRom.gridy++;
     this.tabExtRom.add( this.cbExtRomMega, gbcExtRom );
 
     this.cbExtRom8000 = GUIFactory.createCheckBox(
-		"32K-ROM entsprechend Z1013-128 (8000h-FFFFh)" );
+		LangUtil.getText( "z1013.option.32k_rom_according" ) );
     gbcExtRom.gridy++;
     this.tabExtRom.add( this.cbExtRom8000, gbcExtRom );
 
     this.cbExtRom8000onReset = GUIFactory.createCheckBox(
-					"Nach RESET eingeblendet" );
+					LangUtil.getText( "z1013.option.shown_after_reset" ) );
     gbcExtRom.insets.left = 50;
     gbcExtRom.gridy++;
     this.tabExtRom.add( this.cbExtRom8000onReset, gbcExtRom );
@@ -326,7 +341,7 @@ public class Z1013SettingsFld extends AbstractSettingsFld
     this.fldExtRom = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + Z1013.PROP_EXTROM_PREFIX,
-		LABEL_EXT_ROM );
+		LangUtil.getText( LABEL_EXT_ROM ) );
     gbcExtRom.insets.top    = 10;
     gbcExtRom.insets.left   = 5;
     gbcExtRom.insets.bottom = 5;
@@ -338,7 +353,9 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 
     // Tab Grafik-Erweiterungen
     this.tabExtGraph = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Grafik-Erweiterungen", this.tabExtGraph );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "z1013.section.graphics_expansions" ),
+		this.tabExtGraph );
 
     GridBagConstraints gbcExtGraph = new GridBagConstraints(
 					0, 0,
@@ -350,23 +367,24 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.tabExtGraph.add(
-	GUIFactory.createLabel( "Prim\u00E4re Bildschirmausgabe:" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"z1013.label.primary_screen_output" ) ),
 	gbcExtGraph );
 
-    this.cbGraphicKRT = GUIFactory.createCheckBox(
-		"Vollgrafik nach KRT 11 und FA 7/1991" );
+    this.cbGraphicKRT = GUIFactory.createCheckBox( LangUtil.getText(
+			"z1013.option.full_graphics_according" ) );
     gbcExtGraph.insets.top  = 0;
     gbcExtGraph.insets.left = 50;
     gbcExtGraph.gridy++;
     this.tabExtGraph.add( this.cbGraphicKRT, gbcExtGraph );
 
     this.cbPetersCard = GUIFactory.createCheckBox(
-		"Peters-Platine (32x32 und 64x16 Zeichen)" );
+		LangUtil.getText( "z1013.option.peters_board_32x32" ) );
     gbcExtGraph.gridy++;
     this.tabExtGraph.add( this.cbPetersCard, gbcExtGraph );
 
     this.cbFixedScreenSize = GUIFactory.createCheckBox(
-	"Gleiche Fenstergr\u00F6\u00DFe bei 32x32 und 64x16 Zeichen" );
+	LangUtil.getText( "z1013.option.same_window_size" ) );
     gbcExtGraph.insets.left = 100;
     gbcExtGraph.gridy++;
     this.tabExtGraph.add( this.cbFixedScreenSize, gbcExtGraph );
@@ -375,31 +393,31 @@ public class Z1013SettingsFld extends AbstractSettingsFld
     gbcExtGraph.insets.left = 5;
     gbcExtGraph.gridy++;
     this.tabExtGraph.add(
-	GUIFactory.createLabel( "Zus\u00E4tzliche Bildschirmausgabe"
-				+ " (zweite Anzeigeeinheit):" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"z1013.label.additional_screen_output" ) ),
 	gbcExtGraph );
 
     this.cbGraphicZX = GUIFactory.createCheckBox(
-	"ZX-Spectrum-kompatible S/W-Vollgrafik nach practic 2/1988" );
+	LangUtil.getText( "z1013.option.zx_spectrum_compatible" ) );
     gbcExtGraph.insets.top  = 0;
     gbcExtGraph.insets.left = 50;
     gbcExtGraph.gridy++;
     this.tabExtGraph.add( this.cbGraphicZX, gbcExtGraph );
 
     this.cbGraphicCCJ = GUIFactory.createCheckBox(
-		"Grafikkarte des CC Jena (80x25 Zeichen)" );
+		LangUtil.getText( "z1013.option.graphics_card_cc" ) );
     gbcExtGraph.gridy++;
     this.tabExtGraph.add( this.cbGraphicCCJ, gbcExtGraph );
 
-    this.cbGraphicPoppe = GUIFactory.createCheckBox(
-		"Farbgrafikkarte (32x32 und 64x32 Zeichen)" );
+    this.cbGraphicPoppe = GUIFactory.createCheckBox( LangUtil.getText(
+			"z1013.option.color_graphics_card" ) );
     gbcExtGraph.gridy++;
     this.tabExtGraph.add( this.cbGraphicPoppe, gbcExtGraph );
 
     this.fldAltFont2 = new ROMFileSettingsFld(
 			settingsFrm,
 			this.propPrefix + Z1013.PROP_GRA2_FONT_PREFIX,
-			LABEL_ALT_FONT );
+			LangUtil.getText( LABEL_ALT_FONT ) );
     gbcExtGraph.insets.top    = 10;
     gbcExtGraph.insets.bottom = 5;
     gbcExtGraph.weightx       = 1.0;
@@ -409,7 +427,9 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 
     // Tab Sonstige Erweiterungen
     this.tabExtEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstige Erweiterungen", this.tabExtEtc );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "z1013.section.other_expansions" ),
+		this.tabExtEtc );
 
     GridBagConstraints gbcExtEtc = new GridBagConstraints(
 					0, 0,
@@ -420,32 +440,37 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.cbFloppyDisk = GUIFactory.createCheckBox( "Floppy-Disk-Modul" );
+    this.cbFloppyDisk = GUIFactory.createCheckBox(
+		LangUtil.getText( "emusys.option.floppy_disk_module" ) );
     this.tabExtEtc.add( this.cbFloppyDisk, gbcExtEtc );
 
     this.cbKCNet = GUIFactory.createCheckBox(
-				"KCNet-kompatible Netzwerkkarte" );
+				LangUtil.getText( "emusys.option.kcnet_compatible_network" ) );
     gbcExtEtc.insets.top = 0;
     gbcExtEtc.gridy++;
     this.tabExtEtc.add( this.cbKCNet, gbcExtEtc );
 
-    this.cbK1520Sound = GUIFactory.createCheckBox( "K1520-Sound-Karte" );
+    this.cbK1520Sound = GUIFactory.createCheckBox(
+		LangUtil.getText( "common.option.k1520_sound_card" ) );
     gbcExtEtc.gridy++;
     this.tabExtEtc.add( this.cbK1520Sound, gbcExtEtc );
 
     this.cbVDIP = GUIFactory.createCheckBox(
-				"USB-Anschluss (Vinculum VDIP Modul)" );
+				LangUtil.getText(
+					"emusys.option.usb_port_vinculum" ) );
     gbcExtEtc.gridy++;
     this.tabExtEtc.add( this.cbVDIP, gbcExtEtc );
 
-    this.cbRTC = GUIFactory.createCheckBox( "Echtzeituhr (RTC)" );
+    this.cbRTC = GUIFactory.createCheckBox( LangUtil.getText(
+			"z1013.option.real_time_clock" ) );
     gbcExtEtc.gridy++;
     this.tabExtEtc.add( this.cbRTC, gbcExtEtc );
 
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 						0, 0,
@@ -457,17 +482,17 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 						0, 0 );
 
     this.cbCatchPrintCalls = GUIFactory.createCheckBox(
-	"Sprungverteileraufrufe f\u00FCr Druckerausgaben abfangen" );
+	LangUtil.getText( "z1013.option.intercept_jump_table_calls_printer" ) );
     this.tabEtc.add( this.cbCatchPrintCalls, gbcEtc );
 
     this.cbCatchJoyCalls = GUIFactory.createCheckBox(
-	"Sprungverteileraufrufe f\u00FCr Joystick-Abfragen abfangen" );
+	LangUtil.getText( "z1013.option.intercept_jump_table_calls_joystick" ) );
     gbcEtc.insets.top = 0;
     gbcEtc.gridy++;
     this.tabEtc.add( this.cbCatchJoyCalls, gbcEtc );
 
     this.cbPasteFast = GUIFactory.createCheckBox(
-	"Einf\u00FCgen von Text durch Abfangen des Systemaufrufs" );
+	LangUtil.getText( "emusys.option.paste_text_intercepting" ) );
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridy++;
     this.tabEtc.add( this.cbPasteFast, gbcEtc );
@@ -482,7 +507,7 @@ public class Z1013SettingsFld extends AbstractSettingsFld
     this.fldAltOS = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + Z1013.PROP_OS_PREFIX,
-                "Alternatives Monitorprogramm (F000h-FFFFh):" );
+                LangUtil.getText( "z1013.text.alternative_monitor" ) );
     gbcEtc.insets.top    = 5;
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridy++;
@@ -491,7 +516,7 @@ public class Z1013SettingsFld extends AbstractSettingsFld
     this.fldAltFont = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + Z1013.PROP_FONT_PREFIX,
-		LABEL_ALT_FONT );
+		LangUtil.getText( LABEL_ALT_FONT ) );
     gbcEtc.gridy++;
     this.tabEtc.add( this.fldAltFont, gbcEtc );
 
@@ -502,7 +527,8 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 			propPrefix,
 			Z1013.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 			true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -512,7 +538,8 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 			Z1013.getAutoInputCharSet(),
 			Z1013.DEFAULT_SWAP_KEY_CHAR_CASE,
 			Z1013.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     // Aktivierung der Schaltflaechen
@@ -675,13 +702,11 @@ public class Z1013SettingsFld extends AbstractSettingsFld
       if( selected && (this.fldExtRom.getFile() == null) ) {
 	if( this.cbExtRomMega.isSelected() ) {
 	  throw new UserInputException(
-		"Das Mega-ROM-Modul hat keinen Inhalt.\n"
-			+ "Bitte w\u00E4hlen Sie eine ROM-Datei aus!" );
+		LangUtil.getText( "z1013.error.mega_rom_module" ) );
 	}
 	if( this.cbExtRom8000.isSelected() ) {
 	  throw new UserInputException(
-		"Der 32K-ROM entsprechend Z1013-128 hat keinen Inhalt.\n"
-			+ "Bitte w\u00E4hlen Sie eine ROM-Datei aus!" );
+		LangUtil.getText( "z1013.error.32k_rom_according" ) );
 	}
       }
 
@@ -1127,7 +1152,7 @@ public class Z1013SettingsFld extends AbstractSettingsFld
 
   private void updAltFont2FieldsEnabled()
   {
-    String text = LABEL_ALT_FONT;
+    String text = LangUtil.getText( LABEL_ALT_FONT );
     if( this.cbGraphicPoppe.isSelected() ) {
       text = "Alternativer Zeichensatz im Modus 64x32 Zeichen:";
     } else if( this.cbGraphicCCJ.isSelected() ) {
@@ -1157,7 +1182,7 @@ public class Z1013SettingsFld extends AbstractSettingsFld
       this.fldExtRom.setLabelText( text );
       this.fldExtRom.setEnabled( true );
     } else {
-      this.fldExtRom.setLabelText( LABEL_EXT_ROM );
+      this.fldExtRom.setLabelText( LangUtil.getText( LABEL_EXT_ROM ) );
       this.fldExtRom.setEnabled( false );
     }
   }

@@ -22,6 +22,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.LLC1;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AutoLoadSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AbstractSettingsFld;
@@ -52,7 +53,8 @@ public class LLC1SettingsFld extends AbstractSettingsFld
 
     // Tab ROM
     this.tabRom = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "ROM", this.tabRom );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.rom" ), this.tabRom );
 
     GridBagConstraints gbcRom = new GridBagConstraints(
 					0, 0,
@@ -66,14 +68,14 @@ public class LLC1SettingsFld extends AbstractSettingsFld
     this.fldAltRom = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + LLC1.PROP_ROM_PREFIX,
-		"Alternativer ROM-Inhalt (0000h-13FFh):" );
+		LangUtil.getText( "llc1.text.alternative_rom_content" ) );
     gbcRom.gridy++;
     this.tabRom.add( this.fldAltRom, gbcRom );
 
     this.fldAltFont = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + LLC1.PROP_FONT_PREFIX,
-		"Alternativer Zeichensatz:" );
+		LangUtil.getText( "emusys.text.alternative_character" ) );
     gbcRom.gridy++;
     this.tabRom.add( this.fldAltFont, gbcRom );
 
@@ -84,7 +86,8 @@ public class LLC1SettingsFld extends AbstractSettingsFld
 				propPrefix,
 				LLC1.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 				true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -94,7 +97,8 @@ public class LLC1SettingsFld extends AbstractSettingsFld
 				LLC1.getAutoInputCharSet(),
 				LLC1.DEFAULT_SWAP_KEY_CHAR_CASE,
 				LLC1.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
   }
 
 

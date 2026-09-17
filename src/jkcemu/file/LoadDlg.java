@@ -149,12 +149,7 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     if( audioFile || tapeFile ) {
       if( showSuppressableConfirmDlg(
 		owner,
-		"Die Datei kann nur \u00FCber eine Audiofunktion"
-			+ " geladen werden.\n"
-			+ "Dazu m\u00FCssen Sie im emulierten System"
-			+ " das Laden von Kassette\n"
-			+ "und im Fenster Audio/Kassette das Abspielden"
-			+ " der Datei starten." ) )
+		LangUtil.getText( "file.msg.file_only_loaded" ) ) )
       {
 	AudioFrm.open( screenFrm ).openFile( file, fileBytes, 0 );
       }
@@ -331,7 +326,7 @@ public class LoadDlg extends BaseDlg implements DocumentListener
 		Integer    begAddr,
 		boolean    startEnabled )
   {
-    super( owner, "Datei laden" );
+    super( owner, LangUtil.getText( "common.title.load_file" ) );
     if( (fileName == null) && (file != null) ) {
       fileName = file.getName();
     }
@@ -361,7 +356,7 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     // Bereich Dateiformat und Kopdaten
     JPanel panelFmt = GUIFactory.createPanel( new GridBagLayout() );
     panelFmt.setBorder( GUIFactory.createTitledBorder(
-					"Dateitformat und Kopfdaten" ) );
+					LangUtil.getText( "file.section.file_format_header" ) ) );
     add( panelFmt, gbc );
 
     GridBagConstraints gbcFmt = new GridBagConstraints(
@@ -404,27 +399,32 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     }
     panelFmt.add( this.comboFileFmt, gbcFmt );
 
-    this.labelInfoBegAddr = GUIFactory.createLabel( "Anfangsadresse:" );
+    this.labelInfoBegAddr = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.start_address" ) );
     gbcFmt.anchor        = GridBagConstraints.EAST;
     gbcFmt.gridwidth     = 1;
     gbcFmt.insets.bottom = 2;
     gbcFmt.gridy++;
     panelFmt.add( this.labelInfoBegAddr, gbcFmt );
 
-    this.labelInfoEndAddr = GUIFactory.createLabel( "Endadresse:" );
+    this.labelInfoEndAddr = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.end_address" ) );
     gbcFmt.insets.top = 2;
     gbcFmt.gridy++;
     panelFmt.add( this.labelInfoEndAddr, gbcFmt );
 
-    this.labelInfoStartAddr = GUIFactory.createLabel( "Startadresse:" );
+    this.labelInfoStartAddr = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.execution_address" ) );
     gbcFmt.gridy++;
     panelFmt.add( this.labelInfoStartAddr, gbcFmt );
 
-    this.labelInfoType = GUIFactory.createLabel( "Typ:" );
+    this.labelInfoType = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.type" ) );
     gbcFmt.gridy++;
     panelFmt.add( this.labelInfoType, gbcFmt );
 
-    this.labelInfoDesc = GUIFactory.createLabel( "Beschreibung:" );
+    this.labelInfoDesc = GUIFactory.createLabel(
+		LangUtil.getText( "file.label.description" ) );
     gbcFmt.insets.bottom = 5;
     gbcFmt.gridy++;
     panelFmt.add( this.labelInfoDesc, gbcFmt );
@@ -465,7 +465,8 @@ public class LoadDlg extends BaseDlg implements DocumentListener
 
     // Bereich Ladeoptionen
     JPanel panelLoad = GUIFactory.createPanel( new GridBagLayout() );
-    panelLoad.setBorder( GUIFactory.createTitledBorder( "Ladeadressen" ) );
+    panelLoad.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "file.section.load_addresses" ) ) );
     gbc.gridy++;
     add( panelLoad, gbc );
 
@@ -478,10 +479,12 @@ public class LoadDlg extends BaseDlg implements DocumentListener
 					new Insets( 5, 5, 2, 5 ),
 					0, 0 );
 
-    this.labelLoadBegAddr = GUIFactory.createLabel( "Anfangsadresse:" );
+    this.labelLoadBegAddr = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.start_address" ) );
     panelLoad.add( labelLoadBegAddr, gbcLoad );
 
-    this.docLoadBegAddr = new HexDocument( 4, "Anfangsadresse" );
+    this.docLoadBegAddr = new HexDocument(
+		4, LangUtil.getText( "common.text.start_address" ) );
     this.fldLoadBegAddr = GUIFactory.createTextField(
 						this.docLoadBegAddr,
 						0 );
@@ -495,7 +498,8 @@ public class LoadDlg extends BaseDlg implements DocumentListener
       this.docLoadBegAddr.setValue( begAddr.intValue(), 4 );
     }
 
-    this.labelLoadEndAddr = GUIFactory.createLabel( "Endadresse:" );
+    this.labelLoadEndAddr = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.end_address" ) );
     gbcLoad.anchor        = GridBagConstraints.EAST;
     gbcLoad.fill          = GridBagConstraints.NONE;
     gbcLoad.insets.top    = 2;
@@ -504,7 +508,8 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     gbcLoad.gridy++;
     panelLoad.add( this.labelLoadEndAddr, gbcLoad );
 
-    this.docLoadEndAddr = new HexDocument( 4, "Endadresse" );
+    this.docLoadEndAddr = new HexDocument(
+		4, LangUtil.getText( "common.text.end_address" ) );
     this.fldLoadEndAddr = GUIFactory.createTextField(
 						this.docLoadEndAddr,
 						0 );
@@ -515,7 +520,8 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     panelLoad.add( this.fldLoadEndAddr, gbcLoad );
 
     this.labelLoadBasicAddr = GUIFactory.createLabel(
-					"KC-BASIC-Programm laden nach:" );
+					LangUtil.getText(
+						"file.label.load_kc_basic" ) );
     gbcLoad.fill          = GridBagConstraints.NONE;
     gbcLoad.insets.top    = 5;
     gbcLoad.insets.bottom = 2;
@@ -527,7 +533,7 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     ButtonGroup grpLoadBasic = new ButtonGroup();
 
     this.rbLoadForROMBasic = GUIFactory.createRadioButton(
-					"0401h f\u00FCr ROM-BASIC" );
+					LangUtil.getText( "file.option.0401h_rom_basic" ) );
     grpLoadBasic.add( this.rbLoadForROMBasic );
     gbcLoad.insets.top    = 2;
     gbcLoad.insets.bottom = 0;
@@ -536,7 +542,7 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     panelLoad.add( this.rbLoadForROMBasic, gbcLoad );
 
     this.rbLoadForRAMBasic = GUIFactory.createRadioButton(
-					"2C01h f\u00FCr RAM-BASIC",
+					LangUtil.getText( "file.option.2c01h_ram_basic" ),
 					true );
     grpLoadBasic.add( this.rbLoadForRAMBasic );
     gbcLoad.insets.top    = 0;
@@ -555,13 +561,15 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     gbc.gridy      = 0;
     add( panelBtn, gbc );
 
-    this.btnLoad = GUIFactory.createButton( EmuUtil.TEXT_LOAD );
+    this.btnLoad = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_LOAD ) );
     this.btnLoad.setEnabled( false );
     panelBtn.add( this.btnLoad );
 
     this.btnStart = null;
     if( this.startEnabled ) {
-      this.btnStart = GUIFactory.createButton( "Starten" );
+      this.btnStart = GUIFactory.createButton(
+		LangUtil.getText( "file.action.start" ) );
       this.btnStart.setEnabled( false );
       panelBtn.add( this.btnStart );
     }
@@ -629,22 +637,8 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     if( (file != null) && (fileBytes != null) && (nextTAPOffs > 0) ) {
       if( JOptionPane.showConfirmDialog(
 		owner,
-		LangUtil.tr(
-			"Die Datei ist eine Multi-TAP-Datei,"
-				+ " d.h., sie enth\u00E4lt mehrere Teildateien.\n"
-				+ "Es wurde aber nur die erste Teildatei in den"
-				+ " Arbeitsspeicher geladen.\n\n"
-				+ "H\u00E4ufig versucht das in der ersten Teildatei"
-				+ " enthaltene Programm,\n"
-				+ "die restlichen Teildateien von Kassette"
-				+ " nachzuladen.\n"
-				+ "Sie k\u00F6nnen jetzt die Emulation"
-				+ " des Kassettenrecorderanschlusses\n"
-				+ "mit den restlichen Teildateien aktivieren,\n"
-				+ "sodass das Nachladen auch im Emulator"
-				+ " funktioniert.\n\n"
-				+ "M\u00F6chten Sie das jetzt tun?" ),
-		LangUtil.tr( "Multi-TAP-Datei" ),
+		LangUtil.getText( "file.text.file_multi_tap" ),
+		LangUtil.getText( "file.text.multi_tap_file" ),
 		JOptionPane.YES_NO_OPTION,
 		JOptionPane.WARNING_MESSAGE ) == JOptionPane.YES_OPTION )
       {
@@ -665,7 +659,7 @@ public class LoadDlg extends BaseDlg implements DocumentListener
 	if( JOptionPane.showConfirmDialog(
 		owner,
 		infoMsg,
-		LangUtil.tr( "Achtung" ),
+		LangUtil.getText( "common.text.warning" ),
 		JOptionPane.WARNING_MESSAGE,
 		JOptionPane.OK_CANCEL_OPTION ) != JOptionPane.OK_OPTION )
 	{
@@ -724,9 +718,7 @@ public class LoadDlg extends BaseDlg implements DocumentListener
 	}
 	if( begAddr < 0 ) {
 	  throw new IOException(
-		"Es ist nicht klar, wohin die Datei geladen werden soll.\n"
-			+ "Bitte Anfangsadresse im Bereich Ladeadressen"
-			+ " ausf\u00FCllen!" );
+		LangUtil.getText( "file.error.not_clear_where" ) );
 	}
 
 	// ggf. Info bestaetigen
@@ -810,7 +802,7 @@ public class LoadDlg extends BaseDlg implements DocumentListener
     catch( IOException ex ) {
       showErrorDlg(
 		owner,
-		LangUtil.tr( "Datei kann nicht geladen werden." )
+		LangUtil.getText( "file.error.file_cannot_loaded" )
 					+ "\n\n" + ex.getMessage() );
     }
     return rv;

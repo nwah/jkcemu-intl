@@ -115,18 +115,11 @@ public class AnaDisk extends AbstractFloppyDisk
       out = null;
 
       if( msgBuf != null ) {
-	msgBuf.append( LangUtil.tr(
-		"\nDie angezeigten Informationen k\u00F6nnen"
-			+ " in einer AnaDisk-Datei nicht gespeichert"
-			+ " werden\n"
-			+ "und sind deshalb in der erzeugten Datei"
-			+ " nicht mehr enthalten.\n" ) );
+	msgBuf.append( LangUtil.getText(
+		"disk.text.information_shown_cannot_saved_anadisk" ) );
 	if( dataDeleted ) {
-	  msgBuf.append( LangUtil.tr(
-		"\nSektoren mit gel\u00F6schten Daten werden"
-			+ " in AnaDisk-Dateien nicht unterst\u00FCtzt\n"
-			+ "und sind deshalb als normale Sektoren"
-			+ " enthalten.\n" ) );
+	  msgBuf.append( LangUtil.getText(
+		"disk.text.sectors_deleted_data_not_supported_anadisk" ) );
 	}
       }
     }
@@ -269,11 +262,7 @@ public class AnaDisk extends AbstractFloppyDisk
 		|| ((physHead == 1) && (physCyl != (cyls - 1))) )
 	    {
 	      throw new IOException(
-		"Die Spuren m\u00FCssen l\u00FCckenlos aufsteigend und\n"
-			+ "innerhalb einer Spur Seite 1 vor Seite 2"
-			+ " formatiert werden.\n"
-			+ "Eine andere Reihenfolge wird bei einer"
-			+ " AnaDisk-Datei nicht untest\u00FCtzt." );
+		LangUtil.getText( "disk.error.tracks_formatted_ascending_order_without_anadisk" ) );
 	    }
 	    this.raf.seek( this.fileLen );
 	    for( int i = 0; i < sectorIDs.length; i++ ) {
@@ -312,7 +301,9 @@ public class AnaDisk extends AbstractFloppyDisk
 	  }
 	  catch( IOException ex ) {
 	    rv = false;
-	    fireShowError( "Anh\u00E4ngen von Sektoren fehlgeschlagen", ex );
+	    fireShowError( LangUtil.getText(
+				"disk.error.appending_sectors_failed" ),
+			ex );
 	  }
 	} else {
 	  rv = super.formatTrack(
@@ -580,7 +571,8 @@ public class AnaDisk extends AbstractFloppyDisk
 		side1 );
     }
     if( rv == null ) {
-      throw new IOException( "Datei ist keine AnaDisk-Datei" );
+      throw new IOException(
+		LangUtil.getText( "disk.error.file_not_anadisk" ) );
     }
     return rv;
   }

@@ -18,6 +18,7 @@ package jkcemu.etc;
 
 import java.net.URL;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class PSG8910 extends Thread
@@ -32,10 +33,10 @@ public class PSG8910 extends Thread
   public static final int PORT_A = 0;
   public static final int PORT_B = 1;
 
-  private static final String TEXT_OUT_FIX        = "konstanter&nbsp;Pegel";
-  private static final String TEXT_OUT_NOISE      = "Rauschen";
-  private static final String TEXT_OUT_NOISE_TONE = "Rauschen+Ton";
-  private static final String TEXT_OUT_TONE       = "Ton";
+  private static final String TEXT_OUT_FIX        = "etc.text.constant_level";
+  private static final String TEXT_OUT_NOISE      = "etc.text.noise";
+  private static final String TEXT_OUT_NOISE_TONE = "etc.text.noise_tone";
+  private static final String TEXT_OUT_TONE       = "etc.text.tone";
 
   /*
    * Tabelle mit den Werten fuer die 16 Pegelstufen
@@ -93,7 +94,7 @@ public class PSG8910 extends Thread
 
   public PSG8910( int clockHz, Callback callback )
   {
-    super( Main.getThreadGroup(), "JKCEMU PSG" );
+    super( Main.getThreadGroup(), LangUtil.getText( "etc.title.jkcemu_psg" ) );
     this.clockHz       = clockHz;
     this.callback      = callback;
     this.frameRate     = 0;
@@ -176,44 +177,44 @@ public class PSG8910 extends Thread
     buf.append( "<br/>Kanal A: " );
     switch( this.modeBits & 0x09 ) {
       case 0x00:			// Rauschen + Tongenerator
-	buf.append( TEXT_OUT_NOISE_TONE );
+	buf.append( LangUtil.getText( TEXT_OUT_NOISE_TONE ) );
 	break;
       case 0x01:			// Rauschen
-	buf.append( TEXT_OUT_NOISE );
+	buf.append( LangUtil.getText( TEXT_OUT_NOISE ) );
 	break;
       case 0x08:			// Tongenerator
-	buf.append( TEXT_OUT_TONE );
+	buf.append( LangUtil.getText( TEXT_OUT_TONE ) );
 	break;
       default:				// konstanter Pegel
-	buf.append( TEXT_OUT_FIX );
+	buf.append( LangUtil.getText( TEXT_OUT_FIX ) );
     }
     buf.append( "<br/>Kanal B: " );
     switch( this.modeBits & 0x12 ) {
       case 0x00:			// Rauschen + Tongenerator
-	buf.append( TEXT_OUT_NOISE_TONE );
+	buf.append( LangUtil.getText( TEXT_OUT_NOISE_TONE ) );
 	break;
       case 0x02:			// Rauschen
-	buf.append( TEXT_OUT_NOISE );
+	buf.append( LangUtil.getText( TEXT_OUT_NOISE ) );
 	break;
       case 0x10:			// Tongenerator
-	buf.append( TEXT_OUT_TONE );
+	buf.append( LangUtil.getText( TEXT_OUT_TONE ) );
 	break;
       default:				// konstanter Pegel
-	buf.append( TEXT_OUT_FIX );
+	buf.append( LangUtil.getText( TEXT_OUT_FIX ) );
     }
     buf.append( "<br/>Kanal C: " );
     switch( this.modeBits & 0x24 ) {
       case 0x00:			// Rauschen + Tongenerator
-	buf.append( TEXT_OUT_NOISE_TONE );
+	buf.append( LangUtil.getText( TEXT_OUT_NOISE_TONE ) );
 	break;
       case 0x04:			// Rauschen
-	buf.append( TEXT_OUT_NOISE );
+	buf.append( LangUtil.getText( TEXT_OUT_NOISE ) );
 	break;
       case 0x20:			// Tongenerator
-	buf.append( TEXT_OUT_TONE );
+	buf.append( LangUtil.getText( TEXT_OUT_TONE ) );
 	break;
       default:				// konstanter Pegel
-	buf.append( TEXT_OUT_FIX );
+	buf.append( LangUtil.getText( TEXT_OUT_FIX ) );
     }
     buf.append( "</td></tr>\n"
 	+ "<tr>"

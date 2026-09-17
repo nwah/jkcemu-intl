@@ -13,6 +13,7 @@ import java.io.IOException;
 import javax.sound.sampled.DataLine;
 import jkcemu.Main;
 import jkcemu.base.ScreenFrm;
+import jkcemu.lang.LangUtil;
 
 
 public abstract class AudioIO
@@ -63,11 +64,7 @@ public abstract class AudioIO
   {
     if( cpuSyncLine != null ) {
       throw new IOException(
-	"Es ist bereits ein Audiokanal ge\u00F6ffnet,"
-		+ " der synchron zum emulierten Mikroprozessor"
-		+ " bedient wird.\n"
-		+ "Sie m\u00FCssen zuerst diesen Audiokanal schlie\u00DFen,"
-		+ " bevor Sie einen anderen \u00F6ffnen k\u00F6nnen." );
+	LangUtil.getText( "audio.error.audio_channel_served" ) );
     }
   }
 

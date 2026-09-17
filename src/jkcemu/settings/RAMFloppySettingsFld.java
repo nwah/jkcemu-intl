@@ -70,12 +70,13 @@ public class RAMFloppySettingsFld extends AbstractSettingsFld
       gbc.gridwidth = GridBagConstraints.REMAINDER;
       add( this.cbRF, gbc );
     } else if( rfType == RAMFloppy.RFType.ADW ) {
-      this.labelRF = GUIFactory.createLabel( LangUtil.tr( labelText ) + ":" );
+      this.labelRF = GUIFactory.createLabel(
+		LangUtil.getText( labelText ) + ":" );
       add( this.labelRF, gbc );
 
       this.comboSize = GUIFactory.createComboBox();
       this.comboSize.setEditable( false );
-      this.comboSize.addItem( LangUtil.tr( "Nicht emulieren" ) );
+      this.comboSize.addItem( LangUtil.getText( "settings.text.not_emulate" ) );
       this.comboSize.addItem( "128 KByte" );
       this.comboSize.addItem( "512 KByte" );
       this.comboSize.addItem( "2 MByte" );
@@ -85,7 +86,7 @@ public class RAMFloppySettingsFld extends AbstractSettingsFld
     }
 
     this.labelFile  = GUIFactory.createLabel(
-				"Automatisch laden (optional):" );
+				LangUtil.getText( "settings.label.load_automatically" ) );
     gbc.insets.left = 50;
     gbc.gridwidth   = GridBagConstraints.REMAINDER;
     gbc.gridx       = 0;
@@ -104,7 +105,7 @@ public class RAMFloppySettingsFld extends AbstractSettingsFld
     this.btnSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					"Abbilddatei ausw\u00E4hlen" );
+					LangUtil.getText( "settings.action.select_image_file" ) );
     this.btnSelect.addActionListener( this );
     gbc.fill        = GridBagConstraints.NONE;
     gbc.weightx     = 0.0;
@@ -116,7 +117,7 @@ public class RAMFloppySettingsFld extends AbstractSettingsFld
     this.btnRemove = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/delete.png",
-					"Abbilddatei entfernen" );
+					LangUtil.getText( "settings.action.remove_image_file" ) );
     this.btnRemove.addActionListener( this );
     gbc.gridx++;
     add( this.btnRemove, gbc );

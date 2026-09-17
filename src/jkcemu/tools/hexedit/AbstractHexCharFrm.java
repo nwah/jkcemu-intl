@@ -93,8 +93,8 @@ public abstract class AbstractHexCharFrm
 
   protected void addDirectEditMenuItemTo( JMenu menu )
   {
-    this.mnuDirectEdit = GUIFactory.createCheckBoxMenuItem(
-		"Bytes durch direkte Eingabe \u00FCberschreiben",
+    this.mnuDirectEdit = GUIFactory.createCheckBoxMenuItem( LangUtil.getText(
+			"hexedit.action.overwrite_bytes_direct" ),
 		Main.getBooleanProperty(
 			getSettingsPrefix() + PROP_DIRECT_EDIT,
 			false ) );
@@ -105,19 +105,13 @@ public abstract class AbstractHexCharFrm
     StringBuilder buf      = new StringBuilder();
     String        menuText = menu.getText();
     if( menuText != null ) {
-      buf.append( LangUtil.tr(
-		"Sie m\u00FCssen zuerst den Men\u00FCeintrag"
-			+ "\n''{0}'' \u2192 ''{1}''\n"
-			+ "aktivieren, bevor Sie die Bytes direkt"
-			+ " in der Anzeige \u00E4ndern k\u00F6nnen.",
+      buf.append( LangUtil.getText(
+		"hexedit.text.first_activate_menu_submenu",
 		menuText,
 		this.mnuDirectEdit.getText() ) );
     } else {
-      buf.append( LangUtil.tr(
-		"Sie m\u00FCssen zuerst den Men\u00FCeintrag"
-			+ " ''{0}''\n"
-			+ "aktivieren, bevor Sie die Bytes direkt"
-			+ " in der Anzeige \u00E4ndern k\u00F6nnen.",
+      buf.append( LangUtil.getText(
+		"hexedit.text.first_activate_menu",
 		this.mnuDirectEdit.getText() ) );
     }
     this.readOnlyErrorMsg = buf.toString();
@@ -138,7 +132,8 @@ public abstract class AbstractHexCharFrm
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    panel.add( GUIFactory.createLabel( "Hexadezimal:" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "hexedit.label.hexadecimal" ) ), gbc );
 
     this.fldCaretHex = GUIFactory.createTextField();
     this.fldCaretHex.addActionListener( this );
@@ -150,7 +145,8 @@ public abstract class AbstractHexCharFrm
     gbc.fill    = GridBagConstraints.NONE;
     gbc.weightx = 0.0;
     gbc.gridx++;
-    panel.add( GUIFactory.createLabel( "Dezimal:" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "hexedit.label.decimal" ) ), gbc );
 
     this.fldCaretDec = GUIFactory.createTextField();
     this.fldCaretDec.addActionListener( this );
@@ -183,7 +179,8 @@ public abstract class AbstractHexCharFrm
   {
     JPanel panel = GUIFactory.createPanel( new GridBagLayout() );
     panel.setBorder( GUIFactory.createTitledBorder(
-			"Dezimalwerte der Bytes ab Cursor-Position" ) );
+			LangUtil.getText(
+				"hexedit.section.decimal_values_bytes" ) ) );
 
     GridBagConstraints gbcValue = new GridBagConstraints(
 					0, 0,
@@ -194,7 +191,8 @@ public abstract class AbstractHexCharFrm
 					new Insets( 5, 5, 2, 5 ),
 					0, 0 );
 
-    this.labelValue8 = GUIFactory.createLabel( "8 Bit:" );
+    this.labelValue8 = GUIFactory.createLabel(
+		LangUtil.getText( "hexedit.label.8_bit" ) );
     this.labelValue8.setEnabled( false );
     panel.add( this.labelValue8, gbcValue );
 
@@ -205,7 +203,8 @@ public abstract class AbstractHexCharFrm
     gbcValue.gridx++;
     panel.add( this.fldValue8, gbcValue );
 
-    this.labelValue16 = GUIFactory.createLabel( "16 Bit:" );
+    this.labelValue16 = GUIFactory.createLabel(
+		LangUtil.getText( "hexedit.label.16_bit" ) );
     this.labelValue16.setEnabled( false );
     gbcValue.fill    = GridBagConstraints.NONE;
     gbcValue.weightx = 0.0;
@@ -219,7 +218,8 @@ public abstract class AbstractHexCharFrm
     gbcValue.gridx++;
     panel.add( this.fldValue16, gbcValue );
 
-    this.labelValue32 = GUIFactory.createLabel( "32 Bit:" );
+    this.labelValue32 = GUIFactory.createLabel(
+		LangUtil.getText( "hexedit.label.32_bit" ) );
     this.labelValue32.setEnabled( false );
     gbcValue.fill    = GridBagConstraints.NONE;
     gbcValue.weightx = 0.0;
@@ -242,14 +242,14 @@ public abstract class AbstractHexCharFrm
     panel.add( panelOpt, gbcValue );
 
     this.cbValueSigned = GUIFactory.createCheckBox(
-						"Vorzeichenbehaftet",
+						LangUtil.getText( "hexedit.option.signed" ),
 						true );
     this.cbValueSigned.addActionListener( this );
     this.cbValueSigned.setEnabled( false );
     panelOpt.add( this.cbValueSigned, gbcValue );
 
     this.cbLittleEndian = GUIFactory.createCheckBox(
-						"Little Endian",
+						LangUtil.getText( "common.option.little_endian" ),
 						true );
     this.cbLittleEndian.addActionListener( this );
     this.cbLittleEndian.setEnabled( false );
@@ -550,8 +550,7 @@ public abstract class AbstractHexCharFrm
 	  if( value != null ) {
 	    BaseDlg.showInfoDlg(
 		this,
-		LangUtil.tr(
-			"{0} des ausgew\u00E4hlten Bereichs: {1}",
+		LangUtil.getText( "hexedit.text.selected_range",
 			cc.getAlgorithm(),
 			value ) );
 	  }
@@ -559,9 +558,7 @@ public abstract class AbstractHexCharFrm
 	catch( NoSuchAlgorithmException ex ) {
 	  BaseDlg.showErrorDlg(
 		this,
-		LangUtil.tr(
-			"{0}: Unbekannter bzw. nicht"
-				+ " unterst\u00FCtzter Algorithmus",
+		LangUtil.getText( "hexedit.text.unknown_unsupported",
 			algorithm ) );
 	}
       }
@@ -573,7 +570,8 @@ public abstract class AbstractHexCharFrm
   {
     ReplyBytesDlg dlg = new ReplyBytesDlg(
 					this,
-					"Bytes suchen",
+					LangUtil.getText(
+						"common.text.find_bytes" ),
 					this.recentInputFmt,
 					this.recentBigEndian,
 					this.recentFindText );
@@ -650,7 +648,9 @@ public abstract class AbstractHexCharFrm
 			  }
 			} );
 	  } else {
-	    BaseDlg.showInfoDlg( this, "Byte-Folge nicht gefunden" );
+	    BaseDlg.showInfoDlg(
+			this,
+			LangUtil.getText( "common.msg.byte_sequence_not_found" ) );
 	  }
 	}
       }
@@ -710,7 +710,8 @@ public abstract class AbstractHexCharFrm
       catch( NumberFormatException ex ) {}
     }
     if( !done ) {
-      BaseDlg.showErrorDlg( this, "Ung\u00FCltige Eingabe" );
+      BaseDlg.showErrorDlg(
+		this, LangUtil.getText( "common.error.invalid_input" ) );
     }
   }
 

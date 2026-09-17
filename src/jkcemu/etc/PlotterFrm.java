@@ -37,6 +37,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.HelpFrm;
 import jkcemu.base.UserInputException;
 import jkcemu.image.AbstractImageFrm;
+import jkcemu.lang.LangUtil;
 import jkcemu.print.PrintUtil;
 
 
@@ -282,14 +283,14 @@ public class PlotterFrm extends AbstractImageFrm
     this.image   = null;
     this.file    = null;
     this.dirty   = false;
-    setTitle( "JKCEMU Plotter" );
+    setTitle( LangUtil.getText( "etc.title.jkcemu_plotter" ) );
 
 
     // Menu Datei
     JMenu mnuFile = createMenuFile();
 
     this.mnuNewPage = createMenuItemWithStandardAccelerator(
-						"Neue Seite",
+						LangUtil.getText( "etc.action.new_page" ),
 						KeyEvent.VK_N );
     mnuFile.add( this.mnuNewPage );
 
@@ -314,47 +315,56 @@ public class PlotterFrm extends AbstractImageFrm
     // Menu Einstellungen
     JMenu mnuSettings = createMenuSettings();
 
-    JMenu mnuPenThk = GUIFactory.createMenu( "Stiftbreite" );
+    JMenu mnuPenThk = GUIFactory.createMenu(
+		LangUtil.getText( "etc.menu.pen_width" ) );
     mnuSettings.add( mnuPenThk );
 
     ButtonGroup grpPenThk = new ButtonGroup();
 
-    this.mnuPenThk1 = GUIFactory.createRadioButtonMenuItem( "1 Pixel" );
+    this.mnuPenThk1 = GUIFactory.createRadioButtonMenuItem(
+		LangUtil.getText( "etc.action.1_pixel" ) );
     grpPenThk.add( this.mnuPenThk1 );
     mnuPenThk.add( this.mnuPenThk1 );
 
-    this.mnuPenThk2 = GUIFactory.createRadioButtonMenuItem( "2 Pixel" );
+    this.mnuPenThk2 = GUIFactory.createRadioButtonMenuItem(
+		LangUtil.getText( "etc.action.2_pixels" ) );
     grpPenThk.add( this.mnuPenThk2 );
     mnuPenThk.add( this.mnuPenThk2 );
 
-    this.mnuPenThk3 = GUIFactory.createRadioButtonMenuItem( "3 Pixel" );
+    this.mnuPenThk3 = GUIFactory.createRadioButtonMenuItem(
+		LangUtil.getText( "etc.action.3_pixels" ) );
     grpPenThk.add( this.mnuPenThk3 );
     mnuPenThk.add( this.mnuPenThk3 );
 
-    this.mnuPenThk4 = GUIFactory.createRadioButtonMenuItem( "4 Pixel" );
+    this.mnuPenThk4 = GUIFactory.createRadioButtonMenuItem(
+		LangUtil.getText( "etc.action.4_pixels" ) );
     grpPenThk.add( this.mnuPenThk4 );
     mnuPenThk.add( this.mnuPenThk4 );
 
-    this.mnuPenThk5 = GUIFactory.createRadioButtonMenuItem( "5 Pixel" );
+    this.mnuPenThk5 = GUIFactory.createRadioButtonMenuItem(
+		LangUtil.getText( "etc.action.5_pixels" ) );
     grpPenThk.add( this.mnuPenThk5 );
     mnuPenThk.add( this.mnuPenThk5 );
 
-    this.mnuPenColor = createMenuItem( "Stiftfarbe..." );
+    this.mnuPenColor = createMenuItem(
+		LangUtil.getText( "etc.action.pen_color" ) );
     mnuSettings.add( this.mnuPenColor );
 
-    this.mnuPaperColor = createMenuItem( "Papierfarbe..." );
+    this.mnuPaperColor = createMenuItem(
+		LangUtil.getText( "etc.action.paper_color" ) );
     mnuSettings.add( this.mnuPaperColor );
     mnuSettings.addSeparator();
 
     this.mnuConfirmNewPage = GUIFactory.createCheckBoxMenuItem(
-			"Best\u00E4tigung f\u00FCr neue Seite",
+			LangUtil.getText( "etc.action.confirmation_new_page" ),
 			true );
     mnuSettings.add( this.mnuConfirmNewPage );
 
 
     // Menu Hilfe
     JMenu mnuHelp       = createMenuHelp();
-    this.mnuHelpContent = createMenuItem( "Hilfe zum Plotter..." );
+    this.mnuHelpContent = createMenuItem(
+		LangUtil.getText( "etc.action.help_plotter" ) );
 
 
     // Menu
@@ -400,13 +410,13 @@ public class PlotterFrm extends AbstractImageFrm
     this.btnRotateLeft = GUIFactory.createRelImageResourceButton(
 					this,
 					"edit/rotate_left.png",
-					"Nach links drehen" );
+					LangUtil.getText( "common.action.rotate_left" ) );
     toolBar.add( this.btnRotateLeft );
 
     this.btnRotateRight = GUIFactory.createRelImageResourceButton(
 					this,
 					"edit/rotate_right.png",
-					"Nach rechts drehen" );
+					LangUtil.getText( "common.action.rotate_right" ) );
     toolBar.add( this.btnRotateRight );
     toolBar.addSeparator();
 
@@ -507,7 +517,8 @@ public class PlotterFrm extends AbstractImageFrm
     Plotter plotter = this.plotter;
     if( plotter != null ) {
       if( this.mnuConfirmNewPage.isSelected() ) {
-	if( BaseDlg.showYesNoDlg( this, "Neue Seite?" ) ) {
+	if( BaseDlg.showYesNoDlg(
+		this, LangUtil.getText( "etc.msg.new_page" ) ) ) {
 	  plotter.newPage();
 	}
       } else {

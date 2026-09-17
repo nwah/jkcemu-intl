@@ -46,6 +46,7 @@ import jkcemu.file.FileFormat;
 import jkcemu.file.FileSaver;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class ImageSaver
@@ -377,7 +378,8 @@ public class ImageSaver
     }
     File file = FileUtil.showFileSaveDlg(
 				owner,
-				"Bilddatei speichern",
+				LangUtil.getText(
+					"image.title.save_image_file" ),
 				presetFile,
 				createFileFilters( monochrome ) );
     if( file != null ) {
@@ -507,14 +509,11 @@ public class ImageSaver
 					!= Transparency.OPAQUE) )
 		{
 		  throw new IOException(
-			"Das Bild enth\u00E4lt transparente Pixel,\n"
-				+ "die nicht im BMP-Format gespeichert"
-				+ " werden k\u00F6nnen." );
+			LangUtil.getText( "image.error.image_contains_transparent_pixels_saved_bmp" ) );
 		}
 		else if( suffix.equalsIgnoreCase( "wbmp" ) && !monochrome ) {
 		  throw new IOException(
-			"Das WBMP-Format kann nur monochrome Bilder"
-				+ " (max. 2 Farben) speichern." );
+			LangUtil.getText( "image.error.wbmp_format_only" ) );
 		} else {
 		  ImageWriter imgWriter   = iter.next();
 		  IIOMetadata imgMetadata = null;
@@ -565,11 +564,8 @@ public class ImageSaver
 	  RecentDirsMngr.setRecentDir( file, RecentDirsMngr.FILE_CAT_IMAGE );
 	} else {
 	  if( open ) {	
-	    throw new IOException(
-			"Das Bild l\u00E4sst sich mit seinen Eigenschaften"
-				+ " nicht\n"
-				+ "in dem durch die Dateiendung"
-				+ " angegebenen Format speichern." );
+	    throw new IOException( LangUtil.getText(
+				"image.error.image_properties_cannot_saved" ) );
 	  } else {
 	    throw new IOException(
 			ImageUtil.createFileSuffixNotSupportedMsg(
@@ -1142,7 +1138,7 @@ public class ImageSaver
 						throws IOException
   {
     throw new IOException(
-	"Der Dateiname muss die Endung *.hif oder *.hip haben." );
+	LangUtil.getText( "image.error.file_name_extension" ) );
   }
 
 

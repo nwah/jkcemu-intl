@@ -14,6 +14,7 @@ package jkcemu.emusys.kc85;
 import java.util.Properties;
 import jkcemu.base.EmuThread;
 import jkcemu.etc.Plotter;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
 import z80emu.Z80InterruptSource;
@@ -37,9 +38,9 @@ public class M001 extends AbstractKC85Module implements
   {
     super( slot );
     this.cpu = emuThread.getZ80CPU();
-    this.ctc = new Z80CTC( "CTC (M001)" );
+    this.ctc = new Z80CTC( LangUtil.getText( "kc85.text.ctc_m001" ) );
     this.ctc.setTimerConnection( 2, 3 );
-    this.pio     = new Z80PIO( "PIO (M001)" );
+    this.pio     = new Z80PIO( LangUtil.getText( "kc85.text.pio_m001" ) );
     this.plotter = new Plotter(
 			Plotter.XY_PAGE_WIDTH,
 			Plotter.XY_PAGE_HEIGHT );

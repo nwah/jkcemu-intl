@@ -18,6 +18,7 @@ import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.HexDocument;
+import jkcemu.lang.LangUtil;
 
 
 public class InputBreakpointDlg extends AbstractBreakpointDlg
@@ -32,7 +33,10 @@ public class InputBreakpointDlg extends AbstractBreakpointDlg
 			DebugFrm           debugFrm,
 			AbstractBreakpoint breakpoint )
   {
-    super( debugFrm, "Eingabetor", breakpoint );
+    super(
+		debugFrm,
+		LangUtil.getText( "debugger.section.input_port" ),
+		breakpoint );
 
 
     // Fensterinhalt
@@ -47,7 +51,8 @@ public class InputBreakpointDlg extends AbstractBreakpointDlg
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    add( GUIFactory.createLabel( "Eingabeadresse (8 oder 16 Bit):" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.input_address_8" ) ), gbc );
 
     this.docBegPort = new HexDocument( 4 );
     this.fldBegPort = GUIFactory.createTextField( this.docBegPort, 4 );
@@ -61,7 +66,9 @@ public class InputBreakpointDlg extends AbstractBreakpointDlg
     gbc.weightx = 0.0;
     gbc.gridx   = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Bis Eingabeadresse (optional):" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText(
+			"debugger.label.input_address_optional" ) ), gbc );
 
     this.docEndPort = new HexDocument( 4 );
     this.fldEndPort = GUIFactory.createTextField( this.docEndPort, 4 );

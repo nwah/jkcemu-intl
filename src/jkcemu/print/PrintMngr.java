@@ -16,9 +16,9 @@ import jkcemu.lang.LangUtil;
 public class PrintMngr extends AbstractTableModel
 {
   private static final String[] colNames = {
-					"Nummer",
-					"Gr\u00F6\u00DFe",
-					"Status" };
+					"print.column.number",
+					"common.column.size",
+					"common.section.status" };
 
   private int                       nextEntryNum;
   private java.util.List<PrintData> entries;
@@ -130,7 +130,7 @@ public class PrintMngr extends AbstractTableModel
   public String getColumnName( int col )
   {
     return (col >= 0) && (col < colNames.length) ? 
-		LangUtil.tr( colNames[ col ] ) : "";
+		LangUtil.getText( colNames[ col ] ) : "";
   }
 
 

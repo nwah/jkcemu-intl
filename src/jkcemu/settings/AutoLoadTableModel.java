@@ -23,9 +23,9 @@ public class AutoLoadTableModel extends AbstractTableModel
 
 
   private static String[] colNames = {
-				"Wartezeit",
-				"Ladeadresse",
-				"Dateiname" };
+				"settings.column.wait_time",
+				"settings.column.load_address",
+				"common.column.file_name" };
 
 
   private java.util.List<AutoLoadEntry> rows;
@@ -129,7 +129,7 @@ public class AutoLoadTableModel extends AbstractTableModel
   public String getColumnName( int col )
   {
     return (col >= 0) && (col < colNames.length) ? 
-		LangUtil.tr( colNames[ col ] ) : "";
+		LangUtil.getText( colNames[ col ] ) : "";
   }
 
 

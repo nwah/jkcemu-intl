@@ -30,6 +30,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.disk.GIDESettingsFld;
 import jkcemu.emusys.AC1;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -82,7 +83,8 @@ public class AC1SettingsFld extends AbstractSettingsFld
 
     // Tab Modell
     this.tabModel = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Modell", this.tabModel );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "common.section.model" ), this.tabModel );
 
     GridBagConstraints gbcModel = new GridBagConstraints(
 					0, 0,
@@ -96,33 +98,36 @@ public class AC1SettingsFld extends AbstractSettingsFld
     ButtonGroup grpModel = new ButtonGroup();
 
     this.rbMon31_64x16 = GUIFactory.createRadioButton(
-				"Ur-AC1 mit Monitorprogramm 3.1" );
+				LangUtil.getText(
+					"ac1.option.original_ac1_monitor" ) );
     grpModel.add( this.rbMon31_64x16 );
     gbcModel.insets.top = 0;
     gbcModel.gridy++;
     this.tabModel.add( this.rbMon31_64x16, gbcModel );
 
     this.rbMon31_64x32 = GUIFactory.createRadioButton(
-				"AC1-ACC mit Monitorprogramm 3.1" );
+				LangUtil.getText(
+					"ac1.option.ac1_acc_monitor" ) );
     grpModel.add( this.rbMon31_64x32 );
     gbcModel.gridy++;
     this.tabModel.add( this.rbMon31_64x32, gbcModel );
 
     this.rbMonSCCH80 = GUIFactory.createRadioButton(
-				"AC1-SCCH mit Monitorprogramm 8.0" );
+				LangUtil.getText(
+					"ac1.option.ac1_scch_monitor_program_8" ) );
     grpModel.add( this.rbMonSCCH80 );
     gbcModel.gridy++;
     this.tabModel.add( this.rbMonSCCH80, gbcModel );
 
     this.rbMonSCCH1088 = GUIFactory.createRadioButton(
-	"AC1-SCCH mit Monitorprogramm 10/88 und Zeichensatzumschaltung",
+	LangUtil.getText( "ac1.option.ac1_scch_monitor_program_10" ),
 	true );
     grpModel.add( this.rbMonSCCH1088 );
     gbcModel.gridy++;
     this.tabModel.add( this.rbMonSCCH1088, gbcModel );
 
-    this.rbMon2010 = GUIFactory.createRadioButton(
-		"AC1-2010 mit Monitorprogramm f\u00FCr Farbgrafik" );
+    this.rbMon2010 = GUIFactory.createRadioButton( LangUtil.getText(
+			"ac1.option.ac1_2010_monitor" ) );
     grpModel.add( this.rbMon2010 );
     gbcModel.insets.bottom = 5;
     gbcModel.gridy++;
@@ -133,13 +138,15 @@ public class AC1SettingsFld extends AbstractSettingsFld
     this.tabSCCH = new SCCHModule1SettingsFld(
 				settingsFrm,
 				propPrefix + AC1.PROP_SCCH_PREFIX);
-    this.tabbedPane.addTab( "SCCH-Modul 1", this.tabSCCH );
+    this.tabbedPane.addTab( LangUtil.getText( "ac1.section.scch_module_1" ),
+		this.tabSCCH );
     updSCCHFieldsEnabled();
 
 
     // Tab AC1-2010
     this.tab2010 = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "AC1-2010", this.tab2010 );
+    this.tabbedPane.addTab( LangUtil.getText( "ac1.section.ac1_2010" ),
+		this.tab2010 );
 
     GridBagConstraints gbc2010 = new GridBagConstraints(
 					0, 0,
@@ -153,14 +160,13 @@ public class AC1SettingsFld extends AbstractSettingsFld
     this.fldAltPio2Rom2010 = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + AC1.PROP_2010_PIO2ROM_PREFIX,
-		"Alternativer Inhalt der ROM-B\u00E4nke auf der PIO2-Karte"
-					+ " (4 x 2000h-27FFh):" );
+		LangUtil.getText( "ac1.text.alternative_content_rom" ) );
     this.tab2010.add( this.fldAltPio2Rom2010, gbc2010 );
 
     this.fldRomBank2010 = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + AC1.PROP_2010_ROMBANK_PREFIX,
-		"Inhalt der weiteren 16 ROM-B\u00E4nke (16 x ab A000h):" );
+		LangUtil.getText( "ac1.text.content_further_16" ) );
     gbc2010.gridy++;
     this.tab2010.add( this.fldRomBank2010, gbc2010 );
     upd2010FieldsEnabled();
@@ -170,19 +176,22 @@ public class AC1SettingsFld extends AbstractSettingsFld
     this.tabRF = new RAMFloppySettingsFld(
 	settingsFrm,
 	propPrefix + AC1.PROP_RF_PREFIX,
-	"RAM-Floppy nach MP 3/1988 (256 KByte) an E/A-Adressen E0h-E7h",
+	LangUtil.getText( "ac1.text.ram_floppy_according_mp_3_1988_256_kbyte_i_o_e0h" ),
 	RAMFloppy.RFType.MP_3_1988 );
-    this.tabbedPane.addTab( "RAM-Floppy", this.tabRF );
+    this.tabbedPane.addTab( LangUtil.getText( "ac1.section.ram_floppy" ),
+		this.tabRF );
 
 
     // Tab GIDE
     this.tabGIDE = new GIDESettingsFld( settingsFrm, propPrefix );
-    this.tabbedPane.addTab( "GIDE", this.tabGIDE );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.gide" ), this.tabGIDE );
 
 
     // Tab Erweiterungen
     this.tabExt = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Erweiterungen", this.tabExt );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.expansions" ), this.tabExt );
 
     GridBagConstraints gbcExt = new GridBagConstraints(
 					0, 0,
@@ -193,30 +202,34 @@ public class AC1SettingsFld extends AbstractSettingsFld
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.cbColor = GUIFactory.createCheckBox(
-		"Farbgrafik mit Taktfrequenz- und Zeichensatzumschaltung" );
+    this.cbColor = GUIFactory.createCheckBox( LangUtil.getText(
+			"ac1.option.color_graphics_clock" ) );
     this.tabExt.add( this.cbColor, gbcExt );
 
-    this.cbFloppyDisk = GUIFactory.createCheckBox( "Floppy-Disk-Modul" );
+    this.cbFloppyDisk = GUIFactory.createCheckBox(
+		LangUtil.getText( "emusys.option.floppy_disk_module" ) );
     gbcExt.insets.top  = 0;
     gbcExt.gridy++;
     this.tabExt.add( this.cbFloppyDisk, gbcExt );
 
-    this.cbJoystick = GUIFactory.createCheckBox( "Joystick" );
+    this.cbJoystick = GUIFactory.createCheckBox(
+		LangUtil.getText( "ac1.option.joystick" ) );
     gbcExt.gridy++;
     this.tabExt.add( this.cbJoystick, gbcExt );
 
-    this.cbK1520Sound = GUIFactory.createCheckBox( "K1520-Sound-Karte" );
+    this.cbK1520Sound = GUIFactory.createCheckBox(
+		LangUtil.getText( "common.option.k1520_sound_card" ) );
     gbcExt.gridy++;
     this.tabExt.add( this.cbK1520Sound, gbcExt );
 
     this.cbKCNet = GUIFactory.createCheckBox(
-				"KCNet-kompatible Netzwerkkarte" );
+				LangUtil.getText( "emusys.option.kcnet_compatible_network" ) );
     gbcExt.gridy++;
     this.tabExt.add( this.cbKCNet, gbcExt );
 
     this.cbVDIP = GUIFactory.createCheckBox(
-			"USB-Anschluss (Vinculum VDIP Modul)" );
+			LangUtil.getText(
+				"emusys.option.usb_port_vinculum" ) );
     gbcExt.insets.bottom = 5;
     gbcExt.gridy++;
     this.tabExt.add( this.cbVDIP, gbcExt );
@@ -224,7 +237,8 @@ public class AC1SettingsFld extends AbstractSettingsFld
 
     // Tab CTC
     this.tabCtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "CTC", this.tabCtc );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.text.ctc" ), this.tabCtc );
 
     GridBagConstraints gbcCtc = new GridBagConstraints(
 					0, 0,
@@ -236,13 +250,15 @@ public class AC1SettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.tabCtc.add(
-		GUIFactory.createLabel( "Kopplung der CTC-Kan\u00E4le:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText(
+				"ac1.label.coupling_ctc_channels" ) ),
 		gbcCtc );
 
     ButtonGroup grpCTC = new ButtonGroup();
 
-    this.rbCtcAllInSeries = GUIFactory.createRadioButton(
-		"Alle Kan\u00E4le in Reihe gekoppelt",
+    this.rbCtcAllInSeries = GUIFactory.createRadioButton( LangUtil.getText(
+			"ac1.option.all_channels_coupled" ),
 		true );
     grpCTC.add( this.rbCtcAllInSeries );
     gbcCtc.insets.left   = 50;
@@ -251,14 +267,15 @@ public class AC1SettingsFld extends AbstractSettingsFld
     this.tabCtc.add( this.rbCtcAllInSeries, gbcCtc );
 
     this.rbCtcM1ToClk2 = GUIFactory.createRadioButton(
-	"/M1 an Kanal 2, die anderen Kan\u00E4le in Reihe gekoppelt" );
+	LangUtil.getText( "ac1.option.m1_channel_2" ) );
     grpCTC.add( this.rbCtcM1ToClk2 );
     gbcCtc.insets.top = 0;
     gbcCtc.gridy++;
     this.tabCtc.add( this.rbCtcM1ToClk2, gbcCtc );
 
     this.cbCtcT0ToSound = GUIFactory.createCheckBox(
-				"CTC-Kanal 0 zum Lautsprecher" );
+				LangUtil.getText(
+					"ac1.option.ctc_channel_0" ) );
     gbcCtc.insets.top    = 10;
     gbcCtc.insets.left   = 5;
     gbcCtc.insets.bottom = 5;
@@ -268,7 +285,8 @@ public class AC1SettingsFld extends AbstractSettingsFld
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -280,7 +298,7 @@ public class AC1SettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.cbPasteFast = GUIFactory.createCheckBox(
-		"Einf\u00FCgen von Text durch Abfangen des Systemaufrufs" );
+		LangUtil.getText( "emusys.option.paste_text_intercepting" ) );
     this.tabEtc.add( this.cbPasteFast, gbcEtc );
 
     gbcEtc.insets.top    = 10;
@@ -291,7 +309,7 @@ public class AC1SettingsFld extends AbstractSettingsFld
     this.fldAltOS = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + AC1.PROP_OS_PREFIX,
-		"Alternatives Monitorprogramm (0000h-0FFFh):" );
+		LangUtil.getText( "ac1.text.alternative_monitor" ) );
     gbcEtc.insets.top    = 5;
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridy++;
@@ -300,7 +318,7 @@ public class AC1SettingsFld extends AbstractSettingsFld
     this.fldAltFont = new ROMFileSettingsFld(
 				settingsFrm,
 				propPrefix + AC1.PROP_FONT_PREFIX,
-				"Alternativer Zeichensatz:" );
+				LangUtil.getText( "emusys.text.alternative_character" ) );
     gbcEtc.gridy++;
     this.tabEtc.add( this.fldAltFont, gbcEtc );
 
@@ -311,7 +329,8 @@ public class AC1SettingsFld extends AbstractSettingsFld
 				propPrefix,
 				AC1.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 				true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -321,7 +340,8 @@ public class AC1SettingsFld extends AbstractSettingsFld
 				AC1.getAutoInputCharSet(),
 				AC1.DEFAULT_SWAP_KEY_CHAR_CASE,
 				AC1.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     // Listener

@@ -95,14 +95,15 @@ public class ROMSettingsFld
     this.btnUp = GUIFactory.createRelImageResourceButton(
 						this,
 						"nav/up.png",
-						"Auf" );
+						LangUtil.getText(
+							"common.action.up" ) );
     this.btnUp.addActionListener( this );
     panelRomBtnRight.add( this.btnUp );
 
     this.btnDown = GUIFactory.createRelImageResourceButton(
 						this,
 						"nav/down.png",
-						"Ab" );
+						LangUtil.getText( "common.action.down" ) );
     this.btnDown.addActionListener( this );
     panelRomBtnRight.add( this.btnDown );
 
@@ -249,11 +250,7 @@ public class ROMSettingsFld
       if( overlap ) {
 	if( !BaseDlg.showConfirmDlg(
 		this.settingsFrm,
-		LangUtil.tr(
-			"ROM-Bereiche \u00FCberlappen sich.\n"
-				+ "Im Fall einer \u00DCberlappung ist der"
-				+ " ROM-Bereich relevant,\n"
-				+ "der in der Liste weiter oben steht." ) ) )
+		LangUtil.getText( "customsys.text.rom_areas_overlap" ) ) )
 	{
 	  throw new UserCancelException();
 	}
@@ -261,11 +258,7 @@ public class ROMSettingsFld
       if( !at0000 && (nBootROMs == 0) ) {
 	if( !BaseDlg.showConfirmDlg(
 		this.settingsFrm,
-		LangUtil.tr(
-			"An der Adresse 0000h befindet sich kein ROM\n"
-				+ "und es ist auch kein Boot-ROM markiert.\n"
-				+ "Nach RESET beginnt die"
-				+ " Programmausf\u00FChrung somit im RAM!" ) ) )
+		LangUtil.getText( "customsys.text.no_rom_address" ) ) )
 	{
 	  throw new UserCancelException();
 	}

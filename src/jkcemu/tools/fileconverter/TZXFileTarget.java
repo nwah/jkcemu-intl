@@ -27,8 +27,8 @@ public class TZXFileTarget extends AbstractConvertTarget
 		BitSampleBuffer samples )
   {
     super( fileConvertFrm,
-	LangUtil.tr(
-			"CDT/TZX-Datei ({0})",
+	LangUtil.getText(
+			"fileconv.text.cdt_tzx_file",
 			TZXFile.getFileExtensionText() ) );
     this.samples     = samples;
     this.fileFilters = null;

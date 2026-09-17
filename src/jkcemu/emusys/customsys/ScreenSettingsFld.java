@@ -34,6 +34,7 @@ import jkcemu.base.UserCancelException;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.CustomSys;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.SettingsFrm;
 
@@ -42,10 +43,10 @@ public class ScreenSettingsFld
 			extends AbstractSettingsFld
 			implements ChangeListener, DocumentListener
 {
-  private static final String LABEL_COLS = "Anzahl Textspalten:";
-  private static final String LABEL_ROWS = "Anzahl Textzeilen:";
+  private static final String LABEL_COLS = "customsys.label.number_text_columns";
+  private static final String LABEL_ROWS = "customsys.label.number_text_rows";
   private static final String LABEL_BEGADDR
-				= "Anfangsadresse Bildspeicher (hex):";
+				= "customsys.label.start_address_video";
 
   private HexDocument        docScreenBegAddr;
   private JTextField         fldScreenBegAddr;
@@ -77,10 +78,11 @@ public class ScreenSettingsFld
 					0, 0 );
 
     this.cbScreenEnabled = GUIFactory.createCheckBox(
-					"Bildschirmausgabe emulieren" );
+					LangUtil.getText( "customsys.option.emulate_screen_output" ) );
     add( this.cbScreenEnabled, gbc );
 
-    this.labelScreenCols  = GUIFactory.createLabel( LABEL_COLS );
+    this.labelScreenCols  = GUIFactory.createLabel(
+		LangUtil.getText( LABEL_COLS ) );
     gbc.insets.left = 50;
     gbc.gridwidth   = 1;
     gbc.gridy++;
@@ -93,7 +95,8 @@ public class ScreenSettingsFld
     gbc.gridx++;
     add( this.comboScreenCols, gbc );
 
-    this.labelScreenRows  = GUIFactory.createLabel( LABEL_ROWS );
+    this.labelScreenRows  = GUIFactory.createLabel(
+		LangUtil.getText( LABEL_ROWS ) );
     gbc.insets.left = 50;
     gbc.gridx       = 0;
     gbc.gridy++;
@@ -106,14 +109,16 @@ public class ScreenSettingsFld
     gbc.gridx++;
     add( this.comboScreenRows, gbc );
 
-    this.labelScreenBegAddr = GUIFactory.createLabel( LABEL_BEGADDR );
+    this.labelScreenBegAddr = GUIFactory.createLabel(
+		LangUtil.getText( LABEL_BEGADDR ) );
     gbc.insets.left   = 50;
     gbc.insets.bottom = 5;
     gbc.gridx         = 0;
     gbc.gridy++;
     add( this.labelScreenBegAddr, gbc );
 
-    this.docScreenBegAddr = new HexDocument( 4, LABEL_BEGADDR );
+    this.docScreenBegAddr = new HexDocument(
+		4, LangUtil.getText( LABEL_BEGADDR ) );
     this.fldScreenBegAddr = GUIFactory.createTextField(
 						this.docScreenBegAddr,
 						5 );
@@ -152,10 +157,12 @@ public class ScreenSettingsFld
     this.fldAltFont = new ROMFileSettingsFld(
 			settingsFrm,
 			propPrefix + CustomSys.PROP_FONT_PREFIX,
-			"Alternativer Zeichensatz:" );
+			LangUtil.getText(
+				"emusys.text.alternative_character" ) );
     panelAltFont.add( this.fldAltFont, gbcAltFont );
 
-    this.labelAltFontBitOrder = GUIFactory.createLabel( "Bit-Anordnung:" );
+    this.labelAltFontBitOrder = GUIFactory.createLabel(
+		LangUtil.getText( "customsys.label.bit_arrangement" ) );
     gbcAltFont.fill           = GridBagConstraints.NONE;
     gbcAltFont.weightx        = 0.0;
     gbcAltFont.gridwidth      = 1;
@@ -165,7 +172,7 @@ public class ScreenSettingsFld
     ButtonGroup grpAltFontBitOrder = new ButtonGroup();
 
     this.rbAltFontBit0Left = GUIFactory.createRadioButton(
-						"Bit 0 links",
+						LangUtil.getText( "customsys.option.bit_0_left" ),
 						true );
     grpAltFontBitOrder.add( this.rbAltFontBit0Left );
     gbcAltFont.insets.top  = 5;
@@ -173,7 +180,8 @@ public class ScreenSettingsFld
     gbcAltFont.gridx++;
     panelAltFont.add( this.rbAltFontBit0Left, gbcAltFont );
 
-    this.rbAltFontBit0Right = GUIFactory.createRadioButton( "Bit 0 rechts" );
+    this.rbAltFontBit0Right = GUIFactory.createRadioButton( LangUtil.getText(
+			"customsys.option.bit_0_right" ) );
     grpAltFontBitOrder.add( this.rbAltFontBit0Right );
     gbcAltFont.gridx++;
     panelAltFont.add( this.rbAltFontBit0Right, gbcAltFont );
@@ -241,22 +249,21 @@ public class ScreenSettingsFld
     catch( NumberFormatException ex ) {
       if( selected && screenEnabled ) {
 	throw new UserInputException(
-		LABEL_BEGADDR + CustomSysSettingsFld.TEXT_INVALID_ADDR );
+		LangUtil.getText( LABEL_BEGADDR ) + LangUtil.getText( CustomSysSettingsFld.TEXT_INVALID_ADDR ) );
       }
     }
     if( selected && screenEnabled ) {
       if( screenCols < 1 ) {
 	throw new UserInputException(
-		LABEL_COLS + " Ung\u00FCltiger Wert" );
+		LangUtil.getText( LABEL_COLS ) + " Ung\u00FCltiger Wert" );
       }
       if( screenRows < 1 ) {
 	throw new UserInputException(
-		LABEL_ROWS + CustomSysSettingsFld.TEXT_INVALID_VALUE );
+		LangUtil.getText( LABEL_ROWS ) + LangUtil.getText( CustomSysSettingsFld.TEXT_INVALID_VALUE ) );
       }
       if( (screenBegAddr + (screenCols * screenRows)) > 0x10000 ) {
-	throw new UserInputException(
-		"Bildwiederholspeicher ragt \u00FCber"
-			+ " die Adresse FFFFh hinaus." );
+	throw new UserInputException( LangUtil.getText(
+			"customsys.error.video_ram_extends" ) );
       }
     }
     EmuUtil.setProperty(

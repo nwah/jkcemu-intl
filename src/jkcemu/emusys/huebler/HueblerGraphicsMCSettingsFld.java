@@ -23,6 +23,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.HueblerGraphicsMC;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -56,7 +57,8 @@ public class HueblerGraphicsMCSettingsFld extends AbstractSettingsFld
 
     // Tab Erweiterungen
     this.tabExt = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Erweiterungen", this.tabExt );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.expansions" ), this.tabExt );
 
     GridBagConstraints gbcExt = new GridBagConstraints(
 					0, 0,
@@ -68,11 +70,13 @@ public class HueblerGraphicsMCSettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.cbKCNet = GUIFactory.createCheckBox(
-			"KCNet-kompatible Netzwerkkarte" );
+			LangUtil.getText(
+				"emusys.option.kcnet_compatible_network" ) );
     this.tabExt.add( this.cbKCNet, gbcExt );
 
     this.cbVDIP = GUIFactory.createCheckBox(
-			"USB-Anschluss (Vinculum VDIP Modul)" );
+			LangUtil.getText(
+				"emusys.option.usb_port_vinculum" ) );
     gbcExt.insets.top    = 0;
     gbcExt.insets.bottom = 5;
     gbcExt.gridy++;
@@ -81,7 +85,8 @@ public class HueblerGraphicsMCSettingsFld extends AbstractSettingsFld
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -93,12 +98,12 @@ public class HueblerGraphicsMCSettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.cbBasic = GUIFactory.createCheckBox(
-		"BASIC-Interpreter im ROM enthalten",
+		LangUtil.getText( "huebler.option.basic_interpreter" ),
 		true );
     this.tabEtc.add( this.cbBasic, gbcEtc );
 
     this.cbCatchPrintCalls = GUIFactory.createCheckBox(
-		"Betriebssystemaufrufe f\u00FCr Druckerausgaben abfangen",
+		LangUtil.getText( "emusys.option.intercept_operating" ),
 		true );
     gbcEtc.insets.top    = 0;
     gbcEtc.insets.bottom = 5;
@@ -112,7 +117,8 @@ public class HueblerGraphicsMCSettingsFld extends AbstractSettingsFld
 		propPrefix,
 		HueblerGraphicsMC.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 		true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -122,7 +128,8 @@ public class HueblerGraphicsMCSettingsFld extends AbstractSettingsFld
 		AutoInputCharSet.getStdCharSet(),
 		HueblerGraphicsMC.DEFAULT_SWAP_KEY_CHAR_CASE,
 		HueblerGraphicsMC.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     // Listener

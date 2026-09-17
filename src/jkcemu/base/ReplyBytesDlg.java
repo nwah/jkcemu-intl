@@ -79,9 +79,11 @@ public class ReplyBytesDlg extends BaseDlg
 
 
     // Eingabebereich
-    add( GUIFactory.createLabel( "Bytes eingeben als:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "base.label.enter_bytes" ) ), gbc );
 
-    this.labelByteOrder = GUIFactory.createLabel( "Byte-Anordnung:" );
+    this.labelByteOrder = GUIFactory.createLabel(
+		LangUtil.getText( "base.label.byte_order" ) );
     gbc.gridx++;
     add( this.labelByteOrder, gbc );
 
@@ -89,10 +91,10 @@ public class ReplyBytesDlg extends BaseDlg
     ButtonGroup grpOrder = new ButtonGroup();
 
     this.rbHex8 = GUIFactory.createRadioButton(
-					"8-Bit hexadezimale Zahlen",
+					LangUtil.getText( "base.option.8_bit_hexadecimal" ),
 					true );
-    this.rbHex8.setMnemonic(
-		LangUtil.mnemonic( "8-Bit hexadezimale Zahlen", KeyEvent.VK_H ) );
+    this.rbHex8.setMnemonic( LangUtil.mnemonic(
+			"base.option.8_bit_hexadecimal", KeyEvent.VK_H ) );
     grpType.add( this.rbHex8 );
     gbc.insets.top = 0;
     gbc.gridx      = 0;
@@ -100,49 +102,53 @@ public class ReplyBytesDlg extends BaseDlg
     add( this.rbHex8, gbc );
 
     this.rbLittleEndian = GUIFactory.createRadioButton(
-						"Little Endian",
+						LangUtil.getText( "common.option.little_endian" ),
 						!bigEndian );
-    this.rbLittleEndian.setMnemonic(
-		LangUtil.mnemonic( "Little Endian", KeyEvent.VK_L ) );
+    this.rbLittleEndian.setMnemonic( LangUtil.mnemonic(
+			"common.option.little_endian", KeyEvent.VK_L ) );
     grpOrder.add( this.rbLittleEndian );
     gbc.gridx++;
     add( this.rbLittleEndian, gbc );
   
-    this.rbDec8 = GUIFactory.createRadioButton( "8-Bit Dezimalzahlen" );
-    this.rbDec8.setMnemonic(
-		LangUtil.mnemonic( "8-Bit Dezimalzahlen", KeyEvent.VK_8 ) );
+    this.rbDec8 = GUIFactory.createRadioButton(
+		LangUtil.getText( "base.option.8_bit_decimal" ) );
+    this.rbDec8.setMnemonic( LangUtil.mnemonic(
+			"base.option.8_bit_decimal", KeyEvent.VK_8 ) );
     grpType.add( this.rbDec8 );
     gbc.gridx = 0;
     gbc.gridy++;
     add( this.rbDec8, gbc );
 
     this.rbBigEndian = GUIFactory.createRadioButton(
-						"Big Endian",
+						LangUtil.getText( "base.option.big_endian" ),
 						bigEndian );
     this.rbBigEndian.setMnemonic(
-		LangUtil.mnemonic( "Big Endian", KeyEvent.VK_B ) );
+		LangUtil.mnemonic( "base.option.big_endian", KeyEvent.VK_B ) );
     grpOrder.add( this.rbBigEndian );
     gbc.gridx++;
     add( this.rbBigEndian, gbc );
   
-    this.rbDec16 = GUIFactory.createRadioButton( "16-Bit Dezimalzahlen" );
-    this.rbDec16.setMnemonic(
-		LangUtil.mnemonic( "16-Bit Dezimalzahlen", KeyEvent.VK_6 ) );
+    this.rbDec16 = GUIFactory.createRadioButton(
+		LangUtil.getText( "base.option.16_bit_decimal" ) );
+    this.rbDec16.setMnemonic( LangUtil.mnemonic(
+			"base.option.16_bit_decimal", KeyEvent.VK_6 ) );
     grpType.add( this.rbDec16 );
     gbc.gridx = 0;
     gbc.gridy++;
     add( this.rbDec16, gbc );
 
-    this.rbDec32 = GUIFactory.createRadioButton( "32-Bit Dezimalzahlen" );
-    this.rbDec32.setMnemonic(
-		LangUtil.mnemonic( "32-Bit Dezimalzahlen", KeyEvent.VK_3 ) );
+    this.rbDec32 = GUIFactory.createRadioButton(
+		LangUtil.getText( "base.option.32_bit_decimal" ) );
+    this.rbDec32.setMnemonic( LangUtil.mnemonic(
+			"base.option.32_bit_decimal", KeyEvent.VK_3 ) );
     grpType.add( this.rbDec32 );
     gbc.gridy++;
     add( this.rbDec32, gbc );
 
-    this.rbString = GUIFactory.createRadioButton( "ASCII-Zeichenkette" );
-    this.rbString.setMnemonic(
-		LangUtil.mnemonic( "ASCII-Zeichenkette", KeyEvent.VK_A ) );
+    this.rbString = GUIFactory.createRadioButton(
+		LangUtil.getText( "base.option.ascii_string" ) );
+    this.rbString.setMnemonic( LangUtil.mnemonic(
+			"base.option.ascii_string", KeyEvent.VK_A ) );
     grpType.add( this.rbString );
     gbc.insets.bottom = 5;
     gbc.gridy++;
@@ -152,7 +158,8 @@ public class ReplyBytesDlg extends BaseDlg
     gbc.insets.bottom = 0;
     gbc.gridwidth     = 2;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Eingabe:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "base.label.input" ) ), gbc );
 
     if( inputFmt != null ) {
       switch( inputFmt ) {
@@ -204,7 +211,8 @@ public class ReplyBytesDlg extends BaseDlg
     this.btnPaste = GUIFactory.createRelImageResourceButton(
 					this,
 					"edit/paste.png",
-	                                EmuUtil.TEXT_PASTE );
+	                                LangUtil.getText(
+						EmuUtil.TEXT_PASTE ) );
     gbcInput.fill        = GridBagConstraints.NONE;
     gbcInput.weightx     = 0.0;
     gbcInput.insets.left = 5;

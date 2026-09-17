@@ -31,7 +31,7 @@ public class HexDocument extends PlainDocument
     this.maxLen     = maxLen;
     this.preErrText = "";
     if( label != null ) {
-      label = LangUtil.tr( label );
+      label = LangUtil.getText( label );
       if( label.endsWith( ":" ) ) {
 	this.preErrText = label + "\n";
       } else {

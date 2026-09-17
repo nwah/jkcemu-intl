@@ -55,6 +55,7 @@ import jkcemu.emusys.KC85;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -243,7 +244,8 @@ public class KC85SettingsFld
 
     // Tab Module
     this.tabModule = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Module", this.tabModule );
+    this.tabbedPane.addTab( LangUtil.getText( "kc85.section.modules" ),
+		this.tabModule );
 
     GridBagConstraints gbcModule = new GridBagConstraints(
 					0, 0,
@@ -286,14 +288,15 @@ public class KC85SettingsFld
     this.btnModuleUp = GUIFactory.createRelImageResourceButton(
 						this,
 						"nav/up.png",
-						"Auf" );
+						LangUtil.getText(
+							"common.action.up" ) );
     this.btnModuleUp.addActionListener( this );
     panelModBtnRight.add( this.btnModuleUp );
 
     this.btnModuleDown = GUIFactory.createRelImageResourceButton(
 						this,
 						"nav/down.png",
-						"Ab" );
+						LangUtil.getText( "common.action.down" ) );
     this.btnModuleDown.addActionListener( this );
     panelModBtnRight.add( this.btnModuleDown );
 
@@ -308,7 +311,8 @@ public class KC85SettingsFld
     this.btnModuleAdd.addKeyListener( this );
     panelModBtnBottom.add( this.btnModuleAdd );
 
-    this.btnModuleChange = GUIFactory.createButton( "\u00C4ndern" );
+    this.btnModuleChange = GUIFactory.createButton(
+		LangUtil.getText( "kc85.action.change" ) );
     this.btnModuleChange.addActionListener( this );
     this.btnModuleChange.addKeyListener( this );
     panelModBtnBottom.add( this.btnModuleChange );
@@ -329,13 +333,16 @@ public class KC85SettingsFld
 
     this.popupModuleAdd = GUIFactory.createPopupMenu();
 
-    JMenu mnuModuleRAM = GUIFactory.createMenu( "RAM-Module" );
+    JMenu mnuModuleRAM = GUIFactory.createMenu(
+		LangUtil.getText( "kc85.menu.ram_modules" ) );
     this.popupModuleAdd.add( mnuModuleRAM );
 
-    JMenu mnuModuleROM = GUIFactory.createMenu( "ROM-Module" );
+    JMenu mnuModuleROM = GUIFactory.createMenu(
+		LangUtil.getText( "kc85.menu.rom_modules" ) );
     this.popupModuleAdd.add( mnuModuleROM );
 
-    JMenu mnuModuleEtc = GUIFactory.createMenu( "Sonstige Module" );
+    JMenu mnuModuleEtc = GUIFactory.createMenu(
+		LangUtil.getText( "kc85.menu.other_modules" ) );
     this.popupModuleAdd.add( mnuModuleEtc );
 
     for( int i = 0; i < modules.length; i++ ) {
@@ -364,24 +371,26 @@ public class KC85SettingsFld
 
     this.popupModuleChange = GUIFactory.createPopupMenu();
 
-    this.mnuModuleEdit = GUIFactory.createMenuItem( "Bearbeiten..." );
+    this.mnuModuleEdit = GUIFactory.createMenuItem(
+		LangUtil.getText( "kc85.action.edit" ) );
     this.mnuModuleEdit.addActionListener( this );
     this.popupModuleChange.add( this.mnuModuleEdit );
 
     this.mnuModuleIntoD001orD002 = GUIFactory.createMenuItem(
-						"In D001/D002 stecken" );
+						LangUtil.getText( "kc85.action.plug_d001_d002" ) );
     this.mnuModuleIntoD001orD002.addActionListener( this );
     this.popupModuleChange.add( this.mnuModuleIntoD001orD002 );
 
     this.mnuModuleIntoDiskStation = GUIFactory.createMenuItem(
-						"In D004/D008 stecken" );
+						LangUtil.getText( "kc85.action.plug_d004_d008" ) );
     this.mnuModuleIntoDiskStation.addActionListener( this );
     this.popupModuleChange.add( this.mnuModuleIntoDiskStation );
 
 
     // Tab D004/D008
     this.tabDiskStation = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "D004/D008", this.tabDiskStation );
+    this.tabbedPane.addTab( LangUtil.getText( "kc85.section.d004_d008" ),
+		this.tabDiskStation );
 
     GridBagConstraints gbcDiskStation = new GridBagConstraints(
 					0, 0,
@@ -395,39 +404,38 @@ public class KC85SettingsFld
     ButtonGroup grpDiskStation = new ButtonGroup();
 
     this.rbDiskStationNone = GUIFactory.createRadioButton(
-		"Keine Floppy-Disk-Erweiterung emulieren",
+		LangUtil.getText( "kc85.option.not_emulate_floppy" ),
 		true );
     grpDiskStation.add( this.rbDiskStationNone );
     this.rbDiskStationNone.addActionListener( this );
     this.tabDiskStation.add( this.rbDiskStationNone, gbcDiskStation );
 
-    this.rbDiskStationD004_20 = GUIFactory.createRadioButton(
-		"Floppy-Disk-Erweiterung D004 mit Original-ROM-Version 2.0"
-					+ " (optional mit GIDE)" );
+    this.rbDiskStationD004_20 = GUIFactory.createRadioButton( LangUtil.getText(
+			"kc85.option.floppy_disk_expansion_d004_original" ) );
     grpDiskStation.add( this.rbDiskStationD004_20 );
     this.rbDiskStationD004_20.addActionListener( this );
     gbcDiskStation.insets.top = 0;
     gbcDiskStation.gridy++;
     this.tabDiskStation.add( this.rbDiskStationD004_20, gbcDiskStation );
 
-    this.rbDiskStationD004_35 = GUIFactory.createRadioButton(
-		"Floppy-Disk-Erweiterung D004 mit ROM-Version 3.5"
-					+ " (optional mit GIDE)" );
+    this.rbDiskStationD004_35 = GUIFactory.createRadioButton( LangUtil.getText(
+			"kc85.option.floppy_disk_expansion_d004_rom" ) );
     grpDiskStation.add( this.rbDiskStationD004_35 );
     this.rbDiskStationD004_35.addActionListener( this );
     gbcDiskStation.insets.top = 0;
     gbcDiskStation.gridy++;
     this.tabDiskStation.add( this.rbDiskStationD004_35, gbcDiskStation );
 
-    this.rbDiskStationD008 = GUIFactory.createRadioButton(
-		"Floppy-Disk-Erweiterung D008 (immer mit GIDE)" );
+    this.rbDiskStationD008 = GUIFactory.createRadioButton( LangUtil.getText(
+			"kc85.option.floppy_disk_expansion_d008_always" ) );
     grpDiskStation.add( this.rbDiskStationD008 );
     this.rbDiskStationD008.addActionListener( this );
     gbcDiskStation.gridy++;
     this.tabDiskStation.add( this.rbDiskStationD008, gbcDiskStation );
 
     this.labelDiskStationRom = GUIFactory.createLabel(
-				"Alternativer D004/D008-ROM-Inhalt:" );
+				LangUtil.getText(
+					"kc85.label.alternative_d004_d008" ) );
     gbcDiskStation.insets.top = 20;
     gbcDiskStation.gridy++;
     this.tabDiskStation.add( this.labelDiskStationRom, gbcDiskStation );
@@ -444,7 +452,7 @@ public class KC85SettingsFld
 		= GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ) );
     this.btnDiskStationRomFileSelect.addActionListener( this );
     gbcDiskStation.fill        = GridBagConstraints.NONE;
     gbcDiskStation.weightx     = 0.0;
@@ -458,14 +466,15 @@ public class KC85SettingsFld
 		= GUIFactory.createRelImageResourceButton(
 					this,
 					"file/delete.png",
-					EmuUtil.TEXT_REMOVE_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_REMOVE_ROM_FILE ) );
     this.btnDiskStationRomFileRemove.addActionListener( this );
     gbcDiskStation.gridx++;
     this.tabDiskStation.add(
 		this.btnDiskStationRomFileRemove,
 		gbcDiskStation );
 
-    this.labelDiskStationSpeed = GUIFactory.createLabel( "Taktfrequenz:" );
+    this.labelDiskStationSpeed = GUIFactory.createLabel(
+		LangUtil.getText( "emusys.label.clock_frequency" ) );
     gbcDiskStation.insets.left = 5;
     gbcDiskStation.insets.top  = 20;
     gbcDiskStation.gridwidth   = GridBagConstraints.REMAINDER;
@@ -484,18 +493,20 @@ public class KC85SettingsFld
     ButtonGroup grpDiskStationSpeed = new ButtonGroup();
 
     this.rbDiskStationSpeedDefault = GUIFactory.createRadioButton(
-							"Original",
+							LangUtil.getText( "emusys.msg.original" ),
 							true );
     this.rbDiskStationSpeedDefault.addActionListener( this );
     grpDiskStationSpeed.add( this.rbDiskStationSpeedDefault );
     panelDiskStationSpeed.add( this.rbDiskStationSpeedDefault );
 
-    this.rbDiskStationSpeed8MHz = GUIFactory.createRadioButton( "8 MHz" );
+    this.rbDiskStationSpeed8MHz = GUIFactory.createRadioButton(
+		LangUtil.getText( "kc85.option.8_mhz" ) );
     this.rbDiskStationSpeed8MHz.addActionListener( this );
     grpDiskStationSpeed.add( this.rbDiskStationSpeed8MHz );
     panelDiskStationSpeed.add( this.rbDiskStationSpeed8MHz );
 
-    this.rbDiskStationSpeed16MHz = GUIFactory.createRadioButton( "16 MHz" );
+    this.rbDiskStationSpeed16MHz = GUIFactory.createRadioButton(
+		LangUtil.getText( "kc85.option.16_mhz" ) );
     this.rbDiskStationSpeed16MHz.addActionListener( this );
     grpDiskStationSpeed.add( this.rbDiskStationSpeed16MHz );
     panelDiskStationSpeed.add( this.rbDiskStationSpeed16MHz );
@@ -503,12 +514,14 @@ public class KC85SettingsFld
 
     // Tab GIDE
     this.tabGIDE = new GIDESettingsFld( settingsFrm, propPrefix );
-    this.tabbedPane.addTab( "GIDE", this.tabGIDE );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.gide" ), this.tabGIDE );
 
 
     // Tab ROM
     this.tabROM = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "ROM", this.tabROM );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.rom" ), this.tabROM );
 
     GridBagConstraints gbcROM = new GridBagConstraints(
 						0, 0,
@@ -520,7 +533,9 @@ public class KC85SettingsFld
 						0, 0 );
 
     this.tabROM.add(
-		GUIFactory.createLabel( "Alternative ROM-Inhalte:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText(
+				"kc85.label.alternative_rom_contents" ) ),
 		gbcROM );
 
     this.altRomLabels     = new JLabel[ this.altRomTitles.length ];
@@ -548,7 +563,7 @@ public class KC85SettingsFld
       JButton btn = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ) );
       btn.addActionListener( this );
       gbcROM.fill        = GridBagConstraints.NONE;
       gbcROM.weightx     = 0.0;
@@ -560,7 +575,7 @@ public class KC85SettingsFld
       btn = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/delete.png",
-					EmuUtil.TEXT_REMOVE_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_REMOVE_ROM_FILE ) );
       btn.addActionListener( this );
       gbcROM.gridx++;
       this.tabROM.add( btn, gbcROM );
@@ -570,7 +585,8 @@ public class KC85SettingsFld
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 						0, 0,
@@ -582,14 +598,13 @@ public class KC85SettingsFld
 						0, 0 );
 
     this.cbKeysDirectToBuf = GUIFactory.createCheckBox(
-			"Schnellere Tastatureingaben durch direktes"
-				+ " Schreiben in den Tastaturpuffer" );
+			LangUtil.getText(
+				"kc85.option.faster_keyboard_input" ) );
     this.cbKeysDirectToBuf.addActionListener( this );
     this.tabEtc.add( this.cbKeysDirectToBuf, gbcEtc );
 
     this.cbPasteFast = GUIFactory.createCheckBox(
-		"Einf\u00FCgen von Text aus der Zwischenablage"
-			+ " direkt in den Tastaturpuffer",
+		LangUtil.getText( "kc85.option.paste_text_clipboard" ),
 		true );
     gbcEtc.insets.top = 0;
     gbcEtc.gridy++;
@@ -606,26 +621,26 @@ public class KC85SettingsFld
     gbcEtc.weightx = 0.0;
     gbcEtc.gridy++;
     this.tabEtc.add(
-	GUIFactory.createLabel( "Die folgende Option ist"
-		+ " f\u00FCr die korrekte Darstellung"
-		+ " einiger Programme notwendig," ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "kc85.label.following_option" ) ),
 	gbcEtc );
 
     gbcEtc.insets.top = 0;
     gbcEtc.gridy++;
     this.tabEtc.add(
-	GUIFactory.createLabel( "ben\u00F6tigt aber relativ viel"
-		+ " Rechenleistung. Sollte diese Leistung nicht zur" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"kc85.label.requires_relatively_much" ) ),
 	gbcEtc );
 
     gbcEtc.gridy++;
     this.tabEtc.add(
-	GUIFactory.createLabel( "Verf\u00FCgung stehen,"
-		+ " dann schalten Sie die Option bitte aus." ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"kc85.label.available_please_switch" ) ),
 	gbcEtc );
 
     this.cbVideoTiming = GUIFactory.createCheckBox(
-			"Zeitverhalten der Bildschirmsteuerung emulieren",
+			LangUtil.getText(
+				"kc85.option.emulate_timing_behavior" ),
 			KC85.getDefaultEmulateVideoTiming() );
     this.cbVideoTiming.addActionListener( this );
     gbcEtc.insets.top    = 5;
@@ -642,7 +657,8 @@ public class KC85SettingsFld
 			KC85.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX_2
 			: KC85.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX_4,
 		true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -654,7 +670,8 @@ public class KC85SettingsFld
 		this.kcTypeNum < 4 ?
 			KC85.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX_2
 			: KC85.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX_4 );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     // Drag&Drop ermoeglichen
@@ -802,9 +819,7 @@ public class KC85SettingsFld
 		Integer.toString( nDiskStationModules ) );
       if( !isDiskStationEnabled() && (nDiskStationModules > 0) ) {
 	throw new UserInputException(
-		"Sie k\u00F6nnen nur dann Module in die D004-Sch\u00E4chte"
-			+ "F0 und F4 stecken,\n"
-			+ "wenn Sie die D004-Emulation aktivieren." );
+		LangUtil.getText( "kc85.error.only_plug_modules" ) );
       }
 
       // Tab D004/D008

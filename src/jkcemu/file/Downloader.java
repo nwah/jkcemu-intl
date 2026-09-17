@@ -29,6 +29,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.etc.ReadableByteArrayOutputStream;
+import jkcemu.lang.LangUtil;
 
 
 public class Downloader extends Thread
@@ -227,7 +228,9 @@ public class Downloader extends Thread
 		String              fileName,
 		Downloader.Consumer consumer )
   {
-    super( Main.getThreadGroup(), Main.APPNAME + " Downloader" );
+    super(
+		Main.getThreadGroup(),
+		LangUtil.getText( "file.title.jkcemu_downloader" ) );
     this.owner      = owner;
     this.url        = url;
     this.maxFileLen = maxFileLen;
@@ -252,6 +255,6 @@ public class Downloader extends Thread
 
   private static void throwFileTooBig() throws IOException
   {
-    throw new IOException( "Datei zu gro\u00DF!" );
+    throw new IOException( LangUtil.getText( "file.error.file_large" ) );
   }
 }

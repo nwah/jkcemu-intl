@@ -26,6 +26,7 @@ import jkcemu.base.BaseDlg;
 import jkcemu.base.CharPageFld;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class CharSelectDlg extends BaseDlg implements CharPageFld.Callback
@@ -49,7 +50,7 @@ public class CharSelectDlg extends BaseDlg implements CharPageFld.Callback
   public CharSelectDlg( TextEditFrm textEditFrm )
   {
     super( textEditFrm, Dialog.ModalityType.MODELESS );
-    setTitle( "Zeichenauswahl" );
+    setTitle( LangUtil.getText( "text.title.character_selection" ) );
     this.textEditFrm = textEditFrm;
     this.notified    = false;
     this.codeBase    = 0;
@@ -82,13 +83,14 @@ public class CharSelectDlg extends BaseDlg implements CharPageFld.Callback
 					0, 0 );
 
     panelHeader.add(
-		GUIFactory.createLabel( "Unicode-Seite [hex]:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText( "text.label.unicode_page_hex" ) ),
 		gbcHeader );
 
     this.btnPrevPage = GUIFactory.createRelImageResourceButton(
 					this,
 					"nav/back.png",
-					"Vorherige Seite" );
+					LangUtil.getText( "text.action.previous_page" ) );
     gbcHeader.gridx++;
     panelHeader.add( this.btnPrevPage, gbcHeader );
 
@@ -99,14 +101,16 @@ public class CharSelectDlg extends BaseDlg implements CharPageFld.Callback
     this.btnNextPage = GUIFactory.createRelImageResourceButton(
 					this,
 					"nav/next.png",
-					"N\u00E4chste Seite" );
+					LangUtil.getText(
+						"text.action.next_page" ) );
     gbcHeader.gridx++;
     panelHeader.add( this.btnNextPage, gbcHeader );
 
     gbcHeader.insets.left = 10;
     gbcHeader.gridx++;
     panelHeader.add(
-		GUIFactory.createLabel( "Skalierung:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText( "text.label.scaling" ) ),
 		gbcHeader );
 
     ButtonGroup grpScale = new ButtonGroup();
@@ -156,7 +160,8 @@ public class CharSelectDlg extends BaseDlg implements CharPageFld.Callback
 					0, 0 );
 
     panelFooter.add(
-	GUIFactory.createLabel( "Ausgew\u00E4hltes Zeichen:" ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "text.label.selected_character" ) ),
 	gbcFooter );
 
     this.fldSelectedChar = GUIFactory.createTextField( 3 );
@@ -166,7 +171,8 @@ public class CharSelectDlg extends BaseDlg implements CharPageFld.Callback
     panelFooter.add( this.fldSelectedChar, gbcFooter );
 
     gbcFooter.gridx++;
-    panelFooter.add( GUIFactory.createLabel( "Code:" ), gbcFooter );
+    panelFooter.add( GUIFactory.createLabel(
+		LangUtil.getText( "text.label.code" ) ), gbcFooter );
 
     this.fldCharInfo = GUIFactory.createTextField();
     this.fldCharInfo.setEditable( false );
@@ -183,15 +189,18 @@ public class CharSelectDlg extends BaseDlg implements CharPageFld.Callback
     gbcFooter.gridx++;
     panelFooter.add( panelBtn, gbcFooter );
 
-    this.btnPaste = GUIFactory.createButton( "In Text einf\u00FCgen" );
+    this.btnPaste = GUIFactory.createButton(
+		LangUtil.getText( "text.action.insert_text" ) );
     this.btnPaste.setEnabled( false );
     panelBtn.add( this.btnPaste );
 
-    this.btnCopy = GUIFactory.createButton( EmuUtil.TEXT_COPY );
+    this.btnCopy = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_COPY ) );
     this.btnCopy.setEnabled( false );
     panelBtn.add( this.btnCopy );
 
-    this.btnClose = GUIFactory.createButton( EmuUtil.TEXT_CLOSE );
+    this.btnClose = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_CLOSE ) );
     panelBtn.add( this.btnClose );
 
 

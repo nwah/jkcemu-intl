@@ -9,6 +9,7 @@
 package jkcemu.programming.basic;
 
 import java.text.CharacterIterator;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 
 
@@ -1631,8 +1632,9 @@ public class BasicExprParser
 		    BasicUtil.ensureNumericType( rv );
 		    compiler.parseCallableCall( iter, context, entry );
 		  } else {
-		    throw new PrgException( "Aufruf einer Prozedur"
-				+ " an dieser Stelle nicht erlaubt" );
+		    throw new PrgException(
+				LangUtil.getText(
+					"basic.error.calling_procedure_not_allowed" ) );
 		  }
 		} else {
 		  SimpleVarInfo varInfo = compiler.checkVariable(
@@ -1664,6 +1666,7 @@ public class BasicExprParser
 
   private static void throwCondOpExpected() throws PrgException
   {
-    throw new PrgException( "Vergleichsoperator erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.comparison_operator" ) );
   }
 }

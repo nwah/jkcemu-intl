@@ -210,16 +210,15 @@ public class TarEntry
 	} else {
 	  errMsg = addLine(
 			errMsg,
-			LangUtil.tr(
-				"Ung\u00FCltiges Zeichen im Namen"
-					+ " des Eintrags" ) );
+			LangUtil.getText(
+				"file.text.invalid_character_name" ) );
 	}
       }
       entryName = buf.toString();
     }
     if( entryName.isEmpty() ) {
       errMsg = addLine( errMsg,
-			LangUtil.tr( "Name des Eintrags fehlt" ) );
+			LangUtil.getText( "file.text.name_entry_missing" ) );
     }
     String    typeText  = null;
     EntryType entryType = EntryType.OTHER;

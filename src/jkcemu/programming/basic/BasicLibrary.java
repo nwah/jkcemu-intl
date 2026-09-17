@@ -6484,12 +6484,12 @@ public class BasicLibrary
       PrgLogger logger = compiler.getLogger();
       if( logger != null ) {
 	if( handlerLog.length() > 0 ) {
-	  logger.appendToOutLog( LangUtil.tr(
-		"Eingebundene Treiber f\u00FCr OPEN: " ) );
+	  logger.appendToOutLog( LangUtil.getText(
+		"basic.text.included_drivers_open" ) );
 	  logger.appendToOutLog( handlerLog.toString() );
 	} else {
-	  logger.appendToOutLog( LangUtil.tr(
-		"Warnung: Keine Treiber f\u00FCr OPEN eingebunden" ) );
+	  logger.appendToOutLog( LangUtil.getText(
+		"basic.text.warning_no_drivers" ) );
 	}
 	logger.appendToOutLog( "\n" );
       }

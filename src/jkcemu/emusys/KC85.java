@@ -185,11 +185,11 @@ public class KC85 extends EmuSys implements
   private static final FloppyDiskInfo[] availableFloppyDisks = {
 		new FloppyDiskInfo(
 			"/disks/kc85/kc85caos.dump.gz",
-			"KC85 CAOS Systemdiskette",
+			"emusys.text.kc85_caos_system",
 			2, 2048, true ),
 		new FloppyDiskInfo(
 			"/disks/kc85/kc85microdos.dump.gz",
-			"KC85 MicroDOS Systemdiskette",
+			"emusys.text.kc85_microdos_system",
 			2, 2048, true ) };
 
   private static final int[][] rawRGBValues = {
@@ -434,8 +434,10 @@ public class KC85 extends EmuSys implements
     this.ramPixel1 = new byte[ 0x4000 ];
 
     Z80CPU cpu       = emuThread.getZ80CPU();
-    this.ctc         = new Z80CTC( "CTC (E/A-Adressen 8Ch-8Fh)" );
-    this.pio         = new Z80PIO( "PIO (E/A-Adressen 88h-8Bh)" );
+    this.ctc         = new Z80CTC(
+		LangUtil.getText( "emusys.text.ctc_i_o_addresses_8ch" ) );
+    this.pio         = new Z80PIO(
+		LangUtil.getText( "emusys.text.pio_i_o_addresses_88h" ) );
     this.joyModule   = null;
     this.d004        = null;
     if( emulatesD008( props ) ) {
@@ -444,7 +446,8 @@ public class KC85 extends EmuSys implements
       this.d004 = new D004( this, props, this.propPrefix );
     }
     this.d001SoundDevice = new CPUSynchronSoundDevice(
-				"Tongeneratoren im Grundger\u00E4t",
+				LangUtil.getText(
+					"emusys.text.sound_generators_base" ),
 				true,
 				false );
     this.m066SoundDevice = null;
@@ -783,32 +786,32 @@ public class KC85 extends EmuSys implements
 	      buf.append( this.basicSegNum );
 	      buf.append( '\u0020' );
 	    }
-	    buf.append( EmuUtil.TEXT_ON );
+	    buf.append( LangUtil.getText( EmuUtil.TEXT_ON ) );
 	  }
 	} else {
-	  buf.append( EmuUtil.TEXT_OFF );
+	  buf.append( LangUtil.getText( EmuUtil.TEXT_OFF ) );
 	}
 	buf.append( "</td></tr>\n" );
       }
       buf.append( "<tr><td>RAM 0:</td><td>" );
       if( this.ram0Enabled ) {
-	buf.append( EmuUtil.TEXT_ON );
+	buf.append( LangUtil.getText( EmuUtil.TEXT_ON ) );
 	if( !this.ram0Writeable ) {
-	  buf.append( LangUtil.tr( "(schreibgesch&uuml;tzt)" ) );
+	  buf.append( LangUtil.getText( "emusys.text.write_protected" ) );
 	}
       } else {
-	buf.append( EmuUtil.TEXT_OFF );
+	buf.append( LangUtil.getText( EmuUtil.TEXT_OFF ) );
       }
       buf.append( "</td></tr>\n" );
       if( this.kcTypeNum >= 4 ) {
 	buf.append( "<tr><td>RAM 4:</td><td>" );
 	if( this.ram4Enabled ) {
-	  buf.append( EmuUtil.TEXT_ON );
+	  buf.append( LangUtil.getText( EmuUtil.TEXT_ON ) );
 	  if( !this.ram4Writeable ) {
-	    buf.append( LangUtil.tr( "(schreibgesch&uuml;tzt)" ) );
+	    buf.append( LangUtil.getText( "emusys.text.write_protected" ) );
 	  }
 	} else {
-	  buf.append( EmuUtil.TEXT_OFF );
+	  buf.append( LangUtil.getText( EmuUtil.TEXT_OFF ) );
 	}
 	buf.append( "</td></tr>\n"
 		+ "<tr><td>RAM 8:</td><td>" );
@@ -818,15 +821,15 @@ public class KC85 extends EmuSys implements
 	    buf.append( this.ram8SegNum );
 	    buf.append( '\u0020' );
 	  }
-	  buf.append( EmuUtil.TEXT_ON );
+	  buf.append( LangUtil.getText( EmuUtil.TEXT_ON ) );
 	  if( !this.ram8Writeable ) {
-	    buf.append( LangUtil.tr( "(schreibgesch&uuml;tzt)" ) );
+	    buf.append( LangUtil.getText( "emusys.text.write_protected" ) );
 	  }
 	  if( this.irmEnabled ) {
-	    buf.append( LangUtil.tr( ", aber vom IRM &uuml;berdeckt" ) );
+	    buf.append( LangUtil.getText( "emusys.text.covered_irm" ) );
 	  }
 	} else {
-	  buf.append( EmuUtil.TEXT_OFF );
+	  buf.append( LangUtil.getText( EmuUtil.TEXT_OFF ) );
 	}
 	buf.append( "</td></tr>\n" );
       }
@@ -838,9 +841,9 @@ public class KC85 extends EmuSys implements
 	  buf.append( this.ramColorEnabled ? " Farb" : " Pixel" );
 	  buf.append( "ebene " );
 	}
-	buf.append( EmuUtil.TEXT_ON );
+	buf.append( LangUtil.getText( EmuUtil.TEXT_ON ) );
       } else {
-	buf.append( EmuUtil.TEXT_OFF );
+	buf.append( LangUtil.getText( EmuUtil.TEXT_OFF ) );
       }
       buf.append( "</td></tr>\n" );
       if( this.kcTypeNum >= 4 ) {
@@ -894,13 +897,14 @@ public class KC85 extends EmuSys implements
 		if( readWrite != null ) {
 		  buf.append( readWrite.booleanValue() ? "RW" : "RO" );
 		} else {
-		  buf.append( EmuUtil.TEXT_ON );
+		  buf.append( LangUtil.getText( EmuUtil.TEXT_ON ) );
 		}
 	      } else {
-		buf.append( EmuUtil.TEXT_OFF );
+		buf.append( LangUtil.getText( EmuUtil.TEXT_OFF ) );
 	      }
 	    } else {
-	      buf.append( EmuUtil.TEXT_ON + " (nicht schaltbar)");
+	      buf.append( LangUtil.getText(
+				EmuUtil.TEXT_ON ) + " (nicht schaltbar)");
 	    }
 	    buf.append( "</td><td>" );
 	    int begAddr = module.getBegAddr();
@@ -1141,12 +1145,11 @@ public class KC85 extends EmuSys implements
       if( allowInteractive ) {
 	switch( BaseDlg.showOptionDlg(
 		this.screenFrm,
-		"Welche Tastatur m\u00F6chten Sie sehen,\n"
-			+ "die originale oder die D005?",
-		"Tastaturauswahl",
-		"Original",
-		"D005",
-		EmuUtil.TEXT_CANCEL ) )
+		LangUtil.getText( "emusys.msg.which_keyboard_want" ),
+		LangUtil.getText( "emusys.msg.keyboard_selection" ),
+		LangUtil.getText( "emusys.msg.original" ),
+		LangUtil.getText( "emusys.msg.d005" ),
+		LangUtil.getText( EmuUtil.TEXT_CANCEL ) ) )
 	{
 	  case 0:
 	    this.keyboardFld = new KC85KeyboardFld( this );

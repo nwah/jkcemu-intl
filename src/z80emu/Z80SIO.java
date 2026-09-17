@@ -13,6 +13,7 @@ package z80emu;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import jkcemu.lang.LangUtil;
 
 
 public class Z80SIO implements Z80InterruptSource
@@ -47,10 +48,10 @@ public class Z80SIO implements Z80InterruptSource
   private static final int WR4_PARITY_ENABLED             = 0x01;
   private static final int WR5_TX_ENABLED                 = 0x08;
 
-  private static final String TEXT_NOT_INITIALIZED  = "nicht initialisiert";
-  private static final String TEXT_SENDER_INTERRUPT = "Sender-Interrupt";
+  private static final String TEXT_NOT_INITIALIZED  = "z80emu.text.not_initialized";
+  private static final String TEXT_SENDER_INTERRUPT = "z80emu.text.transmitter_interrupt";
   private static final String TEXT_EXTERNAL_INTERRUPT
-					= "Externer Status-Interrupt";
+					= "z80emu.text.external_status";
 
   private String    title;
   private Channel   a;
@@ -243,7 +244,7 @@ public class Z80SIO implements Z80InterruptSource
 	+ "<tr><td>Vorteiler:</td>" );
     for( int i = 0; i < this.channels.length; i++ ) {
       buf.append( "<td>" );
-      String s   = TEXT_NOT_INITIALIZED;
+      String s   = LangUtil.getText( TEXT_NOT_INITIALIZED );
       int    wr4 = this.channels[ i ].wr[ 4 ];
       if( wr4 >= 0 ) {
 	switch( wr4 & 0xC0 ) {
@@ -327,7 +328,7 @@ public class Z80SIO implements Z80InterruptSource
 			+ "Interrupt angemeldet" );
 	}
       } else {
-	buf.append( TEXT_NOT_INITIALIZED );
+	buf.append( LangUtil.getText( TEXT_NOT_INITIALIZED ) );
       }
       buf.append( "\n"
 		+ "</td>\n" );
@@ -359,31 +360,35 @@ public class Z80SIO implements Z80InterruptSource
 	  }
 	}
 	buf.append( "<br/>\n"
-			+ TEXT_SENDER_INTERRUPT );
+			+ LangUtil.getText( TEXT_SENDER_INTERRUPT ) );
 	buf.append( (channel.wr[ 1 ] & WR1_SENDER_INTERRUPT_ENABLED) != 0 ?
 			" freigegeben" : " gesperrt" );
 	if( (channel.interruptAccepted & SENDER_INTERRUPT) != 0 ) {
 	  buf.append( "<br/>\n"
-			+ TEXT_SENDER_INTERRUPT + " angenommen" );
+			+ LangUtil.getText(
+				TEXT_SENDER_INTERRUPT ) + " angenommen" );
 	}
 	if( (channel.interruptRequest & SENDER_INTERRUPT) != 0 ) {
 	  buf.append( "<br/>\n"
-			+ TEXT_SENDER_INTERRUPT + " angemeldet" );
+			+ LangUtil.getText(
+				TEXT_SENDER_INTERRUPT ) + " angemeldet" );
 	}
 	buf.append( "<br/>\n"
-			+ TEXT_EXTERNAL_INTERRUPT );
+			+ LangUtil.getText( TEXT_EXTERNAL_INTERRUPT ) );
 	buf.append( (channel.wr[ 1 ] & WR1_EXTERNAL_INTERRUPT_ENABLED) != 0 ?
 			" freigegeben" : " gesperrt" );
 	if( (channel.interruptAccepted & EXTERNAL_INTERRUPT) != 0 ) {
 	  buf.append( "<br/>\n"
-			+ TEXT_EXTERNAL_INTERRUPT + " angenommen" );
+			+ LangUtil.getText(
+				TEXT_EXTERNAL_INTERRUPT ) + " angenommen" );
 	}
 	if( (channel.interruptRequest & EXTERNAL_INTERRUPT) != 0 ) {
 	  buf.append( "<br/>\n"
-			+ TEXT_EXTERNAL_INTERRUPT + " angemeldet" );
+			+ LangUtil.getText(
+				TEXT_EXTERNAL_INTERRUPT ) + " angemeldet" );
 	}
       } else {
-	buf.append( TEXT_NOT_INITIALIZED );
+	buf.append( LangUtil.getText( TEXT_NOT_INITIALIZED ) );
       }
       buf.append( "\n"
 		+ "</td>\n" );

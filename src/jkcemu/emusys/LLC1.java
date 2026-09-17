@@ -26,6 +26,7 @@ import jkcemu.base.SourceUtil;
 import jkcemu.emusys.llc1.LLC1AlphaScreenDevice;
 import jkcemu.emusys.llc1.LLC1KeyboardFld;
 import jkcemu.file.SaveDlg;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
@@ -102,9 +103,9 @@ public class LLC1 extends EmuSys implements
     this.pio1B7Value              = false;
 
     Z80CPU cpu = emuThread.getZ80CPU();
-    this.ctc   = new Z80CTC( "CTC" );
-    this.pio1  = new Z80PIO( "PIO 1" );	// nicht in der Interrupt-Kette!
-    this.pio2  = new Z80PIO( "PIO 2" );
+    this.ctc   = new Z80CTC( LangUtil.getText( "emusys.text.ctc" ) );
+    this.pio1  = new Z80PIO( LangUtil.getText( "emusys.text.pio_1" ) );	// nicht in der Interrupt-Kette!
+    this.pio2  = new Z80PIO( LangUtil.getText( "emusys.text.pio_2" ) );
     cpu.setInterruptSources( this.ctc, this.pio2 );
     cpu.addMaxSpeedListener( this );
     cpu.addTStatesListener( this );
@@ -723,7 +724,7 @@ public class LLC1 extends EmuSys implements
 		this.screenFrm,
 		0x1400,
 		endAddr,
-		"LLC1-BASIC-Programm speichern",
+		LangUtil.getText( "emusys.text.save_llc1_basic" ),
 		SaveDlg.BasicType.TINYBASIC,
 		null )).setVisible( true );
     } else {

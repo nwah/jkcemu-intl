@@ -26,16 +26,16 @@ public class FileData implements Closeable
   public FileData( File file ) throws IOException
   {
     if( !file.exists() ) {
-      throw new IOException( LangUtil.tr(
-		"{0}:\nDatei nicht gefunden", file.getPath() ) );
+      throw new IOException( LangUtil.getText(
+		"hexdiff.text.file_not_found", file.getPath() ) );
     }
     if( !file.isFile() ) {
-      throw new IOException( LangUtil.tr(
-		"{0}:\nKeine regul\u00E4re Datei", file.getPath() ) );
+      throw new IOException( LangUtil.getText(
+		"hexdiff.text.not_regular_file", file.getPath() ) );
     }
     if( !file.canRead() ) {
-      throw new IOException( LangUtil.tr(
-		"{0}:\nDatei nicht lesbar", file.getPath() ) );
+      throw new IOException( LangUtil.getText(
+		"hexdiff.text.file_not_readable", file.getPath() ) );
     }
     this.file = file;
     this.in   = null;

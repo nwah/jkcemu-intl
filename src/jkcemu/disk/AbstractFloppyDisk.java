@@ -345,10 +345,7 @@ public abstract class AbstractFloppyDisk
 				false );
 	    } else {
 	      fireShowError(
-			"Formatieren einer bereits formatierten"
-				+ " Diskettenabbilddatei mit einem\n"
-				+ "anderen Format als das bereits"
-				+ " vorhandene ist nicht m\u00F6glich.",
+			LangUtil.getText( "disk.error.formatting_already" ),
 			null );
 	    }
 	  }
@@ -496,8 +493,7 @@ public abstract class AbstractFloppyDisk
 	  int sysTracks = getSysTracks();
 	  if( (sysTracks > 0) && (sysTracks < this.cyls) ) {
 	    buf.append(
-		LangUtil.tr(
-			"{0}/{1} KByte, {2} Spuren a {3} * {4} Bytes",
+		LangUtil.getText( "disk.text.kbyte_tracks_bytes_net",
 			(this.cyls - sysTracks) * this.sides
 				* sectorsPerTrack * sectorSize / 1024,
 			kBytes,
@@ -506,8 +502,7 @@ public abstract class AbstractFloppyDisk
 			sectorSize ) );
 	  } else {
 	    buf.append(
-		LangUtil.tr(
-			"{0} KByte, {1} Spuren a {2} * {3} Bytes",
+		LangUtil.getText( "disk.text.kbyte_tracks_bytes",
 			kBytes,
 			this.cyls,
 			sectorsPerTrack,
@@ -516,23 +511,22 @@ public abstract class AbstractFloppyDisk
 	  withSectorSize = true;
 	} else {
 	  buf.append(
-		LangUtil.tr(
-			"{0} KByte, {1} Spuren",
+		LangUtil.getText( "disk.text.kbyte_tracks",
 			kBytes,
 			this.cyls ) );
 	}
 	switch( sides ) {
 	  case 1:
 	    buf.append( ", " );
-	    buf.append( LangUtil.tr( "einseitig" ) );
+	    buf.append( LangUtil.getText( "disk.text.single_sided" ) );
 	    break;
 	  case 2:
 	    buf.append( ", " );
-	    buf.append( LangUtil.tr( "doppelseitig" ) );
+	    buf.append( LangUtil.getText( "disk.text.double_sided" ) );
 	    break;
 	}
       } else {
-	buf.append( LangUtil.tr( "unformatiert" ) );
+	buf.append( LangUtil.getText( "disk.text.unformatted" ) );
       }
       this.fmtTextWithSectorSize = withSectorSize;
       this.fmtText = buf.toString();
@@ -733,7 +727,7 @@ public abstract class AbstractFloppyDisk
 
   public String getWarningText()
   {
-    return LangUtil.tr( this.warningText );
+    return LangUtil.getText( this.warningText );
   }
 
 
@@ -836,7 +830,8 @@ public abstract class AbstractFloppyDisk
 
   protected static void throwEmptyFirstTrack() throws IOException
   {
-    throw new IOException( "Die erste Spur enth\u00E4lt keine Sektoren." );
+    throw new IOException(
+		LangUtil.getText( "disk.error.first_track_contains" ) );
   }
 
 
@@ -859,7 +854,8 @@ public abstract class AbstractFloppyDisk
 
   protected static void throwUnexpectedEOF() throws IOException
   {
-    throw new IOException( "Unerwartetes Dateiende" );
+    throw new IOException(
+		LangUtil.getText( "disk.error.unexpected_end_file" ) );
   }
 
 

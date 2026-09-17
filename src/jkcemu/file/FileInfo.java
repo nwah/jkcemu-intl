@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 import jkcemu.Main;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class FileInfo
@@ -522,9 +523,8 @@ public class FileInfo
 	  || fileFmt.equals( FileFormat.KCBASIC_HEAD_DATA_BLKN )
 	  || fileFmt.equals( FileFormat.KCBASIC_HEAD_DATA_BLKN_CKS ) )
       {
-	throw new IOException( "Laden von KC-BASIC-Datenfeldern"
-			+ " und KC-BASIC-ASCII-Listings\n"
-			+ "wird nicht unterst\u00FCtzt" );
+	throw new IOException( LangUtil.getText(
+			"file.error.loading_kc_basic_data" ) );
       }
       if( fileFmt.equals( FileFormat.KCB_BLKN ) ) {
 	fileBuf = removeKCBlockNums( fileBuf );
@@ -550,9 +550,7 @@ public class FileInfo
 	  || fileFmt.equals( FileFormat.ZXTAP ) )
       {
 	throw new IOException(
-		"Die Datei ist eine Tape-Datei und kann nur\n"
-			+ "\u00FCber die emulierte Kassettenschnittstelle\n"
-			+ "(Audiofunktion) geladen werden." );
+		LangUtil.getText( "file.error.file_tape_file" ) );
       }
       if( fileFmt.equals( FileFormat.KCTAP_SYS )
 	  || fileFmt.equals( FileFormat.KCTAP_Z9001 )
@@ -580,7 +578,8 @@ public class FileInfo
 	  int fileBegAddr = EmuUtil.getWord( fileBuf, 17 );
 	  int fileEndAddr = EmuUtil.getWord( fileBuf, 19 );
 	  if( (fileBegAddr > 0x0401) || (fileEndAddr < 0x0401 + 8) ) {
-	    new IOException( "Laden als KCB-Datei nicht m\u00F6glich" );
+	    new IOException( LangUtil.getText(
+				"file.error.loading_kcb_file" ) );
 	  }
 	  begAddr      = 0x0401;
 	  int nextAddr = -1;
@@ -592,7 +591,8 @@ public class FileInfo
 	    if( ((nextAddr > 0) && (nextAddr <= curAddr))
 		|| (nextAddr >= fileEndAddr) )
 	    {
-	      new IOException( "Laden als KCB-Datei nicht m\u00F6glich" );
+	      new IOException( LangUtil.getText(
+				"file.error.loading_kcb_file" ) );
 	    }
 	    len     = curAddr - begAddr + 2;
 	    curAddr = nextAddr;
@@ -627,7 +627,8 @@ public class FileInfo
 	    len = EmuUtil.getWord( fileBuf, 11 );
 	  }
 	  if( len <= 0 ) {
-	    new IOException( "Laden als KC-BASIC-Datei nicht m\u00F6glich" );
+	    new IOException( LangUtil.getText(
+				"file.error.loading_kc_basic_file" ) );
 	  }
 	  rv = new LoadData(
 			fileBuf,
@@ -641,7 +642,8 @@ public class FileInfo
 	    len = EmuUtil.getWord( fileBuf, 0 );
 	  }
 	  if( len <= 0 ) {
-	    new IOException( "Laden als KC-BASIC-Datei nicht m\u00F6glich" );
+	    new IOException( LangUtil.getText(
+				"file.error.loading_kc_basic_file" ) );
 	  }
 	  rv = new LoadData(
 			fileBuf,
@@ -655,7 +657,8 @@ public class FileInfo
 	    begAddr = getBegAddr( fileBuf, fileFmt );
 	  }
 	  if( begAddr < 0 ) {
-	    new IOException( "Laden als BASIC-Datei nicht m\u00F6glich" );
+	    new IOException( LangUtil.getText(
+				"file.error.loading_basic_file" ) );
 	  }
 	  rv = new LoadData(
 			fileBuf,
@@ -1380,7 +1383,7 @@ public class FileInfo
       }
     }
     if( rv == null ) {
-      new IOException( "Laden als Intel-HEX-Datei nicht m\u00F6glich" );
+      new IOException( LangUtil.getText( "file.error.loading_intel_hex" ) );
     }
     rv.setInfoMsg( infoMsg );
     return rv;
@@ -1427,7 +1430,7 @@ public class FileInfo
       kcbasic   = true;
     }
     if( (begAddr < 0) || (len <= 0) ) {
-      throw new IOException( "Laden als KC-TAP-Datei nicht m\u00F6glich" );
+      throw new IOException( LangUtil.getText( "file.error.loading_kc_tap" ) );
     }
     byte[] dstBuf = new byte[ len ];
     int    dstPos = 0;
@@ -1583,7 +1586,7 @@ public class FileInfo
 	value = (value << 4) | ((ch - 'a' + 10) & 0x0F);
       } else {
 	throw new IOException(
-		"Datei entspricht nicht dem erwarteten HEX-Format." );
+		LangUtil.getText( "file.error.file_not_conform" ) );
       }
       --cnt;
     }

@@ -24,6 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class RemoveTransparencyDlg extends BaseDlg
@@ -82,7 +83,7 @@ public class RemoveTransparencyDlg extends BaseDlg
 
   private RemoveTransparencyDlg( Window owner, BufferedImage image )
   {
-    super( owner, "Transparenz entfernen" );
+    super( owner, LangUtil.getText( "image.title.remove_transparency" ) );
     this.image        = image;
     this.appliedImage = null;
 
@@ -101,13 +102,15 @@ public class RemoveTransparencyDlg extends BaseDlg
 
 
     add(
-	GUIFactory.createLabel( "Transparente Bereiche f\u00FCllen mit:" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"image.label.fill_transparent_areas" ) ),
 	gbc );
 
     ButtonGroup grpTransp = new ButtonGroup();
 
     this.rbKeepColor = GUIFactory.createRadioButton(
-				"in den Pixeln gespeicherte Farbe",
+				LangUtil.getText(
+					"image.option.color_stored_pixels" ),
 				lastColorIdx == 0 );
     grpTransp.add( this.rbKeepColor );
     gbc.insets.left   = 50;
@@ -116,7 +119,7 @@ public class RemoveTransparencyDlg extends BaseDlg
     add( this.rbKeepColor, gbc );
 
     this.rbToWhite = GUIFactory.createRadioButton(
-				"wei\u00DF",
+				LangUtil.getText( "image.action.white" ),
 				lastColorIdx == 1 );
     grpTransp.add( this.rbToWhite );
     gbc.insets.top = 0;
@@ -124,14 +127,14 @@ public class RemoveTransparencyDlg extends BaseDlg
     add( this.rbToWhite, gbc );
 
     this.rbToGray = GUIFactory.createRadioButton(
-				"grau",
+				LangUtil.getText( "image.action.gray" ),
 				lastColorIdx == 2 );
     grpTransp.add( this.rbToGray );
     gbc.gridy++;
     add( this.rbToGray, gbc );
 
     this.rbToBlack = GUIFactory.createRadioButton(
-				"schwarz",
+				LangUtil.getText( "image.action.black" ),
 				lastColorIdx == 3 );
     grpTransp.add( this.rbToBlack );
     gbc.insets.bottom = 5;

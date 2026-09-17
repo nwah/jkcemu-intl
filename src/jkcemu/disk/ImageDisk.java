@@ -29,6 +29,7 @@ import java.util.Properties;
 import java.util.zip.GZIPInputStream;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.CharConverter;
 
 
@@ -720,6 +721,7 @@ public class ImageDisk extends AbstractFloppyDisk
 
   private static void throwNoImageDiskFile() throws IOException
   {
-    throw new IOException( "Datei ist keine ImageDisk-Datei." );
+    throw new IOException(
+		LangUtil.getText( "disk.error.file_not_imagedisk" ) );
   }
 }

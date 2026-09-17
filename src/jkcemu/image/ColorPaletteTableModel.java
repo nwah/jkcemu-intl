@@ -18,11 +18,11 @@ public class ColorPaletteTableModel
 			extends javax.swing.table.AbstractTableModel
 {
   private static final String[] colNames = {
-					"Nr.",
-					"ARGB-Wert (hex)",
-					"Farbe",
-					"Neuer ARGB-Wert (hex)",
-					"Neue Farbe" };
+					"image.column.no",
+					"image.column.argb_value_hex",
+					"image.column.color",
+					"image.column.new_argb_value",
+					"image.column.new_color" };
 
   private IndexColorModel icm;
   private Integer[]       changedARGBs;
@@ -174,7 +174,7 @@ public class ColorPaletteTableModel
   public String getColumnName( int col )
   {
     return (col >= 0) && (col < colNames.length) ?  
-		LangUtil.tr( colNames[ col ] ) : "";
+		LangUtil.getText( colNames[ col ] ) : "";
   }
 
 

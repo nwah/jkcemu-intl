@@ -132,7 +132,7 @@ public class OptionDlg extends BaseDlg
      * da er anschliessend zeilenweise auf mehrere Labels verteilt wird
      * und die einzelnen Zeilen im Katalog nicht enthalten sind.
      */
-    msg = LangUtil.tr( msg );
+    msg = LangUtil.getText( msg );
 
     // Text
     if( msg != null ) {

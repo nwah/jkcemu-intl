@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class ChangeFileAttrsDlg extends BaseDlg
@@ -43,7 +44,7 @@ public class ChangeFileAttrsDlg extends BaseDlg
 
   public ChangeFileAttrsDlg( Window owner )
   {
-    super( owner, "Dateiattribute \u00E4ndern" );
+    super( owner, LangUtil.getText( "disk.title.change_file_attributes" ) );
     this.notified = false;
     this.readOnly = null;
     this.sysFile  = null;
@@ -63,7 +64,8 @@ public class ChangeFileAttrsDlg extends BaseDlg
 					0, 0 );
 
     // Schreibgeschuetzt
-    add( GUIFactory.createLabel( "Schreibgesch\u00FCtzt:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.read_only" ) ), gbc );
 
     ButtonGroup readOnlyGrp = new ButtonGroup();
 
@@ -89,7 +91,8 @@ public class ChangeFileAttrsDlg extends BaseDlg
     gbc.insets.top = 0;
     gbc.gridx      = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Systemdatei:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.system_file" ) ), gbc );
 
     ButtonGroup sysFileGrp = new ButtonGroup();
 
@@ -114,7 +117,8 @@ public class ChangeFileAttrsDlg extends BaseDlg
     gbc.anchor = GridBagConstraints.EAST;
     gbc.gridx  = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Archiv:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.archive" ) ), gbc );
 
     ButtonGroup archiveGrp = new ButtonGroup();
 
@@ -241,18 +245,20 @@ public class ChangeFileAttrsDlg extends BaseDlg
 
   private static JRadioButton createRadioButtonNo()
   {
-    return GUIFactory.createRadioButton( "Nein" );
+    return GUIFactory.createRadioButton( LangUtil.getText( "common.msg.no" ) );
   }
 
 
   private static JRadioButton createRadioButtonUnchanged()
   {
-    return GUIFactory.createRadioButton( "Nicht \u00E4ndern", true );
+    return GUIFactory.createRadioButton(
+		LangUtil.getText( "disk.option.not_change" ), true );
   }
 
 
   private static JRadioButton createRadioButtonYes()
   {
-    return GUIFactory.createRadioButton( "Ja" );
+    return GUIFactory.createRadioButton(
+		LangUtil.getText( "common.msg.yes" ) );
   }
 }

@@ -20,6 +20,7 @@ import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.emusys.etc.SLC1KeyboardFld;
 import jkcemu.etc.CPUSynchronSoundDevice;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80MaxSpeedListener;
 import z80emu.Z80PCListener;
@@ -63,7 +64,8 @@ public class SLC1 extends EmuSys implements
     this.ledStatus      = 0;
     this.ledValue       = false;
     this.chessMode      = true;
-    this.loudspeaker    = new CPUSynchronSoundDevice( "Lautsprecher" );
+    this.loudspeaker    = new CPUSynchronSoundDevice(
+		LangUtil.getText( "emusys.text.loudspeaker" ) );
 
     Z80CPU cpu = emuThread.getZ80CPU();
     cpu.addMaxSpeedListener( this );

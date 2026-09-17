@@ -17,6 +17,7 @@ import java.awt.Window;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class MsgFrm extends BaseFrm
@@ -30,7 +31,7 @@ public class MsgFrm extends BaseFrm
 
   public MsgFrm( Window owner )
   {
-    setTitle( "JKCEMU Meldungen" );
+    setTitle( LangUtil.getText( "base.title.jkcemu_messages" ) );
     this.frameEmpty = true;
 
     // Fensterinhalt

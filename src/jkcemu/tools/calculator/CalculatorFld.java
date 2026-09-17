@@ -34,8 +34,7 @@ public class CalculatorFld extends JPanel implements
 						ActionListener,
 						DocumentListener
 {
-  private static final String DEFAULT_TEXT = "Geben Sie bitte ein Zeichen"
-		+ " oder einen numerischen Ausdruck ein!";
+  private static final String DEFAULT_TEXT = "calculator.text.please_enter_character";
 
   private CalculatorFrm calculatorFrm;
   private boolean       notified;
@@ -68,7 +67,8 @@ public class CalculatorFld extends JPanel implements
     JPanel panelInput = GUIFactory.createPanel( new GridBagLayout() );
     add( panelInput, gbc );
 
-    panelInput.setBorder( GUIFactory.createTitledBorder( "Eingabe" ) );
+    panelInput.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "calculator.section.input" ) ) );
 
     GridBagConstraints gbcInput = new GridBagConstraints(
 					0, 0,
@@ -79,7 +79,8 @@ public class CalculatorFld extends JPanel implements
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    panelInput.add( GUIFactory.createLabel( "Ausdruck:" ), gbcInput );
+    panelInput.add( GUIFactory.createLabel( LangUtil.getText(
+			"calculator.label.expression" ) ), gbcInput );
 
     this.fldInput      = GUIFactory.createTextField();
     this.docInput      = this.fldInput.getDocument();
@@ -95,7 +96,8 @@ public class CalculatorFld extends JPanel implements
     gbcInput.weightx       = 0.0;
     gbcInput.gridwidth     = 1;
     gbcInput.gridy++;
-    panelInput.add( GUIFactory.createLabel( "Bin\u00E4rzahl:" ), gbcInput );
+    panelInput.add( GUIFactory.createLabel( LangUtil.getText(
+			"calculator.label.binary_number" ) ), gbcInput );
 
     gbcInput.anchor = GridBagConstraints.WEST;
     gbcInput.gridx++;
@@ -105,21 +107,26 @@ public class CalculatorFld extends JPanel implements
     gbcInput.insets.top = 0;
     gbcInput.gridx      = 1;
     gbcInput.gridy++;
-    panelInput.add( GUIFactory.createLabel( "Oktalzahl:" ), gbcInput );
+    panelInput.add( GUIFactory.createLabel( LangUtil.getText(
+			"calculator.label.octal_number" ) ), gbcInput );
 
     gbcInput.anchor = GridBagConstraints.WEST;
     gbcInput.gridx++;
-    panelInput.add( GUIFactory.createLabel( "...Q" ), gbcInput );
+    panelInput.add( GUIFactory.createLabel(
+		LangUtil.getText( "calculator.label.q" ) ), gbcInput );
 
     gbcInput.anchor        = GridBagConstraints.EAST;
     gbcInput.insets.bottom = 5;
     gbcInput.gridx         = 1;
     gbcInput.gridy++;
-    panelInput.add( GUIFactory.createLabel( "Hexadezimalzahl:" ), gbcInput );
+    panelInput.add( GUIFactory.createLabel(
+		LangUtil.getText(
+			"calculator.label.hexadecimal_number" ) ), gbcInput );
 
     gbcInput.anchor = GridBagConstraints.WEST;
     gbcInput.gridx++;
-    panelInput.add( GUIFactory.createLabel( "0x... oder ...H" ), gbcInput );
+    panelInput.add( GUIFactory.createLabel( LangUtil.getText(
+			"calculator.label.0x_h" ) ), gbcInput );
 
 
     // Bereich Ausgabe
@@ -129,11 +136,12 @@ public class CalculatorFld extends JPanel implements
     gbc.gridy++;
     add( panelOutput, gbc );
 
-    panelOutput.setBorder( GUIFactory.createTitledBorder( "Ausgabe" ) );
+    panelOutput.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "calculator.section.output" ) ) );
 
     this.fldOutput = GUIFactory.createEditorPane();
     this.fldOutput.setContentType( "text/html" );
-    EmuUtil.setText( this.fldOutput, LangUtil.tr( DEFAULT_TEXT ) );
+    EmuUtil.setText( this.fldOutput, LangUtil.getText( DEFAULT_TEXT ) );
     this.fldOutput.setBorder( BorderFactory.createLoweredBevelBorder() );
     this.fldOutput.setEditable( false );
     panelOutput.add(
@@ -145,7 +153,7 @@ public class CalculatorFld extends JPanel implements
   public void clear()
   {
     this.fldInput.setText( "" );
-    EmuUtil.setText( this.fldOutput, LangUtil.tr( DEFAULT_TEXT ) );
+    EmuUtil.setText( this.fldOutput, LangUtil.getText( DEFAULT_TEXT ) );
   }
 
 
@@ -239,7 +247,7 @@ public class CalculatorFld extends JPanel implements
 
   private void updOutput()
   {
-    String result = LangUtil.tr( DEFAULT_TEXT );
+    String result = LangUtil.getText( DEFAULT_TEXT );
     String text   = this.fldInput.getText();
     if( text != null ) {
       int len = text.length();
@@ -252,13 +260,15 @@ public class CalculatorFld extends JPanel implements
 	    if( Character.isDefined( ch ) ) {
 	      appendResultRow(
 			buf,
-			LangUtil.tr( "Unicode des Zeichen" ),
+			LangUtil.getText(
+				"calculator.text.unicode_character" ),
 			(int) ch );
 	    }
 	  }
 	  appendResultRow(
 			buf,
-			LangUtil.tr( "Ergebnis des Ausdrucks" ),
+			LangUtil.getText(
+				"calculator.text.result_expression" ),
 			parser.parseExpr( text ) );
 	  appendResultEnd( buf );
 	}

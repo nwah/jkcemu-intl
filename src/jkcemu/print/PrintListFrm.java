@@ -225,8 +225,7 @@ public class PrintListFrm
 	      if( isActivePrintData( data ) ) {
 		if( BaseDlg.showYesNoDlg(
 			this,
-			"M\u00F6chten Sie den Druckauftrag"
-						+ " abschlie\u00DFen?" ) )
+			LangUtil.getText( "print.msg.want_finish_print" ) ) )
 		{
 		  this.printMngr.deactivatePrintData( data );
 		  fireUpdActionButtons();
@@ -234,7 +233,7 @@ public class PrintListFrm
 	      } else {
 		BaseDlg.showInfoDlg(
 			this,
-			"Der Druckauftrag ist bereits abgeschlossen." );
+			LangUtil.getText( "print.msg.print_job_already" ) );
 	      }
 	    }
 	  }
@@ -306,7 +305,8 @@ public class PrintListFrm
       if( data != null ) {
 	File file = FileUtil.showFileSaveDlg(
 				this,
-				"Druckauftrag speichern",
+				LangUtil.getText(
+					"print.title.save_print_job" ),
 				RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_PRINT ),
 				FileUtil.getTextFileFilter() );
@@ -320,7 +320,7 @@ public class PrintListFrm
     catch( IOException ex ) {
       BaseDlg.showErrorDlg(
 		this,
-		LangUtil.tr( "Der Druckauftrag kann nicht gespeichert werden." )
+		LangUtil.getText( "print.text.print_job_cannot_saved" )
 						+ ex.getMessage() );
     }
   }
@@ -333,15 +333,14 @@ public class PrintListFrm
       if( rows.length == 1 ) {
 	if( !BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie den Druckauftrag l\u00F6schen?" ) )
+		LangUtil.getText( "print.msg.want_delete_print" ) ) )
 	{
 	  rows = null;
 	}
       } else if( rows.length > 1 ) {
 	if( !BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie die ausgew\u00E4hlten"
-			+ " Druckauftr\u00E4ge l\u00F6schen?" ) )
+		LangUtil.getText( "print.msg.want_delete_selected" ) ) )
 	{
 	  rows = null;
 	}
@@ -371,13 +370,14 @@ public class PrintListFrm
   {
     this.screenFrm = screenFrm;
     this.printMngr = screenFrm.getEmuThread().getPrintMngr();
-    setTitle( "JKCEMU Druckauftr\u00E4ge" );
+    setTitle( LangUtil.getText( "print.title.jkcemu_print_jobs" ) );
 
 
     // Menu Datei
     JMenu mnuFile = createMenuFile();
 
-    this.mnuFileFinish = createMenuItem( "Abschlie\u00DFen" );
+    this.mnuFileFinish = createMenuItem(
+		LangUtil.getText( "print.action.finish" ) );
     mnuFile.add( this.mnuFileFinish );
     mnuFile.addSeparator();
 
@@ -388,10 +388,12 @@ public class PrintListFrm
     mnuFile.add( this.mnuFilePrint );
     mnuFile.addSeparator();
 
-    this.mnuFileOpenText = createMenuItem( "Im Texteditor \u00F6ffnen..." );
+    this.mnuFileOpenText = createMenuItem(
+		LangUtil.getText( "common.action.open_text_editor" ) );
     mnuFile.add( this.mnuFileOpenText );
 
-    this.mnuFileOpenHex = createMenuItem( "Im Hex-Editor \u00F6ffnen..." );
+    this.mnuFileOpenHex = createMenuItem(
+		LangUtil.getText( "common.action.open_hex_editor" ) );
     mnuFile.add( this.mnuFileOpenHex );
 
     this.mnuFileSaveAs = createMenuItemSaveAs( true );
@@ -399,7 +401,8 @@ public class PrintListFrm
     mnuFile.addSeparator();
 
     this.mnuFileDelete = createMenuItemWithDirectAccelerator(
-						EmuUtil.TEXT_DELETE,
+						LangUtil.getText(
+							EmuUtil.TEXT_DELETE ),
 						KeyEvent.VK_DELETE );
     mnuFile.add( this.mnuFileDelete );
     mnuFile.addSeparator();
@@ -409,7 +412,8 @@ public class PrintListFrm
 
 
     // Menu Zeichensatz
-    JMenu mnuCharset = GUIFactory.createMenu( "Zeichensatz" );
+    JMenu mnuCharset = GUIFactory.createMenu(
+		LangUtil.getText( "common.menu.character_set" ) );
 
     ButtonGroup grpCharset = new ButtonGroup();
 
@@ -457,7 +461,8 @@ public class PrintListFrm
     JMenu mnuHelp = createMenuHelp();
 
     this.mnuHelpContent = createMenuItem(
-				"Hilfe zu Druckauftr\u00E4gen..." );
+				LangUtil.getText(
+					"print.action.help_print_jobs" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -487,7 +492,8 @@ public class PrintListFrm
     popupMnu.add( this.popupSaveAs );
     popupMnu.addSeparator();
 
-    this.popupDelete = createMenuItem( EmuUtil.TEXT_DELETE );
+    this.popupDelete = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_DELETE ) );
     popupMnu.add( this.popupDelete );
 
 
@@ -536,7 +542,8 @@ public class PrintListFrm
     this.btnDelete = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/delete.png",
-					EmuUtil.TEXT_DELETE );
+					LangUtil.getText(
+						EmuUtil.TEXT_DELETE ) );
     this.btnDelete.addActionListener( this );
     toolBar.add( this.btnDelete );
 
@@ -647,8 +654,7 @@ public class PrintListFrm
 	    if( isActivePrintData( data ) ) {
 	      if( BaseDlg.showYesNoDlg(
 			this,
-			"Der Druckauftrag ist noch nicht abgeschlossen.\n"
-			  + "M\u00F6chten Sie ihn jetzt abschlie\u00DFen?" ) )
+			LangUtil.getText( "print.msg.print_job_not_finished" ) ) )
 	      {
 		this.printMngr.deactivatePrintData( data );
 		updFinishButtons();

@@ -24,6 +24,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.Poly880;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.SettingsFrm;
 
@@ -52,7 +53,8 @@ public class Poly880SettingsFld extends AbstractSettingsFld
 
     // Tab Erweiterungen
     this.tabExt = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Erweiterungen", this.tabExt );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.expansions" ), this.tabExt );
 
     GridBagConstraints gbcExt = new GridBagConstraints(
 					0, 0,
@@ -64,7 +66,7 @@ public class Poly880SettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.cbRAM8000 = GUIFactory.createCheckBox(
-					"32 KByte RAM-Erweiterung" );
+					LangUtil.getText( "poly880.option.32_kbyte_ram" ) );
     this.cbRAM8000.addActionListener( this );
     this.tabExt.add( this.cbRAM8000, gbcExt );
 
@@ -78,7 +80,8 @@ public class Poly880SettingsFld extends AbstractSettingsFld
     this.fldROM2 = new ROMFileSettingsFld(
 				settingsFrm,
 				propPrefix + Poly880.PROP_ROM2000_PREFIX,
-				"ROM-Erweiterung 2000h-23FFh:" );
+				LangUtil.getText(
+					"poly880.text.rom_expansion_2000h" ) );
     gbcExt.insets.top    = 5;
     gbcExt.insets.bottom = 5;
     gbcExt.gridy++;
@@ -87,14 +90,16 @@ public class Poly880SettingsFld extends AbstractSettingsFld
     this.fldROM3 = new ROMFileSettingsFld(
 				settingsFrm,
 				propPrefix + Poly880.PROP_ROM3000_PREFIX,
-				"ROM-Erweiterung 3000h-33FFh:" );
+				LangUtil.getText(
+					"poly880.text.rom_expansion_3000h" ) );
     gbcExt.gridy++;
     this.tabExt.add( this.fldROM3, gbcExt );
 
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -108,19 +113,19 @@ public class Poly880SettingsFld extends AbstractSettingsFld
     this.fldAltROM0 = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + Poly880.PROP_ROM0000_PREFIX,
-		"Alternativer ROM-Inhalt 0000h-03FFh:" );
+		LangUtil.getText( "poly880.text.alternative_rom_content_0000h" ) );
     gbcEtc.gridy++;
     this.tabEtc.add( this.fldAltROM0, gbcEtc );
 
     this.fldAltROM1 = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + Poly880.PROP_ROM1000_PREFIX,
-		"Alternativer ROM-Inhalt 1000h-13FFh:" );
+		LangUtil.getText( "poly880.text.alternative_rom_content_1000h" ) );
     gbcEtc.gridy++;
     this.tabEtc.add( this.fldAltROM1, gbcEtc );
 
-    this.cbInversedROM = GUIFactory.createCheckBox(
-		"ROM-Bytes sind negiert (entsprechend dem Original)" );
+    this.cbInversedROM = GUIFactory.createCheckBox( LangUtil.getText(
+			"poly880.option.rom_bytes_inverted" ) );
     this.cbInversedROM.addActionListener( this );
     gbcEtc.weightx = 0.0;
     gbcEtc.fill    = GridBagConstraints.NONE;

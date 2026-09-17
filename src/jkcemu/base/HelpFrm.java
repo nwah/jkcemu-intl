@@ -53,7 +53,7 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
   public static final String PAGE_LICENSE = "/help/license.htm";
 
   private static final String PROP_FONT_SIZE    = "font.size";
-  private static final String TEXT_FIND_IN_HELP = "Hilfe durchsuchen";
+  private static final String TEXT_FIND_IN_HELP = "base.text.search_help";
 
   private static final Map<String,String> page2Text  = new HashMap<>();
   private static final Map<String,String> page2Title = new HashMap<>();
@@ -183,7 +183,8 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 					props,
 					prefix + PROP_FONT_SIZE,
 					-1 );
-      Object item = (fontSize > 0 ? fontSize : EmuUtil.TEXT_DEFAULT);
+      Object item = ( fontSize > 0 ? fontSize : LangUtil.getText(
+			EmuUtil.TEXT_DEFAULT ));
       this.comboFontSize.setSelectedItem( item );
       updFontSize( item );
     }
@@ -247,7 +248,7 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 	null );
 
     String findText = showFindDlg(
-				TEXT_FIND_IN_HELP,
+				LangUtil.getText( TEXT_FIND_IN_HELP ),
 				this.findInHelpText );
     if( findText != null ) {
       int findLen = findText.length();
@@ -311,28 +312,25 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 	resultBuf.append( "<html>\n"
 			+ "<body>\n"
 			+ "<h1>" );
-	resultBuf.append( LangUtil.tr( "Hilfe durchsuchen" ) );
+	resultBuf.append( LangUtil.getText( "base.text.search_help" ) );
 	resultBuf.append( "</h1>\n" );
 	StringBuilder findTextBuf = new StringBuilder();
 	EmuUtil.appendHTML( findTextBuf, this.findInHelpText );
 	String findTextHTML = findTextBuf.toString();
 	if( page2Hits.isEmpty() ) {
-	  resultBuf.append( LangUtil.tr(
-		"Zum Suchtext <em>{0}</em> wurden keine Treffer gefunden.\n",
+	  resultBuf.append( LangUtil.getText(
+		"base.text.no_matches_found",
 		findTextHTML ) );
 	} else {
 	  java.util.List<String> pages = new ArrayList<>();
 	  pages.addAll( page2Hits.keySet() );
 	  if( pages.size() == 1 ) {
-	    resultBuf.append( LangUtil.tr(
-		"Zum Suchtext <em>{0}</em> wurde folgender Treffer"
-			+ " gefunden:\n",
+	    resultBuf.append( LangUtil.getText(
+		"base.text.following_match_found",
 		findTextHTML ) );
 	  } else {
-	    resultBuf.append( LangUtil.tr(
-		"Zum Suchtext <em>{0}</em> wurden folgende Treffer"
-			+ " gefunden,\n"
-			+ "absteigend sortiert nach Anzahl der Treffer:\n",
+	    resultBuf.append( LangUtil.getText(
+		"base.text.following_matches_found",
 		findTextHTML ) );
 	  }
 	  resultBuf.append( "<ul>\n" );
@@ -390,8 +388,8 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 	      resultBuf.append( "\">" );
 	      resultBuf.append( title );
 	      resultBuf.append( "</a>&nbsp;&nbsp;" );
-	      resultBuf.append( LangUtil.tr(
-				"{0}&nbsp;Treffer", hits ) );
+	      resultBuf.append( LangUtil.getText(
+				"base.text.matches", hits ) );
 	      resultBuf.append( "</li>\n" );
 	      if( hits.intValue() > 1 ) {
 		multiHits = true;
@@ -402,33 +400,19 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 			+ "<br/>\n" );
 	  if( pages.size() == 1 ) {
 	    if( multiHits ) {
-	      resultBuf.append( LangUtil.tr(
-		"Wenn Sie auf diesen Link klicken,\n"
-			+ "wird auf der folgenden Seite automatisch"
-			+ " zum ersten Treffer gesprungen.\n"
-			+ "Mit dem Men&uuml;eintrag <em>Weitersuchen</em>"
-			+ " oder der Taste&nbsp;<em>F3</em>"
-			+ " gelangen Sie zum n&auml;chsten Treffer.\n" ) );
+	      resultBuf.append( LangUtil.getText(
+		"base.text.click_link_following_page_jumps_first" ) );
 	    } else {
-	      resultBuf.append( LangUtil.tr(
-		"Wenn Sie auf diesen Link klicken,\n"
-			+ "wird auf der folgenden Seite automatisch"
-			+ " zu dem Treffer gesprungen.\n" ) );
+	      resultBuf.append( LangUtil.getText(
+		"base.text.click_link_following_page_jumps_match" ) );
 	    }
 	  } else {
 	    if( multiHits ) {
-	      resultBuf.append( LangUtil.tr(
-		"Wenn Sie auf einen dieser Links klicken,\n"
-			+ "wird auf der folgenden Seite automatisch"
-			+ " zum ersten Treffer gesprungen.\n"
-			+ "Mit dem Men&uuml;eintrag <em>Weitersuchen</em>"
-			+ " oder der Taste&nbsp;<em>F3</em>"
-			+ " gelangen Sie zum n&auml;chsten Treffer.\n" ) );
+	      resultBuf.append( LangUtil.getText(
+		"base.text.click_one_links_following_page_jumps_first" ) );
 	    } else {
-	      resultBuf.append( LangUtil.tr(
-		"Wenn Sie auf einen dieser Links klicken,\n"
-			+ "wird auf der folgenden Seite automatisch"
-			+ " zu dem Treffer gesprungen.\n" ) );
+	      resultBuf.append( LangUtil.getText(
+		"base.text.click_one_links_following_page_jumps_match" ) );
 	    }
 	  }
 	}
@@ -457,7 +441,7 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 
   private HelpFrm()
   {
-    setTitle( "JKCEMU Hilfe" );
+    setTitle( LangUtil.getText( "base.title.jkcemu_help" ) );
     this.defaultFont    = null;
     this.findInHelpText = null;
     this.posToScroll    = null;
@@ -471,24 +455,28 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
     JMenu mnuFile = createMenuFile();
 
     this.mnuCopyPage = createMenuItem(
-			"Hilfeseite ohne Hypertext-Links kopieren" );
+			LangUtil.getText( "base.action.copy_help_page_without" ) );
     mnuFile.add( this.mnuCopyPage );
 
     this.mnuCopyPageWithLinks = createMenuItem(
-			"Hilfeseite mit Hypertext-Links kopieren" );
+			LangUtil.getText( "base.action.copy_help_page_hypertext" ) );
     mnuFile.add( this.mnuCopyPageWithLinks );
     mnuFile.addSeparator();
 
-    JMenu mnuNav = GUIFactory.createMenu( "Navigation" );
-    mnuNav.setMnemonic( LangUtil.mnemonic( "Navigation", KeyEvent.VK_N ) );
+    JMenu mnuNav = GUIFactory.createMenu(
+		LangUtil.getText( "base.menu.navigation" ) );
+    mnuNav.setMnemonic(
+		LangUtil.mnemonic( "base.menu.navigation", KeyEvent.VK_N ) );
 
     this.mnuNavBack = createMenuItemWithStandardAccelerator(
-						"Zur\u00FCck",
+						LangUtil.getText(
+							"base.action.back" ),
 						KeyEvent.VK_B );
     mnuNav.add( this.mnuNavBack );
 
     this.mnuNavHome = createMenuItemWithStandardAccelerator(
-						"Startseite",
+						LangUtil.getText(
+							"base.action.home" ),
 						KeyEvent.VK_H );
     mnuNav.add( this.mnuNavHome );
 
@@ -530,19 +518,22 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
     this.btnPrint = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/print.png",
-					EmuUtil.TEXT_OPEN_PRINT );
+					LangUtil.getText(
+						EmuUtil.TEXT_OPEN_PRINT ) );
     this.btnPrint.addActionListener( this );
     toolBar.add( this.btnPrint );
     toolBar.addSeparator();
 
     JPanel panelFontSize = GUIFactory.createPanel(
 				new FlowLayout( FlowLayout.LEFT, 5, 5 ) );
-    panelFontSize.add( GUIFactory.createLabel( "Schriftgr\u00F6\u00DFe:" ) );
+    panelFontSize.add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.font_size" ) ) );
     toolBar.add( panelFontSize );
 
     this.comboFontSize = GUIFactory.createComboBox(
 				new Object[] {
-					EmuUtil.TEXT_DEFAULT,
+					LangUtil.getText(
+						EmuUtil.TEXT_DEFAULT ),
 					10, 11, 12, 13, 14, 15, 16,
 					18, 20, 22, 24, 26, 28 } );
 
@@ -626,8 +617,7 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
     catch( Exception ex ) {
       BaseDlg.showErrorDlg(
 		this,
-		"Die Seite konnte nicht nicht die Zwischenablage"
-			+ " kopiert werden." );
+		LangUtil.getText( "base.error.page_not_copied" ) );
     }
   }
 
@@ -1022,7 +1012,7 @@ public class HelpFrm extends HTMLViewFrm implements HyperlinkListener
 	catch( Exception ex ) {
 	  BaseDlg.showErrorDlg(
 		this,
-		LangUtil.tr( "Die Hilfeseite kann nicht angezeigt werden." )
+		LangUtil.getText( "base.text.help_page_cannot_displayed" )
 			+ "\n\n" + ex.getMessage() );
 	}
       }

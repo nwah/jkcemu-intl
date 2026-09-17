@@ -85,7 +85,7 @@ public class D004ProcSys implements
     }
     this.fdc = new FDC8272( this, 4 );
     this.cpu = new Z80CPU( this, this );
-    this.ctc = new Z80CTC( "CTC (FCh-FFh)" );
+    this.ctc = new Z80CTC( LangUtil.getText( "kc85.text.ctc_fch_ffh" ) );
     this.ctc.setTimerConnection( 0, 1 );
     this.ctc.setTimerConnection( 1, 2 );
     this.ctc.setTimerConnection( 2, 3 );
@@ -120,13 +120,15 @@ public class D004ProcSys implements
     buf.append( "<tr><td>Betriebszustand:</td><td>" );
     switch( this.runLevel ) {
       case DOWN:
-	buf.append( LangUtil.tr( "Dauer-RESET" ) );
+	buf.append( LangUtil.getText( "kc85.text.permanent_reset" ) );
 	break;
       case START_UP:
-	buf.append( LangUtil.tr( "Hochlaufen mit Speicher l&ouml;schen" ) );
+	buf.append( LangUtil.getText(
+			"kc85.text.booting_memory_clear" ) );
 	break;
       default:
-	buf.append( LangUtil.tr( "normale Programmausf&uuml;hrung" ) );
+	buf.append( LangUtil.getText(
+			"kc85.text.normal_program_execution" ) );
 	break;
     }
     buf.append( "</td></tr>\n" );

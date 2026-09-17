@@ -78,7 +78,7 @@ public class DiskUtil
 	if( JOptionPane.showConfirmDialog(
 		EmuUtil.getWindow( owner ),
 		msg,
-		LangUtil.tr( "Warnung" ),
+		LangUtil.getText( "common.msg.warning" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) != JOptionPane.OK_OPTION )
 	{
@@ -109,14 +109,8 @@ public class DiskUtil
     if( !rv ) {
       rv = BaseDlg.showYesNoWarningDlg(
 		owner,
-		"Die Dateiendung entspricht nicht der f\u00FCr"
-			+ " diesen Dateityp \u00FCblichen Endung.\n"
-			+ "Wenn Sie die Datei sp\u00E4ter einmal"
-			+ " \u00F6ffnen m\u00F6chten,\n"
-			+ "wird JKCEMU den Dateityp nicht richtig"
-			+ " erkennen k\u00F6nnen.\n\n"
-			+ "M\u00F6chten Sie trotzdem fortsetzen?",
-		"Achtung" );
+		LangUtil.getText( "disk.msg.file_extension_not_match" ),
+		LangUtil.getText( "common.text.warning" ) );
     }
     return rv;
   }
@@ -141,7 +135,8 @@ public class DiskUtil
 	      || (sectorsPerTrack > 0x7F)
 	      || (sectorSize > 0x2000) )
 	  {
-	    throw new IOException( "Datentr\u00E4ger ist keine Diskette." );
+	    throw new IOException( LangUtil.getText(
+				"disk.error.volume_not_floppy" ) );
 	  }
 	  fmt = new FloppyDiskFormat(
 				cyls,
@@ -169,8 +164,8 @@ public class DiskUtil
       }
     }
     if( fmt == null ) {
-      throw new IOException( "Diskettenformat unbekannt"
-				+ " oder nicht unterst\u00FCtzt" );
+      throw new IOException(
+		LangUtil.getText( "disk.error.disk_format_unknown" ) );
     }
     return fmt;
   }
@@ -216,7 +211,7 @@ public class DiskUtil
 	  }
 	} else {
 	  throw new IOException(
-			"Unbekanntes Format einer Diskettenabbilddatei" );
+			LangUtil.getText( "disk.error.unknown_format_disk" ) );
 	}
       }
     }

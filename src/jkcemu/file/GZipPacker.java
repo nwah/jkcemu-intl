@@ -31,7 +31,7 @@ public class GZipPacker extends AbstractThreadFrm
   public static void packFile( Window owner, File srcFile, File outFile )
   {
     Frame frm = new GZipPacker( owner, srcFile, outFile );
-    frm.setTitle( "GZIP-Datei packen" );
+    frm.setTitle( LangUtil.getText( "file.title.pack_gzip_file" ) );
     frm.setVisible( true );
   }
 
@@ -86,8 +86,8 @@ public class GZipPacker extends AbstractThreadFrm
   private GZipPacker( Window owner, File srcFile, File outFile )
   {
     super(
-	"JKCEMU gzip packer",
-	LangUtil.tr( "Packen von {0}...", srcFile.getName() ),
+	LangUtil.getText( "file.title.jkcemu_gzip_packer" ),
+	LangUtil.getText( "file.text.packing", srcFile.getName() ),
 	false,
 	true,
 	true );

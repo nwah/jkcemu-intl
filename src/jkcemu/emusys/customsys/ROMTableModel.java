@@ -16,9 +16,9 @@ import jkcemu.lang.LangUtil;
 public class ROMTableModel extends AbstractTableModel
 {
   private static final String[] colNames = {
-					"Adressbereich",
-					"Optionen",
-					"Datei" };
+					"customsys.column.address_range",
+					"common.section.options",
+					"common.menu.file" };
 
   private java.util.List<CustomSysROM> rows;
 
@@ -106,7 +106,7 @@ public class ROMTableModel extends AbstractTableModel
   public String getColumnName( int col )
   {
     return (col >= 0) && (col < colNames.length) ?  
-		LangUtil.tr( colNames[ col ] ) : "";
+		LangUtil.getText( colNames[ col ] ) : "";
   }
 
 

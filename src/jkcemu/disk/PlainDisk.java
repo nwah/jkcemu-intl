@@ -24,6 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import jkcemu.base.DeviceIO;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class PlainDisk extends RegularFormatFloppyDisk
@@ -417,9 +418,7 @@ public class PlainDisk extends RegularFormatFloppyDisk
 	  }
 	  if( !regular ) {
 	    throw new IOException(
-		"Formatieren mit unregelm\u00E4\u00DFigen Sektoren"
-			+ " bei einer einfachen Abbilddatei"
-			+ " nicht m\u00F6glich" );
+		LangUtil.getText( "disk.error.formatting_irregular" ) );
 	  }
 
 	  // eigentliches Formatieren
@@ -435,10 +434,7 @@ public class PlainDisk extends RegularFormatFloppyDisk
 			&& (sectorSize != dataBuf.length)) )
 	      {
 		throw new IOException(
-			"Formatieren einer Spur mit einem anderen Format"
-				+ " als bei anderen Spuren\n"
-				+ "ist bei einer einfachen Abbilddatei"
-				+ " nicht m&ouml;glich." );
+			LangUtil.getText( "disk.error.formatting_track" ) );
 	      }
 	      setSectorsPerTrack( sectorIDs.length );
 	      setSectorSize( dataBuf.length );
@@ -460,7 +456,9 @@ public class PlainDisk extends RegularFormatFloppyDisk
 	}
 	catch( IOException ex ) {
 	  rv = false;
-	  fireShowError( "Anh\u00E4ngen von Sektoren fehlgeschlagen", ex );
+	  fireShowError( LangUtil.getText(
+				"disk.error.appending_sectors_failed" ),
+			ex );
 	}
       } else {
 	rv = super.formatTrack(

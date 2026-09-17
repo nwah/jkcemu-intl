@@ -43,7 +43,7 @@ import jkcemu.lang.LangUtil;
 
 public class ImageCaptureFrm extends BaseFrm
 {
-  private static final String DEFAULT_STATUS_TEXT = "Bereit";
+  private static final String DEFAULT_STATUS_TEXT = "common.text.ready";
 
   private static ImageCaptureFrm instance = null;
 
@@ -119,7 +119,7 @@ public class ImageCaptureFrm extends BaseFrm
     this.screenFrm           = screenFrm;
     this.waitForWindowMillis = 0;
     this.robot               = null;
-    setTitle( "JKCEMU Bildschirmfoto" );
+    setTitle( LangUtil.getText( "image.title.jkcemu_screenshot" ) );
 
     this.statusTimer = new javax.swing.Timer(
 			500,
@@ -167,26 +167,26 @@ public class ImageCaptureFrm extends BaseFrm
     ButtonGroup grpCaptureArea = new ButtonGroup();
 
     this.rbCaptureEmuSysScreen = GUIFactory.createRadioButton(
-		"Bildschirmausgabe des emulierten Systems ohne Fenster",
+		LangUtil.getText( "image.option.screen_output_emulated_system_without" ),
 		true );
     grpCaptureArea.add( this.rbCaptureEmuSysScreen );
     add( this.rbCaptureEmuSysScreen, gbc );
 
     this.rbCaptureScreenFrm = GUIFactory.createRadioButton(
-		"Bildschirmausgabe des emulierten Systems mit Fenster" );
+		LangUtil.getText( "image.option.screen_output_emulated_system_window" ) );
     grpCaptureArea.add( this.rbCaptureScreenFrm );
     gbc.insets.top = 0;
     gbc.gridy++;
     add( this.rbCaptureScreenFrm, gbc );
 
     this.rbCaptureOtherWindow = GUIFactory.createRadioButton(
-					"Beliebiges JKCEMU-Fenster" );
+					LangUtil.getText( "image.option.any_jkcemu_window" ) );
     grpCaptureArea.add( this.rbCaptureOtherWindow );
     gbc.gridy++;
     add( this.rbCaptureOtherWindow, gbc );
 
     this.labelWinSelectTime = GUIFactory.createLabel(
-					"Zeit f\u00FCr Fensterauswahl:" );
+					LangUtil.getText( "image.label.time_window_selection" ) );
     gbc.insets.left   = 50;
     gbc.insets.bottom = 5;
     gbc.gridwidth     = 1;
@@ -201,7 +201,8 @@ public class ImageCaptureFrm extends BaseFrm
     gbc.gridx++;
     add( this.spinnerWinSelectSec, gbc );
 
-    this.labelWinSelectUnit = GUIFactory.createLabel( "Sekunden" );
+    this.labelWinSelectUnit = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.seconds" ) );
     gbc.fill    = GridBagConstraints.NONE;
     gbc.weightx = 0.0;
     gbc.gridx++;
@@ -218,7 +219,8 @@ public class ImageCaptureFrm extends BaseFrm
     gbc.gridy++;
     add( GUIFactory.createSeparator(), gbc );
 
-    this.labelStatus = GUIFactory.createLabel( DEFAULT_STATUS_TEXT );
+    this.labelStatus = GUIFactory.createLabel(
+		LangUtil.getText( DEFAULT_STATUS_TEXT ) );
     gbc.anchor       = GridBagConstraints.WEST;
     gbc.fill         = GridBagConstraints.NONE;
     gbc.weightx      = 0.0;
@@ -239,7 +241,8 @@ public class ImageCaptureFrm extends BaseFrm
     gbc.gridx       = 3;
     add( panelBtn, gbc );
 
-    this.btnTakePhoto = GUIFactory.createButton( EmuUtil.TEXT_RECORD );
+    this.btnTakePhoto = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_RECORD ) );
     panelBtn.add( btnTakePhoto );
 
     this.btnClose = GUIFactory.createButtonClose();
@@ -338,7 +341,8 @@ public class ImageCaptureFrm extends BaseFrm
       } else {
 	BaseDlg.showErrorDlg(
 			this,
-			"Aufnehmen des Bildschirmfotos fehlgeschlagen" );
+			LangUtil.getText(
+				"image.error.taking_screenshot_failed" ) );
       }
     } else {
       image = this.screenFrm.createSnapshot();
@@ -364,18 +368,16 @@ public class ImageCaptureFrm extends BaseFrm
   private void updStatusText()
   {
     boolean timerEnabled = false;
-    String  text         = LangUtil.tr( DEFAULT_STATUS_TEXT );
+    String  text         = LangUtil.getText( DEFAULT_STATUS_TEXT );
     if( this.waitForWindowMillis > 0 ) {
       this.waitForWindowMillis -= 500;
       if( this.waitForWindowMillis > 0 ) {
 	int seconds = this.waitForWindowMillis / 1000;
 	if( seconds == 1 ) {
-	  text = LangUtil.tr(
-		"Aufzunehmendes Fenster aktivieren! Noch 1 Sekunde..." );
+	  text = LangUtil.getText(
+		"image.text.activate_window_captured_1" );
 	} else if( seconds > 1 ) {
-	  text = LangUtil.tr(
-			"Aufzunehmendes Fenster aktivieren!"
-				+ " Noch {0} Sekunden...",
+	  text = LangUtil.getText( "image.text.activate_window_captured_seconds",
 			seconds );
 	}
 	timerEnabled = true;
@@ -393,8 +395,11 @@ public class ImageCaptureFrm extends BaseFrm
 	if( captureWindow != null ) {
 	  fireTakePhoto( captureWindow );
 	} else {
-	  BaseDlg.showErrorDlg( this, "Kein JKCEMU-Fenster aktiv" );
-	  text = LangUtil.tr( DEFAULT_STATUS_TEXT );
+	  BaseDlg.showErrorDlg(
+			this,
+			LangUtil.getText(
+				"image.error.no_jkcemu_window" ) );
+	  text = LangUtil.getText( DEFAULT_STATUS_TEXT );
 	}
 	this.btnTakePhoto.setEnabled( true );
 	updFieldsEnabled();

@@ -104,7 +104,8 @@ public class TapeInFld
 
     // Bereich Funktion
     JPanel panelFct = GUIFactory.createPanel( new GridBagLayout() );
-    panelFct.setBorder( GUIFactory.createTitledBorder( "Funktion" ) );
+    panelFct.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "audio.section.function" ) ) );
     add( panelFct, gbc );
 
     GridBagConstraints gbcFct = new GridBagConstraints(
@@ -119,21 +120,20 @@ public class TapeInFld
     ButtonGroup grpFct = new ButtonGroup();
 
     this.rbFromLine = GUIFactory.createRadioButton(
-	"Audiodaten vom Sound-System lesen"
-		+ " (z.B. Mikrofon- oder Line-In-Anschluss)",
+	LangUtil.getText( "audio.option.read_audio_data_sound_system" ),
 	true );
     grpFct.add( this.rbFromLine );
     panelFct.add( this.rbFromLine, gbcFct );
 
     this.rbFromFile = GUIFactory.createRadioButton(
-	"Audiodaten aus Sound- oder Tape-Datei lesen" );
+	LangUtil.getText( "audio.option.read_audio_data_sound_tape" ) );
     grpFct.add( this.rbFromFile );
     gbcFct.insets.top = 0;
     gbcFct.gridy++;
     panelFct.add( this.rbFromFile, gbcFct );
 
     this.rbFromLastFile = GUIFactory.createRadioButton(
-	"Letzte Sound- oder Tape-Datei noch einmal lesen" );
+	LangUtil.getText( "audio.option.read_last_sound" ) );
     grpFct.add( this.rbFromLastFile );
     gbcFct.insets.bottom = 5;
     gbcFct.gridy++;
@@ -142,7 +142,8 @@ public class TapeInFld
 
     // Bereich Optionen
     JPanel panelOpt = GUIFactory.createPanel( new GridBagLayout() );
-    panelOpt.setBorder( GUIFactory.createTitledBorder( "Optionen" ) );
+    panelOpt.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.section.options" ) ) );
     gbc.gridy++;
     add( panelOpt, gbc );
 
@@ -155,18 +156,22 @@ public class TapeInFld
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    this.labelMixer = GUIFactory.createLabel( "Eingabeger\u00E4t:" );
+    this.labelMixer = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.input_device" ) );
     panelOpt.add( this.labelMixer, gbcOpt );
 
-    this.labelFrameRate = GUIFactory.createLabel( "Abtastrate (Hz):" );
+    this.labelFrameRate = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.sample_rate_hz" ) );
     gbcOpt.gridy++;
     panelOpt.add( this.labelFrameRate, gbcOpt );
 
-    this.labelChannel = GUIFactory.createLabel( "Aktiver Kanal:" );
+    this.labelChannel = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.active_channel" ) );
     gbcOpt.gridy++;
     panelOpt.add( this.labelChannel, gbcOpt );
 
-    this.labelMonitor = GUIFactory.createLabel( "Mith\u00F6ren \u00FCber:" );
+    this.labelMonitor = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.monitor_through" ) );
     gbcOpt.insets.bottom = 5;
     gbcOpt.gridy++;
     panelOpt.add( this.labelMonitor, gbcOpt );
@@ -186,14 +191,16 @@ public class TapeInFld
 
     ButtonGroup grpChannel = new ButtonGroup();
 
-    this.rbChannel0 = GUIFactory.createRadioButton( "Links", true );
+    this.rbChannel0 = GUIFactory.createRadioButton(
+		LangUtil.getText( "audio.option.left" ), true );
     grpChannel.add( this.rbChannel0 );
     gbcOpt.insets.bottom = 5;
     gbcOpt.gridwidth     = 1;
     gbcOpt.gridy++;
     panelOpt.add( this.rbChannel0, gbcOpt );
 
-    this.rbChannel1 = GUIFactory.createRadioButton( "Rechts" );
+    this.rbChannel1 = GUIFactory.createRadioButton(
+		LangUtil.getText( "audio.option.right" ) );
     grpChannel.add( this.rbChannel1 );
     gbcOpt.gridx++;
     panelOpt.add( this.rbChannel1, gbcOpt );
@@ -201,7 +208,7 @@ public class TapeInFld
     this.comboMonitorMixer = GUIFactory.createComboBox();
     this.comboMonitorMixer.setEditable( false );
     this.comboMonitorMixer.addItem(
-			LangUtil.tr( "--- nicht mith\u00F6ren ---" ) );
+			LangUtil.getText( "audio.text.not_monitor" ) );
     AudioUtil.appendMixerItemsTo( this.comboMonitorMixer, false );
     gbcOpt.insets.bottom = 5;
     gbcOpt.gridwidth     = GridBagConstraints.REMAINDER;
@@ -212,7 +219,8 @@ public class TapeInFld
 
     // Bereich Status
     JPanel panelStatus = GUIFactory.createPanel( new GridBagLayout() );
-    panelStatus.setBorder( GUIFactory.createTitledBorder( "Status" ) );
+    panelStatus.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.section.status" ) ) );
     gbc.gridy++;
     add( panelStatus, gbc );
 
@@ -225,14 +233,17 @@ public class TapeInFld
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    this.labelFile = GUIFactory.createLabel( "Datei:" );
+    this.labelFile = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.file" ) );
     panelStatus.add( this.labelFile, gbcStatus );
 
-    this.labelFormat = GUIFactory.createLabel( "Format:" );
+    this.labelFormat = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.format" ) );
     gbcStatus.gridy++;
     panelStatus.add( this.labelFormat, gbcStatus );
 
-    this.labelProgress      = GUIFactory.createLabel( "Fortschritt:" );
+    this.labelProgress      = GUIFactory.createLabel(
+		LangUtil.getText( "audio.label.progress" ) );
     gbcStatus.insets.bottom = 5;
     gbcStatus.gridy++;
     panelStatus.add( this.labelProgress, gbcStatus );
@@ -295,25 +306,31 @@ public class TapeInFld
     JPanel panelBtn = GUIFactory.createPanel( new GridLayout( 5, 1, 5, 5 ) );
     panelEast.add( panelBtn, gbcEast );
 
-    this.btnEnable = GUIFactory.createButton( "Aktivieren" );
+    this.btnEnable = GUIFactory.createButton(
+		LangUtil.getText( "audio.action.enable" ) );
     panelBtn.add( this.btnEnable );
 
-    this.btnDisable = GUIFactory.createButton( "Deaktivieren" );
+    this.btnDisable = GUIFactory.createButton(
+		LangUtil.getText( "audio.action.disable" ) );
     panelBtn.add( this.btnDisable );
 
-    this.btnFilePlay = GUIFactory.createButton( "Abspielen" );
+    this.btnFilePlay = GUIFactory.createButton(
+		LangUtil.getText( "audio.action.play" ) );
     panelBtn.add( this.btnFilePlay );
 
-    this.btnFilePause = GUIFactory.createButton( "Pause" );
+    this.btnFilePause = GUIFactory.createButton(
+		LangUtil.getText( "common.action.pause" ) );
     panelBtn.add( this.btnFilePause );
 
-    this.btnMaxSpeed = GUIFactory.createButton( "Turbo" );
+    this.btnMaxSpeed = GUIFactory.createButton(
+		LangUtil.getText( "audio.action.turbo" ) );
     panelBtn.add( this.btnMaxSpeed );
 
 
     // Pegelanzeige
     this.volumeBar = new VolumeBar( SwingConstants.VERTICAL );
-    this.volumeBar.setBorder( GUIFactory.createTitledBorder( "Pegel" ) );
+    this.volumeBar.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "audio.section.level" ) ) );
     this.volumeBar.setPreferredSize( new Dimension( 1, 1 ) );
     gbcEast.insets.top = 20;
     gbcEast.fill       = GridBagConstraints.BOTH;
@@ -408,10 +425,8 @@ public class TapeInFld
     if( (file != null) || (fileBytes != null) ) {
       try {
 	if( getTapeIn() != null ) {
-	  throw new IOException( "Die Audiofunktion \'Eingang Kassette\'"
-		+ " ist bereits aktiv.\n"
-		+ "Diese m\u00FCssen Sie zuerst deaktivieren,\n"
-		+ "bevor Sie eine neue Datei \u00F6ffnen k\u00F6nnen." );
+	  throw new IOException( LangUtil.getText(
+				"audio.error.audio_function_tape" ) );
 	}
 	EmuSys emuSys = this.emuThread.getEmuSys();
 	if( emuSys != null ) {
@@ -459,8 +474,7 @@ public class TapeInFld
 		  updProgressSlider( audioInFile );
 		  BaseDlg.showErrorDlg(
 			this,
-			"\u00C4ndern der Abspielposition bei\n"
-				+ " dieser Datei nicht m\u00F6glich" );
+			LangUtil.getText( "audio.error.changing_playback" ) );
 		}
 	      }
 	    }
@@ -622,7 +636,7 @@ public class TapeInFld
 	  if( interactive ) {
 	    File file = FileUtil.showFileOpenDlg(
 			this.audioFrm,
-			"Sound- oder Tape-Datei \u00F6ffnen",
+			LangUtil.getText( "audio.title.open_sound_tape" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_AUDIO ),
 			AudioFile.getFileFilter(),

@@ -64,9 +64,11 @@ public class RAMFloppyFld extends JComponent implements ActionListener
 						new Insets( 5, 5, 5, 5 ),
 						0, 0 );
 
-    add( GUIFactory.createLabel( "Gr\u00F6\u00DFe:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.text.size" ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Davon beschrieben:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "base.label.which_written" ) ), gbc );
 
     gbc.gridwidth = 2;
     gbc.gridy     = 0;
@@ -108,13 +110,16 @@ public class RAMFloppyFld extends JComponent implements ActionListener
     gbc.gridy++;
     add( panelBtn, gbc );
 
-    this.btnLoad = GUIFactory.createButton( EmuUtil.TEXT_OPEN_LOAD );
+    this.btnLoad = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_OPEN_LOAD ) );
     panelBtn.add( this.btnLoad );
 
-    this.btnSave = GUIFactory.createButton( EmuUtil.TEXT_SAVE );
+    this.btnSave = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_SAVE ) );
     panelBtn.add( this.btnSave );
 
-    this.btnClear = GUIFactory.createButton( EmuUtil.TEXT_DELETE );
+    this.btnClear = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_DELETE ) );
     panelBtn.add( this.btnClear );
 
     if( this.ramFloppy != null ) {
@@ -223,9 +228,7 @@ public class RAMFloppyFld extends JComponent implements ActionListener
     if( this.ramFloppy != null ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie die RAM-Floppy l\u00F6schen?\n"
-			+ "Dabei gehen alle in ihr gespeicherten Daten"
-			+ " verloren!" ) )
+		LangUtil.getText( "base.msg.want_clear_ram" ) ) )
       {
 	clear();
       }
@@ -239,7 +242,7 @@ public class RAMFloppyFld extends JComponent implements ActionListener
       File file = this.ramFloppy.getFile();
       file      = FileUtil.showFileOpenDlg(
 			this.owner,
-			"RAM-Floppy laden",
+			LangUtil.getText( "base.title.load_ram_floppy" ),
 			file != null ?
 				file
 				: RecentDirsMngr.getRecentDir(
@@ -252,8 +255,7 @@ public class RAMFloppyFld extends JComponent implements ActionListener
 	catch( IOException ex ) {
 	  BaseDlg.showErrorDlg(
 		this,
-		LangUtil.tr(
-			"Die RAM-Floppy kann nicht geladen werden.\n\n{0}",
+		LangUtil.getText( "base.text.ram_floppy_cannot_loaded",
 			ex.getMessage() ) );
 	}
       }
@@ -267,7 +269,7 @@ public class RAMFloppyFld extends JComponent implements ActionListener
       File file = this.ramFloppy.getFile();
       file      = FileUtil.showFileSaveDlg(
 			this.owner,
-			"RAM-Floppy speichern",
+			LangUtil.getText( "base.title.save_ram_floppy" ),
 			file != null ?
 				file
 				: RecentDirsMngr.getRecentDir(
@@ -280,8 +282,7 @@ public class RAMFloppyFld extends JComponent implements ActionListener
 	catch( IOException ex ) {
 	  BaseDlg.showErrorDlg(
 		this,
-		LangUtil.tr(
-			"RAM-Floppy kann nicht gespeichert werden.\n\n{0}",
+		LangUtil.getText( "base.text.ram_floppy_cannot_saved",
 			ex.getMessage() ) );
 	}
       }

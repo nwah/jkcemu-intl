@@ -117,10 +117,10 @@ public class FloppyDiskStationFrm
   private static final String ACTION_OPEN_FILE            = "file.open";
   private static final String ACTION_REFRESH              = "refresh";
 
-  private static final String TEXT_EJECT_LOAD  = "\u00D6ffnen/Laden";
+  private static final String TEXT_EJECT_LOAD  = "disk.text.open_load";
   private static final String HELP_PAGE        = "/help/floppydisk.htm";
   private static final String PROP_PREFIX      = "jkcemu.floppydisk.";
-  private static final String DRIVE_EMPTY_TEXT = "--- leer ---";
+  private static final String DRIVE_EMPTY_TEXT = "disk.text.empty";
   private static final int    MAX_DRIVE_COUNT  = 4;
 
   private static volatile FloppyDiskStationFrm instance = null;
@@ -526,7 +526,7 @@ public class FloppyDiskStationFrm
 		}
 		File file = FileUtil.showFileSaveDlg(
 					this,
-					"Diskette exportieren",
+					LangUtil.getText( "disk.menu.export_floppy_disk" ),
 					preSel,
 					FileUtil.getAnaDiskFileFilter() );
 		if( file != null ) {
@@ -561,16 +561,11 @@ public class FloppyDiskStationFrm
 		  // Fertigmeldung und weitere Aktionen
 		  int option = BaseDlg.showOptionDlg(
 			this,
-			"Die Diskettenabbilddatei wurde im"
-				+ " AnaDisk-Format exportiert.\n"
-				+ "Sie k\u00F6nnen nun die Datei"
-				+ " in ein anderes Format konvertieren\n"
-				+ "oder die in dem Diskettenabbild"
-				+ " enthaltenen einzelnen Dateien entpacken.",
-			"Export fertig",
-			"Konvertieren",
-			"Entpacken",
-			EmuUtil.TEXT_CLOSE );
+			LangUtil.getText( "disk.msg.disk_image_file" ),
+			LangUtil.getText( "disk.msg.export_finished" ),
+			LangUtil.getText( "common.action.convert" ),
+			LangUtil.getText( "disk.action.unpack" ),
+			LangUtil.getText( EmuUtil.TEXT_CLOSE ) );
 		  if( option == 0 ) {
 		    FileConvertFrm.open( file );
 		  } else if( option == 1 ) {
@@ -637,7 +632,7 @@ public class FloppyDiskStationFrm
     if( (idx >= 0) && (idx < this.drives.length) ) {
       File file = FileUtil.showFileOpenDlg(
 			this,
-			"Diskettenabbilddatei \u00F6ffnen",
+			LangUtil.getText( "disk.title.open_disk_image" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_DISK ),
 			FileUtil.getPlainDiskFileFilter(),
@@ -661,7 +656,7 @@ public class FloppyDiskStationFrm
     if( (idx >= 0) && (idx < this.drives.length) ) {
       File file = FileUtil.showFileSaveDlg(
 			this,
-			"Neue AnaDisk-Datei anlegen",
+			LangUtil.getText( "disk.title.create_new_anadisk" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_DISK ),
 			FileUtil.getAnaDiskFileFilter() );
@@ -694,7 +689,7 @@ public class FloppyDiskStationFrm
     if( (idx >= 0) && (idx < this.drives.length) ) {
       File file = FileUtil.showFileSaveDlg(
 			this,
-			"Neue CPC-Disk-Datei anlegen",
+			LangUtil.getText( "disk.title.create_new_cpc" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_DISK ),
 			FileUtil.getDskFileFilter() );
@@ -727,7 +722,7 @@ public class FloppyDiskStationFrm
     if( (idx >= 0) && (idx < this.drives.length) ) {
       File file = FileUtil.showFileSaveDlg(
 			this,
-			"Einfache Abbilddatei anlegen",
+			LangUtil.getText( "disk.title.create_plain_image" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_DISK ),
 			FileUtil.getPlainDiskFileFilter() );
@@ -764,12 +759,7 @@ public class FloppyDiskStationFrm
 	  ((DirectoryFloppyDisk) disk).fireRefresh();
 	  BaseDlg.showSuppressableInfoDlg(
 		this,
-		"Vergessen Sie bitte nicht, umgehend auch in dem im Emulator"
-			+ " laufenden Programm bzw. Betriebssystem\n"
-			+ "die Diskette zu aktualisieren bzw. das erneute"
-			+ " Einlesen des Directorys zu veranlassen!\n"
-			+ "(bei CP/M-kompatiblen Betriebssystemen meistens"
-			+ " mit CTRL-C bzw. Strg-C)" );
+		LangUtil.getText( "disk.msg.please_not_forget" ) );
 	}
       }
     }
@@ -801,7 +791,7 @@ public class FloppyDiskStationFrm
     this.lastForceLowerCase = false;
     this.ledState           = false;
     this.diskErrorShown     = false;
-    setTitle( "JKCEMU Diskettenstation" );
+    setTitle( LangUtil.getText( "disk.title.jkcemu_floppy_disk" ) );
 
 
     // Laufwerke anlegen
@@ -813,7 +803,7 @@ public class FloppyDiskStationFrm
       textArea.setBorder( BorderFactory.createLoweredBevelBorder() );
       textArea.setFont( font );
       textArea.setEditable( false );
-      textArea.setText( LangUtil.tr( DRIVE_EMPTY_TEXT ) );
+      textArea.setText( LangUtil.getText( DRIVE_EMPTY_TEXT ) );
       (new DropTarget( textArea, this )).setActive( true );
       this.textAreas[ i ] = textArea;
       this.drives[ i ]    = new FloppyDiskDrive( this );
@@ -830,7 +820,7 @@ public class FloppyDiskStationFrm
     // Menu Hilfe
     JMenu mnuHelp = createMenuHelp();
     mnuHelp.add( createMenuItem(
-			"Hilfe zu Diskettenlaufwerken...",
+			LangUtil.getText( "disk.action.help_floppy_disk" ),
 			ACTION_HELP ) );
 
 
@@ -875,7 +865,7 @@ public class FloppyDiskStationFrm
     this.btnOpen = GUIFactory.createRelImageResourceButton(
 					this,
 					"disk/eject.png",
-					TEXT_EJECT_LOAD );
+					LangUtil.getText( TEXT_EJECT_LOAD ) );
     gbc.anchor       = GridBagConstraints.EAST;
     gbc.insets.left  = 0;
     gbc.insets.right = 50;
@@ -947,13 +937,12 @@ public class FloppyDiskStationFrm
     String[] options = {
 		"Nur Lesen",
 		"Lesen & Schreiben",
-		EmuUtil.TEXT_CANCEL };
+		LangUtil.getText( EmuUtil.TEXT_CANCEL ) };
 
     switch( BaseDlg.showOptionDlg(
 			this,
-			"Soll die Datei nur zum Lesen oder auch zum\n"
-				+ "Lesen und Schreiben ge\u00F6ffnet werden?",
-			"Abfrage Schreibschutz",
+			LangUtil.getText( "disk.msg.file_opened_read" ),
+			LangUtil.getText( "disk.msg.write_protection_query" ),
 			options ) )
     {
       case 0:
@@ -994,19 +983,17 @@ public class FloppyDiskStationFrm
   private boolean confirmNewFileNotFormatted()
   {
     boolean  rv      = false;
-    String[] options = LangUtil.tr(
-			new String[] { "Weiter", EmuUtil.TEXT_CANCEL } );
+    String[] options = LangUtil.getTexts(
+			new String[] { "Weiter", LangUtil.getText(
+				EmuUtil.TEXT_CANCEL ) } );
     JOptionPane pane = new JOptionPane(
-	LangUtil.tr(
-		"Es wird jetzt eine Datei ohne Inhalt angelegt.\n"
-			+ "Vergessen Sie bitte nicht, die emulierte Diskette\n"
-			+ "vom emulierten System aus zu formatieren,\n"
-			+ "damit die neue Datei einen Inhalt bekommt\n"
-			+ "und somit genutzt werden kann." ),
+	LangUtil.getText( "disk.text.empty_file_without" ),
 	JOptionPane.INFORMATION_MESSAGE );
     pane.setOptions( options );
     pane.setWantsInput( false );
-    pane.createDialog( this, LangUtil.tr( "Hinweis" ) ).setVisible( true );
+    pane.createDialog(
+		this,
+		LangUtil.getText( "common.msg.note" ) ).setVisible( true );
     Object value = pane.getValue();
     if( value != null ) {
       if( value.equals( options[ 0 ] ) ) {
@@ -1034,7 +1021,7 @@ public class FloppyDiskStationFrm
       if( buf.length() > 0 ) {
 	buf.append( ", " );
       }
-      buf.append( LangUtil.tr( "schreibgesch\u00FCtzt" ) );
+      buf.append( LangUtil.getText( "disk.text.write_protected" ) );
     }
     String remark = disk.getRemark();
     if( remark != null ) {
@@ -1046,9 +1033,8 @@ public class FloppyDiskStationFrm
     }
     if( skipOddCyls ) {
       buf.append( "\n\n" );
-      buf.append( LangUtil.tr(
-		"Emulation einer SD-Diskette in einem DD-Laufwerk"
-			+ "\n(Umrechnung der Spurnummern)" ) );
+      buf.append( LangUtil.getText(
+		"disk.text.emulation_sd_floppy" ) );
     }
     return buf.toString();
   }
@@ -1064,32 +1050,32 @@ public class FloppyDiskStationFrm
     }
     createPopupMenuItem(
 		this.popupMnu,
-		"Diskette \u00F6ffnen...",
+		LangUtil.getText( "disk.action.open_floppy_disk" ),
 		ACTION_OPEN_DRIVE );
     createPopupMenuItem(
 		this.popupMnu,
-		"Diskettenabbilddatei \u00F6ffnen...",
+		LangUtil.getText( "disk.action.open_disk_image" ),
 		ACTION_OPEN_FILE );
     createPopupMenuItem(
 		this.popupMnu,
-		"Verzeichnis \u00F6ffnen...",
+		LangUtil.getText( "disk.action.open_directory_dots" ),
 		"directory.open" );
     this.popupMnuRefresh = createPopupMenuItem(
 		this.popupMnu,
-		"Emulierte Diskette aktualisieren",
+		LangUtil.getText( "disk.action.refresh_emulated_floppy" ),
 		ACTION_REFRESH );
     this.popupMnu.addSeparator();
     createPopupMenuItem(
 		this.popupMnu,
-		"Neue einfache Abbilddatei anlegen...",
+		LangUtil.getText( "disk.action.create_new_plain" ),
 		ACTION_NEW_PLAIN_FILE );
     createPopupMenuItem(
 		this.popupMnu,
-		"Neue AnaDisk-Datei anlegen...",
+		LangUtil.getText( "disk.action.create_new_anadisk" ),
 		ACTION_NEW_ANADISK_FILE );
     createPopupMenuItem(
 		this.popupMnu,
-		"Neue CPC-Disk-Datei anlegen...",
+		LangUtil.getText( "disk.action.create_new_cpc" ),
 		ACTION_NEW_CPCDISK_FILE );
     this.popupMnu.addSeparator();
 
@@ -1107,9 +1093,11 @@ public class FloppyDiskStationFrm
       if( this.etcDisks.length > 0 ) {
 	JMenu mnuEtcDisks = null;
 	if( hasSuitableDisks ) {
-	  mnuEtcDisks = GUIFactory.createMenu( "Andere Diskette einlegen" );
+	  mnuEtcDisks = GUIFactory.createMenu( LangUtil.getText(
+				"disk.menu.insert_different_floppy" ) );
 	} else {
-	  mnuEtcDisks = GUIFactory.createMenu( "Diskette einlegen" );
+	  mnuEtcDisks = GUIFactory.createMenu(
+			LangUtil.getText( "disk.menu.insert_floppy_disk" ) );
 	}
 	for( int i = 0; i < this.etcDisks.length; i++ ) {
 	  mnuEtcDisks.add(
@@ -1127,7 +1115,7 @@ public class FloppyDiskStationFrm
     if( this.allDisks != null ) {
       if( this.allDisks.length > 0 ) {
 	JMenu mnuExportDisks = GUIFactory.createMenu(
-						"Diskette exportieren" );
+						LangUtil.getText( "disk.menu.export_floppy_disk" ) );
 	for( int i = 0; i < this.allDisks.length; i++ ) {
 	  mnuExportDisks.add(
 		createPopupMenuItem(
@@ -1144,7 +1132,8 @@ public class FloppyDiskStationFrm
     this.popupMnu.addSeparator();
     this.popupMnuRemove = createPopupMenuItem(
 				this.popupMnu,
-				"Diskette/Abbilddatei schlie\u00DFen",
+				LangUtil.getText(
+					"disk.action.close_floppy_disk" ),
 				null );
     updRefreshBtn();
   }
@@ -1290,28 +1279,9 @@ public class FloppyDiskStationFrm
       if( !readOnly ) {
 	if( JOptionPane.showConfirmDialog(
 		this,
-		LangUtil.tr(
-		"Sie \u00F6ffnen das Verzeichnis ohne Schreibschutz.\n"
-			+ "Schreibzugriffe auf die emulierte Diskette wirken"
-			+ " sich somit direkt auf die Dateien in dem"
-			+ " Verzeichnis aus.\n\n"
-			+ "Wenn die falsche Directory-Gr\u00F6\u00DFe"
-			+ " eingestellt ist\n"
-			+ "oder die emulierte Diskette zu einem"
-			+ " ung\u00FCnstigen Zeitpunkt aktualisiert wird\n"
-			+ "oder nach dem Aktualisieren im Emulator das"
-			+ " erneute Einlesen des Directorys"
-			+ " nicht veranlasst wird,\n"
-			+ "kann es zum ungewollten L\u00F6schen oder"
-			+ " \u00DCberschreiben der in dem Verzeichnis"
-			+ " liegenden Dateien kommen!\n\n"
-			+ "Stellen Sie bitte sicher, dass die Dateien"
-			+ " in dem Verzeichnis an einer anderen Stelle"
-			+ " nochmals gesichert sind\n"
-			+ "und lesen Sie in der Hilfe den Abschnitt"
-			+ " \u00FCber die Emulation einer Diskette"
-			+ " auf Basis eines Verzeichnisses!" ),
-		LangUtil.tr( "Warnung" ),
+		LangUtil.getText(
+		"disk.text.opening_directory" ),
+		LangUtil.getText( "common.msg.warning" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) != JOptionPane.OK_OPTION )
 	{
@@ -1553,7 +1523,7 @@ public class FloppyDiskStationFrm
       }
       rv = setDisk(
 		idx,
-		LangUtil.tr( "Laufwerk: {0}", driveName ),
+		LangUtil.getText( "disk.text.drive_colon", driveName ),
 		PlainDisk.createForDrive(
 				this,
 				fileName,
@@ -1571,8 +1541,7 @@ public class FloppyDiskStationFrm
 	  errMsg = msg.replace( fileName, driveName );
 	}
       } else {
-	errMsg = LangUtil.tr(
-		"Diskette in Laufwerk {0} nicht gefunden oder nicht nutzbar",
+	errMsg = LangUtil.getText( "disk.text.floppy_disk_drive",
 		driveName );
       }
       if( usb
@@ -1745,22 +1714,16 @@ public class FloppyDiskStationFrm
 		StringBuilder buf = new StringBuilder( 512 );
 		int           pos = fileName.lastIndexOf( '.' );
 		if( (pos >= 0) && (pos < (fileName.length() - 1)) ) {
-		  buf.append( LangUtil.tr(
-			"Dateiendung ''{0}'': Unbekannter Dateityp\n\n",
+		  buf.append( LangUtil.getText(
+			"disk.text.file_extension_unknown",
 			fileName.substring( pos ) ) );
 		}
-		buf.append( LangUtil.tr(
-			"JKCEMU kann den Dateityp nicht erkennen,\n"
-				+ "da die Dateiendung keiner der bei"
-				+ " Diskettenabbilddateien\n"
-				+ "\u00FCblicherweise verwendeten"
-				+ " entspricht.\n"
-				+ "Die Datei wird deshalb als einfache"
-				+ " Abbilddatei ge\u00F6ffnet." ) );
+		buf.append( LangUtil.getText(
+			"disk.text.jkcemu_cannot_recognize" ) );
 		if( JOptionPane.showConfirmDialog(
 			this,
 			buf.toString(),
-			LangUtil.tr( "Dateiformat" ),
+			LangUtil.getText( "common.section.file_format" ),
 			JOptionPane.OK_CANCEL_OPTION,
 			JOptionPane.WARNING_MESSAGE )
 					== JOptionPane.OK_OPTION )
@@ -1826,24 +1789,17 @@ public class FloppyDiskStationFrm
       if( (fileLen >= 0) && (fileLen != fmt.getDiskSize()) ) {
 	StringBuilder buf = new StringBuilder( 512 );
 	if( !readOnly.booleanValue() ) {
-	  buf.append( LangUtil.tr(
-		"Das von Ihnen ausgew\u00E4hlte Diskettenformat"
-			+ " scheint nicht zu passen.\n"
-			+ "Sie k\u00F6nnen trotzdem fortsetzen,"
-			+ " allerdings wird dann\n"
-			+ "die Datei nur mit Schreibschutz"
-			+ " ge\u00F6ffnet.\n\n"
-			+ "M\u00F6chten Sie fortsetzen?" ) );
+	  buf.append( LangUtil.getText(
+		"disk.text.disk_format_selected_not_seem_match_continue" ) );
 	} else {
-	  buf.append( LangUtil.tr(
-		"Das von Ihnen ausgew\u00E4hlte Diskettenformat"
-			+ " scheint nicht zu passen.\n"
-			+ "M\u00F6chten Sie trotzdem fortsetzen?" ) );
+	  buf.append( LangUtil.getText(
+		"disk.text.disk_format_selected_not_seem_match_want" ) );
 	}
 	if( !BaseDlg.showYesNoWarningDlg(
 					this,
 					buf.toString(),
-					LangUtil.tr( "Diskettenformat" ) ) )
+					LangUtil.getText(
+						"disk.text.disk_format" ) ) )
 	{
 	  fmt = null;
 	}
@@ -1890,7 +1846,7 @@ public class FloppyDiskStationFrm
     int n = Math.min( this.textAreas.length, this.driveCnt );
     for( int i = 0; i < n; i++ ) {
       this.tabbedPane.addTab(
-			LangUtil.tr( "Laufwerk {0}", i + 1 ),
+			LangUtil.getText( "disk.text.drive", i + 1 ),
 			this.textAreas[ i ] );
     }
   }
@@ -1924,7 +1880,7 @@ public class FloppyDiskStationFrm
       disk.setOwner( null );
       this.drives[ idx ].removeDisk();
     }
-    this.textAreas[ idx ].setText( LangUtil.tr( DRIVE_EMPTY_TEXT ) );
+    this.textAreas[ idx ].setText( LangUtil.getText( DRIVE_EMPTY_TEXT ) );
     updRefreshBtn();
   }
 
@@ -1961,18 +1917,11 @@ public class FloppyDiskStationFrm
 	  if( (cyls > 0) && (cyls < 50) ) {
 	    switch( OptionDlg.showOptionDlg(
 		this,
-		"Soll ein 40- oder 80-Spuren-Laufwerk emuliert werden?\n\n"
-			+ "Wenn die im Emulator laufende Software von einem"
-			+ " 80-Spuren-Laufwerk ausgeht,\n"
-			+ "wird sie bei einer Diskette mit einfacher Dichte"
-			+ " pro Spurwechsel zwei Schrittimpulse senden.\n"
-			+ "JKCEMU muss das wissen, um auf die richtige"
-			+ " Spur schlie\u00DFen zu k\u00F6nnen.",
-		"Laufwerkstyp",
+		LangUtil.getText( "disk.msg.40_track_80" ),
+		LangUtil.getText( "disk.msg.drive_type" ),
 		-1,
-		"40-Spuren-Laufwerk (z.B. K5600.10 / MFS 1.2)",
-		"80-Spuren-Laufwerk (z.B. K5600.20 / MFS 1.4,"
-						+ " K5601 / MFS 1.6)" ) )
+		LangUtil.getText( "disk.msg.40_track_drive" ),
+		LangUtil.getText( "disk.msg.80_track_drive" ) ) )
 	    {
 	      case 0:
 		skipOddCyls = Boolean.FALSE;

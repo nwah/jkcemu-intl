@@ -360,7 +360,7 @@ public class KCNet implements
 
   public String toString()
   {
-    return this.title != null ? LangUtil.tr( this.title ) : "KCNet";
+    return this.title != null ? LangUtil.getText( this.title ) : "KCNet";
   }
 
 

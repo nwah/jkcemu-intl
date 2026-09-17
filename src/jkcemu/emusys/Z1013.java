@@ -158,13 +158,13 @@ public class Z1013 extends EmuSys implements
   private static final FloppyDiskInfo cpm64x16FloppyDisk =
 		new FloppyDiskInfo(
 			"/disks/z1013/z1013cpm64x16.dump.gz",
-			"Z1013 CP/M Boot-Diskette (64x16 Zeichen)",
+			"emusys.text.z1013_cp_m_boot_disk_64x16",
 			2, 2048, true );
 
   private static final FloppyDiskInfo cpm80x25FloppyDisk =
 		new FloppyDiskInfo(
 			"/disks/z1013/z1013cpm80x25.dump.gz",
-			"Z1013 CP/M Boot-Diskette (80x25 Zeichen)",
+			"emusys.text.z1013_cp_m_boot_disk_80x25",
 			2, 2048, true );
 
   private static final FloppyDiskInfo[] availableFloppyDisks = {
@@ -295,7 +295,8 @@ public class Z1013 extends EmuSys implements
 				this.emuThread.getRAMFloppy1(),
 				"Z1013",
 				RAMFloppy.RFType.MP_3_1988,
-				"RAM-Floppy an E/A-Adressen 98h-9Fh",
+				LangUtil.getText(
+					"emusys.text.ram_floppy_i_o_addresses_98h" ),
 				props,
 				PROP_PREFIX + PROP_RF1_PREFIX );
 
@@ -303,12 +304,13 @@ public class Z1013 extends EmuSys implements
 				this.emuThread.getRAMFloppy2(),
 				"Z1013",
 				RAMFloppy.RFType.MP_3_1988,
-				"RAM-Floppy an E/A-Adressen 58h-5Fh",
+				LangUtil.getText(
+					"emusys.text.ram_floppy_i_o_addresses_58h" ),
 				props,
 				PROP_PREFIX + PROP_RF2_PREFIX );
 
     Z80CPU cpu = this.emuThread.getZ80CPU();
-    this.pio   = new Z80PIO( "PIO (E/A-Adressen 00h-03h)" );
+    this.pio   = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_00h" ) );
     cpu.addAddressListener( this );
     cpu.addMaxSpeedListener( this );
     checkAddPCListener( props );
@@ -354,7 +356,8 @@ public class Z1013 extends EmuSys implements
     }
 
     if( emulatesKCNet( props ) ) {
-      this.kcNet = new KCNet( "Netzwerk-PIO (E/A-Adressen C0h-C3h)" );
+      this.kcNet = new KCNet( LangUtil.getText(
+			"emusys.text.network_pio_i_o_addresses_c0h" ) );
     } else {
       this.kcNet = null;
     }
@@ -363,7 +366,7 @@ public class Z1013 extends EmuSys implements
       this.vdip = new VDIP(
 			0,
 			this.emuThread.getZ80CPU(),
-			"USB-PIO (E/A-Adressen FCh-FFh)" );
+			LangUtil.getText( "emusys.text.usb_pio_i_o_addresses_fch_ffh" ) );
     } else {
       this.vdip = null;
     }
@@ -633,7 +636,7 @@ public class Z1013 extends EmuSys implements
     buf.append( "</td></tr>\n" );
     if( this.rom8000 != null ) {
       buf.append( "<tr><td>27K-ROM (8000h-EBFFh):</td><td>" );
-      buf.append( this.rom8000Enabled ? EmuUtil.TEXT_ON : EmuUtil.TEXT_OFF );
+      buf.append( this.rom8000Enabled ? LangUtil.getText( EmuUtil.TEXT_ON ) : LangUtil.getText( EmuUtil.TEXT_OFF ) );
       buf.append( "</td></tr>\n" );
     }
     if( this.romMega != null ) {
@@ -651,7 +654,7 @@ public class Z1013 extends EmuSys implements
 	  buf.append( " ein" );
 	}
       } else {
-	buf.append( EmuUtil.TEXT_OFF );
+	buf.append( LangUtil.getText( EmuUtil.TEXT_OFF ) );
       }
       buf.append( "</td></tr>\n" );
     }
@@ -664,23 +667,23 @@ public class Z1013 extends EmuSys implements
     if( this.ramKRT != null ) {
       if( this.modeKRT ) {
 	if( this.mode64x16 ) {
-	  buf.append( LangUtil.tr( "KRT-Grafik (64x16 Modus aktiv)" ) );
+	  buf.append( LangUtil.getText( "emusys.text.krt_graphics_64x16" ) );
 	} else {
-	  buf.append( LangUtil.tr( "KRT-Grafik" ) );
+	  buf.append( LangUtil.getText( "emusys.text.krt_graphics" ) );
 	}
 	done = true;
       } else {
-	buf.append( LangUtil.tr( "Standard-BWS, " ) );
+	buf.append( LangUtil.getText( "emusys.text.standard_video_ram" ) );
       }
     }
     if( !done ) {
       if( this.altFontEnabled ) {
-	buf.append( LangUtil.tr(
-		"{0} Zeichen, alternativer Zeichensatz",
+	buf.append( LangUtil.getText(
+		"emusys.text.characters_alternative",
 		this.mode64x16 ? "64x16" : "32x32" ) );
       } else {
-	buf.append( LangUtil.tr(
-		"{0} Zeichen",
+	buf.append( LangUtil.getText(
+		"emusys.text.characters",
 		this.mode64x16 ? "64x16" : "32x32" ) );
       }
     }
@@ -1431,13 +1434,12 @@ public class Z1013 extends EmuSys implements
     }
     switch( OptionDlg.showOptionDlg(
 		this.screenFrm,
-		"W\u00E4hlen Sie bitte den BASIC-Interpreter aus,\n"
-			+ "dessen BASIC-Programm ge\u00F6ffnet werden soll.",
-		"BASIC-Interpreter",
+		LangUtil.getText( "emusys.msg.please_select_basic_interpreter_program_opened" ),
+		LangUtil.getText( "emusys.msg.basic_interpreter" ),
 		preIdx,
-		"Z1013-Tiny-BASIC",
-		"KC-BASIC (RAM-Version)",
-		"KC-BASIC (ROM-Version)" ) )
+		LangUtil.getText( "emusys.msg.z1013_tiny_basic" ),
+		LangUtil.getText( "emusys.msg.kc_basic_ram" ),
+		LangUtil.getText( "emusys.msg.kc_basic_rom" ) ) )
     {
       case 0:
 	bType = BasicType.Z1013_TINY;
@@ -1818,13 +1820,12 @@ public class Z1013 extends EmuSys implements
     }
     switch( OptionDlg.showOptionDlg(
 		this.screenFrm,
-		"W\u00E4hlen Sie bitte den BASIC-Interpreter aus,\n"
-			+ "dessen BASIC-Programm gespeichert werden soll.",
-		"BASIC-Interpreter",
+		LangUtil.getText( "emusys.msg.please_select_basic_interpreter_program_saved" ),
+		LangUtil.getText( "emusys.msg.basic_interpreter" ),
 		preIdx,
-		"Z1013-Tiny-BASIC",
-		"KC-BASIC (RAM-Version)",
-		"KC-BASIC (ROM-Version)" ) )
+		LangUtil.getText( "emusys.msg.z1013_tiny_basic" ),
+		LangUtil.getText( "emusys.msg.kc_basic_ram" ),
+		LangUtil.getText( "emusys.msg.kc_basic_rom" ) ) )
     {
       case 0:
 	endAddr = this.emuThread.getMemWord( 0x101F );

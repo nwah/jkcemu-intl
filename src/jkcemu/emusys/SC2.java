@@ -21,6 +21,7 @@ import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.emusys.etc.SC2KeyboardFld;
 import jkcemu.etc.CPUSynchronSoundDevice;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80InterruptSource;
 import z80emu.Z80MaxSpeedListener;
@@ -64,10 +65,11 @@ public class SC2 extends EmuSys implements Z80MaxSpeedListener
     this.keyboardMatrix = new int[ 4 ];
     this.digitStatus    = new int[ 4 ];
     this.digitValues    = new int[ 4 ];
-    this.loudspeaker    = new CPUSynchronSoundDevice( "Lautsprecher" );
+    this.loudspeaker    = new CPUSynchronSoundDevice(
+		LangUtil.getText( "emusys.text.loudspeaker" ) );
 
     Z80CPU cpu = emuThread.getZ80CPU();
-    this.pio   = new Z80PIO( "PIO" );
+    this.pio   = new Z80PIO( LangUtil.getText( "emusys.text.pio" ) );
     cpu.setInterruptSources( this.pio );
     cpu.addMaxSpeedListener( this );
     cpu.addTStatesListener( this );

@@ -30,6 +30,7 @@ import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 
 
 public class SpeedSettingsFld
@@ -66,12 +67,13 @@ public class SpeedSettingsFld
 					0, 0 );
 
     panel.add(
-	GUIFactory.createLabel( "Geschwindigkeit des emulierten Systems:" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"settings.label.speed_emulated_system" ) ),
 	gbc );
 
     ButtonGroup grpSpeed = new ButtonGroup();
     this.rbSpeedDefault = GUIFactory.createRadioButton(
-				"Begrenzen auf Originalgeschwindigkeit",
+				LangUtil.getText( "settings.option.limit_original_speed" ),
 				true );
     grpSpeed.add( this.rbSpeedDefault );
     gbc.insets.top  = 0;
@@ -79,7 +81,8 @@ public class SpeedSettingsFld
     gbc.gridy++;
     panel.add( this.rbSpeedDefault, gbc );
 
-    this.rbSpeedValue = GUIFactory.createRadioButton( "Begrenzen auf:" );
+    this.rbSpeedValue = GUIFactory.createRadioButton(
+		LangUtil.getText( "settings.option.limit" ) );
     grpSpeed.add( this.rbSpeedValue );
     gbc.insets.bottom = 5;
     gbc.gridwidth     = 1;
@@ -92,7 +95,8 @@ public class SpeedSettingsFld
     gbc.gridx++;
     panel.add( this.fldSpeed, gbc );
 
-    this.labelSpeedUnit = GUIFactory.createLabel( "MHz" );
+    this.labelSpeedUnit = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.mhz" ) );
     gbc.insets.left = 5;
     gbc.gridx++;
     panel.add( this.labelSpeedUnit, gbc );

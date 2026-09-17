@@ -24,6 +24,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class PrintOptionsDlg extends BaseDlg
@@ -99,7 +100,7 @@ public class PrintOptionsDlg extends BaseDlg
 		boolean askFontSize,
 		boolean askPrintFileName )
   {
-    super( owner, "Druckoptionen" );
+    super( owner, LangUtil.getText( "print.title.print_options" ) );
     this.applied = false;
 
 
@@ -133,7 +134,8 @@ public class PrintOptionsDlg extends BaseDlg
     this.comboFontSize = null;
     if( askFontSize ) {
       panelOpt.add(
-		GUIFactory.createLabel( "Schriftgr\u00F6\u00DFe:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText( "common.label.font_size" ) ),
 		gbcOpt );
       this.comboFontSize = GUIFactory.createComboBox( fontSizes );
       this.comboFontSize.setEditable( false );
@@ -151,7 +153,8 @@ public class PrintOptionsDlg extends BaseDlg
     this.cbFileName = null;
     if( askPrintFileName ) {
       this.cbFileName = GUIFactory.createCheckBox(
-				"Dateiname drucken",
+				LangUtil.getText(
+					"print.option.print_file_name" ),
 				Main.getPrintFileName() );
       panelOpt.add( this.cbFileName, gbcOpt );
       gbcOpt.insets.top = 0;
@@ -161,7 +164,8 @@ public class PrintOptionsDlg extends BaseDlg
 
     // Seitennummer
     this.cbPageNum = GUIFactory.createCheckBox(
-				"Seitennummer drucken",
+				LangUtil.getText(
+					"print.option.print_page_number" ),
 				Main.getPrintPageNum() );
     gbcOpt.insets.bottom = 5;
     panelOpt.add( this.cbPageNum, gbcOpt );

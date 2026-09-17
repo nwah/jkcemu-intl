@@ -272,7 +272,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--ar" )
 	       || arg.equalsIgnoreCase( "--audiorecorder" ) )
       {
-	setAppName( AudioRecorderFrm.TITLE );
+	setAppName( LangUtil.getText( AudioRecorderFrm.TITLE ) );
 	EventQueue.invokeLater(
 		new Runnable()
 		{
@@ -306,7 +306,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--ca" )
 	       || arg.equalsIgnoreCase( "--calculator" ) )
       {
-	setAppName( CalculatorFrm.TITLE );
+	setAppName( LangUtil.getText( CalculatorFrm.TITLE ) );
 	EventQueue.invokeLater(
 		new Runnable()
 		{
@@ -322,7 +322,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--dc" )
 	       || arg.equalsIgnoreCase( "--diskcreator" ) )
       {
-	setAppName( DiskImgCreateFrm.TITLE );
+	setAppName( LangUtil.getText( DiskImgCreateFrm.TITLE ) );
 	EventQueue.invokeLater(
 		new Runnable()
 		{
@@ -338,7 +338,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--du" )
 	       || arg.equalsIgnoreCase( "--diskunpacker" ) )
       {
-	setAppName( DiskImgUnpackFrm.TITLE );
+	setAppName( LangUtil.getText( DiskImgUnpackFrm.TITLE ) );
 	final File file = getArgFile( args, argIdx );
 	EventQueue.invokeLater(
 		new Runnable()
@@ -355,7 +355,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--dv" )
 	       || arg.equalsIgnoreCase( "--diskviewer" ) )
       {
-	setAppName( DiskImgViewFrm.TITLE );
+	setAppName( LangUtil.getText( DiskImgViewFrm.TITLE ) );
 	final File file = getArgFile( args, argIdx );
 	EventQueue.invokeLater(
 		new Runnable()
@@ -372,7 +372,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--fb" )
 	       || arg.equalsIgnoreCase( "--filebrowser" ) )
       {
-	setAppName( FileBrowserFrm.TITLE );
+	setAppName( LangUtil.getText( FileBrowserFrm.TITLE ) );
 	EventQueue.invokeLater(
 		new Runnable()
 		{
@@ -388,7 +388,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--fc" )
 	       || arg.equalsIgnoreCase( "--fileconverter" ) )
       {
-	setAppName( FileConvertFrm.TITLE );
+	setAppName( LangUtil.getText( FileConvertFrm.TITLE ) );
 	final File file = getArgFile( args, argIdx );
 	EventQueue.invokeLater(
 		new Runnable()
@@ -405,7 +405,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--ff" )
 	       || arg.equalsIgnoreCase( "--findfiles" ) )
       {
-	setAppName( FindFilesFrm.TITLE );
+	setAppName( LangUtil.getText( FindFilesFrm.TITLE ) );
 	Path path = null;
 	File file = getArgFile( args, argIdx );
 	if( file != null ) {
@@ -434,7 +434,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--hd" )
 	       || arg.equalsIgnoreCase( "--hexdiff" ) )
       {
-	setAppName( HexDiffFrm.TITLE );
+	setAppName( LangUtil.getText( HexDiffFrm.TITLE ) );
 	final List<File> files = getArgFileList( args, argIdx );
 	EventQueue.invokeLater(
 		new Runnable()
@@ -455,7 +455,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--he" )
 	       || arg.equalsIgnoreCase( "--hexeditor" ) )
       {
-	setAppName( HexEditFrm.TITLE );
+	setAppName( LangUtil.getText( HexEditFrm.TITLE ) );
 	final File file = getArgFile( args, argIdx );
 	EventQueue.invokeLater(
 		new Runnable()
@@ -472,7 +472,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--iv" )
 	       || arg.equalsIgnoreCase( "--imageviewer" ) )
       {
-	setAppName( ImageFrm.TITLE );
+	setAppName( LangUtil.getText( ImageFrm.TITLE ) );
 	final File file = getArgFile( args, argIdx );
 	EventQueue.invokeLater(
 		new Runnable()
@@ -489,7 +489,7 @@ public class Main
       else if( arg.equalsIgnoreCase( "--te" )
 	       || arg.equalsIgnoreCase( "--texteditor" ) )
       {
-	setAppName( TextEditFrm.TITLE );
+	setAppName( LangUtil.getText( TextEditFrm.TITLE ) );
 	final File file  = getArgFile( args, argIdx );
 	EventQueue.invokeLater(
 		new Runnable()
@@ -605,32 +605,13 @@ public class Main
     if( props != null ) {
       if( !EmuUtil.getProperty( props, PROP_VERSION ).equals( VERSION ) ) {
 	String[]    options = new String[] {
-				LangUtil.tr( "Ja" ),
-				LangUtil.tr( "Nein" ) };
-	String      title   = LangUtil.tr( "{0}-Profil laden", APPNAME );
+				LangUtil.getText( "common.msg.yes" ),
+				LangUtil.getText( "common.msg.no" ) };
+	String      title   = LangUtil.getText(
+		"main.text.load_profile", APPNAME );
 	Window      dlg     = null;
-	JOptionPane pane    = new JOptionPane(
-		LangUtil.tr(
-			"Das zu ladende Profil wurde mit einer anderen"
-				+ " {0}-Version gespeichert,\n"
-				+ "deren Profilformat nicht unbedingt"
-				+ " kompatibel zur dieser Version ist.\n"
-				+ "Es kann somit sein, dass die im Profil"
-				+ " gespeicherten Einstellungen nicht korrekt\n"
-				+ "\u00FCbernommen oder dass in einigen Fenstern"
-				+ " nicht alles richtig angezeigt wird.\n"
-				+ "\nSollte das bei Ihnen der Fall sein, dann"
-				+ " schlie\u00DFen Sie {0}"
-				+ " und starten erneut.\n"
-				+ "Erscheint dabei dieser Dialog, so brechen Sie"
-				+ " ihn bitte ab,\n"
-				+ "damit {0} mit Standardeinstellungen"
-				+ " startet.\n"
-				+ "Anschlie\u00DFend stellen Sie alles nach Ihren"
-				+ " W\u00FCnschen ein und speichern\n"
-				+ "die Einstellungen als Profil erneut ab.\n"
-				+ "\nM\u00F6chten Sie das eventuell inkompatible"
-				+ " Profil jetzt laden?",
+	JOptionPane pane    = new JOptionPane( LangUtil.getText(
+			"main.text.profile_loaded_saved",
 			APPNAME ),
 		JOptionPane.WARNING_MESSAGE );
 	pane.setOptions( options );
@@ -955,8 +936,7 @@ public class Main
 	}
 	if( !found ) {
 	  throw new IOException(
-		LangUtil.tr(
-			"Datei ist keine {0}-Profildatei",
+		LangUtil.getText( "main.text.file_not_profile",
 			APPNAME ) );
 	}
       }
@@ -1341,8 +1321,9 @@ public class Main
 	setDefaultLAF();
 	ProfileDlg dlg = new ProfileDlg(
 				null,
-				APPNAME + " Profile",
-				EmuUtil.TEXT_SELECT,
+				LangUtil.getText(
+					"main.text.jkcemu_profiles" ),
+				LangUtil.getText( EmuUtil.TEXT_SELECT ),
 				propsFile,
 				false );
 	dlg.setVisible( true );
@@ -1371,14 +1352,7 @@ public class Main
       if( !configDir.mkdirs() ) {
 	BaseDlg.showErrorDlg(
 		screenFrm,
-		LangUtil.tr(
-			"Das Verzeichnis {0}"
-				+ "\nkonnte nicht angelegt werden."
-				+ "\nDadurch ist {1} nur mit einigen"
-				+ " Einschr\u00E4nkungen lauff\u00E4hig."
-				+ "\nInsbesondere k\u00F6nnen keine"
-				+ " Einstellungen und Profile"
-				+ " gespeichert werden.",
+		LangUtil.getText( "main.text.directory_not_created",
 			configDir.getPath(),
 			APPNAME ) );
 	configDir = null;
@@ -1417,10 +1391,8 @@ public class Main
     // ggf. Fehlermeldung, dass das Profil nicht geladen werden konnte
     if( !firstExec && (propsEx != null) && (prfName != null) ) {
       StringBuilder buf = new StringBuilder( 256 );
-      buf.append( LangUtil.tr(
-		"Profil ''{0}'' kann nicht geladen werden.\n"
-			+ "{1} wird ohne benutzerdefinierte"
-			+ " Einstellungen gestartet",
+      buf.append( LangUtil.getText(
+		"main.text.profile_cannot_loaded",
 		prfName,
 		APPNAME ) );
       String msg = propsEx.getMessage();
@@ -1428,7 +1400,7 @@ public class Main
 	msg = msg.trim();
 	if( !msg.isEmpty() ) {
 	  buf.append( "\n\n" );
-	  buf.append( LangUtil.tr( "Details:" ) );
+	  buf.append( LangUtil.getText( "main.text.details" ) );
 	  buf.append( '\n' );
 	  buf.append( msg );
 	}

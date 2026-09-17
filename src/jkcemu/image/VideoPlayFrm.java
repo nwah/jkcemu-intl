@@ -21,6 +21,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseFrm;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class VideoPlayFrm extends BaseFrm
@@ -36,13 +37,14 @@ public class VideoPlayFrm extends BaseFrm
   {
     this.file  = null;
     this.image = null;
-    setTitle( "JKCEMU Videoplayer" );
+    setTitle( LangUtil.getText( "image.title.jkcemu_video_player" ) );
 
 
     // Menu
     JMenu mnuFile = createMenuFile();
 
-    this.mnuPlayAgain = createMenuItem( "Video erneut wiedergeben" );
+    this.mnuPlayAgain = createMenuItem(
+		LangUtil.getText( "image.action.play_video_again" ) );
     this.mnuPlayAgain.setEnabled( false );
     mnuFile.add( this.mnuPlayAgain );
     mnuFile.addSeparator();
@@ -98,7 +100,7 @@ public class VideoPlayFrm extends BaseFrm
 	this.mnuPlayAgain.setEnabled( false );
 	this.labelPlayer.setIcon( null );
 	this.labelPlayer.setText(
-			"Video kann nicht wiedergegeben werden." );
+			LangUtil.getText( "image.text.video_cannot_played" ) );
       }
     }
   }

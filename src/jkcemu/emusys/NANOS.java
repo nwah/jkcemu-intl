@@ -27,6 +27,7 @@ import jkcemu.disk.FloppyDiskInfo;
 import jkcemu.disk.GIDE;
 import jkcemu.etc.GraphicPoppe;
 import jkcemu.etc.K1520Sound;
+import jkcemu.lang.LangUtil;
 import jkcemu.net.KCNet;
 import jkcemu.text.TextUtil;
 import jkcemu.usb.VDIP;
@@ -84,19 +85,19 @@ public class NANOS extends EmuSys implements
   private static FloppyDiskInfo epos20Disk64x32 =
 		new FloppyDiskInfo(
 			"/disks/nanos/epos21_64x32.dump.gz",
-			"EPOS 2.1 Boot-Diskette (64x32 Zeichen)",
+			"emusys.text.epos_2_1_boot_disk_64x32",
 			2, 2048, true );
 
   private static FloppyDiskInfo epos20Disk80x24 =
 		new FloppyDiskInfo(
 			"/disks/nanos/epos21_80x24.dump.gz",
-			"EPOS 2.1 Boot-Diskette (80x24 Zeichen)",
+			"emusys.text.epos_2_1_boot_disk_80x24",
 			2, 2048, true );
 
   private static FloppyDiskInfo nanos22Disk80x25 =
 		new FloppyDiskInfo(
 			"/disks/nanos/nanos22_80x25.dump.gz",
-			"NANOS 2.2 Boot-Diskette",
+			"emusys.text.nanos_2_2",
 			2, 2048, true );
 
   private static byte[] romEpos   = null;
@@ -165,7 +166,8 @@ public class NANOS extends EmuSys implements
 
     this.kcNet = null;
     if( emulatesKCNet( props ) ) {
-      this.kcNet = new KCNet( "Netzwerk-PIO (E/A-Adressen 80h-83h)" );
+      this.kcNet = new KCNet(
+		LangUtil.getText( "emusys.text.network_pio_i_o_addresses_80h" ) );
     }
 
     this.vdip = null;
@@ -173,23 +175,23 @@ public class NANOS extends EmuSys implements
       this.vdip = new VDIP(
 			0,
 			this.emuThread.getZ80CPU(),
-			"USB-PIO (E/A-Adressen 88h-8Bh)" );
+			LangUtil.getText( "emusys.text.usb_pio_i_o_addresses_88h_8bh" ) );
       this.vdip.applySettings( props );
     }
 
     this.gide = GIDE.getGIDE( this.screenFrm, props, this.propPrefix );
 
-    this.pio00 = new Z80PIO( "ZRE-PIO (E/A-Adressen 00h-03h)" );
+    this.pio00 = new Z80PIO( LangUtil.getText( "emusys.text.zre_pio_i" ) );
     this.pio80 = null;
     if( this.kcNet == null ) {
-      this.pio80 = new Z80PIO( "PIO (E/A-Adressen 80h-83h)" );
+      this.pio80 = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_80h" ) );
     }
-    this.sio84 = new Z80SIO( "SIO (E/A-Adressen 84h-87h)" );
+    this.sio84 = new Z80SIO( LangUtil.getText( "emusys.text.sio_i_o_addresses_84h" ) );
     this.pio88 = null;
     if( this.vdip == null ) {
-      this.pio88 = new Z80PIO( "PIO (E/A-Adressen 88h-8Bh)" );
+      this.pio88 = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_88h" ) );
     }
-    this.ctc8C = new Z80CTC( "CTC (E/A-Adressen 8Ch-8Fh)" );
+    this.ctc8C = new Z80CTC( LangUtil.getText( "emusys.text.ctc_i_o_addresses_8ch" ) );
 
     java.util.List<Z80InterruptSource> iSources = new ArrayList<>();
     iSources.add( this.pio00 );

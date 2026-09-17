@@ -25,6 +25,7 @@ import java.util.Stack;
 import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 import jkcemu.programming.PrgLogger;
 import jkcemu.programming.PrgSource;
@@ -439,8 +440,8 @@ public class BasicCompiler
 				null );
 	    } else {
 	      if( callableEntry != null ) {
-		throw new PrgException( "Implizite Variablendeklaration"
-			+ " in einer Funktion/Prozedur nicht erlaubt" );
+		throw new PrgException(
+			LangUtil.getText( "basic.error.implicit_variable" ) );
 	      }
 	      // implizite Variablendeklaration, aber nur im Hauptprogramm
 	      if( this.options.getWarnImplicitDecls() ) {
@@ -743,11 +744,8 @@ public class BasicCompiler
   public void lockTmpStrBuf() throws PrgException
   {
     if( this.tmpStrBufUsed ) {
-      throw new PrgException( "String-Funktion hier nicht erlaubt,"
-		+ " da der interne String-Puffer bereits durch"
-		+ " eine andere String-Funktion belegt ist\n"
-		+ "Weisen Sie bitte den String-Ausdruck einer Variablen zu"
-		+ " und verwenden Sie diese hier." );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.string_function_not_allowed" ) );
     }
     this.tmpStrBufUsed = true;
   }
@@ -996,7 +994,8 @@ public class BasicCompiler
 
   public void putWarningOutOfRange()
   {
-    putWarning( "Wert au\u00DFerhalb des Wertebereiches" );
+    putWarning( LangUtil.getText(
+			"basic.msg.value_outside_value" ) );
   }
 
 
@@ -1182,7 +1181,8 @@ public class BasicCompiler
   {
     if( lineExpr != null ) {
       StringBuilder buf = new StringBuilder( 128 );
-      if( lineExpr.appendMsgPrefixTo( EmuUtil.TEXT_ERROR, buf ) ) {
+      if( lineExpr.appendMsgPrefixTo(
+		LangUtil.getText( EmuUtil.TEXT_ERROR ), buf ) ) {
 	buf.append( ": " );
       }
       if( lineExpr.isLabel() ) {
@@ -1340,7 +1340,7 @@ public class BasicCompiler
       appendLineNumMsgToErrLog(
 		entry,
 		entry.toString() + " nicht abgeschlossen",
-		EmuUtil.TEXT_ERROR );
+		LangUtil.getText( EmuUtil.TEXT_ERROR ) );
       this.errCnt++;
     }
 
@@ -1437,7 +1437,7 @@ public class BasicCompiler
 	  appendLineNumMsgToErrLog(
 			callSourcePos != null ? callSourcePos : entry,
 			entry.toString() + " nicht implementiert",
-			EmuUtil.TEXT_ERROR );
+			LangUtil.getText( EmuUtil.TEXT_ERROR ) );
 	  incErrorCount();
 	}
       }
@@ -1508,13 +1508,14 @@ public class BasicCompiler
 	    labelText         = buf.toString();
 	    String upperLabel = labelText.toUpperCase();
 	    if( isReservedWord( upperLabel ) ) {
-	      throw new PrgException( "Reserviertes Schl\u00FCsselwort"
-					+ " als Marke nicht erlaubt" );
+	      throw new PrgException(
+			LangUtil.getText(
+				"basic.error.reserved_keyword_not_allowed_label" ) );
 	    }
 	    if( this.basicLines.contains( upperLabel ) ) {
 	      appendLineNumMsgToErrLog(
 			"\'" + labelText + "\': Marke bereits vorhanden",
-			EmuUtil.TEXT_ERROR );
+			LangUtil.getText( EmuUtil.TEXT_ERROR ) );
 	      incErrorCount();
 	    }
 	    this.basicLines.add( upperLabel );
@@ -1538,13 +1539,13 @@ public class BasicCompiler
 		String.format(
 			"BASIC-Zeilennummer %s bereits vorhanden",
 			this.lastBasicLineExpr ),
-		EmuUtil.TEXT_ERROR );
+		LangUtil.getText( EmuUtil.TEXT_ERROR ) );
 	    incErrorCount();
 	  }
 	  this.curBasicLineNum = lineNum.longValue();
 	  if( this.curBasicLineNum <= this.lastBasicLineNum ) {
 	    putWarning(
-		"BASIC-Zeilennummer nicht in aufsteigender Reihenfolge" );
+		LangUtil.getText( "basic.msg.basic_line_number" ) );
 	  }
 	  this.basicLines.add( this.lastBasicLineExpr );
 	  this.lastBasicLineNum = this.curBasicLineNum;
@@ -1599,7 +1600,7 @@ public class BasicCompiler
       if( msg == null ) {
 	msg = "Unbekannter Fehler";
       }
-      appendLineNumMsgToErrLog( msg, EmuUtil.TEXT_ERROR );
+      appendLineNumMsgToErrLog( msg, LangUtil.getText( EmuUtil.TEXT_ERROR ) );
       if( iter != null ) {
 	StringBuilder buf = new StringBuilder( iter.getEndIndex() + 16 );
 	buf.append( "    " );
@@ -1690,7 +1691,8 @@ public class BasicCompiler
 	boolean caseState = BasicUtil.checkKeyword( iter, "CASE" );
 	iter.setIndex( idx );
 	if( !caseState ) {
-	  throw new PrgException( "CASE erwartet" );
+	  throw new PrgException( LangUtil.getText(
+				"basic.error.case_expected" ) );
 	}
       }
       if( ch == '?' ) {
@@ -1896,7 +1898,8 @@ public class BasicCompiler
 	}
 	if( !done ) {
 	  throw new PrgException(
-			"Anweisung, Prozedur oder Variable erwartet" );
+			LangUtil.getText(
+				"basic.error.statement_procedure" ) );
 	}
       }
     }
@@ -1982,7 +1985,8 @@ public class BasicCompiler
       }
     }
     if( selectEntry == null ) {
-      throw new PrgException( "CASE au\u00DFerhalb einer SELECT-Anweisung" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.case_outside_select" ) );
     }
     if( this.caseExpected ) {
       this.caseExpected = false;
@@ -1997,13 +2001,15 @@ public class BasicCompiler
     }
     if( BasicUtil.checkKeyword( iter, "ELSE" ) ) {
       if( selectEntry.isElseDone() ) {
-	throw new PrgException( "Mehrfaches CASE ELSE nicht erlaubt" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.multiple_case_else" ) );
       }
       selectEntry.setElseDone();
     } else {
       if( selectEntry.isElseDone() ) {
 	throw new PrgException(
-			"CASE-Ausdruck nach CASE ELSE nicht erlaubt" );
+			LangUtil.getText(
+				"basic.error.case_expression_after" ) );
       }
       java.util.List<Integer> values = new ArrayList<>();
       do {
@@ -2049,7 +2055,8 @@ public class BasicCompiler
       } else if( n > 1 ) {
 	if( n > 255 ) {
 	  throw new PrgException(
-			"Zu viele Eintr\u00E4ge in der Konstantenliste" );
+			LangUtil.getText(
+				"basic.error.many_entries_constant" ) );
 	}
 	this.asmOut.append( "\tCALL\tI2_CONTAINS\n" );
 	addLibItem( BasicLibrary.LibItem.I2_CONTAINS );
@@ -2200,7 +2207,9 @@ public class BasicCompiler
       } else {
 	NumericValue value = checkSignedNumericLiteral( iter );
 	if( value == null ) {
-	  throw new PrgException( "Zahl oder String-Literal erwartet" );
+	  throw new PrgException(
+			LangUtil.getText(
+				"basic.error.number_string_literal" ) );
 	}
 	this.dataOut.append( "\tDB\t" );
 	DataType dataType = value.getDataType();
@@ -2253,7 +2262,8 @@ public class BasicCompiler
     } else if( BasicUtil.checkKeyword( iter, "SUB" ) ) {
       parseCallableDecl( iter, false, false );
     } else {
-      throw new PrgException( "FUNCTION oder SUB erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.function_sub_expected" ) );
     }
   }
 
@@ -2270,7 +2280,7 @@ public class BasicCompiler
       }
     }
     if( !status ) {
-      throw new PrgException( "USR erwartet" );
+      throw new PrgException( LangUtil.getText( "basic.error.usr_expected" ) );
     }
     int usrNum = BasicUtil.parseUsrNum( iter );
     parseDEFUSR( iter, usrNum );
@@ -2300,8 +2310,8 @@ public class BasicCompiler
   {
     CallableEntry entry = getEnclosingCallableEntry();
     if( entry != null ) {
-      throw new PrgException( "Anweisung in einer Funktion/Prozedur"
-			+ " nicht zul\u00E4ssig" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.statement_not_permitted" ) );
     }
     do {
       String varName = BasicUtil.checkIdentifier( iter );
@@ -2310,12 +2320,12 @@ public class BasicCompiler
       }
       checkVarName( varName );
       if( this.name2GlobalVar.get( varName ) != null ) {
-	throw new PrgException(
-		"Variable mit dem Namen bereits deklariert" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.variable_name_already" ) );
       }
       if( this.name2Callable.get( varName ) != null ) {
-	throw new PrgException(
-		"Funktion/Prozedur mit dem Namen bereits deklariert" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.function_procedure_name" ) );
       }
       int dim1 = 0;
       int dim2 = 0;
@@ -2452,7 +2462,8 @@ public class BasicCompiler
 	}
       }
       if( ifEntry == null ) {
-	throw new PrgException( "ELSE ohne IF" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.else_without" ) );
       }
       boolean ifCodeCreationDisabled = ifEntry.isIfCodeCreationDisabled();
       if( ifCodeCreationDisabled ) {
@@ -2508,11 +2519,13 @@ public class BasicCompiler
       }
     }
     if( ifEntry == null ) {
-      throw new PrgException( "ELSE ohne IF" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.else_without" ) );
     }
     String elseLabel = ifEntry.getElseLabel();
     if( elseLabel == null ) {
-      throw new PrgException( "ELSEIF hinter ELSE nicht zul\u00E4ssig" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.elseif_after_else" ) );
     }
     setCodeCreationDisabledLevel( ifEntry.getCodeCreationDisabledLevel() );
     if( ifEntry.isIfCodeCreationDisabled() ) {
@@ -2551,8 +2564,8 @@ public class BasicCompiler
 	}
       }
       if( selectEntry == null ) {
-	throw new PrgException(
-		"END SELECT au\u00DFerhalb einer SELECT-Anweisung" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.end_select_outside" ) );
       }
       this.asmOut.append( selectEntry.getCaseLabel() );
       this.asmOut.append( ":\n" );
@@ -2591,7 +2604,7 @@ public class BasicCompiler
 	}
 	if( !ok ) {
 	  throw new PrgException(
-			  "Anweisung nur am Ende einer Funktion erlaubt" );
+			  LangUtil.getText( "basic.error.statement_only_allowed_end_function" ) );
 	}
       } else if( BasicUtil.checkKeyword( iter, "SUB" ) ) {
 	boolean ok = false;
@@ -2602,7 +2615,8 @@ public class BasicCompiler
 	}
 	if( !ok ) {
 	  throw new PrgException(
-			"Anweisung nur am Ende einer Prozedur erlaubt" );
+			LangUtil.getText(
+				"basic.error.statement_only_allowed_end_procedure" ) );
 	}
       }
       if( callableEntry != null ) {
@@ -2614,7 +2628,7 @@ public class BasicCompiler
 	    appendLineNumMsgToErrLog(
 			entry,
 			entry.toString() + " nicht abgeschlossen",
-			EmuUtil.TEXT_ERROR );
+			LangUtil.getText( EmuUtil.TEXT_ERROR ) );
 	    this.errCnt++;
 	  }
 	}
@@ -2678,7 +2692,8 @@ public class BasicCompiler
       }
     }
     if( ifEntry == null ) {
-      throw new PrgException( "ENDIF ohne IF" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.endif_without" ) );
     }
     setCodeCreationDisabledLevel( ifEntry.getCodeCreationDisabledLevel() );
     String elseLabel = ifEntry.getElseLabel();
@@ -2707,7 +2722,8 @@ public class BasicCompiler
       --idx;
     }
     if( loopEntry == null ) {
-      throw new PrgException( "EXIT aus\u00DFerhalb einer Schleife" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.exit_outside_loop" ) );
     }
     if( !isEndOfInstr( iter ) ) {
       if( !BasicUtil.checkKeyword( iter, loopEntry.getLoopBegKeyword() ) ) {
@@ -2733,16 +2749,16 @@ public class BasicCompiler
       }
     }
     if( varInfo == null ) {
-      throw new PrgException( "Integer-Variable erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.integer_variable" ) );
     }
     if( !varInfo.hasStaticAddr() ) {
-      throw new PrgException(
-		"Laufvariable darf keine Feldvariable mit variabler"
-						+ " Indexangabe sein." );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.loop_variable_not_array" ) );
     }
     parseAssignment( iter, varInfo );
     if( !BasicUtil.checkKeyword( iter, "TO" ) ) {
-      throw new PrgException( "TO erwartet" );
+      throw new PrgException( LangUtil.getText( "basic.error.to_expected" ) );
     }
     int toPos = this.asmOut.length();
     BasicExprParser.parseInt2Expr( this, iter );
@@ -3067,7 +3083,7 @@ public class BasicCompiler
     }
     if( this.curSource != this.mainSource ) {
       throw new PrgException(
-		"In sich geschachtelte INCLUDE-Anweisungen nicht erlaubt" );
+		LangUtil.getText( "basic.error.nested_include" ) );
     }
     try {
       this.curSource = PrgSource.readFile( file );
@@ -3428,7 +3444,8 @@ public class BasicCompiler
 	  addLibItem( BasicLibrary.LibItem.DRBOXF );
 	} else {
 	  if( !BasicUtil.checkKeyword( iter, "B" ) ) {
-	    throw new PrgException( "B oder BF erwartet" );
+	    throw new PrgException( LangUtil.getText(
+				"basic.error.b_bf_expected" ) );
 	  }
 	  this.asmOut.append( "\tCALL\tDRBOX\n" );
 	  addLibItem( BasicLibrary.LibItem.DRBOX );
@@ -3445,8 +3462,8 @@ public class BasicCompiler
   {
     CallableEntry entry = getEnclosingCallableEntry();
     if( entry == null ) {
-	throw new PrgException(
-		"Anweisung nur in einer Funktion/Prozedur erlaubt" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.statement_only_allowed_function_procedure" ) );
     }
     do {
       String varName = BasicUtil.checkIdentifier( iter );
@@ -3455,8 +3472,8 @@ public class BasicCompiler
       }
       checkVarName( varName );
       if( varName.equals( entry.getName() ) ) {
-	throw new PrgException( "Name der Funktion/Prozedur"
-			+ " als Variablenname nicht zul\u00E4ssig" );
+	throw new PrgException(
+		LangUtil.getText( "basic.error.name_function_procedure_not_permitted" ) );
       }
       entry.addVar(
 		this.curSource,
@@ -3474,8 +3491,8 @@ public class BasicCompiler
       this.asmOut.append( "\tCALL\tLOCATE\n" );
       addLibItem( BasicLibrary.LibItem.LOCATE );
     } else {
-      throw new PrgException( "LOCATE-Anweisung f\u00FCr das"
-				+ " Zielsystem nicht unterst\u00FCtzt" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.locate_statement_not_supported" ) );
     }
   }
 
@@ -3491,7 +3508,8 @@ public class BasicCompiler
       }
     }
     if( doEntry == null ) {
-      throw new PrgException( "LOOP ohne DO" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.loop_without" ) );
     }
     if( BasicUtil.checkKeyword( iter, "UNTIL" ) ) {
       BasicExprParser.parseInt2Expr( this, iter );
@@ -3505,8 +3523,8 @@ public class BasicCompiler
 		+ "\tJP\tNZ," + doEntry.getLoopLabel() + "\n" );
     } else {
       if( !isEndOfInstr( iter ) ) {
-	throw new PrgException(
-		"UNTIL, WHILE oder Ende der Anweisung erwartet" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.until_while_end" ) );
       }
       this.asmOut.append( "\tJP\t" );
       this.asmOut.append( doEntry.getLoopLabel() );
@@ -3520,9 +3538,8 @@ public class BasicCompiler
   private void parseLPRINT( CharacterIterator iter ) throws PrgException
   {
     if( !this.target.supportsXLPTCH() ) {
-      throw new PrgException(
-		"Druckerausgaben f\u00FCr das Zielsystem"
-					+ " nicht unterst\u00FCtzt" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.printer_output_not_supported" ) );
     }
     this.asmOut.append( "\tLD\tHL,XLPTCH\n"
 		+ "\tLD\t(IO_M_COUT),HL\n" );
@@ -3564,7 +3581,8 @@ public class BasicCompiler
       }
     }
     if( forEntry == null ) {
-      throw new PrgException( "NEXT ohne FOR" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.next_without" ) );
     }
     if( !isEndOfInstr( iter ) ) {
       int len = this.asmOut.length();
@@ -3574,11 +3592,12 @@ public class BasicCompiler
 					AccessMode.READ_WRITE );
       this.asmOut.setLength( len );
       if( varInfo == null ) {
-	throw new PrgException( "Variable oder Ende der Anweisung erwartet" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.variable_end_statement" ) );
       }
       if( !varInfo.equals( forEntry.getSimpleVarInfo() ) ) {
-	throw new PrgException( "Variable stimmt nicht mit der bei der"
-			+ " FOR-Anweisung angegebenen \u00FCberein." );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.variable_not_match" ) );
       }
     }
     forEntry.getSimpleVarInfo().ensureAddrInHL( this.asmOut );
@@ -3667,7 +3686,8 @@ public class BasicCompiler
       this.asmOut.append( ":\n" );
       addLibItem( BasicLibrary.LibItem.GET_ON_GO_ADDR );
     } else {
-      throw new PrgException( "GOSUB oder GOTO erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.gosub_goto_expected" ) );
     }
   }
 
@@ -3696,7 +3716,8 @@ public class BasicCompiler
 	int pos = text.indexOf( ':' );
 	if( pos >= 0 ) {
 	  driver = null;
-	  putWarning( "Unbekanntes Ger\u00E4t" );
+	  putWarning( LangUtil.getText(
+				"basic.msg.unknown_device" ) );
 	} else {
 	  // Dateizugriff ohne Laufwerksbuchstabe
 	  if( this.target.getDiskHandlerLabel() != null ) {
@@ -3722,35 +3743,34 @@ public class BasicCompiler
 	switch( driver ) {
 	  case CRT:
 	    if( !this.options.isOpenCrtEnabled() ) {
-	      putWarning( "CRT-Treiber in den Compiler-Optionen"
-				+ " deaktiviert" );
+	      putWarning(
+			LangUtil.getText( "basic.msg.crt_driver_disabled" ) );
 	    }
 	    break;
 	  case LPT:
 	    if( !this.options.isOpenLptEnabled() ) {
-	      putWarning( "LPT-Treiber in den Compiler-Optionen"
-				+ " deaktiviert" );
+	      putWarning(
+			LangUtil.getText( "basic.msg.lpt_driver_disabled" ) );
 	    }
 	    break;
 	  case DISK:
 	    if( !this.options.isOpenDiskEnabled() ) {
-	      putWarning( "DISK-Treiber in den Compiler-Optionen"
-				+ " deaktiviert" );
+	      putWarning(
+			LangUtil.getText( "basic.msg.disk_driver_disabled" ) );
 	    }
 	    break;
 	  case VDIP:
 	    if( !this.options.isOpenVdipEnabled() ) {
-	      putWarning( "VDIP-Treiber in den Compiler-Optionen"
-				+ " deaktiviert" );
+	      putWarning(
+			LangUtil.getText( "basic.msg.vdip_driver_disabled" ) );
 	    }
 	    break;
 	  case FILE_ALL:
 	    if( !this.options.isOpenDiskEnabled()
 		&& !this.options.isOpenVdipEnabled() )
 	    {
-	      putWarning( "Alle Treiber f\u00FCr Dateizugriffe"
-			+ " (DISK und VDIP) in den Compiler-Optionen"
-			+ " deaktiviert" );
+	      putWarning( LangUtil.getText(
+				"basic.msg.all_drivers_file" ) );
 	    }
 	    break;
 	  case ALL:
@@ -3759,8 +3779,8 @@ public class BasicCompiler
 		&& !this.options.isOpenDiskEnabled()
 		&& !this.options.isOpenVdipEnabled() )
 	    {
-	      putWarning( "Alle Treiber in den Compiler-Optionen"
-			+ " deaktiviert" );
+	      putWarning(
+			LangUtil.getText( "basic.msg.all_drivers_disabled" ) );
 	    }
 	    break;
 	}
@@ -3780,8 +3800,8 @@ public class BasicCompiler
 	&& !this.options.isOpenDiskEnabled()
 	&& !this.options.isOpenVdipEnabled() )
     {
-      putWarning( "Alle betreffenden Treiber"
-			+ " in den Compiler-Optionen deaktiviert" );
+      putWarning( LangUtil.getText(
+			"basic.msg.all_relevant_drivers" ) );
     }
     this.asmOut.append( "\tLD\t(IO_M_NAME),HL\n" );
     if( BasicUtil.checkKeyword( iter, "FOR" ) ) {
@@ -3804,7 +3824,8 @@ public class BasicCompiler
 			BasicLibrary.IOMODE_BIN_DEFAULT
 			: BasicLibrary.IOMODE_TXT_DEFAULT);
       } else {
-	throw new PrgException( "INPUT, OUTPUT oder APPEND erwartet" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.input_output_append" ) );
       }
     }
     if( !asParsed ) {
@@ -3821,8 +3842,8 @@ public class BasicCompiler
 	    || (ioMode == BasicLibrary.IOMODE_BIN_OUTPUT)
 	    || (ioMode == BasicLibrary.IOMODE_BIN_APPEND)) )
     {
-      putWarning( "Ger\u00E4t kann nicht mit der angegebenen Betriebsart"
-					+ " ge\u00F6ffnet werden" );
+      putWarning( LangUtil.getText(
+			"basic.msg.device_cannot_opened" ) );
     }
     if( driver != null ) {
       Set<Integer> driverModes = this.ioDriverModes.get( driver );
@@ -3921,7 +3942,8 @@ public class BasicCompiler
   private void parsePASSWORD( CharacterIterator iter ) throws PrgException
   {
     if( !BasicUtil.checkKeyword( iter, "INPUT" ) ) {
-      throw new PrgException( "INPUT erwartet" );
+      throw new PrgException(
+		LangUtil.getText( "basic.error.input_expected" ) );
     }
     parseInputLine( iter, true );
   }
@@ -4004,7 +4026,8 @@ public class BasicCompiler
     Integer value = BasicUtil.removeLastCodeIfConstExpr( this.asmOut, pos );
     if( value != null ) {
       if( (value.intValue() < 0) || (value.intValue() > 3) ) {
-	throw new PrgException( "Ung\u00FCltiger Wert bei PEN" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.invalid_value_pen" ) );
       }
       this.asmOut.append_LD_A_n( value.intValue() );
       this.asmOut.append( "\tCALL\tXPEN\n" );
@@ -4187,7 +4210,8 @@ public class BasicCompiler
   private void parseSELECT( CharacterIterator iter ) throws PrgException
   {
     if( !BasicUtil.checkKeyword( iter, "CASE" ) ) {
-      throw new PrgException( "CASE erwartet" );
+      throw new PrgException(
+		LangUtil.getText( "basic.error.case_expected" ) );
     }
     int pos = this.asmOut.length();
     BasicExprParser.parseInt2Expr( this, iter );
@@ -4238,7 +4262,8 @@ public class BasicCompiler
       BasicUtil.throwVarExpected();
     }
     if( !varInfo1.getDataType().equals( varInfo2.getDataType() ) ) {
-      throw new PrgException( "Datentypen stimmen nicht \u00FCberein" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.data_types_not_match" ) );
     }
     int    typeSize  = BasicUtil.getDataTypeSize( varInfo1.getDataType() );
     String addrExpr1 = varInfo1.getStaticAddrExpr();
@@ -4422,7 +4447,8 @@ public class BasicCompiler
       }
     }
     if( whileEntry == null ) {
-      throw new PrgException( "WEND ohne WHILE" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.wend_without_while" ) );
     }
     this.asmOut.append( "\tJP\t" );
     this.asmOut.append( whileEntry.getLoopLabel() );
@@ -4471,7 +4497,8 @@ public class BasicCompiler
     }
     int n = labels.size();
     if( n >= 0xFF ) {
-      throw new PrgException( "Liste der Zeilennummern zu lang" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.list_line_numbers" ) );
     }
     this.asmOut.append( "\tDB\t" );
     this.asmOut.appendHex2( n );
@@ -4495,7 +4522,9 @@ public class BasicCompiler
       while( (ch >= '0') && (ch <= '9') ) {
 	lineNum = (lineNum * 10L) + (ch - '0');
 	if( lineNum > Integer.MAX_VALUE ) {
-	  throw new PrgException( "BASIC-Zeilennummer zu gro\u00DF" );
+	  throw new PrgException(
+			LangUtil.getText(
+				"basic.error.basic_line_number_large" ) );
 	}
 	ch = iter.next();
       }
@@ -4749,9 +4778,8 @@ public class BasicCompiler
   private void checkGraphicsSupported() throws PrgException
   {
     if( !this.target.supportsGraphics() ) {
-      throw new PrgException(
-		"Grafikanweisungen und -funktionen f\u00FCr"
-			+ " das Zielsystem nicht unterst\u00FCtzt" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.graphics_statements" ) );
     }
   }
 
@@ -4761,8 +4789,8 @@ public class BasicCompiler
     if( !this.mainPrg ) {
       CallableEntry entry = getEnclosingCallableEntry();
       if( entry == null ) {
-	throw new PrgException( "Anweisung nur im Hauptprogramm"
-		+ " oder in einer Funktion/Prozedur zul\u00E4ssig" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.statement_only_permitted" ) );
       }
     }
   }
@@ -4779,8 +4807,9 @@ public class BasicCompiler
 	if( entry instanceof FunctionEntry ) {
 	  Integer iyOffs = ((FunctionEntry) entry).getIYOffs( name );
 	  if( iyOffs == null ) {
-	    new PrgException( "R\u00FCckgabewert f\u00FCr eine"
-				+ " Prozedur nicht m\u00F6glich" );
+	    new PrgException(
+			LangUtil.getText(
+				"basic.error.return_value_not_possible" ) );
 	  }
 	  parseAssignment( iter, ((FunctionEntry) entry).getReturnVarInfo() );
 	  rv = true;
@@ -4794,8 +4823,8 @@ public class BasicCompiler
   private void checkVarName( String varName ) throws PrgException
   {
     if( isReservedWord( varName ) ) {
-      throw new PrgException( "Reserviertes Schl\u00FCsselwort"
-			+ " als Variablenname nicht erlaubt" );
+      throw new PrgException(
+		LangUtil.getText( "basic.error.reserved_keyword_not_allowed_variable" ) );
     }
   }
 
@@ -4820,17 +4849,19 @@ public class BasicCompiler
 		boolean           forImplementation ) throws PrgException
   {
     if( !this.structureStack.isEmpty() ) {
-      throw new PrgException( "Anweisung nur in der obersten Ebene erlaubt" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.statement_only_allowed_top_level" ) );
     }
 
     // Name parsen
     String name = BasicUtil.checkIdentifier( iter );
     if( name == null ) {
-      throw new PrgException( "Name der Funktion/Prozedur erwartet" );
+      throw new PrgException(
+		LangUtil.getText( "basic.error.name_function_procedure_expected" ) );
     }
     if( isReservedWord( name ) ) {
-      throw new PrgException( "Reserviertes Schl\u00FCsselwort als"
-			+ " Name einer Funktion/Prozedur nicht erlaubt" );
+      throw new PrgException(
+		LangUtil.getText( "basic.error.reserved_keyword_not_allowed_name" ) );
     }
     if( !isFunc && BasicUtil.endsWithStringSuffix( name ) ) {
       throw new PrgException(
@@ -4864,8 +4895,9 @@ public class BasicCompiler
 	  }
 	  checkVarName( argName );
 	  if( argName.equals( name ) ) {
-	    throw new PrgException( "Name der Funktion/Prozedur"
-				+ " als Variablenname nicht erlaubt" );
+	    throw new PrgException(
+			LangUtil.getText(
+				"basic.error.name_function_procedure_not_allowed" ) );
 	  }
 	  DataType argType = BasicUtil.parseTypeDecl( argName, iter );
 	  if( entry != null ) {
@@ -4888,7 +4920,9 @@ public class BasicCompiler
 	    }
 	  }
 	  if( !argSet.add( argName ) ) {
-	    throw new PrgException( "Lokale Variable bereits vorhanden" );
+	    throw new PrgException(
+			LangUtil.getText(
+				"basic.error.local_variable_already" ) );
 	  }
 	  argNames.add( argName );
 	  argTypes.add( argType );
@@ -4913,8 +4947,8 @@ public class BasicCompiler
       }
     }
     if( mismatch ) {
-      throw new PrgException( "Funktion/Prozedur stimmt nicht"
-			+ " mit vorheriger Deklaration \u00FCberein." );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.function_procedure_not_match" ) );
     }
     if( entry == null ) {
       if( isFunc ) {
@@ -4939,7 +4973,8 @@ public class BasicCompiler
   {
     CallableEntry entry = parseCallableDecl( iter, isFunc, true );
     if( entry.isImplemented() ) {
-      throw new PrgException( "Funktion/Prozedur bereits vorhanden" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.function_procedure" ) );
     }
     entry.setImplemented();
     this.structureStack.push( entry );
@@ -5105,7 +5140,7 @@ public class BasicCompiler
   private void parseKeywordAS( CharacterIterator iter ) throws PrgException
   {
     if( !BasicUtil.checkKeyword( iter, "AS" ) ) {
-      throw new PrgException( "AS erwartet" );
+      throw new PrgException( LangUtil.getText( "basic.error.as_expected" ) );
     }
   }
 
@@ -5555,7 +5590,8 @@ public class BasicCompiler
   {
     String text = BasicUtil.checkStringLiteral( this, iter );
     if( text == null ) {
-      throw new PrgException( "String-Literal erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.string_literal_expected" ) );
     }
     return text;
   }

@@ -72,7 +72,7 @@ public class A5105 extends EmuSys implements
 					Z80PIOPortListener
 {
   public static final String SYSNAME     = "A5105";
-  public static final String SYSTEXT     = "A5105 (BIC)";
+  public static final String SYSTEXT     = "emusys.text.a5105_bic";
   public static final String PROP_PREFIX = "jkcemu.a5105.";
 
   public static final int DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX = 6000;
@@ -90,19 +90,19 @@ public class A5105 extends EmuSys implements
   private static FloppyDiskInfo rbasicPicDisk =
 		new FloppyDiskInfo(
 			"/disks/a5105/a5105rbasicpic.dump.gz",
-                        "BIC A5105 RBASIC Diskette mit Bildern",
+                        "emusys.text.bic_a5105_rbasic_disk",
 			2, 2048, true );
 
   private static FloppyDiskInfo rbasicPrgDisk =
 		new FloppyDiskInfo(
 			"/disks/a5105/a5105rbasicprg.dump.gz",
-                        "BIC A5105 RBASIC Programmdiskette",
+                        "emusys.text.bic_a5105_rbasic_program",
 			2, 2048, true );
 
   private static FloppyDiskInfo rbasicSysDisk =
 		new FloppyDiskInfo(
 			"/disks/a5105/a5105rbasicsys.dump.gz",
-                        "BIC A5105 RBASIC Systemdiskette",
+                        "emusys.text.bic_a5105_rbasic_system",
 			2, 2048, true );
 
   private static final FloppyDiskInfo[] availableFloppyDisks = {
@@ -111,7 +111,7 @@ public class A5105 extends EmuSys implements
 		rbasicSysDisk,
 		new FloppyDiskInfo(
 			"/disks/a5105/a5105scpxsys.dump.gz",
-                        "BIC A5105 SCPX Systemdiskette",
+                        "emusys.text.bic_a5105_scpx",
 			2, 2048, true ) };
 
   private static final FloppyDiskInfo[] suitableFloppyDisks = {
@@ -245,7 +245,8 @@ public class A5105 extends EmuSys implements
 				this.emuThread.getRAMFloppy1(),
 				"A5105",
 				RAMFloppy.RFType.ADW,
-				"RAM-Floppy an E/A-Adressen 20h/21h",
+				LangUtil.getText(
+					"emusys.text.ram_floppy_i_o_addresses_20h" ),
 				props,
 				this.propPrefix + PROP_RF1_PREFIX );
 
@@ -253,13 +254,14 @@ public class A5105 extends EmuSys implements
 				this.emuThread.getRAMFloppy2(),
 				"A5105",
 				RAMFloppy.RFType.ADW,
-				"RAM-Floppy an E/A-Adressen 24h/25h",
+				LangUtil.getText(
+					"emusys.text.ram_floppy_i_o_addresses_24h" ),
 				props,
 				this.propPrefix + PROP_RF2_PREFIX );
 
     this.svgPSG = new SvgPSG( getDefaultSpeedKHz() * 1000 / 2, this );
     this.svgSoundDevice = new PSGSoundDevice(
-					"Sound-Generator",
+					LangUtil.getText( "emusys.text.sound_generator" ),
 					false,
 					this.svgPSG );
     this.svgPSG.start();
@@ -273,14 +275,15 @@ public class A5105 extends EmuSys implements
     this.gide = GIDE.getGIDE( this.screenFrm, props, this.propPrefix );
 
     if( this.fdc != null ) {
-      this.ctc50 = new Z80CTC( "CTC (E/A-Adressen 50h-53h)" );
+      this.ctc50 = new Z80CTC( LangUtil.getText( "emusys.text.ctc_i_o_addresses_50h" ) );
     }
-    this.ctc80 = new Z80CTC( "CTC (E/A-Adressen 80h-83h)" );
-    this.pio90 = new Z80PIO( "PIO (E/A-Adressen 90h-93h)" );
+    this.ctc80 = new Z80CTC( LangUtil.getText( "emusys.text.ctc_i_o_addresses_80h" ) );
+    this.pio90 = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_90h" ) );
 
     this.kcNet = null;
     if( emulatesKCNet( props ) ) {
-      this.kcNet = new KCNet( "Netzwerk-PIO (E/A-Adressen C0h-C3h)" );
+      this.kcNet = new KCNet( LangUtil.getText(
+			"emusys.text.network_pio_i_o_addresses_c0h" ) );
     }
 
     this.vdip = null;
@@ -288,7 +291,7 @@ public class A5105 extends EmuSys implements
       this.vdip = new VDIP(
 			0,
 			this.emuThread.getZ80CPU(),
-			"USB-PIO (E/A-Adressen FCh-FFh)" );
+			LangUtil.getText( "emusys.text.usb_pio_i_o_addresses_fch_ffh" ) );
     }
 
     java.util.List<Z80InterruptSource> iSources = new ArrayList<>();
@@ -338,36 +341,40 @@ public class A5105 extends EmuSys implements
       autoInputCharSet.addSpecialChar(
 			29,
 			AutoInputCharSet.VIEW_LEFT,
-			AutoInputCharSet.TEXT_LEFT );
+			LangUtil.getText( AutoInputCharSet.TEXT_LEFT ) );
       autoInputCharSet.addSpecialChar(
 			28,
 			AutoInputCharSet.VIEW_RIGHT,
-			AutoInputCharSet.TEXT_RIGHT );
+			LangUtil.getText( AutoInputCharSet.TEXT_RIGHT ) );
       autoInputCharSet.addSpecialChar(
 			31,
 			AutoInputCharSet.VIEW_DOWN,
-			AutoInputCharSet.TEXT_DOWN );
+			LangUtil.getText( AutoInputCharSet.TEXT_DOWN ) );
       autoInputCharSet.addSpecialChar(
 			30,
 			AutoInputCharSet.VIEW_UP,
-			AutoInputCharSet.TEXT_UP );
+			LangUtil.getText( AutoInputCharSet.TEXT_UP ) );
       autoInputCharSet.addSpecialChar(
 			11,
 			AutoInputCharSet.VIEW_HOME,
-			AutoInputCharSet.TEXT_HOME );
+			LangUtil.getText( AutoInputCharSet.TEXT_HOME ) );
       autoInputCharSet.addCtrlCodes();
       autoInputCharSet.setCtrlCodeDesc(
 			8,
-			SCPX_PREFIX + AutoInputCharSet.TEXT_LEFT );
+			SCPX_PREFIX + LangUtil.getText(
+				AutoInputCharSet.TEXT_LEFT ) );
       autoInputCharSet.setCtrlCodeDesc(
 			4,
-			SCPX_PREFIX + AutoInputCharSet.TEXT_RIGHT );
+			SCPX_PREFIX + LangUtil.getText(
+				AutoInputCharSet.TEXT_RIGHT ) );
       autoInputCharSet.setCtrlCodeDesc(
 			24,
-			SCPX_PREFIX + AutoInputCharSet.TEXT_DOWN );
+			SCPX_PREFIX + LangUtil.getText(
+				AutoInputCharSet.TEXT_DOWN ) );
       autoInputCharSet.setCtrlCodeDesc(
 			5,
-			SCPX_PREFIX + AutoInputCharSet.TEXT_UP );
+			SCPX_PREFIX + LangUtil.getText(
+				AutoInputCharSet.TEXT_UP ) );
     }
     return autoInputCharSet;
   }
@@ -555,64 +562,64 @@ public class A5105 extends EmuSys implements
 	+ "<tr><td>C000h - FFFFh</td><td>" );
     switch( this.memConfig & 0xC0 ) {
       case 0x00:
-	buf.append( LangUtil.tr( "ROM im Grundger&auml;t (bis 9FFFh)" ) );
+	buf.append( LangUtil.getText( "emusys.text.rom_base_unit_up" ) );
 	break;
       case 0x40:
-	buf.append( LangUtil.tr( "Modul in der Datenspeichereinheit (nicht emuliert)" ) );
+	buf.append( LangUtil.getText( "emusys.text.module_data_storage" ) );
 	break;
       case 0x80:
 	buf.append( "RAM" );
 	break;
       case 0xC0:
-	buf.append( LangUtil.tr( "Modul im Grundger&auml;t (nicht emuliert)" ) );
+	buf.append( LangUtil.getText( "emusys.text.module_base_unit" ) );
 	break;
     }
     buf.append( "</td></tr>\n"
 	+ "<tr><td>8000h - BFFFh</td><td>" );
     switch( this.memConfig & 0x30 ) {
       case 0x00:
-	buf.append( LangUtil.tr( "ROM im Grundger&auml;t (bis 9FFFh)" ) );
+	buf.append( LangUtil.getText( "emusys.text.rom_base_unit_up" ) );
 	break;
       case 0x10:
-	buf.append( LangUtil.tr( "Modul in der Datenspeichereinheit (nicht emuliert)" ) );
+	buf.append( LangUtil.getText( "emusys.text.module_data_storage" ) );
 	break;
       case 0x20:
 	buf.append( "RAM" );
 	break;
       case 0x30:
-	buf.append( LangUtil.tr( "Modul im Grundger&auml;t (nicht emuliert)" ) );
+	buf.append( LangUtil.getText( "emusys.text.module_base_unit" ) );
 	break;
     }
     buf.append( "</td></tr>\n"
 	+ "<tr><td>4000h - 7FFFh</td><td>" );
     switch( this.memConfig & 0x0C ) {
       case 0x00:
-	buf.append( LangUtil.tr( "ROM im Grundger&auml;t" ) );
+	buf.append( LangUtil.getText( "emusys.text.rom_base_unit" ) );
 	break;
       case 0x04:
-	buf.append( LangUtil.tr( "ROM in der Datenspeichereinheit" ) );
+	buf.append( LangUtil.getText( "emusys.text.rom_data_storage" ) );
 	break;
       case 0x08:
 	buf.append( "RAM" );
 	break;
       case 0x0C:
-	buf.append( LangUtil.tr( "Modul im Grundger&auml;t (nicht emuliert)" ) );
+	buf.append( LangUtil.getText( "emusys.text.module_base_unit" ) );
 	break;
     }
     buf.append( "</td></tr>\n"
 	+ "<tr><td>0000h - 3FFFh</td><td>" );
     switch( this.memConfig & 0x03 ) {
       case 0x00:
-	buf.append( LangUtil.tr( "ROM im Grundger&auml;t" ) );
+	buf.append( LangUtil.getText( "emusys.text.rom_base_unit" ) );
 	break;
       case 0x01:
-	buf.append( LangUtil.tr( "Modul in der Datenspeichereinheit (nicht emuliert)" ) );
+	buf.append( LangUtil.getText( "emusys.text.module_data_storage" ) );
 	break;
       case 0x02:
 	buf.append( "RAM" );
 	break;
       case 0x03:
-	buf.append( LangUtil.tr( "Modul im Grundger&auml;t (nicht emuliert)" ) );
+	buf.append( LangUtil.getText( "emusys.text.module_base_unit" ) );
 	break;
     }
     buf.append( "</td></tr>\n"
@@ -946,7 +953,7 @@ public class A5105 extends EmuSys implements
   @Override
   public String getTitle()
   {
-    return SYSTEXT;
+    return LangUtil.getText( SYSTEXT );
   }
 
 
@@ -1482,7 +1489,7 @@ public class A5105 extends EmuSys implements
 		this.screenFrm,
 		0x8001,
 		endAddr,
-		"RBASIC-Programm speichern",
+		LangUtil.getText( "emusys.text.save_rbasic_program" ),
 		SaveDlg.BasicType.RBASIC,
 		FileUtil.getBasicOrRBasicFileFilter() )).setVisible( true );
     } else {

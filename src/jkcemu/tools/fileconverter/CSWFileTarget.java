@@ -27,8 +27,8 @@ public class CSWFileTarget extends AbstractConvertTarget
 		BitSampleBuffer samples )
   {
     super( fileConvertFrm,
-	LangUtil.tr(
-			"CSW-Datei ({0})",
+	LangUtil.getText(
+			"fileconv.text.csw_file",
 			CSWFile.getFileExtensionText() ) );
     this.samples     = samples;
     this.fileFilters = null;

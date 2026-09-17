@@ -36,6 +36,7 @@ import jkcemu.Main;
 import jkcemu.base.PopupMenuOwner;
 import jkcemu.file.FileProgressInputStream;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.LogTextActionMngr;
 
 
@@ -182,7 +183,7 @@ public abstract class AbstractThreadFrm
 
   protected void appendIgnoredToLog()
   {
-    appendToLog( " Ignoriert\n" );
+    appendToLog( LangUtil.getText( "base.msg.ignored" ) );
     this.autoClose = false;
   }
 
@@ -383,7 +384,7 @@ public abstract class AbstractThreadFrm
     if( !this.cancelled && !this.finished ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6tchten Sie die laufende Aktion abbrechen?" ) )
+		LangUtil.getText( "base.msg.want_cancel_running" ) ) )
       {
 	this.cancelled = true;
 	Thread thread  = this.thread;
@@ -453,7 +454,7 @@ public abstract class AbstractThreadFrm
 
   private void progressFinished()
   {
-    this.btnClose.setText( EmuUtil.TEXT_CLOSE );
+    this.btnClose.setText( LangUtil.getText( EmuUtil.TEXT_CLOSE ) );
     if( !this.cancelled && (this.errorCount > 0) ) {
       if( this.fldLog != null ) {
 	this.fldLog.append( "\n" );

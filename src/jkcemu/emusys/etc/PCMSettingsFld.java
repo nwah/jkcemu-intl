@@ -27,6 +27,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.PCM;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -62,7 +63,8 @@ public class PCMSettingsFld extends AbstractSettingsFld
 
     // Tab Modell
     this.tabModel = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Modell", this.tabModel );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "common.section.model" ), this.tabModel );
 
     GridBagConstraints gbcModel = new GridBagConstraints(
 					0, 0,
@@ -76,13 +78,13 @@ public class PCMSettingsFld extends AbstractSettingsFld
     ButtonGroup grpSys = new ButtonGroup();
 
     this.rbRF64x16 = GUIFactory.createRadioButton(
-				"RAM-Floppy-System, 64x16 Zeichen",
+				LangUtil.getText( "emusys_etc.option.ram_floppy_system" ),
 				true );
     grpSys.add( this.rbRF64x16 );
     this.tabModel.add( this.rbRF64x16, gbcModel );
 
     this.cbAutoLoadBDOS = GUIFactory.createCheckBox(
-				"Bei RESET automatisch BDOS laden",
+				LangUtil.getText( "emusys_etc.option.load_bdos_automatically" ),
 				true );
     gbcModel.insets.top  = 0;
     gbcModel.insets.left = 50;
@@ -90,14 +92,14 @@ public class PCMSettingsFld extends AbstractSettingsFld
     this.tabModel.add( this.cbAutoLoadBDOS, gbcModel );
 
     this.rbFDC64x16 = GUIFactory.createRadioButton(
-				"Floppy-Disk-System, 64x16 Zeichen" );
+				LangUtil.getText( "emusys_etc.option.floppy_disk_system_64x16" ) );
     grpSys.add( this.rbFDC64x16 );
     gbcModel.insets.left = 5;
     gbcModel.gridy++;
     this.tabModel.add( this.rbFDC64x16, gbcModel );
 
     this.rbFDC80x24 = GUIFactory.createRadioButton(
-				"Floppy-Disk-System, 80x24 Zeichen" );
+				LangUtil.getText( "emusys_etc.option.floppy_disk_system_80x24" ) );
     grpSys.add( this.rbFDC80x24 );
     gbcModel.insets.bottom = 5;
     gbcModel.gridy++;
@@ -113,7 +115,8 @@ public class PCMSettingsFld extends AbstractSettingsFld
     this.fldAltROM = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + PCM.PROP_ROM_PREFIX,
-		"Alternativer ROM-Inhalt (Grundbetriebssystem):" );
+		LangUtil.getText(
+			"emusys_etc.text.alternative_rom_content_base" ) );
     gbcModel.insets.top    = 5;
     gbcModel.insets.bottom = 5;
     gbcModel.gridy++;
@@ -122,14 +125,15 @@ public class PCMSettingsFld extends AbstractSettingsFld
     this.fldAltFont = new ROMFileSettingsFld(
 				settingsFrm,
 				propPrefix + PCM.PROP_FONT_PREFIX,
-				"Alternativer Zeichensatz:" );
+				LangUtil.getText( "emusys.text.alternative_character" ) );
     gbcModel.gridy++;
     this.tabModel.add( this.fldAltFont, gbcModel );
 
 
     // Tab Erweiterungen
     this.tabExt = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Erweiterungen", this.tabExt );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.expansions" ), this.tabExt );
 
     GridBagConstraints gbcExt = new GridBagConstraints(
 					0, 0,
@@ -140,11 +144,13 @@ public class PCMSettingsFld extends AbstractSettingsFld
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.cbK1520Sound = GUIFactory.createCheckBox( "K1520-Sound-Karte" );
+    this.cbK1520Sound = GUIFactory.createCheckBox(
+		LangUtil.getText( "common.option.k1520_sound_card" ) );
     this.tabExt.add( this.cbK1520Sound, gbcExt );
 
     this.cbVDIP = GUIFactory.createCheckBox(
-				"USB-Anschluss (Vinculum VDIP Modul)" );
+				LangUtil.getText(
+					"emusys.option.usb_port_vinculum" ) );
     gbcExt.insets.top    = 0;
     gbcExt.insets.bottom = 5;
     gbcExt.gridy++;
@@ -157,7 +163,8 @@ public class PCMSettingsFld extends AbstractSettingsFld
 				propPrefix,
 				PCM.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 				true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -167,7 +174,8 @@ public class PCMSettingsFld extends AbstractSettingsFld
 				AutoInputCharSet.getCPMCharSet(),
 				PCM.DEFAULT_SWAP_KEY_CHAR_CASE,
 				PCM.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     // Listener

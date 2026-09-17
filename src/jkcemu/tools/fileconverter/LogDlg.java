@@ -32,6 +32,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.PopupMenuOwner;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.LogTextActionMngr;
 import jkcemu.text.TextFinder;
 import jkcemu.text.TextUtil;
@@ -163,10 +164,12 @@ public class LogDlg extends BaseDlg implements PopupMenuOwner
     gbc.gridy++;
     add( panelBtns, gbc );
 
-    this.btnSave = GUIFactory.createButton( EmuUtil.TEXT_OPEN_SAVE );
+    this.btnSave = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_OPEN_SAVE ) );
     panelBtns.add( this.btnSave );
 
-    this.btnMenu = GUIFactory.createButton( "Men\u00FC" );
+    this.btnMenu = GUIFactory.createButton(
+		LangUtil.getText( "fileconv.action.menu" ) );
     panelBtns.add( this.btnMenu );
 
     this.btnClose = GUIFactory.createButtonClose();

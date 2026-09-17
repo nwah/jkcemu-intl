@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class EncodingSelectDlg extends BaseDlg
@@ -45,7 +46,7 @@ public class EncodingSelectDlg extends BaseDlg
 			Frame  parent,
 			String presetEncoding )
   {
-    super( parent, "Zeichensatz ausw\u00E4hlen" );
+    super( parent, LangUtil.getText( "text.title.select_character_set" ) );
     this.applied             = false;
     this.notified            = false;
     this.ignoreEofByte       = false;
@@ -80,8 +81,7 @@ public class EncodingSelectDlg extends BaseDlg
     // Fragetext
     add(
 	GUIFactory.createLabel(
-		"Mit welchem Zeichensatz soll die Datei"
-			+ " ge\u00F6ffnet werden?" ),
+		LangUtil.getText( "text.label.which_character_set" ) ),
 	gbc );
 
 
@@ -154,7 +154,8 @@ public class EncodingSelectDlg extends BaseDlg
 
 
     // Hinweistext
-    JLabel label = GUIFactory.createLabel( "Achtung!" );
+    JLabel label = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.warning" ) );
     Font font = label.getFont();
     if( font != null ) {
       label.setFont( font.deriveFont( Font.BOLD ) );
@@ -169,24 +170,23 @@ public class EncodingSelectDlg extends BaseDlg
     gbc.gridy++;
     add(
 	GUIFactory.createLabel(
-		"Die Datei wird als Textdatei mit dem"
-			+ " ausgew\u00E4hlten Zeichensatz ge\u00F6ffnet." ),
+		LangUtil.getText( "text.label.file_opened_text" ) ),
 	gbc );
 
     gbc.gridy++;
     add(
 	GUIFactory.createLabel(
-		"Das gilt auch, wenn die Datei gar keine"
-			+ " Textdatei ist oder in einem" ),
+		LangUtil.getText( "text.label.also_applies_file" ) ),
 	gbc );
 
     gbc.gridy++;
     add(
-	GUIFactory.createLabel( "anderem Zeichensatz gespeichert wurde." ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "text.label.different_character_set" ) ),
 	gbc );
 
     this.cbIgnoreEofByte = GUIFactory.createCheckBox(
-		"Eventuell vorhandenes Dateiendezeichen ignorieren" );
+		LangUtil.getText( "text.option.ignore_any_end" ) );
     gbc.anchor     = GridBagConstraints.CENTER;
     gbc.insets.top = 20;
     gbc.gridy++;

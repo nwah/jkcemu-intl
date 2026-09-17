@@ -22,6 +22,7 @@ import jkcemu.emusys.kc85.KCAudioCreator;
 import jkcemu.emusys.zxspectrum.ZXSpectrumAudioCreator;
 import jkcemu.file.FileInfo;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class AudioUtil
@@ -97,7 +98,7 @@ public class AudioUtil
 				JComboBox<Object> comboBox,
 				boolean           forTargetLines )
   {
-    comboBox.addItem( EmuUtil.TEXT_DEFAULT );
+    comboBox.addItem( LangUtil.getText( EmuUtil.TEXT_DEFAULT ) );
     for( Mixer.Info mixerInfo : AudioSystem.getMixerInfo() ) {
       try {
 	Mixer       mixer         = AudioSystem.getMixer( mixerInfo );
@@ -122,7 +123,7 @@ public class AudioUtil
   {
     JComboBox<Object> comboBox = GUIFactory.createComboBox();
     comboBox.setEditable( false );
-    comboBox.addItem( EmuUtil.TEXT_DEFAULT );
+    comboBox.addItem( LangUtil.getText( EmuUtil.TEXT_DEFAULT ) );
     for( int i = 0; i < frameRates.length; i++ ) {
       comboBox.addItem( frameRates[ i ] );
     }
@@ -263,6 +264,7 @@ public class AudioUtil
 
   public static void throwNoAudioData() throws IOException
   {
-    throw new IOException( "Keine Audiodaten vorhanden" );
+    throw new IOException(
+		LangUtil.getText( "audio.error.no_audio_data" ) );
   }
 }

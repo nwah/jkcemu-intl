@@ -13,6 +13,7 @@ import java.io.IOException;
 import jkcemu.disk.AbstractFloppyDisk;
 import jkcemu.disk.CopyQMDisk;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class CopyQMFileTarget extends AbstractConvertTarget
@@ -24,7 +25,9 @@ public class CopyQMFileTarget extends AbstractConvertTarget
 			FileConvertFrm     fileConvertFrm,
 			AbstractFloppyDisk disk )
   {
-    super( fileConvertFrm, "CopyQM-Datei (*.cqm)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "fileconv.title.copyqm_file_cqm" ) );
     this.disk = disk;
   }
 

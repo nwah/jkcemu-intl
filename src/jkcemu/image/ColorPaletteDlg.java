@@ -41,6 +41,7 @@ import jkcemu.base.PopupMenusOwner;
 import jkcemu.base.GUIFactory;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class ColorPaletteDlg
@@ -111,9 +112,7 @@ public class ColorPaletteDlg
       } else {
 	showErrorDlg(
 		imageFrm,
-		"Das Bild hat keine indexierten Farben,\n"
-			+ "die als Farbpalette angezeigt werden"
-			+ " k\u00F6nnten." );
+		LangUtil.getText( "image.error.image_no_indexed" ) );
       }
     }
     return retImg;
@@ -354,7 +353,7 @@ public class ColorPaletteDlg
 		BufferedImage   orgImg,
 		IndexColorModel icm )
   {
-    super( imageFrm, "Farbpalette" );
+    super( imageFrm, LangUtil.getText( "image.section.color_palette" ) );
     this.imageFld        = imageFld;
     this.orgImg          = orgImg;
     this.orgICM          = icm;
@@ -396,8 +395,7 @@ public class ColorPaletteDlg
 
     // beide Farbpaletten anzeigen
     this.cbBlinkOldNew = GUIFactory.createCheckBox(
-		"Urspr\u00FCngliche und ge\u00E4nderte Farbpalette"
-			+ " abwechselnd anzeigen",
+		LangUtil.getText( "image.option.show_original_modified" ),
 		blinkOldNew );
     gbc.anchor    = GridBagConstraints.WEST;
     gbc.fill      = GridBagConstraints.NONE;
@@ -420,13 +418,16 @@ public class ColorPaletteDlg
     this.btnApply.setEnabled( false );
     panelBtn.add( this.btnApply );
 
-    this.btnColor = GUIFactory.createButton( "Farbe..." );
+    this.btnColor = GUIFactory.createButton(
+		LangUtil.getText( "image.action.color" ) );
     panelBtn.add( this.btnColor );
 
-    this.btnExport = GUIFactory.createButton( "Exportieren..." );
+    this.btnExport = GUIFactory.createButton(
+		LangUtil.getText( "common.action.export_dots" ) );
     panelBtn.add( this.btnExport );
 
-    this.btnImport = GUIFactory.createButton( "Importieren..." );
+    this.btnImport = GUIFactory.createButton(
+		LangUtil.getText( "common.action.import" ) );
     panelBtn.add( this.btnImport );
 
     this.btnReset = GUIFactory.createButtonReset();
@@ -440,23 +441,26 @@ public class ColorPaletteDlg
     // Popup-Menu fuer Color-Button
     this.popupColor = GUIFactory.createPopupMenu();
 
-    this.mnuColorAll = GUIFactory.createMenuItem( "aus allen Farben..." );
+    this.mnuColorAll = GUIFactory.createMenuItem(
+		LangUtil.getText( "image.action.all_colors" ) );
     this.popupColor.add( this.mnuColorAll );
 
     this.mnuColorA5105 = GUIFactory.createMenuItem(
-					"aus A5105-Farbpalette..." );
+					LangUtil.getText( "image.action.a5105_color_palette" ) );
     this.popupColor.add( this.mnuColorA5105 );
 
     this.mnuColorCPC = GUIFactory.createMenuItem(
-				"aus CPC-/KC-compact-Farbpalette..." );
+				LangUtil.getText(
+					"image.action.cpc_kc_compact_color_palette" ) );
     this.popupColor.add( this.mnuColorCPC );
 
     this.mnuColorKC854Hires = GUIFactory.createMenuItem(
-				"aus KC85/4-HIRES-Farbpalette..." );
+				LangUtil.getText(
+					"image.action.kc85_4_hires_color_palette" ) );
     this.popupColor.add( this.mnuColorKC854Hires );
 
     this.mnuColorFile = GUIFactory.createMenuItem(
-				"aus importierter Farbpalette..." );
+				LangUtil.getText( "image.action.imported_color_palette" ) );
     this.mnuColorFile.setEnabled( false );
     this.popupColor.add( this.mnuColorFile );
 
@@ -465,53 +469,61 @@ public class ColorPaletteDlg
     this.popupImport = GUIFactory.createPopupMenu();
 
     this.mnuImportA5105 = GUIFactory.createMenuItem(
-					"A5105-Farbpalette (16 Farben)" );
+					LangUtil.getText( "image.action.a5105_color_palette_16" ) );
     this.popupImport.add( this.mnuImportA5105 );
 
     this.mnuImportCPC = GUIFactory.createMenuItem(
-				"CPC-/KC-compact-Farbpalette (27 Farben)" );
+				LangUtil.getText(
+					"image.action.cpc_kc_compact_color_palette_27" ) );
     this.popupImport.add( this.mnuImportCPC );
 
     this.mnuImportKC854Hires = GUIFactory.createMenuItem(
-				"KC85/4-HIRES-Farbpalette (4 Farben)" );
+				LangUtil.getText(
+					"image.action.kc85_4_hires_color_palette_4" ) );
     this.popupImport.add( this.mnuImportKC854Hires );
 
     this.mnuImportFile = GUIFactory.createMenuItem(
-					"Farbpalette aus Datei..." );
+					LangUtil.getText( "image.action.color_palette_file" ) );
     this.popupImport.add( this.mnuImportFile );
 
 
     // Popup-Menu fuer Tabelle
     this.popupTable = GUIFactory.createPopupMenu();
 
-    this.mnuContextCut = GUIFactory.createMenuItem( EmuUtil.TEXT_CUT );
+    this.mnuContextCut = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_CUT ) );
     this.popupTable.add( this.mnuContextCut );
 
-    this.mnuContextCopy = GUIFactory.createMenuItem( EmuUtil.TEXT_COPY );
+    this.mnuContextCopy = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_COPY ) );
     this.popupTable.add( this.mnuContextCopy );
 
-    this.mnuContextPaste = GUIFactory.createMenuItem( EmuUtil.TEXT_PASTE );
+    this.mnuContextPaste = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_PASTE ) );
     this.popupTable.add( this.mnuContextPaste );
     this.popupTable.addSeparator();
 
     this.mnuContextColorAll = GUIFactory.createMenuItem(
-					"Farbe aus allen Farben..." );
+					LangUtil.getText( "image.action.color_all_colors" ) );
     this.popupTable.add( this.mnuContextColorAll );
 
     this.mnuContextColorA5105 = GUIFactory.createMenuItem(
-				"Farbe aus A5105-Farbpalette..." );
+				LangUtil.getText(
+					"image.action.color_a5105_color" ) );
     this.popupTable.add( this.mnuContextColorA5105 );
 
     this.mnuContextColorCPC = GUIFactory.createMenuItem(
-				"Farbe aus CPC-/KC-compact-Farbpalette..." );
+				LangUtil.getText(
+					"image.action.color_cpc_kc" ) );
     this.popupTable.add( this.mnuContextColorCPC );
 
     this.mnuContextColorKC854Hires = GUIFactory.createMenuItem(
-				"Farbe aus KC85/4-HIRES-Farbpalette..." );
+				LangUtil.getText(
+					"image.action.color_kc85_4" ) );
     this.popupTable.add( this.mnuContextColorKC854Hires );
 
     this.mnuContextColorFile = GUIFactory.createMenuItem(
-				"Farbe aus importierter Farbpalette..." );
+				LangUtil.getText( "image.action.color_imported_color" ) );
     this.mnuContextColorFile.setEnabled( false );
     this.popupTable.add( this.mnuContextColorFile );
 
@@ -696,12 +708,11 @@ public class ColorPaletteDlg
     if( this.tableModel.hasChangedARGBs() ) {
       switch( showOptionDlg(
 		this,
-		"M\u00F6chten Sie die urspr\u00FCngliche oder die"
-			+ " ge\u00E4nderte Farbpalette exportieren?",
-		"Farbpalette exportieren",
-		"Urspr\u00FCngliche",
-		"Ge\u00E4nderte",
-		EmuUtil.TEXT_CANCEL ) )
+		LangUtil.getText( "image.msg.want_export_original" ),
+		LangUtil.getText( "image.msg.export_color_palette" ),
+		LangUtil.getText( "image.msg.original" ),
+		LangUtil.getText( "image.msg.modified" ),
+		LangUtil.getText( EmuUtil.TEXT_CANCEL ) ) )
       {
 	case 0:
 	  icm = this.orgICM;
@@ -716,7 +727,7 @@ public class ColorPaletteDlg
     if( icm != null ) {
       File file = FileUtil.showFileSaveDlg(
 			this,
-			"Farbpalette exportieren",
+			LangUtil.getText( "image.msg.export_color_palette" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_IMAGE ),
 			IFFFile.getPaletteFileFilter(),
@@ -766,12 +777,11 @@ public class ColorPaletteDlg
     if( this.tableModel.hasChangedARGBs() ) {
       switch( showOptionDlg(
 		this,
-		"Sollen die bereits ge\u00E4nderten Farbwerte"
-			+ " \u00FCberschrieben werden?",
-		"Best\u00E4tigung",
-		"Ja",
-		"Nein",
-		EmuUtil.TEXT_CANCEL) )
+		LangUtil.getText( "image.msg.color_values_already" ),
+		LangUtil.getText( "common.msg.confirmation" ),
+		LangUtil.getText( "common.msg.yes" ),
+		LangUtil.getText( "common.msg.no" ),
+		LangUtil.getText( EmuUtil.TEXT_CANCEL )) )
       {
 	case 0:
 	  rv = Boolean.TRUE;

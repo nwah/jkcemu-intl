@@ -12,6 +12,7 @@ import java.awt.Component;
 import java.util.Properties;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.net.KCNet;
 import jkcemu.usb.VDIP;
 import z80emu.Z80CPU;
@@ -55,9 +56,10 @@ public class M052 extends AbstractKC85Module
     if( usbOnly ) {
       this.kcNet = null;
     } else {
-      this.kcNet = new KCNet( "Netzwerk-PIO" );
+      this.kcNet = new KCNet( LangUtil.getText( "kc85.text.network_pio" ) );
     }
-    this.vdip = new VDIP( vdipNum, z80cpu, "USB-PIO" );
+    this.vdip = new VDIP(
+		vdipNum, z80cpu, LangUtil.getText( "emusys.text.usb_pio" ) );
     this.vdip.setModuleTitle(
 		String.format( "M052 in Schacht %02X", slot ) );
     this.ioEnabled = false;

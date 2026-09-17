@@ -19,6 +19,7 @@ import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.emusys.poly880.Poly880KeyboardFld;
 import jkcemu.etc.CPUSynchronSoundDevice;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
@@ -35,7 +36,7 @@ public class Poly880 extends EmuSys implements
 					Z80PIOPortListener
 {
   public static final String SYSNAME              = "Poly880";
-  public static final String SYSTEXT              = "Poly-880";
+  public static final String SYSTEXT              = "emusys.text.poly_880";
   public static final String PROP_PREFIX          = "jkcemu.poly880.";
   public static final String PROP_NEGATED         = "negated";
   public static final String PROP_RAM8000_ENABLED = "ram_8000.enabled";
@@ -98,12 +99,13 @@ public class Poly880 extends EmuSys implements
     this.digitValues         = new int[ 8 ];
     this.keyboardMatrix      = new int[ 8 ];
     this.keyboardFld         = null;
-    this.loudspeaker         = new CPUSynchronSoundDevice( "Lautsprecher" );
+    this.loudspeaker         = new CPUSynchronSoundDevice(
+		LangUtil.getText( "emusys.text.loudspeaker" ) );
 
     Z80CPU cpu = emuThread.getZ80CPU();
-    this.pio1  = new Z80PIO( "PIO (E/A-Adressen 80h-83h)" );
-    this.pio2  = new Z80PIO( "PIO (E/A-Adressen 84h-87h)" );
-    this.ctc   = new Z80CTC( "CTC (E/A-Adressen 88h-8Bh)" );
+    this.pio1  = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_80h" ) );
+    this.pio2  = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_84h" ) );
+    this.ctc   = new Z80CTC( LangUtil.getText( "emusys.text.ctc_i_o_addresses_88h" ) );
     cpu.setInterruptSources( this.pio1, this.pio2, this.ctc );
 
     this.ctc.setTimerConnection( 2, 3 );
@@ -378,7 +380,7 @@ public class Poly880 extends EmuSys implements
   @Override
   public String getTitle()
   {
-    return SYSTEXT;
+    return LangUtil.getText( SYSTEXT );
   }
 
 

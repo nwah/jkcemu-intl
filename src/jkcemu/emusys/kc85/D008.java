@@ -13,11 +13,12 @@ import java.util.Properties;
 import jkcemu.base.EmuUtil;
 import jkcemu.emusys.KC85;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class D008 extends D004
 {
-  private static final String TEXT_D008_ROM_FILE = "D008-ROM-Datei";
+  private static final String TEXT_D008_ROM_FILE = "kc85.text.d008_rom_file";
 
   private static byte[] romD008 = null;
 
@@ -114,7 +115,7 @@ public class D008 extends D004
 		this.romProp.substring( KC85.VALUE_PREFIX_FILE.length() ),
 		true,
 		0x8000,
-		TEXT_D008_ROM_FILE );
+		LangUtil.getText( TEXT_D008_ROM_FILE ) );
     }
     if( romBytes == null ) {
       if( romD008 == null ) {
@@ -159,7 +160,7 @@ public class D008 extends D004
 		this.romProp.substring( KC85.VALUE_PREFIX_FILE.length() ),
 		true,
 		0x8000,
-		TEXT_D008_ROM_FILE );
+		LangUtil.getText( TEXT_D008_ROM_FILE ) );
       if( romBytes != null ) {
 	this.romBytes = romBytes;
       }

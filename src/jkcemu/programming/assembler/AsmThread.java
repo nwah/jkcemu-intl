@@ -14,6 +14,7 @@ import jkcemu.base.EmuSys;
 import jkcemu.base.EmuThread;
 import jkcemu.emusys.Z9001;
 import jkcemu.file.FileFormat;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgLogger;
 import jkcemu.programming.PrgOptions;
 import jkcemu.programming.PrgSource;
@@ -32,7 +33,12 @@ public class AsmThread extends PrgThread
 		PrgOptions options,
 		Appendable logOut )
   {
-    super( "JKCEMU assembler", emuThread, editText, options, logOut );
+    super( LangUtil.getText(
+			"assembler.title.jkcemu_assembler" ),
+		emuThread,
+		editText,
+		options,
+		logOut );
     this.assembler = new Z80Assembler(
 				editText.getText(),
 				null,
@@ -54,7 +60,7 @@ public class AsmThread extends PrgThread
   @Override
   public boolean execute() throws IOException
   {
-    appendToLog( "Assembliere...\n" );
+    appendToLog( LangUtil.getText( "programming.msg.assembling" ) );
     boolean forZ9001 = false;
     if( this.emuThread != null ) {
       EmuSys emuSys = this.emuThread.getEmuSys();

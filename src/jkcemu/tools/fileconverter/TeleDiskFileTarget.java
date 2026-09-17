@@ -13,6 +13,7 @@ import java.io.IOException;
 import jkcemu.disk.AbstractFloppyDisk;
 import jkcemu.disk.TeleDisk;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class TeleDiskFileTarget extends AbstractConvertTarget
@@ -24,7 +25,9 @@ public class TeleDiskFileTarget extends AbstractConvertTarget
 			FileConvertFrm     fileConvertFrm,
 			AbstractFloppyDisk disk )
   {
-    super( fileConvertFrm, "TeleDisk-Datei (*.td0)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "fileconv.title.teledisk_file_td0" ) );
     this.disk = disk;
   }
 

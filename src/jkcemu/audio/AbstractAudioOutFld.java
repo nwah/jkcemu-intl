@@ -20,6 +20,7 @@ import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public abstract class AbstractAudioOutFld extends AbstractAudioIOFld
@@ -50,9 +51,8 @@ public abstract class AbstractAudioOutFld extends AbstractAudioIOFld
     if( (this.recordedData != null) && !this.recordedDataSaved ) {
       if( BaseDlg.showYesNoWarningDlg(
 		this,
-		"Die Aufnahme wurden noch nicht gespeichert!"
-			+ "\nM\u00F6chten Sie die Aufnahme verwerfen?",
-		"Warnung" ) )
+		LangUtil.getText( "audio.msg.recording_not_saved_yet_want" ),
+		LangUtil.getText( "common.msg.warning" ) ) )
       {
 	this.recordedData = null;
       } else {
@@ -145,7 +145,7 @@ public abstract class AbstractAudioOutFld extends AbstractAudioIOFld
       }
       File file = FileUtil.showFileSaveDlg(
 			this.audioFrm,
-			"Sound- oder Tape-Datei speichern",
+			LangUtil.getText( "audio.title.save_sound_tape" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_AUDIO ),
 			fileFilters );

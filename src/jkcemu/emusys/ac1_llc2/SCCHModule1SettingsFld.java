@@ -26,6 +26,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.SettingsFrm;
 
@@ -64,15 +65,14 @@ public class SCCHModule1SettingsFld
     this.fldPrgX = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + AbstractSCCHSys.PROP_PROGRAM_X_PREFIX,
-		"ROM-Datei f\u00FCr Programmpaket X (E000h-FFFFh):" );
+		LangUtil.getText( "ac1.text.rom_file_program" ) );
     add( this.fldPrgX, gbc );
 
     // ROM-Disk
     this.fldRomDisk = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + AbstractSCCHSys.PROP_ROMDISK_PREFIX,
-		"ROM-Datei f\u00FCr ROM-Disk"
-			+ " (8000h-FFFFh bzw. C000h-FFFFh):" );
+		LangUtil.getText( "ac1.text.rom_file_rom" ) );
     gbc.insets.bottom = 0;
     gbc.gridy++;
     add( this.fldRomDisk, gbc );
@@ -84,7 +84,8 @@ public class SCCHModule1SettingsFld
     add( panelRomDiskAddr, gbc );
 
     this.labelRomDiskAddr = GUIFactory.createLabel(
-				"ROM-Disk einblenden ab Adresse:" );
+				LangUtil.getText(
+					"ac1.label.show_rom_disk" ) );
     panelRomDiskAddr.add( this.labelRomDiskAddr );
 
     ButtonGroup grpRomDiskAddr = new ButtonGroup();
@@ -108,7 +109,7 @@ public class SCCHModule1SettingsFld
     this.fldBasicRom = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + AbstractSCCHSys.PROP_BASIC_PREFIX,
-		"Alternativer BASIC-ROM (2000h-5FFFh bzw. 4000h-5FFFh):" );
+		LangUtil.getText( "ac1.text.alternative_basic_rom" ) );
     gbc.insets.top    = 5;
     gbc.insets.bottom = 0;
     gbc.gridy++;
@@ -121,7 +122,8 @@ public class SCCHModule1SettingsFld
     add( panelBasicRomAddr, gbc );
 
     this.labelBasicRomAddr = GUIFactory.createLabel(
-				"BASIC-ROM einblenden ab Adresse:" );
+				LangUtil.getText(
+					"ac1.label.show_basic_rom" ) );
     panelBasicRomAddr.add( this.labelBasicRomAddr );
     ButtonGroup grpBasicRomAddr = new ButtonGroup();
 

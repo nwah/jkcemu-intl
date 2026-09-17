@@ -202,39 +202,29 @@ public abstract class AbstractFileWorker
 	JOptionPane pane  = null;
         String      title = null;
 	if( allCancelled ) {
-	  title             = LangUtil.tr( "Best\u00E4tigung" );
+	  title             = LangUtil.getText( "common.msg.confirmation" );
 	  StringBuilder buf = new StringBuilder( 512 );
 	  if( nWorkers == 1 ) {
-	    buf.append( LangUtil.tr(
-		"Eine abgebrochene Datei-Operation l\u00E4uft noch." ) );
+	    buf.append( LangUtil.getText(
+		"file.text.cancelled_file_operation" ) );
 	  } else {
-	    buf.append( LangUtil.tr(
-		"{0} abgebrochene Datei-Operationen laufen noch.",
+	    buf.append( LangUtil.getText(
+		"file.text.cancelled_file",
 		nWorkers ) );
 	  }
-	  buf.append( LangUtil.tr(
-		"\nDas Fenster sollte erst geschlossen werden,\n"
-			+ "wenn keine Datei-Operation mehr l\u00E4uft.\n\n"
-			+ "M\u00F6chten Sie trotzdem schlie\u00DFen"
-			+ " und riskieren,\n"
-			+ "dass bei Beendigung des Programms noch"
-			+ " laufende\n"
-			+ "Datei-Operationen hart abgebrochen werden?" ) );
+	  buf.append( LangUtil.getText(
+		"file.text.window_not_closed_until_no" ) );
 	  pane = new JOptionPane(
 			buf.toString(),
 			JOptionPane.WARNING_MESSAGE,
 			JOptionPane.YES_NO_OPTION );
 	} else {
-	  title = LangUtil.tr( "Hinweis" );
-	  pane  = new JOptionPane(
-			LangUtil.tr(
-				"Das Fenster wird erst geschlossen,"
-					+ " wenn die laufenden\n"
-					+ "Datei-Operationen fertig sind"
-					+ " oder abgebrochen wurden." ),
+	  title = LangUtil.getText( "common.msg.note" );
+	  pane  = new JOptionPane( LangUtil.getText(
+				"file.text.window_not_closed_until_running" ),
 			JOptionPane.WARNING_MESSAGE,
 			JOptionPane.OK_OPTION );
-	  pane.setOptions( LangUtil.tr(
+	  pane.setOptions( LangUtil.getTexts(
 			new String[] { "Fenster nicht schlie\u00DFen" } ) );
 	}
 	final JDialog dlg = pane.createDialog( owner, title );
@@ -376,17 +366,19 @@ public abstract class AbstractFileWorker
       switch( showJOptionPane(
 			buf.toString(),
 			JOptionPane.ERROR_MESSAGE,
-			EmuUtil.TEXT_ERROR,
+			LangUtil.getText( EmuUtil.TEXT_ERROR ),
 			enableRepeat ?
 				new String[] {
 					OPTION_REPEAT,
 					OPTION_SKIP,
 					OPTION_SKIP_ALL,
-					EmuUtil.TEXT_CANCEL }
+					LangUtil.getText(
+						EmuUtil.TEXT_CANCEL ) }
 				: new String[] {
 					OPTION_SKIP,
 					OPTION_SKIP_ALL,
-					EmuUtil.TEXT_CANCEL } ) )
+					LangUtil.getText(
+						EmuUtil.TEXT_CANCEL ) } ) )
       {
 	case OPTION_REPEAT:
 	  rv = true;
@@ -432,10 +424,11 @@ public abstract class AbstractFileWorker
     for( int i = 0; i < trOptions.length; i++ ) {
       Object option = options[ i ];
       trOptions[ i ] = (option instanceof String ?
-				LangUtil.tr( (String) option )
+				LangUtil.getText( (String) option )
 				: option);
     }
-    final JOptionPane pane = new JOptionPane( LangUtil.tr( msg ), msgType );
+    final JOptionPane pane = new JOptionPane(
+		LangUtil.getText( msg ), msgType );
     pane.setOptions( trOptions );
     synchronized( this.syncMonitor ) {
       EventQueue.invokeLater(
@@ -446,7 +439,7 @@ public abstract class AbstractFileWorker
 		  {
 		    pane.createDialog(
 				owner,
-				LangUtil.tr( title ) ).setVisible( true );
+				LangUtil.getText( title ) ).setVisible( true );
 		    synchronized( syncMonitor ) {
 		      try {
 			syncMonitor.notifyAll();
@@ -487,13 +480,15 @@ public abstract class AbstractFileWorker
       if( this.register != null ) {
 	this.register.add( this );
       }
-      this.progressLabel = GUIFactory.createLabel( "In Arbeit..." );
+      this.progressLabel = GUIFactory.createLabel(
+		LangUtil.getText( "file.label.progress" ) );
       this.progressLabel.setBorder(
 		BorderFactory.createEmptyBorder( 5, 5, 5, 5 ) );
       this.progressLabel.setAlignmentX( Component.CENTER_ALIGNMENT );
       this.progressLabel.setAlignmentY( Component.CENTER_ALIGNMENT );
 
-      JButton cancelBtn = GUIFactory.createButton( EmuUtil.TEXT_CANCEL );
+      JButton cancelBtn = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_CANCEL ) );
       cancelBtn.setBorder( BorderFactory.createEmptyBorder( 5, 5, 5, 5 ) );
       cancelBtn.setAlignmentX( Component.CENTER_ALIGNMENT );
       cancelBtn.setAlignmentY( Component.CENTER_ALIGNMENT );
@@ -669,7 +664,7 @@ public abstract class AbstractFileWorker
 	setProgressText( urlText );
 	JDialog dlg = this.progressDlg;
 	if( dlg != null ) {
-	  dlg.setTitle( "Laden" );
+	  dlg.setTitle( LangUtil.getText( "common.text.load" ) );
 	}
       } else {
 	Path path = this.curPath;

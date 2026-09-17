@@ -32,6 +32,7 @@ import jkcemu.base.UserCancelException;
 import jkcemu.base.UserInputException;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public abstract class AbstractSettingsFld
@@ -88,7 +89,7 @@ public abstract class AbstractSettingsFld
 		this, 
 		msg + "\nM\u00F6chten Sie trotzdem die Einstellungen"
 			+ " \u00FCbernehmen?",
-		"Konflikt" ) )
+		LangUtil.getText( "settings.msg.conflict" ) ) )
     {
       throw new UserCancelException();
     }

@@ -28,6 +28,7 @@ import jkcemu.etc.Plotter;
 import jkcemu.etc.PSG8910;
 import jkcemu.file.FileFormat;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import jkcemu.usb.VDIP;
 import z80emu.Z80CPU;
@@ -858,8 +859,7 @@ public abstract class EmuSys
   {
     BaseDlg.showErrorDlg(
 	this.screenFrm,
-	"Es ist kein BASIC-Programm im entsprechenden\n"
-		+ "Adressbereich des Arbeitsspeichers vorhanden." );
+	LangUtil.getText( "base.error.no_basic_program" ) );
   }
 
 
@@ -1189,7 +1189,6 @@ public abstract class EmuSys
   {
     BaseDlg.showErrorDlg(
 	this.screenFrm,
-	"Diese Funktion steht f\u00FCr das gerade emulierte System\n"
-		+ "nicht zur Verf\u00FCgung." );
+	LangUtil.getText( "base.error.function_not_available" ) );
   }
 }

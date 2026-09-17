@@ -32,6 +32,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.disk.GIDESettingsFld;
 import jkcemu.emusys.Z9001;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -103,7 +104,8 @@ public class Z9001SettingsFld extends AbstractSettingsFld
 
     // Tab Grafik
     this.tabGraph = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Grafik", this.tabGraph );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.graphics" ), this.tabGraph );
 
     GridBagConstraints gbcGraph = new GridBagConstraints(
 						0, 0,
@@ -117,51 +119,55 @@ public class Z9001SettingsFld extends AbstractSettingsFld
     ButtonGroup grpGraph = new ButtonGroup();
 
     this.rbMonoGraphNone = GUIFactory.createRadioButton(
-					"S/W, Blockgrafik" );
+					LangUtil.getText(
+						"z9001.option.b_w_block" ) );
     grpGraph.add( this.rbMonoGraphNone );
     this.tabGraph.add( this.rbMonoGraphNone, gbcGraph );
 
     this.rbMonoGraphKRT = GUIFactory.createRadioButton(
-					"S/W, KRT-Vollgrafikerweiterung" );
+					LangUtil.getText(
+						"z9001.option.b_w_krt" ) );
     grpGraph.add( this.rbMonoGraphKRT );
     gbcGraph.insets.top = 0;
     gbcGraph.gridy++;
     this.tabGraph.add( this.rbMonoGraphKRT, gbcGraph );
 
     this.rbColorGraphNone = GUIFactory.createRadioButton(
-					"Farbe, Blockgrafik",
+					LangUtil.getText( "z9001.option.color_block_graphics" ),
 					true );
     grpGraph.add( this.rbColorGraphNone );
     gbcGraph.gridy++;
     this.tabGraph.add( this.rbColorGraphNone, gbcGraph );
 
     this.rbColorGraphKRT = GUIFactory.createRadioButton(
-				"Farbe, KRT-Vollgrafikerweiterung" );
+				LangUtil.getText(
+					"z9001.option.color_krt_full" ) );
     grpGraph.add( this.rbColorGraphKRT );
     gbcGraph.gridy++;
     this.tabGraph.add( this.rbColorGraphKRT, gbcGraph );
 
     this.rbColorGraphRobotron = GUIFactory.createRadioButton(
-				"Farbe, Robotron-Vollgrafikerweiterung" );
+				LangUtil.getText(
+					"z9001.option.color_robotron_full" ) );
     grpGraph.add( this.rbColorGraphRobotron );
     gbcGraph.gridy++;
     this.tabGraph.add( this.rbColorGraphRobotron, gbcGraph );
 
     this.cbFontProgrammable = GUIFactory.createCheckBox(
-				"Programmierbarer Zeichengenerator" );
+				LangUtil.getText( "z9001.option.programmable_character" ) );
     gbcGraph.insets.top    = 10;
     gbcGraph.insets.bottom = 0;
     gbcGraph.gridy++;
     this.tabGraph.add( this.cbFontProgrammable, gbcGraph );
 
     this.cb80Chars = GUIFactory.createCheckBox(
-					"40/80-Zeichen-Umschaltung" );
+					LangUtil.getText( "z9001.option.40_80_character" ) );
     gbcGraph.insets.top = 0;
     gbcGraph.gridy++;
     this.tabGraph.add( this.cb80Chars, gbcGraph );
 
     this.cbFixedScreenSize = GUIFactory.createCheckBox(
-		"Gleiche Fenstergr\u00F6\u00DFe in beiden Bildschirmmodi" );
+		LangUtil.getText( "z9001.option.same_window_size" ) );
     gbcGraph.insets.left   = 50;
     gbcGraph.insets.bottom = 5;
     gbcGraph.gridy++;
@@ -170,7 +176,8 @@ public class Z9001SettingsFld extends AbstractSettingsFld
 
     // Tab Speichermodule
     this.tabMem = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Speichermodule", this.tabMem );
+    this.tabbedPane.addTab( LangUtil.getText( "z9001.section.memory_modules" ),
+		this.tabMem );
 
     GridBagConstraints gbcMem = new GridBagConstraints(
 					0, 0,
@@ -182,16 +189,16 @@ public class Z9001SettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.cbRam16k4000 = GUIFactory.createCheckBox(
-					"16K RAM-Modul (4000h-7FFFh)" );
+					LangUtil.getText( "z9001.option.16k_ram_module_4000h" ) );
     this.tabMem.add( this.cbRam16k4000, gbcMem );
 
     this.cbRam16k8000 = GUIFactory.createCheckBox(
-					"16K RAM-Modul (8000h-BFFFh)" );
+					LangUtil.getText( "z9001.option.16k_ram_module_8000h" ) );
     gbcMem.gridx++;
     this.tabMem.add( this.cbRam16k8000, gbcMem );
 
     this.cbRam64k = GUIFactory.createCheckBox(
-		"64K RAM-Modul (2 x 4000h-7FFFh, 1 x 8000h-E7FFh)" );
+		LangUtil.getText( "z9001.option.64k_ram_module" ) );
     gbcMem.insets.top = 0;
     gbcMem.gridwidth  = 2;
     gbcMem.gridx      = 0;
@@ -199,19 +206,19 @@ public class Z9001SettingsFld extends AbstractSettingsFld
     this.tabMem.add( this.cbRam64k, gbcMem );
 
     this.cbRom16k4000 = GUIFactory.createCheckBox(
-					"16K ROM-Modul (4000h-7FFFh)" );
+					LangUtil.getText( "z9001.option.16k_rom_module_4000h" ) );
     gbcMem.insets.top  = 10;
     gbcMem.gridwidth   = 1;
     gbcMem.gridy++;
     this.tabMem.add( this.cbRom16k4000, gbcMem );
 
     this.cbRom16k8000 = GUIFactory.createCheckBox(
-					"16K ROM-Modul (8000h-BFFFh)" );
+					LangUtil.getText( "z9001.option.16k_rom_module_8000h" ) );
     gbcMem.gridx++;
     this.tabMem.add( this.cbRom16k8000, gbcMem );
 
     this.cbRom32k4000 = GUIFactory.createCheckBox(
-					"32K ROM-Modul (4000h-BFFFh)" );
+					LangUtil.getText( "z9001.option.32k_rom_module" ) );
     gbcMem.insets.top  = 0;
     gbcMem.gridwidth   = 1;
     gbcMem.gridx       = 0;
@@ -219,19 +226,20 @@ public class Z9001SettingsFld extends AbstractSettingsFld
     this.tabMem.add( this.cbRom32k4000, gbcMem );
 
     this.cbRom10kC000 = GUIFactory.createCheckBox(
-					"10K ROM-Modul (C000h-E7FFh)" );
+					LangUtil.getText( "z9001.option.10k_rom_module" ) );
     gbcMem.gridx++;
     this.tabMem.add( this.cbRom10kC000, gbcMem );
 
     this.cbRomMega  = GUIFactory.createCheckBox(
-				"Mega-ROM-Modul (256 x C000h-E7FFh)" );
+				LangUtil.getText(
+					"emusys.option.mega_rom_module" ) );
     gbcMem.gridwidth = 2;
     gbcMem.gridx     = 0;
     gbcMem.gridy++;
     this.tabMem.add( this.cbRomMega, gbcMem );
 
-    this.cbRomBoot = GUIFactory.createCheckBox( "Boot-ROM-Modul"
-		+ " (C000h-E7FFh, nur mit Floppy-Disk-Modul sinnvoll)" );
+    this.cbRomBoot = GUIFactory.createCheckBox( LangUtil.getText(
+			"z9001.option.boot_rom_module" ) );
     gbcMem.gridy++;
     this.tabMem.add( this.cbRomBoot, gbcMem );
 
@@ -329,16 +337,18 @@ public class Z9001SettingsFld extends AbstractSettingsFld
     this.tabRF = new RAMFloppiesSettingsFld(
 			settingsFrm,
 			propPrefix,
-			"RAM-Floppy an E/A-Adressen 20h/21h",
+			LangUtil.getText( "emusys.text.ram_floppy_i_o_addresses_20h" ),
 			RAMFloppy.RFType.ADW,
-			"RAM-Floppy an E/A-Adressen 24h/25h",
+			LangUtil.getText( "emusys.text.ram_floppy_i_o_addresses_24h" ),
 			RAMFloppy.RFType.ADW );
-    this.tabbedPane.addTab( "RAM-Floppies", this.tabRF );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.ram_floppies" ),
+		this.tabRF );
 
 
     // Tab Drucker
     this.tabPrinter = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Drucker", this.tabPrinter );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.choice.printer" ), this.tabPrinter );
 
     GridBagConstraints gbcPrinter = new GridBagConstraints(
 						0, 0,
@@ -352,19 +362,20 @@ public class Z9001SettingsFld extends AbstractSettingsFld
     ButtonGroup grpPrinter = new ButtonGroup();
 
     this.rbCatchPrintCalls = GUIFactory.createRadioButton(
-			"BOS-Aufrufe f\u00FCr Druckerausgaben abfangen" );
+			LangUtil.getText(
+				"z9001.option.intercept_bos_calls" ) );
     grpPrinter.add( this.rbCatchPrintCalls );
     this.tabPrinter.add( this.rbCatchPrintCalls, gbcPrinter );
 
     this.rbPrinterModule = GUIFactory.createRadioButton(
-			"V.24-Druckermodul emulieren" );
+			LangUtil.getText( "z9001.option.emulate_v_24" ) );
     grpPrinter.add( this.rbPrinterModule );
     gbcPrinter.insets.top = 0;
     gbcPrinter.gridy++;
     this.tabPrinter.add( this.rbPrinterModule, gbcPrinter );
 
     this.rbNoPrinter = GUIFactory.createRadioButton(
-			"Keinen Drucker emulieren",
+			LangUtil.getText( "z9001.option.not_emulate_printer" ),
 			true );
     grpPrinter.add( this.rbNoPrinter );
     gbcPrinter.insets.bottom = 5;
@@ -374,12 +385,14 @@ public class Z9001SettingsFld extends AbstractSettingsFld
 
     // Tab GIDE
     this.tabGIDE = new GIDESettingsFld( settingsFrm, propPrefix );
-    this.tabbedPane.addTab( "GIDE", this.tabGIDE );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.gide" ), this.tabGIDE );
 
 
     // Tab Erweiterungen
     this.tabExt = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Erweiterungen", this.tabExt );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.expansions" ), this.tabExt );
 
     GridBagConstraints gbcExt = new GridBagConstraints(
 					0, 0,
@@ -390,29 +403,34 @@ public class Z9001SettingsFld extends AbstractSettingsFld
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.cbRTC = GUIFactory.createCheckBox( "Echtzeituhr" );
+    this.cbRTC = GUIFactory.createCheckBox(
+		LangUtil.getText( "z9001.option.real_time_clock" ) );
     this.tabExt.add( this.cbRTC, gbcExt );
 
-    this.cbFloppyDisk = GUIFactory.createCheckBox( "Floppy-Disk-Modul" );
+    this.cbFloppyDisk = GUIFactory.createCheckBox(
+		LangUtil.getText( "emusys.option.floppy_disk_module" ) );
     gbcExt.insets.top = 0;
     gbcExt.gridy++;
     this.tabExt.add( this.cbFloppyDisk, gbcExt );
 
-    this.cbK1520Sound = GUIFactory.createCheckBox( "K1520-Sound-Karte" );
+    this.cbK1520Sound = GUIFactory.createCheckBox(
+		LangUtil.getText( "common.option.k1520_sound_card" ) );
     gbcExt.gridy++;
     this.tabExt.add( this.cbK1520Sound, gbcExt );
 
     this.cbKCNet = GUIFactory.createCheckBox(
-				"KCNet-kompatible Netzwerkkarte" );
+				LangUtil.getText( "emusys.option.kcnet_compatible_network" ) );
     gbcExt.gridy++;
     this.tabExt.add( this.cbKCNet, gbcExt );
 
-    this.cbPlotter = GUIFactory.createCheckBox( "Plotter XY4131 / XY4140" );
+    this.cbPlotter = GUIFactory.createCheckBox( LangUtil.getText(
+			"z9001.option.plotter_xy4131_xy4140" ) );
     gbcExt.gridy++;
     this.tabExt.add( this.cbPlotter, gbcExt );
 
     this.cbVDIP = GUIFactory.createCheckBox(
-				"USB-Anschluss (Vinculum VDIP Modul)" );
+				LangUtil.getText(
+					"emusys.option.usb_port_vinculum" ) );
     gbcExt.insets.bottom = 5;
     gbcExt.gridy++;
     this.tabExt.add( this.cbVDIP, gbcExt );
@@ -420,7 +438,8 @@ public class Z9001SettingsFld extends AbstractSettingsFld
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -431,8 +450,8 @@ public class Z9001SettingsFld extends AbstractSettingsFld
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    this.cbPasteFast = GUIFactory.createCheckBox(
-		"Einf\u00FCgen von Text direkt in den Tastaturpuffer" );
+    this.cbPasteFast = GUIFactory.createCheckBox( LangUtil.getText(
+			"z9001.option.paste_text_directly" ) );
     gbcEtc.gridy++;
     this.tabEtc.add( this.cbPasteFast, gbcEtc );
 
@@ -446,7 +465,8 @@ public class Z9001SettingsFld extends AbstractSettingsFld
     this.fldAltOS = new ROMFileSettingsFld(
 			settingsFrm,
 			propPrefix + Z9001.PROP_OS_PREFIX,
-			"Alternatives Betriebssystem (F000h-FFFFh):" );
+			LangUtil.getText(
+				"z9001.text.alternative_operating" ) );
     gbcEtc.insets.top    = 5;
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridy++;
@@ -456,7 +476,8 @@ public class Z9001SettingsFld extends AbstractSettingsFld
       this.fldAltBASIC = new ROMFileSettingsFld(
 			settingsFrm,
 			propPrefix + Z9001.PROP_BASIC_PREFIX,
-			"Alternativer BASIC-ROM (C000h-E7FFh):" );
+			LangUtil.getText(
+				"z9001.text.alternative_basic_rom" ) );
       gbcEtc.gridy++;
       this.tabEtc.add( this.fldAltBASIC, gbcEtc );
     } else {
@@ -466,7 +487,8 @@ public class Z9001SettingsFld extends AbstractSettingsFld
     this.fldAltFont = new ROMFileSettingsFld(
 			settingsFrm,
 			propPrefix + Z9001.PROP_FONT_PREFIX,
-			"Alternativer Zeichensatz:" );
+			LangUtil.getText(
+				"emusys.text.alternative_character" ) );
     gbcEtc.gridy++;
     this.tabEtc.add( this.fldAltFont, gbcEtc );
 
@@ -477,7 +499,8 @@ public class Z9001SettingsFld extends AbstractSettingsFld
 		propPrefix,
 		Z9001.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 		true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -487,7 +510,8 @@ public class Z9001SettingsFld extends AbstractSettingsFld
 		Z9001.getAutoInputCharSet(),
 		Z9001.DEFAULT_SWAP_KEY_CHAR_CASE,
 		Z9001.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     // Listener
@@ -595,7 +619,7 @@ public class Z9001SettingsFld extends AbstractSettingsFld
 	  && selected )
       {
 	throw new UserInputException(
-			"Datei f\u00FCr ROM-Modul nicht ausgew\u00E4hlt" );
+			LangUtil.getText( "z9001.error.file_rom_module" ) );
       }
       EmuUtil.setProperty(
 		props,

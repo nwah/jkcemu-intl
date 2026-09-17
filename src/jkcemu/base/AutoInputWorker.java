@@ -10,6 +10,7 @@ package jkcemu.base;
 
 import java.util.Properties;
 import jkcemu.Main;
+import jkcemu.lang.LangUtil;
 
 
 public class AutoInputWorker extends Thread
@@ -69,7 +70,9 @@ public class AutoInputWorker extends Thread
 		EmuThread                      emuThread,
 		java.util.List<AutoInputEntry> entries )
   {
-    super( Main.getThreadGroup(), "JKCEMU auto input" );
+    super(
+		Main.getThreadGroup(),
+		LangUtil.getText( "base.title.jkcemu_auto_input" ) );
     this.emuThread = emuThread;
     this.entries   = entries;
   }

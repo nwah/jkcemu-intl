@@ -46,9 +46,9 @@ public class TarUnpacker extends AbstractThreadFrm
   {
     Frame frm = new TarUnpacker( owner, srcFile, outDir, compression );
     if( compression ) {
-      frm.setTitle( "TGZ-Datei entpacken" );
+      frm.setTitle( LangUtil.getText( "file.title.unpack_tgz_file" ) );
     } else {
-      frm.setTitle( "TAR-Datei entpacken" );
+      frm.setTitle( LangUtil.getText( "file.title.unpack_tar_file" ) );
     }
     frm.setVisible( true );
   }
@@ -105,8 +105,8 @@ public class TarUnpacker extends AbstractThreadFrm
 	      if( entry.isDirectory() ) {
 		outFile.mkdirs();
 		if( !outFile.exists() ) {
-		  throw new IOException(
-				"Verzeichnis kann nicht angelegt werden" );
+		  throw new IOException( LangUtil.getText(
+					"file.error.directory_cannot_created" ) );
 		}
 		setAttributes( outFile, null, entry );
 		msg = null;
@@ -185,7 +185,7 @@ public class TarUnpacker extends AbstractThreadFrm
 	    }
 	  }
 	  catch( Exception ex ) {
-	    msg          = EmuUtil.TEXT_ERROR;
+	    msg          = LangUtil.getText( EmuUtil.TEXT_ERROR );
 	    String exMsg = ex.getMessage();
 	    if( exMsg != null ) {
 	      exMsg = exMsg.trim();
@@ -237,8 +237,8 @@ public class TarUnpacker extends AbstractThreadFrm
 		boolean compression )
   {
     super(
-	"JKCEMU tar unpacker",
-	LangUtil.tr( "Entpacken von {0}...", srcFile.getName() ),
+	LangUtil.getText( "file.title.jkcemu_tar_unpacker" ),
+	LangUtil.getText( "file.text.unpacking", srcFile.getName() ),
 	true,
 	true,
 	true );

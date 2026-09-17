@@ -53,7 +53,10 @@ public class MemoryBreakpointDlg extends AbstractBreakpointDlg
 			int                begAddr,
 			int                endAddr )
   {
-    super( debugFrm, "Speicherbereich", breakpoint );
+    super(
+		debugFrm,
+		LangUtil.getText( "debugger.title.memory_range" ),
+		breakpoint );
 
 
     // Fensterinhalt
@@ -68,7 +71,9 @@ public class MemoryBreakpointDlg extends AbstractBreakpointDlg
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    add( GUIFactory.createLabel( "Adresse/Anfangsadresse (hex):" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText(
+			"debugger.label.address_start_address" ) ), gbc );
 
     this.docBegAddr = new HexDocument( 4 );
     this.fldBegAddr = GUIFactory.createTextField( this.docBegAddr, 0 );
@@ -85,7 +90,8 @@ public class MemoryBreakpointDlg extends AbstractBreakpointDlg
     gbc.gridwidth = 1;
     gbc.gridx     = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Endadresse (optional, hex):" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.end_address_optional" ) ), gbc );
 
     this.docEndAddr = new HexDocument( 4 );
     this.fldEndAddr = GUIFactory.createTextField( this.docEndAddr, 0 );
@@ -102,7 +108,8 @@ public class MemoryBreakpointDlg extends AbstractBreakpointDlg
     gbc.gridwidth = 1;
     gbc.gridx     = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Name (optional):" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.name_optional" ) ), gbc );
 
     this.docName  = new LabelDocument();
     this.fldName  = GUIFactory.createTextField( this.docName, 0 );
@@ -120,14 +127,17 @@ public class MemoryBreakpointDlg extends AbstractBreakpointDlg
     gbc.gridwidth     = 1;
     gbc.gridx         = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Anhalten/Loggen beim:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.halt_log" ) ), gbc );
 
-    this.cbOnRead = GUIFactory.createCheckBox( "Lesen", true );
+    this.cbOnRead = GUIFactory.createCheckBox(
+		LangUtil.getText( "debugger.option.read" ), true );
     gbc.anchor     = GridBagConstraints.WEST;
     gbc.gridx++;
     add( this.cbOnRead, gbc );
 
-    this.cbOnWrite = GUIFactory.createCheckBox( "Schreiben", true );
+    this.cbOnWrite = GUIFactory.createCheckBox(
+		LangUtil.getText( "debugger.option.write" ), true );
     gbc.gridx++;
     add( this.cbOnWrite, gbc );
 
@@ -139,9 +149,8 @@ public class MemoryBreakpointDlg extends AbstractBreakpointDlg
     gbc.gridy++;
     add( GUIFactory.createSeparator(), gbc );
 
-    this.cbCheckValue = GUIFactory.createCheckBox(
-		"Zus\u00E4tzlich Wert der Speicherzelle"
-			+ " bzw. zu schreibenden Wert pr\u00FCfen" );
+    this.cbCheckValue = GUIFactory.createCheckBox( LangUtil.getText(
+			"debugger.option.additionally_check_value_memory" ) );
     gbc.insets.bottom = 0;
     gbc.fill          = GridBagConstraints.NONE;
     gbc.weightx       = 0.0;
@@ -165,12 +174,13 @@ public class MemoryBreakpointDlg extends AbstractBreakpointDlg
 						0, 0 );
 
     this.labelValue1 = GUIFactory.createLabel(
-				"Nur anhalten/loggen wenn Wert UND" );
+				LangUtil.getText(
+					"debugger.label.only_halt_log_value" ) );
     panelValue.add( this.labelValue1, gbcValue );
 
     this.docMask = new HexDocument( 2 );
     this.fldMask = GUIFactory.createTextField( this.docMask, 2 );
-    this.fldMask.setToolTipText( LangUtil.tr( "Maske" ) );
+    this.fldMask.setToolTipText( LangUtil.getText( "debugger.text.mask" ) );
     gbcValue.fill        = GridBagConstraints.HORIZONTAL;
     gbcValue.weightx     = 0.5;
     gbcValue.insets.left = 5;
@@ -186,13 +196,15 @@ public class MemoryBreakpointDlg extends AbstractBreakpointDlg
 
     this.docValue = new HexDocument( 2 );
     this.fldValue = GUIFactory.createTextField( this.docValue, 2 );
-    this.fldValue.setToolTipText( LangUtil.tr( "Vergleichswert" ) );
+    this.fldValue.setToolTipText(
+		LangUtil.getText( "debugger.text.comparison_value" ) );
     gbcValue.fill    = GridBagConstraints.HORIZONTAL;
     gbcValue.weightx = 0.5;
     gbcValue.gridx++;
     panelValue.add( this.fldValue, gbcValue );
 
-    this.labelValue2 = GUIFactory.createLabel( "ist." );
+    this.labelValue2 = GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.dot" ) );
     gbcValue.fill    = GridBagConstraints.NONE;
     gbcValue.weightx = 0.0;
     gbcValue.gridx++;

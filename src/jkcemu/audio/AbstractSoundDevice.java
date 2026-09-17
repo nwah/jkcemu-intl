@@ -85,6 +85,6 @@ public abstract class AbstractSoundDevice
   @Override
   public String toString()
   {
-    return LangUtil.tr( this.text );
+    return LangUtil.getText( this.text );
   }
 }

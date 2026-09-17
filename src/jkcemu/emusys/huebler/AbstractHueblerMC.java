@@ -15,6 +15,7 @@ import java.util.Properties;
 import jkcemu.base.EmuSys;
 import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
@@ -65,8 +66,10 @@ public abstract class AbstractHueblerMC
   protected void createIOSystem()
   {
     Z80CPU cpu = this.emuThread.getZ80CPU();
-    this.ctc   = new Z80CTC( "CTC (E/A-Adressen 14h-17h)" );
-    this.pio   = new Z80PIO( "PIO (E/A-Adressen 0Ch-0Fh)" );
+    this.ctc   = new Z80CTC( LangUtil.getText(
+			"huebler.text.ctc_i_o" ) );
+    this.pio   = new Z80PIO( LangUtil.getText(
+			"huebler.text.pio_i_o" ) );
     cpu.setInterruptSources( this.ctc, this.pio );
     cpu.addTStatesListener( this.ctc );
   }

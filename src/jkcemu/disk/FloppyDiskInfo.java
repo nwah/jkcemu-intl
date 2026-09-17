@@ -111,6 +111,6 @@ public class FloppyDiskInfo implements Comparable<FloppyDiskInfo>
   @Override
   public String toString()
   {
-    return this.infoText != null ? LangUtil.tr( this.infoText ) : "";
+    return this.infoText != null ? LangUtil.getText( this.infoText ) : "";
   }
 }

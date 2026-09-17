@@ -17,6 +17,7 @@ package jkcemu.audio;
 
 import java.io.IOException;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class BitSampleBuffer
@@ -262,8 +263,7 @@ public class BitSampleBuffer
 	this.data = null;
 	System.gc();
 	throw new IOException(
-		"Kein Speicher mehr f\u00FCr die Aufzeichnung\n"
-				+ "der Audiodaten verf\u00FCgbar." );
+		LangUtil.getText( "audio.error.no_more_memory" ) );
       }
     }
     return status;

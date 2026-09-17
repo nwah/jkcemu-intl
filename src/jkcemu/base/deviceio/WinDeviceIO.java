@@ -103,7 +103,7 @@ public class WinDeviceIO
     public long skip( long n ) throws IOException
     {
       throw new IOException(
-		"WinDeviceIO.WinInputStream.skip(...) nicht implementiert" );
+		LangUtil.getText( "deviceio.error.windeviceio" ) );
     }
   };
 
@@ -1068,11 +1068,8 @@ public class WinDeviceIO
     }
     if( libVersion < REQUIRED_LIB_VERSION ) {
       StringBuilder buf = new StringBuilder( 256 );
-      buf.append( LangUtil.tr(
-		"Die Bibliothek ''{0}''\n"
-			+ "ist veraltet und muss aktualisiert werden.\n"
-			+ "Solange das nicht geschehen ist, stehen einige"
-			+ " Funktionen nicht zur Verf\u00FCgung.",
+      buf.append( LangUtil.getText(
+		"deviceio.text.library_outdated_updated",
 		libFile.getPath() ) );
       if( (updFile != null) && libCopyable ) {
 	/*
@@ -1082,19 +1079,11 @@ public class WinDeviceIO
 	createEmptyFile( updFile );
 	libUpdRequested = true;
 	if( updFile.exists() ) {
-	  buf.append( LangUtil.tr(
-		"\n\nDie Bibliothek wird beim n\u00E4chsten"
-			+ " Start von JKCEMU aktualisiert.\n"
-			+ "Beenden Sie bitte alle laufenden Instanzen"
-			+ " des Emulators und starten Sie"
-			+ " anschlie\u00DFend neu." ) );
+	  buf.append( LangUtil.getText(
+		"deviceio.text.library_updated_next" ) );
 	} else {
-	  buf.append( LangUtil.tr(
-		"\n\nZum Aktualisieren beenden Sie bitte JKCEMU"
-			+ " und l\u00F6schen danach\n"
-			+ "die Bibliotheksdatei."
-			+ " Anschlie\u00DFend k\u00F6nnen Sie den Emulator"
-			+ " neu starten." ) );
+	  buf.append( LangUtil.getText(
+		"deviceio.text.update_please_quit" ) );
 	  if( DesktopHelper.isOpenSupported() ) {
 	    File configDir = Main.getConfigDir();
 	    if( configDir != null ) {
@@ -1102,18 +1091,12 @@ public class WinDeviceIO
 		DesktopHelper.open( configDir );
 		String fileName = libFile.getName();
 		if( fileName != null ) {
-		  buf.append( LangUtil.tr(
-			"\n\nIn dem gerade neu ge\u00F6ffneten Fenster"
-				+ " k\u00F6nnen Sie die Datei {0}\n"
-				+ "l\u00F6schen, aber erst, nachdem alle"
-				+ " JKCEMU-Instanzen beendet wurden.",
+		  buf.append( LangUtil.getText(
+			"deviceio.text.window_just_opened_delete_file",
 			fileName ) );
 		} else {
-		  buf.append( LangUtil.tr(
-			"\n\nIn dem gerade neu ge\u00F6ffneten Fenster"
-				+ " k\u00F6nnen Sie die Bibliotheksdatei\n"
-				+ "l\u00F6schen, aber erst, nachdem alle"
-				+ " JKCEMU-Instanzen beendet wurden." ) );
+		  buf.append( LangUtil.getText(
+			"deviceio.text.window_just_opened_delete_library" ) );
 		}
 	      }
 	      catch( IOException ex ) {}
@@ -1178,11 +1161,8 @@ public class WinDeviceIO
 	      }
 	      if( errCode != 0 ) {
 		StringBuilder buf = new StringBuilder( 256 );
-		buf.append( LangUtil.tr(
-			"Das auf dem Datentr\u00E4ger liegende"
-				+ " Laufwerk {0}\n"
-				+ "konnte nicht aus dem Dateisystem"
-				+ " ausgeh\u00E4ngt werden.",
+		buf.append( LangUtil.getText(
+			"deviceio.text.drive_volume_not_unmounted",
 			driveName ) );
 		String errMsg = getErrorMsg( errCode );
 		if( errMsg != null ) {
@@ -1435,22 +1415,14 @@ public class WinDeviceIO
   {
     StringBuilder msgBuf = new StringBuilder( 1024 );
     msgBuf.append( msg );
-    msgBuf.append( LangUtil.tr(
-	"\nDadurch ist aktuell der Zugriff auf physische"
-		+ " Datentr\u00E4ger, Joysticks und andere\n"
-		+ "am Emulatorrechner angeschlossene Ger\u00E4te nicht"
-		+ " oder nur eingeschr\u00E4nkt m\u00F6glich.\n"
-		+ "Ansonsten ist JKCEMU voll funktionsf\u00E4hig.\n\n"
-		+ "M\u00F6glicherweise stimmt etwas mit den Dateien"
-		+ " oder den Berechtigungen im\n"
-		+ "Konfigurationsverzeichnis nicht"
-		+ " (siehe JKCEMU-Einstellungen, Bereich Sonstiges,"
-		+ " ganz unten)." ) );
+    msgBuf.append( LangUtil.getText(
+	"deviceio.text.result_access_physical" ) );
     String exMsg = t.getMessage();
     if( exMsg != null ) {
       if( !exMsg.isEmpty() ) {
 	msgBuf.append( "\n\n" );
-	msgBuf.append( LangUtil.tr( "Detaillierte Fehlermeldung:" ) );
+	msgBuf.append( LangUtil.getText(
+			"deviceio.text.detailed_error_message" ) );
 	msgBuf.append( '\n' );
 	msgBuf.append( exMsg );
       }
@@ -1470,16 +1442,12 @@ public class WinDeviceIO
     }
     StringBuilder buf = new StringBuilder( 1024 );
     if( libUpdRequested ) {
-      buf.append( LangUtil.tr(
-		"Die Bibliothek ''{0}''\n"
-			+ "konnte nicht geladen werden und wird deshalb"
-			+ " beim n\u00E4chsten Start von JKCEMU"
-			+ " aktualisiert.",
+      buf.append( LangUtil.getText(
+		"deviceio.text.library_not_loaded_therefore",
 		libFile.getPath() ) );
     } else {
-      buf.append( LangUtil.tr(
-		"Die Bibliothek ''{0}''\n"
-			+ "konnte nicht geladen werden.",
+      buf.append( LangUtil.getText(
+		"deviceio.text.library_not_loaded",
 		libFile.getPath() ) );
     }
     showLibError( buf.toString(), t );
@@ -1509,7 +1477,8 @@ public class WinDeviceIO
 
   private static void throwLibCorrupt() throws IOException
   {
-    throw new IOException( "DeviceIO-Bibliothek korrupt" );
+    throw new IOException( LangUtil.getText(
+			"deviceio.error.deviceio_library_corrupt" ) );
   }
 
 

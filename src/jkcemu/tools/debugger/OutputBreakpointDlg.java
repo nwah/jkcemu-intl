@@ -44,7 +44,10 @@ public class OutputBreakpointDlg extends AbstractBreakpointDlg
 			DebugFrm           debugFrm,
 			AbstractBreakpoint breakpoint )
   {
-    super( debugFrm, "Ausgabetor", breakpoint );
+    super(
+		debugFrm,
+		LangUtil.getText( "debugger.section.output_port" ),
+		breakpoint );
 
 
     // Fensterinhalt
@@ -59,7 +62,8 @@ public class OutputBreakpointDlg extends AbstractBreakpointDlg
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    add( GUIFactory.createLabel( "Ausgabeadresse (8 oder 16 Bit):" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.output_address_8" ) ), gbc );
 
     this.docBegPort = new HexDocument( 4 );
     this.fldBegPort = GUIFactory.createTextField( this.docBegPort, 4 );
@@ -73,7 +77,9 @@ public class OutputBreakpointDlg extends AbstractBreakpointDlg
     gbc.weightx = 0.0;
     gbc.gridx   = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Bis Ausgabeadresse (optional):" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText(
+			"debugger.label.output_address_optional" ) ), gbc );
 
     this.docEndPort = new HexDocument( 4 );
     this.fldEndPort = GUIFactory.createTextField( this.docEndPort, 4 );
@@ -89,8 +95,8 @@ public class OutputBreakpointDlg extends AbstractBreakpointDlg
     gbc.gridy++;
     add( GUIFactory.createSeparator(), gbc );
 
-    this.cbCheckValue = GUIFactory.createCheckBox(
-		"Zus\u00E4tzlich auszugebenden Wert pr\u00FCfen" );
+    this.cbCheckValue = GUIFactory.createCheckBox( LangUtil.getText(
+			"debugger.option.additionally_check_value_output" ) );
     gbc.insets.bottom = 0;
     gbc.fill          = GridBagConstraints.NONE;
     gbc.weightx       = 0.0;
@@ -115,12 +121,13 @@ public class OutputBreakpointDlg extends AbstractBreakpointDlg
                                                 0, 0 );
 
     this.labelValue1 = GUIFactory.createLabel(
-				"Nur anhalten/loggen wenn Wert UND" );
+				LangUtil.getText(
+					"debugger.label.only_halt_log_value" ) );
     panelValue.add( this.labelValue1, gbcValue );
 
     this.docMask = new HexDocument( 2 );
     this.fldMask = GUIFactory.createTextField( this.docMask, 2 );
-    this.fldMask.setToolTipText( LangUtil.tr( "Maske" ) );
+    this.fldMask.setToolTipText( LangUtil.getText( "debugger.text.mask" ) );
     gbcValue.fill        = GridBagConstraints.HORIZONTAL;
     gbcValue.weightx     = 0.5;
     gbcValue.insets.left = 5;
@@ -136,13 +143,15 @@ public class OutputBreakpointDlg extends AbstractBreakpointDlg
 
     this.docValue = new HexDocument( 2 );
     this.fldValue = GUIFactory.createTextField( this.docValue, 2 );
-    this.fldValue.setToolTipText( LangUtil.tr( "Vergleichswert" ) );
+    this.fldValue.setToolTipText(
+		LangUtil.getText( "debugger.text.comparison_value" ) );
     gbcValue.fill    = GridBagConstraints.HORIZONTAL;
     gbcValue.weightx = 0.5;
     gbcValue.gridx++;
     panelValue.add( this.fldValue, gbcValue );
 
-    this.labelValue2 = GUIFactory.createLabel( "ist." );
+    this.labelValue2 = GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.dot" ) );
     gbcValue.fill    = GridBagConstraints.NONE;
     gbcValue.weightx = 0.0;
     gbcValue.gridx++;

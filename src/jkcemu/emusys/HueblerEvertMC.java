@@ -13,6 +13,7 @@ import jkcemu.base.CharRaster;
 import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.emusys.huebler.AbstractHueblerMC;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80MemView;
 import z80emu.Z80PIO;
 
@@ -20,7 +21,7 @@ import z80emu.Z80PIO;
 public class HueblerEvertMC extends AbstractHueblerMC
 {
   public static final String SYSNAME     = "HueblerEvertMC";
-  public static final String SYSTEXT     = "H\u00FCbler/Evert-MC";
+  public static final String SYSTEXT     = "emusys.text.huebler_evert_mc";
   public static final String PROP_PREFIX = "jkcemu.hemc.";
 
   public static final int     DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX = 4000;
@@ -59,7 +60,7 @@ public class HueblerEvertMC extends AbstractHueblerMC
     this.osFile    = null;
     this.ramVideo  = new byte[ 0x0800 ];
     this.ramStatic = new byte[ 0x0400 ];
-    this.pio2      = new Z80PIO( "PIO (E/A-Adressen 10h-13h)" );
+    this.pio2      = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_10h" ) );
     createIOSystem();
     this.emuThread.getZ80CPU().setInterruptSources(
 					this.ctc,
@@ -250,7 +251,7 @@ public class HueblerEvertMC extends AbstractHueblerMC
   @Override
   public String getTitle()
   {
-    return SYSTEXT;
+    return LangUtil.getText( SYSTEXT );
   }
 
 

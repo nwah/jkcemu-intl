@@ -9,6 +9,7 @@
 package jkcemu.programming.basic;
 
 import java.text.CharacterIterator;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 import jkcemu.programming.PrgUtil;
 
@@ -302,7 +303,8 @@ public class BasicUtil
 	ch = iter.next();
       }
       if( ch != delimiter ) {
-	compiler.putWarning( "String-Literal nicht geschlossen" );
+	compiler.putWarning( LangUtil.getText(
+			"basic.msg.string_literal_not_closed" ) );
       }
       iter.next();
     }
@@ -588,7 +590,8 @@ public class BasicUtil
       throwNumberExpected();
     }
     if( !(value instanceof Integer) ) {
-      throw new PrgException( "Integer-Zahl erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.integer_number_expected" ) );
     }
     return value.intValue();
   }
@@ -614,7 +617,8 @@ public class BasicUtil
     if( BasicUtil.checkKeyword( iter, "AS" ) ) {
       String typeName = checkIdentifier( iter );
       if( typeName == null ) {
-	throw new PrgException( "INTEGER, LONG oder STRING erwartet" );
+	throw new PrgException( LangUtil.getText(
+			"basic.error.integer_long_string" ) );
       }
       switch( typeName ) {
 	case "DECIMAL":
@@ -668,13 +672,14 @@ public class BasicUtil
   {
     Number usrNum = readNumber( iter );
     if( usrNum == null ) {
-      throw new PrgException( "Nummer der USR-Funktion erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.number_usr_function" ) );
     }
     if( !(usrNum instanceof Integer)
 	|| (usrNum.intValue() < 0) || (usrNum.intValue() > 9) )
     {
-      throw new PrgException(
-		"Ung\u00FCltige USR-Funktionsnummer (0...9 erlaubt)" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.invalid_usr_function" ) );
     }
     return usrNum.intValue();
   }
@@ -810,76 +815,84 @@ public class BasicUtil
 
   public static void throwBasicLineExprExpected() throws PrgException
   {
-    throw new PrgException( "BASIC-Zeilennummer oder Marke erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.basic_line_number_label" ) );
   }
 
 
   public static void throwDataTypeMismatch() throws PrgException
   {
-    throw new PrgException( "Falscher Datentyp" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.wrong_data_type" ) );
   }
 
 
   public static void throwDecExprExpected() throws PrgException
   {
-    throw new PrgException( "Decimal-Ausdruck erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.decimal_expression" ) );
   }
 
 
   public static void throwDimTooSmall() throws PrgException
   {
-    throw new PrgException( "Dimension zu klein" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.dimension_small" ) );
   }
 
 
   public static void throwDivisionByZero() throws PrgException
   {
-    throw new PrgException( "Division durch 0" );
+    throw new PrgException( LangUtil.getText( "common.error.division_0" ) );
   }
 
 
   public static void throwHexDigitExpected() throws PrgException
   {
-    throw new PrgException( "Hexadezimalziffer erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.hexadecimal_digit" ) );
   }
 
 
   public static void throwIndexOutOfRange() throws PrgException
   {
-    throw new PrgException(
-		"Index au\u00DFerhalb des g\u00FCltigen Bereichs" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.index_outside_valid" ) );
   }
 
 
   public static void throwInt2ExprExpected() throws PrgException
   {
-    throw new PrgException( "Integer-Ausdruck erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.integer_expression" ) );
   }
 
 
   public static void throwIntLongOrDecExprExpected() throws PrgException
   {
-    throw new PrgException(
-		"Integer-, Long- oder Decimal-Ausdruck erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.integer_long_decimal" ) );
   }
 
 
   public static void throwIntLongOrSingleExprExpected() throws PrgException
   {
-    throw new PrgException(
-		"Integer-, Long- oder Single-Ausdruck erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.integer_long_single" ) );
   }
 
 
   public static void throwIntOrLongExprExpected() throws PrgException
   {
-    throw new PrgException( "Integer- oder Long-Ausdruck erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.integer_long_expression" ) );
   }
 
 
   public static void throwIntOrLongVarExpected() throws PrgException
   {
-    throw new PrgException( "Integer- oder Long-Ausdruck erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.integer_long_expression" ) );
   }
 
 
@@ -894,71 +907,78 @@ public class BasicUtil
 
   public static void throwIOChannelNumOutOfRange() throws PrgException
   {
-    throw new PrgException(
-		"Kanalnummer au\u00DFerhalb des g\u00FCltigen Bereichs" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.channel_number_outside" ) );
   }
 
 
   public static void throwNoConstExpr() throws PrgException
   {
-    throw new PrgException( "Kein konstanter Ausdruck" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.not_constant_expression" ) );
   }
 
 
   public static void throwNumberExpected() throws PrgException
   {
-    throw new PrgException( "Zahl erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.number_expected" ) );
   }
 
 
   public static void throwNumberTooBig() throws PrgException
   {
-    throw new PrgException( "Zahl zu gro\u00DF" );
+    throw new PrgException( LangUtil.getText( "common.error.number_large" ) );
   }
 
 
   public static void throwNumericExprExpected() throws PrgException
   {
-    throw new PrgException( "Numerischer Ausdruck erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.numeric_expression" ) );
   }
 
 
   public static void throwOp1DataTypeNotAllowed() throws PrgException
   {
-    throw new PrgException( "Operation auf der linken Seite"
-			+ " mit diesem Datentyp nicht erlaubt" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.operation_left_side" ) );
   }
 
 
   public static void throwOp2DataTypeNotAllowed() throws PrgException
   {
-    throw new PrgException( "Operation auf der rechten Seite"
-			+ " mit diesem Datentyp nicht erlaubt" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.operation_right_side" ) );
   }
 
 
   public static void throwStringExprExpected() throws PrgException
   {
-    throw new PrgException( "String-Ausdruck erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.string_expression" ) );
   }
 
 
   public static void throwStringLitOrVarExpected() throws PrgException
   {
-    throw new PrgException( "String-Literal oder String-Variable erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.string_literal_string" ) );
   }
 
 
   public static void throwStringVarExpected() throws PrgException
   {
-    throw new PrgException( "String-Variable erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.string_variable_expected" ) );
   }
 
 
   public static void throwUnexpectedChar( char ch ) throws PrgException
   {
     if( ch == CharacterIterator.DONE ) {
-      throw new PrgException( "Unerwartetes Ende der Zeile" );
+      throw new PrgException( LangUtil.getText(
+			"basic.error.unexpected_end_line" ) );
     }
     StringBuilder buf = new StringBuilder( 32 );
     if( ch >= '\u0020' ) {
@@ -979,13 +999,15 @@ public class BasicUtil
 
   public static void throwVarExpected() throws PrgException
   {
-    throw new PrgException( "Variable erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.variable_expected" ) );
   }
 
 
   public static void throwVarNameExpected() throws PrgException
   {
-    throw new PrgException( "Name einer Variable erwartet" );
+    throw new PrgException( LangUtil.getText(
+			"basic.error.name_variable_expected" ) );
   }
 
 

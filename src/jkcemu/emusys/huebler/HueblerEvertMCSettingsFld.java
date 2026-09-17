@@ -25,6 +25,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.HueblerEvertMC;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -60,7 +61,8 @@ public class HueblerEvertMCSettingsFld extends AbstractSettingsFld
 		propPrefix,
 		HueblerEvertMC.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 		true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -70,12 +72,14 @@ public class HueblerEvertMCSettingsFld extends AbstractSettingsFld
 		AutoInputCharSet.getStdCharSet(),
 		HueblerEvertMC.DEFAULT_SWAP_KEY_CHAR_CASE,
 		HueblerEvertMC.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -87,7 +91,7 @@ public class HueblerEvertMCSettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.cbCatchPrintCalls = GUIFactory.createCheckBox(
-		"Betriebssystemaufrufe f\u00FCr Druckerausgaben abfangen",
+		LangUtil.getText( "emusys.option.intercept_operating" ),
 		true );
 
     this.tabEtc.add( this.cbCatchPrintCalls, gbcEtc );
@@ -102,7 +106,7 @@ public class HueblerEvertMCSettingsFld extends AbstractSettingsFld
     this.fldAltOS = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + HueblerEvertMC.PROP_OS_PREFIX,
-		"Alternatives Monitorprogramm (F000h-FBFFh):" );
+		LangUtil.getText( "huebler.text.alternative_monitor" ) );
     gbcEtc.insets.top    = 5;
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridy++;
@@ -111,7 +115,7 @@ public class HueblerEvertMCSettingsFld extends AbstractSettingsFld
     this.fldAltFont = new ROMFileSettingsFld(
 				settingsFrm,
 				propPrefix + HueblerEvertMC.PROP_FONT_PREFIX,
-				"Alternativer Zeichensatz:" );
+				LangUtil.getText( "emusys.text.alternative_character" ) );
     gbcEtc.gridy++;
     this.tabEtc.add( this.fldAltFont, gbcEtc );
 

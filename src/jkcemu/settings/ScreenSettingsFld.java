@@ -30,6 +30,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.ScreenFld;
 import jkcemu.base.ScreenFrm;
+import jkcemu.lang.LangUtil;
 
 
 public class ScreenSettingsFld
@@ -62,7 +63,8 @@ public class ScreenSettingsFld
 					new Insets( 10, 5, 10, 5 ),
 					0, 0 );
 
-    panel.add( GUIFactory.createLabel( "Helligkeit [%]:" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.brightness" ) ), gbc );
 
     this.sliderBrightness = GUIFactory.createSlider(
 					SwingConstants.HORIZONTAL,
@@ -86,7 +88,8 @@ public class ScreenSettingsFld
     gbc.gridwidth = 1;
     gbc.gridx     = 0;
     gbc.gridy++;
-    panel.add( GUIFactory.createLabel( "Rand:" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.border" ) ), gbc );
 
     this.spinnerModelMargin = new SpinnerNumberModel(
 					ScreenFld.DEFAULT_MARGIN,
@@ -102,12 +105,14 @@ public class ScreenSettingsFld
 
     gbc.fill = GridBagConstraints.NONE;
     gbc.gridx++;
-    panel.add( GUIFactory.createLabel( "Pixel" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.pixels" ) ), gbc );
 
     gbc.anchor = GridBagConstraints.EAST;
     gbc.gridx  = 0;
     gbc.gridy++;
-    panel.add( GUIFactory.createLabel( "Aktualisierungszyklus:" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.refresh_cycle" ) ), gbc );
 
     this.comboScreenRefresh = GUIFactory.createComboBox();
     this.comboScreenRefresh.setEditable( false );
@@ -124,11 +129,11 @@ public class ScreenSettingsFld
 
     gbc.fill = GridBagConstraints.NONE;
     gbc.gridx++;
-    panel.add( GUIFactory.createLabel( "ms" ), gbc );
+    panel.add( GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.ms" ) ), gbc );
 
     this.cbDirectCopyPaste = GUIFactory.createCheckBox(
-		"Direktes \"Kopieren & Einf\u00FCgen\" durch Dr\u00FCcken"
-			+ " der mittleren Maustaste",
+		LangUtil.getText( "settings.option.direct_copy_paste" ),
 		true );
     gbc.anchor     = GridBagConstraints.CENTER;
     gbc.insets.top = 10;

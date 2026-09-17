@@ -12,6 +12,7 @@ import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.PlainDocument;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.assembler.AsmLabel;
 import jkcemu.text.TextUtil;
 
@@ -35,9 +36,8 @@ public class LabelDocument extends PlainDocument
       if( s != null ) {
 	if( !s.isEmpty() ) {
 	  if( !AsmLabel.isIdentifierStart( s.charAt( 0 ) ) ) {
-	    throw new UserInputException(
-			"Name muss mit einem Buchstaben oder einem"
-				+ " Unterstrich beginnen." );
+	    throw new UserInputException( LangUtil.getText(
+				"debugger.error.name_begin_letter" ) );
 	  }
 	  rv = s;
 	}

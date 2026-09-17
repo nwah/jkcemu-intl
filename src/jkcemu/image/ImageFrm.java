@@ -84,7 +84,7 @@ public class ImageFrm extends AbstractImageFrm implements
 						MouseMotionListener,
 						RecentFilesMngr.Listener
 {
-  public static final String TITLE = Main.APPNAME + " Bildbetrachter";
+  public static final String TITLE = "image.title.jkcemu_image_viewer";
 
   private static final String PROP_AUTORESIZE = "auto_resize";
   private static final String PROP_BACKGROUND = "background";
@@ -95,27 +95,27 @@ public class ImageFrm extends AbstractImageFrm implements
   private static final String HELP_PAGE       = "/help/tools/imageviewer.htm";
 
   private static final String ACTION_HISTORY_PREFIX = "history.";
-  private static final String DEFAULT_STATUS_TEXT   = "Bereit";
+  private static final String DEFAULT_STATUS_TEXT   = "common.text.ready";
   private static final int MAX_CONTENT_SIZE_PERCENT = 75;
 
   private static final String TEXT_A5105_FMT =
-			"A5105-Format (320x200, 16 Farben)";
+			"image.text.a5105_format_320x200";
   private static final String TEXT_AC1_ACC_FMT =
-			"AC1-ACC-Blockgrafik (384x256, monochrom)";
+			"image.text.ac1_acc_block";
   private static final String TEXT_AC1_SCCH_FMT =
-			"AC1-SCCH-Blockgrafik (384x256, monochrom)";
+			"image.text.ac1_scch_block";
   private static final String TEXT_AC1_2010_FMT =
-			"AC1-2010-Blockgrafik (384x256, monochrom)";
+			"image.text.ac1_2010_block";
   private static final String TEXT_KC85MONO_FMT =
-			"KC85/2..5-Format ohne Farben (320x256, monochrom)";
+			"image.text.kc85_2_5";
   private static final String TEXT_KC854HIRES_FMT =
-			"KC85/4,5-HIRES-Format (320x256, 4 Farben)";
+			"image.text.kc85_4_5_hires_format";
   private static final String TEXT_LLC2HIRES_FMT =
-			"LLC2-HIRES-Format (512x256, monochrom)";
+			"image.text.llc2_hires_format";
   private static final String TEXT_Z1013_FMT =
-			"Z1013-Blockgrafik (256x256, monochrom)";
+			"image.text.z1013_block_graphics";
   private static final String TEXT_Z9001_FMT =
-			"Z9001-Blockgrafik (320x192, monochrom)";
+			"image.text.z9001_block_graphics";
 
 
   private enum ExpFmt {
@@ -415,7 +415,7 @@ public class ImageFrm extends AbstractImageFrm implements
   public void mouseDragged( MouseEvent e )
   {
     if( e.getComponent() == this.imageFld ) {
-      String text     = DEFAULT_STATUS_TEXT;
+      String text     = LangUtil.getText( DEFAULT_STATUS_TEXT );
       Point  curPos   = toUnscaledPoint( e );
       Point  startPos = this.selectionStart;
       if( startPos != null ) {
@@ -469,7 +469,7 @@ public class ImageFrm extends AbstractImageFrm implements
     if( (e.getComponent() == this.imageFld)
 	&& (this.imageFld.getSelection() == null) )
     {
-      String        text  = DEFAULT_STATUS_TEXT;
+      String        text  = LangUtil.getText( DEFAULT_STATUS_TEXT );
       BufferedImage image = getImage();
       if( image != null ) {
 	int w = image.getWidth();
@@ -945,7 +945,7 @@ public class ImageFrm extends AbstractImageFrm implements
   public void mouseExited( MouseEvent e )
   {
     if( e.getComponent() == this.imageFld )
-      this.labelStatus.setText( DEFAULT_STATUS_TEXT );
+      this.labelStatus.setText( LangUtil.getText( DEFAULT_STATUS_TEXT ) );
   }
 
 
@@ -955,7 +955,7 @@ public class ImageFrm extends AbstractImageFrm implements
     if( e.getComponent() == this.imageFld ) {
       this.imageFld.setSelection( null );
       this.imageFld.requestFocus();
-      this.labelStatus.setText( DEFAULT_STATUS_TEXT );
+      this.labelStatus.setText( LangUtil.getText( DEFAULT_STATUS_TEXT ) );
     }
   }
 
@@ -1040,7 +1040,7 @@ public class ImageFrm extends AbstractImageFrm implements
 		entry.getMode() == ImageEntry.Mode.INDEXED_COLORS ?
 			ImageEntry.Mode.INDEXED_COLORS 
 			: ImageEntry.Mode.UNSPECIFIED,
-		"Helligkeit,  Kontrast, Farben eingestellt" );
+		LangUtil.getText( "image.text.brightness_contrast" ) );
       } else {
 	restoreView();
       }
@@ -1060,7 +1060,7 @@ public class ImageFrm extends AbstractImageFrm implements
 		entry.getSharedExifDataCopyForChangedImage(),
 		ImageEntry.Action.CHANGED,
 		ImageEntry.Mode.INDEXED_COLORS,
-		"Farbpalette ge\u00E4ndert" );
+		LangUtil.getText( "image.text.color_palette_changed" ) );
       } else {
 	restoreView();
       }
@@ -1106,13 +1106,7 @@ public class ImageFrm extends AbstractImageFrm implements
       {
 	BaseDlg.showSuppressableInfoDlg(
 		this,
-		LangUtil.tr(
-			"M\u00F6glicherweise m\u00FCssen Sie das Bild aufhellen"
-				+ " und den Kontrast erh\u00F6hen,"
-				+ " um die Konturen zu sehen.\n"
-				+ "Auch die Funktion \'\'{0}\'\' \u2192 \'\'{1}\'\'\n"
-				+ "kann f\u00FCr die weitere Bearbeitung"
-				+ " n\u00FCtzlich sein.",
+		LangUtil.getText( "image.text.brighten_image_increase",
 			this.mnuToBW.getText(),
 			this.mnuThreshold.getText() ) );
       }
@@ -1131,7 +1125,8 @@ public class ImageFrm extends AbstractImageFrm implements
 			exifData,
 			ImageEntry.Action.CHANGED,
 			entry.getMode(),
-			"Zusatzinformationen ge\u00E4ndert" );
+			LangUtil.getText(
+				"image.text.additional_information_changed" ) );
       }
     }
   }
@@ -1143,15 +1138,15 @@ public class ImageFrm extends AbstractImageFrm implements
     if( entry != null ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie die an dem Bild angeh\u00E4ngten\n"
-			+ "Zusatzinformationen (EXIF-Daten) entfernen?" ) )
+		LangUtil.getText( "image.msg.want_remove_additional" ) ) )
       {
 	showSameBoundsImage(
 			entry.getImage(),
 			null,
 			ImageEntry.Action.CHANGED,
 			entry.getMode(),
-			"Zusatzinformationen entfernt" );
+			LangUtil.getText(
+				"image.text.additional_information_removed" ) );
       }
     }
   }
@@ -1289,18 +1284,7 @@ public class ImageFrm extends AbstractImageFrm implements
 	if( !isUnrotated() ) {
 	  BaseDlg.showInfoDlg(
 		this,
-		LangUtil.tr(
-			"Das Bild wird ohne die gerade angezeigte Drehung"
-				+ " exportiert,\n"
-				+ "da bei dem Dateiformat Breite und"
-				+ " H\u00F6he nicht \u00E4nderbar sind.\n"
-				+ "Wenn Sie das Bild gedreht exportieren"
-				+ " m\u00F6chten,\n"
-				+ "m\u00FCssen Sie es zuerst drehen,"
-				+ " und dann mit der entsprechenden\n"
-				+ "Funktion im Men\u00FC \"{0}\""
-				+ " \u2192 \"{1}\"\n"
-				+ "in das gew\u00FCnschte Format umwandeln.",
+		LangUtil.getText( "image.text.image_exported_without",
 			this.mnuEdit.getText(),
 			this.mnuConvert.getText() ) );
 	}
@@ -1417,18 +1401,10 @@ public class ImageFrm extends AbstractImageFrm implements
       } else {
 	BaseDlg.showErrorDlg(
 		this,
-		LangUtil.tr(
-			"Sie m\u00FCssen das Bild zuerst mit der entsprechenden"
-				+ " Funktion\n"
-				+ "im Men\u00FC \"{0}\" \u2192 \"{1}\"\n"
-				+ "in das entsprechende Format umwandeln,\n"
-				+ "bevor Sie es in dem Format exportieren"
-				+ " k\u00F6nnen.\n"
-				+ "Lesen Sie dazu bitte auch die Hinweise"
-				+ " in der Hilfe!",
+		LangUtil.getText( "image.text.first_convert_image",
 			this.mnuEdit.getText(),
 			this.mnuConvert.getText() ),
-		"Exportieren" );
+		LangUtil.getText( "common.action.export" ) );
       }
     }
   }
@@ -1458,7 +1434,8 @@ public class ImageFrm extends AbstractImageFrm implements
 			entry.getSharedExifDataCopyForChangedImage(),
 			ImageEntry.Action.HORIZONTAL_FLIPPED,
 			entry.getMode(),
-			"Horizontal gespiegelt" );
+			LangUtil.getText(
+				"image.text.flipped_horizontally" ) );
 	}
       }
     }
@@ -1482,7 +1459,7 @@ public class ImageFrm extends AbstractImageFrm implements
 			entry.getSharedExifDataCopyForChangedImage(),
 			ImageEntry.Action.VERTICAL_FLIPPED,
 			entry.getMode(),
-			"Vertikal gespiegelt" );
+			LangUtil.getText( "image.text.flipped_vertically" ) );
 	}
       }
     }
@@ -1532,7 +1509,7 @@ public class ImageFrm extends AbstractImageFrm implements
     if( instance.confirmImageSaved() ) {
       File file = FileUtil.showFileOpenDlg(
 			this,
-			"Bilddatei \u00F6ffnen",
+			LangUtil.getText( "image.title.open_image_file" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_IMAGE ),
 			ImageLoader.createFileFilter() );
@@ -1763,7 +1740,7 @@ public class ImageFrm extends AbstractImageFrm implements
 			entry.getSharedExifDataCopyForChangedImage(),
 			ImageEntry.Action.CHANGED,
 			entry.getMode(),
-			"Ecken abgerundet" );
+			LangUtil.getText( "image.text.corners_rounded" ) );
 	}
 	this.lastRoundTopPixels    = nTopPixels;
 	this.lastRoundBottomPixels = nBottomPixels;
@@ -1800,8 +1777,7 @@ public class ImageFrm extends AbstractImageFrm implements
       if( entry.getAction() == ImageEntry.Action.SOFTENED ) {
 	if( BaseDlg.showSuppressableConfirmDlg(
 		this,
-		"Statt zu sch\u00E4rfen wird der letzte Beabeitungsschritt"
-			+ " \'Weichzeichnen\' zur\u00FCckgenommen." ) )
+		LangUtil.getText( "image.msg.instead_sharpening_last" ) ) )
 	{
 	  doUndo();
 	}
@@ -1814,7 +1790,7 @@ public class ImageFrm extends AbstractImageFrm implements
 			entry.getSharedExifDataCopyForChangedImage(),
 			ImageEntry.Action.SHARPENED,
 			entry.getMode(),
-			"Gesch\u00E4rft" );
+			LangUtil.getText( "image.text.sharpened" ) );
 	} else {
 	  restoreView();
 	}
@@ -1830,8 +1806,7 @@ public class ImageFrm extends AbstractImageFrm implements
       if( entry.getAction() == ImageEntry.Action.SHARPENED ) {
 	if( BaseDlg.showSuppressableConfirmDlg(
 		this,
-		"Statt weichzuzeichnen wird der letzte Beabeitungsschritt"
-			+ " \'Sch\u00E4rfen\' zur\u00FCckgenommen." ) )
+		LangUtil.getText( "image.msg.instead_blurring_last" ) ) )
 	{
 	  doUndo();
 	}
@@ -1858,7 +1833,8 @@ public class ImageFrm extends AbstractImageFrm implements
       if( entry.isGray() || entry.isMonochrome() ) {
 	BaseDlg.showInfoDlg(
 			this,
-			"Das Bild ist bereits in Graustufen" );
+			LangUtil.getText(
+				"image.msg.image_already_grayscale" ) );
       } else {
 	BufferedImage newImg = GrayScaler.toGray( this, entry.getImage() );
 	if( newImg != null ) {
@@ -1867,7 +1843,7 @@ public class ImageFrm extends AbstractImageFrm implements
 			entry.getSharedExifDataCopyForChangedImage(),
 			ImageEntry.Action.CHANGED,
 			ImageEntry.Mode.GRAY,
-			"Graustufen" );
+			LangUtil.getText( "image.action.grayscale" ) );
 	}
       }
     }
@@ -1893,7 +1869,7 @@ public class ImageFrm extends AbstractImageFrm implements
 			entry.getSharedExifDataCopyForChangedImage(),
 			ImageEntry.Action.CHANGED,
 			ImageEntry.Mode.MONOCHROME,
-			"Monochrom" );
+			LangUtil.getText( "image.text.monochrome" ) );
 	}
       }
     }
@@ -1915,7 +1891,7 @@ public class ImageFrm extends AbstractImageFrm implements
 			entry.getSharedExifDataCopyForChangedImage(),
 			ImageEntry.Action.CHANGED,
 			ImageEntry.Mode.MONOCHROME,
-			"Monochrom" );
+			LangUtil.getText( "image.text.monochrome" ) );
 	} else {
 	  restoreView();
 	}
@@ -1969,7 +1945,7 @@ public class ImageFrm extends AbstractImageFrm implements
 			entry.getSharedExifDataCopyForChangedImage(),
 			ImageEntry.Action.INVERTED,
 			entry.getMode(),			
-			"Invertiert" );
+			LangUtil.getText( "image.text.inverted" ) );
 	  }
 	} else {
 	  byte[] elements = new byte[ 256 ];
@@ -2004,7 +1980,8 @@ public class ImageFrm extends AbstractImageFrm implements
 			entry.getSharedExifDataCopyForChangedImage(),
 			ImageEntry.Action.CHANGED,
 			ImageEntry.Mode.UNSPECIFIED,
-			"Transparenz entfernt" );
+			LangUtil.getText(
+				"image.text.transparency_removed" ) );
 	}
       }
     }
@@ -2018,7 +1995,7 @@ public class ImageFrm extends AbstractImageFrm implements
       if( entry.isA5105Format() && isUnrotated() ) {
 	BaseDlg.showInfoDlg(
 			this,
-			"Das Bild ist bereits im A5105-Format." );
+			LangUtil.getText( "image.msg.image_already_a5105" ) );
       } else {
 	showImageInternal(
 		drawImageTo(
@@ -2034,7 +2011,7 @@ public class ImageFrm extends AbstractImageFrm implements
 		ImageEntry.Mode.A5105,
 		ImageFld.Rotation.NONE,
 		null,
-		TEXT_A5105_FMT,
+		LangUtil.getText( TEXT_A5105_FMT ),
 		null,
 		null );
       }
@@ -2055,7 +2032,7 @@ public class ImageFrm extends AbstractImageFrm implements
       {
 	BaseDlg.showInfoDlg(
 			this,
-			"Das Bild ist bereits in dem AC1-Format." );
+			LangUtil.getText( "image.msg.image_already_ac1" ) );
       } else {
 	toMonochromCharImage(
 			entry.getImage(),
@@ -2079,7 +2056,7 @@ public class ImageFrm extends AbstractImageFrm implements
       if( entry.isKC85MonochromeFormat() && isUnrotated() ) {
 	BaseDlg.showInfoDlg(
 		this,
-		"Das Bild ist bereits im KC85/2..5-Format ohne Farben." );
+		LangUtil.getText( "image.msg.image_already_kc85_2" ) );
       } else {
 	showImageInternal(
 		drawImageTo(
@@ -2091,7 +2068,7 @@ public class ImageFrm extends AbstractImageFrm implements
 		ImageEntry.Mode.MONOCHROME,
 		ImageFld.Rotation.NONE,
 		null,
-		TEXT_KC85MONO_FMT,
+		LangUtil.getText( TEXT_KC85MONO_FMT ),
 		null,
 		null );
       }
@@ -2108,7 +2085,7 @@ public class ImageFrm extends AbstractImageFrm implements
       {
 	BaseDlg.showInfoDlg(
 			this,
-			"Das Bild ist bereits im KC85/4,5-HIRES-Format." );
+			LangUtil.getText( "image.msg.image_already_kc85_4" ) );
       } else {
 	showImageInternal(
 		drawImageTo(
@@ -2120,7 +2097,7 @@ public class ImageFrm extends AbstractImageFrm implements
 		ImageEntry.Mode.KC854_HIRES,
 		ImageFld.Rotation.NONE,
 		null,
-		TEXT_KC854HIRES_FMT,
+		LangUtil.getText( TEXT_KC854HIRES_FMT ),
 		null,
 		null );
       }
@@ -2135,7 +2112,7 @@ public class ImageFrm extends AbstractImageFrm implements
       if( entry.isLLC2HiresFormat() && isUnrotated() ) {
 	BaseDlg.showInfoDlg(
 			this,
-			"Das Bild ist bereits im LLC2-HIRES-Format." );
+			LangUtil.getText( "image.msg.image_already_llc2" ) );
       } else {
 	Float ratioCorrection = null;
 	if( for43 ) {
@@ -2155,7 +2132,7 @@ public class ImageFrm extends AbstractImageFrm implements
 		ImageEntry.Mode.MONOCHROME,
 		ImageFld.Rotation.NONE,
 		null,
-		TEXT_LLC2HIRES_FMT,
+		LangUtil.getText( TEXT_LLC2HIRES_FMT ),
 		null,
 		null );
       }
@@ -2206,9 +2183,7 @@ public class ImageFrm extends AbstractImageFrm implements
       if( (idx + 2) < this.imgStack.size() ) {
 	state = BaseDlg.showYesNoDlg(
 		this,
-		LangUtil.tr(
-			"M\u00F6chten Sie die letzten {0}"
-				+ " Bildbearbeitungsschritte verwerfen?",
+		LangUtil.getText( "image.text.want_discard_last",
 			String.valueOf(
 				this.imgStack.size() - idx - 1 ) ) );
       }
@@ -2287,68 +2262,84 @@ public class ImageFrm extends AbstractImageFrm implements
 
     // Menu Datei
     this.mnuOpen = createMenuItemWithStandardAccelerator(
-					EmuUtil.TEXT_OPEN_OPEN,
+					LangUtil.getText(
+						EmuUtil.TEXT_OPEN_OPEN ),
 					KeyEvent.VK_O );
     mnuFile.add( this.mnuOpen );
 
     this.mnuSaveAs = createMenuItemSaveAs( true );
     mnuFile.add( this.mnuSaveAs );
 
-    JMenu mnuExp = GUIFactory.createMenu( "Exportieren als" );
+    JMenu mnuExp = GUIFactory.createMenu(
+		LangUtil.getText( "image.menu.export" ) );
     mnuFile.add( mnuExp );
 
-    this.mnuExpImgA5105 = createMenuItem( "A5105-Bilddatei..." );
+    this.mnuExpImgA5105 = createMenuItem(
+		LangUtil.getText( "image.action.a5105_image_file" ) );
     mnuExp.add( this.mnuExpImgA5105 );
 
     this.mnuExpImgKC852Monochrome = createMenuItem(
-				"KC85/2,3-Bilddatei ohne Farben..." );
+				LangUtil.getText(
+					"image.action.kc85_2_3_image" ) );
     mnuExp.add( this.mnuExpImgKC852Monochrome );
 
     this.mnuExpImgKC854Monochrome = createMenuItem(
-				"KC85/4,5-Bilddatei ohne Farben..." );
+				LangUtil.getText(
+					"image.action.kc85_4_5_image" ) );
     mnuExp.add( this.mnuExpImgKC854Monochrome );
 
     this.mnuExpImgKC854Hires = createMenuItem(
-					"KC85/4,5-HIRES-Bilddatei..." );
+					LangUtil.getText(
+						"image.action.kc85_4_5_hires" ) );
     mnuExp.add( this.mnuExpImgKC854Hires );
 
     this.mnuExpImgLLC2Hires = createMenuItem(
-					"LLC2-HIRES-Bilddatei..." );
+					LangUtil.getText( "image.action.llc2_hires_image" ) );
     mnuExp.add( this.mnuExpImgLLC2Hires );
 
     JMenu mnuExpMem = GUIFactory.createMenu(
-		"Abbilddatei f\u00FCr Bildwiederholspeicher f\u00FCr" );
+		LangUtil.getText( "image.menu.image_file_video" ) );
     mnuExp.add( mnuExpMem );
 
-    this.mnuExpMemAC1 = createMenuItem( "AC1..." );
+    this.mnuExpMemAC1 = createMenuItem(
+		LangUtil.getText( "image.action.ac1" ) );
     mnuExpMem.add( this.mnuExpMemAC1 );
 
-    this.mnuExpMemZ1013 = createMenuItem( "Z1013..." );
+    this.mnuExpMemZ1013 = createMenuItem(
+		LangUtil.getText( "image.action.z1013" ) );
     mnuExpMem.add( this.mnuExpMemZ1013 );
 
-    this.mnuExpMemZ9001 = createMenuItem( "Z9001..." );
+    this.mnuExpMemZ9001 = createMenuItem(
+		LangUtil.getText( "image.action.z9001" ) );
     mnuExpMem.add( this.mnuExpMemZ9001 );
 
     JMenu mnuExpApp = GUIFactory.createMenu(
-			"Programm zur Anzeige des Bildes im" );
+			LangUtil.getText(
+				"image.menu.program_displaying_image" ) );
     mnuExp.add( mnuExpApp );
 
-    this.mnuExpAppAC1 = createMenuItem( "AC1..." );
+    this.mnuExpAppAC1 = createMenuItem(
+		LangUtil.getText( "image.action.ac1" ) );
     mnuExpApp.add( this.mnuExpAppAC1 );
 
-    this.mnuExpAppKC852 = createMenuItem( "KC85/2,3..." );
+    this.mnuExpAppKC852 = createMenuItem(
+		LangUtil.getText( "image.action.kc85_2_3" ) );
     mnuExpApp.add( this.mnuExpAppKC852 );
 
-    this.mnuExpAppKC854 = createMenuItem( "KC85/4,5..." );
+    this.mnuExpAppKC854 = createMenuItem(
+		LangUtil.getText( "image.action.kc85_4_5" ) );
     mnuExpApp.add( this.mnuExpAppKC854 );
 
-    this.mnuExpAppLLC2Hires = createMenuItem( "LLC2..." );
+    this.mnuExpAppLLC2Hires = createMenuItem(
+		LangUtil.getText( "image.action.llc2" ) );
     mnuExpApp.add( this.mnuExpAppLLC2Hires );
 
-    this.mnuExpAppZ1013 = createMenuItem( "Z1013..." );
+    this.mnuExpAppZ1013 = createMenuItem(
+		LangUtil.getText( "image.action.z1013" ) );
     mnuExpApp.add( this.mnuExpAppZ1013 );
 
-    this.mnuExpAppZ9001 = createMenuItem( "Z9001..." );
+    this.mnuExpAppZ9001 = createMenuItem(
+		LangUtil.getText( "image.action.z9001" ) );
     mnuExpApp.add( this.mnuExpAppZ9001 );
 
     if( this.recentFilesMngr != null ) {
@@ -2359,24 +2350,27 @@ public class ImageFrm extends AbstractImageFrm implements
     mnuFile.add( this.mnuPrint );
     mnuFile.addSeparator();
 
-    this.mnuImgProps = createMenuItem( "Bildeigenschaften..." );
+    this.mnuImgProps = createMenuItem(
+		LangUtil.getText( "image.action.image_properties" ) );
     mnuFile.add( this.mnuImgProps );
 
-    this.mnuExifEdit = createMenuItem( "Zusatzinformationen bearbeiten..." );
+    this.mnuExifEdit = createMenuItem( LangUtil.getText(
+			"image.action.edit_additional" ) );
     mnuFile.add( this.mnuExifEdit );
 
-    this.mnuExifRemove = createMenuItem( "Zusatzinformationen entfernen" );
+    this.mnuExifRemove = createMenuItem( LangUtil.getText(
+			"image.action.remove_additional" ) );
     mnuFile.add( this.mnuExifRemove );
 
     mnuFile.addSeparator();
 
     this.mnuPrev = createMenuItemWithStandardAccelerator(
-						"Vorheriges Bild",
+						LangUtil.getText( "image.action.previous_image" ),
 						KeyEvent.VK_LEFT );
     mnuFile.add( this.mnuPrev );
 
     this.mnuNext = createMenuItemWithStandardAccelerator(
-						"N\u00E4chstes Bild",
+						LangUtil.getText( "image.action.next_image" ),
 						KeyEvent.VK_RIGHT );
     mnuFile.add( this.mnuNext );
     mnuFile.addSeparator();
@@ -2389,78 +2383,95 @@ public class ImageFrm extends AbstractImageFrm implements
     this.mnuEdit = createMenuEdit();
 
     this.mnuUndo = createMenuItemWithStandardAccelerator(
-					"R\u00FCckg\u00E4ngig",
+					LangUtil.getText(
+						"common.action.undo" ),
 					KeyEvent.VK_Z );
     this.mnuEdit.add( this.mnuUndo );
 
-    this.mnuHistory = GUIFactory.createMenu( "Historie" );
+    this.mnuHistory = GUIFactory.createMenu(
+		LangUtil.getText( "image.menu.history" ) );
     this.mnuEdit.add( this.mnuHistory );
     this.mnuEdit.addSeparator();
 
     this.mnuCopy = createMenuItemWithStandardAccelerator(
-					"Bild kopieren",
+					LangUtil.getText(
+						"image.action.copy_image" ),
 					KeyEvent.VK_C );
     this.mnuEdit.add( this.mnuCopy );
 
     this.mnuPaste = createMenuItemWithStandardAccelerator(
-					"Bild einf\u00FCgen",
+					LangUtil.getText(
+						"image.action.paste_image" ),
 					KeyEvent.VK_V );
     this.mnuEdit.add( this.mnuPaste );
     this.mnuEdit.addSeparator();
 
-    this.mnuFlipHorizontal = createMenuItem( "Horizontal spiegeln" );
+    this.mnuFlipHorizontal = createMenuItem(
+		LangUtil.getText( "image.action.flip_horizontally" ) );
     this.mnuEdit.add( this.mnuFlipHorizontal );
 
-    this.mnuFlipVertical = createMenuItem( "Vertikal spiegeln" );
+    this.mnuFlipVertical = createMenuItem(
+		LangUtil.getText( "image.action.flip_vertically" ) );
     this.mnuEdit.add( this.mnuFlipVertical );
 
     this.mnuRotateImage = createMenuItemWithStandardAccelerator(
-					"Drehen...",
+					LangUtil.getText(
+						"image.action.rotate" ),
 					KeyEvent.VK_R );
     this.mnuEdit.add( this.mnuRotateImage );
 
     this.mnuCropImage = createMenuItemWithStandardAccelerator(
-					"Zuschneiden...",
+					LangUtil.getText(
+						"image.action.crop_dots" ),
 					KeyEvent.VK_C,
 					true );
     this.mnuEdit.add( this.mnuCropImage );
 
-    this.mnuScaleImage = createMenuItem( "Skalieren..." );
+    this.mnuScaleImage = createMenuItem(
+		LangUtil.getText( "image.action.scale_dots" ) );
     this.mnuEdit.add( this.mnuScaleImage );
 
-    this.mnuSharpenImage = createMenuItem( "Sch\u00E4rfen..." );
+    this.mnuSharpenImage = createMenuItem(
+		LangUtil.getText( "image.action.sharpen" ) );
     this.mnuEdit.add( this.mnuSharpenImage );
 
-    this.mnuSoftenImage = createMenuItem( "Weichzeichnen" );
+    this.mnuSoftenImage = createMenuItem(
+		LangUtil.getText( "image.action.blur" ) );
     this.mnuEdit.add( this.mnuSoftenImage );
 
     this.mnuDetectEdges = createMenuItem(
-				"Konturen erkennen und darstellen" );
+				LangUtil.getText( "image.action.detect_show_contours" ) );
     this.mnuEdit.add( this.mnuDetectEdges );
 
-    this.mnuRoundCorners = createMenuItem( "Ecken abrunden..." );
+    this.mnuRoundCorners = createMenuItem(
+		LangUtil.getText( "image.action.round_corners" ) );
     this.mnuEdit.add( this.mnuRoundCorners );
     this.mnuEdit.addSeparator();
 
     this.mnuAdjustImage = createMenuItem(
-				"Helligkeit, Kontrast, Farben..." );
+				LangUtil.getText(
+					"image.action.brightness_contrast" ) );
     this.mnuEdit.add( this.mnuAdjustImage );
 
     this.mnuIndexColors = createMenuItem(
-				"Farben reduzieren und indexieren..." );
+				LangUtil.getText(
+					"image.action.reduce_index_colors" ) );
     this.mnuEdit.add( this.mnuIndexColors );
 
-    this.mnuToBW = GUIFactory.createMenu( "Schwarz/Wei\u00DF wandeln" );
+    this.mnuToBW = GUIFactory.createMenu(
+		LangUtil.getText( "image.menu.convert_black_white" ) );
     this.mnuEdit.add( this.mnuToBW );
 
-    this.mnuToGray = createMenuItem( "Graustufen" );
+    this.mnuToGray = createMenuItem(
+		LangUtil.getText( "image.action.grayscale" ) );
     this.mnuToBW.add( this.mnuToGray );
 
-    this.mnuThreshold = createMenuItem( "Monochrom mittels Schwellwert" );
+    this.mnuThreshold = createMenuItem( LangUtil.getText(
+			"image.action.monochrome_using" ) );
     this.mnuToBW.add( this.mnuThreshold );
 
     JMenu mnuToMonoDith = GUIFactory.createMenu(
-					"Monochrom mittels Dithering" );
+					LangUtil.getText( "image.menu.monochrome_using" ) );
     this.mnuToBW.add( mnuToMonoDith );
 
     this.mnuToMonoFloydSteinberg = createMenuItem(
@@ -2475,52 +2486,57 @@ public class ImageFrm extends AbstractImageFrm implements
 	Dithering.getAlgorithmText( Dithering.Algorithm.ATKINSON ) );
     mnuToMonoDith.add( this.mnuToMonoAtkinson );
 
-    this.mnuInvertImage = createMenuItem( "Invertieren" );
+    this.mnuInvertImage = createMenuItem(
+		LangUtil.getText( "image.action.invert" ) );
     this.mnuEdit.add( this.mnuInvertImage );
 
     this.mnuRemoveTransparency = createMenuItem(
-					"Transparenz entfernen..." );
+					LangUtil.getText( "image.action.remove_transparency" ) );
     this.mnuEdit.add( this.mnuRemoveTransparency );
 
-    this.mnuColorPalette = createMenuItem( "Farbpalette..." );
+    this.mnuColorPalette = createMenuItem(
+		LangUtil.getText( "image.action.color_palette" ) );
     this.mnuEdit.add( this.mnuColorPalette );
     this.mnuEdit.addSeparator();
 
-    this.mnuConvert = GUIFactory.createMenu( "Konvertieren in" );
+    this.mnuConvert = GUIFactory.createMenu(
+		LangUtil.getText( "image.menu.convert" ) );
     this.mnuEdit.add( mnuConvert );
 
-    this.mnuToA5105 = createMenuItem( TEXT_A5105_FMT );
+    this.mnuToA5105 = createMenuItem( LangUtil.getText( TEXT_A5105_FMT ) );
     this.mnuConvert.add( this.mnuToA5105 );
 
-    this.mnuToAC1_ACC = createMenuItem( TEXT_AC1_ACC_FMT );
+    this.mnuToAC1_ACC = createMenuItem( LangUtil.getText( TEXT_AC1_ACC_FMT ) );
     this.mnuConvert.add( this.mnuToAC1_ACC );
 
-    this.mnuToAC1_SCCH = createMenuItem( TEXT_AC1_SCCH_FMT );
+    this.mnuToAC1_SCCH = createMenuItem(
+		LangUtil.getText( TEXT_AC1_SCCH_FMT ) );
     this.mnuConvert.add( this.mnuToAC1_SCCH );
 
-    this.mnuToAC1_2010 = createMenuItem( TEXT_AC1_2010_FMT );
+    this.mnuToAC1_2010 = createMenuItem(
+		LangUtil.getText( TEXT_AC1_2010_FMT ) );
     this.mnuConvert.add( this.mnuToAC1_2010 );
 
-    this.mnuToKC85Monochrome = createMenuItem( TEXT_KC85MONO_FMT );
+    this.mnuToKC85Monochrome = createMenuItem(
+		LangUtil.getText( TEXT_KC85MONO_FMT ) );
     this.mnuConvert.add( this.mnuToKC85Monochrome );
 
-    this.mnuToKC854Hires = createMenuItem( TEXT_KC854HIRES_FMT );
+    this.mnuToKC854Hires = createMenuItem(
+		LangUtil.getText( TEXT_KC854HIRES_FMT ) );
     this.mnuConvert.add( this.mnuToKC854Hires );
 
     this.mnuToLLC2Hires21 = createMenuItem(
-		"LLC2-HIRES-Format (512x256, monochrom)"
-			+ " ohne Anpassung f\u00FCr 4:3-Anzeige" );
+		LangUtil.getText( "image.action.llc2_hires_format_512x256_monochrome_without" ) );
     this.mnuConvert.add( this.mnuToLLC2Hires21 );
 
     this.mnuToLLC2Hires43 = createMenuItem(
-		"LLC2-HIRES-Format (512x256, monochrom)"
-			+ " mit Anpassung f\u00FCr 4:3-Anzeige" );
+		LangUtil.getText( "image.action.llc2_hires_format_512x256_monochrome_adjustment" ) );
     this.mnuConvert.add( this.mnuToLLC2Hires43 );
 
-    this.mnuToZ1013 = createMenuItem( TEXT_Z1013_FMT );
+    this.mnuToZ1013 = createMenuItem( LangUtil.getText( TEXT_Z1013_FMT ) );
     this.mnuConvert.add( this.mnuToZ1013 );
 
-    this.mnuToZ9001 = createMenuItem( TEXT_Z9001_FMT );
+    this.mnuToZ9001 = createMenuItem( LangUtil.getText( TEXT_Z9001_FMT ) );
     this.mnuConvert.add( this.mnuToZ9001 );
 
 
@@ -2528,41 +2544,46 @@ public class ImageFrm extends AbstractImageFrm implements
     JMenu mnuSettings = createMenuSettings();
 
     this.mnuAutoResize = GUIFactory.createCheckBoxMenuItem(
-				"Fenster an Bildgr\u00F6\u00DFe anpassen",
+				LangUtil.getText(
+					"image.action.fit_window_image" ),
 				false );
     mnuSettings.add( this.mnuAutoResize );
 
-    JMenu mnuBgColor = GUIFactory.createMenu( "Hintergrundfarbe" );
+    JMenu mnuBgColor = GUIFactory.createMenu(
+		LangUtil.getText( "image.menu.background_color" ) );
     mnuSettings.add( mnuBgColor );
     mnuSettings.addSeparator();
 
     ButtonGroup grpBgColor = new ButtonGroup();
 
     this.mnuBgSystem = GUIFactory.createRadioButtonMenuItem(
-							"System",
+							LangUtil.getText( "common.action.system" ),
 							true );
     this.mnuBgSystem.addActionListener( this );
     grpBgColor.add( this.mnuBgSystem );
     mnuBgColor.add( this.mnuBgSystem );
     mnuBgColor.addSeparator();
 
-    this.mnuBgBlack = GUIFactory.createRadioButtonMenuItem( "schwarz" );
+    this.mnuBgBlack = GUIFactory.createRadioButtonMenuItem(
+		LangUtil.getText( "image.action.black" ) );
     this.mnuBgBlack.addActionListener( this );
     grpBgColor.add( this.mnuBgBlack );
     mnuBgColor.add( this.mnuBgBlack );
 
-    this.mnuBgGray = GUIFactory.createRadioButtonMenuItem( "grau" );
+    this.mnuBgGray = GUIFactory.createRadioButtonMenuItem(
+		LangUtil.getText( "image.action.gray" ) );
     this.mnuBgGray.addActionListener( this );
     grpBgColor.add( this.mnuBgGray );
     mnuBgColor.add( this.mnuBgGray );
 
-    this.mnuBgWhite = GUIFactory.createRadioButtonMenuItem( "wei\u00DF" );
+    this.mnuBgWhite = GUIFactory.createRadioButtonMenuItem(
+		LangUtil.getText( "image.action.white" ) );
     this.mnuBgWhite.addActionListener( this );
     grpBgColor.add( this.mnuBgWhite );
     mnuBgColor.add( this.mnuBgWhite );
 
     this.mnuJPEGSaveParam = createMenuItem(
-				"JPEG-Parameter beim Speichern..." );
+				LangUtil.getText( "image.action.jpeg_parameters_when" ) );
     mnuSettings.add( this.mnuJPEGSaveParam );
 
 
@@ -2570,7 +2591,7 @@ public class ImageFrm extends AbstractImageFrm implements
     JMenu mnuHelp = createMenuHelp();
 
     this.mnuHelpContent = createMenuItem(
-		"Hilfe zu Bildbetrachter/Bildbearbeitung..." );
+		LangUtil.getText( "image.action.help_image_viewer" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -2619,14 +2640,14 @@ public class ImageFrm extends AbstractImageFrm implements
     this.btnRotateLeft = GUIFactory.createRelImageResourceButton(
 					this,
 					"edit/rotate_left.png",
-					"Nach links drehen" );
+					LangUtil.getText( "common.action.rotate_left" ) );
     this.btnRotateLeft.addActionListener( this );
     toolBar.add( this.btnRotateLeft );
 
     this.btnRotateRight = GUIFactory.createRelImageResourceButton(
 					this,
 					"edit/rotate_right.png",
-					"Nach rechts drehen" );
+					LangUtil.getText( "common.action.rotate_right" ) );
     this.btnRotateRight.addActionListener( this );
     toolBar.add( this.btnRotateRight );
     toolBar.addSeparator();
@@ -2638,7 +2659,8 @@ public class ImageFrm extends AbstractImageFrm implements
     this.btnFitImage = GUIFactory.createRelImageResourceButton(
 				this,
 				"edit/fit.png",
-				"Bild an Fenstergr\u00F6\u00DFe anpassen" );
+				LangUtil.getText(
+					"image.action.fit_image_window" ) );
     this.btnFitImage.addActionListener( this );
     toolBar.add( this.btnFitImage );
     toolBar.addSeparator();
@@ -2661,7 +2683,8 @@ public class ImageFrm extends AbstractImageFrm implements
 
 
     // Statuszeile
-    this.labelStatus = GUIFactory.createLabel( DEFAULT_STATUS_TEXT );
+    this.labelStatus = GUIFactory.createLabel(
+		LangUtil.getText( DEFAULT_STATUS_TEXT ) );
     JPanel panelStatus = GUIFactory.createPanel(
 		new FlowLayout( FlowLayout.LEFT, 5, 5 ) );
     panelStatus.add( this.labelStatus );
@@ -2707,7 +2730,7 @@ public class ImageFrm extends AbstractImageFrm implements
 		null );
     updFileList();
     updPasteBtn();
-    this.labelStatus.setText( DEFAULT_STATUS_TEXT );
+    this.labelStatus.setText( LangUtil.getText( DEFAULT_STATUS_TEXT ) );
   }
 
 
@@ -2732,11 +2755,8 @@ public class ImageFrm extends AbstractImageFrm implements
       if( this.imgStack.peek().getFile() == null ) {
 	rv = BaseDlg.showYesNoWarningDlg(
 		this,
-		LangUtil.tr(
-			"Das angezeigte Bild wurde nicht"
-				+ " gespeichert.\n"
-				+ "M\u00F6chten Sie es verwerfen?" ),
-		LangUtil.tr( "Bild nicht gespeichert" ) );
+		LangUtil.getText( "image.text.image_shown_not_saved" ),
+		LangUtil.getText( "image.text.image_not_saved" ) );
       }
     }
     return rv;
@@ -3040,7 +3060,7 @@ public class ImageFrm extends AbstractImageFrm implements
   private void setTitleInternal( String title )
   {
     StringBuilder buf = new StringBuilder( 64 );
-    buf.append( LangUtil.tr( TITLE ) );
+    buf.append( LangUtil.getText( TITLE ) );
     if( title != null ) {
       if( !title.isEmpty() ) {
 	buf.append( ": " );
@@ -3129,13 +3149,13 @@ public class ImageFrm extends AbstractImageFrm implements
       }
       if( entry == null ) {
 	if( errMsg != null ) {
-	  BaseDlg.showErrorDlg( this, LangUtil.tr(
-		"Bilddatei kann nicht geladen werden:\n{0}",
+	  BaseDlg.showErrorDlg( this, LangUtil.getText(
+		"image.text.image_file_cannot_loaded",
 		errMsg ) );
 	} else {
 	  BaseDlg.showErrorDlg(
 			this,
-			"Bilddatei kann nicht geladen werden." );
+			LangUtil.getText( "image.error.image_file_cannot_loaded" ) );
 	}
       }
       if( rv && (this.recentFilesMngr != null) ) {
@@ -3164,7 +3184,7 @@ public class ImageFrm extends AbstractImageFrm implements
      * bei einem Dateinamen bleibt er unveraendert,
      * da er im Katalog nicht enthalten ist.
      */
-    title = LangUtil.tr( title );
+    title = LangUtil.getText( title );
 
     ImageEntry newEntry   = null;
     boolean    autoResize = false;
@@ -3336,13 +3356,16 @@ public class ImageFrm extends AbstractImageFrm implements
   {
     BaseDlg.showInfoDlg(
 			this,
-			"Das Bild ist bereits monochrom." );
+			LangUtil.getText(
+				"image.msg.image_already_monochrome" ) );
   }
 
 
   private void showNoMoreImageFileFound()
   {
-    BaseDlg.showErrorDlg( this, "Keine weitere Bilddatei gefunden" );
+    BaseDlg.showErrorDlg(
+		this,
+		LangUtil.getText( "image.error.no_further_image" ) );
   }
 
 

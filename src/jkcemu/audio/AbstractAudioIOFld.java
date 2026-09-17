@@ -24,6 +24,7 @@ import javax.swing.JTextField;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 
 
 public abstract class AbstractAudioIOFld
@@ -67,15 +68,7 @@ public abstract class AbstractAudioIOFld
   {
     return BaseDlg.showSuppressableConfirmDlg(
 		this,
-		"Mit \u00D6ffnen des Audiokanals ist sowohl eingangs-"
-			+ " als auch ausgangseitig\n"
-			+ "ein Audiokanal ge\u00F6ffnet,"
-			+ " der durch den emulierten Mikroprozessor"
-			+ " bedient wird.\n"
-			+ "Falls Sie Daten \u00FCber das Audiosystem"
-			+ " einlesen m\u00F6chten, sollte gleichzeitig\n"
-			+ "kein ausgangsseitiger Audiokanal ge\u00F6ffnet"
-			+ " sein, da dieser st\u00F6ren k\u00F6nnte." );
+		LangUtil.getText( "audio.msg.opening_audio_channel" ) );
   }
 
 

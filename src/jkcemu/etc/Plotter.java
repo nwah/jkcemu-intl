@@ -15,6 +15,7 @@ import java.awt.image.IndexColorModel;
 import java.util.Properties;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 
 
 public class Plotter
@@ -213,8 +214,7 @@ public class Plotter
 	createBufferedImage();
       } else {
 	throw new UserInputException(
-			"Die neue Papierfarbe wird erst auf der"
-				+ " n\u00E4chsten Seite wirksam." );
+			LangUtil.getText( "etc.error.new_paper_color" ) );
       }
     }
   }
@@ -230,8 +230,7 @@ public class Plotter
 	createBufferedImage();
       } else {
 	throw new UserInputException(
-			"Die neue Stiftfarbe wird erst auf der"
-				+ " n\u00E4chsten Seite wirksam." );
+			LangUtil.getText( "etc.error.new_pen_color" ) );
       }
     }
   }

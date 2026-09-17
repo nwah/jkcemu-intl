@@ -68,7 +68,7 @@ public class LineAddrRowHeader extends JComponent
 	this.closeH = closeBtnSize.height;
       }
     }
-    setToolTipText( LangUtil.tr( "Adressen im Arbeitsspeicher" ) );
+    setToolTipText( LangUtil.getText( "text.text.addresses_main_memory" ) );
 
     addMouseListener(
 		new MouseAdapter()
@@ -166,7 +166,7 @@ public class LineAddrRowHeader extends JComponent
   public String getToolTipText( MouseEvent e )
   {
     return isOverClose( e ) ?
-		LangUtil.tr( "Adressspalte ausblenden" )
+		LangUtil.getText( "text.action.hide_address_column" )
 		: super.getToolTipText( e );
   }
 

@@ -23,6 +23,7 @@ import jkcemu.disk.GIDE;
 import jkcemu.etc.CPUSynchronSoundDevice;
 import jkcemu.etc.K1520Sound;
 import jkcemu.etc.PSG8910;
+import jkcemu.lang.LangUtil;
 import jkcemu.net.KCNet;
 import jkcemu.text.TextUtil;
 import jkcemu.usb.VDIP;
@@ -226,7 +227,8 @@ public abstract class AbstractSCCHSys
     this.scchRomdiskBankAddr = 0;
     this.pasteFast           = true;
     this.gsbasic             = null;
-    this.loudspeaker         = new CPUSynchronSoundDevice( "Lautsprecher" );
+    this.loudspeaker         = new CPUSynchronSoundDevice(
+		LangUtil.getText( "emusys.text.loudspeaker" ) );
     this.k1520Sound          = null;
     this.kcNet               = null;
     this.vdip                = null;
@@ -234,13 +236,14 @@ public abstract class AbstractSCCHSys
       this.k1520Sound = new K1520Sound( this, 0x38 );
     }
     if( emulatesKCNet( props ) ) {
-      this.kcNet = new KCNet( "Netzwerk-PIO (E/A-Adressen C0h-C3h)" );
+      this.kcNet = new KCNet( LangUtil.getText(
+			"emusys.text.network_pio_i_o_addresses_c0h" ) );
     }
     if( emulatesVDIP( props ) ) {
       this.vdip = new VDIP(
 			0,
 			this.emuThread.getZ80CPU(),
-			"USB-PIO (E/A-Adressen DCh-DFh, FCh-FFh)" );
+			LangUtil.getText( "ac1.text.usb_pio_i" ) );
       this.vdip.applySettings( props );
     }
     this.gide = GIDE.getGIDE( this.screenFrm, props, this.propPrefix );

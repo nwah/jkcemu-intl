@@ -8,6 +8,7 @@
 
 package jkcemu.programming.assembler;
 
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 
 
@@ -41,7 +42,8 @@ public class AsmStackEntry
   public void processELSE() throws PrgException
   {
     if( this.elseProcessed ) {
-      throw new PrgException( "ELSE ohne zugeh\u00F6riges IF..." );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.else_without" ) );
     }
     this.asmEnabled    = !this.asmEnabled;
     this.elseProcessed = true;

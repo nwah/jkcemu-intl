@@ -19,6 +19,7 @@ import jkcemu.base.ErrorMsg;
 import jkcemu.base.ScreenFrm;
 import jkcemu.file.FileFormat;
 import jkcemu.file.LoadData;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.assembler.AsmLabel;
 import jkcemu.programming.assembler.Z80Assembler;
 import jkcemu.text.EditText;
@@ -136,7 +137,8 @@ public abstract class PrgThread extends Thread
 	    secondSysName = emuSys.getSecondSystemName();
 	  }
 	}
-	appendToLog( "Lade Programmcode in Arbeitsspeicher...\n" );
+	appendToLog( LangUtil.getText(
+			"programming.msg.loading_program_code_main" ) );
 	try {
 	  if( (emuSys != null) && (secondSysName != null) ) {
 	    emuSys.loadIntoSecondSystem( codeBytes, begAddr );
@@ -185,15 +187,15 @@ public abstract class PrgThread extends Thread
 				"Starte Programm auf Adresse %04X...\n",
 				startAddr ) );
 	      } else {
-		appendToLog( "\nStart des Programms nicht m\u00F6glich,\n"
-			+ "da Quelltext keine ENT-Anweisung"
-			+ " (Programmeintrittspunkt) enth\u00E4lt\n" );
+		appendToLog( LangUtil.getText(
+				"programming.msg.starting_program_not_possible" ) );
 	      }
 	    }
 	  }
 	}
 	catch( IOException ex ) {
-	  appendToLog( "Laden des Programmcodes fehlgeschlagen\n" );
+	  appendToLog( LangUtil.getText(
+				"programming.msg.loading_program_code_failed" ) );
 	  String msg = ex.getMessage();
 	  if( msg != null ) {
 	    if( !msg.isEmpty() ) {
@@ -210,11 +212,11 @@ public abstract class PrgThread extends Thread
 	labelsToReass( assembler, this.options.getCodeToSecondSystem() );
       }
     } else {
-      appendToLog( "Programmcode kann nicht in Emulator geladen" );
+      appendToLog( LangUtil.getText( "programming.msg.program_code_cannot_loaded" ) );
       if( forceRun ) {
-	appendToLog( " und dort gestartet" );
+	appendToLog( LangUtil.getText( "programming.msg.started" ) );
       }
-      appendToLog( " werden,\nda kein einziges Byte erzeugt wurde.\n" );
+      appendToLog( LangUtil.getText( "programming.msg.because_not_single" ) );
     }
   }
 
@@ -227,7 +229,7 @@ public abstract class PrgThread extends Thread
     TextEditFrm textEditFrm = this.editText.getTextEditFrm();
     try {
       if( execute() ) {
-	appendToLog( "Fertig\n" );
+	appendToLog( LangUtil.getText( "programming.msg.done" ) );
       }
     }
     catch( IOException ex ) {
@@ -236,7 +238,7 @@ public abstract class PrgThread extends Thread
 	String  msg  = ex.getMessage();
 	if( msg != null ) {
 	  if( !msg.isEmpty() ) {
-	    appendToLog( "Fehler: " );
+	    appendToLog( LangUtil.getText( "programming.msg.error" ) );
 	    appendToLog( msg );
 	    if( !msg.endsWith( "\n" ) ) {
 	      appendToLog( "\n" );
@@ -245,10 +247,10 @@ public abstract class PrgThread extends Thread
 	  }
 	}
 	if( !done ) {
-	  appendToLog( "Ein-/Ausgabefehler\n" );
+	  appendToLog( LangUtil.getText( "programming.msg.i_o_error" ) );
 	}
       } else {
-	appendToLog( "Abgebrochen\n" );
+	appendToLog( LangUtil.getText( "programming.msg.cancelled" ) );
       }
     }
     catch( Exception ex ) {

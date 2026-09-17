@@ -20,6 +20,7 @@ import jkcemu.base.SourceUtil;
 import jkcemu.file.FileFormat;
 import jkcemu.file.FileUtil;
 import jkcemu.file.SaveDlg;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80InterruptSource;
@@ -36,7 +37,7 @@ public class KramerMC extends EmuSys implements
 					Z80PIOPortListener
 {
   public static final String SYSNAME          = "KramerMC";
-  public static final String SYSTEXT          = "Kramer-MC";
+  public static final String SYSTEXT          = "emusys.text.kramer_mc";
   public static final String PROP_PREFIX      = "jkcemu.kramermc.";
   public static final String PROP_ROM0_PREFIX = "rom.0000.";
   public static final String PROP_ROM8_PREFIX = "rom.8000.";
@@ -134,7 +135,7 @@ public class KramerMC extends EmuSys implements
     this.kbMatrix     = new int[ 8 ];
 
     Z80CPU cpu = emuThread.getZ80CPU();
-    this.pio   = new Z80PIO( "PIO (E/A-Adressen FC-FF)" );
+    this.pio   = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_fc" ) );
     cpu.setInterruptSources( this.pio );
     cpu.addMaxSpeedListener( this );
     cpu.addTStatesListener( this );
@@ -418,7 +419,7 @@ public class KramerMC extends EmuSys implements
   @Override
   public String getTitle()
   {
-    return SYSTEXT;
+    return LangUtil.getText( SYSTEXT );
   }
 
 
@@ -682,7 +683,7 @@ public class KramerMC extends EmuSys implements
 		this.screenFrm,
 		0x1001,
 		endAddr,
-		"BASIC-Programm speichern",
+		LangUtil.getText( "emusys.text.save_basic_program" ),
 		SaveDlg.BasicType.MS_DERIVED_BASIC,
 		FileUtil.getBasicFileFilter() )).setVisible( true );
     } else {

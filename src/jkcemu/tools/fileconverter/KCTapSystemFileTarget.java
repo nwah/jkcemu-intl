@@ -39,10 +39,10 @@ public class KCTapSystemFileTarget extends AbstractConvertTarget
     super(
 	fileConvertFrm,
 	z9001 ?
-	    LangUtil.tr(
-		"KC-TAP-Systemdatei f\u00FCr KC85/1, KC87 und Z9001 (*.tap)" )
-	    : LangUtil.tr(
-		"KC-TAP-Systemdatei f\u00FCr HC900 und KC85/2..5 (*.tap)" ) );
+	    LangUtil.getText(
+		"fileconv.text.kc_tap_system_file_kc85" )
+	    : LangUtil.getText(
+		"fileconv.text.kc_tap_system_file_hc900" ) );
     this.dataBytes = dataBytes;
     this.offs      = offs;
     this.len       = len;

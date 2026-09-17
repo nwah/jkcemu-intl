@@ -95,12 +95,13 @@ public class EtcSettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     panel.add(
-	GUIFactory.createLabel( "Sprache der Benutzeroberfl\u00E4che:" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"settings.label.language_user_interface" ) ),
 	gbc );
 
     this.comboLang = GUIFactory.createComboBox();
     this.comboLang.setEditable( false );
-    this.comboLang.addItem( EmuUtil.TEXT_DEFAULT );
+    this.comboLang.addItem( LangUtil.getText( EmuUtil.TEXT_DEFAULT ) );
     for( String langCode : LangUtil.getAvailableLangCodes() ) {
       this.comboLang.addItem( langCode );
     }
@@ -110,8 +111,7 @@ public class EtcSettingsFld extends AbstractSettingsFld
     panel.add( this.comboLang, gbc );
 
     this.labelLangNote = GUIFactory.createLabel(
-	"Eine ge\u00E4nderte Sprache wird erst nach einem Neustart"
-		+ " von JKCEMU wirksam." );
+	LangUtil.getText( "settings.label.changed_language_only" ) );
     gbc.insets.top = 5;
     gbc.gridy++;
     panel.add( this.labelLangNote, gbc );
@@ -120,13 +120,15 @@ public class EtcSettingsFld extends AbstractSettingsFld
     gbc.insets.left = 5;
     gbc.gridy++;
     panel.add(
-	GUIFactory.createLabel( "Zu verwendenter Dateiauswahldialog:" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"settings.label.file_selection_dialog" ) ),
 	gbc );
 
     ButtonGroup grpFileDlg = new ButtonGroup();
 
     this.rbFileDlgEmu = GUIFactory.createRadioButton(
-				"JKCEMU-eigener Dateiauswahldialog",
+				LangUtil.getText(
+					"settings.option.jkcemu_s_own" ),
 				true );
     grpFileDlg.add( this.rbFileDlgEmu );
     gbc.insets.top  = 0;
@@ -135,35 +137,30 @@ public class EtcSettingsFld extends AbstractSettingsFld
     panel.add( this.rbFileDlgEmu, gbc );
 
     this.rbFileDlgSwing = GUIFactory.createRadioButton(
-	"Java/Swing (bildet den Dateiauswahldialog"
-		+ " des jeweiligen Erscheinungsbildes nach)" );
+	LangUtil.getText( "settings.option.java_swing_emulates" ) );
     grpFileDlg.add( this.rbFileDlgSwing );
     gbc.gridy++;
     panel.add( this.rbFileDlgSwing, gbc );
 
     this.rbFileDlgNative = GUIFactory.createRadioButton(
-		"Nativer Dateiauswahldialog des Betriebssystems" );
+		LangUtil.getText( "settings.option.native_file_selection" ) );
     grpFileDlg.add( this.rbFileDlgNative );
     gbc.gridy++;
     panel.add( this.rbFileDlgNative, gbc );
 
     this.labelWarnOnOverwriteFile1 = GUIFactory.createLabel(
-	"Bei manchen Betriebssystemen warnt der native Dateiauswahldialog"
-		+ " vor dem \u00DCberschreiben" );
+	LangUtil.getText( "settings.label.some_operating_systems" ) );
     gbc.insets.left = 100;
     gbc.gridy++;
     panel.add( this.labelWarnOnOverwriteFile1, gbc );
 
     this.labelWarnOnOverwriteFile2 = GUIFactory.createLabel(
-	"einer Datei, bei anderen wiederum nicht."
-		+ " Deshalb k\u00F6nnen Sie festlegen,"
-		+ " ob JKCEMU warnen soll." );
+	LangUtil.getText( "settings.label.file_others_not_why" ) );
     gbc.gridy++;
     panel.add( this.labelWarnOnOverwriteFile2, gbc );
 
     this.cbWarnOnOverwriteFile = GUIFactory.createCheckBox(
-	"Vor \u00DCberschreiben einer Datei warnen (Bitte ausschalten,"
-			+ " falls doppelt gewarnt wird)" );
+	LangUtil.getText( "settings.option.warn_before_overwriting" ) );
     gbc.insets.left = 100;
     gbc.gridy++;
     panel.add( this.cbWarnOnOverwriteFile, gbc );
@@ -174,12 +171,13 @@ public class EtcSettingsFld extends AbstractSettingsFld
     gbc.gridy++;
     panel.add(
 	GUIFactory.createLabel(
-		"Statische RAM-Bereiche (SRAM) initialisieren mit:" ),
+		LangUtil.getText( "settings.label.initialize_static_ram" ) ),
 	gbc );
 
     ButtonGroup grpSRAMInit = new ButtonGroup();
 
-    this.rbSRAMInit00 = GUIFactory.createRadioButton( "Nullbytes", true );
+    this.rbSRAMInit00 = GUIFactory.createRadioButton(
+		LangUtil.getText( "settings.option.zero_bytes" ), true );
     grpSRAMInit.add( this.rbSRAMInit00 );
     gbc.insets.top  = 0;
     gbc.insets.left = 50;
@@ -187,21 +185,20 @@ public class EtcSettingsFld extends AbstractSettingsFld
     panel.add( this.rbSRAMInit00, gbc );
 
     this.rbSRAMInitRandom = GUIFactory.createRadioButton(
-			"Zufallsmuster (entspricht Originalverhalten)" );
+			LangUtil.getText( "settings.option.random_pattern" ) );
     grpSRAMInit.add( this.rbSRAMInitRandom );
     gbc.gridy++;
     panel.add( this.rbSRAMInitRandom, gbc );
 
     this.cbClearRFsOnPowerOn = GUIFactory.createCheckBox(
-		"RAM-Floppies bei jedem \"Einschalten\" l\u00F6schen" );
+		LangUtil.getText( "settings.option.clear_ram_floppies" ) );
     gbc.insets.top  = 15;
     gbc.insets.left = 5;
     gbc.gridy++;
     panel.add( this.cbClearRFsOnPowerOn, gbc );
 
     this.cbReloadROMsOnPowerOn = GUIFactory.createCheckBox(
-		"Eingebundene ROM-Dateien bei jedem \"Einschalten\""
-			+ " neu laden" );
+		LangUtil.getText( "settings.option.reload_included_rom" ) );
     gbc.insets.top    = 0;
     gbc.insets.bottom = 5;
     gbc.gridy++;
@@ -213,8 +210,8 @@ public class EtcSettingsFld extends AbstractSettingsFld
       gbc.insets.bottom = 0;
       gbc.gridy++;
       panel.add(
-	GUIFactory.createLabel( "JKCEMU-Konfigurationsverzeichnis"
-				+ " (Einstellungen und Profile)" ),
+	GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.jkcemu_configuration" ) ),
 	gbc );
 
       this.fldConfigDir = GUIFactory.createTextField();
@@ -234,7 +231,8 @@ public class EtcSettingsFld extends AbstractSettingsFld
       gbc.gridx         = 0;
       gbc.gridy++;
       if( DesktopHelper.isOpenSupported() ) {
-	this.btnOpenConfigDir = GUIFactory.createButton( EmuUtil.TEXT_OPEN );
+	this.btnOpenConfigDir = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_OPEN ) );
 	this.btnOpenConfigDir.setEnabled( configDir.exists() );
 	panel.add( this.btnOpenConfigDir, gbc );
 	gbc.insets.left = 0;
@@ -243,8 +241,7 @@ public class EtcSettingsFld extends AbstractSettingsFld
 	this.btnOpenConfigDir = null;
       }
       this.btnDeleteConfigDir = GUIFactory.createButton(
-		"Alle Einstellungen l\u00F6schen"
-			+ " und JKCEMU zur\u00FCcksetzen..." );
+		LangUtil.getText( "settings.action.delete_all_settings" ) );
       this.btnDeleteConfigDir.setEnabled( configDir.exists() );
       panel.add( this.btnDeleteConfigDir, gbc );
     } else {
@@ -295,7 +292,8 @@ public class EtcSettingsFld extends AbstractSettingsFld
     String langText = selLang != null ? selLang.toString() : "";
     props.setProperty(
 		Main.PROP_LANG,
-		!langText.equals( EmuUtil.TEXT_DEFAULT ) ? langText : "" );
+		!langText.equals( LangUtil.getText(
+				EmuUtil.TEXT_DEFAULT ) ) ? langText : "" );
 
     String value = FileUtil.VALUE_FILEDIALOG_JKCEMU;
     if( this.rbFileDlgSwing.isSelected() ) {
@@ -388,7 +386,8 @@ public class EtcSettingsFld extends AbstractSettingsFld
   {
     String langCode = EmuUtil.getProperty( props, Main.PROP_LANG );
     this.comboLang.setSelectedItem(
-		!langCode.isEmpty() ? langCode : EmuUtil.TEXT_DEFAULT );
+		!langCode.isEmpty() ? langCode : LangUtil.getText(
+			EmuUtil.TEXT_DEFAULT ) );
 
     switch( EmuUtil.getProperty( props, FileUtil.PROP_FILEDIALOG ) ) {
       case FileUtil.VALUE_FILEDIALOG_NATIVE:
@@ -432,18 +431,7 @@ public class EtcSettingsFld extends AbstractSettingsFld
     if( configDir != null ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"Sie k\u00F6nnen das JKCEMU-Konfigurationsverzeichnis"
-			+ " mit allen Einstellungen\n"
-			+ "l\u00F6schen und so den Emulator auf den Zustand"
-			+ " zur\u00FCcksetzen,\n"
-			+ "als w\u00FCrde er das erste mal auf diesem"
-			+ " Computer gestartet werden.\n\n"
-			+ "M\u00F6chten Sie das Konfigurationsverzeichnis"
-			+ " jetzt l\u00F6schen?\n"
-			+ "Dabei gehen alle gespeicherten Einstellungen"
-			+ " und Profile sowie eventuell\n"
-			+ "selbst erfasste Stammdaten f\u00FCr die"
-			+ " zu emulierenden Festplatten verloren." ) )
+		LangUtil.getText( "settings.msg.delete_jkcemu" ) ) )
       {
 	boolean done  = false;
 	boolean state = true;
@@ -482,13 +470,9 @@ public class EtcSettingsFld extends AbstractSettingsFld
 	    if( !state ) {
 	      state = BaseDlg.showYesNoWarningDlg(
 			this,
-			"Das JKCEMU-Datenverzeichnis enth\u00E4lt Dateien"
-				+ " und/oder Unterverzeichnisse,\n"
-				+ "die offensichtlich nicht von JKCEMU"
-				+ " stammen.\n"
-				+ "Soll das Verzeichnis trotzdem"
-				+ " gel\u00F6scht werden?",
-			"Warnung" );
+			LangUtil.getText(
+				"settings.msg.jkcemu_data_directory" ),
+			LangUtil.getText( "common.msg.warning" ) );
 	    }
 	    if( state ) {
 	      DeviceIO.LibInfo libInfo = DeviceIO.getLibInfo();
@@ -502,15 +486,10 @@ public class EtcSettingsFld extends AbstractSettingsFld
 		    if( libDir.equals( configDir ) ) {
 		      BaseDlg.showErrorDlg(
 			this,
-			LangUtil.tr(
-				"Im Konfigurationsverzeichnis befindet sich"
-					+ " eine Bibliothek,\n"
-					+ "die durch JKCEDMU selbst verwendet wird.\n"
-					+ "Aus diesem Grund kann das Verzeichnis"
-					+ " erst nach\n"
-					+ "dem Schlie\u00DFen gel\u00F6scht"
-					+ " werden." )
-				+ "\n\n" + LangUtil.tr( MSG_DELETE_CONFIG_DIR_MANUALLY ) );
+			LangUtil.getText(
+				"settings.text.configuration_directory" )
+				+ "\n\n" + LangUtil.getText(
+					MSG_DELETE_CONFIG_DIR_MANUALLY ) );
 		      doOpenConfigDir( true );
 		      state = false;
 		    }
@@ -530,22 +509,17 @@ public class EtcSettingsFld extends AbstractSettingsFld
 	    }
 	    if( BaseDlg.showYesNoWarningDlg(
 		this,
-		"Wenn Sie sichergehen wollen,\n"
-			+ "dass keine alten Einstellungen \u00FCbernommen"
-			+ " werden,\n"
-			+ "sollten Sie jetzt den Emulator beenden.\n\n"
-			+ "M\u00F6chten Sie den Emulator jetzt beenden?",
-		"Hinweis" ) )
+		LangUtil.getText( "settings.msg.want_make_sure" ),
+		LangUtil.getText( "common.msg.note" ) ) )
 	    {
 	      this.settingsFrm.getScreenFrm().doQuit();
 	    }
 	  } else {
 	    BaseDlg.showErrorDlg(
 		this,
-		LangUtil.tr(
-			"Das JKCEMU-Konfigurationsverzeichnis"
-				+ " konnte nicht gel\u00F6scht werden." )
-			+ "\n" + LangUtil.tr( MSG_DELETE_CONFIG_DIR_MANUALLY ) );
+		LangUtil.getText( "settings.text.jkcemu_configuration" )
+			+ "\n" + LangUtil.getText(
+				MSG_DELETE_CONFIG_DIR_MANUALLY ) );
 	    doOpenConfigDir( true );
 	  }
 	}
@@ -568,8 +542,7 @@ public class EtcSettingsFld extends AbstractSettingsFld
     if( !done && !suppressErrMsg ) {
       BaseDlg.showErrorDlg(
 		this,
-		"Das Konfigurationsverzeichnis konnte nicht"
-			+ " ge\u00F6ffnet werden." );
+		LangUtil.getText( "settings.error.configuration_directory" ) );
     }
   }
 

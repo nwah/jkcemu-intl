@@ -23,6 +23,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class RoundCornersDlg extends BaseDlg
@@ -40,7 +41,7 @@ public class RoundCornersDlg extends BaseDlg
 			int    nTopPixels,
 			int    nBottomPixels )
   {
-    super( owner, "Ecken abrunden" );
+    super( owner, LangUtil.getText( "image.title.round_corners" ) );
     this.numTopPixels    = 0;
     this.numBottomPixels = 0;
 
@@ -68,7 +69,8 @@ public class RoundCornersDlg extends BaseDlg
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Obere Ecken:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.upper_corners" ) ), gbc );
 
     this.spinnerTopPixels = GUIFactory.createSpinner(
 			new SpinnerNumberModel(
@@ -81,13 +83,15 @@ public class RoundCornersDlg extends BaseDlg
     add( this.spinnerTopPixels, gbc );
 
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Pixel" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.pixels" ) ), gbc );
 
     gbc.insets.top  = 0;
     gbc.insets.left = 5;
     gbc.gridx       = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Untere Ecken:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.lower_corners" ) ), gbc );
 
     this.spinnerBottomPixels = GUIFactory.createSpinner(
 			new SpinnerNumberModel(
@@ -100,7 +104,8 @@ public class RoundCornersDlg extends BaseDlg
     add( this.spinnerBottomPixels, gbc );
 
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Pixel" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.pixels" ) ), gbc );
 
 
     // Knoepfe

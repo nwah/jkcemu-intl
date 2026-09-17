@@ -102,10 +102,10 @@ public class ExtROMTableModel extends AbstractTableModel
     String rv = "";
     switch( col ) {
       case 0:
-	rv = LangUtil.tr( "ROM-Nr." );
+	rv = LangUtil.getText( "kccompact.text.rom_no" );
 	break;
       case 1:
-	rv = LangUtil.tr( "ROM-Datei" );
+	rv = LangUtil.getText( "kccompact.text.rom_file" );
 	break;
     }
     return rv;

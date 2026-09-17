@@ -10,6 +10,7 @@ package jkcemu.programming.assembler;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 import jkcemu.programming.PrgUtil;
 
@@ -100,7 +101,8 @@ public class AsmArg
   public String getIndirectText() throws PrgException
   {
     if( this.indirectText == null ) {
-      throw new PrgException( "Indirekte Adressierung erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.indirect_addressing_expected" ) );
     }
     return this.indirectText;
   }
@@ -117,14 +119,13 @@ public class AsmArg
 	&& !this.indirectText.startsWith( "IY" ) )
     {
       throw new PrgException(
-		"Indirekte Adressierung mit Indexregister erwartet" );
+		LangUtil.getText( "assembler.error.indirect_addressing_index" ) );
     }
     if( this.indirectText.length() > 2 ) {
       rv = this.indirectText.substring( 2 );
       if( !rv.startsWith( "+" ) && !rv.startsWith( "-" ) ) {
-	throw new PrgException(
-		"Ung\u00FCltige Distanzangabe bei"
-			+ " indirekter Adressierung mit Indexregister" );
+	throw new PrgException( LangUtil.getText(
+			"assembler.error.invalid_displacement" ) );
       }
     }
     return rv;
@@ -162,7 +163,8 @@ public class AsmArg
       rv = 6;
     }
     if( (rv < 0) || (rv > 7) ) {
-      throw new PrgException( "Register oder (HL) erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.register_hl_expected" ) );
     }
     return rv;
   }

@@ -42,17 +42,16 @@ public class FileRemover extends AbstractFileWorker
 	if( n == 1 ) {
 	  Path p = paths.get( 0 );
 	  if( Files.isDirectory( p ) ) {
-	    buf.append( LangUtil.tr(
-		"M\u00F6chten Sie das Verzeichnis\n''{0}''\nl\u00F6schen?",
+	    buf.append( LangUtil.getText(
+		"file.text.want_delete_directory",
 		p ) );
 	  } else if( Files.isSymbolicLink( p ) ) {
-	    buf.append( LangUtil.tr(
-		"M\u00F6chten Sie den symbolischen Link"
-			+ "\n''{0}''\nl\u00F6schen?",
+	    buf.append( LangUtil.getText(
+		"file.text.want_delete_symbolic",
 		p ) );
 	  } else {
-	    buf.append( LangUtil.tr(
-		"M\u00F6chten Sie die Datei\n''{0}''\nl\u00F6schen?",
+	    buf.append( LangUtil.getText(
+		"file.text.want_delete_file",
 		p ) );
 	  }
 	} else {
@@ -75,31 +74,32 @@ public class FileRemover extends AbstractFileWorker
 	   */
 	  java.util.List<String> parts = new ArrayList<>();
 	  if( nDirs == 1 ) {
-	    parts.add( LangUtil.tr( "das Verzeichnis" ) );
+	    parts.add( LangUtil.getText( "file.text.directory_das" ) );
 	  } else if( nDirs > 1 ) {
-	    parts.add( LangUtil.tr( "{0} Verzeichnisse", nDirs ) );
+	    parts.add( LangUtil.getText( "file.text.directories", nDirs ) );
 	  }
 	  if( nFiles == 1 ) {
-	    parts.add( LangUtil.tr( "die Datei" ) );
+	    parts.add( LangUtil.getText( "file.text.file" ) );
 	  } else if( nFiles > 1 ) {
-	    parts.add( LangUtil.tr( "{0} Dateien", nFiles ) );
+	    parts.add( LangUtil.getText( "file.text.files", nFiles ) );
 	  }
 	  if( nLinks == 1 ) {
-	    parts.add( LangUtil.tr( "den symbolischen Link" ) );
+	    parts.add( LangUtil.getText( "file.text.symbolic_link_den" ) );
 	  } else if( nLinks > 1 ) {
-	    parts.add( LangUtil.tr( "{0} symbolische Links", nLinks ) );
+	    parts.add( LangUtil.getText(
+				"file.text.symbolic_links", nLinks ) );
 	  }
 	  StringBuilder itemBuf = new StringBuilder( 64 );
 	  for( int i = 0; i < parts.size(); i++ ) {
 	    if( i > 0 ) {
 	      itemBuf.append( i == (parts.size() - 1) ?
-				LangUtil.tr( " und " )
-				: LangUtil.tr( ", " ) );
+				LangUtil.getText( "file.text.and" )
+				: LangUtil.getText( ", " ) );
 	    }
 	    itemBuf.append( parts.get( i ) );
 	  }
-	  buf.append( LangUtil.tr(
-		"M\u00F6chten Sie {0} l\u00F6schen?",
+	  buf.append( LangUtil.getText(
+		"file.text.want_delete",
 		itemBuf.toString() ) );
 	}
 
@@ -107,7 +107,8 @@ public class FileRemover extends AbstractFileWorker
 	boolean moveToTrash = false;
 	if( DesktopHelper.isMoveToTrashSupported() ) {
 	  JCheckBox cb = GUIFactory.createCheckBox(
-					"In den Papierkorb werfen",
+					LangUtil.getText(
+						"file.option.move_trash" ),
 					true );
 	  status      = BaseDlg.showYesNoDlg( owner, buf.toString(), cb );
 	  moveToTrash = cb.isSelected();
@@ -152,8 +153,7 @@ public class FileRemover extends AbstractFileWorker
   @Override
   public String getFileFailedMsg( String fileName )
   {
-    return LangUtil.tr(
-		"\'\'{0}\'\' kann nicht gel\u00F6scht werden.",
+    return LangUtil.getText( "file.text.cannot_deleted",
 		fileName );
   }
 
@@ -161,16 +161,14 @@ public class FileRemover extends AbstractFileWorker
   @Override
   public String getProgressDlgTitle()
   {
-    return EmuUtil.TEXT_DELETE;
+    return LangUtil.getText( EmuUtil.TEXT_DELETE );
   }
 
 
   @Override
   public String getUncompletedWorkMsg()
   {
-    return LangUtil.tr(
-		"Es konnten nicht alle Dateien, Verzeichnisse bzw.\n"
-			+ "symbolische Links gel\u00F6scht werden." );
+    return LangUtil.getText( "file.text.not_all_files_directories_symbolic_links_deleted" );
   }
 
 

@@ -110,7 +110,7 @@ public class GIDESettingsFld
     int nIOBaseAddrs = (ioBaseAddrs != null ? ioBaseAddrs.length : 0);
     if( nIOBaseAddrs > 1 ) {
       this.cbEnabled = GUIFactory.createCheckBox(
-			"GIDE emulieren an E/A-Basisadresse:" );
+			LangUtil.getText( "disk.option.emulate_gide_i" ) );
       this.comboIOBaseAddr = GUIFactory.createComboBox();
       this.comboIOBaseAddr.setEditable( false );
       for( int i = 0; i < nIOBaseAddrs; i++ ) {
@@ -132,7 +132,8 @@ public class GIDESettingsFld
       panelGeneral.add( this.comboIOBaseAddr, gbcGeneral );
       add( panelGeneral, gbc );
     } else {
-      this.cbEnabled       = GUIFactory.createCheckBox( "GIDE emulieren" );
+      this.cbEnabled       = GUIFactory.createCheckBox(
+		LangUtil.getText( "disk.option.emulate_gide" ) );
       this.comboIOBaseAddr = null;
       add( this.cbEnabled, gbc );
     }
@@ -212,7 +213,7 @@ public class GIDESettingsFld
 	      catch( NumberFormatException ex ) {
 		if( selected && enabled ) {
 		  throw new UserInputException(
-			"E/A-Basisadresse: Ung\u00FCltige Eingabe" );
+			LangUtil.getText( "disk.error.i_o_base" ) );
 		}
 	      }
 	    }
@@ -229,8 +230,8 @@ public class GIDESettingsFld
 	      props.setProperty( prefix + GIDE.PROP_FILE, "" );
 	      if( selected ) {
 		throw new UserInputException(
-		    LangUtil.tr(
-			"{0}. Festplatte: Abbilddatei nicht ausgew\u00E4hlt",
+		    LangUtil.getText(
+			"disk.text.hard_disk_image_file_not",
 			i + 1 ) );
 	      }
 	    }
@@ -459,10 +460,11 @@ public class GIDESettingsFld
     // 1. Zeile
     if( idx == 0 ) {
       this.titleLabels[ idx ] = GUIFactory.createLabel(
-					"1. Festplatte (Master):" );
+					LangUtil.getText(
+						"disk.label.hard_disk_1" ) );
     } else {
       this.titleLabels[ idx ] = GUIFactory.createLabel(
-		LangUtil.tr( "{0}. Festplatte (Slave):", idx + 1 ) );
+		LangUtil.getText( "disk.text.hard_disk_slave", idx + 1 ) );
     }
     gbc.fill          = GridBagConstraints.NONE;
     gbc.weightx       = 0.0;
@@ -485,7 +487,8 @@ public class GIDESettingsFld
     this.diskTypeBtns[ idx ] = GUIFactory.createRelImageResourceButton(
 				this,
 				"disk/harddiskmodel.png",
-				"Festplattenmodell ausw\u00E4hlen" );
+				LangUtil.getText(
+					"disk.action.select_hard_disk_model" ) );
     this.diskTypeBtns[ idx ].addActionListener( this );
     gbc.fill    = GridBagConstraints.NONE;
     gbc.weightx = 0.0;
@@ -505,7 +508,8 @@ public class GIDESettingsFld
     this.selectBtns[ idx ] = GUIFactory.createRelImageResourceButton(
 				this,
 				"file/open.png",
-				"Festplattenabbilddatei ausw\u00E4hlen" );
+				LangUtil.getText(
+					"disk.action.select_hard_disk_image" ) );
     this.selectBtns[ idx ].addActionListener( this );
     gbc.fill        = GridBagConstraints.NONE;
     gbc.weightx     = 0.0;
@@ -549,7 +553,8 @@ public class GIDESettingsFld
       int  offset = -1;
       File file   = FileUtil.showFileOpenDlg(
 				this.settingsFrm,
-				"Festplattenabbilddatei ausw\u00E4hlen",
+				LangUtil.getText(
+					"disk.action.select_hard_disk_image" ),
 				preSelection );
       if( file != null ) {
 	String msg = null;
@@ -560,27 +565,11 @@ public class GIDESettingsFld
 	} else {
 	  switch( OptionDlg.showOptionDlg(
 		this.settingsFrm,
-		"Die angegebene Datei existiert nicht.\n"
-			+ "Formatieren Sie bitte das betreffende Laufwerk"
-			+ " vom emulierten System aus,\n"
-			+ "damit die Datei angelegt wird"
-			+ " und einen Inhalt erh\u00E4lt.\n\n"
-			+ "Welchen Typ soll die Datei haben?\n"
-			+ "Eine RAW-Datei enth\u00E4lt das reine Abbild"
-			+ " und kann mit geeigneten Programmen\n"
-			+ "direkt auf eine Festplatte oder DOM"
-			+ " geschrieben werden.\n"
-			+ "Eine kompatible Abbilddatei entspricht dem Format"
-			+ " \u00E4lterer JKCEMU-Versionen\n"
-			+ "und kann auch in manch anderem Emulator verwendet"
-			+ " werden.\n"
-			+ "Allerdings lassen sich kompatible Abbilddateien"
-			+ " nicht mit \u00FCblichen Werkzeugen\n"
-			+ "direkt auf eine Festplatte oder DOM schreiben.",
-		"Neue Abbilddatei",
+		LangUtil.getText( "disk.msg.specified_file_not_exist" ),
+		LangUtil.getText( "disk.msg.new_image_file" ),
 		0,
-		"RAW-Datei",
-		"Kompatible Abbilddatei" ) )
+		LangUtil.getText( "disk.msg.raw_file" ),
+		LangUtil.getText( "disk.msg.compatible_image_file" ) ) )
 	  {
 	    case 0:
 	      offset = 0;

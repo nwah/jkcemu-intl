@@ -438,18 +438,11 @@ public class CPCDisk extends AbstractFloppyDisk
       }
     }
     if( msgBuf != null ) {
-      msgBuf.append( LangUtil.tr(
-		"\nDie angezeigten Informationen k\u00F6nnen"
-			+ " in einer CPC-Disk-Datei nicht gespeichert"
-			+ " werden\n"
-			+ "und sind deshalb in der erzeugten Datei"
-			+ " nicht mehr enthalten.\n" ) );
+      msgBuf.append( LangUtil.getText(
+		"disk.text.information_shown_cannot_saved_cpc" ) );
       if( dataDeleted ) {
-	msgBuf.append( LangUtil.tr(
-		"\nSektoren mit gel\u00F6schten Daten werden"
-			+ " in CPC-Disk-Dateien nicht unterst\u00FCtzt\n"
-			+ "und sind deshalb als normale Sektoren"
-			+ " enthalten.\n" ) );
+	msgBuf.append( LangUtil.getText(
+		"disk.text.sectors_deleted_data_not_supported_cpc" ) );
       }
     }
     return msgBuf != null ? msgBuf.toString() : null;
@@ -568,11 +561,7 @@ public class CPCDisk extends AbstractFloppyDisk
 	      || ((physHead == 1) && (physCyl != (cyls - 1))) )
 	  {
 	    throw new IOException(
-		"Die Spuren m\u00FCssen l\u00FCckenlos aufsteigend und\n"
-			+ "innerhalb einer Spur Seite 1 vor Seite 2"
-			+ " formatiert werden.\n"
-			+ "Eine andere Reihenfolge wird bei einer"
-			+ " CPC-Disk-Datei nicht untest\u00FCtzt." );
+		LangUtil.getText( "disk.error.tracks_formatted_ascending_order_without_gaps_cpc" ) );
 	  }
 
 	  // Groesse der Spur
@@ -582,9 +571,7 @@ public class CPCDisk extends AbstractFloppyDisk
 	  if( firstTrackdata != null ) {
 	    if( trackSize != firstTrackdata.getTrackSize() ) {
 	      throw new IOException(
-		"Formatieren mit unterschiedlich gro\u00DFen Spuren\n"
-			+ "bei einer CPC-Disk-Datei"
-			+ " nicht untest\u00FCtzt" );
+		LangUtil.getText( "disk.error.formatting_tracks" ) );
 	    }
 	  }
 
@@ -723,7 +710,8 @@ public class CPCDisk extends AbstractFloppyDisk
 	}
 	catch( IOException ex ) {
 	  rv = false;
-	  fireShowError( "Formatieren fehlgeschlagen", ex );
+	  fireShowError( LangUtil.getText( "disk.error.formatting_failed" ),
+			ex );
 	}
       } else {
 	rv = super.formatTrack(
@@ -1110,7 +1098,7 @@ public class CPCDisk extends AbstractFloppyDisk
       }
     }
     if( rv == null ) {
-      throw new IOException( "Datei ist keine CPC-Disk-Datei" );
+      throw new IOException( LangUtil.getText( "disk.error.file_not_cpc" ) );
     }
     return rv;
   }

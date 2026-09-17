@@ -31,6 +31,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class ReplyOnExistingFileDlg extends BaseDlg
@@ -208,7 +209,8 @@ public class ReplyOnExistingFileDlg extends BaseDlg
 					0, 0 );
 
     add(
-	GUIFactory.createLabel( "Am Zielort existiert bereits die Datei:" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"file.label.following_file_already" ) ),
 	gbc );
 
     gbc.insets.top = 0;
@@ -250,12 +252,13 @@ public class ReplyOnExistingFileDlg extends BaseDlg
     gbc.gridy++;
     add(
 	GUIFactory.createLabel(
-		"Was soll mit der Datei am Zielort passieren?" ),
+		LangUtil.getText( "file.label.what_happen_file" ) ),
 	gbc );
 
     ButtonGroup grpAction = new ButtonGroup();
 
-    this.rbReplace = GUIFactory.createRadioButton( "Datei ersetzen" );
+    this.rbReplace = GUIFactory.createRadioButton(
+		LangUtil.getText( "file.option.replace_file" ) );
     grpAction.add( this.rbReplace );
     gbc.insets.top  = 5;
     gbc.insets.left = 50;
@@ -263,22 +266,20 @@ public class ReplyOnExistingFileDlg extends BaseDlg
     add( this.rbReplace, gbc );
 
     this.rbReplaceAll = GUIFactory.createRadioButton(
-		"Diese und alle weiteren Dateien ersetzen" );
+		LangUtil.getText( "file.option.replace_all_further" ) );
     grpAction.add( this.rbReplaceAll );
     gbc.insets.top = 0;
     gbc.gridy++;
     add( this.rbReplaceAll, gbc );
 
     this.rbSkip = GUIFactory.createRadioButton(
-		"Datei behalten (Vorgang \u00FCberspringen)" );
+		LangUtil.getText( "file.option.keep_file_skip" ) );
     grpAction.add( this.rbSkip );
     gbc.gridy++;
     add( this.rbSkip, gbc );
 
     this.rbSkipAll = GUIFactory.createRadioButton(
-		"Diese und alle weiteren betreffenden Dateien behalten"
-			+ " (alle betreffenden Vorg\u00E4nge"
-			+ " \u00FCberspringen)" );
+		LangUtil.getText( "file.option.keep_all_further" ) );
     grpAction.add( this.rbSkipAll );
     gbc.gridy++;
     add( this.rbSkipAll, gbc );
@@ -304,7 +305,8 @@ public class ReplyOnExistingFileDlg extends BaseDlg
       gbc.gridy++;
       add( this.rbRename, gbc );
 
-      this.labelFileName = GUIFactory.createLabel( "Dateiname:" );
+      this.labelFileName = GUIFactory.createLabel(
+		LangUtil.getText( "common.label.file_name" ) );
       gbc.insets.left    = 50;
       gbc.gridy++;
       add( this.labelFileName, gbc );
@@ -445,13 +447,13 @@ public class ReplyOnExistingFileDlg extends BaseDlg
 	  if( fileName.isEmpty() ) {
 	    showErrorDlg(
 		this,
-		"Neuer Dateinamen nicht eingegeben" );
+		LangUtil.getText( "file.error.new_file_name" ) );
 	  } else {
 	    Path newFile = this.dirPath.resolve( fileName );
 	    if( Files.exists( newFile, LinkOption.NOFOLLOW_LINKS ) ) {
 	      showErrorDlg(
 		this,
-		"Eine Datei mit dem neuen Namen existiert bereits." );
+		LangUtil.getText( "file.error.file_new_name" ) );
 	    } else {
 	      this.reply.renamedPath = newFile;
 	      this.reply.action      = UserAction.RENAME;

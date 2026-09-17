@@ -157,7 +157,7 @@ public class BaseDlg extends JDialog implements
   @Override
   public void setTitle( String title )
   {
-    super.setTitle( LangUtil.tr( title ) );
+    super.setTitle( LangUtil.getText( title ) );
   }
 
 
@@ -367,7 +367,8 @@ public class BaseDlg extends JDialog implements
 
   public static boolean showConfirmDlg( Component owner, String msg )
   {
-    return showConfirmDlg( owner, msg, "Best\u00E4tigung" );
+    return showConfirmDlg(
+		owner, msg, LangUtil.getText( "common.msg.confirmation" ) );
   }
 
 
@@ -379,8 +380,8 @@ public class BaseDlg extends JDialog implements
     EmuUtil.frameToFront( owner );
     return (JOptionPane.showConfirmDialog(
 		EmuUtil.getWindow( owner ),
-		LangUtil.tr( msg ),
-		LangUtil.tr( title ),
+		LangUtil.getText( msg ),
+		LangUtil.getText( title ),
 		JOptionPane.OK_CANCEL_OPTION ) == JOptionPane.OK_OPTION);
   }
 
@@ -393,8 +394,8 @@ public class BaseDlg extends JDialog implements
     EmuUtil.frameToFront( owner );
     return (JOptionPane.showConfirmDialog(
 		EmuUtil.getWindow( owner ),
-		LangUtil.tr( msg ),
-		LangUtil.tr( title ),
+		LangUtil.getText( msg ),
+		LangUtil.getText( title ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) == JOptionPane.OK_OPTION);
   }
@@ -417,7 +418,7 @@ public class BaseDlg extends JDialog implements
 
   public static void showErrorDlg( Component owner, String msg )
   {
-    showErrorDlg( owner, msg, EmuUtil.TEXT_ERROR );
+    showErrorDlg( owner, msg, LangUtil.getText( EmuUtil.TEXT_ERROR ) );
   }
 
 
@@ -426,8 +427,8 @@ public class BaseDlg extends JDialog implements
     EmuUtil.frameToFront( owner );
     JOptionPane.showMessageDialog(
 		EmuUtil.getWindow( owner ),
-		LangUtil.tr( msg != null ? msg : "Unbekannter Fehler" ),
-		LangUtil.tr( title ),
+		LangUtil.getText( msg != null ? msg : "Unbekannter Fehler" ),
+		LangUtil.getText( title ),
 		JOptionPane.ERROR_MESSAGE );
   }
 
@@ -439,9 +440,8 @@ public class BaseDlg extends JDialog implements
   {
     showErrorDlg(
 	owner,
-	EmuUtil.createErrorMsg(
-		LangUtil.tr(
-			"Die Datei ''{0}''\nkann nicht ge\u00F6ffnet werden.",
+	EmuUtil.createErrorMsg( LangUtil.getText(
+			"base.text.file_cannot_opened",
 			file.getPath() ),
 		ex ) );
   }
@@ -468,14 +468,13 @@ public class BaseDlg extends JDialog implements
      * Da JOptionPane genau das uebergebene Objekt zurueckliefert,
      * muss anschliessend gegen das uebersetzte Array verglichen werden.
      */
-    String[] trOptions = LangUtil.tr( options );
-    JOptionPane pane = new JOptionPane(
-		LangUtil.tr( msg ),
+    String[] trOptions = LangUtil.getTexts( options );
+    JOptionPane pane = new JOptionPane( LangUtil.getText( msg ),
 		JOptionPane.QUESTION_MESSAGE );
     pane.setOptions( trOptions );
     pane.createDialog(
 		EmuUtil.getWindow( owner ),
-		LangUtil.tr( title ) ).setVisible( true );
+		LangUtil.getText( title ) ).setVisible( true );
 
     // ausgewaehlter Knopf ermitteln
     Object selOption = pane.getValue();
@@ -496,7 +495,7 @@ public class BaseDlg extends JDialog implements
    */
   public static void showInfoDlg( Component owner, String msg )
   {
-    showInfoDlg( owner, msg, "Information" );
+    showInfoDlg( owner, msg, LangUtil.getText( "base.msg.information" ) );
   }
 
 
@@ -508,8 +507,8 @@ public class BaseDlg extends JDialog implements
     EmuUtil.frameToFront( owner );
     JOptionPane.showMessageDialog(
 		EmuUtil.getWindow( owner ),
-		LangUtil.tr( msg ),
-		LangUtil.tr( title ),
+		LangUtil.getText( msg ),
+		LangUtil.getText( title ),
 		JOptionPane.INFORMATION_MESSAGE );
   }
 
@@ -530,8 +529,8 @@ public class BaseDlg extends JDialog implements
 	JCheckBox cb = createSuppressDlgCheckbox();
 	rv = (JOptionPane.showConfirmDialog(
 		EmuUtil.getWindow( owner ),
-		new Object[] { LangUtil.tr( msg ), cb },
-		LangUtil.tr( "Best\u00E4tigung" ),
+		new Object[] { LangUtil.getText( msg ), cb },
+		LangUtil.getText( "common.msg.confirmation" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) == JOptionPane.OK_OPTION);
 	if( rv && cb.isSelected() ) {
@@ -551,8 +550,8 @@ public class BaseDlg extends JDialog implements
 	JCheckBox cb = createSuppressMsgCheckbox();
 	JOptionPane.showMessageDialog(
 			EmuUtil.getWindow( owner ),
-			new Object[] { LangUtil.tr( msg ), cb },
-			LangUtil.tr( "Hinweis" ),
+			new Object[] { LangUtil.getText( msg ), cb },
+			LangUtil.getText( "common.msg.note" ),
 			JOptionPane.INFORMATION_MESSAGE );
 	if( cb.isSelected() ) {
 	  suppressedMessages.add( msg );
@@ -575,7 +574,7 @@ public class BaseDlg extends JDialog implements
 				owner,
 				msg,
 				cb,
-				EmuUtil.TEXT_CONFIRM,
+				LangUtil.getText( EmuUtil.TEXT_CONFIRM ),
 				JOptionPane.QUESTION_MESSAGE );
 	if( rv && cb.isSelected() ) {
 	  suppressedMessages.add( msg );
@@ -600,7 +599,7 @@ public class BaseDlg extends JDialog implements
 				owner,
 				msg,
 				cb,
-				EmuUtil.TEXT_CONFIRM,
+				LangUtil.getText( EmuUtil.TEXT_CONFIRM ),
 				JOptionPane.QUESTION_MESSAGE );
 	if( (rv != null) && cb.isSelected() ) {
 	  suppressedValues.put( msg, rv );
@@ -616,7 +615,7 @@ public class BaseDlg extends JDialog implements
    */
   public static void showWarningDlg( Component owner, String msg )
   {
-    showWarningDlg( owner, msg, "Warnung" );
+    showWarningDlg( owner, msg, LangUtil.getText( "common.msg.warning" ) );
   }
 
 
@@ -628,8 +627,8 @@ public class BaseDlg extends JDialog implements
     EmuUtil.frameToFront( owner );
     JOptionPane.showMessageDialog(
 		EmuUtil.getWindow( owner ),
-		LangUtil.tr( msg ),
-		LangUtil.tr( title ),
+		LangUtil.getText( msg ),
+		LangUtil.getText( title ),
 		JOptionPane.WARNING_MESSAGE );
   }
 
@@ -643,7 +642,8 @@ public class BaseDlg extends JDialog implements
    */
   public static boolean showYesNoDlg( Component owner, String msg )
   {
-    return showYesNoDlg( owner, msg, EmuUtil.TEXT_CONFIRM );
+    return showYesNoDlg(
+		owner, msg, LangUtil.getText( EmuUtil.TEXT_CONFIRM ) );
   }
 
 
@@ -657,7 +657,7 @@ public class BaseDlg extends JDialog implements
 		owner,
 		msg,
 		checkBox,
-		EmuUtil.TEXT_CONFIRM,
+		LangUtil.getText( EmuUtil.TEXT_CONFIRM ),
 		JOptionPane.QUESTION_MESSAGE );
   }
 
@@ -745,11 +745,11 @@ public class BaseDlg extends JDialog implements
 				int       msgType )
   {
     String[] options = {
-		LangUtil.tr( OPTION_YES ),
-		LangUtil.tr( OPTION_NO ) };
+		LangUtil.getText( OPTION_YES ),
+		LangUtil.getText( OPTION_NO ) };
 
     EmuUtil.frameToFront( owner );
-    msg = LangUtil.tr( msg );
+    msg = LangUtil.getText( msg );
     JOptionPane pane = null;
     if( checkBox != null ) {
       pane = new JOptionPane( new Object[] { msg, checkBox }, msgType );
@@ -759,7 +759,7 @@ public class BaseDlg extends JDialog implements
     pane.setOptions( options );
     Dialog dlg = pane.createDialog(
 				EmuUtil.getWindow( owner ),
-				LangUtil.tr( title ) );
+				LangUtil.getText( title ) );
     Main.updIcon( dlg );
     dlg.setVisible( true );
 
@@ -775,13 +775,13 @@ public class BaseDlg extends JDialog implements
 				String    title,
 				int       msgType )
   {
-    String textYes = LangUtil.tr( OPTION_YES );
-    String textNo  = LangUtil.tr( OPTION_NO );
+    String textYes = LangUtil.getText( OPTION_YES );
+    String textNo  = LangUtil.getText( OPTION_NO );
 
-    String[] options = { textYes, textNo, LangUtil.tr( OPTION_CANCEL ) };
+    String[] options = { textYes, textNo, LangUtil.getText( OPTION_CANCEL ) };
 
     EmuUtil.frameToFront( owner );
-    msg = LangUtil.tr( msg );
+    msg = LangUtil.getText( msg );
     JOptionPane pane = null;
     if( checkBox != null ) {
       pane = new JOptionPane( new Object[] { msg, checkBox }, msgType );
@@ -791,7 +791,7 @@ public class BaseDlg extends JDialog implements
     pane.setOptions( options );
     Dialog dlg = pane.createDialog(
 				EmuUtil.getWindow( owner ),
-				LangUtil.tr( title ) );
+				LangUtil.getText( title ) );
     Main.updIcon( dlg );
     dlg.setVisible( true );
 

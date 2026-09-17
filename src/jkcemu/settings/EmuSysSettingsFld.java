@@ -64,6 +64,7 @@ import jkcemu.emusys.poly880.Poly880SettingsFld;
 import jkcemu.emusys.z1013.Z1013SettingsFld;
 import jkcemu.emusys.z9001.Z9001SettingsFld;
 import jkcemu.emusys.zxspectrum.ZXSpectrumSettingsFld;
+import jkcemu.lang.LangUtil;
 
 
 public class EmuSysSettingsFld extends AbstractSettingsFld
@@ -146,7 +147,8 @@ public class EmuSysSettingsFld extends AbstractSettingsFld
 
     ButtonGroup grpSys = new ButtonGroup();
 
-    this.rbA5105 = GUIFactory.createRadioButton( A5105.SYSTEXT, true );
+    this.rbA5105 = GUIFactory.createRadioButton(
+		LangUtil.getText( A5105.SYSTEXT ), true );
     this.rbA5105.addActionListener( this );
     grpSys.add( this.rbA5105 );
     panelSys.add( this.rbA5105, gbc );
@@ -164,7 +166,8 @@ public class EmuSysSettingsFld extends AbstractSettingsFld
     gbc.gridy++;
     panelSys.add( this.rbBCS3, gbc );
 
-    this.rbC80 = GUIFactory.createRadioButton( C80.SYSTEXT );
+    this.rbC80 = GUIFactory.createRadioButton(
+		LangUtil.getText( C80.SYSTEXT ) );
     this.rbC80.addActionListener( this );
     grpSys.add( this.rbC80 );
     gbc.gridy++;
@@ -176,14 +179,16 @@ public class EmuSysSettingsFld extends AbstractSettingsFld
     gbc.gridy++;
     panelSys.add( this.rbHC900, gbc );
 
-    this.rbHEMC = GUIFactory.createRadioButton( HueblerEvertMC.SYSTEXT );
+    this.rbHEMC = GUIFactory.createRadioButton(
+		LangUtil.getText( HueblerEvertMC.SYSTEXT ) );
     this.rbHEMC.addActionListener( this );
     grpSys.add( this.rbHEMC );
     gbc.gridy++;
     panelSys.add( this.rbHEMC, gbc );
 
     this.rbHGMC = GUIFactory.createRadioButton(
-					HueblerGraphicsMC.SYSTEXT );
+					LangUtil.getText(
+						HueblerGraphicsMC.SYSTEXT ) );
     this.rbHGMC.addActionListener( this );
     grpSys.add( this.rbHGMC );
     gbc.gridy++;
@@ -225,13 +230,15 @@ public class EmuSysSettingsFld extends AbstractSettingsFld
     gbc.gridy++;
     panelSys.add( this.rbKC87, gbc );
 
-    this.rbKCcompact = GUIFactory.createRadioButton( KCcompact.SYSTEXT );
+    this.rbKCcompact = GUIFactory.createRadioButton(
+		LangUtil.getText( KCcompact.SYSTEXT ) );
     this.rbKCcompact.addActionListener( this );
     grpSys.add( this.rbKCcompact );
     gbc.gridy++;
     panelSys.add( this.rbKCcompact, gbc );
 
-    this.rbKramerMC = GUIFactory.createRadioButton( KramerMC.SYSTEXT );
+    this.rbKramerMC = GUIFactory.createRadioButton(
+		LangUtil.getText( KramerMC.SYSTEXT ) );
     this.rbKramerMC.addActionListener( this );
     grpSys.add( this.rbKramerMC );
     gbc.insets.top = 5;
@@ -239,7 +246,8 @@ public class EmuSysSettingsFld extends AbstractSettingsFld
     gbc.gridx++;
     panelSys.add( this.rbKramerMC, gbc );
 
-    this.rbLC80 = GUIFactory.createRadioButton( LC80.SYSTEXT );
+    this.rbLC80 = GUIFactory.createRadioButton(
+		LangUtil.getText( LC80.SYSTEXT ) );
     this.rbLC80.addActionListener( this );
     grpSys.add( this.rbLC80 );
     gbc.insets.top = 0;
@@ -264,13 +272,15 @@ public class EmuSysSettingsFld extends AbstractSettingsFld
     gbc.gridy++;
     panelSys.add( this.rbNANOS, gbc );
 
-    this.rbPCM = GUIFactory.createRadioButton( PCM.SYSTEXT );
+    this.rbPCM = GUIFactory.createRadioButton(
+		LangUtil.getText( PCM.SYSTEXT ) );
     this.rbPCM.addActionListener( this );
     grpSys.add( this.rbPCM );
     gbc.gridy++;
     panelSys.add( this.rbPCM, gbc );
 
-    this.rbPoly880 = GUIFactory.createRadioButton( Poly880.SYSTEXT );
+    this.rbPoly880 = GUIFactory.createRadioButton(
+		LangUtil.getText( Poly880.SYSTEXT ) );
     this.rbPoly880.addActionListener( this );
     grpSys.add( this.rbPoly880 );
     gbc.gridy++;
@@ -307,13 +317,15 @@ public class EmuSysSettingsFld extends AbstractSettingsFld
     panelSys.add( this.rbZ9001, gbc );
 
     this.rbZXSpectrum = GUIFactory.createRadioButton(
-						ZXSpectrum.SYSTEXT );
+						LangUtil.getText(
+							ZXSpectrum.SYSTEXT ) );
     this.rbZXSpectrum.addActionListener( this );
     grpSys.add( this.rbZXSpectrum );
     gbc.gridy++;
     panelSys.add( this.rbZXSpectrum, gbc );
 
-    this.rbCustomSys = GUIFactory.createRadioButton( CustomSys.SYSTEXT );
+    this.rbCustomSys = GUIFactory.createRadioButton(
+		LangUtil.getText( CustomSys.SYSTEXT ) );
     this.rbCustomSys.addActionListener( this );
     grpSys.add( this.rbCustomSys );
     gbc.insets.top    = 10;
@@ -330,7 +342,8 @@ public class EmuSysSettingsFld extends AbstractSettingsFld
 
     this.panelOpt = GUIFactory.createPanel( this.cardLayoutSysOpt );
     this.panelOpt.setBorder(
-		GUIFactory.createTitledBorder( "Optionen" ) );
+		GUIFactory.createTitledBorder(
+			LangUtil.getText( "common.section.options" ) ) );
     gbc.anchor     = GridBagConstraints.CENTER;
     gbc.fill       = GridBagConstraints.BOTH;
     gbc.weightx    = 1.0;
@@ -354,7 +367,8 @@ public class EmuSysSettingsFld extends AbstractSettingsFld
 						0, 0 );
 
     panelEmpty.add(
-		GUIFactory.createLabel( "Keine Optionen verf\u00FCgbar" ),
+		GUIFactory.createLabel( LangUtil.getText(
+				"settings.label.no_options_available" ) ),
 		gbcEmpty );
 
 

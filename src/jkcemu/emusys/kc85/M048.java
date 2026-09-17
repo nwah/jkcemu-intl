@@ -9,13 +9,21 @@
 package jkcemu.emusys.kc85;
 
 import java.awt.Component;
+import jkcemu.lang.LangUtil;
 
 
 public class M048 extends AbstractKC85UserPROMModule
 {
   public M048( int slot, int typeByte, Component owner, String fileName )
   {
-    super( slot, typeByte, "M048", 16, 0x4000, owner, fileName );
+    super(
+		slot,
+		typeByte,
+		LangUtil.getText( "kc85.title.m048" ),
+		16,
+		0x4000,
+		owner,
+		fileName );
   }
 
 

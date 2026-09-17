@@ -18,6 +18,7 @@ import java.io.Writer;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class JASCPaletteFile
@@ -38,7 +39,8 @@ public class JASCPaletteFile
   {
     if( fileFilter == null ) {
       fileFilter = ImageUtil.createFileFilter(
-				"Paintshop Pro Farbpalettendatei",
+				LangUtil.getText(
+					"image.filetype.paintshop_pro_color" ),
 				fileSuffixes );
     }
     return fileFilter;

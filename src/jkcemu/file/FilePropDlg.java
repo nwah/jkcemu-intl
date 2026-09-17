@@ -54,7 +54,7 @@ public class FilePropDlg
 
   public FilePropDlg( Frame parent, Path path ) throws IOException
   {
-    super( parent, "Eigenschaften" );
+    super( parent, LangUtil.getText( "common.title.properties" ) );
     this.path          = path;
     this.sizeLabel     = null;
     this.dirSize       = 0;
@@ -110,24 +110,28 @@ public class FilePropDlg
       }
       if( text != null ) {
 	if( !text.isEmpty() ) {
-	  lines.add( new String[] { LangUtil.tr( "Name:" ), text } );
+	  lines.add( new String[] { LangUtil.getText(
+				"file.text.name_colon" ),
+			text } );
 	}
       }
       if( attrs.isRegularFile() ) {
-	lines.add( new String[] { LangUtil.tr( "Typ:" ), LangUtil.tr( "regul\u00E4re Datei" ) } );
+	lines.add( new String[] { LangUtil.getText( "common.label.type" ),
+		LangUtil.getText( "file.text.regular_file" ) } );
 	long size = attrs.size();
 	if( size >= 0 ) {
 	  lines.add( new String[] {
-			LangUtil.tr( "Gr\u00F6\u00DFe:" ),
+			LangUtil.getText( "common.text.size" ),
 			EmuUtil.formatSize( size, false, true ) } );
 	}
       }
       else if( attrs.isDirectory() ) {
-	lines.add( new String[] { LangUtil.tr( "Typ:" ), LangUtil.tr( "Verzeichnis" ) } );
+	lines.add( new String[] { LangUtil.getText( "common.label.type" ),
+		LangUtil.getText( "file.text.directory_verzeichnis" ) } );
 	sizeLineIdx = lines.size();
 	lines.add( new String[] {
-			LangUtil.tr( "Gr\u00F6\u00DFe aller Dateien:" ),
-			LangUtil.tr( "wird berechnet..." ) } );
+			LangUtil.getText( "file.text.size_all_files" ),
+			LangUtil.getText( "file.text.being_calculated" ) } );
       }
       else if( attrs.isSymbolicLink() ) {
 	try {
@@ -137,7 +141,7 @@ public class FilePropDlg
 	    s = p.toString();
 	  }
 	  lines.add( new String[] {
-				LangUtil.tr( "Symbolischer Link auf:" ),
+				LangUtil.getText( "file.text.symbolic_link_symbolischer" ),
 				s != null ? s : "" } );
 	}
 	catch( Exception ex ) {}
@@ -146,7 +150,7 @@ public class FilePropDlg
 	FileTime t = Files.getLastModifiedTime( path );
 	if( t != null ) {
 	  lines.add( new String[] {
-		LangUtil.tr( "Zuletzt ge\u00E4ndert:" ),
+		LangUtil.getText( "file.text.last_modified_colon" ),
 		DateFormat.getDateTimeInstance(
 			DateFormat.MEDIUM,
 			DateFormat.MEDIUM ).format(
@@ -158,7 +162,8 @@ public class FilePropDlg
 	String s = owner.getName();
 	if( s != null ) {
 	  if( !s.isEmpty() ) {
-	    lines.add( new String[] { LangUtil.tr( "Eigent\u00FCmer:" ), s } );
+	    lines.add( new String[] { LangUtil.getText( "file.text.owner" ),
+			s } );
 	  }
 	}
       }
@@ -166,7 +171,8 @@ public class FilePropDlg
 	String s = group.getName();
 	if( s != null ) {
 	  if( !s.isEmpty() ) {
-	    lines.add( new String[] { LangUtil.tr( "Gruppe:" ), s } );
+	    lines.add( new String[] { LangUtil.getText( "file.text.group" ),
+			s } );
 	  }
 	}
       }
@@ -217,7 +223,8 @@ public class FilePropDlg
 	  if( storeSize > 0 ) {
 	    lines.clear();
 
-	    JLabel label = GUIFactory.createLabel( "Datentr\u00E4ger" );
+	    JLabel label = GUIFactory.createLabel(
+			LangUtil.getText( "file.label.volume" ) );
 	    Font   font  = label.getFont();
 	    if( font != null ) {
 	      label.setFont(
@@ -236,29 +243,33 @@ public class FilePropDlg
 	    text = store.name();
 	    if( text != null ) {
 	      if( !text.isEmpty() ) {
-		lines.add( new String[] { LangUtil.tr( "Name:" ), text } );
+		lines.add( new String[] { LangUtil.getText(
+				"file.text.name_colon" ),
+			text } );
 	      }
 	    }
 	    text = store.type();
 	    if( text != null ) {
 	      if( !text.isEmpty() ) {
-		lines.add( new String[] { LangUtil.tr( "Typ:" ), text } );
+		lines.add(
+			new String[] { LangUtil.getText( "common.label.type" ),
+			text } );
 	      }
 	    }
 	    lines.add(
 		new String[] {
-			LangUtil.tr( "Schreibgesch\u00FCtzt:" ),
+			LangUtil.getText( "common.label.read_only" ),
 			store.isReadOnly() ?
-				LangUtil.tr( "ja" ) : LangUtil.tr( "nein" )
+				LangUtil.getText( "file.text.yes" ) : LangUtil.getText( "file.text.no" )
 		} );
 	    lines.add(
 		new String[] {
-			LangUtil.tr( "Gr\u00F6\u00DFe:" ),
+			LangUtil.getText( "common.text.size" ),
 			EmuUtil.formatSize( storeSize, false, true )
 		} );
 	    lines.add(
 		new String[] {
-			LangUtil.tr( "Freier Speicher:" ),
+			LangUtil.getText( "file.text.free_space" ),
 			EmuUtil.formatSize(
 					store.getUnallocatedSpace(),
 					false,
@@ -298,7 +309,7 @@ public class FilePropDlg
     }
     catch( UnsupportedOperationException ex ) {
       throw new IOException(
-		"Dateiattribute k\u00E4nnen nicht gelesen werden.\n" );
+		LangUtil.getText( "file.error.file_attributes_cannot_read" ) );
     }
   }
 

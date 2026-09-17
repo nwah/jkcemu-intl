@@ -22,6 +22,7 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class FloppyDiskFormatDlg extends BaseDlg
@@ -53,8 +54,8 @@ public class FloppyDiskFormatDlg extends BaseDlg
 			FloppyDiskFormat preSelFmt,
 			Flag...          flags )
   {
-    super( owner, "Datei laden" );
-    setTitle( "JKCEMU Diskettenformat" );
+    super( owner, LangUtil.getText( "common.title.load_file" ) );
+    setTitle( LangUtil.getText( "disk.title.jkcemu_disk_format" ) );
     this.approved    = false;
     this.notified    = false;
     this.selectedFmt = null;
@@ -139,21 +140,21 @@ public class FloppyDiskFormatDlg extends BaseDlg
 	  switch( flags[ i ] ) {
 	    case READONLY:
 	      this.cbReadOnly = GUIFactory.createCheckBox(
-					"Schreibschutz (Nur-Lese-Modus)",
+					LangUtil.getText( "common.option.write_protection_read" ),
 					true );
 	      checkBoxes.add( this.cbReadOnly );
 	      break;
 
 	    case AUTO_REFRESH:
 	      this.cbAutoRefresh = GUIFactory.createCheckBox(
-					"Automatisch aktualisieren",
+					LangUtil.getText( "disk.option.update_automatically" ),
 					false );
 	      checkBoxes.add( this.cbAutoRefresh );
 	      break;
 
 	    case FORCE_LOWERCASE:
 	      this.cbForceLowerCase = GUIFactory.createCheckBox(
-					"Dateinamen klein schreiben",
+					LangUtil.getText( "common.option.write_file_names" ),
 					lastForceLowerCase );
 	      checkBoxes.add( this.cbForceLowerCase );
 	      break;

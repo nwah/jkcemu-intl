@@ -17,9 +17,9 @@ import jkcemu.text.TextUtil;
 public class KC85ModuleTableModel extends AbstractTableModel
 {
   private static final String[] colNames = {
-					"Schacht",
-					"Modul",
-					"Beschreibung" };
+					"kc85.column.slot",
+					"kc85.column.module",
+					"kc85.column.description" };
 
   private java.util.List<String[]> rows;
 
@@ -175,7 +175,7 @@ public class KC85ModuleTableModel extends AbstractTableModel
   public String getColumnName( int col )
   {
     return (col >= 0) && (col < colNames.length) ?  
-		LangUtil.tr( colNames[ col ] ) : "";
+		LangUtil.getText( colNames[ col ] ) : "";
   }
 
 

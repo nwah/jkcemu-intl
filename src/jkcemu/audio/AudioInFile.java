@@ -22,6 +22,7 @@ import jkcemu.emusys.kc85.KCAudioCreator;
 import jkcemu.emusys.zxspectrum.ZXSpectrumAudioCreator;
 import jkcemu.file.FileInfo;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import z80emu.Z80CPU;
 
@@ -382,7 +383,8 @@ public class AudioInFile extends AudioIn
 	throw new IOException();
       }
       if( this.fileFrameCnt <= 0 ) {
-	throw new IOException( "Die Datei enth\u00E4lt keine Daten" );
+	throw new IOException(
+		LangUtil.getText( "audio.error.file_contains_no_data" ) );
       }
       if( fileFmtText != null ) {
 	fileFmtText += ": ";

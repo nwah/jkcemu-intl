@@ -146,7 +146,7 @@ public class FileBrowserFrm
 				TreeSelectionListener,
 				TreeWillExpandListener
 {
-  public static final String TITLE = Main.APPNAME + " Datei-Browser";
+  public static final String TITLE = "filebrowser.title.jkcemu_file_browser";
 
   private static FileBrowserFrm instance = null;
 
@@ -522,8 +522,7 @@ public class FileBrowserFrm
 			if( msgState ) {
 			  BaseDlg.showErrorDlg(
 			  	this,
-			  	"Verschieben im selben Verzeichnis"
-					  + " ist nicht m\u00F6glich." );
+			  	LangUtil.getText( "filebrowser.error.moving_within_same" ) );
 			}
 			status = false;
 		      }
@@ -1128,8 +1127,8 @@ public class FileBrowserFrm
     } else {
       BaseDlg.showErrorDlg(
 		this,
-		"Kein Verzeichnis ausgew\u00E4hlt,"
-			+ " in das eingef\u00FCgt werden soll" );
+		LangUtil.getText(
+			"filebrowser.error.no_directory_selected" ) );
     }
   }
 
@@ -1262,7 +1261,7 @@ public class FileBrowserFrm
     this.clipboard             = null;
     this.cutFiles              = new ArrayList<>();
     this.unreachableNetPaths   = startFindUnreachableNetPaths();
-    setTitle( TITLE );
+    setTitle( LangUtil.getText( TITLE ) );
 
 
     // Popup-Menu
@@ -1330,25 +1329,27 @@ public class FileBrowserFrm
 
 
     // Menu Einstellungen
-    this.mnuSettings = GUIFactory.createMenu( EmuUtil.TEXT_SETTINGS );
+    this.mnuSettings = GUIFactory.createMenu(
+		LangUtil.getText( EmuUtil.TEXT_SETTINGS ) );
     this.mnuSettings.setMnemonic(
 		LangUtil.mnemonic( EmuUtil.TEXT_SETTINGS, KeyEvent.VK_E ) );
 
-    this.mnuHiddenFiles = GUIFactory.createCheckBoxMenuItem(
-		"Versteckte Dateien anzeigen",
+    this.mnuHiddenFiles = GUIFactory.createCheckBoxMenuItem( LangUtil.getText(
+			"filebrowser.action.show_hidden_files" ),
 		Main.getBooleanProperty( PROP_SHOW_HIDDEN_FILES, false ) );
     this.mnuHiddenFiles.addActionListener( this );
     this.mnuSettings.add( this.mnuHiddenFiles );
 
     this.mnuSortCaseSensitive = GUIFactory.createCheckBoxMenuItem(
-		"Gro\u00DF-/Kleinschreibung bei Sortierung beachten",
+		LangUtil.getText(
+			"filebrowser.action.case_sensitive_sorting" ),
 		Main.getBooleanProperty( PROP_SORT_CASE_SENSITIVE, false ) );
     this.mnuSortCaseSensitive.addActionListener( this );
     this.mnuSettings.add( this.mnuSortCaseSensitive );
 
     this.mnuWatchServiceEnabled = GUIFactory.createCheckBoxMenuItem(
-		"Angezeigte Verzeichnisse auf \u00C4nderungen"
-						+ " \u00FCberwachen",
+		LangUtil.getText(
+			"filebrowser.action.monitor_displayed" ),
 		Main.getBooleanProperty(
 				PROP_WATCH_SERVICE_ENABLED,
 				true ) );
@@ -1357,43 +1358,43 @@ public class FileBrowserFrm
     this.mnuSettings.addSeparator();
 
     JMenu mnuSettingsPreview = GUIFactory.createMenu(
-			"Max. Dateigr\u00F6\u00DFe f\u00FCr Vorschau" );
+			LangUtil.getText( "filebrowser.menu.max_file_size" ) );
     this.mnuSettings.add( mnuSettingsPreview );
 
     ButtonGroup grpPreviewMaxFileSize = new ButtonGroup();
 
     this.mnuNoPreview = GUIFactory.createRadioButtonMenuItem(
-							"Keine Vorschau" );
+							LangUtil.getText( "filebrowser.action.no_preview" ) );
     this.mnuNoPreview.addActionListener( this );
     grpPreviewMaxFileSize.add( this.mnuNoPreview );
     mnuSettingsPreview.add( this.mnuNoPreview );
 
     this.mnuPreviewMaxFileSize100K = GUIFactory.createRadioButtonMenuItem(
-							"100 KByte" );
+							LangUtil.getText( "filebrowser.action.100_kbyte" ) );
     this.mnuPreviewMaxFileSize100K.addActionListener( this );
     grpPreviewMaxFileSize.add( this.mnuPreviewMaxFileSize100K );
     mnuSettingsPreview.add( this.mnuPreviewMaxFileSize100K );
 
     this.mnuPreviewMaxFileSize1M = GUIFactory.createRadioButtonMenuItem(
-							"1 MByte" );
+							LangUtil.getText( "filebrowser.action.1_mbyte" ) );
     this.mnuPreviewMaxFileSize1M.addActionListener( this );
     grpPreviewMaxFileSize.add( this.mnuPreviewMaxFileSize1M );
     mnuSettingsPreview.add( this.mnuPreviewMaxFileSize1M );
 
     this.mnuPreviewMaxFileSize10M = GUIFactory.createRadioButtonMenuItem(
-							"10 MByte" );
+							LangUtil.getText( "filebrowser.action.10_mbyte" ) );
     this.mnuPreviewMaxFileSize10M.addActionListener( this );
     grpPreviewMaxFileSize.add( this.mnuPreviewMaxFileSize10M );
     mnuSettingsPreview.add( this.mnuPreviewMaxFileSize10M );
 
     this.mnuPreviewMaxFileSize100M = GUIFactory.createRadioButtonMenuItem(
-							"100 MByte" );
+							LangUtil.getText( "filebrowser.action.100_mbyte" ) );
     this.mnuPreviewMaxFileSize100M.addActionListener( this );
     grpPreviewMaxFileSize.add( this.mnuPreviewMaxFileSize100M );
     mnuSettingsPreview.add( this.mnuPreviewMaxFileSize100M );
 
     this.mnuPreviewNoFileSizeLimit = GUIFactory.createRadioButtonMenuItem(
-						"Unbegrenzt" );
+						LangUtil.getText( "filebrowser.action.unlimited" ) );
     this.mnuPreviewNoFileSizeLimit.addActionListener( this );
     grpPreviewMaxFileSize.add( this.mnuPreviewNoFileSizeLimit );
     mnuSettingsPreview.add( this.mnuPreviewNoFileSizeLimit );
@@ -1427,7 +1428,8 @@ public class FileBrowserFrm
     // Menu Hilfe
     JMenu mnuHelp = createMenuHelp();
 
-    this.mnuHelpContent = createMenuItem( "Hilfe zum Datei-Browser..." );
+    this.mnuHelpContent = createMenuItem( LangUtil.getText(
+			"filebrowser.action.help_file_browser" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 

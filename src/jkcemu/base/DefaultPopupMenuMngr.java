@@ -19,6 +19,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.JTextComponent;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -194,10 +195,14 @@ public class DefaultPopupMenuMngr implements ActionListener, MouseListener
 
   private DefaultPopupMenuMngr()
   {
-    this.mnuCut       = GUIFactory.createMenuItem( EmuUtil.TEXT_CUT );
-    this.mnuCopy      = GUIFactory.createMenuItem( EmuUtil.TEXT_COPY );
-    this.mnuSelectAll = GUIFactory.createMenuItem( EmuUtil.TEXT_SELECT_ALL );
-    this.mnuPaste     = GUIFactory.createMenuItem( EmuUtil.TEXT_PASTE );
+    this.mnuCut       = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_CUT ) );
+    this.mnuCopy      = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_COPY ) );
+    this.mnuSelectAll = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_SELECT_ALL ) );
+    this.mnuPaste     = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_PASTE ) );
     this.mnuCut.addActionListener( this );
     this.mnuCopy.addActionListener( this );
     this.mnuPaste.addActionListener( this );

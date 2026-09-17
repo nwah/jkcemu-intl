@@ -33,6 +33,7 @@ import jkcemu.base.BaseDlg;
 import jkcemu.base.CancelableProgressDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class CropDlg extends BaseDlg
@@ -223,7 +224,7 @@ public class CropDlg extends BaseDlg
     this.image         = null;
     this.cropImg       = null;
     this.orgRatio      = null;
-    setTitle( "Zuschneiden" );
+    setTitle( LangUtil.getText( "image.action.crop" ) );
 
 
     // Fensterinhalt
@@ -238,7 +239,7 @@ public class CropDlg extends BaseDlg
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "X:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText( "image.label.x" ) ), gbc );
 
     this.spinnerModelX = new SpinnerNumberModel( 0, 0, 9999, 1 );
     this.spinnerX      = GUIFactory.createSpinner( this.spinnerModelX );
@@ -248,7 +249,8 @@ public class CropDlg extends BaseDlg
 
     gbc.insets.left = 20;
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Breite:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.width" ) ), gbc );
 
     this.spinnerModelWidth = new SpinnerNumberModel( 0, 0, 9999, 1 );
     this.spinnerWidth      = GUIFactory.createSpinner(
@@ -260,7 +262,7 @@ public class CropDlg extends BaseDlg
     gbc.insets.left = 5;
     gbc.gridx       = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Y:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText( "image.label.y" ) ), gbc );
 
     this.spinnerModelY = new SpinnerNumberModel( 0, 0, 9999, 1 );
     this.spinnerY      = GUIFactory.createSpinner( this.spinnerModelY );
@@ -270,7 +272,8 @@ public class CropDlg extends BaseDlg
 
     gbc.insets.left = 20;
     gbc.gridx++;
-    add( GUIFactory.createLabel( "H\u00F6he:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.height" ) ), gbc );
 
     this.spinnerModelHeight = new SpinnerNumberModel( 0, 0, 9999, 1 );
     this.spinnerHeight      = GUIFactory.createSpinner(
@@ -299,11 +302,13 @@ public class CropDlg extends BaseDlg
 					0, 0 );
 
     panelOpt.add(
-		GUIFactory.createLabel( "Seitenverh\u00E4ltnis:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText( "image.label.aspect_ratio" ) ),
 		gbcOpt );
     gbcOpt.gridy++;
     panelOpt.add(
-		GUIFactory.createLabel( "Farbe f\u00FCr Auswahl:" ),
+		GUIFactory.createLabel( LangUtil.getText(
+				"image.label.color_selection" ) ),
 		gbcOpt );
 
     this.comboRatio = GUIFactory.createComboBox();
@@ -331,7 +336,8 @@ public class CropDlg extends BaseDlg
     gbc.gridy++;
     add( panelBtn, gbc );
 
-    this.btnCrop = GUIFactory.createButton( "Zuschneiden" );
+    this.btnCrop = GUIFactory.createButton(
+		LangUtil.getText( "image.action.crop" ) );
     panelBtn.add( this.btnCrop );
 
     this.btnClose = GUIFactory.createButtonClose();
@@ -561,12 +567,7 @@ public class CropDlg extends BaseDlg
       if( ensureRatio() ) {
 	state = showYesNoDlg(
 			this,
-			"Der ausgew\u00E4hlte Bereich entsprach nicht"
-				+ " dem gew\u00FCnschten\n"
-				+ "Seitenverh\u00E4ltnis und wurde deshalb"
-				+ " angepasst.\n"
-				+ "M\u00F6chten Sie das Bild nun auf die"
-				+ " angepassten Werte zuschneiden?" );
+			LangUtil.getText( "image.msg.selected_area_not_match" ) );
       }
       if( state ) {
 	int x = EmuUtil.getInt( this.spinnerX );

@@ -35,16 +35,16 @@ public class IOSettingsFld
 			implements DocumentListener
 {
   private static final String LABEL_UNUSED_PORT_VALUE
-		= "Gelesener Wert von nicht belegten E/A-Adressen (hex):";
+		= "customsys.label.value_read_unused";
 
   private static final String[] SIO_CLOCK_ITEMS = {
-					"CTC Ausgang 0",
-					"CTC Ausgang 1",
-					"CTC Ausgang 2" };
+					"customsys.choice.ctc_output_0",
+					"customsys.choice.ctc_output_1",
+					"customsys.choice.ctc_output_2" };
 
   private static final String[] SIO_OUT_ITEMS = {
-					"nichts angeschlossen",
-					"Drucker" };
+					"customsys.choice.nothing_connected",
+					"emusys.choice.printer" };
 
   private CustomSysSettingsFld csSettingsFld;
   private int                  pioIOBaseAddr;
@@ -97,7 +97,7 @@ public class IOSettingsFld
 					0, 0 );
 
     this.cbPioEnabled = GUIFactory.createCheckBox(
-		"PIO emulieren an E/A-Basisadresse (hex):" );
+		LangUtil.getText( "customsys.option.emulate_pio_i" ) );
     add( this.cbPioEnabled, gbc );
 
     this.docPioIOBaseAddr = new HexDocument(
@@ -112,7 +112,7 @@ public class IOSettingsFld
     add( this.fldPioIOBaseAddr, gbc );
 
     this.cbSioEnabled = GUIFactory.createCheckBox(
-		"SIO emulieren an E/A-Basisadresse (hex):" );
+		LangUtil.getText( "customsys.option.emulate_sio_i" ) );
     gbc.gridwidth = 2;
     gbc.gridx     = 0;
     gbc.gridy++;
@@ -129,61 +129,63 @@ public class IOSettingsFld
     add( this.fldSioIOBaseAddr, gbc );
 
     this.labelSioClockA = GUIFactory.createLabel(
-					"Kanal A getaktet durch:" );
+					LangUtil.getText( "customsys.label.channel_clocked" ) );
     gbc.insets.left   = 50;
     gbc.gridx         = 0;
     gbc.gridy++;
     add( this.labelSioClockA, gbc );
 
     this.comboSioClockA = GUIFactory.createComboBox(
-				LangUtil.tr( SIO_CLOCK_ITEMS ) );
+				LangUtil.getTexts( SIO_CLOCK_ITEMS ) );
     this.comboSioClockA.setEditable( false );
     gbc.insets.left = 5;
     gbc.gridx++;
     add( this.comboSioClockA, gbc );
 
     this.labelSioClockB = GUIFactory.createLabel(
-					"Kanal B getaktet durch:" );
+					LangUtil.getText( "customsys.label.channel_b_clocked" ) );
     gbc.insets.left   = 50;
     gbc.gridx         = 0;
     gbc.gridy++;
     add( this.labelSioClockB, gbc );
 
     this.comboSioClockB = GUIFactory.createComboBox(
-				LangUtil.tr( SIO_CLOCK_ITEMS ) );
+				LangUtil.getTexts( SIO_CLOCK_ITEMS ) );
     this.comboSioClockB.setEditable( false );
     gbc.insets.left = 5;
     gbc.gridx++;
     add( this.comboSioClockB, gbc );
 
-    this.labelSioOutA = GUIFactory.createLabel( "Kanal A Ausgang:" );
+    this.labelSioOutA = GUIFactory.createLabel( LangUtil.getText(
+			"customsys.label.channel_output" ) );
     gbc.insets.left = 50;
     gbc.gridx       = 0;
     gbc.gridy++;
     add( this.labelSioOutA, gbc );
 
     this.comboSioOutA = GUIFactory.createComboBox(
-				LangUtil.tr( SIO_OUT_ITEMS ) );
+				LangUtil.getTexts( SIO_OUT_ITEMS ) );
     this.comboSioOutA.setEditable( false );
     gbc.insets.left = 5;
     gbc.gridx++;
     add( this.comboSioOutA, gbc );
 
-    this.labelSioOutB = GUIFactory.createLabel( "Kanal B Ausgang:" );
+    this.labelSioOutB = GUIFactory.createLabel( LangUtil.getText(
+			"customsys.label.channel_b_output" ) );
     gbc.insets.left = 50;
     gbc.gridx       = 0;
     gbc.gridy++;
     add( this.labelSioOutB, gbc );
 
     this.comboSioOutB = GUIFactory.createComboBox(
-				LangUtil.tr( SIO_OUT_ITEMS ) );
+				LangUtil.getTexts( SIO_OUT_ITEMS ) );
     this.comboSioOutB.setEditable( false );
     gbc.insets.left = 5;
     gbc.gridx++;
     add( this.comboSioOutB, gbc );
 
     this.cbCtcEnabled = GUIFactory.createCheckBox(
-		"CTC emulieren an E/A-Basisadresse (hex):" );
+		LangUtil.getText( "customsys.option.emulate_ctc_i" ) );
     gbc.gridwidth = 2;
     gbc.gridx     = 0;
     gbc.gridy++;
@@ -199,8 +201,8 @@ public class IOSettingsFld
     gbc.gridx += 2;
     add( this.fldCtcIOBaseAddr, gbc );
 
-    this.cbK1520SoundEnabled = GUIFactory.createCheckBox(
-		"K1520-Sound-Karte emulieren an E/A-Basisadresse (hex):" );
+    this.cbK1520SoundEnabled = GUIFactory.createCheckBox( LangUtil.getText(
+			"customsys.option.emulate_k1520_sound" ) );
     gbc.gridwidth = 2;
     gbc.gridx     = 0;
     gbc.gridy++;
@@ -216,8 +218,8 @@ public class IOSettingsFld
     gbc.gridx += 2;
     add( this.fldK1520SoundIOBaseAddr, gbc );
 
-    this.cbKCNetEnabled = GUIFactory.createCheckBox(
-		"KCNet emulieren an E/A-Basisadresse (hex):" );
+    this.cbKCNetEnabled = GUIFactory.createCheckBox( LangUtil.getText(
+			"customsys.option.emulate_kcnet_i" ) );
     gbc.gridwidth = 2;
     gbc.gridx     = 0;
     gbc.gridy++;
@@ -233,8 +235,8 @@ public class IOSettingsFld
     gbc.gridx += 2;
     add( this.fldKCNetIOBaseAddr, gbc );
 
-    this.cbVdipEnabled = GUIFactory.createCheckBox(
-		"USB (VDIP) emulieren an E/A-Basisadresse (hex):" );
+    this.cbVdipEnabled = GUIFactory.createCheckBox( LangUtil.getText(
+			"customsys.option.emulate_usb_vdip" ) );
     gbc.gridwidth = 2;
     gbc.gridx     = 0;
     gbc.gridy++;
@@ -256,10 +258,12 @@ public class IOSettingsFld
     gbc.gridx         = 0;
     gbc.gridy++;
     add(
-		GUIFactory.createLabel( LABEL_UNUSED_PORT_VALUE ),
+		GUIFactory.createLabel(
+			LangUtil.getText( LABEL_UNUSED_PORT_VALUE ) ),
 		gbc );
 
-    this.docUnusedPortValue = new HexDocument( 2, LABEL_UNUSED_PORT_VALUE );
+    this.docUnusedPortValue = new HexDocument(
+		2, LangUtil.getText( LABEL_UNUSED_PORT_VALUE ) );
     this.fldUnusedPortValue = GUIFactory.createTextField(
 					this.docUnusedPortValue,
 					3 );
@@ -343,11 +347,8 @@ public class IOSettingsFld
 	&& this.cbSioEnabled.isSelected()
 	&& !this.cbCtcEnabled.isSelected() )
     {
-      throw new UserInputException(
-		"Wenn eine SIO emuliert wird,\n"
-			+ "m\u00FCssen Sie auch die Emulation der CTC"
-			+ " aktivieren,\n"
-			+ "da diese die SIO taktet." );
+      throw new UserInputException( LangUtil.getText(
+			"customsys.error.sio_emulated_also" ) );
     }
     this.csSettingsFld.applyIOAddrInput(
 				selected,

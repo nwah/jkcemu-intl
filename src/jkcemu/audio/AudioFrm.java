@@ -37,6 +37,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.HelpFrm;
 import jkcemu.base.ScreenFrm;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import z80emu.Z80CPU;
 
@@ -109,18 +110,12 @@ public class AudioFrm extends BaseFrm implements ComponentListener
   {
     Z80CPU cpu = this.emuThread.getZ80CPU();
     if( !cpu.isActive() ) {
-      throw new IOException( "Der emulierte Mikroprozessor ist gerade"
-		+ " nicht aktiv.\n"
-		+ "Aus diesem Grund kann kein Audiokanal ge\u00F6ffnet"
-		+ " werden,\n"
-		+ "der synchron zu diesem bedient werden soll." );
+      throw new IOException(
+		LangUtil.getText( "audio.error.emulated_microprocessor_currently_not" ) );
     }
     if( cpu.isPause() ) {
-      throw new IOException( "Der emulierte Mikroprozessor ist gerade"
-		+ " auf Pause gesetzt.\n"
-		+ "Aus diesem Grund kann kein Audiokanal ge\u00F6ffnet"
-		+ " werden,\n"
-		+ "der synchron zu diesem bedient werden soll." );
+      throw new IOException(
+		LangUtil.getText( "audio.error.emulated_microprocessor_currently_paused" ) );
     }
     AudioIO.checkOpenExclCPUSynchronLine();
   }
@@ -132,9 +127,7 @@ public class AudioFrm extends BaseFrm implements ComponentListener
     if( khz <= 0 ) {
       BaseDlg.showErrorDlg(
 	this,
-	"Sie m\u00FCssen die Geschwindigkeit des Emulators\n"
-		+ "auf einen konkreten Wert begrenzen, da dieser\n"
-		+ "als Zeitbasis f\u00FCr das Audiosystem dient.\n" );
+	LangUtil.getText( "audio.error.limit_speed_emulator" ) );
     }
     return khz;
   }
@@ -305,14 +298,17 @@ public class AudioFrm extends BaseFrm implements ComponentListener
       // benoetigte Tabs hinzufuegen
       int idxToSelect = -1;
       if( newEmuSys.supportsTapeIn() ) {
-	this.tabbedPane.addTab( "Eingang Kassette", this.tabTapeIn );
+	this.tabbedPane.addTab( LangUtil.getText( "audio.section.tape_input" ),
+		this.tabTapeIn );
 	this.tabTapeIn.updFieldsEnabled();
 	if( this.tabTapeIn.checkEnableAudio( this.autoEnableProps ) ) {
 	  idxToSelect = this.tabbedPane.getTabCount() - 1;
 	}
       }
       if( newEmuSys.supportsTapeOut() ) {
-	this.tabbedPane.addTab( "Ausgang Kassette", this.tabTapeOut );
+	this.tabbedPane.addTab(
+		LangUtil.getText( "audio.section.tape_output" ),
+		this.tabTapeOut );
 	this.tabTapeOut.updFieldsEnabled();
 	if( this.tabTapeOut.checkEnableAudio( this.autoEnableProps ) ) {
 	  idxToSelect = this.tabbedPane.getTabCount() - 1;
@@ -438,7 +434,7 @@ public class AudioFrm extends BaseFrm implements ComponentListener
     this.tabTapeOut      = new TapeOutFld( this, this.emuThread );
     this.speedKHz        = 0;
     this.autoEnableProps = null;
-    setTitle( "JKCEMU Audio/Kassette" );
+    setTitle( LangUtil.getText( "audio.title.jkcemu_audio_tape" ) );
 
 
     // Menu Datei
@@ -449,7 +445,8 @@ public class AudioFrm extends BaseFrm implements ComponentListener
 
     // Menu Hilfe
     JMenu mnuHelp       = createMenuHelp();
-    this.mnuHelpContent = createMenuItem( "Hilfe zu Audio/Kassette..." );
+    this.mnuHelpContent = createMenuItem(
+		LangUtil.getText( "audio.action.help_audio_tape" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 

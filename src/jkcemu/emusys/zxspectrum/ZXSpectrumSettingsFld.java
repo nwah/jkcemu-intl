@@ -22,6 +22,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.ZXSpectrum;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.SettingsFrm;
 
@@ -49,11 +50,14 @@ public class ZXSpectrumSettingsFld extends AbstractSettingsFld
 
     ButtonGroup grpModel = new ButtonGroup();
 
-    this.rb48K = GUIFactory.createRadioButton( "ZX Spectrum 48K", true );
+    this.rb48K = GUIFactory.createRadioButton(
+		LangUtil.getText( "zxspectrum.option.zx_spectrum_48k" ),
+		true );
     grpModel.add( this.rb48K );
     add( this.rb48K, gbc );
 
-    this.rb128K = GUIFactory.createRadioButton( "ZX Spectrum+ 128K" );
+    this.rb128K = GUIFactory.createRadioButton( LangUtil.getText(
+			"zxspectrum.option.zx_spectrum_128k" ) );
     grpModel.add( this.rb128K );
     gbc.insets.top    = 0;
     gbc.insets.bottom = 5;
@@ -70,7 +74,7 @@ public class ZXSpectrumSettingsFld extends AbstractSettingsFld
     this.fldAltROM = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + ZXSpectrum.PROP_ROM_PREFIX,
-		"Alternativer Betriebssystem-ROM:" );
+		LangUtil.getText( "emusys.text.alternative_operating" ) );
     gbc.insets.top    = 5;
     gbc.insets.bottom = 5;
     gbc.gridy++;

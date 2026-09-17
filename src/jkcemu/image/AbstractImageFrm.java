@@ -91,7 +91,8 @@ public abstract class AbstractImageFrm
     if( defaultItem != null ) {
       this.comboScale.setSelectedItem( defaultItem );
     }
-    this.comboScale.setToolTipText( "Skalierung der Anzeige" );
+    this.comboScale.setToolTipText(
+		LangUtil.getText( "image.tooltip.scaling_display" ) );
     this.comboScale.addActionListener( this );
     return this.comboScale;
   }
@@ -233,10 +234,8 @@ public abstract class AbstractImageFrm
 	if( (w > 0) && (h > 0) ) {
 	  switch( JOptionPane.showConfirmDialog(
 			this,
-			LangUtil.tr(
-				"Soll das Bild gedreht gespeichert werden,\n"
-					+ "so wie Sie es gerade sehen?" ),
-			LangUtil.tr( "Bild gedreht" ),
+			LangUtil.getText( "image.text.want_save_image" ),
+			LangUtil.getText( "image.text.image_rotated" ),
 			JOptionPane.YES_NO_CANCEL_OPTION,
 			JOptionPane.QUESTION_MESSAGE ) )
 	  {

@@ -18,11 +18,11 @@ import z80emu.Z80MemView;
 public class VarTableModel extends AbstractTableModel
 {
   private static final String[] colNames = {
-					"Bezeichnung",
-					"Adresse",
-					"Typ",
-					"Bytes (Hex)",
-					"Wert" };
+					"debugger.column.name",
+					"debugger.column.address",
+					"debugger.column.type",
+					"debugger.column.bytes_hex",
+					"common.column.value" };
 
   private java.util.List<VarData> rows;
   private boolean                 valuesEnabled;
@@ -145,7 +145,7 @@ public class VarTableModel extends AbstractTableModel
   public String getColumnName( int col )
   {
     return (col >= 0) && (col < colNames.length) ? 
-		LangUtil.tr( colNames[ col ] ) : "";
+		LangUtil.getText( colNames[ col ] ) : "";
   }
 
 

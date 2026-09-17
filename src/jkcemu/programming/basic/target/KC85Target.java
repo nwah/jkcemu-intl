@@ -10,6 +10,7 @@ package jkcemu.programming.basic.target;
 
 import jkcemu.base.EmuSys;
 import jkcemu.emusys.KC85;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.basic.AbstractTarget;
 import jkcemu.programming.basic.AsmCodeBuf;
 import jkcemu.programming.basic.BasicCompiler;
@@ -430,9 +431,8 @@ public class KC85Target extends AbstractTarget
       }
     }
     if( !done ) {
-      compiler.putWarning(
-		"Programm kann auf dem Zielsystem nicht aufgerufen werden,"
-				+ " da der Programmname leer ist." );
+      compiler.putWarning( LangUtil.getText(
+			"basic.msg.program_cannot_called" ) );
     }
     buf.append( "\tENT\n" );
   }

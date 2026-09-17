@@ -3,7 +3,7 @@
  *
  * Kleincomputer-Emulator
  *
- * Zugriff auf die Uebersetzungskataloge (gettext-Stil)
+ * Zugriff auf die Sprachschluessel (ResourceBundle-basiert)
  */
 
 package jkcemu.lang;
@@ -21,26 +21,36 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 import jkcemu.Main;
 
 
 public class LangUtil
 {
   /*
-   * "de" bzw. null bedeutet: kein Katalog geladen,
-   * tr(...) liefert dann immer den deutschen Quelltext unveraendert.
+   * "de" ist der Sprachschluessel, der verwendet wird,
+   * wenn noch nie setLangCode(...) aufgerufen wurde.
+   * Im Unterschied zum alten gettext-basierten System wird auch
+   * fuer "de" ein echtes ResourceBundle geladen
+   * (lang/jkcemu_de.properties), da an den Aufrufstellen inzwischen
+   * durchgaengig symbolische Schluessel uebergeben werden --
+   * auch fuer den deutschen Text.
    */
   public static final String LANG_CODE_DE = "de";
 
-  private static final String RES_PREFIX     = "/lang/";
-  private static final String RES_SUFFIX     = ".po";
-  private static final String RES_LANGUAGES  = "/lang/languages.txt";
-  private static final String CTX_MNEMONIC   = "mnemonic";
-  private static final String PROP_COLLECT   = "jkcemu.lang.collect";
+  private static final String  BUNDLE_BASE_NAME = "lang.jkcemu";
+  private static final String  RES_LANGUAGES    = "/lang/languages.txt";
+  private static final String  MNEMONIC_SUFFIX  = ".mnemonic";
+  private static final String  PROP_COLLECT     = "jkcemu.lang.collect";
+  private static final Pattern KEY_PATTERN      = Pattern.compile(
+					"[a-z][a-z0-9_]*(\\.[a-z0-9_]+)+" );
 
-  private static volatile String langCode = null;
-  private static volatile POFile poFile   = null;
+  private static volatile String         langCode    = null;
+  private static volatile ResourceBundle bundle      = null;
+  private static volatile boolean        initialized = false;
 
   private static final Object          collectLock = new Object();
   private static Map<String,Boolean>   collectMap  = null;
@@ -99,41 +109,39 @@ public class LangUtil
   }
 
 
-  /*
-   * Liefert zu einem im Menuetext enthaltenen Mnemonic-Zeichen
-   * den dazu passenden Tastencode.
-   * Dazu wird im Katalog nach einem Eintrag mit dem Kontext
-   * "mnemonic" zum uebergebenen Menuetext gesucht.
-   * Ist die Uebersetzung genau ein Zeichen lang,
-   * wird daraus der Tastencode ermittelt,
-   * anderenfalls wird defaultKey zurueckgeliefert.
-   */
-  public static int mnemonic( String menuText, int defaultKey )
-  {
-    int rv = defaultKey;
-    if( menuText != null ) {
-      String translation = lookup( CTX_MNEMONIC, menuText );
-      collect( CTX_MNEMONIC, menuText, translation != null );
-      if( (translation != null) && (translation.length() == 1) ) {
-	int keyCode = KeyEvent.getExtendedKeyCodeForChar(
-						translation.charAt( 0 ) );
-	if( keyCode != KeyEvent.VK_UNDEFINED ) {
-	  rv = keyCode;
-	}
-      }
-    }
-    return rv;
-  }
-
-
   public static void setLangCode( String code )
   {
-    if( (code == null) || code.equals( LANG_CODE_DE ) ) {
-      langCode = null;
-      poFile   = null;
-    } else {
-      langCode = code;
-      poFile   = loadPOFile( code );
+    String c = ( (code == null) || code.equals( LANG_CODE_DE ) )
+			? LANG_CODE_DE
+			: code;
+    langCode    = c;
+    initialized = true;
+
+    /*
+     * getNoFallbackControl unterdrueckt lediglich den Rueckfall auf
+     * das Bundle der JVM-Standard-Locale, falls fuer die angeforderte
+     * Locale ueberhaupt nichts gefunden wird.
+     * Innerhalb der Kandidatenkette der angeforderten Locale selbst
+     * bleibt der Rueckfall auf das Basis-Bundle erhalten.
+     * Damit liefert "de" das deutsche Bundle jkcemu_de.properties,
+     * und jeder andere bzw. unbekannte Schluessel liefert ueber den
+     * Rueckfall innerhalb dieser Kette das englische Basis-Bundle
+     * jkcemu.properties.
+     */
+    try {
+      bundle = ResourceBundle.getBundle(
+			BUNDLE_BASE_NAME,
+			Locale.forLanguageTag( c ),
+			LangUtil.class.getClassLoader(),
+			ResourceBundle.Control.getNoFallbackControl(
+				ResourceBundle.Control.FORMAT_PROPERTIES ) );
+    }
+    catch( MissingResourceException ex ) {
+      Main.printlnErr(
+		"Sprachschluessel-Katalog fuer \'" + c
+			+ "\' kann nicht geladen werden: "
+			+ ex.getMessage() );
+      bundle = null;
     }
 
     /*
@@ -150,46 +158,46 @@ public class LangUtil
      */
     try {
       Locale.setDefault(
-		Locale.Category.DISPLAY,
-		Locale.forLanguageTag(
-			code != null ? code : LANG_CODE_DE ) );
+			Locale.Category.DISPLAY,
+			Locale.forLanguageTag( c ) );
     }
     catch( Exception ex ) {}
   }
 
 
-  public static String tr( String text )
+  public static String getText( String keyOrText )
   {
-    String rv = text;
-    if( text != null ) {
-      String translation = lookup( null, text );
-      collect( null, text, translation != null );
-      if( translation != null ) {
-	rv = translation;
+    if( keyOrText == null ) {
+      return null;
+    }
+    ensureInitialized();
+
+    String         rv  = keyOrText;
+    boolean        hit = false;
+    ResourceBundle b   = bundle;
+    if( b != null ) {
+      try {
+	rv  = b.getString( keyOrText );
+	hit = true;
+      }
+      catch( MissingResourceException ex ) {
+	// Schluessel nicht im Katalog enthalten -> unten unveraendert liefern
       }
     }
-    return rv;
-  }
 
-
-  /*
-   * Uebersetzung eines Textarrays,
-   * wobei ein neues Array zurueckgeliefert wird.
-   * Die Methode ist fuer Auswahlfelder gedacht,
-   * deren Auswahl ueber den Index und nicht ueber den angezeigten
-   * Text ausgewertet wird.
-   * Bei Auswahlfeldern, die den Text selbst als Wert verwenden,
-   * darf sie nicht angewendet werden!
-   */
-  public static String[] tr( String[] texts )
-  {
-    String[] rv = texts;
-    if( texts != null ) {
-      rv = new String[ texts.length ];
-      for( int i = 0; i < texts.length; i++ ) {
-	rv[ i ] = tr( texts[ i ] );
-      }
-    }
+    /*
+     * Diese Methode muss tolerant sein:
+     * An generischen Text-Senken dieser Anwendung
+     * (z.B. GUIFactory, BaseDlg, OptionDlg, FileFormat
+     * und aehnliche Hilfsklassen) wird entweder ein symbolischer
+     * Schluessel (aus einer statischen Schluessel-Konstante)
+     * oder bereits uebersetzter bzw. zur Laufzeit dynamisch
+     * zusammengesetzter Text uebergeben, der gar kein Schluessel ist.
+     * Deshalb wird ein nicht erkannter Schluessel nicht als Fehler
+     * behandelt, sondern unveraendert zurueckgeliefert,
+     * anstatt eine Ausnahme auszuloesen oder den Text zu verstuemmeln.
+     */
+    collect( keyOrText, hit );
     return rv;
   }
 
@@ -204,9 +212,9 @@ public class LangUtil
    * was bei den hier auszugebenden technischen Werten
    * (Adressen, Anzahlen, Byte- und Sektorgroessen) falsch waere.
    */
-  public static String tr( String text, Object... args )
+  public static String getText( String key, Object... args )
   {
-    String rv = tr( text );
+    String rv = getText( key );
     if( (rv != null) && (args != null) && (args.length > 0) ) {
       Object[] fmtArgs = new Object[ args.length ];
       for( int i = 0; i < args.length; i++ ) {
@@ -222,14 +230,50 @@ public class LangUtil
   }
 
 
-  public static String trCtx( String context, String text )
+  /*
+   * Uebersetzung eines Textarrays,
+   * wobei ein neues Array zurueckgeliefert wird.
+   * Die Methode ist fuer Auswahlfelder gedacht,
+   * deren Auswahl ueber den Index und nicht ueber den angezeigten
+   * Text ausgewertet wird.
+   * Bei Auswahlfeldern, die den Text selbst als Wert verwenden,
+   * darf sie nicht angewendet werden!
+   */
+  public static String[] getTexts( String[] texts )
   {
-    String rv = text;
-    if( text != null ) {
-      String translation = lookup( context, text );
-      collect( context, text, translation != null );
-      if( translation != null ) {
-	rv = translation;
+    String[] rv = texts;
+    if( texts != null ) {
+      rv = new String[ texts.length ];
+      for( int i = 0; i < texts.length; i++ ) {
+	rv[ i ] = getText( texts[ i ] );
+      }
+    }
+    return rv;
+  }
+
+
+  /*
+   * Liefert zu einem Schluessel den dazu passenden Tastencode
+   * fuer das Mnemonic.
+   * Dazu wird nach dem Schluessel mit dem Suffix ".mnemonic" gesucht.
+   * Da getText(...) fuer ein nicht-null-Argument niemals null liefert,
+   * sondern im Nichttrefferfall das Argument unveraendert zurueckgibt,
+   * ist ein "nicht gefunden" hier die Zeichenkette
+   * key + ".mnemonic" selbst, die praktisch nie genau ein Zeichen
+   * lang ist. Die Pruefung auf Laenge 1 reicht also aus, um einen
+   * echten Mnemonic-Treffer von einem Fehltreffer zu unterscheiden.
+   */
+  public static int mnemonic( String key, int defaultKey )
+  {
+    int rv = defaultKey;
+    if( key != null ) {
+      String translation = getText( key + MNEMONIC_SUFFIX );
+      if( translation.length() == 1 ) {
+	int keyCode = KeyEvent.getExtendedKeyCodeForChar(
+						translation.charAt( 0 ) );
+	if( keyCode != KeyEvent.VK_UNDEFINED ) {
+	  rv = keyCode;
+	}
       }
     }
     return rv;
@@ -238,21 +282,34 @@ public class LangUtil
 
 	/* --- private Methoden --- */
 
+  private static void ensureInitialized()
+  {
+    if( !initialized ) {
+      setLangCode( LANG_CODE_DE );
+    }
+  }
+
+
   /*
-   * Sammeln aller angefragten Texte fuer die QS,
+   * Sammeln aller angefragten Schluessel fuer die QS,
    * gesteuert ueber die System-Property "jkcemu.lang.collect".
    * Ist diese gesetzt, wird ihr Wert als Dateiname interpretiert,
-   * in den beim Beenden der JVM alle angefragten Texte
+   * in den beim Beenden der JVM alle angefragten Schluessel
    * zusammen mit dem Ergebnis (Treffer/kein Treffer) geschrieben werden.
+   * Erfasst wird nur, was wie ein echter symbolischer Schluessel
+   * aussieht (klein geschrieben, punktgegliedert), damit nicht
+   * jeder beliebige, bereits fertige Anzeigetext den Bericht
+   * verunreinigt.
    */
-  private static void collect( String context, String text, boolean hit )
+  private static void collect( String text, boolean hit )
   {
-    if( isCollectEnabled() ) {
-      String key = (context != null ? context + '\u0004' + text : text);
+    if( isCollectEnabled()
+	&& (text != null)
+	&& KEY_PATTERN.matcher( text ).matches() ) {
       synchronized( collectLock ) {
-	Boolean old = collectMap.get( key );
+	Boolean old = collectMap.get( text );
 	if( (old == null) || (!old.booleanValue() && hit) ) {
-	  collectMap.put( key, Boolean.valueOf( hit ) );
+	  collectMap.put( text, Boolean.valueOf( hit ) );
 	}
       }
     }
@@ -282,41 +339,6 @@ public class LangUtil
       }
     }
     return collectMap != null;
-  }
-
-
-  private static POFile loadPOFile( String code )
-  {
-    POFile      rv       = null;
-    String      resource = RES_PREFIX + code + RES_SUFFIX;
-    InputStream in       = LangUtil.class.getResourceAsStream( resource );
-    if( in != null ) {
-      try {
-	rv = POFile.load( in );
-      }
-      catch( IOException ex ) {
-	Main.printlnErr(
-		"Sprachdatei " + resource
-			+ " kann nicht geladen werden: "
-			+ ex.getMessage() );
-      }
-      finally {
-	try {
-	  in.close();
-	}
-	catch( IOException ex ) {}
-      }
-    } else {
-      Main.printlnErr( "Sprachdatei " + resource + " nicht gefunden" );
-    }
-    return rv;
-  }
-
-
-  private static String lookup( String context, String text )
-  {
-    POFile pf = poFile;
-    return (pf != null ? pf.getTranslation( context, text ) : null);
   }
 
 

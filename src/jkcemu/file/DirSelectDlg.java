@@ -37,6 +37,7 @@ import jkcemu.base.BaseDlg;
 import jkcemu.base.DeviceIO;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class DirSelectDlg
@@ -164,7 +165,7 @@ public class DirSelectDlg
 
   private DirSelectDlg( Window owner, final File preSelection )
   {
-    super( owner, "Verzeichnisauswahl" );
+    super( owner, LangUtil.getText( "file.title.select_directory" ) );
     this.selectedDirFile = null;
     this.comparator      = FileNodeComparator.getIgnoreCaseInstance();
 
@@ -218,7 +219,7 @@ public class DirSelectDlg
     gbc.gridy++;
     add(
 	GUIFactory.createLabel(
-		"Ausgew\u00E4hltes oder neues Verzeichnis:" ),
+		LangUtil.getText( "file.label.selected_new_directory" ) ),
 	gbc );
 
     this.fldDir       = GUIFactory.createTextField();
@@ -232,7 +233,8 @@ public class DirSelectDlg
     this.btnPaste = GUIFactory.createRelImageResourceButton(
 					this,
 					"edit/paste.png",
-	                                EmuUtil.TEXT_PASTE );
+	                                LangUtil.getText(
+						EmuUtil.TEXT_PASTE ) );
     gbc.fill        = GridBagConstraints.NONE;
     gbc.weightx     = 0.0;
     gbc.insets.left = 0;
@@ -305,26 +307,23 @@ public class DirSelectDlg
     File dirFile = getAbsoluteDirFile();
     if( dirFile == null ) {
       throw new IOException(
-		"Kein Verzeichnis angegeben bzw. ausgew\u00E4hlt" );
+		LangUtil.getText( "file.error.no_directory_specified" ) );
     }
     if( dirFile.exists() ) {
       if( !dirFile.isDirectory() ) {
 	throw new IOException(
-		"Das ausgew\u00E4hlte bzw. angegebene Dateisystemobjekt"
-			+ " ist kein Verzeichnis." );
+		LangUtil.getText( "file.error.selected_specified_file" ) );
       }
       this.selectedDirFile = dirFile;
       doClose();
     } else {
       if( showYesNoDlg(
 		this,
-		"Das angegebene Verzeichnis existiert nicht.\n"
-			+ "M\u00F6chten Sie es anlegen"
-			+ " und ausw\u00E4hlen?" ) )
+		LangUtil.getText( "file.msg.specified_directory_not_exist" ) ) )
       {
 	if( !dirFile.mkdir() ) {
 	  throw new IOException(
-		"Das angegebene Verzeichnis konnte nicht angelegt werden." );
+		LangUtil.getText( "file.error.specified_directory_not_created" ) );
 	}
 	this.selectedDirFile = dirFile;
 	doClose();

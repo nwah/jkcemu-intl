@@ -15,13 +15,12 @@ import jkcemu.audio.AudioFile;
 import jkcemu.audio.PCMDataSource;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.kc85.KCAudioCreator;
+import jkcemu.lang.LangUtil;
 
 
 public class KCAudioMultiFileTarget extends AbstractConvertTarget
 {
-  public static final String INFO_TEXT = "Sound-Datei im KC-Format,"
-				+ " 1:1 aus TAP- oder Multi-TAP-Datei"
-				+ " konvertiert";
+  public static final String INFO_TEXT = "fileconv.text.sound_file_kc";
 
   private byte[] tapFileBytes;
 
@@ -30,7 +29,7 @@ public class KCAudioMultiFileTarget extends AbstractConvertTarget
 		FileConvertFrm fileConvertFrm,
 		byte[]         tapFileBytes )
   {
-    super( fileConvertFrm, INFO_TEXT );
+    super( fileConvertFrm, LangUtil.getText( INFO_TEXT ) );
     this.tapFileBytes = tapFileBytes;
   }
 

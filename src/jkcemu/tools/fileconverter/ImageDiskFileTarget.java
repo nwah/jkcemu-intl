@@ -13,6 +13,7 @@ import java.io.IOException;
 import jkcemu.disk.AbstractFloppyDisk;
 import jkcemu.disk.ImageDisk;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class ImageDiskFileTarget extends AbstractConvertTarget
@@ -24,7 +25,9 @@ public class ImageDiskFileTarget extends AbstractConvertTarget
 			FileConvertFrm     fileConvertFrm,
 			AbstractFloppyDisk disk )
   {
-    super( fileConvertFrm, "ImageDisk-Datei (*.imd)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "fileconv.title.imagedisk_file_imd" ) );
     this.disk = disk;
   }
 

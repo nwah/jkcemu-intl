@@ -16,6 +16,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.UserInputException;
 import jkcemu.file.FileInfo;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class KCTapBasicFileTarget extends AbstractConvertTarget
@@ -31,7 +32,7 @@ public class KCTapBasicFileTarget extends AbstractConvertTarget
 		int            offs,
 		int            len )
   {
-    super( fileConvertFrm, "KC-TAP-BASIC-Datei" );
+    super( fileConvertFrm, LangUtil.getText( "fileconv.title.kc_tap_basic" ) );
     this.dataBytes = dataBytes;
     this.offs      = offs;
     this.len       = len;

@@ -23,6 +23,7 @@ import javax.swing.JPanel;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.GUIFactory;
 import jkcemu.etc.CksCalculator;
+import jkcemu.lang.LangUtil;
 
 
 public class ReplyCksAlgorithmDlg extends BaseDlg
@@ -100,7 +101,9 @@ public class ReplyCksAlgorithmDlg extends BaseDlg
 
   private ReplyCksAlgorithmDlg( Window owner, String preSelection )
   {
-    super( owner, "Pr\u00FCfsummen-/Hash-Algorithmus" );
+    super(
+		owner,
+		LangUtil.getText( "hexedit.title.checksum_hash_algorithm" ) );
     this.approvedAlgorithm = null;
 
 
@@ -118,7 +121,8 @@ public class ReplyCksAlgorithmDlg extends BaseDlg
 
 
     // Eingabebereich
-    add( GUIFactory.createLabel( "Algorithmus:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "tools.label.algorithm" ) ), gbc );
 
     this.comboAlgorithm = GUIFactory.createComboBox(
 		CksCalculator.getAvailableAlgorithms() );

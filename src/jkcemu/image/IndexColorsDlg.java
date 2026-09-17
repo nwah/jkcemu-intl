@@ -140,7 +140,7 @@ public class IndexColorsDlg extends BaseDlg
 
   private IndexColorsDlg( Window owner, BufferedImage image )
   {
-    super( owner, "Farben reduzieren und indexieren" );
+    super( owner, LangUtil.getText( "image.title.reduce_index_colors" ) );
     this.image        = image;
     this.appliedImage = null;
     this.importedICM  = null;
@@ -162,7 +162,8 @@ public class IndexColorsDlg extends BaseDlg
     // Farbpalette
     JPanel panelColorTab = GUIFactory.createPanel( new GridBagLayout() );
     panelColorTab.setBorder(
-		GUIFactory.createTitledBorder( "Farbpalette" ) );
+		GUIFactory.createTitledBorder(
+			LangUtil.getText( "image.section.color_palette" ) ) );
     add( panelColorTab, gbc );
 
     GridBagConstraints gbcColorTab = new GridBagConstraints(
@@ -177,12 +178,14 @@ public class IndexColorsDlg extends BaseDlg
     ButtonGroup grpColorTab = new ButtonGroup();
 
     this.rbReduceColors = GUIFactory.createRadioButton(
-			"Farbpalette ermitteln",
+			LangUtil.getText(
+				"image.option.determine_color_palette" ),
 			lastColorTabMode == MODE_REDUCE_COLORS );
     grpColorTab.add( this.rbReduceColors );
     panelColorTab.add( this.rbReduceColors, gbcColorTab );
 
-    this.labelMaxColors = GUIFactory.createLabel( "Max. Anzahl Farben:" );
+    this.labelMaxColors = GUIFactory.createLabel(
+		LangUtil.getText( "image.label.max_number_colors" ) );
     gbcColorTab.insets.top  = 0;
     gbcColorTab.insets.left = 50;
     gbcColorTab.gridwidth   = 1;
@@ -227,12 +230,13 @@ public class IndexColorsDlg extends BaseDlg
     panelColorTab.add( this.comboMaxColors, gbcColorTab );
 
     this.labelMaxColorsInfo = GUIFactory.createLabel(
-			"inkl. Farbe f\u00FCr Transparenz" );
+			LangUtil.getText(
+				"image.label.incl_color_transparency" ) );
     gbcColorTab.gridx++;
     panelColorTab.add( this.labelMaxColorsInfo, gbcColorTab );
 
     this.rbToA5105Colors = GUIFactory.createRadioButton(
-			"A5105 (16 Farben)",
+			LangUtil.getText( "image.option.a5105_16_colors" ),
 			lastColorTabMode == MODE_TO_A5105_COLORS );
     grpColorTab.add( this.rbToA5105Colors );
     gbcColorTab.insets.left = 5;
@@ -242,14 +246,15 @@ public class IndexColorsDlg extends BaseDlg
     panelColorTab.add( this.rbToA5105Colors, gbcColorTab );
 
     this.rbToKC854HiresColors = GUIFactory.createRadioButton(
-			"KC85/4 HIRES (4 Farben)",
+			LangUtil.getText( "image.option.kc85_4_hires" ),
 			lastColorTabMode == MODE_TO_KC854HIRES_COLORS );
     grpColorTab.add( this.rbToKC854HiresColors );
     gbcColorTab.gridy++;
     panelColorTab.add( this.rbToKC854HiresColors, gbcColorTab );
 
     this.rbImportColorTab = GUIFactory.createRadioButton(
-			"Farbpalette importieren",
+			LangUtil.getText(
+				"image.option.import_color_palette" ),
 			lastColorTabMode == MODE_IMPORT_COLORTAB );
     grpColorTab.add( this.rbImportColorTab );
     gbcColorTab.gridy++;
@@ -266,7 +271,7 @@ public class IndexColorsDlg extends BaseDlg
     this.btnColorTabSelect = GUIFactory.createRelImageResourceButton(
 						this,
 						"file/open.png",
-						EmuUtil.TEXT_SELECT );
+						LangUtil.getText( EmuUtil.TEXT_SELECT ) );
     gbcColorTab.fill          = GridBagConstraints.NONE;
     gbcColorTab.weightx       = 0.0;
     gbcColorTab.insets.left   = 5;
@@ -283,7 +288,8 @@ public class IndexColorsDlg extends BaseDlg
 
     // Optionen
     JPanel panelOpt = GUIFactory.createPanel( new GridBagLayout() );
-    panelOpt.setBorder( GUIFactory.createTitledBorder( "Optionen" ) );
+    panelOpt.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.section.options" ) ) );
     gbc.gridy++;
     add( panelOpt, gbc );
 
@@ -296,13 +302,15 @@ public class IndexColorsDlg extends BaseDlg
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.labelTranspColor = GUIFactory.createLabel( "Transparenz:" );
+    this.labelTranspColor = GUIFactory.createLabel(
+		LangUtil.getText( "image.label.transparency" ) );
     panelOpt.add( this.labelTranspColor, gbcOpt );
 
     ButtonGroup grpTransp = new ButtonGroup();
 
     this.rbTranspToWhite = GUIFactory.createRadioButton(
-			"Transparente Bereiche hell f\u00E4rben" );
+			LangUtil.getText(
+				"image.option.color_transparent_areas_light" ) );
     grpTransp.add( this.rbTranspToWhite );
     gbcOpt.insets.top = 0;
     gbcOpt.gridwidth  = GridBagConstraints.REMAINDER;
@@ -310,13 +318,15 @@ public class IndexColorsDlg extends BaseDlg
     panelOpt.add( this.rbTranspToWhite, gbcOpt );
 
     this.rbTranspToBlack = GUIFactory.createRadioButton(
-			"Transparente Bereiche dunkel f\u00E4rben" );
+			LangUtil.getText(
+				"image.option.color_transparent_areas_dark" ) );
     grpTransp.add( this.rbTranspToBlack );
     gbcOpt.gridy++;
     panelOpt.add( this.rbTranspToBlack, gbcOpt );
 
     this.rbTranspKeep = GUIFactory.createRadioButton(
-			"Transparenz behalten (1 volltransparente Farbe)" );
+			LangUtil.getText(
+				"image.option.keep_transparency_1" ) );
     grpTransp.add( this.rbTranspKeep );
     gbcOpt.insets.bottom = 5;
     gbcOpt.gridy++;
@@ -337,7 +347,8 @@ public class IndexColorsDlg extends BaseDlg
       this.rbTranspToWhite.setEnabled( false );
     }
 
-    this.labelDithering = GUIFactory.createLabel( "Dithering:" );
+    this.labelDithering = GUIFactory.createLabel(
+		LangUtil.getText( "image.label.dithering" ) );
     gbcOpt.insets.top   = 5;
     gbcOpt.gridx        = 0;
     gbcOpt.gridy++;
@@ -488,15 +499,7 @@ public class IndexColorsDlg extends BaseDlg
 	  if( oldIdxColors <= maxColors ) {
 	    state = BaseDlg.showYesNoDlg(
 		this,
-		LangUtil.tr(
-			"Das Bild hat bereits ein indexiertes Farbmodell"
-				+ " mit {0} Farben.\n"
-				+ "M\u00F6glicherweise werden nicht alle"
-				+ " diese Farben verwendet,\n"
-				+ "so dass die Farbpalette vielleicht"
-				+ " verkleinert werden kann.\n"
-				+ "M\u00F6chten Sie versuchen,"
-				+ " die Farbpalette zu verkleinern?",
+		LangUtil.getText( "image.text.image_already_indexed",
 		oldIdxColors ) );
 	  }
 	}
@@ -521,8 +524,7 @@ public class IndexColorsDlg extends BaseDlg
 		  retImg = null;
 		  BaseDlg.showErrorDlg(
 				getOwner(),
-				"Die Anzahl der Farben konnte nicht"
-					+ " reduziert werden." );
+				LangUtil.getText( "image.error.number_colors_not_reduced" ) );
 		}
 	      }
 	    }
@@ -576,13 +578,8 @@ public class IndexColorsDlg extends BaseDlg
     if( srcImg.getTransparency() != Transparency.OPAQUE ) {
       Color colorForTransp = getSelectedColorForTransp();
       if( colorForTransp == null ) {
-	throw new UserInputException( LangUtil.tr(
-		"Bei dieser Funktion ist die Option\n''{0}''"
-			+ " nicht m\u00F6glich,\n"
-			+ "da die Farbpalette keine transparenten Farben"
-			+ " enth\u00E4lt.\n"
-			+ "W\u00E4hlen Sie bitte die Option\n''{1}''"
-			+ " oder\n''{2}'' aus!",
+	throw new UserInputException( LangUtil.getText(
+		"image.text.function_option_not_possible",
 		this.rbTranspKeep.getText(),
 		this.rbTranspToWhite.getText(),
 		this.rbTranspToBlack.getText() ) );

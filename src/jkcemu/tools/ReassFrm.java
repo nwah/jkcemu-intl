@@ -59,6 +59,7 @@ import jkcemu.base.ReplyTextDlg;
 import jkcemu.base.ScreenFrm;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.print.PlainTextPrintable;
 import jkcemu.print.PrintOptionsDlg;
 import jkcemu.print.PrintUtil;
@@ -144,7 +145,7 @@ public class ReassFrm
     this.textFinder     = null;
     this.selectionFld   = null;
     this.textArea       = GUIFactory.createCodeArea();
-    setTitle( "JKCEMU Reassembler" );
+    setTitle( LangUtil.getText( "common.text.jkcemu_disassembler" ) );
 
 
     // Popup-Menu
@@ -169,7 +170,8 @@ public class ReassFrm
     this.popupMnu.addSeparator();
 
     this.popupBreak = createMenuItem(
-			"Im Debugger Halte-/Log-Punkt hinzuf\u00FCgen..." );
+			LangUtil.getText(
+				"common.action.add_breakpoint_logpoint" ) );
     this.popupBreak.setEnabled( false );
     this.popupMnu.add( this.popupBreak );
     this.popupMnu.addSeparator();
@@ -183,31 +185,35 @@ public class ReassFrm
     JMenu mnuFile = createMenuFile();
 
     this.mnuReass = createMenuItemWithStandardAccelerator(
-						"Reassemblieren",
+						LangUtil.getText( "tools.action.disassemble" ),
 						KeyEvent.VK_R );
     mnuFile.add( this.mnuReass );
     mnuFile.addSeparator();
 
     this.mnuImportLabelsFile = createMenuItem(
-			"Marken aus Datei importieren..." );
+			LangUtil.getText(
+				"tools.action.import_labels_file" ) );
     mnuFile.add( this.mnuImportLabelsFile );
 
     this.mnuImportLabelsClp = createMenuItem(
-			"Marken aus Zwischenablage importieren" );
+			LangUtil.getText(
+				"tools.action.import_labels_clipboard" ) );
     mnuFile.add( this.mnuImportLabelsClp );
 
     this.mnuRemoveLabels = createMenuItem(
-			"Importierte Marken entfernen" );
+			LangUtil.getText(
+				"tools.action.remove_imported_labels" ) );
     this.mnuRemoveLabels.setEnabled( false );
     mnuFile.add( this.mnuRemoveLabels );
     mnuFile.addSeparator();
 
     this.mnuSourceOpen = createMenuItem(
-			"Als Quelltext im Texteditor \u00F6ffnen..." );
+			LangUtil.getText( "tools.action.open_source_code" ) );
     this.mnuSourceOpen.setEnabled( false );
     mnuFile.add( this.mnuSourceOpen );
 
-    this.mnuSourceExport = createMenuItem( "Als Quelltext exportieren..." );
+    this.mnuSourceExport = createMenuItem(
+		LangUtil.getText( "tools.action.export_source_code" ) );
     this.mnuSourceExport.setEnabled( false );
     mnuFile.add( this.mnuSourceExport );
     mnuFile.addSeparator();
@@ -259,7 +265,8 @@ public class ReassFrm
     JMenu mnuHelp = createMenuHelp();
 
     this.mnuHelpContent = GUIFactory.createMenuItem(
-				"Hilfe zum Reassembler..." );
+				LangUtil.getText(
+					"tools.action.help_disassembler" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -284,9 +291,11 @@ public class ReassFrm
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    panelHead.add( GUIFactory.createLabel( "Anfangsadresse:" ), gbcHead );
+    panelHead.add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.start_address" ) ), gbcHead );
 
-    this.docBegAddr = new HexDocument( 4, "Anfangsadresse" );
+    this.docBegAddr = new HexDocument(
+		4, LangUtil.getText( "common.text.start_address" ) );
     this.fldBegAddr = GUIFactory.createTextField( this.docBegAddr, 4 );
     gbcHead.fill    = GridBagConstraints.HORIZONTAL;
     gbcHead.weightx = 0.5;
@@ -296,9 +305,11 @@ public class ReassFrm
     gbcHead.fill    = GridBagConstraints.NONE;
     gbcHead.weightx = 0.0;
     gbcHead.gridx++;
-    panelHead.add( GUIFactory.createLabel( "Endadresse:" ), gbcHead );
+    panelHead.add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.end_address" ) ), gbcHead );
 
-    this.docEndAddr = new HexDocument( 4, "Endadresse" );
+    this.docEndAddr = new HexDocument(
+		4, LangUtil.getText( "common.text.end_address" ) );
     this.fldEndAddr = GUIFactory.createTextField( this.docEndAddr, 4 );
     gbcHead.fill    = GridBagConstraints.HORIZONTAL;
     gbcHead.weightx = 0.5;
@@ -650,8 +661,7 @@ public class ReassFrm
     if( !state ) {
       BaseDlg.showErrorDlg(
 		this,
-		"Der Inhalt der Zwischenablage konnte nicht als\n"
-			+ "Liste mit Marken interpretiert werden." );
+		LangUtil.getText( "tools.error.content_clipboard_not_interpreted" ) );
     }
   }
 
@@ -664,7 +674,7 @@ public class ReassFrm
     }
     file = FileUtil.showFileOpenDlg(
 			this,
-			"Haltepunkte importieren",
+			LangUtil.getText( "tools.title.import_breakpoints" ),
 			FileUtil.getDirectory( file ),
 			FileUtil.getTextFileFilter() );
     if( file != null ) {
@@ -683,8 +693,7 @@ public class ReassFrm
       } else {
 	BaseDlg.showErrorDlg(
 		this,
-		"Der Inhalt der Datei konnte nicht als Liste\n"
-			+ "mit Marken interpretiert werden." );
+		LangUtil.getText( "tools.error.content_file_not_interpreted" ) );
       }
     }
   }
@@ -721,7 +730,10 @@ public class ReassFrm
       }
     }
     catch( NumberFormatException ex ) {
-      BaseDlg.showErrorDlg( this, ex.getMessage(), "Eingabefehler" );
+      BaseDlg.showErrorDlg(
+		this,
+		ex.getMessage(),
+		LangUtil.getText( "tools.error.input_error" ) );
     }
   }
 
@@ -731,7 +743,7 @@ public class ReassFrm
     if( this.addr2Labels != null ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie die importierten Marken entfernen?" ) )
+		LangUtil.getText( "tools.msg.want_remove_imported" ) ) )
       {
 	this.addr2Labels = null;
 	this.mnuRemoveLabels.setEnabled( false );
@@ -745,7 +757,7 @@ public class ReassFrm
   {
     File file = FileUtil.showFileSaveDlg(
 			this,
-			"Textdatei speichern",
+			LangUtil.getText( "common.title.save_text_file" ),
 			this.lastFile != null ?
 				this.lastFile
 				: RecentDirsMngr.getRecentDir(
@@ -774,7 +786,7 @@ public class ReassFrm
     if( text != null ) {
       File file = FileUtil.showFileSaveDlg(
 		this,
-		"Als Quelltext speichern",
+		LangUtil.getText( "tools.title.save_source_code" ),
 		this.lastFile != null ?
 			this.lastFile
 			: RecentDirsMngr.getRecentDir(
@@ -1018,8 +1030,7 @@ public class ReassFrm
 	} else {
 	  BaseDlg.showErrorDlg(
 		this, 
-		"Der Prefix entspricht nicht den Namenskonventionen"
-			+ " f\u00FCr Assembler-Marken." );
+		LangUtil.getText( "tools.error.prefix_not_conform" ) );
 	}
       }
     }
@@ -1123,10 +1134,7 @@ public class ReassFrm
 	  if( !oldLabel2Addr.isEmpty() ) {
 	    removeObsolete = BaseDlg.showYesNoDlg(
 		this,
-		"Sollen die bereits vorher importierten und im"
-			+ " jetzigen Import\n"
-			+ "nicht mehr vorhandenen Marken"
-			+ " entfernt werden?" );
+		LangUtil.getText( "tools.msg.labels_imported_earlier" ) );
 	    if( !removeObsolete ) {
 	      Set<Map.Entry<String,Integer>> c = oldLabel2Addr.entrySet();
 	      if( c != null ) {

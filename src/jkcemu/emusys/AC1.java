@@ -32,6 +32,7 @@ import jkcemu.file.FileUtil;
 import jkcemu.file.LoadData;
 import jkcemu.file.SaveDlg;
 import jkcemu.joystick.JoystickThread;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
@@ -542,7 +543,7 @@ public class AC1
 				this.emuThread.getRAMFloppy1(),
 				"AC1",
 				RAMFloppy.RFType.MP_3_1988,
-				"RAM-Floppy E/A-Adressen E0h-E7h",
+				LangUtil.getText( "emusys.text.ram_floppy_i_o_addresses_e0h" ),
 				props,
 				this.propPrefix + PROP_RF_PREFIX );
 
@@ -556,12 +557,12 @@ public class AC1
 
     List<Z80InterruptSource> iSources = new ArrayList<>();
 
-    this.ctc   = new Z80CTC( "CTC (E/A-Adressen 00h-03h)" );
-    this.pio1  = new Z80PIO( "PIO (E/A-Adressen 04h-07h)" );
+    this.ctc   = new Z80CTC( LangUtil.getText( "emusys.text.ctc_i_o_addresses_00h" ) );
+    this.pio1  = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_04h" ) );
     iSources.add( this.ctc );
     iSources.add( this.pio1 );
     if( this.modeSCCH || this.mode2010 ) {
-      this.pio2 = new Z80PIO( "V24-PIO (E/A-Adressen 08h-0Bh)" );
+      this.pio2 = new Z80PIO( LangUtil.getText( "emusys.text.v24_pio_i_o_addresses_08h" ) );
       iSources.add( this.pio2 );
     }
     if( this.kcNet != null ) {
@@ -657,14 +658,9 @@ public class AC1
 	try {
 	  int v = OptionDlg.showOptionDlg(
 			owner,
-			"Das BASIC-Programm enth\u00E4lt Tokens,"
-				+ " die von den einzelnen Interpretern\n"
-				+ "als unterschiedliche Anweisungen"
-				+ " verstanden werden.\n"
-				+ "W\u00E4hlen Sie bitte den Interpreter aus,"
-				+ " entsprechend dem die Tokens\n"
-				+ "dekodiert werden sollen.",
-			"BASIC-Interpreter",
+			LangUtil.getText(
+				"emusys.msg.basic_program_contains" ),
+			LangUtil.getText( "emusys.msg.basic_interpreter" ),
 			-1,
 			options.toArray( new String[ cnt ] ) );
 	  if( (v >= 0) && (v < texts.size()) ) {
@@ -877,7 +873,7 @@ public class AC1
 		+ "<tr><td>PIO2 ROM Segment-Offset:</td><td>" );
 	  buf.append( String.format( "%Xh", this.pio2Rom2010Offs ) );
 	} else {
-	  buf.append( EmuUtil.TEXT_OFF );
+	  buf.append( LangUtil.getText( EmuUtil.TEXT_OFF ) );
 	}
 	buf.append( "</td></tr>\n"
 		+ "<tr><td>ROM-Bank:</td><td>" );
@@ -889,7 +885,7 @@ public class AC1
 		+ "<tr><td>ROM-Bank Segment-Offset:</td><td>" );
 	  buf.append( String.format( "%Xh", this.romBank2010Offs ) );
 	} else {
-	  buf.append( EmuUtil.TEXT_OFF );
+	  buf.append( LangUtil.getText( EmuUtil.TEXT_OFF ) );
 	}
 	buf.append( "</td></tr>\n" );
       }
@@ -1462,20 +1458,16 @@ public class AC1
     }
     switch( OptionDlg.showOptionDlg(
 		this.screenFrm,
-		"W\u00E4hlen Sie bitte den BASIC-Interpreter aus,\n"
-			+ "dessen BASIC-Programm ge\u00F6ffnet werden soll.\n"
-			+ "Die Auswahl des Interpreters ist auch deshalb"
-			+ " notwendig,\n"
-			+ "damit die Tokens richtig dekodiert werden.",
-		"BASIC-Interpreter",
+		LangUtil.getText( "emusys.msg.please_select_basic_interpreter_program_selecting" ),
+		LangUtil.getText( "emusys.msg.basic_interpreter" ),
 		preIdx,
-		"Mini-BASIC",
-		"AC1-8K-BASIC",
-		"AC1-12K-BASIC",
-		"AC1-BASIC6",
-		"SCCH-BASIC",
-		"BACOBAS 2",
-		"BACOBAS 3" ) )
+		LangUtil.getText( "emusys.msg.mini_basic" ),
+		LangUtil.getText( "emusys.msg.ac1_8k_basic" ),
+		LangUtil.getText( "emusys.msg.ac1_12k_basic" ),
+		LangUtil.getText( "emusys.msg.ac1_basic6" ),
+		LangUtil.getText( "emusys.msg.scch_basic" ),
+		LangUtil.getText( "emusys.msg.bacobas_2" ),
+		LangUtil.getText( "emusys.msg.bacobas_3" ) ) )
     {
       case 0:
 	bType = BasicType.AC1_MINI;
@@ -1855,15 +1847,14 @@ public class AC1
     javax.swing.filechooser.FileFilter fileFilter = null;
     switch( OptionDlg.showOptionDlg(
 		this.screenFrm,
-		"W\u00E4hlen Sie bitte den BASIC-Interpreter aus,\n"
-			+ "dessen BASIC-Programm gespeichert werden soll.",
-		"BASIC-Interpreter",
+		LangUtil.getText( "emusys.msg.please_select_basic_interpreter_program_saved" ),
+		LangUtil.getText( "emusys.msg.basic_interpreter" ),
 		preIdx,
-		"Mini-BASIC",
-		"AC1-8K-BASIC oder SCCH-BASIC",
-		"AC1-12K-BASIC",
-		"AC1-BASIC6",
-		"BACOBAS" ) )
+		LangUtil.getText( "emusys.msg.mini_basic" ),
+		LangUtil.getText( "emusys.msg.ac1_8k_basic_scch" ),
+		LangUtil.getText( "emusys.msg.ac1_12k_basic" ),
+		LangUtil.getText( "emusys.msg.ac1_basic6" ),
+		LangUtil.getText( "emusys.msg.bacobas" ) ) )
     {
       case 0:
 	ac1BasicType = BasicType.AC1_MINI;
@@ -1919,7 +1910,7 @@ public class AC1
 		this.screenFrm,
 		begAddr,
 		endAddr,
-		"BASIC-Programm speichern",
+		LangUtil.getText( "emusys.text.save_basic_program" ),
 		dstBasicType,
 		fileFilter )).setVisible( true );
       } else {

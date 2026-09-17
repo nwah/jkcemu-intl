@@ -231,14 +231,12 @@ public class FileActionMngr
 
   public void addCopyFileNameMenuItemsTo( JPopupMenu popup, JMenu menu )
   {
-    addJMenuItem(
-		"Datei-/Verzeichnisnamen kopieren",
+    addJMenuItem( LangUtil.getText( "file.action.copy_file_directory_names" ),
 		ACTION_COPY_PATH,
 		popup,
 		menu );
 
-    addJMenuItem(
-		"Datei-/Verzeichnisnamen als URL kopieren",
+    addJMenuItem( LangUtil.getText( "file.action.copy_file_directory_names_url" ),
 		ACTION_COPY_URL,
 		popup,
 		menu );
@@ -247,8 +245,7 @@ public class FileActionMngr
 
   public void addCopyFileMenuItemTo( JPopupMenu popup, JMenu menu )
   {
-    addJMenuItem(
-		"Dateien/Verzeichnisse kopieren",
+    addJMenuItem( LangUtil.getText( "file.action.copy_files_directories" ),
 		ACTION_COPY,
 		popup,
 		menu );
@@ -258,7 +255,7 @@ public class FileActionMngr
   public void addFileMenuItemsTo( JPopupMenu popup, JMenu menu )
   {
     addJMenuItemWithControlShortcut(
-		"Im Texteditor \u00F6ffnen...",
+		LangUtil.getText( "common.action.open_text_editor" ),
 		ACTION_TEXT_EDIT,
 		KeyEvent.VK_E,
 		false,
@@ -266,45 +263,39 @@ public class FileActionMngr
 		menu );
 
     addJMenuItemWithControlShortcut(
-		"Im Bildbetrachter anzeigen...",
+		LangUtil.getText( "file.action.show_image_viewer" ),
 		ACTION_IMAGE_VIEW,
 		KeyEvent.VK_B,
 		false,
 		popup,
 		menu );
 
-    addJMenuItem(
-		"Im Diskettenabbilddatei-Inspektor anzeigen...",
+    addJMenuItem( LangUtil.getText( "file.action.show_disk_image" ),
 		ACTION_DISK_VIEW,
 		popup,
 		menu );
 
-    addJMenuItem(
-		"Im Hex-Editor \u00F6ffnen...",
+    addJMenuItem( LangUtil.getText( "common.action.open_hex_editor" ),
 		ACTION_HEX_EDIT,
 		popup,
 		menu );
 
-    addJMenuItem(
-		"Im Hex-Dateivergleicher \u00F6ffnen...",
+    addJMenuItem( LangUtil.getText( "file.action.open_hex_file" ),
 		ACTION_HEX_DIFF,
 		popup,
 		menu );
 
-    addJMenuItem(
-		"Im Dateikonverter \u00F6ffnen...",
+    addJMenuItem( LangUtil.getText( "file.action.open_file_converter" ),
 		ACTION_CONVERT,
 		popup,
 		menu );
 
-    addJMenuItem(
-		"In Audio/Kassette \u00F6ffnen...",
+    addJMenuItem( LangUtil.getText( "file.action.open_audio_tape" ),
 		ACTION_AUDIO_IN,
 		popup,
 		menu );
 
-    addJMenuItem(
-		"Wiedergeben",
+    addJMenuItem( LangUtil.getText( "common.action.play" ),
 		ACTION_PLAY,
 		popup,
 		menu );
@@ -312,58 +303,53 @@ public class FileActionMngr
     JMenu menuPlayAs  = null;
     JMenu popupPlayAs = null;
     if( menu != null ) {
-      menuPlayAs = GUIFactory.createMenu( "Wiedergeben im" );
+      menuPlayAs = GUIFactory.createMenu(
+		LangUtil.getText( "file.menu.play" ) );
       menu.add( menuPlayAs );
     }
     if( popup != null ) {
-      popupPlayAs = GUIFactory.createMenu( "Wiedergeben im" );
+      popupPlayAs = GUIFactory.createMenu(
+		LangUtil.getText( "file.menu.play" ) );
       popup.add( popupPlayAs );
     }
 
-    addJMenuItem(
-		"AC1-Format",
+    addJMenuItem( LangUtil.getText( "file.action.ac1_format" ),
 		ACTION_PLAY_AC1,
 		null,
 		popupPlayAs,
 		menuPlayAs );
 
-    addJMenuItem(
-		"AC1-BASIC-Format",
+    addJMenuItem( LangUtil.getText( "file.action.ac1_basic_format" ),
 		ACTION_PLAY_AC1,
 		null,
 		popupPlayAs,
 		menuPlayAs );
 
-    addJMenuItem(
-		"AC1/LLC2-TurboSave-Format",
+    addJMenuItem( LangUtil.getText( "file.action.ac1_llc2_turbosave" ),
 		ACTION_PLAY_SCCH,
 		null,
 		popupPlayAs,
 		menuPlayAs );
 
-    addJMenuItem(
-		"KC-Format (HC900, KC85/2..5, KC-BASIC)",
+    addJMenuItem( LangUtil.getText( "file.action.kc_format_hc900" ),
 		ACTION_PLAY_KC85,
 		null,
 		popupPlayAs,
 		menuPlayAs );
 
-    addJMenuItem(
-		"KC-Format (KC85/1, KC87, Z9001)",
+    addJMenuItem( LangUtil.getText( "file.action.kc_format_kc85" ),
 		ACTION_PLAY_Z9001,
 		null,
 		popupPlayAs,
 		menuPlayAs );
 
-    addJMenuItem(
-		"Z1013-Format",
+    addJMenuItem( LangUtil.getText( "file.action.z1013_format" ),
 		ACTION_PLAY_Z1013,
 		null,
 		popupPlayAs,
 		menuPlayAs );
 
-    addJMenuItem(
-		"Z1013-Headersave-Format",
+    addJMenuItem( LangUtil.getText( "file.action.z1013_headersave_format" ),
 		ACTION_PLAY_Z1013HS,
 		null,
 		popupPlayAs,
@@ -372,83 +358,73 @@ public class FileActionMngr
     JMenu menuPack  = null;
     JMenu popupPack = null;
     if( menu != null ) {
-      menuPack = GUIFactory.createMenu( "Packen in" );
+      menuPack = GUIFactory.createMenu( LangUtil.getText( "file.menu.pack" ) );
       menu.add( menuPack );
     }
     if( popup != null ) {
-      popupPack = GUIFactory.createMenu( "Packen in" );
+      popupPack = GUIFactory.createMenu(
+		LangUtil.getText( "file.menu.pack" ) );
       popup.add( popupPack );
     }
-    addJMenuItem(
-		"TAR-Archiv...",
+    addJMenuItem( LangUtil.getText( "file.action.tar_archive" ),
 		ACTION_PACK_TAR,
 		null,
 		popupPack,
 		menuPack );
 
-    addJMenuItem(
-		"TGZ-Archiv...",
+    addJMenuItem( LangUtil.getText( "file.action.tgz_archive" ),
 		ACTION_PACK_TGZ,
 		null,
 		popupPack,
 		menuPack );
 
-    addJMenuItem(
-		"ZIP-Archiv...",
+    addJMenuItem( LangUtil.getText( "file.action.zip_archive" ),
 		ACTION_PACK_ZIP,
 		null,
 		popupPack,
 		menuPack );
     addSeparator( null, popupPack, menuPack );
 
-    addJMenuItem(
-		"GZip-Datei...",
+    addJMenuItem( LangUtil.getText( "file.action.gzip_file" ),
 		ACTION_PACK_GZIP,
 		null,
 		popupPack,
 		menuPack );
 
-    addJMenuItem(
-		"Entpacken...",
+    addJMenuItem( LangUtil.getText( "file.action.unpack" ),
 		ACTION_UNPACK,
 		popup,
 		menu );
     addSeparator( popup, menu );
 
-    addJMenuItem(
-		"Mit zugeh\u00F6rigem Programm \u00F6ffnen...",
+    addJMenuItem( LangUtil.getText( "file.action.open_associated_program" ),
 		ACTION_OPEN_EXTERNAL,
 		popup,
 		menu );
     addSeparator( popup, menu );
 
-    addJMenuItem(
-		"Pr\u00FCfsumme/Hashwert berechnen...",
+    addJMenuItem( LangUtil.getText( "file.action.compute_checksum_hash" ),
 		ACTION_CHECKSUM,
 		popup,
 		menu );
 
-    addJMenuItem(
-		"\u00C4nderungszeitpunkt setzen...",
+    addJMenuItem( LangUtil.getText( "file.action.set_modification_time" ),
 		ACTION_LAST_MODIFIED,
 		popup,
 		menu );
 
-    addJMenuItem(
-		"Umbenennen...",
+    addJMenuItem( LangUtil.getText( "file.action.rename" ),
 		ACTION_RENAME,
 		popup,
 		menu );
 
-    addJMenuItem(
-		EmuUtil.TEXT_DELETE,
+    addJMenuItem( LangUtil.getText( EmuUtil.TEXT_DELETE ),
 		ACTION_DELETE,
 		popup,
 		menu );
     addSeparator( popup, menu );
 
-    addJMenuItem(
-		"Eigenschaften...",
+    addJMenuItem( LangUtil.getText( "common.action.properties" ),
 		ACTION_PROPERTIES,
 		popup,
 		menu );
@@ -457,14 +433,15 @@ public class FileActionMngr
 
   public void addLoadIntoEmuMenuItemsTo( JPopupMenu popup, JMenu menu )
   {
-    JMenu menu1 = GUIFactory.createMenu( "In Emulator laden" );
+    JMenu menu1 = GUIFactory.createMenu(
+		LangUtil.getText( "file.menu.load_emulator" ) );
     popup.add( menu1 );
 
     JMenu menu2 = GUIFactory.createMenu( menu1.getText() );
     menu.add( menu2 );
 
     addJMenuItemWithControlShortcut(
-		"In Arbeitsspeicher laden mit...",
+		LangUtil.getText( "file.action.load_main_memory_mit" ),
 		ACTION_EMU_LOAD_OPT,
 		KeyEvent.VK_L,
 		false,
@@ -473,7 +450,7 @@ public class FileActionMngr
 		menu2 );
 
     addJMenuItemWithControlShortcut(
-		"In Arbeitsspeicher laden",
+		LangUtil.getText( "file.action.load_main_memory_arbeitsspeicher_laden" ),
 		ACTION_EMU_LOAD,
 		KeyEvent.VK_L,
 		true,
@@ -482,7 +459,7 @@ public class FileActionMngr
 		menu2 );
 
     addJMenuItemWithControlShortcut(
-		"In Arbeitsspeicher laden und starten",
+		LangUtil.getText( "file.action.load_main_memory_start" ),
 		ACTION_EMU_START,
 		KeyEvent.VK_R,
 		false,
@@ -492,15 +469,13 @@ public class FileActionMngr
     menu1.addSeparator();
     menu2.addSeparator();
 
-    addJMenuItem(
-		"In RAM-Floppy 1 laden",
+    addJMenuItem( LangUtil.getText( "file.action.load_ram_floppy_1" ),
 		ACTION_RF1_LOAD,
 		null,
 		menu1,
 		menu2 );
 
-    addJMenuItem(
-		"In RAM-Floppy 2 laden",
+    addJMenuItem( LangUtil.getText( "file.action.load_ram_floppy_2" ),
 		ACTION_RF2_LOAD,
 		null,
 		menu1,
@@ -597,7 +572,7 @@ public class FileActionMngr
 		done = true;
 	      } else {
 		  throw new IOException(
-			"Die PRJ-Datei ist keine JKCEMU-Projektdatei." );
+			LangUtil.getText( "file.error.prj_file_not_jkcemu" ) );
 	      }
 	    }
 	  }
@@ -1023,7 +998,7 @@ public class FileActionMngr
     } else {
       BaseDlg.showErrorDlg(
 		this.owner,
-		"Funktion auf diesem System nicht unterst\u00FCtzt." );
+		LangUtil.getText( "file.error.function_not_supported" ) );
     }
   }
 
@@ -1063,7 +1038,8 @@ public class FileActionMngr
       }
       File outFile = askForOutputFile(
 				file,
-				"GZip-Datei speichern",
+				LangUtil.getText(
+					"file.title.save_gzip_file" ),
 				fileName );
       if( outFile != null ) {
 	GZipPacker.packFile( this.owner, file, outFile );
@@ -1138,7 +1114,7 @@ public class FileActionMngr
 	  try {
 	    File outFile = askForOutputFile(
 				firstPath.toFile(),
-				"ZIP-Datei speichern",
+				LangUtil.getText( "file.title.save_zip_file" ),
 				fileName );
 	    if( outFile != null ) {
 	      ZipPacker.packFiles( this.owner, paths, outFile );
@@ -1498,7 +1474,7 @@ public class FileActionMngr
       catch( IOException ex ) {
 	BaseDlg.showErrorDlg(
 		this.owner,
-		LangUtil.tr( "Die RAM-Floppy kann nicht geladen werden." )
+		LangUtil.getText( "file.text.ram_floppy_cannot_loaded" )
 						+ "\n\n" + ex.getMessage() );
       }
     }
@@ -1569,7 +1545,7 @@ public class FileActionMngr
 	  if( upperName.endsWith( ".GZ" ) ) {
 	    File outFile = askForOutputFile(
 			file,
-			"Entpackte Datei speichern",
+			LangUtil.getText( "file.title.save_unpacked_file" ),
 			fileName.substring( 0, fileName.length() - 3 ) );
 	    if( outFile != null ) {
 	      GZipUnpacker.unpackFile( this.owner, file, outFile );
@@ -1581,8 +1557,9 @@ public class FileActionMngr
 	    File outDir = FileUtil.askForOutputDir(
 				this.owner,
 				file,
-				"Entpacken nach:",
-				"Archiv-Datei entpacken" );
+				LangUtil.getText( "common.title.unpack" ),
+				LangUtil.getText(
+					"file.title.unpack_archive_file" ) );
 	    if( outDir != null ) {
 	      TarUnpacker.unpackFile(
 				this.owner,
@@ -1597,8 +1574,9 @@ public class FileActionMngr
 	    File outDir = FileUtil.askForOutputDir(
 				this.owner,
 				file,
-				"Entpacken nach:",
-				"Archiv-Datei entpacken" );
+				LangUtil.getText( "common.title.unpack" ),
+				LangUtil.getText(
+					"file.title.unpack_archive_file" ) );
 	    if( outDir != null ) {
 	      ZipUnpacker.unpackFile( this.owner, file, outDir );
 	    }
@@ -1652,16 +1630,13 @@ public class FileActionMngr
 	if( file.equals( srcFile ) ) {
 	  BaseDlg.showErrorDlg(
 		this.owner,
-		"Die Ausgabedatei kann nicht\n"
-			+ "mit der Quelldatei identisch sein." );
+		LangUtil.getText( "file.error.output_file_cannot_identical" ) );
 	  file = null;
 	}
 	else if( !file.isFile() ) {
 	  BaseDlg.showErrorDlg(
 		this.owner,
-		LangUtil.tr(
-			"{0} existiert bereits\n"
-				+ "und kann nicht als Datei angelegt werden.",
+		LangUtil.getText( "file.text.already_exists_cannot_created_file",
 			file.getPath() ) );
 	  file = null;
 	}
@@ -1882,7 +1857,7 @@ public class FileActionMngr
       try {
 	if( !file.canRead() ) {
 	  throw new IOException( 
-		"Datei/Verzeichnis kann nicht gelesen werden." );
+		LangUtil.getText( "file.error.file_directory_cannot_read" ) );
 	}
 	DesktopHelper.open( file );
       }

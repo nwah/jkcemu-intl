@@ -27,6 +27,7 @@ import javax.swing.event.ListSelectionListener;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class ARGBSelectDlg
@@ -143,7 +144,8 @@ public class ARGBSelectDlg
     gbc.gridy++;
     add( panelBtn, gbc );
 
-    this.btnSelect = GUIFactory.createButton( EmuUtil.TEXT_SELECT );
+    this.btnSelect = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_SELECT ) );
     panelBtn.add( this.btnSelect );
 
     this.btnCancel = GUIFactory.createButtonCancel();

@@ -20,6 +20,7 @@ import javax.swing.JScrollPane;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.ScreenFrm;
+import jkcemu.lang.LangUtil;
 
 
 public class ConfirmSettingsFld extends AbstractSettingsFld
@@ -48,12 +49,12 @@ public class ConfirmSettingsFld extends AbstractSettingsFld
 						0, 0 );
 
     panel.add(
-	GUIFactory.createLabel( "Folgende Aktionen m\u00FCssen"
-			+ " in einem Dialog best\u00E4tigt werden:" ),
+	GUIFactory.createLabel( LangUtil.getText(
+			"settings.label.following_actions" ) ),
 	gbc );
 
     this.cbConfirmNMI = GUIFactory.createCheckBox(
-		"Nicht maskierbarer Interrupt (NMI)",
+		LangUtil.getText( "settings.option.non_maskable_interrupt" ),
 		true );
     gbc.insets.top  = 0;
     gbc.insets.left = 50;
@@ -61,16 +62,17 @@ public class ConfirmSettingsFld extends AbstractSettingsFld
     panel.add( this.cbConfirmNMI, gbc );
 
     this.cbConfirmReset = GUIFactory.createCheckBox(
-		"Emulator zur\u00FCcksetzen (RESET)" );
+		LangUtil.getText( "settings.option.reset_emulator_reset" ) );
     gbc.gridy++;
     panel.add( this.cbConfirmReset, gbc );
 
-    this.cbConfirmPowerOn = GUIFactory.createCheckBox(
-		"Einschalten emulieren (Arbeitsspeicher l\u00F6schen)" );
+    this.cbConfirmPowerOn = GUIFactory.createCheckBox( LangUtil.getText(
+			"settings.option.emulate_switching_clear" ) );
     gbc.gridy++;
     panel.add( this.cbConfirmPowerOn, gbc );
 
-    this.cbConfirmQuit = GUIFactory.createCheckBox( "Emulator beenden" );
+    this.cbConfirmQuit = GUIFactory.createCheckBox(
+		LangUtil.getText( "settings.option.quit_emulator" ) );
     gbc.insets.bottom = 5;
     gbc.gridy++;
     panel.add( this.cbConfirmQuit, gbc );

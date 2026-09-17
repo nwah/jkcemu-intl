@@ -222,47 +222,47 @@ public class FileTableModel
   @Override
   public String getColumnName( int col )
   {
-    String rv = LangUtil.tr( "" );
+    String rv = LangUtil.getText( "" );
     if( (col >= 0) && (col < this.cols.length) ) {
       switch( this.cols[ col ] ) {
 	case NAME:
-	  rv = LangUtil.tr( "Name" );
+	  rv = LangUtil.getText( "file.text.name" );
 	  break;
 
 	case INFO:
-	  rv = LangUtil.tr( "Typ/Gr\u00F6\u00DFe" );
+	  rv = LangUtil.getText( "file.text.type_size" );
 	  break;
 
 	case SIZE:
-	  rv = LangUtil.tr( "Gr\u00F6\u00DFe" );
+	  rv = LangUtil.getText( "common.column.size" );
 	  break;
 
 	case LAST_MODIFIED:
-	  rv = LangUtil.tr( "Zuletzt ge\u00E4ndert" );
+	  rv = LangUtil.getText( "file.text.last_modified" );
 	  break;
 
 	case FILE:
-	  rv = LangUtil.tr( "Datei" );
+	  rv = LangUtil.getText( "common.menu.file" );
 	  break;
 
 	case USER_NUM:
-	  rv = LangUtil.tr( "User" );
+	  rv = LangUtil.getText( "file.text.user" );
 	  break;
 
 	case VALUE:
-	  rv = LangUtil.tr( "Wert" );
+	  rv = LangUtil.getText( "common.column.value" );
 	  break;
 
 	case READ_ONLY:
-	  rv = LangUtil.tr( "Schreibgesch\u00FCtzt" );
+	  rv = LangUtil.getText( "file.text.write_protected" );
 	  break;
 
 	case SYSTEM_FILE:
-	  rv = LangUtil.tr( "System-Datei" );
+	  rv = LangUtil.getText( "file.text.system_file" );
 	  break;
 
 	case ARCHIVE:
-	  rv = LangUtil.tr( "Archiv" );
+	  rv = LangUtil.getText( "file.text.archive" );
 	  break;
       }
     }

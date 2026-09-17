@@ -33,6 +33,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.RFC822DateParser;
 import jkcemu.emusys.KC85;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.NamedNodeMap;
@@ -84,7 +85,8 @@ public class ImageLoader
   public static javax.swing.filechooser.FileFilter createFileFilter()
   {
     return ImageUtil.createFileFilter(
-			"Unterst\u00FCtzte Bilddateien",
+			LangUtil.getText(
+				"image.filetype.supported_image_files" ),
 			ImageIO.getReaderFileSuffixes(),
 			IFFFile.getFileSuffixes(),
 			kc85ImgFileSuffixes,
@@ -383,7 +385,7 @@ public class ImageLoader
 	  catch( OutOfMemoryError ex ) {
 	    System.gc();
 	    throw new IOException(
-		"Es steht nicht gen\u00FCgend Speicher zur Verf\u00FCgung." );
+		LangUtil.getText( "image.error.not_enough_memory" ) );
 	  }
 	  finally {
 	    EmuUtil.closeSilently( in );

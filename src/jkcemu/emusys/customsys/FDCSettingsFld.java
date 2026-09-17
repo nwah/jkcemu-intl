@@ -27,6 +27,7 @@ import jkcemu.base.HexDocument;
 import jkcemu.base.UserCancelException;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.CustomSys;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 
 
@@ -35,13 +36,13 @@ public class FDCSettingsFld
 			implements DocumentListener
 {
   private static final String LABEL_DATA_IOADDR
-				= "E/A-Adresse Datenregister (hex):";
+				= "customsys.label.i_o_address_data";
   private static final String LABEL_STATUS_IOADDR
-				= "E/A-Adresse Statusregister (hex):";
+				= "customsys.label.i_o_address_status";
   private static final String LABEL_TC_IOADDR
-				= "E/A-Adresse Terminal Count (hex):";
+				= "customsys.label.i_o_address_terminal";
   private static final String LABEL_TC_IOBIT
-				= "Terminal Count ausl\u00F6sen bei:";
+				= "customsys.label.trigger_terminal_count";
 
   private CustomSysSettingsFld csSettingsFld;
   private HexDocument          docDataIOAddr;
@@ -77,42 +78,49 @@ public class FDCSettingsFld
 					0, 0 );
 
     this.cbFdcEnabled = GUIFactory.createCheckBox(
-	"Floppy Disk Controller (FDC) mit 4 Diskettenlaufwerken emulieren" );
+	LangUtil.getText( "customsys.option.emulate_floppy_disk" ) );
     add( this.cbFdcEnabled, gbc );
 
-    this.labelDataIOAddr = GUIFactory.createLabel( LABEL_DATA_IOADDR );
+    this.labelDataIOAddr = GUIFactory.createLabel(
+		LangUtil.getText( LABEL_DATA_IOADDR ) );
     gbc.insets.left      = 50;
     gbc.gridwidth        = 1;
     gbc.gridy++;
     add( this.labelDataIOAddr, gbc );
 
-    this.labelStatusIOAddr = GUIFactory.createLabel( LABEL_STATUS_IOADDR );
+    this.labelStatusIOAddr = GUIFactory.createLabel(
+		LangUtil.getText( LABEL_STATUS_IOADDR ) );
     gbc.gridy++;
     add( this.labelStatusIOAddr, gbc );
 
-    this.labelTcIOAddr = GUIFactory.createLabel( LABEL_TC_IOADDR );
+    this.labelTcIOAddr = GUIFactory.createLabel(
+		LangUtil.getText( LABEL_TC_IOADDR ) );
     gbc.gridy++;
     add( this.labelTcIOAddr, gbc );
 
-    this.labelTcBit = GUIFactory.createLabel( LABEL_TC_IOBIT );
+    this.labelTcBit = GUIFactory.createLabel(
+		LangUtil.getText( LABEL_TC_IOBIT ) );
     gbc.gridy++;
     add( this.labelTcBit, gbc );
 
-    this.docDataIOAddr = new HexDocument( 2, LABEL_DATA_IOADDR );
+    this.docDataIOAddr = new HexDocument(
+		2, LangUtil.getText( LABEL_DATA_IOADDR ) );
     this.fldDataIOAddr = GUIFactory.createTextField( this.docDataIOAddr, 3 );
     gbc.insets.left    = 5;
     gbc.gridy          = 1;
     gbc.gridx++;
     add( this.fldDataIOAddr, gbc );
 
-    this.docStatusIOAddr = new HexDocument( 2, LABEL_STATUS_IOADDR );
+    this.docStatusIOAddr = new HexDocument(
+		2, LangUtil.getText( LABEL_STATUS_IOADDR ) );
     this.fldStatusIOAddr = GUIFactory.createTextField(
 					this.docStatusIOAddr,
 					3 );
     gbc.gridy++;
     add( this.fldStatusIOAddr, gbc );
 
-    this.docTcIOAddr = new HexDocument( 2, LABEL_TC_IOADDR );
+    this.docTcIOAddr = new HexDocument(
+		2, LangUtil.getText( LABEL_TC_IOADDR ) );
     this.fldTcIOAddr = GUIFactory.createTextField(
 					this.docTcIOAddr,
 					3 );

@@ -83,7 +83,10 @@ public class PCBreakpointDlg extends AbstractBreakpointDlg
 		String             name,
 		int                addr )
   {
-    super( debugFrm, "Programmadresse", breakpoint );
+    super(
+		debugFrm,
+		LangUtil.getText( "debugger.section.program_address" ),
+		breakpoint );
 
 
     // Fensterinhalt
@@ -98,9 +101,11 @@ public class PCBreakpointDlg extends AbstractBreakpointDlg
 						new Insets( 5, 5, 5, 5 ),
 						0, 0 );
 
-    add( GUIFactory.createLabel( "Adresse (hex):" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.address_hex" ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Name (optional):" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"debugger.label.name_optional" ) ), gbc );
 
     this.docAddr = new HexDocument( 4 );
     this.fldAddr = GUIFactory.createTextField( this.docAddr, 0 );
@@ -122,9 +127,8 @@ public class PCBreakpointDlg extends AbstractBreakpointDlg
     gbc.gridy++;
     add( GUIFactory.createSeparator(), gbc );
 
-    this.cbCheckReg = GUIFactory.createCheckBox(
-		"Zus\u00E4tzlich Registerinhalt vor Befehlsausf\u00FChrung"
-			+ " pr\u00FCfen:" );
+    this.cbCheckReg = GUIFactory.createCheckBox( LangUtil.getText(
+			"debugger.option.additionally_check" ) );
     gbc.insets.bottom = 0;
     gbc.fill          = GridBagConstraints.NONE;
     gbc.weightx       = 0.0;
@@ -142,7 +146,8 @@ public class PCBreakpointDlg extends AbstractBreakpointDlg
     panelReg.setLayout( new BoxLayout( panelReg, BoxLayout.X_AXIS ) );
 
     this.labelReg1 = GUIFactory.createLabel(
-				"Nur anhalten/loggen, wenn Register" );
+				LangUtil.getText(
+					"debugger.label.only_halt_log_register" ) );
     panelReg.add( this.labelReg1 );
     panelReg.add( Box.createHorizontalStrut( 5 ) );
 
@@ -151,13 +156,14 @@ public class PCBreakpointDlg extends AbstractBreakpointDlg
     panelReg.add( this.comboRegName );
     panelReg.add( Box.createHorizontalStrut( 5 ) );
 
-    this.labelReg2 = GUIFactory.createLabel( "UND" );
+    this.labelReg2 = GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.and" ) );
     panelReg.add( this.labelReg2 );
     panelReg.add( Box.createHorizontalStrut( 5 ) );
 
     this.docRegMask = new HexDocument( 4 );
     this.fldRegMask = GUIFactory.createTextField( this.docRegMask, 4 );
-    this.fldRegMask.setToolTipText( LangUtil.tr( "Maske" ) );
+    this.fldRegMask.setToolTipText( LangUtil.getText( "debugger.text.mask" ) );
     panelReg.add( this.fldRegMask );
     panelReg.add( Box.createHorizontalStrut( 5 ) );
 
@@ -168,16 +174,17 @@ public class PCBreakpointDlg extends AbstractBreakpointDlg
 
     this.docRegValue = new HexDocument( 4 );
     this.fldRegValue = GUIFactory.createTextField( this.docRegValue, 4 );
-    this.fldRegValue.setToolTipText( LangUtil.tr( "Vergleichswert" ) );
+    this.fldRegValue.setToolTipText(
+		LangUtil.getText( "debugger.text.comparison_value" ) );
     panelReg.add( this.fldRegValue );
     panelReg.add( Box.createHorizontalStrut( 5 ) );
 
-    this.labelReg3 = GUIFactory.createLabel( "ist." );
+    this.labelReg3 = GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.dot" ) );
     panelReg.add( this.labelReg3 );
 
-    this.cbCheckFlag = GUIFactory.createCheckBox(
-		"Zus\u00E4tzlich Flagbedingung vor Befehlsausf\u00FChrung"
-			+ " pr\u00FCfen:" );
+    this.cbCheckFlag = GUIFactory.createCheckBox( LangUtil.getText(
+			"debugger.option.additionally_check_flag" ) );
     gbc.insets.top = 10;
     gbc.gridx = 0;
     gbc.gridy++;
@@ -194,7 +201,8 @@ public class PCBreakpointDlg extends AbstractBreakpointDlg
     panelFlag.setLayout( new BoxLayout( panelFlag, BoxLayout.X_AXIS ) );
 
     this.labelFlag1 = GUIFactory.createLabel(
-				"Nur anhalten/loggen, wenn Flagbedingung" );
+				LangUtil.getText(
+					"debugger.label.only_halt_log_flag" ) );
     panelFlag.add( this.labelFlag1 );
     panelFlag.add( Box.createHorizontalStrut( 5 ) );
 
@@ -211,7 +219,8 @@ public class PCBreakpointDlg extends AbstractBreakpointDlg
     panelFlag.add( this.comboFlag );
     panelFlag.add( Box.createHorizontalStrut( 5 ) );
 
-    this.labelFlag2 = GUIFactory.createLabel( "erf\u00FCllt ist." );
+    this.labelFlag2 = GUIFactory.createLabel(
+		LangUtil.getText( "debugger.label.met" ) );
     panelFlag.add( this.labelFlag2 );
 
     gbc.fill        = GridBagConstraints.HORIZONTAL;

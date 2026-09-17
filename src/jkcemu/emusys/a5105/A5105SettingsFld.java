@@ -25,6 +25,7 @@ import jkcemu.base.RAMFloppy;
 import jkcemu.base.UserInputException;
 import jkcemu.disk.GIDESettingsFld;
 import jkcemu.emusys.A5105;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -61,21 +62,24 @@ public class A5105SettingsFld extends AbstractSettingsFld
     this.tabRF = new RAMFloppiesSettingsFld(
 			settingsFrm,
 			propPrefix,
-			"RAM-Floppy an E/A-Adressen 20h/21h",
+			LangUtil.getText( "emusys.text.ram_floppy_i_o_addresses_20h" ),
 			RAMFloppy.RFType.ADW,
-			"RAM-Floppy an E/A-Adressen 24h/25h",
+			LangUtil.getText( "emusys.text.ram_floppy_i_o_addresses_24h" ),
 			RAMFloppy.RFType.ADW );
-    this.tabbedPane.addTab( "RAM-Floppies", this.tabRF );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.ram_floppies" ),
+		this.tabRF );
 
 
     // Tab GIDE
     this.tabGIDE = new GIDESettingsFld( settingsFrm, propPrefix );
-    this.tabbedPane.addTab( "GIDE", this.tabGIDE );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.gide" ), this.tabGIDE );
 
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -87,33 +91,35 @@ public class A5105SettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.cbFloppyDisk = GUIFactory.createCheckBox(
-					"Floppy-Disk-Station",
+					LangUtil.getText( "emusys.option.floppy_disk_station" ),
 					true );
     this.tabEtc.add( this.cbFloppyDisk, gbcEtc );
 
-    this.cbK1520Sound = GUIFactory.createCheckBox( "K1520-Sound-Karte" );
+    this.cbK1520Sound = GUIFactory.createCheckBox(
+		LangUtil.getText( "common.option.k1520_sound_card" ) );
     gbcEtc.insets.top  = 0;
     gbcEtc.gridy++;
     this.tabEtc.add( this.cbK1520Sound, gbcEtc );
 
     this.cbKCNet = GUIFactory.createCheckBox(
-				"KCNet-kompatible Netzwerkkarte" );
+				LangUtil.getText( "emusys.option.kcnet_compatible_network" ) );
     gbcEtc.gridy++;
     this.tabEtc.add( this.cbKCNet, gbcEtc );
 
     this.cbVDIP = GUIFactory.createCheckBox(
-				"USB-Anschluss (Vinculum VDIP Modul)" );
+				LangUtil.getText(
+					"emusys.option.usb_port_vinculum" ) );
     gbcEtc.gridy++;
     this.tabEtc.add( this.cbVDIP, gbcEtc );
 
     this.cbPasteFast = GUIFactory.createCheckBox(
-		"Einf\u00FCgen von Text durch Abfangen des Systemaufrufs" );
+		LangUtil.getText( "emusys.option.paste_text_intercepting" ) );
     gbcEtc.insets.top = 20;
     gbcEtc.gridy++;
     this.tabEtc.add( this.cbPasteFast, gbcEtc );
 
     this.cbFixedScreenSize = GUIFactory.createCheckBox(
-		"Gleiche Fenstergr\u00F6\u00DFe in allen Bildschirmmodi" );
+		LangUtil.getText( "emusys.option.same_window_size" ) );
     gbcEtc.insets.top    = 0;
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridy++;
@@ -126,7 +132,8 @@ public class A5105SettingsFld extends AbstractSettingsFld
 				propPrefix,
 				A5105.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 				true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -136,7 +143,8 @@ public class A5105SettingsFld extends AbstractSettingsFld
 				A5105.getAutoInputCharSet(),
 				A5105.DEFAULT_SWAP_KEY_CHAR_CASE,
 				A5105.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     // Listener

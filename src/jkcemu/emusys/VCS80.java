@@ -17,6 +17,7 @@ import jkcemu.base.EmuSys;
 import jkcemu.base.EmuThread;
 import jkcemu.base.EmuUtil;
 import jkcemu.emusys.etc.VCS80KeyboardFld;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80AddressListener;
 import z80emu.Z80CPU;
 import z80emu.Z80InterruptSource;
@@ -66,7 +67,7 @@ public class VCS80 extends EmuSys implements
     this.digitValues       = new int[ 9 ];
 
     Z80CPU cpu = emuThread.getZ80CPU();
-    this.pio   = new Z80PIO( "PIO" );
+    this.pio   = new Z80PIO( LangUtil.getText( "emusys.text.pio" ) );
     cpu.setInterruptSources( this.pio );
     cpu.addAddressListener( this );
     cpu.addMaxSpeedListener( this );

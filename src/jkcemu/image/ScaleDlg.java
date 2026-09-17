@@ -29,6 +29,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class ScaleDlg extends BaseDlg implements ChangeListener
@@ -112,7 +113,7 @@ public class ScaleDlg extends BaseDlg implements ChangeListener
 
   private ScaleDlg( ImageFrm imageFrm, BufferedImage image )
   {
-    super( imageFrm, "Skalieren" );
+    super( imageFrm, LangUtil.getText( "image.action.scale" ) );
     this.image            = image;
     this.ratio            = null;
     this.scaledImage      = null;
@@ -144,7 +145,8 @@ public class ScaleDlg extends BaseDlg implements ChangeListener
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Neue Breite:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.new_width" ) ), gbc );
 
     this.spinnerWidth = GUIFactory.createSpinner(
 				new SpinnerNumberModel(
@@ -157,12 +159,14 @@ public class ScaleDlg extends BaseDlg implements ChangeListener
     add( this.spinnerWidth, gbc );
 
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Pixel" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.pixels" ) ), gbc );
 
     gbc.insets.left = 5;
     gbc.gridx       = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Neue H\u00F6he:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "image.label.new_height" ) ), gbc );
 
     this.spinnerHeight = GUIFactory.createSpinner(
 				new SpinnerNumberModel(
@@ -175,10 +179,12 @@ public class ScaleDlg extends BaseDlg implements ChangeListener
     add( this.spinnerHeight, gbc );
 
     gbc.gridx++;
-    add( GUIFactory.createLabel( "Pixel" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.pixels" ) ), gbc );
 
     this.cbKeepRatio = GUIFactory.createCheckBox(
-				"Seitenverh\u00E4ltnis beibehalten" );
+				LangUtil.getText(
+					"image.option.keep_aspect_ratio" ) );
     if( this.ratio != null ) {
       this.cbKeepRatio.setSelected( lastKeepRatio );
     } else {
@@ -201,7 +207,8 @@ public class ScaleDlg extends BaseDlg implements ChangeListener
     gbc.gridy++;
     add( panelBtn, gbc );
 
-    this.btnScale = GUIFactory.createButton( "Skalieren" );
+    this.btnScale = GUIFactory.createButton(
+		LangUtil.getText( "image.action.scale" ) );
     panelBtn.add( this.btnScale );
 
     this.btnCancel = GUIFactory.createButtonCancel();

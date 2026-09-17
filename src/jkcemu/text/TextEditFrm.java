@@ -111,7 +111,7 @@ public class TextEditFrm extends BaseFrm implements
 					PopupMenuOwner,
 					RecentFilesMngr.Listener
 {
-  public static final String TITLE = Main.APPNAME + " Editor";
+  public static final String TITLE = "text.title.jkcemu_editor";
 
   public static final String PROP_SHOW_LINE_ADDRS
 				= "jkcemu.texteditor.show_line_addrs";
@@ -122,7 +122,7 @@ public class TextEditFrm extends BaseFrm implements
   public static final String PROP_SHIFT_USE_TABS
 				= "jkcemu.texteditor.shift.use_tabs";
 
-  private static final String DEFAULT_STATUS_TEXT = "Bereit";
+  private static final String DEFAULT_STATUS_TEXT = "common.text.ready";
   private static final String HELP_PAGE = "/help/tools/texteditor.htm";
 
   private static TextEditFrm                          instance        = null;
@@ -289,7 +289,8 @@ public class TextEditFrm extends BaseFrm implements
     if( textFileFilters == null ) {
       textFileFilters      = new javax.swing.filechooser.FileFilter[ 2 ];
       textFileFilters[ 0 ] = new FileNameExtensionFilter(
-				LangUtil.tr( "Quelltextdateien (*.asm; *.bas)" ),
+				LangUtil.getText(
+					"text.text.source_code_files" ),
 				"asm", "bas" );
       textFileFilters[ 1 ] = FileUtil.getTextFileFilter();
     }
@@ -398,19 +399,15 @@ public class TextEditFrm extends BaseFrm implements
     if( props != null ) {
       setState( Frame.NORMAL );
       toFront();
-      String[] options = { LangUtil.tr( "Projekt" ),
-			   LangUtil.tr( "Inhalt" ),
-			   LangUtil.tr( EmuUtil.TEXT_CANCEL ) };
+      String[] options = { LangUtil.getText( "text.text.project_projekt" ),
+			   LangUtil.getText( "text.text.content" ),
+			   LangUtil.getText( EmuUtil.TEXT_CANCEL ) };
       int      selOpt  = JOptionPane.showOptionDialog(
 				this,
-				LangUtil.tr(
-					"Die ausgew\u00E4hlte Datei ist eine"
-						+ " JKCEMU-Projektdatei.\n"
-						+ "M\u00F6chten Sie das Projekt"
-						+ " oder den Inhalt\n"
-						+ "der Projektdatei"
-						+ " \u00F6ffnen?" ),
-				LangUtil.tr( "Projektdatei ausgew\u00E4hlt" ),
+				LangUtil.getText(
+					"text.text.selected_file_jkcemu" ),
+				LangUtil.getText(
+					"text.text.project_file_selected" ),
 				JOptionPane.YES_NO_CANCEL_OPTION,
 				JOptionPane.QUESTION_MESSAGE,
 				null,
@@ -1145,7 +1142,7 @@ public class TextEditFrm extends BaseFrm implements
   {
     File file = FileUtil.showFileOpenDlg(
 			this,
-			"Textdatei \u00F6ffnen",
+			LangUtil.getText( "text.title.open_text_file" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_TEXT ),
 			getTextFileFilters() );
@@ -1159,7 +1156,7 @@ public class TextEditFrm extends BaseFrm implements
   {
     File file = FileUtil.showFileOpenDlg(
 			this,
-			"Textdatei \u00F6ffnen mit Zeichensatz",
+			LangUtil.getText( "text.title.open_text_file_character" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_TEXT ),
 			getTextFileFilters() );
@@ -1216,13 +1213,14 @@ public class TextEditFrm extends BaseFrm implements
           }
           wasSaved = true;
 	  editText.setAskFileNameOnSave( false );
-          this.labelStatus.setText( "Datei gespeichert" );
+          this.labelStatus.setText(
+			LangUtil.getText( "text.text.file_saved" ) );
         }
       }
       catch( IOException ex ) {
         BaseDlg.showErrorDlg(
                 this,
-                LangUtil.tr( "Die Datei kann nicht gespeichert werden." )
+                LangUtil.getText( "text.text.file_cannot_saved_die" )
                         + "\n\n" + ex.getMessage() );
       }
     }
@@ -1233,7 +1231,8 @@ public class TextEditFrm extends BaseFrm implements
   private void doFilePrintOptions()
   {
     if( PrintOptionsDlg.showPrintOptionsDlg( this, true, true ) )
-      this.labelStatus.setText( "Druckoptionen ge\u00E4ndert" );
+      this.labelStatus.setText(
+		LangUtil.getText( "text.text.print_options_changed" ) );
   }
 
 
@@ -1252,7 +1251,8 @@ public class TextEditFrm extends BaseFrm implements
 			file != null ? file.getName() : null ),
 		editText.getName() ) )
       {
-        this.labelStatus.setText( "Datei gedruckt" );
+        this.labelStatus.setText(
+		LangUtil.getText( "text.text.file_printed" ) );
       }
     }
   }
@@ -1316,17 +1316,15 @@ public class TextEditFrm extends BaseFrm implements
 	if( (tabIdx >= 0) && (tabIdx < this.tabbedPane.getTabCount()) ) {
 	  this.tabbedPane.setSelectedIndex( tabIdx );
 	}
-	String[] options = LangUtil.tr( new String[] {
-			EmuUtil.TEXT_SAVE,
-			"Verwerfen",
-			EmuUtil.TEXT_CANCEL } );
-	JOptionPane pane = new JOptionPane(
-		LangUtil.tr(
-			"{0} wurde ge\u00E4ndert und nicht gespeichert.\n"
-				+ "M\u00F6chten Sie jetzt speichern?",
+	String[] options = LangUtil.getTexts( new String[] {
+			LangUtil.getText( EmuUtil.TEXT_SAVE ),
+			LangUtil.getText( "common.text.discard" ),
+			LangUtil.getText( EmuUtil.TEXT_CANCEL ) } );
+	JOptionPane pane = new JOptionPane( LangUtil.getText(
+			"text.text.changed_not_saved",
 			prjChanged ?
-				LangUtil.tr( "Das Projekt" )
-				: LangUtil.tr( "Der Text" ) ),
+				LangUtil.getText( "text.text.project_das" )
+				: LangUtil.getText( "text.text.text" ) ),
 		JOptionPane.WARNING_MESSAGE );
 	pane.setWantsInput( false );
 	pane.setOptions( options );
@@ -1335,7 +1333,8 @@ public class TextEditFrm extends BaseFrm implements
 	toFront();
 	pane.createDialog(
 		this,
-		LangUtil.tr( "Daten ge\u00E4ndert" ) ).setVisible( true );
+		LangUtil.getText(
+			"common.text.data_changed" ) ).setVisible( true );
 	Object value = pane.getValue();
 	if( value != null ) {
 	  if( value.equals( options[ 0 ] ) ) {
@@ -1458,14 +1457,7 @@ public class TextEditFrm extends BaseFrm implements
     if( textArea != null ) {
       if( BaseDlg.showSuppressableYesNoDlg(
 		this,
-		"M\u00F6chten Sie an der aktuellen Cursor-Position"
-			+ " ein Seitenumbruchzeichen einf\u00FCgen?\n"
-			+ "Dieses Zeichen hat nur beim Drucken"
-			+ " eine Wirkung.\n"
-			+ "Im Editor wird es abh\u00E4ngig von der"
-			+ " aktuellen Schrift entweder gar nicht\n"
-			+ "oder mit einem speziellen Zeichen"
-			+ " dargestellt." ) )
+		LangUtil.getText( "text.msg.want_insert_page" ) ) )
       {
 	textArea.replaceSelection( "\f" );
       }
@@ -1479,8 +1471,7 @@ public class TextEditFrm extends BaseFrm implements
     if( editText != null ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie alle Seitenumbruchzeichen"
-			+ " aus dem Text entfernen?" ) )
+		LangUtil.getText( "text.msg.want_remove_all" ) ) )
       {
 	String oldText = editText.getText();
 	if( oldText != null ) {
@@ -1509,14 +1500,12 @@ public class TextEditFrm extends BaseFrm implements
 	      editText.setCaretPosition( crsPos );
 	      BaseDlg.showInfoDlg(
 			this,
-			LangUtil.tr(
-				"{0} Seitenumbruchzeichen entfernt",
+			LangUtil.getText( "text.text.page_break_characters",
 				cnt ) );
 	    } else {
 	      BaseDlg.showInfoDlg(
 			this,
-			"Im Text sind keine Seitenumbruchzeichen"
-				+ " enthalten." );
+			LangUtil.getText( "text.msg.text_contains_no_page" ) );
 	    }
 	  }
 	}
@@ -1571,12 +1560,11 @@ public class TextEditFrm extends BaseFrm implements
 	if( oldText.indexOf( '\t' ) < 0 ) {
 	  BaseDlg.showInfoDlg(
 		this,
-		"Der Text enth\u00E4lt keine Tabulatoren." );
+		LangUtil.getText( "text.msg.text_contains_no_tabs" ) );
 	} else {
 	  if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie die Tabulatoren durch Leerzeichen"
-			+ " ersetzen?" ) )
+		LangUtil.getText( "text.msg.want_replace_tabs" ) ) )
 	  {
 	    int tabSize     = editText.getTabSize();
 	    int oldCaretPos = editText.getCaretPosition();
@@ -1744,8 +1732,7 @@ public class TextEditFrm extends BaseFrm implements
     if( editText != null ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie die Zeichen \"[\\]{|}~\"\n"
-			+ "in deutsche Umlaute konvertieren?" ) )
+		LangUtil.getText( "text.msg.want_convert_characters" ) ) )
       {
 	String oldText = editText.getText();
 	if( oldText != null ) {
@@ -1808,9 +1795,7 @@ public class TextEditFrm extends BaseFrm implements
     if( editText != null ) {
       if( BaseDlg.showYesNoDlg(
 		this,
-		"M\u00F6chten Sie die im DOS-Zeichensatz kodierten\n"
-			+ "deutschen Umlaute konvertieren und so"
-			+ " sichtbar machen?" ) )
+		LangUtil.getText( "text.msg.want_convert_german" ) ) )
       {
 	String oldText = editText.getText();
 	if( oldText != null ) {
@@ -2043,7 +2028,7 @@ public class TextEditFrm extends BaseFrm implements
                                 lineNum,
                                 1,
                                 null );
-      dlg.setTitle( "Gehe zu Zeile" );
+      dlg.setTitle( LangUtil.getText( "text.title.go_line" ) );
       dlg.setVisible( true );
       lineNum = dlg.getReply();
 
@@ -2176,7 +2161,7 @@ public class TextEditFrm extends BaseFrm implements
   {
     File file = FileUtil.showFileOpenDlg(
 			this,
-			"Projekt \u00F6ffnen",
+			LangUtil.getText( "text.title.open_project" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_PROJECT ),
 			FileUtil.getProjectFileFilter() );
@@ -2188,7 +2173,7 @@ public class TextEditFrm extends BaseFrm implements
 	} else {
 	  BaseDlg.showErrorDlg(
 		this,
-		"Die ausgew\u00E4hlte Datei ist keine JKCEMU-Projektdatei." );
+		LangUtil.getText( "text.error.selected_file_not_jkcemu" ) );
 	}
       }
       catch( IOException ex ) {
@@ -2303,17 +2288,18 @@ public class TextEditFrm extends BaseFrm implements
     JMenu mnuFile = createMenuFile();
 
     this.mnuFileNew = createMenuItemWithStandardAccelerator(
-						"Neuer Text",
+						LangUtil.getText( "text.action.new_text" ),
 						KeyEvent.VK_N );
     mnuFile.add( this.mnuFileNew );
 
     this.mnuFileOpen = createMenuItemWithStandardAccelerator(
-						EmuUtil.TEXT_OPEN_OPEN,
+						LangUtil.getText( EmuUtil.TEXT_OPEN_OPEN ),
 						KeyEvent.VK_O );
     mnuFile.add( this.mnuFileOpen );
 
     this.mnuFileOpenCharset = createMenuItem(
-				"\u00D6ffnen mit Zeichensatz..." );
+				LangUtil.getText(
+					"text.action.open_character_set" ) );
     mnuFile.add( this.mnuFileOpenCharset );
 
     if( this.recentFilesMngr != null ) {
@@ -2322,7 +2308,8 @@ public class TextEditFrm extends BaseFrm implements
     mnuFile.addSeparator();
 
     this.mnuFileSave = createMenuItemWithStandardAccelerator(
-						EmuUtil.TEXT_SAVE,
+						LangUtil.getText(
+							EmuUtil.TEXT_SAVE ),
 						KeyEvent.VK_S );
     mnuFile.add( this.mnuFileSave );
 
@@ -2337,12 +2324,13 @@ public class TextEditFrm extends BaseFrm implements
     mnuFile.add( this.mnuFilePrint );
     mnuFile.addSeparator();
 
-    this.mnuFileProperties = createMenuItem( "Eigenschaften..." );
+    this.mnuFileProperties = createMenuItem(
+		LangUtil.getText( "common.action.properties" ) );
     mnuFile.add( this.mnuFileProperties );
     mnuFile.addSeparator();
 
     this.mnuFileTabClose = createMenuItemWithStandardAccelerator(
-					"Unterfenster schlie\u00DFen",
+					LangUtil.getText( "common.action.close_subwindow" ),
 					KeyEvent.VK_W );
     mnuFile.add( this.mnuFileTabClose );
 
@@ -2354,7 +2342,8 @@ public class TextEditFrm extends BaseFrm implements
     JMenu mnuEdit = createMenuEdit();
 
     this.mnuEditUndo = createMenuItemWithStandardAccelerator(
-						"R\u00FCckg\u00E4ngig",
+						LangUtil.getText(
+							"common.action.undo" ),
 						KeyEvent.VK_Z );
     this.mnuEditUndo.setEnabled( false );
     mnuEdit.add( this.mnuEditUndo );
@@ -2371,33 +2360,36 @@ public class TextEditFrm extends BaseFrm implements
     mnuEdit.addSeparator();
 
     this.mnuEditShiftIn = createMenuItemWithStandardAccelerator(
-						"Einr\u00FCcken",
+						LangUtil.getText(
+							"text.action.indent" ),
 						KeyEvent.VK_I );
     mnuEdit.add( this.mnuEditShiftIn );
 
     this.mnuEditShiftOut = createMenuItemWithStandardAccelerator(
-						"Herausr\u00FCcken",
+						LangUtil.getText( "text.action.outdent" ),
 						KeyEvent.VK_I,
 						true );
     mnuEdit.add( this.mnuEditShiftOut );
 
-    this.mnuEditShiftWidth = createMenuItem( "Einr\u00FCcktiefe..." );
+    this.mnuEditShiftWidth = createMenuItem(
+		LangUtil.getText( "text.action.indentation_depth" ) );
     mnuEdit.add( this.mnuEditShiftWidth );
     mnuEdit.addSeparator();
 
     this.mnuEditUpper = createMenuItemWithStandardAccelerator(
-					"In Gro\u00DFbuchstaben wandeln",
+					LangUtil.getText( "text.action.convert_upper_case" ),
 					KeyEvent.VK_U );
     mnuEdit.add( this.mnuEditUpper );
 
     this.mnuEditLower = createMenuItemWithStandardAccelerator(
-					"In Kleinbuchstaben wandeln",
+					LangUtil.getText( "text.action.convert_lower_case" ),
 					KeyEvent.VK_L );
     mnuEdit.add( this.mnuEditLower );
     mnuEdit.addSeparator();
 
     this.mnuEditFind = createMenuItemWithStandardAccelerator(
-				EmuUtil.TEXT_OPEN_FIND_AND_REPLACE,
+				LangUtil.getText(
+					EmuUtil.TEXT_OPEN_FIND_AND_REPLACE ),
 				KeyEvent.VK_F );
     mnuEdit.add( this.mnuEditFind );
 
@@ -2408,62 +2400,70 @@ public class TextEditFrm extends BaseFrm implements
     mnuEdit.add( this.mnuEditFindPrev );
 
     this.mnuEditReplace = createMenuItemWithStandardAccelerator(
-						EmuUtil.TEXT_REPLACE,
+						LangUtil.getText(
+							EmuUtil.TEXT_REPLACE ),
 						KeyEvent.VK_R );
     mnuEdit.add( this.mnuEditReplace );
     mnuEdit.addSeparator();
 
     this.mnuEditBracket = createMenuItemWithStandardAccelerator(
-						"Klammer pr\u00FCfen",
+						LangUtil.getText( "text.action.check_bracket" ),
 						KeyEvent.VK_K );
     mnuEdit.add( this.mnuEditBracket );
 
     this.mnuEditGoto = createMenuItemWithStandardAccelerator(
-						"Gehe zu Zeile...",
+						LangUtil.getText( "text.action.go_line" ),
 						KeyEvent.VK_G );
     mnuEdit.add( this.mnuEditGoto );
 
-    JMenu mnuEditEtc = GUIFactory.createMenu( "Weitere Funktionen" );
+    JMenu mnuEditEtc = GUIFactory.createMenu(
+		LangUtil.getText( "text.menu.more_functions" ) );
     mnuEdit.add( mnuEditEtc );
     mnuEdit.addSeparator();
 
-    this.mnuEditCharSelectDlg = createMenuItem( "Zeichenauswahl..." );
+    this.mnuEditCharSelectDlg = createMenuItem(
+		LangUtil.getText( "text.action.character_selection" ) );
     mnuEditEtc.add( this.mnuEditCharSelectDlg );
     mnuEditEtc.addSeparator();
 
     this.mnuEditInsertNewPage = createMenuItem(
-				"Seitenumbruchzeichen einf\u00FCgen" );
+				LangUtil.getText(
+					"text.action.insert_page_break" ) );
     mnuEditEtc.add( this.mnuEditInsertNewPage );
 
     this.mnuEditRemoveNewPages = createMenuItem(
-				"Alle Seitenumbruchzeichen entfernen" );
+				LangUtil.getText(
+					"text.action.remove_all_page" ) );
     mnuEditEtc.add( this.mnuEditRemoveNewPages );
 
     this.mnuEditRemoveWordstarFmt = createMenuItem(
-			"WordStar-Formatierungen entfernen" );
+			LangUtil.getText( "text.action.remove_wordstar" ) );
     mnuEditEtc.add( this.mnuEditRemoveWordstarFmt );
     mnuEditEtc.addSeparator();
 
     this.mnuEditTabSize = createMenuItemWithStandardAccelerator(
-						"Tabulatorbreite...",
+						LangUtil.getText( "text.action.tab_width" ),
 						KeyEvent.VK_T );
     mnuEditEtc.add( this.mnuEditTabSize );
 
     this.mnuEditTabToSpaces = createMenuItem(
-			"Tabulatoren durch Leerzeichen ersetzen" );
+			LangUtil.getText(
+				"text.action.replace_tabs_spaces" ) );
     mnuEditEtc.add( this.mnuEditTabToSpaces );
     mnuEditEtc.addSeparator();
 
     JMenu mnuEditUmlaut = GUIFactory.createMenu(
-				"Deutsche Umlaute konvertieren" );
+				LangUtil.getText(
+					"text.menu.convert_german_umlauts" ) );
     mnuEditEtc.add( mnuEditUmlaut );
 
     this.mnuEditUmlautGerToUni = GUIFactory.createMenuItem(
-			"\"[\\]{|}~\" in Umlaute konvertieren" );
+			LangUtil.getText( "text.action.convert_umlauts" ) );
     mnuEditUmlaut.add( this.mnuEditUmlautGerToUni );
 
     this.mnuEditUmlautDosToUni = createMenuItem(
-			"Umlaute im DOS-Zeichensatz konvertieren" );
+			LangUtil.getText(
+				"text.action.convert_umlauts_dos" ) );
     mnuEditUmlaut.add( this.mnuEditUmlautDosToUni );
 
     this.mnuEditSelectAll = createMenuItemSelectAll( true );
@@ -2471,73 +2471,83 @@ public class TextEditFrm extends BaseFrm implements
 
 
     // Menu Programmierung
-    JMenu mnuPrg = GUIFactory.createMenu( "Programmierung" );
-    mnuPrg.setMnemonic( LangUtil.mnemonic( "Programmierung", KeyEvent.VK_P ) );
+    JMenu mnuPrg = GUIFactory.createMenu(
+		LangUtil.getText( "text.menu.programming" ) );
+    mnuPrg.setMnemonic(
+		LangUtil.mnemonic( "text.menu.programming", KeyEvent.VK_P ) );
 
     this.mnuPrgCompile = createMenuItemWithDirectAccelerator(
-				"BASIC-Programm compilieren",
+				LangUtil.getText(
+					"text.action.compile_basic_program_programm_compilieren" ),
 				KeyEvent.VK_F9 );
     mnuPrg.add( this.mnuPrgCompile );
 
     this.mnuPrgCompileRun = createMenuItemWithDirectAccelerator(
-				"BASIC-Programm compilieren und starten",
+				LangUtil.getText( "text.action.compile_basic_program_start" ),
 				KeyEvent.VK_F9,
 				true );
     mnuPrg.add( this.mnuPrgCompileRun );
 
     this.mnuPrgCompileOpt = createMenuItem(
-				"BASIC-Programm compilieren mit..." );
+				LangUtil.getText( "text.action.compile_basic_program_compilieren_mit" ) );
     mnuPrg.add( this.mnuPrgCompileOpt );
     mnuPrg.addSeparator();
 
     this.mnuPrgAssemble = createMenuItemWithDirectAccelerator(
-				"Assemblieren",
+				LangUtil.getText( "text.action.assemble_assemblieren" ),
 				KeyEvent.VK_F8 );
     mnuPrg.add( this.mnuPrgAssemble );
 
     this.mnuPrgAssembleRun = createMenuItemWithDirectAccelerator(
-				"Assemblieren und Programm starten",
+				LangUtil.getText(
+					"text.action.assemble_start_program" ),
 				KeyEvent.VK_F8,
 				true );
     mnuPrg.add( this.mnuPrgAssembleRun );
 
     this.mnuPrgAssembleOpt = createMenuItem(
-				"Assemblieren mit..." );
+				LangUtil.getText( "text.action.assemble_assemblieren_mit" ) );
     mnuPrg.add( this.mnuPrgAssembleOpt );
     mnuPrg.addSeparator();
 
     this.mnuPrgLineAddrs = GUIFactory.createCheckBoxMenuItem(
-		"Adressspalte nach Assemblieren anzeigen",
+		LangUtil.getText( "text.action.show_address_column" ),
 		Main.getBooleanProperty(
 				PROP_SHOW_LINE_ADDRS,
 				true ) );
     mnuPrg.add( this.mnuPrgLineAddrs );
 
     this.mnuRemoveRowHeader = createMenuItem(
-				"Adressspalte ausblenden" );
+				LangUtil.getText(
+					"text.action.hide_address_column" ) );
     mnuPrg.add( this.mnuRemoveRowHeader );
     mnuPrg.addSeparator();
 
     this.mnuPrgCancel = createMenuItemWithDirectAccelerator(
-				"Assembler/Compiler abbrechen",
+				LangUtil.getText(
+					"text.action.cancel_assembler" ),
 				KeyEvent.VK_F7 );
     this.mnuPrgCancel.setEnabled( false );
     mnuPrg.add( this.mnuPrgCancel );
     mnuPrg.addSeparator();
 
-    this.mnuPrjOpen = createMenuItem( "Projekt \u00F6ffnen..." );
+    this.mnuPrjOpen = createMenuItem(
+		LangUtil.getText( "text.action.open_project" ) );
     mnuPrg.add( this.mnuPrjOpen );
 
-    this.mnuPrjSave = createMenuItem( "Projekt speichern" );
+    this.mnuPrjSave = createMenuItem(
+		LangUtil.getText( "text.action.save_project_projekt_speichern" ) );
     mnuPrg.add( this.mnuPrjSave );
 
-    this.mnuPrjSaveAs = createMenuItem( "Projekt speichern unter..." );
+    this.mnuPrjSaveAs = createMenuItem(
+		LangUtil.getText( "text.action.save_project_speichern_unter" ) );
     mnuPrg.add( this.mnuPrjSaveAs );
 
 
     // Menu Hilfe
     JMenu mnuHelp       = createMenuHelp();
-    this.mnuHelpContent = createMenuItem( "Hilfe zum Texteditor..." );
+    this.mnuHelpContent = createMenuItem(
+		LangUtil.getText( "text.action.help_text_editor" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -2563,7 +2573,8 @@ public class TextEditFrm extends BaseFrm implements
     this.popupMnu.addSeparator();
 
     this.popupFind = createMenuItem(
-				EmuUtil.TEXT_OPEN_FIND_AND_REPLACE );
+				LangUtil.getText(
+					EmuUtil.TEXT_OPEN_FIND_AND_REPLACE ) );
     this.popupMnu.add( this.popupFind );
 
     this.popupFindNext = createMenuItemFindNext( false );
@@ -2572,16 +2583,19 @@ public class TextEditFrm extends BaseFrm implements
     this.popupFindPrev = createMenuItemFindPrev( false );
     this.popupMnu.add( this.popupFindPrev );
 
-    this.popupReplace = createMenuItem( EmuUtil.TEXT_REPLACE );
+    this.popupReplace = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_REPLACE ) );
     this.popupMnu.add( this.popupReplace );
     this.popupMnu.addSeparator();
 
     if( this.emuThread != null ) {
       this.popupDebugCreateBP = createMenuItem(
-			"Im Debugger Halte-/Log-Punkt hinzuf\u00FCgen..." );
+			LangUtil.getText(
+				"common.action.add_breakpoint_logpoint" ) );
       this.popupMnu.add( this.popupDebugCreateBP );
       this.popupDebugCreateVar = createMenuItem(
-			"Im Debugger Variable hinzuf\u00FCgen..." );
+			LangUtil.getText(
+				"text.action.add_variable_debugger" ) );
       this.popupMnu.add( this.popupDebugCreateVar );
       this.popupMnu.addSeparator();
     } else {
@@ -2589,7 +2603,8 @@ public class TextEditFrm extends BaseFrm implements
       this.popupDebugCreateVar = null;
     }
 
-    this.popupSelectAll = createMenuItem( EmuUtil.TEXT_SELECT_ALL );
+    this.popupSelectAll = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_SELECT_ALL ) );
     this.popupMnu.add( this.popupSelectAll );
 
 
@@ -2616,58 +2631,63 @@ public class TextEditFrm extends BaseFrm implements
     this.btnNew = GUIFactory.createRelImageResourceButton(
 						this,
 						"file/new.png",
-						"Neu" );
+						LangUtil.getText( "common.action.new" ) );
     toolBar.add( this.btnNew );
 
     this.btnOpen = GUIFactory.createRelImageResourceButton(
 						this,
 						"file/open.png",
-						EmuUtil.TEXT_LOAD );
+						LangUtil.getText(
+							EmuUtil.TEXT_LOAD ) );
     toolBar.add( this.btnOpen );
 
     this.btnSave = GUIFactory.createRelImageResourceButton(
 						this,
 						"file/save.png",
-						EmuUtil.TEXT_SAVE );
+						LangUtil.getText(
+							EmuUtil.TEXT_SAVE ) );
     toolBar.add( this.btnSave );
 
     this.btnPrint = GUIFactory.createRelImageResourceButton(
 						this,
 						"file/print.png",
-						"Drucken" );
+						LangUtil.getText( "text.action.print" ) );
     toolBar.add( this.btnPrint );
     toolBar.addSeparator();
 
     this.btnUndo = GUIFactory.createRelImageResourceButton(
 						this,
 						"edit/undo.png",
-						"R\u00FCckg\u00E4ngig" );
+						LangUtil.getText( "common.action.undo" ) );
     toolBar.add( this.btnUndo );
     toolBar.addSeparator();
 
     this.btnCut = GUIFactory.createRelImageResourceButton(
 						this,
 						"edit/cut.png",
-						EmuUtil.TEXT_CUT );
+						LangUtil.getText(
+							EmuUtil.TEXT_CUT ) );
     toolBar.add( this.btnCut );
 
     this.btnCopy = GUIFactory.createRelImageResourceButton(
 						this,
 						"edit/copy.png",
-						EmuUtil.TEXT_COPY );
+						LangUtil.getText(
+							EmuUtil.TEXT_COPY ) );
     toolBar.add( this.btnCopy );
 
     this.btnPaste = GUIFactory.createRelImageResourceButton(
 						this,
 						"edit/paste.png",
-						EmuUtil.TEXT_PASTE );
+						LangUtil.getText(
+							EmuUtil.TEXT_PASTE ) );
     toolBar.add( this.btnPaste );
     toolBar.addSeparator();
 
     this.btnFind = GUIFactory.createRelImageResourceButton(
 					this,
 					"edit/find.png",
-					EmuUtil.TEXT_OPEN_FIND_AND_REPLACE );
+					LangUtil.getText( EmuUtil.TEXT_OPEN_FIND_AND_REPLACE ) );
     toolBar.add( this.btnFind );
 
     add( toolBar, gbc );
@@ -2695,7 +2715,8 @@ public class TextEditFrm extends BaseFrm implements
 
 
     // Statuszeile
-    this.labelStatus  = GUIFactory.createLabel( DEFAULT_STATUS_TEXT );
+    this.labelStatus  = GUIFactory.createLabel(
+		LangUtil.getText( DEFAULT_STATUS_TEXT ) );
     gbc.anchor        = GridBagConstraints.WEST;
     gbc.fill          = GridBagConstraints.HORIZONTAL;
     gbc.insets.top    = 5;
@@ -2822,8 +2843,8 @@ public class TextEditFrm extends BaseFrm implements
         setSelectedEditText( editText );
         BaseDlg.showInfoDlg(
 		this,
-		"Diese Datei ist bereits ge\u00F6ffnet.",
-		"Hinweis" );
+		LangUtil.getText( "text.msg.file_already_open" ),
+		LangUtil.getText( "common.msg.note" ) );
         rv = editText;
       }
     }
@@ -3271,7 +3292,7 @@ public class TextEditFrm extends BaseFrm implements
   {
     BaseDlg.showInfoDlg(
 		this,
-		LangUtil.tr( "{0} Ersetzungen", cnt ) );
+		LangUtil.getText( "text.text.replacements", cnt ) );
   }
 
 
@@ -3323,7 +3344,7 @@ public class TextEditFrm extends BaseFrm implements
   private void updStatusBar()
   {
     if( this.labelStatus != null ) {
-      String    statusText = DEFAULT_STATUS_TEXT;
+      String    statusText = LangUtil.getText( DEFAULT_STATUS_TEXT );
       JTextArea textArea   = getSelectedJTextArea();
       if( textArea != null ) {
         try {
@@ -3361,7 +3382,7 @@ public class TextEditFrm extends BaseFrm implements
 
   private void updTitle( EditText editText )
   {
-    String title = LangUtil.tr( TITLE );
+    String title = LangUtil.getText( TITLE );
     if( editText != null ) {
       StringBuilder buf = new StringBuilder( 256 );
       buf.append( title );
@@ -3380,7 +3401,7 @@ public class TextEditFrm extends BaseFrm implements
 	 * sind im deutschen Originaltext so enthalten
 	 * und werden hier nicht veraendert.
 	 */
-	title = LangUtil.tr( "{0} (schreibesch\u00FCtzt", title );
+	title = LangUtil.getText( "text.text.write_protected", title );
       }
     }
     setTitle( title );

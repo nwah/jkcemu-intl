@@ -147,7 +147,7 @@ public class ChessboardFrm extends BaseFrm
 
   private ChessboardFrm( EmuThread emuThread )
   {
-    setTitle( "JKCEMU Schachbrett" );
+    setTitle( LangUtil.getText( "etc.title.jkcemu_chessboard" ) );
 
 
     // Menu Datei
@@ -160,22 +160,27 @@ public class ChessboardFrm extends BaseFrm
     // Menu Bearbeiten
     JMenu mnuEdit = createMenuEdit();
 
-    this.mnuCopy = createMenuItem( "Schachbrett kopieren" );
+    this.mnuCopy = createMenuItem(
+		LangUtil.getText( "etc.action.copy_chessboard" ) );
     mnuEdit.add( this.mnuCopy );
 
 
     // Menu Ansicht
-    JMenu mnuView = GUIFactory.createMenu( "Ansicht" );
-    mnuView.setMnemonic( LangUtil.mnemonic( "Ansicht", KeyEvent.VK_A ) );
+    JMenu mnuView = GUIFactory.createMenu(
+		LangUtil.getText( "common.menu.view" ) );
+    mnuView.setMnemonic(
+		LangUtil.mnemonic( "common.menu.view", KeyEvent.VK_A ) );
 
-    this.mnuSwap = createMenuItem( "Seite wechseln" );
+    this.mnuSwap = createMenuItem(
+		LangUtil.getText( "etc.action.switch_side" ) );
     mnuView.add( this.mnuSwap );
 
 
     // Menu Hilfe
     JMenu mnuHelp = createMenuHelp();
 
-    this.mnuHelpContent = createMenuItem( "Hilfe zum Schachbrett..." );
+    this.mnuHelpContent = createMenuItem(
+		LangUtil.getText( "etc.action.help_chessboard" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 

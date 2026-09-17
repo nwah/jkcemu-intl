@@ -74,10 +74,12 @@ public class FontSelectionFld extends JPanel implements ActionListener
     gbc.gridx++;
     add( panelBtn, gbc );
 
-    this.btnSelect = GUIFactory.createButton( EmuUtil.TEXT_SELECT );
+    this.btnSelect = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_SELECT ) );
     panelBtn.add( this.btnSelect );
 
-    this.btnDefault = GUIFactory.createButton( "Standard" );
+    this.btnDefault = GUIFactory.createButton(
+		LangUtil.getText( "common.text.default" ) );
     panelBtn.add( this.btnDefault );
 
     updFields();
@@ -208,7 +210,7 @@ public class FontSelectionFld extends JPanel implements ActionListener
       this.fldInfo.setText( buf.toString() );
       this.btnDefault.setEnabled( true );
     } else {
-      this.fldInfo.setText( LangUtil.tr( "Standard" ) );
+      this.fldInfo.setText( LangUtil.getText( "common.text.default" ) );
       this.btnDefault.setEnabled( false );
     }
   }

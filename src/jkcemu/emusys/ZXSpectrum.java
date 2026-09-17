@@ -51,7 +51,7 @@ public class ZXSpectrum extends EmuSys implements
 					Z80MaxSpeedListener
 {
   public static final String SYSNAME     = "ZXSpectrum";
-  public static final String SYSTEXT     = "ZX Spectrum";
+  public static final String SYSTEXT     = "emusys.text.zx_spectrum";
   public static final String PROP_PREFIX = "jkcemu.zxspectrum.";
 
   public static final String VALUE_128K = "128k";
@@ -185,7 +185,7 @@ public class ZXSpectrum extends EmuSys implements
       this.ram             = new byte[ 0x20000 ];
       this.psg             = new PSG8910( DEFAULT_128K_KHZ * 500, this );
       this.psgSoundDevice  = new PSGSoundDevice(
-					"Sound-Generator",
+					LangUtil.getText( "emusys.text.sound_generator" ),
 					false,
 					this.psg );
     } else {
@@ -194,7 +194,8 @@ public class ZXSpectrum extends EmuSys implements
       this.linesPerScreen  = 312;
       this.firstScreenLine = 64;
     }
-    this.earSoundDevice  = new CPUSynchronSoundDevice( "Ausgang EAR" );
+    this.earSoundDevice  = new CPUSynchronSoundDevice(
+		LangUtil.getText( "emusys.text.ear_output" ) );
     this.lastScreenLine  = this.firstScreenLine + SCREEN_HEIGHT;
     this.borderColorNums = new byte[ this.linesPerScreen ];
     this.screenColorNums = new byte[ SCREEN_WIDTH * SCREEN_HEIGHT ];
@@ -598,7 +599,7 @@ public class ZXSpectrum extends EmuSys implements
   @Override
   public String getTitle()
   {
-    return SYSTEXT;
+    return LangUtil.getText( SYSTEXT );
   }
 
 
@@ -990,7 +991,7 @@ public class ZXSpectrum extends EmuSys implements
   @Override
   public String toString()
   {
-    return LangUtil.tr( "ULA (Bildschirmsteuerung)" );
+    return LangUtil.getText( "emusys.text.ula_display_controller" );
   }
 
 

@@ -11,6 +11,7 @@ package jkcemu.programming.assembler;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
 import java.util.ArrayList;
+import jkcemu.lang.LangUtil;
 import jkcemu.programming.PrgException;
 import jkcemu.programming.PrgUtil;
 
@@ -280,7 +281,8 @@ public class AsmLine
       }
     }
     if( arg == null ) {
-      throw new PrgException( "Argument erwartet" );
+      throw new PrgException( LangUtil.getText(
+			"assembler.error.argument_expected" ) );
     }
     return arg;
   }
@@ -341,7 +343,9 @@ public class AsmLine
     }
     if( ch == ',' ) {
       if( buf == null ) {
-	throw new PrgException( "Komma ohne vorheriges Argument" );
+	throw new PrgException(
+		LangUtil.getText(
+			"assembler.error.comma_without_preceding" ) );
       }
       iter.next();
     }

@@ -76,8 +76,7 @@ public class DiskImgViewFrm extends BaseFrm
 				HyperlinkListener,
 				RecentFilesMngr.Listener
 {
-  public static final String TITLE = Main.APPNAME
-					+ "Diskettenabbilddatei-Inspektor";
+  public static final String TITLE = "disk.title.jkcemu_disk_image";
 
   private static final String HELP_PAGE     = "/help/disk/diskimgviewer.htm";
   private static final String MARK_BEG      = "<font color=\"red\">";
@@ -448,7 +447,7 @@ public class DiskImgViewFrm extends BaseFrm
 
   private DiskImgViewFrm()
   {
-    setTitle( TITLE );
+    setTitle( LangUtil.getText( TITLE ) );
     this.disk            = null;
     this.file            = null;
     this.exportPrefix    = null;
@@ -461,7 +460,7 @@ public class DiskImgViewFrm extends BaseFrm
     JMenu mnuFile = createMenuFile();
 
     this.mnuOpen = createMenuItemWithStandardAccelerator(
-						EmuUtil.TEXT_OPEN_OPEN,
+						LangUtil.getText( EmuUtil.TEXT_OPEN_OPEN ),
 						KeyEvent.VK_O );
     mnuFile.add( this.mnuOpen );
     if( this.recentFilesMngr != null ) {
@@ -469,7 +468,8 @@ public class DiskImgViewFrm extends BaseFrm
     }
     mnuFile.addSeparator();
 
-    this.mnuExportTracks = createMenuItem( "Spuren exportieren..." );
+    this.mnuExportTracks = createMenuItem(
+		LangUtil.getText( "disk.action.export_tracks" ) );
     this.mnuExportTracks.setEnabled( false );
     mnuFile.add( this.mnuExportTracks );
     mnuFile.addSeparator();
@@ -482,17 +482,17 @@ public class DiskImgViewFrm extends BaseFrm
     JMenu mnuEdit = createMenuEdit();
 
     this.mnuBytesCopyHex = createMenuItem(
-		"Ausgw\u00E4hlte Bytes als Hexadezimalzahlen kopieren" );
+		LangUtil.getText( "common.action.copy_selected_bytes_hexadecimal" ) );
     this.mnuBytesCopyHex.setEnabled( false );
     mnuEdit.add( this.mnuBytesCopyHex );
 
     this.mnuBytesCopyAscii = createMenuItem(
-		"Ausgw\u00E4hlte Bytes als ASCII-Text kopieren" );
+		LangUtil.getText( "common.action.copy_selected_bytes_ascii" ) );
     this.mnuBytesCopyAscii.setEnabled( false );
     mnuEdit.add( this.mnuBytesCopyAscii );
 
     this.mnuBytesCopyDump = createMenuItem(
-		"Ausgw\u00E4hlte Bytes als Hex-ASCII-Dump kopieren" );
+		LangUtil.getText( "common.action.copy_selected_bytes_hex" ) );
     this.mnuBytesCopyDump.setEnabled( false );
     mnuEdit.add( this.mnuBytesCopyDump );
     mnuEdit.addSeparator();
@@ -513,7 +513,7 @@ public class DiskImgViewFrm extends BaseFrm
     // Menu Hilfe
     JMenu mnuHelp       = createMenuHelp(); 
     this.mnuHelpContent = createMenuItem(
-			"Hilfe zum Diskettenabbilddatei-Inspektor..." );
+			LangUtil.getText( "disk.action.help_disk_image" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -528,7 +528,9 @@ public class DiskImgViewFrm extends BaseFrm
     add( this.tabbedPane, BorderLayout.CENTER );
 
     JPanel panelPhys = new JPanel( new BorderLayout() );
-    this.tabbedPane.addTab( "Physische Struktur", panelPhys );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "disk.section.physical_structure" ),
+		panelPhys );
 
     this.fldFileContent = GUIFactory.createEditorPane();
     this.fldFileContent.setEditable( false );
@@ -557,7 +559,8 @@ public class DiskImgViewFrm extends BaseFrm
 
     // Bereich Datei
     JPanel panelFile = GUIFactory.createPanel( new GridBagLayout() );
-    panelFile.setBorder( GUIFactory.createTitledBorder( "Datei" ) );
+    panelFile.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.menu.file" ) ) );
     panelDetails.add( panelFile, gbcDetails );
 
     GridBagConstraints gbcFile = new GridBagConstraints(
@@ -569,16 +572,21 @@ public class DiskImgViewFrm extends BaseFrm
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    panelFile.add( GUIFactory.createLabel( "Dateiname:" ), gbcFile );
+    panelFile.add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.file_name" ) ), gbcFile );
     gbcFile.gridy++;
-    panelFile.add( GUIFactory.createLabel( "Format:" ), gbcFile );
+    panelFile.add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.format" ) ), gbcFile );
     gbcFile.gridy++;
-    panelFile.add( GUIFactory.createLabel( "Bemerkung:" ), gbcFile );
+    panelFile.add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.remark" ) ), gbcFile );
     gbcFile.insets.bottom = 5;
     gbcFile.gridy++;
-    panelFile.add( GUIFactory.createLabel( "Zeitstempel:" ), gbcFile );
+    panelFile.add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.timestamp" ) ), gbcFile );
     gbcFile.gridy++;
-    panelFile.add( GUIFactory.createLabel( "Weitere Infos:" ), gbcFile );
+    panelFile.add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.further_info" ) ), gbcFile );
 
     this.fldFileName = GUIFactory.createTextField();
     this.fldFileName.setEditable( false );
@@ -612,7 +620,8 @@ public class DiskImgViewFrm extends BaseFrm
 
     // Bereich Sektor
     JPanel panelSector = GUIFactory.createPanel( new GridBagLayout() );
-    panelSector.setBorder( GUIFactory.createTitledBorder( "Sektor" ) );
+    panelSector.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "disk.section.sector" ) ) );
     gbcDetails.fill    = GridBagConstraints.BOTH;
     gbcDetails.weighty = 1.0;
     gbcDetails.gridy++;
@@ -628,13 +637,16 @@ public class DiskImgViewFrm extends BaseFrm
 						0, 0 );
 
     panelSector.add(
-		GUIFactory.createLabel( "Sektorposition:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText( "disk.label.sector_position" ) ),
 		gbcSector );
     gbcSector.gridy++;
-    panelSector.add( GUIFactory.createLabel( "Sektor-ID:" ), gbcSector );
+    panelSector.add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.sector_id" ) ), gbcSector );
     gbcSector.insets.bottom = 5;
     gbcSector.gridy++;
-    panelSector.add( GUIFactory.createLabel( "Weitere Infos:" ), gbcSector );
+    panelSector.add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.further_info" ) ), gbcSector );
 
     this.fldSectorPos = GUIFactory.createTextField();
     this.fldSectorPos.setEditable( false );
@@ -657,7 +669,7 @@ public class DiskImgViewFrm extends BaseFrm
     panelSector.add( this.fldSectorEtc, gbcSector );
 
     this.sectorDataInfo = GUIFactory.createLabel(
-		"Bitte in der linken Ansicht einen Sektor anklicken" );
+		LangUtil.getText( "disk.label.please_click_sector" ) );
     this.sectorDataInfo.setHorizontalAlignment( SwingConstants.CENTER );
     this.sectorDataInfo.setVerticalAlignment( SwingConstants.CENTER );
     this.fldSectorData = new HexCharFld( this );
@@ -684,12 +696,13 @@ public class DiskImgViewFrm extends BaseFrm
     gbcSector.gridy++;
     panelSector.add( panelSectorBtns, gbcSector );
 
-    this.btnSectorCopy = GUIFactory.createButton( "Sektordaten kopieren" );
+    this.btnSectorCopy = GUIFactory.createButton(
+		LangUtil.getText( "disk.action.copy_sector_data" ) );
     this.btnSectorCopy.setEnabled( false );
     panelSectorBtns.add( this.btnSectorCopy );
 
     this.btnSectorExport = GUIFactory.createButton(
-					"Sektordaten exportieren..." );
+					LangUtil.getText( "disk.action.export_sector_data" ) );
     this.btnSectorExport.setEnabled( false );
     panelSectorBtns.add( this.btnSectorExport );
 
@@ -699,8 +712,9 @@ public class DiskImgViewFrm extends BaseFrm
 						new GridBagLayout() );
     panelRecognizedFmt.setBorder(
 	GUIFactory.createTitledBorder(
-			"Automatische CP/M-Diskettenformaterkennung" ) );
-    this.tabbedPane.addTab( "CP/M-Format", panelRecognizedFmt );
+			LangUtil.getText( "disk.section.automatic_cp_m" ) ) );
+    this.tabbedPane.addTab( LangUtil.getText( "disk.section.cp_m_format" ),
+		panelRecognizedFmt );
 
     GridBagConstraints gbcRecognizedFmt = new GridBagConstraints(
 						0, 0,
@@ -712,16 +726,19 @@ public class DiskImgViewFrm extends BaseFrm
 						0, 0 );
 
     panelRecognizedFmt.add(
-		GUIFactory.createLabel( "Systemspuren / Directory:" ),
+		GUIFactory.createLabel( LangUtil.getText(
+				"disk.label.system_tracks_directory" ) ),
 		gbcRecognizedFmt );
     gbcRecognizedFmt.gridy++;
     panelRecognizedFmt.add(
-		GUIFactory.createLabel( "Blockgr\u00F6\u00DFe:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText( "disk.label.block_size" ) ),
 		gbcRecognizedFmt );
     gbcRecognizedFmt.insets.bottom = 5;
     gbcRecognizedFmt.gridy++;
     panelRecognizedFmt.add(
-		GUIFactory.createLabel( "Blocknummernformat:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText( "disk.label.block_number_format" ) ),
 		gbcRecognizedFmt );
 
     this.fldCPMSys = GUIFactory.createTextField();
@@ -745,7 +762,8 @@ public class DiskImgViewFrm extends BaseFrm
     panelRecognizedFmt.add( this.fldBlockNumFmt, gbcRecognizedFmt );
 
     JPanel panelCPMDir = GUIFactory.createPanel( new BorderLayout() );
-    panelCPMDir.setBorder( GUIFactory.createTitledBorder( "Directory" ) );
+    panelCPMDir.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "disk.section.directory" ) ) );
     gbcRecognizedFmt.fill      = GridBagConstraints.BOTH;
     gbcRecognizedFmt.weighty   = 1.0;
     gbcRecognizedFmt.gridwidth = GridBagConstraints.REMAINDER;
@@ -792,7 +810,7 @@ public class DiskImgViewFrm extends BaseFrm
   {
     if( openFile( FileUtil.showFileOpenDlg(
 			this,
-			"Diskettenabbilddatei \u00F6ffnen",
+			LangUtil.getText( "disk.title.open_disk_image" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_DV_DISK ),
 			FileUtil.getPlainDiskFileFilter(),
@@ -812,7 +830,8 @@ public class DiskImgViewFrm extends BaseFrm
     if( this.disk != null ) {
       ReplyBytesDlg dlg = new ReplyBytesDlg(
 					this,
-					"Bytes suchen",
+					LangUtil.getText(
+						"common.text.find_bytes" ),
 					this.lastInputFmt,
 					this.lastBigEndian,
 					this.lastFindText );
@@ -885,7 +904,9 @@ public class DiskImgViewFrm extends BaseFrm
       }
       catch( NotFoundException ex ) {
 	if( this.disk != null ) {
-	  BaseDlg.showInfoDlg( this, "Byte-Folge nicht gefunden" );
+	  BaseDlg.showInfoDlg(
+			this,
+			LangUtil.getText( "common.msg.byte_sequence_not_found" ) );
 	}
       }
     }
@@ -934,7 +955,8 @@ public class DiskImgViewFrm extends BaseFrm
 				sector.getSizeCode() );
 	File file = FileUtil.showFileSaveDlg(
 				this,
-				"Sektordaten exportieren",
+				LangUtil.getText(
+					"disk.title.export_sector_data" ),
 				dirFile != null ? 
 					new File( dirFile, fName )
 					: new File( fName ),
@@ -1220,10 +1242,12 @@ public class DiskImgViewFrm extends BaseFrm
 	    switch( BaseDlg.showOptionDlg(
 				this,
 				msg,
-				"Dateireparatur",
-				"Reparierter Inhalt",
-				"Originaler Inhalt",
-				EmuUtil.TEXT_CANCEL ) )
+				LangUtil.getText( "disk.msg.file_repair" ),
+				LangUtil.getText(
+					"disk.msg.repaired_content" ),
+				LangUtil.getText(
+					"disk.msg.original_content" ),
+				LangUtil.getText( EmuUtil.TEXT_CANCEL ) ) )
 	    {
 	      case 0:
 		// leer
@@ -1244,7 +1268,7 @@ public class DiskImgViewFrm extends BaseFrm
 	  }
 	  this.disk = disk;
 	  this.file = file;
-	  setTitle( LangUtil.tr( TITLE ) + ": " + file.getPath() );
+	  setTitle( LangUtil.getText( TITLE ) + ": " + file.getPath() );
 
 	  // Allgemeine Infos
 	  EmuUtil.setText( this.fldFileName, file.getName() );
@@ -1270,12 +1294,12 @@ public class DiskImgViewFrm extends BaseFrm
 	    if( !disk.isFormatTextWithSectorSize() ) {
 	      buf.append( formatText );
 	      if( occurence.intValue() < totalCount.intValue() ) {
-		buf.append( LangUtil.tr(
-			", h\u00E4ufigste Sektorgr\u00F6\u00DFe: {0} Byte",
+		buf.append( LangUtil.getText(
+			"disk.text.most_frequent_sector",
 			sectorSize ) );
 	      } else {
-		buf.append( LangUtil.tr(
-			", Sektorgr\u00F6\u00DFe: {0} Byte",
+		buf.append( LangUtil.getText(
+			"disk.text.sector_size_bytes",
 			sectorSize ) );
 	      }
 	      formatText = buf.toString();
@@ -1544,18 +1568,16 @@ public class DiskImgViewFrm extends BaseFrm
 			|| hasErrorSectors )
 	    {
 	      buf.append( "<br/>\n" );
-	      buf.append( LangUtil.tr( "Agenda:" ) );
+	      buf.append( LangUtil.getText( "disk.text.legend_agenda" ) );
 	      buf.append( "<br/>\n"
 			+ "<table border=\"0\">\n"
 			+ "<tr><td valign=\"top\">" );
 	      buf.append( MARK_BEG );
-	      buf.append( LangUtil.tr( "farblich hervorgehoben" ) );
+	      buf.append( LangUtil.getText( "disk.text.highlighted_color" ) );
 	      buf.append( MARK_END );
 	      buf.append( ":</td><td valign=\"top\">" );
-	      buf.append( LangUtil.tr(
-			"allgemeine Kennzeichnung,"
-				+ " dass es an dieser Stelle"
-				+ " eine Besonderheit gibt" ) );
+	      buf.append( LangUtil.getText(
+			"disk.text.general_indication" ) );
 	      buf.append( "</td></tr>\n" );
 	      if( hasBogusIdSectors ) {
 		buf.append( "<tr><td valign=\"top\">" );
@@ -1563,33 +1585,32 @@ public class DiskImgViewFrm extends BaseFrm
 		buf.append( MARK_BOGUS_ID );
 		buf.append( MARK_END );
 		buf.append( ":</td><td valign=\"top\">" );
-		buf.append( LangUtil.tr(
-			"Sektor-ID generiert,"
-				+ " da Sektorkopf nicht gelesen"
-				+ " werden konnte" ) );
+		buf.append( LangUtil.getText(
+			"disk.text.sector_id_generated_because" ) );
 		buf.append( "</td></tr>\n" );
 	      }
 	      if( hasNoDataSectors ) {
 		buf.append( "<tr><td valign=\"top\">" );
 		buf.append( MARK_NO_DATA );
 		buf.append( ":</td><td valign=\"top\">" );
-		buf.append( LangUtil.tr( "Sektor ohne Datenbereich" ) );
+		buf.append( LangUtil.getText(
+				"disk.text.sector_without_data" ) );
 		buf.append( "</td></tr>\n" );
 	      }
 	      if( hasDeletedDataSectors ) {
 		buf.append( "<tr><td valign=\"top\">" );
 		buf.append( MARK_DELETED );
 		buf.append( ":</td><td valign=\"top\">" );
-		buf.append( LangUtil.tr(
-			"Sektor mit <em>Deleted Data Address Mark</em>" ) );
+		buf.append( LangUtil.getText(
+			"disk.text.sector_deleted_data" ) );
 		buf.append( "</td></tr>\n" );
 	      }
 	      if( hasDeletedDataSectors ) {
 		buf.append( "<tr><td>" );
 		buf.append( MARK_ERROR );
 		buf.append( ":</td><td valign=\"top\">" );
-		buf.append( LangUtil.tr(
-			"Sektordaten mit CRC-Fehler gelesen" ) );
+		buf.append( LangUtil.getText(
+			"disk.text.sector_data_read" ) );
 		buf.append( "</td></tr>\n" );
 	      }
 	      buf.append( "</table>\n" );
@@ -1758,20 +1779,20 @@ public class DiskImgViewFrm extends BaseFrm
       {
 	StringBuilder buf = new StringBuilder( 128 );
 	if( sector.getDataDeleted() ) {
-	  buf.append( LangUtil.tr( "Daten als gel\u00F6scht markiert" ) );
+	  buf.append( LangUtil.getText( "disk.text.data_marked_deleted" ) );
 	}
 	if( sector.checkError() ) {
 	  if( buf.length() > 0 ) {
 	    buf.append( ", " );
 	  }
-	  buf.append( LangUtil.tr( "Lesefehler" ) );
+	  buf.append( LangUtil.getText( "disk.text.read_error" ) );
 	}
 	if( sector.hasBogusID() ) {
 	  if( buf.length() > 0 ) {
 	    buf.append( ", " );
 	  }
-	  buf.append( LangUtil.tr(
-		"Sektor-ID generiert (Sektorkopf war nicht lesbar)" ) );
+	  buf.append( LangUtil.getText(
+		"disk.text.sector_id_generated_sector" ) );
 	}
 	etcText = buf.toString();
       }

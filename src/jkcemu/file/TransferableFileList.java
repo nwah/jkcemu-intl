@@ -19,6 +19,7 @@ import java.nio.file.InvalidPathException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import jkcemu.lang.LangUtil;
 
 
 public class TransferableFileList implements ClipboardOwner, Transferable
@@ -50,8 +51,7 @@ public class TransferableFileList implements ClipboardOwner, Transferable
       finally {
 	if( failed ) {
 	  throw new IOException(
-		"Kopieren/Verschieben von virtuellen Dateien"
-			+ " bzw. Verzeichnisse nicht m\u00F6glich" );
+		LangUtil.getText( "file.error.copying_moving_virtual" ) );
 	}
       }
     }

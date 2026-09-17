@@ -26,6 +26,7 @@ import jkcemu.base.HexDocument;
 import jkcemu.base.UserCancelException;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.CustomSys;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.SettingsFrm;
 
@@ -70,12 +71,14 @@ public class KeyboardSettingsFld
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Tastatur ist angeschlossen an:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"emusys.label.keyboard_connected" ) ), gbc );
 
     ButtonGroup grpKeyboard = new ButtonGroup();
 
     this.rbPortRaw = GUIFactory.createRadioButton(
-			"Einfaches Eingabetor an E/A-Adresse (hex):" );
+			LangUtil.getText(
+				"customsys.option.simple_input_port" ) );
     grpKeyboard.add( this.rbPortRaw );
     gbc.insets.left = 50;
     gbc.gridwidth   = 1;
@@ -89,7 +92,8 @@ public class KeyboardSettingsFld
     add( this.fldIOAddr, gbc );
 
     this.rbPioAhs = GUIFactory.createRadioButton(
-			"PIO Port A mit Ready/Strobe-Handshake" );
+			LangUtil.getText(
+				"customsys.option.pio_port_ready" ) );
     grpKeyboard.add( this.rbPioAhs );
     gbc.gridwidth   = GridBagConstraints.REMAINDER;
     gbc.insets.top  = 0;
@@ -99,41 +103,45 @@ public class KeyboardSettingsFld
     add( this.rbPioAhs, gbc );
 
     this.rbPioAbit7 = GUIFactory.createRadioButton(
-			"PIO Port A mit Strobe an Bit 7" );
+			LangUtil.getText(
+				"customsys.option.pio_port_strobe" ) );
     grpKeyboard.add( this.rbPioAbit7 );
     gbc.gridy++;
     add( this.rbPioAbit7, gbc );
 
     this.rbPioBhs = GUIFactory.createRadioButton(
-			"PIO Port B mit Ready/Strobe-Handshake" );
+			LangUtil.getText( "customsys.option.pio_port_b_ready" ) );
     grpKeyboard.add( this.rbPioBhs );
     gbc.gridy++;
     add( this.rbPioBhs, gbc );
 
     this.rbPioBbit7 = GUIFactory.createRadioButton(
-			"PIO Port B mit Strobe an Bit 7" );
+			LangUtil.getText( "customsys.option.pio_port_b_strobe" ) );
     grpKeyboard.add( this.rbPioBbit7 );
     gbc.gridy++;
     add( this.rbPioBbit7, gbc );
 
-    this.rbSioA = GUIFactory.createRadioButton( "SIO Kanal A" );
+    this.rbSioA = GUIFactory.createRadioButton(
+		LangUtil.getText( "customsys.option.sio_channel" ) );
     grpKeyboard.add( this.rbSioA );
     gbc.gridy++;
     add( this.rbSioA, gbc );
 
-    this.rbSioB = GUIFactory.createRadioButton( "SIO Kanal B" );
+    this.rbSioB = GUIFactory.createRadioButton(
+		LangUtil.getText( "customsys.option.sio_channel_b" ) );
     grpKeyboard.add( this.rbSioB );
     gbc.gridy++;
     add( this.rbSioB, gbc );
 
     this.rbNoKeyboard = GUIFactory.createRadioButton(
-					"Keine Tastatur emulieren" );
+					LangUtil.getText( "customsys.option.not_emulate_keyboard" ) );
     grpKeyboard.add( this.rbNoKeyboard );
     gbc.gridy++;
     add( this.rbNoKeyboard, gbc );
 
     this.cbSwapCase = GUIFactory.createCheckBox(
-			"Gro\u00DF-/Kleinschreibung umkehren" );
+			LangUtil.getText(
+				"emusys.option.invert_upper_lower" ) );
     gbc.insets.top    = 10;
     gbc.insets.left   = 5;
     gbc.insets.bottom = 5;

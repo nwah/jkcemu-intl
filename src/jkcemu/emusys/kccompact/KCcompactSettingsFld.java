@@ -45,6 +45,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.emusys.KCcompact;
 import jkcemu.file.FileUtil;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.SettingsFrm;
@@ -84,7 +85,9 @@ public class KCcompactSettingsFld
 
     // Tab ROM
     this.tabExtROM = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "ROM-Erweiterungen", this.tabExtROM );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.rom_expansions" ),
+		this.tabExtROM );
 
     GridBagConstraints gbcROM = new GridBagConstraints(
 					0, 0,
@@ -148,7 +151,8 @@ public class KCcompactSettingsFld
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -159,20 +163,20 @@ public class KCcompactSettingsFld
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.cbFDC = GUIFactory.createCheckBox( "Floppy-Disk-Station" );
+    this.cbFDC = GUIFactory.createCheckBox(
+		LangUtil.getText( "emusys.option.floppy_disk_station" ) );
     this.cbFDC.addActionListener( this );
     this.tabEtc.add( this.cbFDC, gbcEtc );
 
     this.cbExtRAM512K = GUIFactory.createCheckBox(
-		"512 KByte RAM-Erweiterung"
-			+ " (2 x DK\'tronics 256K Memory Expansion)" );
+		LangUtil.getText( "kccompact.option.512_kbyte_ram" ) );
     this.cbExtRAM512K.addActionListener( this );
     gbcEtc.insets.top = 0;
     gbcEtc.gridy++;
     this.tabEtc.add( this.cbExtRAM512K, gbcEtc );
 
     this.cbFixedScreenSize = GUIFactory.createCheckBox(
-		"Gleiche Fenstergr\u00F6\u00DFe in allen Bildschirmmodi" );
+		LangUtil.getText( "emusys.option.same_window_size" ) );
     this.cbFixedScreenSize.addActionListener( this );
     gbcEtc.insets.bottom = 0;
     gbcEtc.gridy++;
@@ -188,7 +192,7 @@ public class KCcompactSettingsFld
     this.fldAltOS = new ROMFileSettingsFld(
 				settingsFrm,
 				propPrefix + KCcompact.PROP_OS_PREFIX,
-				"Alternativer Betriebssystem-ROM:" );
+				LangUtil.getText( "emusys.text.alternative_operating" ) );
     gbcEtc.insets.top    = 5;
     gbcEtc.insets.bottom = 0;
     gbcEtc.gridy++;
@@ -197,7 +201,7 @@ public class KCcompactSettingsFld
     this.fldAltBasic = new ROMFileSettingsFld(
 				settingsFrm,
 				propPrefix + KCcompact.PROP_BASIC_PREFIX,
-				"Alternativer BASIC-ROM:" );
+				LangUtil.getText( "kccompact.text.alternative_basic_rom" ) );
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridy++;
     this.tabEtc.add( this.fldAltBasic, gbcEtc );
@@ -210,7 +214,8 @@ public class KCcompactSettingsFld
 		KCcompact.getAutoInputCharSet(),
 		KCcompact.DEFAULT_SWAP_KEY_CHAR_CASE,
 		KCcompact.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
   }
 
 

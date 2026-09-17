@@ -18,6 +18,7 @@ import java.util.Properties;
 import javax.swing.JMenu;
 import jkcemu.Main;
 import jkcemu.base.EmuUtil;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 
 
@@ -134,7 +135,7 @@ public class RAMFloppyFrm extends BaseFrm
     this.rfInfo2   = null;
     this.rfSize1   = -1;
     this.rfSize2   = -1;
-    setTitle( "JKCEMU RAM-Floppies" );
+    setTitle( LangUtil.getText( "base.title.jkcemu_ram_floppies" ) );
 
     int       nRFs = 0;
     RAMFloppy rf1  = null;
@@ -166,7 +167,8 @@ public class RAMFloppyFrm extends BaseFrm
     // Menu Hilfe
     JMenu mnuHelp = createMenuHelp();
     mnuHelp.add(
-	createMenuItem( "Hilfe zu RAM-Floppies...", ACTION_HELP ) );
+	createMenuItem( LangUtil.getText( "base.action.help_ram_floppies" ),
+		ACTION_HELP ) );
 
 
     // Menu

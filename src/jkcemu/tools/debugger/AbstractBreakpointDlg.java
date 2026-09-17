@@ -49,11 +49,9 @@ public abstract class AbstractBreakpointDlg extends BaseDlg
     super(
 	debugFrm,
 	breakpoint != null ?
-		LangUtil.tr(
-			"Halte-/Log-Punkt auf {0} bearbeiten",
+		LangUtil.getText( "debugger.text.edit_breakpoint_logpoint_auf",
 			watchedObj )
-		: LangUtil.tr(
-			"Neuer Halte-/Log-Punkt auf {0}",
+		: LangUtil.getText( "debugger.text.new_breakpoint_logpoint",
 			watchedObj ) );
     this.debugFrm           = debugFrm;
     this.oldBP              = breakpoint;
@@ -81,9 +79,8 @@ public abstract class AbstractBreakpointDlg extends BaseDlg
 	if( (otherBP != null) && (otherBP != this.oldBP) ) {
 	  if( !showConfirmDlg(
 			this,
-			"Ein Halte-Log-Punkt mit dem Namen existiert"
-				+ " bereits.\n"
-				+ "Dieser wird aktualisiert." ) )
+			LangUtil.getText(
+				"debugger.msg.breakpoint_logpoint_name" ) ) )
 	  {
 	    breakpoint = null;
 	  }
@@ -127,8 +124,7 @@ public abstract class AbstractBreakpointDlg extends BaseDlg
     if( mask == 0 ) {
       showErrorDlg(
 		this,
-		"Die Maske 00 blendet den zu testenden Wert"
-			+ " vollst\u00E4ndig aus." );
+		LangUtil.getText( "debugger.error.mask_00_masks" ) );
       rv = false;
     } else if( (~mask & value & m) != 0 ) {
       rv = showYesNoWarningDlg(
@@ -145,7 +141,7 @@ public abstract class AbstractBreakpointDlg extends BaseDlg
 				+ "Sollen trotzdem die von Ihnen angegeben"
 				+ " Werte verwendet werden?",
 			mask & value & m ),
-		"Best\u00E4tigung" );
+		LangUtil.getText( "common.msg.confirmation" ) );
     }
     return rv;
   }
@@ -164,13 +160,13 @@ public abstract class AbstractBreakpointDlg extends BaseDlg
 						new Insets( 5, 5, 0, 5 ),
 						0, 0 );
 
-    this.cbStopEnabled = GUIFactory.createCheckBox(
-		"Programmausf\u00FChrung anhalten (Haltepunkt)",
+    this.cbStopEnabled = GUIFactory.createCheckBox( LangUtil.getText(
+			"debugger.option.halt_program_execution" ),
 		lastStopEnabled );
     panel.add( this.cbStopEnabled, gbc );
 
     this.cbLogEnabled = GUIFactory.createCheckBox(
-				"Log-Meldung erzeugen (Log-Punkt)",
+				LangUtil.getText( "debugger.option.generate_log_message" ),
 				lastLogEnabled );
     gbc.insets.top    = 0;
     gbc.insets.bottom = 10;
@@ -216,7 +212,7 @@ public abstract class AbstractBreakpointDlg extends BaseDlg
   {
     showErrorDlg(
 		this,
-		LangUtil.tr( "{0} hat ung\u00FCltiges Format.", fldName ) );
+		LangUtil.getText( "debugger.text.invalid_format", fldName ) );
   }
 
 

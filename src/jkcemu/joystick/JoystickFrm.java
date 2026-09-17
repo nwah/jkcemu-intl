@@ -32,16 +32,17 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.EmuThread;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.HelpFrm;
+import jkcemu.lang.LangUtil;
 
 
 public class JoystickFrm extends BaseFrm
 {
   private static final String HELP_PAGE          = "/help/joystick.htm";
-  private static final String TEXT_NOT_EMULATED  = "Nicht emuliert";
-  private static final String TEXT_NOT_CONNECTED = "Nicht verbunden";
-  private static final String TEXT_CONNECTED     = "Aktiv";
-  private static final String TEXT_CONNECT       = "Verbinden";
-  private static final String TEXT_DISCONNECT    = "Trennen";
+  private static final String TEXT_NOT_EMULATED  = "joystick.text.not_emulated";
+  private static final String TEXT_NOT_CONNECTED = "joystick.text.not_connected";
+  private static final String TEXT_CONNECTED     = "joystick.text.active";
+  private static final String TEXT_CONNECT       = "joystick.text.connect";
+  private static final String TEXT_DISCONNECT    = "joystick.text.disconnect";
 
   private static JoystickFrm instance = null;
 
@@ -111,14 +112,14 @@ public class JoystickFrm extends BaseFrm
 			boolean emulated,
 			boolean connected )
   {
-    String btnText    = TEXT_CONNECT;
-    String statusText = TEXT_NOT_EMULATED;
+    String btnText    = LangUtil.getText( TEXT_CONNECT );
+    String statusText = LangUtil.getText( TEXT_NOT_EMULATED );
     if( emulated ) {
       if( connected ) {
-	btnText    = TEXT_DISCONNECT;
-	statusText = TEXT_CONNECTED;
+	btnText    = LangUtil.getText( TEXT_DISCONNECT );
+	statusText = LangUtil.getText( TEXT_CONNECTED );
       } else {
-	statusText = TEXT_NOT_CONNECTED;
+	statusText = LangUtil.getText( TEXT_NOT_CONNECTED );
       }
     }
     if( joyNum == 0 ) {
@@ -279,7 +280,7 @@ public class JoystickFrm extends BaseFrm
   {
     this.emuThread      = emuThread;
     this.joyActionByKey = true;
-    setTitle( "JKCEMU Joysticks" );
+    setTitle( LangUtil.getText( "joystick.title.jkcemu_joysticks" ) );
 
 
     // Menu Datei
@@ -290,7 +291,8 @@ public class JoystickFrm extends BaseFrm
 
     // Menu Hilfe
     JMenu mnuHelp       = createMenuHelp();
-    this.mnuHelpContent = createMenuItem( "Hilfe zu Joysticks..." );
+    this.mnuHelpContent = createMenuItem(
+		LangUtil.getText( "joystick.action.help_joysticks" ) );
     mnuHelp.add( this.mnuHelpContent );
 
 
@@ -310,10 +312,12 @@ public class JoystickFrm extends BaseFrm
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    this.labelStatus0 = GUIFactory.createLabel( TEXT_NOT_CONNECTED );
+    this.labelStatus0 = GUIFactory.createLabel(
+		LangUtil.getText( TEXT_NOT_CONNECTED ) );
     this.joyFld0      = new JoystickActionFld();
     this.joyFld0.setFocusable( true );
-    this.btnConnect0 = GUIFactory.createButton( TEXT_CONNECT );
+    this.btnConnect0 = GUIFactory.createButton(
+		LangUtil.getText( TEXT_CONNECT ) );
     this.panel0      = createJoystickPanel(
 				this.labelStatus0,
 				this.joyFld0,
@@ -321,10 +325,12 @@ public class JoystickFrm extends BaseFrm
 				"Joystick 1" );
     add( this.panel0, gbc );
 
-    this.labelStatus1 = GUIFactory.createLabel( TEXT_NOT_CONNECTED );
+    this.labelStatus1 = GUIFactory.createLabel(
+		LangUtil.getText( TEXT_NOT_CONNECTED ) );
     this.joyFld1      = new JoystickActionFld();
     this.joyFld1.setFocusable( true );
-    this.btnConnect1 = GUIFactory.createButton( TEXT_CONNECT );
+    this.btnConnect1 = GUIFactory.createButton(
+		LangUtil.getText( TEXT_CONNECT ) );
     this.panel1      = createJoystickPanel(
 				this.labelStatus1,
 				this.joyFld1,

@@ -20,6 +20,7 @@ import jkcemu.emusys.bcs3.BCS3KeyboardFld;
 import jkcemu.file.FileFormat;
 import jkcemu.file.FileUtil;
 import jkcemu.file.SaveDlg;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
@@ -225,7 +226,7 @@ public class BCS3 extends EmuSys implements Z80CTCListener
     this.screenChars = new byte[ this.screenPixelsWriting.length / 8 ];
 
     Z80CPU cpu = emuThread.getZ80CPU();
-    this.ctc   = new Z80CTC( "CTC" );
+    this.ctc   = new Z80CTC( LangUtil.getText( "emusys.text.ctc" ) );
     cpu.setInterruptSources( this.ctc );
     this.ctc.setTimerConnection( 0, 1 );
     this.ctc.setTimerConnection( 1, 2 );
@@ -1261,7 +1262,7 @@ public class BCS3 extends EmuSys implements Z80CTCListener
 		this.screenFrm,
 		begAddr,
 		endAddr - 1,
-		"BASIC-Programm speichern",
+		LangUtil.getText( "emusys.text.save_basic_program" ),
 		SaveDlg.BasicType.OTHER_BASIC,
 		FileUtil.getBinaryFileFilter() )).setVisible( true );
     } else {

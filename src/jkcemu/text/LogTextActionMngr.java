@@ -27,6 +27,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.PopupMenuOwner;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class LogTextActionMngr implements ActionListener, PopupMenuOwner
@@ -48,7 +49,8 @@ public class LogTextActionMngr implements ActionListener, PopupMenuOwner
     this.textFinder = null;
     this.popupMnu   = GUIFactory.createPopupMenu();
 
-    this.popupCopy = GUIFactory.createMenuItem( EmuUtil.TEXT_COPY );
+    this.popupCopy = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_COPY ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator(
 				this.popupCopy,
@@ -59,7 +61,8 @@ public class LogTextActionMngr implements ActionListener, PopupMenuOwner
     this.popupMnu.add( this.popupCopy );
     this.popupMnu.addSeparator();
 
-    this.popupFind = GUIFactory.createMenuItem( EmuUtil.TEXT_OPEN_FIND );
+    this.popupFind = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_OPEN_FIND ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator(
 				this.popupFind,
@@ -69,7 +72,8 @@ public class LogTextActionMngr implements ActionListener, PopupMenuOwner
     this.popupFind.addActionListener( this );
     this.popupMnu.add( this.popupFind );
 
-    this.popupFindNext = GUIFactory.createMenuItem( EmuUtil.TEXT_FIND_NEXT );
+    this.popupFindNext = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_FIND_NEXT ) );
     if( withAccelerator ) {
       EmuUtil.setDirectAccelerator(
 				this.popupFindNext,
@@ -79,7 +83,8 @@ public class LogTextActionMngr implements ActionListener, PopupMenuOwner
     this.popupFindNext.addActionListener( this );
     this.popupMnu.add( this.popupFindNext );
 
-    this.popupFindPrev = GUIFactory.createMenuItem( EmuUtil.TEXT_FIND_PREV );
+    this.popupFindPrev = GUIFactory.createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_FIND_PREV ) );
     if( withAccelerator ) {
       EmuUtil.setDirectAccelerator(
 				this.popupFindPrev,
@@ -90,7 +95,8 @@ public class LogTextActionMngr implements ActionListener, PopupMenuOwner
     this.popupMnu.add( this.popupFindPrev );
     this.popupMnu.addSeparator();
 
-    this.popupSaveAs = GUIFactory.createMenuItem( "Speichern unter..." );
+    this.popupSaveAs = GUIFactory.createMenuItem(
+		LangUtil.getText( "common.action.save" ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator(
 				this.popupSaveAs,
@@ -102,7 +108,8 @@ public class LogTextActionMngr implements ActionListener, PopupMenuOwner
     this.popupMnu.addSeparator();
 
     this.popupSelectAll = GUIFactory.createMenuItem(
-					EmuUtil.TEXT_SELECT_ALL );
+					LangUtil.getText(
+						EmuUtil.TEXT_SELECT_ALL ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator(
 				this.popupSelectAll,
@@ -138,7 +145,7 @@ public class LogTextActionMngr implements ActionListener, PopupMenuOwner
     try {
       File file = FileUtil.showFileSaveDlg(
 			EmuUtil.getWindow( this.textArea ),
-			"Text speichern",
+			LangUtil.getText( "text.title.save_text" ),
 			RecentDirsMngr.getRecentDir(
 					RecentDirsMngr.FILE_CAT_LOG ),
 			FileUtil.getTextFileFilter() );

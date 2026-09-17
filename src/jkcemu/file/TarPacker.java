@@ -57,9 +57,9 @@ public class TarPacker extends AbstractThreadFrm
   {
     Frame frm = new TarPacker( owner, srcPaths, outFile, compression );
     if( compression ) {
-      frm.setTitle( "TGZ-Datei packen" );
+      frm.setTitle( LangUtil.getText( "file.title.pack_tgz_file" ) );
     } else {
-      frm.setTitle( "TAR-Datei packen" );
+      frm.setTitle( LangUtil.getText( "file.title.pack_tar_file" ) );
     }
     frm.setVisible( true );
   }
@@ -264,7 +264,7 @@ public class TarPacker extends AbstractThreadFrm
       }
       this.out.close();
       this.out = null;
-      appendToLog( "\nFertig\n" );
+      appendToLog( LangUtil.getText( "file.msg.done" ) );
     }
     catch( InterruptedIOException ex ) {}
     catch( IOException ex ) {
@@ -300,7 +300,11 @@ public class TarPacker extends AbstractThreadFrm
 		File             outFile,
 		boolean          compression )
   {
-    super( "JKCEMU tar packer", null, true, true, false );
+    super( LangUtil.getText( "file.title.jkcemu_tar_packer" ),
+		null,
+		true,
+		true,
+		false );
     this.srcPaths     = srcPaths;
     this.outFile      = outFile;
     this.out          = null;
@@ -407,7 +411,8 @@ public class TarPacker extends AbstractThreadFrm
     // 0-99: Name
     int len = entryName.length();
     if( len > 99 ) {
-      throw new IOException( "Name des Eintrags zu lang" );
+      throw new IOException(
+		LangUtil.getText( "file.error.name_entry_long" ) );
     }
     byte[] nameBytes = null;
     try {
@@ -418,7 +423,8 @@ public class TarPacker extends AbstractThreadFrm
       nameBytes = entryName.getBytes();
     }
     if( nameBytes.length != len ) {
-      throw new IOException( "Name enth\u00E4lt nicht erlaubte Zeichen" );
+      throw new IOException( LangUtil.getText(
+			"file.error.name_contains_characters" ) );
     }
     System.arraycopy( nameBytes, 0, headerBuf, 0, nameBytes.length );
 
@@ -490,8 +496,8 @@ public class TarPacker extends AbstractThreadFrm
     if( linkedName != null ) {
       len = linkedName.length();
       if( len > 99 ) {
-	throw new IOException( LangUtil.tr(
-		"{0}: Verlinkter Name zu lang",
+	throw new IOException( LangUtil.getText(
+		"file.text.linked_name_long",
 		linkedName ) );
       }
       nameBytes = null;
@@ -503,9 +509,8 @@ public class TarPacker extends AbstractThreadFrm
 	nameBytes = entryName.getBytes();
       }
       if( nameBytes.length != len ) {
-	throw new IOException( LangUtil.tr(
-		"{0}: Verlinkter Name enth\u00E4lt nicht erlaubte"
-			+ " Zeichen",
+	throw new IOException( LangUtil.getText(
+		"file.text.linked_name_contains",
 		linkedName ) );
       }
       System.arraycopy( nameBytes, 0, headerBuf, 157, nameBytes.length );

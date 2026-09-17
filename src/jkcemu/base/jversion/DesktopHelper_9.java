@@ -30,6 +30,7 @@ import jkcemu.base.BaseFrm;
 import jkcemu.base.DesktopHelper;
 import jkcemu.base.GUIFactory;
 import jkcemu.base.ScreenFrm;
+import jkcemu.lang.LangUtil;
 
 
 public class DesktopHelper_9
@@ -59,7 +60,8 @@ public class DesktopHelper_9
       // Standard.Menu
       if( this.desktop.isSupported( Desktop.Action.APP_MENU_BAR ) ) {
 	try {
-	  JMenuItem mnuQuit = GUIFactory.createMenuItem( "Beenden" );
+	  JMenuItem mnuQuit = GUIFactory.createMenuItem(
+			LangUtil.getText( "base.action.quit" ) );
 	  mnuQuit.addActionListener( e->topFrm.doClose() );
 
 	  JMenu mnuApp = GUIFactory.createMenu( Main.getAppName() );

@@ -25,6 +25,7 @@ import jkcemu.emusys.lc80.TVTerminal;
 import jkcemu.file.FileFormat;
 import jkcemu.file.FileUtil;
 import jkcemu.file.SaveDlg;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import jkcemu.usb.VDIP;
 import z80emu.Z80CPU;
@@ -53,7 +54,7 @@ public class LC80 extends EmuSys implements
   public static final String SYSNAME_LC80_E       = "LC80_E";
   public static final String SYSNAME_LC80_EX      = "LC80_EX";
   public static final String SYSNAME_LC80         = "LC80";
-  public static final String SYSTEXT              = "LC-80";
+  public static final String SYSTEXT              = "emusys.text.lc_80";
   public static final String SYSTEXT_LC80_2       = "LC-80.2";
   public static final String SYSTEXT_LC80_E       = "LC-80e";
   public static final String SYSTEXT_LC80_EX      = "LC-80ex";
@@ -163,19 +164,22 @@ public class LC80 extends EmuSys implements
     this.keyboardFld         = null;
 
     Z80CPU cpu   = emuThread.getZ80CPU();
-    this.pioSys  = new Z80PIO( "System-PIO" );
-    this.pioUser = new Z80PIO( "User-PIO" );
-    this.ctc     = new Z80CTC( "CTC" );
+    this.pioSys  = new Z80PIO( LangUtil.getText( "emusys.text.system_pio" ) );
+    this.pioUser = new Z80PIO( LangUtil.getText( "emusys.text.user_pio" ) );
+    this.ctc     = new Z80CTC( LangUtil.getText( "emusys.text.ctc" ) );
     this.sio     = null;
     this.vdip    = null;
     this.tvTerm  = null;
     if( this.sysName.equals( SYSNAME_LC80_EX ) ) {
       this.tvTerm = new TVTerminal( this, props );
-      this.sio    = new Z80SIO( "SIO" );
+      this.sio    = new Z80SIO( LangUtil.getText( "emusys.text.sio" ) );
       cpu.setInterruptSources(
 		this.ctc, this.pioUser, this.pioSys, this.sio );
       // VDIP nicht in Interrupt-Logik enthalten!
-      this.vdip = new VDIP( 0, this.emuThread.getZ80CPU(), "USB-PIO" );
+      this.vdip = new VDIP(
+		0,
+		this.emuThread.getZ80CPU(),
+		LangUtil.getText( "emusys.text.usb_pio" ) );
     } else {
       cpu.setInterruptSources( this.ctc, this.pioUser, this.pioSys );
     }
@@ -631,7 +635,7 @@ public class LC80 extends EmuSys implements
   @Override
   public String getTitle()
   {
-    String rv = SYSTEXT;
+    String rv = LangUtil.getText( SYSTEXT );
     switch( this.sysName ) {
       case SYSNAME_LC80_2:
 	rv = SYSTEXT_LC80_2;
@@ -1221,7 +1225,7 @@ public class LC80 extends EmuSys implements
 		this.screenFrm,
 		0x2400,
 		endAddr,
-		"LC-80ex-BASIC-Programm speichern",
+		LangUtil.getText( "emusys.text.save_lc_80ex" ),
 		SaveDlg.BasicType.MS_DERIVED_BASIC_HS,
 		FileUtil.getHeadersaveFileFilter() )).setVisible( true );
     } else {

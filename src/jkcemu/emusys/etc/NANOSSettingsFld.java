@@ -36,6 +36,7 @@ import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.ROMFileSettingsFld;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.SettingsFrm;
@@ -86,7 +87,8 @@ public class NANOSSettingsFld extends AbstractSettingsFld
 
     // Tab Grafik
     this.tabGraphic = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Grafik", this.tabGraphic );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.graphics" ),
+		this.tabGraphic );
 
     GridBagConstraints gbcGraphic = new GridBagConstraints(
 					0, 0,
@@ -98,39 +100,40 @@ public class NANOSSettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.tabGraphic.add(
-		GUIFactory.createLabel( "Grafikkarte:" ),
+		GUIFactory.createLabel(
+			LangUtil.getText( "emusys_etc.label.graphics_card" ) ),
 		gbcGraphic );
 
     ButtonGroup grpGraphic = new ButtonGroup();
 
-    this.rbGraphic64x32 = GUIFactory.createRadioButton(
-		"Bildschirmsteuerung Video 2 mit 64x32 Zeichen" );
+    this.rbGraphic64x32 = GUIFactory.createRadioButton( LangUtil.getText(
+			"emusys_etc.option.video_controller_video_2_64x32" ) );
     grpGraphic.add( this.rbGraphic64x32 );
     gbcGraphic.insets.top  = 0;
     gbcGraphic.insets.left = 50;
     gbcGraphic.gridy++;
     this.tabGraphic.add( this.rbGraphic64x32, gbcGraphic );
 
-    this.rbGraphic80x24 = GUIFactory.createRadioButton(
-		"Bildschirmsteuerung Video 3 mit 80x24 Zeichen" );
+    this.rbGraphic80x24 = GUIFactory.createRadioButton( LangUtil.getText(
+			"emusys_etc.option.video_controller_video_3_80x24" ) );
     grpGraphic.add( this.rbGraphic80x24 );
     gbcGraphic.gridy++;
     this.tabGraphic.add( this.rbGraphic80x24, gbcGraphic );
 
-    this.rbGraphic80x25 = GUIFactory.createRadioButton(
-		"Bildschirmsteuerung Video 3 mit 80x25 Zeichen" );
+    this.rbGraphic80x25 = GUIFactory.createRadioButton( LangUtil.getText(
+			"emusys_etc.option.video_controller_video_3_80x25" ) );
     grpGraphic.add( this.rbGraphic80x25 );
     gbcGraphic.gridy++;
     this.tabGraphic.add( this.rbGraphic80x25, gbcGraphic );
 
     this.rbGraphicPoppe = GUIFactory.createRadioButton(
-		"Farbgrafikkarte mit 64x32 und 80x24 Zeichen" );
+		LangUtil.getText( "emusys_etc.option.color_graphics_card" ) );
     grpGraphic.add( this.rbGraphicPoppe );
     gbcGraphic.gridy++;
     this.tabGraphic.add( this.rbGraphicPoppe, gbcGraphic );
 
     this.cbFixedScreenSize = GUIFactory.createCheckBox(
-	"Gleiche Fenstergr\u00F6\u00DFe bei 64x32 und 80x24 Zeichen" );
+	LangUtil.getText( "emusys_etc.option.same_window_size" ) );
     gbcGraphic.insets.left = 100;
     gbcGraphic.gridy++;
     this.tabGraphic.add( this.cbFixedScreenSize, gbcGraphic );
@@ -145,7 +148,7 @@ public class NANOSSettingsFld extends AbstractSettingsFld
     this.fldAltFont8x8 = new ROMFileSettingsFld(
 				settingsFrm,
 				propPrefix + NANOS.PROP_FONT_8X8_PREFIX,
-				"Alternativer Zeichensatz (8x8):" );
+				LangUtil.getText( "emusys_etc.text.alternative_character" ) );
     gbcGraphic.insets.top = 10;
     gbcGraphic.gridy++;
     this.tabGraphic.add( this.fldAltFont8x8, gbcGraphic );
@@ -153,8 +156,7 @@ public class NANOSSettingsFld extends AbstractSettingsFld
     this.fldAltFont8x6 = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + NANOS.PROP_FONT_8X6_PREFIX,
-		"Alternativer 8x6-Zeichensatz"
-			+ " f\u00FCr 64x32-Modus der Farbgrafikkarte:" );
+		LangUtil.getText( "emusys_etc.text.alternative_8x6" ) );
     gbcGraphic.insets.bottom = 5;
     gbcGraphic.gridy++;
     this.tabGraphic.add( this.fldAltFont8x6, gbcGraphic );
@@ -162,7 +164,8 @@ public class NANOSSettingsFld extends AbstractSettingsFld
 
     // Tab Tastatur
     this.tabKeyboard = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Tastatur", this.tabKeyboard );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.keyboard" ),
+		this.tabKeyboard );
 
     GridBagConstraints gbcKeyboard = new GridBagConstraints(
 					0, 0,
@@ -174,13 +177,14 @@ public class NANOSSettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.tabKeyboard.add(
-		GUIFactory.createLabel( "Tastatur ist angeschlossen an:" ),
+		GUIFactory.createLabel( LangUtil.getText(
+				"emusys.label.keyboard_connected" ) ),
 		gbcKeyboard );
 
     ButtonGroup grpKeyboard = new ButtonGroup();
 
     this.rbKbPio00Ahs = GUIFactory.createRadioButton(
-		"ZRE-PIO Port A mit Ready/Strobe-Handshake (NANOS 2.2)",
+		LangUtil.getText( "emusys_etc.option.zre_pio_port_ready" ),
 		true );
     grpKeyboard.add( this.rbKbPio00Ahs );
     gbcKeyboard.insets.top  = 0;
@@ -189,12 +193,13 @@ public class NANOSSettingsFld extends AbstractSettingsFld
     this.tabKeyboard.add( this.rbKbPio00Ahs, gbcKeyboard );
 
     this.rbKbPio00Abit7 = GUIFactory.createRadioButton(
-		"ZRE-PIO Port A mit Strobe an Bit 7 (EPOS 2.1)" );
+		LangUtil.getText( "emusys_etc.option.zre_pio_port_strobe" ) );
     grpKeyboard.add( this.rbKbPio00Abit7 );
     gbcKeyboard.gridy++;
     this.tabKeyboard.add( this.rbKbPio00Abit7, gbcKeyboard );
 
-    this.rbKbSio84A = GUIFactory.createRadioButton( "IO-Karte SIO Port A" );
+    this.rbKbSio84A = GUIFactory.createRadioButton(
+		LangUtil.getText( "emusys_etc.option.i_o_card" ) );
     grpKeyboard.add( this.rbKbSio84A );
     gbcKeyboard.gridy++;
     this.tabKeyboard.add( this.rbKbSio84A, gbcKeyboard );
@@ -203,13 +208,14 @@ public class NANOSSettingsFld extends AbstractSettingsFld
     gbcKeyboard.insets.left = 5;
     gbcKeyboard.gridy++;
     this.tabKeyboard.add(
-		GUIFactory.createLabel( "Mapping der Cursor-Tasten:" ),
+		GUIFactory.createLabel( LangUtil.getText(
+				"emusys_etc.label.mapping_cursor_keys" ) ),
 		gbcKeyboard );
 
     ButtonGroup grpCrsKeyMapping = new ButtonGroup();
 
     this.rbKeyMappingCrs08090A0B = GUIFactory.createRadioButton(
-		"Links: 08h, Rechts: 09h, Runter: 0Ah, Hoch: 0Bh" );
+		LangUtil.getText( "emusys_etc.option.left_08h_right_09h" ) );
     grpCrsKeyMapping.add( this.rbKeyMappingCrs08090A0B );
     gbcKeyboard.insets.top  = 0;
     gbcKeyboard.insets.left = 50;
@@ -217,7 +223,7 @@ public class NANOSSettingsFld extends AbstractSettingsFld
     this.tabKeyboard.add( this.rbKeyMappingCrs08090A0B, gbcKeyboard );
 
     this.rbKeyMappingCrs08040518 = GUIFactory.createRadioButton(
-		"Links: 08h, Rechts: 04h, Runter: 05h, Hoch: 18h" );
+		LangUtil.getText( "emusys_etc.option.left_08h_right_04h" ) );
     grpCrsKeyMapping.add( this.rbKeyMappingCrs08040518 );
     gbcKeyboard.insets.top  = 0;
     gbcKeyboard.insets.left = 50;
@@ -225,7 +231,7 @@ public class NANOSSettingsFld extends AbstractSettingsFld
     this.tabKeyboard.add( this.rbKeyMappingCrs08040518, gbcKeyboard );
 
     this.cbKbSwapCase = GUIFactory.createCheckBox(
-		"Gro\u00DF-/Kleinschreibung umkehren" );
+		LangUtil.getText( "emusys.option.invert_upper_lower" ) );
     gbcKeyboard.insets.top  = 10;
     gbcKeyboard.insets.left = 5;
     gbcKeyboard.insets.bottom = 5;
@@ -235,7 +241,8 @@ public class NANOSSettingsFld extends AbstractSettingsFld
 
     // Tab ROM
     this.tabRom = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "ROM", this.tabRom );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.rom" ), this.tabRom );
 
     GridBagConstraints gbcRom = new GridBagConstraints(
 					0, 0,
@@ -249,19 +256,22 @@ public class NANOSSettingsFld extends AbstractSettingsFld
     ButtonGroup grpRom = new ButtonGroup();
 
     this.rbRomNanos = GUIFactory.createRadioButton(
-				"Boot-ROM f\u00FCr NANOS 2.2",
+				LangUtil.getText(
+					"emusys_etc.option.boot_rom_nanos" ),
 				true );
     grpRom.add( this.rbRomNanos );
     this.tabRom.add( this.rbRomNanos, gbcRom );
 
     this.rbRomEpos = GUIFactory.createRadioButton(
-				"Boot-ROM f\u00FCr EPOS 2.1" );
+				LangUtil.getText(
+					"emusys_etc.option.boot_rom_epos" ) );
     grpRom.add( this.rbRomEpos );
     gbcRom.insets.top = 0;
     gbcRom.gridy++;
     this.tabRom.add( this.rbRomEpos, gbcRom );
 
-    this.rbRomFile = GUIFactory.createRadioButton( "ROM-Datei:" );
+    this.rbRomFile = GUIFactory.createRadioButton(
+		LangUtil.getText( "emusys.label.rom_file" ) );
     grpRom.add( this.rbRomFile );
     gbcRom.gridy++;
     this.tabRom.add( this.rbRomFile, gbcRom );
@@ -276,7 +286,7 @@ public class NANOSSettingsFld extends AbstractSettingsFld
     this.btnRomFileSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ) );
     gbcRom.fill        = GridBagConstraints.NONE;
     gbcRom.weightx     = 0.0;
     gbcRom.insets.left = 0;
@@ -286,19 +296,21 @@ public class NANOSSettingsFld extends AbstractSettingsFld
     this.btnRomFileRemove = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/delete.png",
-					EmuUtil.TEXT_REMOVE_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_REMOVE_ROM_FILE ) );
     gbcRom.gridx++;
     this.tabRom.add( this.btnRomFileRemove, gbcRom );
 
 
     // Tab GIDE
     this.tabGIDE = new GIDESettingsFld( settingsFrm, propPrefix );
-    this.tabbedPane.addTab( "GIDE", this.tabGIDE );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.gide" ), this.tabGIDE );
 
 
     // Tab Erweiterungen
     this.tabExt = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Erweiterungen", this.tabExt );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.expansions" ), this.tabExt );
 
     GridBagConstraints gbcExt = new GridBagConstraints(
 					0, 0,
@@ -309,17 +321,19 @@ public class NANOSSettingsFld extends AbstractSettingsFld
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.cbK1520Sound = GUIFactory.createCheckBox( "K1520-Sound-Karte" );
+    this.cbK1520Sound = GUIFactory.createCheckBox(
+		LangUtil.getText( "common.option.k1520_sound_card" ) );
     this.tabExt.add( this.cbK1520Sound, gbcExt );
 
     this.cbKCNet = GUIFactory.createCheckBox(
-				"KCNet-kompatible Netzwerkkarte" );
+				LangUtil.getText( "emusys.option.kcnet_compatible_network" ) );
     gbcExt.insets.top = 0;
     gbcExt.gridy++;
     this.tabExt.add( this.cbKCNet, gbcExt );
 
     this.cbVDIP = GUIFactory.createCheckBox(
-				"USB-Anschluss (Vinculum VDIP Modul)" );
+				LangUtil.getText(
+					"emusys.option.usb_port_vinculum" ) );
     gbcExt.insets.bottom = 5;
     gbcExt.gridy++;
     this.tabExt.add( this.cbVDIP, gbcExt );
@@ -332,7 +346,8 @@ public class NANOSSettingsFld extends AbstractSettingsFld
 				AutoInputCharSet.getCPMCharSet(),
 				NANOS.DEFAULT_SWAP_KEY_CHAR_CASE,
 				NANOS.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     // Listener
@@ -431,8 +446,7 @@ public class NANOSSettingsFld extends AbstractSettingsFld
 	  if( selected ) {
 	    this.tabbedPane.setSelectedComponent( this.tabRom );
 	    throw new UserInputException(
-		"ROM: Bitte w\u00E4hlen Sie eine ROM-Datei aus\n"
-			+ "oder stellen Sie einen anderen Boot-ROM ein." );
+		LangUtil.getText( "emusys_etc.error.rom_please_select" ) );
 	  }
 	}
 	if( file != null ) {
@@ -505,7 +519,8 @@ public class NANOSSettingsFld extends AbstractSettingsFld
 	}
 	else if( src == this.btnRomFileSelect ) {
 	  File file = selectFile(
-				EmuUtil.TEXT_SELECT_ROM_FILE,
+				LangUtil.getText(
+					EmuUtil.TEXT_SELECT_ROM_FILE ),
 				RecentDirsMngr.FILE_CAT_ROM,
 				this.fldRomFile.getFile(),
 				FileUtil.getROMFileFilter() );

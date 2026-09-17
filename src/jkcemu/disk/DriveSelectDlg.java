@@ -44,7 +44,7 @@ public class DriveSelectDlg extends BaseDlg
 
   public DriveSelectDlg( Window owner, DeviceIO.MediaType requestedType )
   {
-    super( owner, "Auswahl Laufwerk" );
+    super( owner, LangUtil.getText( "disk.title.select_drive" ) );
     this.requestedType      = requestedType;
     this.notified           = false;
     this.selectedDrive      = null;
@@ -72,10 +72,12 @@ public class DriveSelectDlg extends BaseDlg
     int presetIdx   = -1;
     this.comboDrive = GUIFactory.createComboBox();
     if( Main.isUnixLikeOS() ) {
-      add( GUIFactory.createLabel( "Ger\u00E4tedatei:" ), gbc );
+      add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.device_file" ) ), gbc );
       this.comboDrive.setEditable( true );
     } else {
-      add( GUIFactory.createLabel( "Laufwerk:" ), gbc );
+      add( GUIFactory.createLabel(
+		LangUtil.getText( "disk.label.drive" ) ), gbc );
       this.comboDrive.setEditable( false );
     }
     for( DeviceIO.Drive drive : DeviceIO.getDrives( requestedType ) ) {
@@ -118,7 +120,8 @@ public class DriveSelectDlg extends BaseDlg
     if( (requestedType == DeviceIO.MediaType.ANY_DISK)
 	|| (requestedType == DeviceIO.MediaType.FLOPPYDISK) )
     {
-      this.cbReadOnly = GUIFactory.createCheckBox( "Nur lesen", true );
+      this.cbReadOnly = GUIFactory.createCheckBox(
+		LangUtil.getText( "disk.option.read_only" ), true );
       add( this.cbReadOnly, gbc );
       gbc.gridy++;
     } else {
@@ -271,19 +274,14 @@ public class DriveSelectDlg extends BaseDlg
       boolean status = false;
       if( specialPriv ) {
 	StringBuilder buf = new StringBuilder( 0x200 );
-	buf.append( LangUtil.tr(
-		"Wahrscheinlich sind f\u00FCr den Zugriff auf"
-			+ " das Laufwerk spezielle Rechte notwendig.\n"
-			+ "Wenn {0} unter einem Benutzer gestartet wurde,"
-			+ " der diese Rechte\n"
-			+ "(i.d.R. {1}-Rechte) nicht hat, wird der Vorgang"
-			+ " zu einer Fehlermeldung f\u00FChren.",
+	buf.append( LangUtil.getText(
+		"disk.text.special_privileges",
 		Main.APPNAME,
 		Main.isUnixLikeOS() ? "root" : "Administrator" ) );
 	if( JOptionPane.showConfirmDialog(
 		this,
 		buf.toString(),
-		LangUtil.tr( "Achtung" ),
+		LangUtil.getText( "common.text.warning" ),
 		JOptionPane.OK_CANCEL_OPTION,
 		JOptionPane.WARNING_MESSAGE ) == JOptionPane.OK_OPTION )
 	{

@@ -16,6 +16,7 @@ import jkcemu.base.EmuUtil;
 import jkcemu.base.UserInputException;
 import jkcemu.file.FileSaver;
 import jkcemu.file.FileUtil;
+import jkcemu.lang.LangUtil;
 
 
 public class KCSystemFileTarget extends AbstractConvertTarget
@@ -31,7 +32,9 @@ public class KCSystemFileTarget extends AbstractConvertTarget
 		int            offs,
 		int            len )
   {
-    super( fileConvertFrm, "KC-Systemdatei (*.kcc)" );
+    super(
+		fileConvertFrm,
+		LangUtil.getText( "common.option.kc_system_file" ) );
     this.dataBytes = dataBytes;
     this.offs      = offs;
     this.len       = len;

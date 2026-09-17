@@ -275,9 +275,8 @@ public class ZXSpectrumAudioCreator extends BitSampleBuffer
     int pauseMillis = this.iter.nextWord();
     int sampleRate  = this.iter.nextInt3LE();
     if( sampleRate != SAMPLE_RATE ) {
-      throw new IOException( LangUtil.tr(
-			"Block-ID 18: Abtastrate {0} Hz"
-				+ " nicht unterst\u00FCtzt",
+      throw new IOException( LangUtil.getText(
+			"zxspectrum.text.block_id_18",
 			sampleRate ) );
     }
     int compression = this.iter.nextByte();

@@ -11,70 +11,84 @@ Java-Kenntnisse sind dafuer nicht erforderlich.
 1. What you need
 ----------------
 
-Poedit, a free translation editor for Windows, macOS and Linux:
+A plain text editor. The translation files are Java property files:
+one line per text, in the form
 
-    https://poedit.net/
+    key=text
 
-Any other gettext-compatible editor works too (Lokalize, GTranslator,
-Gtranslator, Weblate, Crowdin). The files are standard GNU gettext
-catalogs with the extension ".po".
+Nothing else is required. Web based translation platforms such as
+Weblate and Crowdin support this format directly, should you prefer
+one of those.
 
 
 2. The files in this directory
 ------------------------------
 
-  jkcemu.pot        The template. It contains every translatable text
-                    of JKCEMU in the original German, with no
-                    translations. It is generated from the source code
-                    and must NOT be edited by hand.
+  jkcemu.properties     The base file, in English. It contains every
+                        translatable text of JKCEMU and serves as the
+                        fallback for all other languages.
 
-  en.po             The English translation.
+  jkcemu_de.properties  The German texts. German is the language the
+                        program is originally written in.
 
-  <code>.po         One file per language, named after the ISO 639-1
-                    language code, e.g. fr.po, cs.po, pl.po, ru.po.
+  jkcemu_<code>.properties
+                        One file per language, named after the ISO 639-1
+                        language code, e.g. jkcemu_fr.properties,
+                        jkcemu_cs.properties, jkcemu_pl.properties.
 
-  languages.txt     The list of languages offered in the settings
-                    dialog. One line per language, in the form
-                    <code>=<name in that language>, e.g.
+  languages.txt         The list of languages offered in the settings
+                        dialog. One line per language, in the form
+                        <code>=<name in that language>, e.g.
 
-                        de=Deutsch
-                        en=English
-                        fr=Francais
+                            de=Deutsch
+                            en=English
+                            fr=Francais
 
-  GLOSSARY.txt      Binding terminology. Please read it before you
-                    start - it lists the retro-computing terms that are
-                    easy to get wrong.
+  GLOSSARY.txt          Binding terminology. Please read it before you
+                        start - it lists the retro-computing terms that
+                        are easy to get wrong.
+
+The left hand side of every line is the key. It is what the program
+looks up, so it must never be translated or changed. Only the text to
+the right of the "=" is yours.
+
+The first part of a key tells you where the text appears, which helps
+when a German word could mean several things:
+
+    basic.*                 BASIC compiler
+    assembler.*             assembler
+    disk.*                  floppy disk tools
+    kc85.*                  KC85 specific settings
+    debugger.*              debugger
+    common.*                used in several places
+
+The second part is the kind of text: action (menu item or button),
+menu, label, option, choice, column, section, title, tooltip, msg,
+error, filetype or text.
 
 
 3. Translating an existing language
 -----------------------------------
 
-  1. Open the .po file of your language in Poedit.
-  2. Choose "Translation" -> "Update from POT file" and select
-     jkcemu.pot. This adds texts that are new in this JKCEMU version
-     and marks changed ones.
-  3. Translate the entries. The German original is shown on the left,
-     your translation goes on the right.
-  4. Save the file. That is all.
+  1. Open the .properties file of your language in your editor.
+  2. Translate the text to the right of each "=".
+  3. Save the file as UTF-8, and see section 5.6 about umlauts and
+     other non-ASCII characters.
 
-Entries that you leave empty are not a problem: JKCEMU then simply
-shows the German original. A partial translation never breaks the
+A key you leave out is not a problem: JKCEMU then shows the English
+text from jkcemu.properties. A partial translation never breaks the
 program.
 
 
 4. Starting a new language
 --------------------------
 
-  1. In Poedit choose "File" -> "New from POT/PO file" and select
-     jkcemu.pot.
-  2. Poedit asks for the language. Choose yours.
-  3. Save the file in this directory as <code>.po, using the ISO 639-1
-     code of your language, e.g. fr.po.
-  4. Add one line for your language to languages.txt, e.g.
+  1. Copy jkcemu.properties to jkcemu_<code>.properties, using the
+     ISO 639-1 code of your language, e.g. jkcemu_fr.properties.
+  2. Translate it as described in section 3.
+  3. Add one line for your language to languages.txt, e.g.
 
         fr=Francais
-
-  5. Translate as described in section 3.
 
 
 5. Rules you have to follow
@@ -104,16 +118,17 @@ written twice. This is a rule of the Java message formatter.
     right       Don''t open {0}
 
 In texts without any placeholder, write the apostrophe normally.
-About 22 of the German originals contain an apostrophe; watch out for
-them.
-
 Likewise, a literal curly brace in such a text must be written as '{'.
 
 5.3. Line breaks and spaces
 
   - \n is a line break. Keep them where the original has them.
   - Some texts begin or end with a space. Keep those spaces, they
-    separate the text from what comes before or after it.
+    separate the text from what comes before or after it. A leading
+    space must be written as "\ ", otherwise Java discards it.
+  - A backslash is written as "\\", a tab as "\t".
+  - The text is one single line in the file, however long it is. Do not
+    insert real line breaks into it.
 
 5.4. Do not translate
 
@@ -123,12 +138,30 @@ Likewise, a literal curly brace in such a text must be written as '{'.
     GIDE, RAM-Floppy.
   - File format names and extensions: KCC, TAP, SSS, JTC, *.wav ...
   - Z80 register and instruction names: A, BC, IX, LD, CALL, JP ...
+  - The keys themselves, i.e. everything left of the "=".
 
 5.5. Keyboard mnemonics
 
-Entries with the context "mnemonic" are single letters underlined in
-the menu bar. Choose a letter that occurs in your translated menu
-title, and do not use the same letter twice in one menu bar.
+Keys ending in ".mnemonic" are not texts but single letters, underlined
+in the menu bar, e.g.
+
+    common.menu.file=File
+    common.menu.file.mnemonic=F
+
+Choose a letter that occurs in your translated menu title, and do not
+use the same letter twice in one menu bar.
+
+5.6. Umlauts and other non-ASCII characters
+
+JKCEMU also runs on older Java versions, which read property files as
+ISO-8859-1. Write any character outside plain ASCII as a Java escape:
+
+    wrong       action.close=Schließen
+    right       action.close=Schließen
+
+The shipped files are written this way, so you can copy the notation
+from them. Most editors and all of the translation platforms mentioned
+in section 1 can produce these escapes for you.
 
 
 6. Testing your translation
@@ -147,30 +180,32 @@ The language can also be selected permanently in JKCEMU under
 "Einstellungen" -> "Sonstiges" ("Settings" -> "Miscellaneous").
 A change takes effect after restarting JKCEMU.
 
-To see how complete a translation is:
+To check your file for missing or superfluous keys:
 
-    ant lang-report
+    ant lang-check
 
-If you cannot build JKCEMU yourself, just send the .po file to the
-JKCEMU authors - the file is all that is needed.
+If you cannot build JKCEMU yourself, just send the .properties file to
+the JKCEMU authors - the file is all that is needed.
 
 
-7. For maintainers: regenerating the template
+7. For maintainers: adding and checking texts
 ---------------------------------------------
 
-After changing texts in the Java sources:
+Texts are not written into the Java sources. A source line reads
 
-    ant pot
+    GUIFactory.createMenuItem( LangUtil.getText( "disk.action.unpack" ) )
 
-This regenerates jkcemu.pot from the sources. Translators then use
-"Update from POT file" in Poedit to pick up the changes; existing
-translations are preserved.
+so a new text means a new key, which has to be added to
+jkcemu.properties (English) and jkcemu_de.properties (German).
 
-    ant pot        regenerates src/lang/jkcemu.pot
-    ant lang-report  shows how complete each language is
+    ant lang-check
 
-The file src/lang/candidates.txt is also written by "ant pot". It
-lists German-looking texts in the sources that are NOT yet
-translatable, so they can be reviewed and, where appropriate, routed
-through jkcemu.lang.LangUtil. It is a development aid only and is not
-shipped in jkcemu.jar.
+checks all of this and fails the build on a real problem. It reports
+
+  1. keys used in the sources but missing from jkcemu.properties,
+  2. keys in jkcemu.properties that no source line references,
+  3. per language file: keys missing compared to the base file, and
+     keys that exist there but not in the base file.
+
+The checking tool jkcemu.lang.KeyCheck, this file and GLOSSARY.txt are
+development aids only and are not shipped in jkcemu.jar.

@@ -29,6 +29,7 @@ import java.util.zip.ZipOutputStream;
 import jkcemu.base.AbstractThreadFrm;
 import jkcemu.base.EmuUtil;
 import jkcemu.file.FileProgressInputStream;
+import jkcemu.lang.LangUtil;
 
 
 public class ZipPacker extends AbstractThreadFrm
@@ -46,7 +47,7 @@ public class ZipPacker extends AbstractThreadFrm
 			File             outFile )
   {
     Frame frm = new ZipPacker( owner, srcPaths, outFile );
-    frm.setTitle( "ZIP-Datei packen" );
+    frm.setTitle( LangUtil.getText( "file.title.pack_zip_file" ) );
     frm.setVisible( true );
   }
 
@@ -153,7 +154,8 @@ public class ZipPacker extends AbstractThreadFrm
 		  EmuUtil.closeSilently( in );
 		}
 	      } else if( attrs.isSymbolicLink() ) {
-		appendToLog( " Symbolischer Link ignoriert\n" );
+		appendToLog(
+			LangUtil.getText( "file.msg.symbolic_link_ignored" ) );
 		disableAutoClose();
 	      } else {
 		appendIgnoredToLog();
@@ -199,7 +201,7 @@ public class ZipPacker extends AbstractThreadFrm
       this.out.finish();
       this.out.close();
       this.out = null;
-      appendToLog( "\nFertig\n" );
+      appendToLog( LangUtil.getText( "file.msg.done" ) );
     }
     catch( InterruptedIOException ex ) {}
     catch( IOException ex ) {
@@ -234,7 +236,11 @@ public class ZipPacker extends AbstractThreadFrm
 		Collection<Path> srcPaths,
 		File             outFile )
   {
-    super( "JKCEMU zip packer", null, true, true, false );
+    super( LangUtil.getText( "file.title.jkcemu_zip_packer" ),
+		null,
+		true,
+		true,
+		false );
     this.srcPaths = srcPaths;
     this.outFile  = outFile;
     this.out      = null;

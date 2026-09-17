@@ -47,6 +47,7 @@ import jkcemu.etc.PSG8910;
 import jkcemu.file.LoadData;
 import jkcemu.joystick.JoystickFrm;
 import jkcemu.joystick.JoystickThread;
+import jkcemu.lang.LangUtil;
 import jkcemu.print.PrintMngr;
 import jkcemu.text.TextUtil;
 import z80emu.Z80CPU;
@@ -93,7 +94,9 @@ public class EmuThread extends Thread implements
 
   public EmuThread( ScreenFrm screenFrm, Properties props )
   {
-    super( Main.getThreadGroup(), "JKCEMU CPU" );
+    super(
+		Main.getThreadGroup(),
+		LangUtil.getText( "base.title.jkcemu_cpu" ) );
     this.screenFrm  = screenFrm;
     this.z80cpu     = new Z80CPU( this, this );
     this.monitor    = new Object();

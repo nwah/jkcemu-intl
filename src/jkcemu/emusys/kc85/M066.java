@@ -12,6 +12,7 @@ import jkcemu.audio.AudioOut;
 import jkcemu.emusys.KC85;
 import jkcemu.etc.PSG8910;
 import jkcemu.etc.PSGSoundDevice;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
 import z80emu.Z80InterruptSource;
@@ -41,7 +42,7 @@ public class M066 extends AbstractKC85Module
   {
     super( slot, false );
     this.kc85 = kc85;
-    this.ctc  = new Z80CTC( "CTC (M066)" );
+    this.ctc  = new Z80CTC( LangUtil.getText( "kc85.text.ctc_m066" ) );
     this.ctc.setTimerConnection( 0, 1 );
     this.ctc.setTimerConnection( 1, 2 );
     this.ctc.setTimerConnection( 2, 3 );

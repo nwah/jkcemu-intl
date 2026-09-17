@@ -27,6 +27,7 @@ import jkcemu.file.FileFormat;
 import jkcemu.file.FileUtil;
 import jkcemu.file.SaveDlg;
 import jkcemu.joystick.JoystickThread;
+import jkcemu.lang.LangUtil;
 import jkcemu.text.TextUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
@@ -113,7 +114,8 @@ public class LLC2
 				this.emuThread.getRAMFloppy1(),
 				"LLC2",
 				RAMFloppy.RFType.MP_3_1988,
-				"RAM-Floppy an E/A-Adressen D0h-D7h",
+				LangUtil.getText(
+					"emusys.text.ram_floppy_i_o_addresses_d0h" ),
 				props,
 				this.propPrefix + PROP_RF1_PREFIX );
 
@@ -121,7 +123,8 @@ public class LLC2
 				this.emuThread.getRAMFloppy2(),
 				"LLC2",
 				RAMFloppy.RFType.MP_3_1988,
-				"RAM-Floppy an E/A-Adressen B0h-B7h",
+				LangUtil.getText(
+					"emusys.text.ram_floppy_i_o_addresses_b0h" ),
 				props,
 				this.propPrefix + PROP_RF2_PREFIX );
 
@@ -134,9 +137,9 @@ public class LLC2
       this.fdc = new FDC8272( this, 4 );
     }
 
-    this.ctc  = new Z80CTC( "CTC (E/A-Adressen F8h-FBh)" );
-    this.pio1 = new Z80PIO( "PIO (E/A-Adressen E8h-EBh)" );
-    this.pio2 = new Z80PIO( "V24-PIO (E/A-Adressen E4h-E7h)" );
+    this.ctc  = new Z80CTC( LangUtil.getText( "emusys.text.ctc_i_o_addresses_f8h" ) );
+    this.pio1 = new Z80PIO( LangUtil.getText( "emusys.text.pio_i_o_addresses_e8h" ) );
+    this.pio2 = new Z80PIO( LangUtil.getText( "emusys.text.v24_pio_i_o_addresses_e4h" ) );
 
     java.util.List<Z80InterruptSource> iSources = new ArrayList<>();
     iSources.add( this.ctc );
@@ -838,7 +841,7 @@ public class LLC2
 		this.screenFrm,
 		0x60F7,
 		endAddr,
-		"LLC2-BASIC-Programm speichern",
+		LangUtil.getText( "emusys.text.save_llc2_basic" ),
 		SaveDlg.BasicType.MS_DERIVED_BASIC,
 		FileUtil.getBasicFileFilter() )).setVisible( true );
     } else {

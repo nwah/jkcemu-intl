@@ -73,24 +73,22 @@ public class FileCopier extends AbstractFileWorker
   {
     String urlText = this.curURLText;
     return urlText != null ?
-	LangUtil.tr( "\'\'{0}\'\' kann nicht geladen werden.", urlText )
-	: LangUtil.tr( "\'\'{0}\'\' kann nicht kopiert werden.", fileName );
+	LangUtil.getText( "file.text.loaded", urlText )
+	: LangUtil.getText( "file.text.cannot_copied", fileName );
   }
 
 
   @Override
   public String getProgressDlgTitle()
   {
-    return EmuUtil.TEXT_COPY;
+    return LangUtil.getText( EmuUtil.TEXT_COPY );
   }
 
 
   @Override
   public String getUncompletedWorkMsg()
   {
-    return LangUtil.tr(
-		"Es konnten nicht alle Dateien, Verzeichnisse bzw.\n"
-			+ "symbolische Links kopiert werden." );
+    return LangUtil.getText( "file.text.not_all_files_directories_symbolic_links_copied" );
   }
 
 
@@ -116,38 +114,36 @@ public class FileCopier extends AbstractFileWorker
 	    forceCopy = this.copyAllDirs.booleanValue();
 	  }
 	  if( (this.copyAllDirs == null) && exists ) {
-	    switch( showJOptionPane(
-			LangUtil.tr(
-				"Das Verzeichnis ''{0}''"
-					+ " existiert bereits.\n"
-					+ "M\u00F6chten Sie trotzdem in das"
-					+ " Verzeichnis hinein kopieren?",
+	    /*
+	     * Kein switch auf String moeglich, da die uebersetzte
+	     * Beschriftung von TEXT_COPY/TEXT_CANCEL zur Laufzeit
+	     * ermittelt wird und deshalb kein konstanter Ausdruck
+	     * (case-Label) mehr ist.
+	     */
+	    String choice = showJOptionPane( LangUtil.getText(
+				"file.text.directory_already_exists",
 				dstDir.toString() ),
 			JOptionPane.WARNING_MESSAGE,
-			LangUtil.tr( "Zielverzeichnis bereits vorhanden" ),
+			LangUtil.getText(
+				"file.text.target_directory_already" ),
 			new String[] {
-				EmuUtil.TEXT_COPY,
+				LangUtil.getText( EmuUtil.TEXT_COPY ),
 				OPTION_COPY_ALL,
 				OPTION_SKIP,
 				OPTION_SKIP_ALL,
-				EmuUtil.TEXT_CANCEL } ) )
-	    {
-	      case EmuUtil.TEXT_COPY:
-		forceCopy = true;
-		break;
-	      case OPTION_COPY_ALL:
-		forceCopy        = true;
-		this.copyAllDirs = Boolean.TRUE;
-		break;
-	      case OPTION_SKIP:
-		forceCopy = false;
-		break;
-	      case OPTION_SKIP_ALL:
-		forceCopy        = false;
-		this.copyAllDirs = Boolean.FALSE;
-		break;
-	      default:
-		this.cancelled = true;
+				LangUtil.getText( EmuUtil.TEXT_CANCEL ) } );
+	    if( LangUtil.getText( EmuUtil.TEXT_COPY ).equals( choice ) ) {
+	      forceCopy = true;
+	    } else if( OPTION_COPY_ALL.equals( choice ) ) {
+	      forceCopy        = true;
+	      this.copyAllDirs = Boolean.TRUE;
+	    } else if( OPTION_SKIP.equals( choice ) ) {
+	      forceCopy = false;
+	    } else if( OPTION_SKIP_ALL.equals( choice ) ) {
+	      forceCopy        = false;
+	      this.copyAllDirs = Boolean.FALSE;
+	    } else {
+	      this.cancelled = true;
 	    }
 	  }
 	  if( !this.cancelled && (!exists || forceCopy) ) {
@@ -332,8 +328,8 @@ public class FileCopier extends AbstractFileWorker
       namePart = namePath.toString();
     }
     if( (parentPath == null) || (namePart == null) ) {
-      throw new IOException( "Name der Quelldatei kann nicht"
-			+ " in Pfad und Dateiname zerlegt werden." );
+      throw new IOException(
+		LangUtil.getText( "file.error.name_source_file" ) );
     }
     Path   rv      = null;
     String extPart = "";

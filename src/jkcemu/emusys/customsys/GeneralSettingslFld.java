@@ -25,6 +25,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.UserCancelException;
 import jkcemu.base.UserInputException;
 import jkcemu.emusys.CustomSys;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.SettingsFrm;
 
@@ -33,7 +34,7 @@ public class GeneralSettingslFld
 			extends AbstractSettingsFld
 			implements DocumentListener
 {
-  private static final String LABEL_CLOCK_FREQUENCY = "Taktfrequenz:";
+  private static final String LABEL_CLOCK_FREQUENCY = "emusys.label.clock_frequency";
 
   private NumberFormat fmtSpeed;
   private Document     docTitle;
@@ -61,9 +62,11 @@ public class GeneralSettingslFld
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Bezeichnung des Computers:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"customsys.label.name_computer" ) ), gbc );
     gbc.gridy++;
-    add( GUIFactory.createLabel( LABEL_CLOCK_FREQUENCY ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( LABEL_CLOCK_FREQUENCY ) ), gbc );
 
     this.fldTitle = GUIFactory.createTextField( 5 );
     this.docTitle = this.fldTitle.getDocument();
@@ -83,7 +86,8 @@ public class GeneralSettingslFld
     gbc.gridy++;
     add( this.fldSpeedMHz, gbc );
     gbc.gridx++;
-    add( GUIFactory.createLabel( "MHz" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.mhz" ) ), gbc );
 
     if( this.docTitle != null ) {
       this.docTitle.addDocumentListener( this );
@@ -118,8 +122,9 @@ public class GeneralSettingslFld
 	khz = Math.round( mhz.floatValue() * 1000F );
       }
       if( khz < 1 ) {
-	throw new UserInputException( LABEL_CLOCK_FREQUENCY
-			+ CustomSysSettingsFld.TEXT_INVALID_VALUE );
+	throw new UserInputException( LangUtil.getText( LABEL_CLOCK_FREQUENCY )
+			+ LangUtil.getText(
+				CustomSysSettingsFld.TEXT_INVALID_VALUE ) );
       }
       EmuUtil.setProperty(
 			props,
@@ -127,8 +132,9 @@ public class GeneralSettingslFld
 			khz );
     }
     catch( ParseException ex ) {
-      throw new UserInputException( LABEL_CLOCK_FREQUENCY
-			+ CustomSysSettingsFld.TEXT_INVALID_VALUE );
+      throw new UserInputException( LangUtil.getText( LABEL_CLOCK_FREQUENCY )
+			+ LangUtil.getText(
+				CustomSysSettingsFld.TEXT_INVALID_VALUE ) );
     }
   }
 

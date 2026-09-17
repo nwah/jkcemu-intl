@@ -86,10 +86,10 @@ public class TextFinder
     TextFinder textFinder = oldTextFinder;
     String     searchText = getPresetSearchText( textArea, oldTextFinder );
 
-    String[]    options = LangUtil.tr(
-			new String[] { EmuUtil.TEXT_FIND, EmuUtil.TEXT_CANCEL } );
+    String[]    options = LangUtil.getTexts(
+			new String[] { LangUtil.getText( EmuUtil.TEXT_FIND ), LangUtil.getText( EmuUtil.TEXT_CANCEL ) } );
     JOptionPane pane    = new JOptionPane(
-				LangUtil.tr( EmuUtil.LABEL_SEARCH_FOR ),
+				LangUtil.getText( EmuUtil.LABEL_SEARCH_FOR ),
 				JOptionPane.PLAIN_MESSAGE );
     pane.setOptions( options );
     pane.setWantsInput( true );
@@ -99,7 +99,7 @@ public class TextFinder
     pane.setInitialValue( options[ 0 ] );
     JDialog dlg = pane.createDialog(
 				textArea,
-				LangUtil.tr( EmuUtil.TEXT_FIND ) );
+				LangUtil.getText( EmuUtil.TEXT_FIND ) );
     BaseDlg.setParentCentered( dlg );
     dlg.setVisible( true );
     Object value = pane.getValue();
@@ -172,12 +172,12 @@ public class TextFinder
 		BaseDlg.showInfoDlg(
 			textArea,
 			n == 1
-				? LangUtil.tr(
-					"1 Textersetzung durchgef\u00FChrt." )
-				: LangUtil.tr(
-					"{0} Textersetzungen durchgef\u00FChrt.",
+				? LangUtil.getText(
+					"text.text.1_text_replacement" )
+				: LangUtil.getText(
+					"text.text.text_replacements",
 					n ),
-			"Text ersetzen" );
+			LangUtil.getText( "text.msg.replace_text" ) );
 	      }
 	      break;
 	  }
@@ -206,8 +206,8 @@ public class TextFinder
   {
     BaseDlg.showInfoDlg(
                 owner,
-                "Text nicht gefunden!",
-                "Text suchen" );
+                LangUtil.getText( "text.msg.text_not_found" ),
+                LangUtil.getText( "text.msg.find_text" ) );
   }
 
 
@@ -333,11 +333,10 @@ public class TextFinder
       BaseDlg.showInfoDlg(
 		textArea,
 		n == 1
-			? LangUtil.tr( "1 Textersetzung durchgef\u00FChrt." )
-			: LangUtil.tr(
-				"{0} Textersetzungen durchgef\u00FChrt.",
+			? LangUtil.getText( "text.text.1_text_replacement" )
+			: LangUtil.getText( "text.text.text_replacements",
 				n ),
-		"Text ersetzen" );
+		LangUtil.getText( "text.msg.replace_text" ) );
     }
   }
 }

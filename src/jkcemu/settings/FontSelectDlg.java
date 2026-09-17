@@ -44,9 +44,7 @@ import jkcemu.lang.LangUtil;
 
 public class FontSelectDlg extends BaseDlg implements ListSelectionListener
 {
-  private static final String EXAMPLE_TEXT = "ABCDEFGHIJKLMNOPQRSTUVWXYZ\n"
-					+ "abcdefghijklmnopqrstuvwxyz\n"
-					+ "0123 4567 89 +-*/=()_:;#~?";
+  private static final String EXAMPLE_TEXT = "settings.text.abcdefghijklmnopqrstuvwxyz";
 
   private Integer[] fontSizes = {
 			6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
@@ -173,7 +171,7 @@ public class FontSelectDlg extends BaseDlg implements ListSelectionListener
 		FontMngr.FontUsage fontUsage,
 		Font               preselectedFont )
   {
-    super( owner, "Auswahl Schrift" );
+    super( owner, LangUtil.getText( "settings.title.font_selection" ) );
     this.approvedFont = null;
     this.selectedFont = null;
     if( preselectedFont == null ) {
@@ -194,7 +192,8 @@ public class FontSelectDlg extends BaseDlg implements ListSelectionListener
 					new Insets( 5, 5, 5, 5 ),
 					0, 0 );
 
-    add( GUIFactory.createLabel( "Schriftart:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.font" ) ), gbc );
 
     this.listFontFamily = GUIFactory.createList();
     this.listFontFamily.setSelectionMode(
@@ -212,7 +211,7 @@ public class FontSelectDlg extends BaseDlg implements ListSelectionListener
     ButtonGroup grpFontType = new ButtonGroup();
 
     this.rbAllFonts = GUIFactory.createRadioButton(
-			"Alle Schriftarten",
+			LangUtil.getText( "settings.option.all_fonts" ),
 			!fontUsage.equals( FontMngr.FontUsage.CODE ) );
     grpFontType.add( this.rbAllFonts );
     gbc.insets.left   = 15;
@@ -227,7 +226,7 @@ public class FontSelectDlg extends BaseDlg implements ListSelectionListener
     add( this.rbAllFonts, gbc );
 
     this.rbMonospacedFonts = GUIFactory.createRadioButton(
-			"Nur Schriften mit gleicher Zeichenbreite",
+			LangUtil.getText( "settings.option.only_fonts_equal" ),
 			fontUsage.equals( FontMngr.FontUsage.CODE ) );
     grpFontType.add( this.rbMonospacedFonts );
     gbc.insets.top = 0;
@@ -235,17 +234,19 @@ public class FontSelectDlg extends BaseDlg implements ListSelectionListener
     add( this.rbMonospacedFonts, gbc );
 
     this.rbProportionalFonts = GUIFactory.createRadioButton(
-				"Nur Proportionalschriften" );
+				LangUtil.getText( "settings.option.only_proportional_fonts" ) );
     grpFontType.add( this.rbProportionalFonts );
     gbc.gridy++;
     add( this.rbProportionalFonts, gbc );
 
-    this.cbBold    = GUIFactory.createCheckBox( "Fett" );
+    this.cbBold    = GUIFactory.createCheckBox(
+		LangUtil.getText( "settings.option.bold" ) );
     gbc.insets.top = 20;
     gbc.gridy++;
     add( this.cbBold, gbc );
 
-    this.cbItalic = GUIFactory.createCheckBox( "Kursiv" );
+    this.cbItalic = GUIFactory.createCheckBox(
+		LangUtil.getText( "settings.option.italic" ) );
     gbc.insets.top = 0;
     gbc.gridy++;
     add( this.cbItalic, gbc );
@@ -255,7 +256,8 @@ public class FontSelectDlg extends BaseDlg implements ListSelectionListener
     gbc.insets.bottom = 5;
     gbc.gridwidth     = 1;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "Schriftgr\u00F6\u00DFe:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "common.label.font_size" ) ), gbc );
 
     this.comboFontSize = GUIFactory.createComboBox( fontSizes );
     this.comboFontSize.setEditable( false );
@@ -269,7 +271,8 @@ public class FontSelectDlg extends BaseDlg implements ListSelectionListener
     gbc.insets.right = 5;
     gbc.gridx        = 0;
     gbc.gridy += 7;
-    add( GUIFactory.createLabel( "Beispiel:" ), gbc );
+    add( GUIFactory.createLabel(
+		LangUtil.getText( "settings.label.example" ) ), gbc );
 
     this.fldFontExample = new JTextArea( 10, 0 );
     this.fldFontExample.setEditable( false );
@@ -397,12 +400,7 @@ public class FontSelectDlg extends BaseDlg implements ListSelectionListener
 	this.rbAllFonts.setSelected( true );
 	BaseDlg.showInfoDlg(
 		this,
-		"Die Ermittlung der Zeichenbreiten aller Schriften"
-			+ " zur Einteilung in\n"
-			+ "Proportional- und Nicht-Proportionalschriften"
-			+ " l\u00E4uft noch.\n"
-			+ "Aus diesem Grund k\u00F6nnen Sie noch nicht"
-			+ " umschalten." );
+		LangUtil.getText( "settings.msg.character_widths_all" ) );
       }
     }
   }
@@ -532,7 +530,7 @@ public class FontSelectDlg extends BaseDlg implements ListSelectionListener
     if( font != null ) {
       this.selectedFont = font;
       this.fldFontExample.setFont( font );
-      this.fldFontExample.setText( LangUtil.tr( EXAMPLE_TEXT ) );
+      this.fldFontExample.setText( LangUtil.getText( EXAMPLE_TEXT ) );
       this.btnApply.setEnabled( true );
     } else {
       this.selectedFont = null;

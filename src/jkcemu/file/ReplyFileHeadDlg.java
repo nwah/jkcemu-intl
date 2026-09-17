@@ -28,6 +28,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.base.HexDocument;
 import jkcemu.base.LimitedDocument;
 import jkcemu.base.UserInputException;
+import jkcemu.lang.LangUtil;
 
 
 public class ReplyFileHeadDlg extends BaseDlg implements DocumentListener
@@ -337,7 +338,8 @@ public class ReplyFileHeadDlg extends BaseDlg implements DocumentListener
 		}
 	      }
 	      if( this.approvedFileName == null ) {
-		throw new UserInputException( "Dateiname nicht angegeben" );
+		throw new UserInputException( LangUtil.getText(
+				"file.error.file_name_not_specified" ) );
 	      }
 	    }
 	    if( this.comboScchFileType != null ) {

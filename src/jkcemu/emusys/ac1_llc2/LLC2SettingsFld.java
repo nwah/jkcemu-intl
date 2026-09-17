@@ -27,6 +27,7 @@ import jkcemu.base.UserInputException;
 import jkcemu.disk.GIDESettingsFld;
 import jkcemu.emusys.LLC2;
 import jkcemu.file.ROMFileSettingsFld;
+import jkcemu.lang.LangUtil;
 import jkcemu.settings.AbstractSettingsFld;
 import jkcemu.settings.AutoInputSettingsFld;
 import jkcemu.settings.AutoLoadSettingsFld;
@@ -68,28 +69,32 @@ public class LLC2SettingsFld extends AbstractSettingsFld
     this.tabSCCH = new SCCHModule1SettingsFld(
 					settingsFrm,
 					propPrefix + LLC2.PROP_SCCH_PREFIX );
-    this.tabbedPane.addTab( "SCCH-Modul 1", this.tabSCCH );
+    this.tabbedPane.addTab( LangUtil.getText( "ac1.section.scch_module_1" ),
+		this.tabSCCH );
 
 
     // Tab RAM-Floppies
     this.tabRF = new RAMFloppiesSettingsFld(
 	settingsFrm,
 	propPrefix,
-	"RAM-Floppy nach MP 3/1988 (256 KByte) an E/A-Adressen D0h-D7h",
+	LangUtil.getText( "ac1.text.ram_floppy_according_mp_3_1988_256_kbyte_i_o_d0h" ),
 	RAMFloppy.RFType.MP_3_1988,
-	"RAM-Floppy nach MP 3/1988 (256 KByte) an E/A-Adressen B0h-B7h",
+	LangUtil.getText( "ac1.text.ram_floppy_according_mp_3_1988_256_kbyte_i_o_b0h" ),
 	RAMFloppy.RFType.MP_3_1988 );
-    this.tabbedPane.addTab( "RAM-Floppies", this.tabRF );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.ram_floppies" ),
+		this.tabRF );
 
 
     // Tab GIDE
     this.tabGIDE = new GIDESettingsFld( settingsFrm, propPrefix );
-    this.tabbedPane.addTab( "GIDE", this.tabGIDE );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.gide" ), this.tabGIDE );
 
 
     // Tab Erweiterungen
     this.tabExt = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Erweiterungen", this.tabExt );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "emusys.section.expansions" ), this.tabExt );
 
     GridBagConstraints gbcExt = new GridBagConstraints(
 					0, 0,
@@ -100,26 +105,30 @@ public class LLC2SettingsFld extends AbstractSettingsFld
 					new Insets( 5, 5, 0, 5 ),
 					0, 0 );
 
-    this.cbFloppyDisk = GUIFactory.createCheckBox( "Floppy-Disk-Modul" );
+    this.cbFloppyDisk = GUIFactory.createCheckBox(
+		LangUtil.getText( "emusys.option.floppy_disk_module" ) );
     gbcExt.gridy++;
     this.tabExt.add( this.cbFloppyDisk, gbcExt );
 
-    this.cbJoystick  = GUIFactory.createCheckBox( "Joystick" );
+    this.cbJoystick  = GUIFactory.createCheckBox(
+		LangUtil.getText( "ac1.option.joystick" ) );
     gbcExt.insets.top = 0;
     gbcExt.gridy++;
     this.tabExt.add( this.cbJoystick, gbcExt );
 
-    this.cbK1520Sound = GUIFactory.createCheckBox( "K1520-Sound-Karte" );
+    this.cbK1520Sound = GUIFactory.createCheckBox(
+		LangUtil.getText( "common.option.k1520_sound_card" ) );
     gbcExt.gridy++;
     this.tabExt.add( this.cbK1520Sound, gbcExt );
 
     this.cbKCNet = GUIFactory.createCheckBox(
-				"KCNet-kompatible Netzwerkkarte" );
+				LangUtil.getText( "emusys.option.kcnet_compatible_network" ) );
     gbcExt.gridy++;
     this.tabExt.add( this.cbKCNet, gbcExt );
 
     this.cbVDIP = GUIFactory.createCheckBox(
-				"USB-Anschluss (Vinculum VDIP Modul)" );
+				LangUtil.getText(
+					"emusys.option.usb_port_vinculum" ) );
     gbcExt.insets.bottom = 5;
     gbcExt.gridy++;
     this.tabExt.add( this.cbVDIP, gbcExt );
@@ -127,7 +136,8 @@ public class LLC2SettingsFld extends AbstractSettingsFld
 
     // Tab Sonstiges
     this.tabEtc = GUIFactory.createPanel( new GridBagLayout() );
-    this.tabbedPane.addTab( "Sonstiges", this.tabEtc );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.miscellaneous" ),
+		this.tabEtc );
 
     GridBagConstraints gbcEtc = new GridBagConstraints(
 					0, 0,
@@ -139,11 +149,12 @@ public class LLC2SettingsFld extends AbstractSettingsFld
 					0, 0 );
 
     this.cbRatio43 = GUIFactory.createCheckBox(
-				"Bildschirmausgabe im Format 4:3" );
+				LangUtil.getText(
+					"ac1.option.screen_output_4" ) );
     this.tabEtc.add( this.cbRatio43, gbcEtc );
 
     this.cbPasteFast = GUIFactory.createCheckBox(
-		"Einf\u00FCgen von Text durch Abfangen des Systemaufrufs" );
+		LangUtil.getText( "emusys.option.paste_text_intercepting" ) );
     gbcEtc.insets.top    = 0;
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridy++;
@@ -159,7 +170,7 @@ public class LLC2SettingsFld extends AbstractSettingsFld
     this.fldAltOS = new ROMFileSettingsFld(
 		settingsFrm,
 		propPrefix + LLC2.PROP_OS_PREFIX,
-		"Alternatives Monitorprogramm (0000h-0FFFh):" );
+		LangUtil.getText( "ac1.text.alternative_monitor" ) );
     gbcEtc.insets.top    = 5;
     gbcEtc.insets.bottom = 5;
     gbcEtc.gridy++;
@@ -168,7 +179,7 @@ public class LLC2SettingsFld extends AbstractSettingsFld
     this.fldAltFont = new ROMFileSettingsFld(
 				settingsFrm,
 				propPrefix + LLC2.PROP_FONT_PREFIX,
-				"Alternativer Zeichensatz:" );
+				LangUtil.getText( "emusys.text.alternative_character" ) );
     gbcEtc.gridy++;
     this.tabEtc.add( this.fldAltFont, gbcEtc );
 
@@ -179,7 +190,8 @@ public class LLC2SettingsFld extends AbstractSettingsFld
 				propPrefix,
 				LLC2.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX,
 				true );
-    this.tabbedPane.addTab( "AutoLoad", this.tabAutoLoad );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoload" ),
+		this.tabAutoLoad );
 
 
     // Tab AutoInput
@@ -189,7 +201,8 @@ public class LLC2SettingsFld extends AbstractSettingsFld
 				LLC2.getAutoInputCharSet(),
 				LLC2.DEFAULT_SWAP_KEY_CHAR_CASE,
 				LLC2.DEFAULT_PROMPT_AFTER_RESET_MILLIS_MAX );
-    this.tabbedPane.addTab( "AutoInput", this.tabAutoInput );
+    this.tabbedPane.addTab( LangUtil.getText( "emusys.section.autoinput" ),
+		this.tabAutoInput );
 
 
     // Listener

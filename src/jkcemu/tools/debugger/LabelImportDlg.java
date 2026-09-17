@@ -28,6 +28,7 @@ import jkcemu.base.GUIFactory;
 import jkcemu.file.FileNameFld;
 import jkcemu.file.FileUtil;
 import jkcemu.file.RecentDirsMngr;
+import jkcemu.lang.LangUtil;
 
 
 public class LabelImportDlg extends BaseDlg
@@ -103,7 +104,7 @@ public class LabelImportDlg extends BaseDlg
 		DebugFrm           debugFrm,
 		LabelImportOptions options )
   {
-    super( debugFrm, "Halte-/Log-Punkte importieren" );
+    super( debugFrm, LangUtil.getText( "debugger.title.import_breakpoints" ) );
     this.debugFrm = debugFrm;
 
 
@@ -122,7 +123,8 @@ public class LabelImportDlg extends BaseDlg
 
     // Bereich Quelle
     JPanel panelSource = GUIFactory.createPanel( new GridBagLayout() );
-    panelSource.setBorder( GUIFactory.createTitledBorder( "Quelle" ) );
+    panelSource.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "debugger.section.source" ) ) );
     add( panelSource, gbc );
 
     GridBagConstraints gbcSource = new GridBagConstraints(
@@ -137,12 +139,14 @@ public class LabelImportDlg extends BaseDlg
     ButtonGroup grpSource = new ButtonGroup();
 
     this.rbSourceClipboard = GUIFactory.createRadioButton(
-			"Halte-/Log-Punkte aus Zwischenablage importieren" );
+			LangUtil.getText(
+				"debugger.option.import_breakpoints_logpoints_clipboard" ) );
     grpSource.add( this.rbSourceClipboard );
     panelSource.add( this.rbSourceClipboard, gbcSource );
 
     this.rbSourceFile = GUIFactory.createRadioButton(
-			"Halte-/Log-Punkte aus Datei importieren" );
+			LangUtil.getText(
+				"debugger.option.import_breakpoints_logpoints_file" ) );
     grpSource.add( this.rbSourceFile );
     gbcSource.insets.top = 0;
     gbcSource.gridy++;
@@ -160,7 +164,7 @@ public class LabelImportDlg extends BaseDlg
     this.btnFileSelect = GUIFactory.createRelImageResourceButton(
 						this,
 						"file/open.png",
-						EmuUtil.TEXT_SELECT_FILE );
+						LangUtil.getText( EmuUtil.TEXT_SELECT_FILE ) );
     gbcSource.weightx     = 0.0;
     gbcSource.fill        = GridBagConstraints.NONE;
     gbcSource.insets.left = 5;
@@ -170,7 +174,8 @@ public class LabelImportDlg extends BaseDlg
 
     // Bereich Optionen
     JPanel panelOptions = GUIFactory.createPanel();
-    panelOptions.setBorder( GUIFactory.createTitledBorder( "Optionen" ) );
+    panelOptions.setBorder( GUIFactory.createTitledBorder(
+		LangUtil.getText( "common.section.options" ) ) );
     gbc.gridy++;
     add( panelOptions, gbc );
 
@@ -180,25 +185,25 @@ public class LabelImportDlg extends BaseDlg
     ButtonGroup grpCreateBPs = new ButtonGroup();
 
     this.rbCreateOrUpdateBPs = GUIFactory.createRadioButton(
-		"Halte-/Log-Punkte anlegen oder aktualisieren" );
+		LangUtil.getText( "debugger.option.create_update" ) );
     grpCreateBPs.add( this.rbCreateOrUpdateBPs );
     this.rbCreateOrUpdateBPs.setAlignmentX( Component.LEFT_ALIGNMENT );
     panelOptions.add( this.rbCreateOrUpdateBPs );
 
-    this.rbUpdateBPsOnly = GUIFactory.createRadioButton(
-		"Nur vorhandene Halte-/Log-Punkte aktualisieren" );
+    this.rbUpdateBPsOnly = GUIFactory.createRadioButton( LangUtil.getText(
+			"debugger.option.only_update_existing" ) );
     grpCreateBPs.add( this.rbUpdateBPsOnly );
     this.rbUpdateBPsOnly.setAlignmentX( Component.LEFT_ALIGNMENT );
     panelOptions.add( this.rbUpdateBPsOnly );
 
     this.cbRemoveObsoleteLabels = GUIFactory.createCheckBox(
-		"Bereits vorher importierte Halte-/Log-Punkte entfernen",
+		LangUtil.getText( "debugger.option.remove_breakpoints" ),
 		true );
     this.cbRemoveObsoleteLabels.setAlignmentX( Component.LEFT_ALIGNMENT );
     panelOptions.add( this.cbRemoveObsoleteLabels );
 
-    this.cbCaseSensitive = GUIFactory.createCheckBox(
-		"Gro\u00DF/-Kleinschreibung bei Namen beachten" );
+    this.cbCaseSensitive = GUIFactory.createCheckBox( LangUtil.getText(
+			"debugger.option.names_case_sensitive" ) );
     this.cbCaseSensitive.setAlignmentX( Component.LEFT_ALIGNMENT );
     panelOptions.add( this.cbCaseSensitive );
 
@@ -211,7 +216,8 @@ public class LabelImportDlg extends BaseDlg
     gbc.gridy++;
     add( panelBtn, gbc );
 
-    this.btnImport = GUIFactory.createButton( "Importieren" );
+    this.btnImport = GUIFactory.createButton(
+		LangUtil.getText( "debugger.action.import" ) );
     panelBtn.add( this.btnImport );
 
     this.btnCancel = GUIFactory.createButtonCancel();
@@ -271,7 +277,7 @@ public class LabelImportDlg extends BaseDlg
     }
     file = FileUtil.showFileOpenDlg(
 			this,
-			EmuUtil.TEXT_SELECT_FILE,
+			LangUtil.getText( EmuUtil.TEXT_SELECT_FILE ),
 			FileUtil.getDirectory( file ) );
     if( file != null ) {
       String msg = null;
@@ -299,8 +305,7 @@ public class LabelImportDlg extends BaseDlg
     if( isFileSource && (file == null) ) {
       showErrorDlg(
 		this,
-		"Bei einem Import aus einer Datei m\u00FCssen\n"
-			+ "Sie auch eine Datei ausw\u00E4hlen." );
+		LangUtil.getText( "debugger.error.import_file_also" ) );
     } else {
       if( this.debugFrm.importLabels(
 		this,

@@ -12,6 +12,7 @@ import jkcemu.audio.AudioOut;
 import jkcemu.base.EmuSys;
 import jkcemu.etc.PSG8910;
 import jkcemu.etc.PSGSoundDevice;
+import jkcemu.lang.LangUtil;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
 import z80emu.Z80InterruptSource;
@@ -53,7 +54,8 @@ public class K1520Sound implements
     this.maxSpeedKHz = 0;
     this.psg         = new PSG8910( PSG_CLOCK_KHZ * 1000, this );
     this.soundDevice = new PSGSoundDevice(
-				"K1520-Sound-Karte",
+				LangUtil.getText(
+					"common.option.k1520_sound_card" ),
 				true,
 				psg );
     this.psg.start();

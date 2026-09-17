@@ -26,6 +26,7 @@ import jkcemu.Main;
 import jkcemu.base.BaseDlg;
 import jkcemu.base.EmuUtil;
 import jkcemu.base.GUIFactory;
+import jkcemu.lang.LangUtil;
 
 
 public class ReplyShiftWidthDlg extends BaseDlg
@@ -92,7 +93,9 @@ public class ReplyShiftWidthDlg extends BaseDlg
 
   private ReplyShiftWidthDlg( TextEditFrm textEditFrm )
   {
-    super( textEditFrm, "Einr\u00FCcktiefe \u00E4ndern" );
+    super(
+		textEditFrm,
+		LangUtil.getText( "text.title.change_indentation_depth" ) );
     this.textEditFrm = textEditFrm;
 
 
@@ -111,7 +114,8 @@ public class ReplyShiftWidthDlg extends BaseDlg
     JPanel panelShiftWidth = GUIFactory.createPanel(
 				new FlowLayout( FlowLayout.CENTER ) );
     add( panelShiftWidth, gbc );
-    panelShiftWidth.add( GUIFactory.createLabel( "Einr\u00FCcktiefe:" ) );
+    panelShiftWidth.add( GUIFactory.createLabel(
+		LangUtil.getText( "text.label.indentation_depth" ) ) );
 
     int shiftWidth = this.textEditFrm.getShiftWidth();
     if( shiftWidth < 1 ) {
@@ -124,7 +128,7 @@ public class ReplyShiftWidthDlg extends BaseDlg
     panelShiftWidth.add( this.spinnerShiftWidth );
 
     this.cbUseTabs = GUIFactory.createCheckBox(
-				"Tabulatoren verwenden",
+				LangUtil.getText( "text.option.use_tabs" ),
 				this.textEditFrm.getShiftUseTabs() );
     gbc.insets.top    = 0;
     gbc.insets.bottom = 5;
@@ -138,7 +142,8 @@ public class ReplyShiftWidthDlg extends BaseDlg
     JPanel panelBtn = GUIFactory.createPanel();
     panelBtn.setLayout( new GridLayout( 1, 2, 5, 5 ) );
 
-    this.btnApply = GUIFactory.createButton( EmuUtil.TEXT_APPLY );
+    this.btnApply = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_APPLY ) );
     panelBtn.add( this.btnApply );
 
     this.btnClose = GUIFactory.createButtonClose();

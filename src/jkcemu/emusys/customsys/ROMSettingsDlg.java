@@ -44,9 +44,9 @@ public class ROMSettingsDlg
 			extends BaseDlg
 			implements DropTargetListener
 {
-  private static final String LABEL_BEG_ADDR = "Anfangsadresse (hex):";
-  private static final String LABEL_SIZE     = "Gr\u00F6\u00DFe (hex):";
-  private static final String LABEL_IO_ADDR  = "E/A-Adresse (hex):";
+  private static final String LABEL_BEG_ADDR = "customsys.label.start_address_hex";
+  private static final String LABEL_SIZE     = "customsys.label.size_hex";
+  private static final String LABEL_IO_ADDR  = "customsys.label.i_o_address_hex";
 
   private Window            owner;
   private CustomSysROM      approvedROM;
@@ -218,7 +218,8 @@ public class ROMSettingsDlg
       int begAddr      = this.docBegAddr.intValue();
       int romSize      = this.docSize.intValue();
       if( romSize < 1 ) {
-	throw new UserInputException( "Ung\u00FCltige ROM-Gr\u00F6\u00DFe" );
+	throw new UserInputException( LangUtil.getText(
+			"customsys.error.invalid_rom_size" ) );
       }
       if( (begAddr + romSize) > 0x10000 ) {
 	throw new UserInputException(
@@ -238,11 +239,7 @@ public class ROMSettingsDlg
 	if( fileSize > romSize ) {
 	  if( !showConfirmDlg(
 		this,
-		LangUtil.tr(
-			"Die Datei ist gr\u00F6\u00DFer als der"
-				+ " ROM-Bereich.\n"
-				+ "Es sind somit nicht alle Bytes der Datei"
-				+ " im Arbeitsspeicher sichtbar." ) ) )
+		LangUtil.getText( "customsys.text.file_larger_rom" ) ) )
 	  {
 	    status = false;
 	  }
@@ -250,10 +247,7 @@ public class ROMSettingsDlg
       } else {
 	if( !showConfirmDlg(
 		this,
-		LangUtil.tr(
-			"Sie haben keine Datei ausgew\u00E4hlt.\n"
-				+ "Der ROM-Bereich enth\u00E4lt somit nur"
-				+ " FFh-Bytes." ) ) )
+		LangUtil.getText( "customsys.text.not_selected_file" ) ) )
 	{
 	  status = false;
 	}
@@ -268,16 +262,13 @@ public class ROMSettingsDlg
 	    switchIOAddr = tmpIOAddr;
 	  }
 	  if( switchIOAddr < 0 ) {
-	    throw new UserInputException(
-			"Wenn der ROM ein- oder ausblendbar ist, muss auch\n"
-				+ "eine E/A-Adresse angegeben werden,"
-				+ " \u00FCber die das geschieht." );
+	    throw new UserInputException( LangUtil.getText(
+				"customsys.error.rom_shown_hidden" ) );
 	  }
 	}
 	if( switchableByBit && !enableOnReset && bootROM ) {
-	  throw new UserInputException(
-			"Wenn der ROM ein schaltbarer Boot-ROM ist,\n"
-				+ "muss er nach RESET eingeblendet sein." );
+	  throw new UserInputException( LangUtil.getText(
+				"customsys.error.rom_switchable_boot" ) );
 	}
 	int switchIOMask  = 0;
 	int switchIOValue = 0;
@@ -314,7 +305,7 @@ public class ROMSettingsDlg
     }
     file = FileUtil.showFileOpenDlg(
 			this.owner,
-			EmuUtil.TEXT_SELECT_ROM_FILE,
+			LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ),
 			file,
 			FileUtil.getROMFileFilter() );
     if( file != null ) {
@@ -366,8 +357,8 @@ public class ROMSettingsDlg
     super(
 	owner,
 	rom != null ?
-		LangUtil.tr( "ROM-Bereich bearbeiten" )
-		: LangUtil.tr( "Neuer ROM-Bereich" ) );
+		LangUtil.getText( "customsys.text.edit_rom_range" )
+		: LangUtil.getText( "customsys.text.new_rom_range" ) );
     this.owner       = owner;
     this.approvedROM = null;
 
@@ -397,18 +388,20 @@ public class ROMSettingsDlg
 						new Insets( 0, 0, 0, 0 ),
 						0, 0 );
 
-    panelAddr.add( GUIFactory.createLabel( LABEL_BEG_ADDR ), gbcAddr );
+    panelAddr.add( GUIFactory.createLabel(
+		LangUtil.getText( LABEL_BEG_ADDR ) ), gbcAddr );
 
-    this.docBegAddr = new HexDocument( 4, LABEL_BEG_ADDR );
+    this.docBegAddr = new HexDocument( 4, LangUtil.getText( LABEL_BEG_ADDR ) );
     this.fldBegAddr = GUIFactory.createTextField( this.docBegAddr, 5 );
     gbcAddr.insets.left = 5;
     gbcAddr.gridx++;
     panelAddr.add( this.fldBegAddr, gbcAddr );
 
     gbcAddr.gridx++;
-    panelAddr.add( GUIFactory.createLabel( LABEL_SIZE ), gbcAddr );
+    panelAddr.add( GUIFactory.createLabel(
+		LangUtil.getText( LABEL_SIZE ) ), gbcAddr );
 
-    this.docSize = new HexDocument( 4, LABEL_SIZE );
+    this.docSize = new HexDocument( 4, LangUtil.getText( LABEL_SIZE ) );
     this.fldSize = GUIFactory.createTextField( this.docSize, 5 );
     gbcAddr.gridx++;
     panelAddr.add( this.fldSize, gbcAddr );
@@ -417,7 +410,8 @@ public class ROMSettingsDlg
     gbc.insets.top = 10;
     gbc.gridx      = 0;
     gbc.gridy++;
-    add( GUIFactory.createLabel( "ROM-Inhalt:" ), gbc );
+    add( GUIFactory.createLabel( LangUtil.getText(
+			"customsys.label.rom_content" ) ), gbc );
 
     this.fldFile   = new FileNameFld();
     gbc.insets.top = 0;
@@ -431,7 +425,7 @@ public class ROMSettingsDlg
     this.btnSelect = GUIFactory.createRelImageResourceButton(
 					this,
 					"file/open.png",
-					EmuUtil.TEXT_SELECT_ROM_FILE );
+					LangUtil.getText( EmuUtil.TEXT_SELECT_ROM_FILE ) );
     this.btnSelect.addActionListener( this );
     gbc.fill        = GridBagConstraints.NONE;
     gbc.weightx     = 0.0;
@@ -443,7 +437,7 @@ public class ROMSettingsDlg
     ButtonGroup grpSwitch = new ButtonGroup();
 
     this.rbAlwaysSwitchedOn = GUIFactory.createRadioButton(
-		"ROM ist nicht schaltbar, d.h. immer eingeblendet",
+		LangUtil.getText( "customsys.option.rom_not_switchable" ),
 		true );
     grpSwitch.add( this.rbAlwaysSwitchedOn );
     gbc.insets.top = 10;
@@ -452,21 +446,21 @@ public class ROMSettingsDlg
     gbc.gridy++;
     add( this.rbAlwaysSwitchedOn, gbc );
 
-    this.rbSwitchoffable = GUIFactory.createRadioButton(
-		"ROM ist mit einem Ausgabebefehl ausblendbar" );
+    this.rbSwitchoffable = GUIFactory.createRadioButton( LangUtil.getText(
+			"customsys.option.rom_hidden_output" ) );
     grpSwitch.add( this.rbSwitchoffable );
     gbc.insets.top = 0;
     gbc.gridy++;
     add( this.rbSwitchoffable, gbc );
 
-    this.rbSwitchableByBit = GUIFactory.createRadioButton(
-		"ROM ist mit einem Ausgabebefehl \u00FCber ein Bit"
-			+ " ein- und ausblendbar" );
+    this.rbSwitchableByBit = GUIFactory.createRadioButton( LangUtil.getText(
+			"customsys.option.rom_shown_hidden" ) );
     grpSwitch.add( this.rbSwitchableByBit );
     gbc.gridy++;
     add( this.rbSwitchableByBit, gbc );
 
-    this.labelSwitchIOAddr = GUIFactory.createLabel( LABEL_IO_ADDR );
+    this.labelSwitchIOAddr = GUIFactory.createLabel(
+		LangUtil.getText( LABEL_IO_ADDR ) );
     gbc.insets.top         = 5;
     gbc.insets.left        = 50;
     gbc.gridwidth          = 1;
@@ -474,7 +468,8 @@ public class ROMSettingsDlg
     gbc.gridy++;
     add( this.labelSwitchIOAddr, gbc );
 
-    this.docSwitchIOAddr = new HexDocument( 2, LABEL_IO_ADDR );
+    this.docSwitchIOAddr = new HexDocument(
+		2, LangUtil.getText( LABEL_IO_ADDR ) );
     this.fldSwitchIOAddr = GUIFactory.createTextField(
 					this.docSwitchIOAddr,
 					2 );
@@ -483,7 +478,7 @@ public class ROMSettingsDlg
     add( this.fldSwitchIOAddr, gbc );
 
     this.labelSwitchIOBit = GUIFactory.createLabel(
-					"ROM wird eingeblendet bei:" );
+					LangUtil.getText( "customsys.label.rom_shown" ) );
     gbc.insets.left       = 50;
     gbc.gridx             = 0;
     gbc.gridy++;
@@ -502,7 +497,8 @@ public class ROMSettingsDlg
     add( this.comboSwitchIOBit, gbc );
 
     this.cbEnableOnReset = GUIFactory.createCheckBox(
-				"ROM ist nach RESET eingeblendet" );
+				LangUtil.getText(
+					"customsys.option.rom_shown_after" ) );
     gbc.insets.left = 50;
     gbc.gridwidth   = GridBagConstraints.REMAINDER;
     gbc.gridx       = 0;
@@ -510,9 +506,8 @@ public class ROMSettingsDlg
     add( this.cbEnableOnReset, gbc );
 
     // Boot-ROM
-    this.cbBoot = GUIFactory.createCheckBox(
-		"Nach RESET beginnt bei diesem ROM"
-			+ " die Programmausf\u00FChrung (Boot-ROM)" );
+    this.cbBoot = GUIFactory.createCheckBox( LangUtil.getText(
+			"customsys.option.after_reset_program" ) );
     gbc.insets.top  = 10;
     gbc.insets.left = 5;
     gbc.gridx       = 0;

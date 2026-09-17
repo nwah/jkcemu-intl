@@ -9,6 +9,7 @@
 package jkcemu.emusys.kc85;
 
 import jkcemu.base.EmuThread;
+import jkcemu.lang.LangUtil;
 import jkcemu.print.PrintMngr;
 import z80emu.Z80CPU;
 import z80emu.Z80CTC;
@@ -36,8 +37,10 @@ public class M003 extends AbstractKC85Module implements
     super( slot );
     this.remainTStates = 0;
     this.printMngr     = emuThread.getPrintMngr();
-    this.ctc           = new Z80CTC( "CTC (M003)" );
-    this.sio           = new Z80SIO( "SIO (M003)" );
+    this.ctc           = new Z80CTC(
+		LangUtil.getText( "kc85.text.ctc_m003" ) );
+    this.sio           = new Z80SIO(
+		LangUtil.getText( "kc85.text.sio_m003" ) );
     this.sio.addChannelListener( this, 0 );
     this.ctc.addCTCListener( this );
   }

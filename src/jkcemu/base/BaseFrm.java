@@ -166,31 +166,34 @@ public class BaseFrm extends JFrame implements
    */
   protected static JMenu createMenuEdit()
   {
-    JMenu menu = GUIFactory.createMenu( "Bearbeiten" );
-    menu.setMnemonic( LangUtil.mnemonic( "Bearbeiten", KeyEvent.VK_B ) );
+    JMenu menu = GUIFactory.createMenu( LangUtil.getText( "base.menu.edit" ) );
+    menu.setMnemonic( LangUtil.mnemonic( "base.menu.edit", KeyEvent.VK_B ) );
     return menu;
   }
 
 
   protected static JMenu createMenuFile()
   {
-    JMenu menu = GUIFactory.createMenu( "Datei" );
-    menu.setMnemonic( LangUtil.mnemonic( "Datei", KeyEvent.VK_D ) );
+    JMenu menu = GUIFactory.createMenu(
+		LangUtil.getText( "common.menu.file" ) );
+    menu.setMnemonic( LangUtil.mnemonic( "common.menu.file", KeyEvent.VK_D ) );
     return menu;
   }
 
 
   protected static JMenu createMenuHelp()
   {
-    JMenu menu = GUIFactory.createMenu( "Hilfe" );
-    menu.setMnemonic( LangUtil.mnemonic( "Hilfe", KeyEvent.VK_H ) );
+    JMenu menu = GUIFactory.createMenu(
+		LangUtil.getText( "common.menu.help" ) );
+    menu.setMnemonic( LangUtil.mnemonic( "common.menu.help", KeyEvent.VK_H ) );
     return menu;
   }
 
 
   public static JMenu createMenuSettings()
   {
-    JMenu menu = GUIFactory.createMenu( EmuUtil.TEXT_SETTINGS );
+    JMenu menu = GUIFactory.createMenu(
+		LangUtil.getText( EmuUtil.TEXT_SETTINGS ) );
     menu.setMnemonic(
 		LangUtil.mnemonic( EmuUtil.TEXT_SETTINGS, KeyEvent.VK_E ) );
     return menu;
@@ -215,7 +218,7 @@ public class BaseFrm extends JFrame implements
 
   protected JMenuItem createMenuItemClose()
   {
-    return createMenuItem( EmuUtil.TEXT_CLOSE );
+    return createMenuItem( LangUtil.getText( EmuUtil.TEXT_CLOSE ) );
   }
 
 
@@ -229,7 +232,7 @@ public class BaseFrm extends JFrame implements
 
   protected JMenuItem createMenuItemCopy( boolean withAccelerator )
   {
-    JMenuItem item = createMenuItem( EmuUtil.TEXT_COPY );
+    JMenuItem item = createMenuItem( LangUtil.getText( EmuUtil.TEXT_COPY ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator( item, KeyEvent.VK_C, false );
     }
@@ -239,7 +242,7 @@ public class BaseFrm extends JFrame implements
 
   protected JMenuItem createMenuItemCut( boolean withAccelerator )
   {
-    JMenuItem item = createMenuItem( EmuUtil.TEXT_CUT );
+    JMenuItem item = createMenuItem( LangUtil.getText( EmuUtil.TEXT_CUT ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator( item, KeyEvent.VK_X, false );
     }
@@ -249,7 +252,8 @@ public class BaseFrm extends JFrame implements
 
   protected JMenuItem createMenuItemFindNext( boolean withAccelerator )
   {
-    JMenuItem item = createMenuItem( EmuUtil.TEXT_FIND_NEXT );
+    JMenuItem item = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_FIND_NEXT ) );
     if( withAccelerator ) {
       EmuUtil.setDirectAccelerator( item, KeyEvent.VK_F3, false );
     }
@@ -259,7 +263,8 @@ public class BaseFrm extends JFrame implements
 
   protected JMenuItem createMenuItemFindPrev( boolean withAccelerator )
   {
-    JMenuItem item = createMenuItem( EmuUtil.TEXT_FIND_PREV );
+    JMenuItem item = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_FIND_PREV ) );
     if( withAccelerator ) {
       EmuUtil.setDirectAccelerator( item, KeyEvent.VK_F3, true );
     }
@@ -269,7 +274,8 @@ public class BaseFrm extends JFrame implements
 
   protected JMenuItem createMenuItemOpenFind( boolean withAccelerator )
   {
-    JMenuItem item = createMenuItem( EmuUtil.TEXT_OPEN_FIND );
+    JMenuItem item = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_OPEN_FIND ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator( item, KeyEvent.VK_F, false );
     }
@@ -279,7 +285,8 @@ public class BaseFrm extends JFrame implements
 
   protected JMenuItem createMenuItemOpenPrint( boolean withAccelerator )
   {
-    JMenuItem item = createMenuItem( EmuUtil.TEXT_OPEN_PRINT );
+    JMenuItem item = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_OPEN_PRINT ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator( item, KeyEvent.VK_P, false );
     }
@@ -289,13 +296,13 @@ public class BaseFrm extends JFrame implements
 
   protected JMenuItem createMenuItemOpenPrintOptions()
   {
-    return createMenuItem( "Druckoptionen..." );
+    return createMenuItem( LangUtil.getText( "base.action.print_options" ) );
   }
 
 
   protected JMenuItem createMenuItemPaste( boolean withAccelerator )
   {
-    JMenuItem item = createMenuItem( EmuUtil.TEXT_PASTE );
+    JMenuItem item = createMenuItem( LangUtil.getText( EmuUtil.TEXT_PASTE ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator( item, KeyEvent.VK_V, false );
     }
@@ -305,7 +312,8 @@ public class BaseFrm extends JFrame implements
 
   protected JMenuItem createMenuItemSaveAs( boolean withAccelerator )
   {
-    JMenuItem item = createMenuItem( EmuUtil.TEXT_SAVE_AS );
+    JMenuItem item = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_SAVE_AS ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator( item, KeyEvent.VK_S, true );
     }
@@ -315,7 +323,8 @@ public class BaseFrm extends JFrame implements
 
   protected JMenuItem createMenuItemSelectAll( boolean withAccelerator )
   {
-    JMenuItem item = createMenuItem( EmuUtil.TEXT_SELECT_ALL );
+    JMenuItem item = createMenuItem(
+		LangUtil.getText( EmuUtil.TEXT_SELECT_ALL ) );
     if( withAccelerator ) {
       EmuUtil.setStandardAccelerator( item, KeyEvent.VK_A, false );
     }
@@ -533,7 +542,7 @@ public class BaseFrm extends JFrame implements
   @Override
   public void setTitle( String title )
   {
-    super.setTitle( LangUtil.tr( title ) );
+    super.setTitle( LangUtil.getText( title ) );
   }
 
 

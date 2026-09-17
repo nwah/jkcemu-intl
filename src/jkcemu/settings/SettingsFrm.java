@@ -294,8 +294,9 @@ public class SettingsFrm extends BaseFrm
   {
     ProfileDlg dlg = new ProfileDlg(
 				this,
-				"Profil laden",
-				EmuUtil.TEXT_LOAD,
+				LangUtil.getText(
+					"settings.text.load_profile" ),
+				LangUtil.getText( EmuUtil.TEXT_LOAD ),
 				Main.getProfileFile(),
 				false );
     dlg.setVisible( true );
@@ -318,8 +319,9 @@ public class SettingsFrm extends BaseFrm
     // Profile-Auswahlbox
     ProfileDlg dlg = new ProfileDlg(
 				this,
-				"Profil speichern",
-				EmuUtil.TEXT_SAVE,
+				LangUtil.getText(
+					"settings.text.save_profile" ),
+				LangUtil.getText( EmuUtil.TEXT_SAVE ),
 				this.profileFile,
 				true );
     dlg.setVisible( true );
@@ -416,9 +418,7 @@ public class SettingsFrm extends BaseFrm
       catch( IOException ex ) {
 	BaseDlg.showErrorDlg(
 		this,
-		LangUtil.tr(
-			"Die Einstellungen k\u00F6nnen nicht in die"
-				+ " Datei\n''{0}''\ngespeichert werden.",
+		LangUtil.getText( "settings.text.settings_cannot_saved",
 			profileFile.getPath() ) );
       }
       finally {
@@ -432,7 +432,7 @@ public class SettingsFrm extends BaseFrm
 
   private SettingsFrm( ScreenFrm screenFrm )
   {
-    setTitle( "JKCEMU Einstellungen" );
+    setTitle( LangUtil.getText( "settings.title.jkcemu_settings" ) );
     this.screenFrm   = screenFrm;
     this.emuThread   = screenFrm.getEmuThread();
     this.profileFile = Main.getProfileFile();
@@ -455,43 +455,55 @@ public class SettingsFrm extends BaseFrm
 
     // Bereich System
     this.tabEmuSys = new EmuSysSettingsFld( this );
-    this.tabbedPane.addTab( "System", tabEmuSys );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "common.action.system" ), tabEmuSys );
 
     // Bereich Geschwindigkeit
     this.tabSpeed = new SpeedSettingsFld( this );
-    this.tabbedPane.addTab( "Geschwindigkeit", this.tabSpeed );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "settings.section.speed" ), this.tabSpeed );
 
     // Bereich Bestaetigungen
     this.tabConfirm = new ConfirmSettingsFld( this );
-    this.tabbedPane.addTab( "Best\u00E4tigungen", this.tabConfirm );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "settings.section.confirmations" ),
+		this.tabConfirm );
 
     // Bereich Bildschirmausgabe
     this.tabScreen = new ScreenSettingsFld( this );
-    this.tabbedPane.addTab( "Bildschirmausgabe", this.tabScreen );
+    this.tabbedPane.addTab( LangUtil.getText( "common.section.screen_output" ),
+		this.tabScreen );
 
     // Bereich Schriften und Symbole
     this.tabFontSym = new FontSymSettingsFld( this );
-    this.tabbedPane.addTab( "Schriften/Symbole", this.tabFontSym );
+    this.tabbedPane.addTab( LangUtil.getText( "settings.section.fonts_icons" ),
+		this.tabFontSym );
 
     // UI-Skalierung
     this.tabUIScale = new UIScaleSettingsFld( this );
-    this.tabbedPane.addTab( "Fensterskalierung", this.tabUIScale );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "settings.section.window_scaling" ),
+		this.tabUIScale );
 
     // Bereich Erscheinungsbild
     this.tabLAF = new LAFSettingsFld( this );
     if( this.tabLAF.containsLAFSettings() ) {
-      this.tabbedPane.addTab( "Erscheinungsbild", this.tabLAF );
+      this.tabbedPane.addTab(
+		LangUtil.getText( "settings.section.appearance" ),
+		this.tabLAF );
     } else {
       this.tabLAF = null;
     }
 
     // Bereich KCNet
     this.tabKCNet = new KCNetSettingsFld( this, KCNet.PROP_PREFIX );
-    this.tabbedPane.addTab( "KCNet", this.tabKCNet );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "settings.section.kcnet" ), this.tabKCNet );
 
     // Bereich Sonstiges
     this.tabEtc = new EtcSettingsFld( this );
-    this.tabbedPane.addTab( "Sonstiges", tabEtc );
+    this.tabbedPane.addTab(
+		LangUtil.getText( "common.section.miscellaneous" ), tabEtc );
 
 
     // Knoepfe
@@ -504,14 +516,17 @@ public class SettingsFrm extends BaseFrm
     gbc.gridx++;
     add( panelBtn, gbc );
 
-    this.btnApply = GUIFactory.createButton( EmuUtil.TEXT_APPLY );
+    this.btnApply = GUIFactory.createButton(
+		LangUtil.getText( EmuUtil.TEXT_APPLY ) );
     this.btnApply.setEnabled( false );
     panelBtn.add( this.btnApply );
 
-    this.btnLoad = GUIFactory.createButton( "Profil laden..." );
+    this.btnLoad = GUIFactory.createButton(
+		LangUtil.getText( "settings.action.load_profile" ) );
     panelBtn.add( this.btnLoad );
 
-    this.btnSave = GUIFactory.createButton( "Profil speichern..." );
+    this.btnSave = GUIFactory.createButton(
+		LangUtil.getText( "settings.action.save_profile" ) );
     panelBtn.add( this.btnSave );
 
     this.btnHelp = GUIFactory.createButtonHelp();
