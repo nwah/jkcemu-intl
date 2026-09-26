@@ -1,0 +1,74 @@
+name: Release builds
+
+# Push a tag like v0.9.9.2 to build all platforms and attach them to a
+# draft GitHub Release. Branch pushes touching the packaging and
+# "Run workflow" build them as downloadable artifacts only.
+on:
+  push:
+    tags: ['v*']
+    branches: ['**']
+    paths:
+      - 'packaging/**'
+      - '.github/workflows/release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  jar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - run: sudo apt-get update && sudo apt-get install -y ant
+      - run: ant jar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jar
+          path: jkcemu.jar
+
+  package:
+    needs: jar
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, macos-15-intel, windows-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/download-artifact@v4
+        with:
+          name: jar
+      - run: bash packaging/package.sh jkcemu.jar
+        shell: bash
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package-${{ matrix.os }}
+          path: dist/*
+
+  release:
+    needs: [jar, package]
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: |
+            out/*.dmg
+            out/*.zip
+            out/*.tar.gz
+            out/*.deb
+            out/jkcemu.jar

@@ -106,7 +106,8 @@ public class Main
 					"/images/icon/jkcemu_20x20.png",
 					"/images/icon/jkcemu_24x24.png",
 					"/images/icon/jkcemu_32x32.png",
-					"/images/icon/jkcemu_48x48.png" };
+					"/images/icon/jkcemu_48x48.png",
+					"/images/icon/jkcemu_256x256.png" };
 
   private static String[] usageLines = {
 	"",

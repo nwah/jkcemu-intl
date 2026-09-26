@@ -107,8 +107,13 @@ public class DesktopHelper_9
       try {
 	this.taskbar = Taskbar.getTaskbar();
 
-	// Icon
-	if( this.taskbar.isSupported( Taskbar.Feature.ICON_IMAGE ) ) {
+	/*
+	 * Icon: In a jpackage bundle the OS already shows the
+	 * native application icon (e.g. the .icns in the macOS Dock).
+	 */
+	if( this.taskbar.isSupported( Taskbar.Feature.ICON_IMAGE )
+	    && (System.getProperty( "jpackage.app-path" ) == null) )
+	{
 	  java.util.List<Image> iconImages = Main.getIconImages( topFrm );
 	  if( iconImages != null ) {
 	    int n = iconImages.size();

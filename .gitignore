@@ -2,3 +2,4 @@
 build
 jkcemu.jar
 *.class
+dist
