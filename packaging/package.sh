@@ -25,7 +25,7 @@ NAME="JKCEMU Multilingual"
 SLUG="JKCEMU-Multilingual"      # for file names
 VENDOR="Jens Mueller"
 DESC="Emulator for East German home and microcomputers"
-URL="https://github.com/nwah/jkcemu"
+URL="https://github.com/nwah/jkcemu-multilingual"
 VERSION="$(sed -n 's/.*String VERSION *= *"\([^"]*\)".*/\1/p' \
 		"$ROOT/src/jkcemu/Main.java")"
 
